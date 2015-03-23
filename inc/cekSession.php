@@ -12,7 +12,7 @@ if (!isset($_SESSION['username']))
 		echo '<script type="text/javascript"> window.parent.location ="../LoginUser.php";</script>';
 	}
 else {
-	$inactive = 2*60; // Set timeout period in seconds
+	$inactive = 15*60; // Set timeout period in seconds
  
 	if (isset($_SESSION['timeout'])) {
     $session_life = time() - $_SESSION['timeout'];
