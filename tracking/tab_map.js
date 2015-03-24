@@ -21,7 +21,7 @@ var store_daftar_kapal = Ext.create('Ext.data.Store', {
         reader: {
             type: 'json',
             successProperty: 'success',
-            root: 'results',
+            root: 'ship',
             messageProperty: 'message'
         }            
     }
