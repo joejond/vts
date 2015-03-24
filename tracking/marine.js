@@ -61,16 +61,15 @@ Ext.onReady(function() {
 				html	: '<div id="jam"></div>',
 				width	: '10%'
 			
-			
-			//*
-			
 			},{
 				
 				//id: 'clock',
 				xtype	: 'button',
-				html	: '<div id="">LOGOUT</div>',
-				width	: '5%'			
-			//*/
+				text	: 'LOGOUT',
+				width	: '5%',	
+				handler: function(){
+					window.location = '../LogOutUser.php';
+				}		
 			}],
 			
 			listeners : {
