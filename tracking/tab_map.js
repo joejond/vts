@@ -300,7 +300,8 @@ var tabel_daftar_kapal = Ext.create('Ext.grid.Panel', {
     },
     {
         text: "Name", 
-        width: 120, 
+        //width: 120, 
+        flex : 1,
         dataIndex: 'name'
     }
     ]
