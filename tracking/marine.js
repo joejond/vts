@@ -1,13 +1,19 @@
 Ext.onReady(function() {
 	var user_login = "";
-	Ext.Ajax.request({
+	var login_y = Ext.Ajax.request({
 			url: 'get_user_session.php',
 			method: 'GET',
 			success: function(data) {
-			user_login = (data.responseText);
+				user_login = (data.responseText);
+				//console.log ('yang login = '+user_login);
+				Ext.fly('user').update('Welcome '+user_login);
 			},
+			
 			params: {}
 	});
+	
+	//user_login1 = user_login;
+	//console.log (login_y);
 	
 	
 	//var updateClock = function () {
@@ -24,8 +30,8 @@ Ext.onReady(function() {
 	//});
 	
 
-	var time_t = 'dd-MM-YYYY hh:mm';
-	var content_t = '<html><head><title></title></head><body><div style="background:#E0E0E0; width: 100%; overflow: hidden; vertical-align: middle; "><div style="width: 65px; float: left;"> <img src="header.png"></div><div align=right style="width: 200px; float: right; font-size: 14px;">'+user_login+' <a href="http://monita.daunbiru.com:8999/tracking/logout.php">(logout)</a>  <br> '+time_t+' WITA</div><div style="font-size: 28px;">MONITA - Vessel Tracking System</div></div></body></html>';
+	//var time_t = 'dd-MM-YYYY hh:mm';
+	//var content_t = '<html><head><title></title></head><body><div style="background:#E0E0E0; width: 100%; overflow: hidden; vertical-align: middle; "><div style="width: 65px; float: left;"> <img src="header.png"></div><div align=right style="width: 200px; float: right; font-size: 14px;">'+user_login+'  <br> </div><div style="font-size: 28px;">MONITA - Vessel Tracking System</div></div></body></html>';
 	
     var viewport = Ext.create('Ext.Viewport', {
         layout: {
@@ -54,18 +60,23 @@ Ext.onReady(function() {
 				id		: 'app-header-title',
 				html	: document.title,
 				//flex 	: 1,
-				width	: '85%'
+				width	: '75%'
 				
 			},{
+				id		: 'user',
 				xtype	: 'label',
-				html	: '<div id="jam"></div>',
 				width	: '10%'
-			
+				
+			},{
+				id	: 'jam',
+				xtype	: 'label',
+				//html	: '<div id="jam"></div><span>'+ user_login +' </span>',
+				width	: '10%'			
 			},{
 				
-				//id: 'clock',
+				//id: 'user',
 				xtype	: 'button',
-				text	: 'LOGOUT',
+				text	: 'LOGOUT' + user_login,
 				width	: '5%',	
 				handler: function(){
 					window.location = '../LogOutUser.php';
@@ -76,7 +87,7 @@ Ext.onReady(function() {
                 render :function() {                
                     Ext.TaskManager.start({
                         run : function() {
-                            Ext.fly('jam').update(Ext.Date.format(new Date(), 'F j, Y, g:i:s A'));  
+                            Ext.fly('jam').update(Ext.Date.format(new Date(), 'm M Y, H:i:s'));  
                          },
                         //scope: me,
                         interval : 1000
@@ -84,10 +95,6 @@ Ext.onReady(function() {
                 }
             }
 			
-			
-			
-        
-        
         },
         {
             region: 'center',
@@ -121,21 +128,21 @@ Ext.onReady(function() {
         ]
     });    
 	
-	function update_tittle() {
+	//function update_tittle() {
 	
-		Ext.Ajax.request({
-			url: 'servertime.php',
-			method: 'GET',
-			success: function(data) {
-			time_t = (data.responseText);
-			},
-			params: {}
-		});	
+		//Ext.Ajax.request({
+			//url: 'servertime.php',
+			//method: 'GET',
+			//success: function(data) {
+			//time_t = (data.responseText);
+			//},
+			//params: {}
+		//});	
 		
-		var content_t = '<html><head><title></title></head><body><div style="background:#E0E0E0; width: 100%; overflow: hidden; vertical-align: middle; "><div style="width: 65px; float: left;"> <img src="header.png"></div><div align=right style="width: 200px; float: right; font-size: 14px;">'+user_login+'  <a href="http://monita.daunbiru.com:8999/tracking/logout.php">(logout)</a>  <br> '+time_t+' WITA</div><div style="font-size: 28px;">MONITA - Vessel Tracking System</div></div></body></html>';
+		//var content_t = '<html><head><title></title></head><body><div style="background:#E0E0E0; width: 100%; overflow: hidden; vertical-align: middle; "><div style="width: 65px; float: left;"> <img src="header.png"></div><div align=right style="width: 200px; float: right; font-size: 14px;">'+user_login+'  <a href="http://monita.daunbiru.com:8999/tracking/logout.php">(logout)</a>  <br> '+time_t+' WITA</div><div style="font-size: 28px;">MONITA - Vessel Tracking System</div></div></body></html>';
 
-		Ext.getCmp('panel_title').update(content_t);
-	}
+		//Ext.getCmp('panel_title').update(content_t);
+	//}
 	
 	
 	//setInterval(function() {
