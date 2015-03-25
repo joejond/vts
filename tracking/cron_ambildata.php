@@ -104,7 +104,7 @@ while ($row = $hasil->fetch_assoc()){
 				//echo (int)$id_urut  .'<br>';
 				$value = round(hexTo32Float(dechex($payload[$no_urut])),6);
 				
-				echo 'data urut ke-'.$no_urut.' => '.$id_titik.' dg value : '.$value.' dari data asli : ' .$payload[$no_urut].'<br>';
+				echo 'data urut ke-'.$no_urut.' => '.$id_titik.' dg value : '.$value.' ==> dari data asli : ' .$payload[$no_urut].'<br>';
 				
 				insert_titik ($id_titik,$value,$date1);
 			}			
