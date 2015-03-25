@@ -103,8 +103,8 @@ while ($row = $hasil->fetch_assoc()){
 				//echo 'id_titik_ukur = '.$angka .'<br>';
 				//echo (int)$id_urut  .'<br>';
 				$nilai = dechex($payload[$no_urut]) ;
-				$hasil = (strlen($nilai) > 8) ? substr($nilai,8) : $nilai;
-				$value = round(hexTo32Float($hasil),6);
+				$nilaix = (strlen($nilai) > 8) ? substr($nilai,8) : $nilai;
+				$value = round(hexTo32Float($nilaix),6);
 				
 				//echo 'data urut ke-'.$no_urut.' => '.$id_titik.' dg value : '.$value.' ==> dari data asli : ' .$payload[$no_urut].'<br>';
 				
