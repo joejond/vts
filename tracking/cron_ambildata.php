@@ -34,7 +34,7 @@ function insert_titik ($id_titik,$value,$tgl){
 	if ($jml != 1) $ins = 'insert into data (id_titik_ukur,value,id_trip,data_time,year,month,day,hour,minute,origin) values ("'.$id_titik.'","'.$value.'","0","'.$tgl.'","'.$th.'","'.$bl.'","'.$hr.'","'.$jam.'","'.$mnt.'","1")' ;
 	else $ins = 'update data set value = "'.$value.'" where id_titik_ukur = '.$id_titik.' and data_time = "'.$tgl.'"';
 	
-	echo $ins.'<br>';
+	//echo $ins.'<br>';
 	$query = $db->query($ins);
 	
 	return $query ;
@@ -44,7 +44,7 @@ function insert_titik ($id_titik,$value,$tgl){
 
 function urutan ($modem_id){
 	require '../inc/conn_db.php';
-	$datax = array();
+	//$datax = array();
 	$query = 'SELECT id_tu, urutan_data_monita
 				FROM parsing_ref p
 				inner join ship s on s.id_ship = p.id_ship  
@@ -104,7 +104,7 @@ while ($row = $hasil->fetch_assoc()){
 				//echo (int)$id_urut  .'<br>';
 				$value = round(hexTo32Float(dechex($payload[$no_urut])),6);
 				
-				echo 'data urut ke-'.$no_urut.' => '.$id_titik.' dg value : '.$value.'<br>';
+				echo 'data urut ke-'.$no_urut.' => '.$id_titik.' dg value : '.$value.' dari data asli : ' .$payload[$no_urut].'<br>';
 				
 				insert_titik ($id_titik,$value,$date1);
 			}			
