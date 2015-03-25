@@ -102,7 +102,7 @@ while ($row = $hasil->fetch_assoc()){
 				//$id_urut = substr($angka,1,3);
 				//echo 'id_titik_ukur = '.$angka .'<br>';
 				//echo (int)$id_urut  .'<br>';
-				$value = round(hexTo32Float(dechex($payload[$no_urut-1])),6);
+				$value = round(hexTo32Float(dechex($payload[$no_urut])),6);
 				
 				echo 'data urut ke-'.$no_urut.' => '.$id_titik.' dg value : '.$value.'<br>';
 				
