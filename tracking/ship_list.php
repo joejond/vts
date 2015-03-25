@@ -10,7 +10,8 @@ try {
 	$hasil = $db->query($query);
 	while($row = $hasil->fetch_assoc()){
 		$kapal[] = array(
-					"name"=>$row['name'],
+					"id"=>$row['id'],
+					"name"=>$row['name']
 					);
 	}
 	

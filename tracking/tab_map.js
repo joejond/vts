@@ -281,6 +281,7 @@ var selmod = Ext.create('Ext.selection.CheckboxModel',{
                         deleteMarkers();
                     else if(data.responseText != 'null')
                         gambar_kapal(data.responseText);                 
+
                 }                
             });
         }        
