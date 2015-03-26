@@ -58,17 +58,17 @@ try{
 	foreach($posisi as $isi){
 			$aa = $isi['id'].','.$isi['lat'].','.$isi['lng'].'|';
 			
-			$bb = ($aa != ',,|') ? $aa : 'null';
+			$bb = ($aa != '') ? $aa : 'null';
 			
 			echo $bb;
 		
 		}
 	
 
-	$jsonResult = array(
-        'success' => true,
-        'posisi' => $posisi
-    );
+	//$jsonResult = array(
+        //'success' => true,
+        //'posisi' => $posisi
+    //);
 
 } 
 catch(Exception $e) {

@@ -150,6 +150,7 @@ function showMarkers() {
 function deleteMarkers() {
     clearMarkers();
     markers = [];
+    setAllMap(peta1.getMap());
 }
 
 
@@ -158,7 +159,7 @@ function gambar_kapal(datapilih){
     var pos_arr = [];
     var loc_arr = [];
     var pos1 = [];
-    kapal_dipilih = '';
+    //kapal_dipilih = '';
     pos_arr = datapilih.split("|");
     jml_kapaldipilih = (pos_arr.length - 1);
     for(var n = 0; n < (pos_arr.length - 1); n++){
@@ -167,7 +168,7 @@ function gambar_kapal(datapilih){
         pos1 = pos_arr[n].split(",");
         loc_arr[n] = new google.maps.LatLng(parseFloat(pos1[1]), parseFloat(pos1[2]));
         addMarker(parseInt(pos1[0]), loc_arr[n]);
-        kapal_dipilih = kapal_dipilih + (pos1[0]) + ',';
+        //kapal_dipilih = kapal_dipilih + (pos1[0]) + ',';
     }
     if(status_path == 1){
         addpath();
@@ -286,10 +287,10 @@ var selmod = Ext.create('Ext.selection.CheckboxModel',{
                 params : 'id='+ship,
                 method: 'GET',
                 success: function (data) {    
-                    console.log(data.responseText);
-                    //if(data.responseText == 'null')
-                        //deleteMarkers();
-                    //else if(data.responseText != 'null')
+                    //console.log(data.responseText);
+                    if(data.responseText == '')
+                        deleteMarkers();
+                    else 
                         gambar_kapal(data.responseText);                 
 
                 }                
