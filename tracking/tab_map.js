@@ -155,26 +155,36 @@ function deleteMarkers() {
 
 
 function gambar_kapal(datapilih){
+    console.log(datapilih.posisi[0].id);
+    var datax = datapilih.posisi,
+    jum = datapilih.posisi.length;
+    console.log(jum);
     deleteMarkers();
     var pos_arr = [];
     var loc_arr = [];
     var pos1 = [];
     //kapal_dipilih = '';
-    pos_arr = datapilih.split("|");
+    //pos_arr = datapilih.split("|");
     jml_kapaldipilih = (pos_arr.length - 1);
-    for(var n = 0; n < (pos_arr.length - 1); n++){
+    //for(var n = 0; n < (pos_arr.length - 1); n++){
+    for(var n = 0; n < jum; n++){
         //console.log(pos_arr[n]);
         
-        pos1 = pos_arr[n].split(",");
-        loc_arr[n] = new google.maps.LatLng(parseFloat(pos1[1]), parseFloat(pos1[2]));
-        addMarker(parseInt(pos1[0]), loc_arr[n]);
+        //pos1 = pos_arr[n].split(",");
+        //loc_arr[n] = new google.maps.LatLng(parseFloat(pos1[1]), parseFloat(pos1[2]));
+        loc_arr[n] = new google.maps.LatLng(parseFloat(datax[n].lat), parseFloat(datax[n].lng));
+        console.log(datax[n].lat +'=='+ datax[n].lng);
+        addMarker(parseInt(datax[n].id), loc_arr[n]);
         //kapal_dipilih = kapal_dipilih + (pos1[0]) + ',';
+        var point1 = new google.maps.LatLng(parseFloat(datax[n].lat), parseFloat(datax[n].lng));
+		peta1.getMap().setCenter(point1);
     }
     if(status_path == 1){
         addpath();
     }
-    var point1 = new google.maps.LatLng(parseFloat(pos1[1]), parseFloat(pos1[2]));
-    peta1.getMap().setCenter(point1);
+    //var point1 = new google.maps.LatLng(parseFloat(pos1[1]), parseFloat(pos1[2]));
+    //var point1 = new google.maps.LatLng(parseFloat(datax[0].lat), parseFloat(datax[0].lng));
+    //peta1.getMap().setCenter(point1);
 }
 
 function getdatapath(id, start_tm, stop_tm)
@@ -283,15 +293,14 @@ var selmod = Ext.create('Ext.selection.CheckboxModel',{
             
             Ext.Ajax.request({
                 url: 'get_last_pos_array.php',
-                //params: 'id_kapal='+text2,
                 params : 'id='+ship,
                 method: 'GET',
-                success: function (data) {    
-                    //console.log(data.responseText);
-                    if(data.responseText == '')
+                success: function (data) {
+					var isidat = Ext.JSON.decode(data.responseText);
+                    if(isidat.posisi.length == 0)
                         deleteMarkers();
                     else 
-                        gambar_kapal(data.responseText);                 
+                        gambar_kapal(isidat);                 
 
                 }                
             });
