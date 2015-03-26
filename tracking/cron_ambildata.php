@@ -28,14 +28,19 @@ function insert_titik ($id_titik,$value,$tgl){
 	
 	//cek value di tgl dan id_titik_ukur
 	$cek = 'select value from data where id_titik_ukur = '.$id_titik.' and data_time = "'.$tgl.'"';
-	$hsl = $db->query($cek);
-	$jml = mysqli_num_rows($hsl);
+	$hsl = $db->prepare($cek);
+	$hsl->execute();
+	
+	//$jml = mysqli_num_rows($hsl);
+	$jml = $hsl->rowCount();
+	
 	
 	if ($jml != 1) $ins = 'insert into data (id_titik_ukur,value,id_trip,data_time,year,month,day,hour,minute,origin) values ("'.$id_titik.'","'.$value.'","0","'.$tgl.'","'.$th.'","'.$bl.'","'.$hr.'","'.$jam.'","'.$mnt.'","1")' ;
 	else $ins = 'update data set value = "'.$value.'" where id_titik_ukur = '.$id_titik.' and data_time = "'.$tgl.'"';
 	
 	echo $ins.'<br>';
-	$query = $db->query($ins);
+	$query = $db->prepare($ins);
+	$query->execute();
 	
 	return $query ;
 	
@@ -49,7 +54,10 @@ function urutan ($modem_id){
 				FROM parsing_ref p
 				inner join ship s on s.id_ship = p.id_ship  
 				where s.modem_id = "'.$modem_id.'" order by urutan_data_monita;';
-	$hasil = $db->query($query);
+	//$hasil = $db->query($query);
+	
+	$hasil = $db->prepare($query);
+	$hasil->execute();
 	return $hasil;
 	
 	}
@@ -59,9 +67,12 @@ echo 'ambil data tgl (utc - 7 - 2 jam) = '.$dateambil.'<br>';
 
 $mdm = 'select modem_id from ship '.((!isset($_GET['modem']))? '' : 'where modem_id = "'.$_GET['modem'].'"');
 //echo 'queri modem  = '.$mdm.'<br>';
-$hasil = $db->query($mdm);
+//$hasil = $db->query($mdm);
+$hasil = $db->prepare($mdm);
+$hasil->execute();
 
-while ($row = $hasil->fetch_assoc()){
+
+while ($row = $hasil->fetch()){
 	
 		$url = 'http://isatdatapro.skywave.com/GLGW/GWServices_v1/RestMessages.svc/get_return_messages.xml/?access_id=70000214&password=STSATI2010&from_id=1450235&mobile_id='.$row['modem_id'].'&start_utc='.$dateambil;
 		echo 'url = '.$url.'<br>';
@@ -91,7 +102,7 @@ while ($row = $hasil->fetch_assoc()){
 				$urut = urutan($row['modem_id']);
 				
 				//while ($row1 = mysqli_fetch_assoc($urut)){
-				while ($row1 = $urut->fetch_assoc()){
+				while ($row1 = $urut->fetch()){
 					//echo $row1['id_tu'];
 					$id_titik = $row1['id_tu'];
 					$no_urut = $row1['urutan_data_monita'];
@@ -104,7 +115,7 @@ while ($row = $hasil->fetch_assoc()){
 					$nilaix = (strlen($nilai) > 8) ? substr($nilai,8) : $nilai;
 					$value = round(hexTo32Float($nilaix),6);
 					
-					//echo 'data urut ke-'.$no_urut.' => '.$id_titik.' dg value : '.$value.' ==> dari data asli : ' .$payload[$no_urut].'<br>';
+					echo 'data urut ke-'.$no_urut.' => '.$id_titik.' dg value : '.$value.' ==> dari data asli : ' .$payload[$no_urut].'<br>';
 					
 					insert_titik ($id_titik,$value,$date1);
 				}			
