@@ -256,13 +256,13 @@ var range = Ext.create('Ext.data.Store', {
 });
 
 // Create the combo box, attached to the states data store
-var time_range_combo = Ext.create('Ext.form.ComboBox', {
-    store: range,
-    width: 80,
-    queryMode: 'local',
-    displayField: 'tipe_range',
-    valueField: 'tipe_range'
-});
+//var time_range_combo = Ext.create('Ext.form.ComboBox', {
+    //store: range,
+    //width: 80,
+    //queryMode: 'local',
+    //displayField: 'tipe_range',
+    //valueField: 'tipe_range'
+//});
 
 //function update_text1() {		
 	//var content_text1 = '<html><body><div style="font-size: 20px; color:blue">(current view -> '+comb_kapal1+' - date: '+tgl_sel1+')</div></body></html>';
@@ -297,16 +297,21 @@ var panel_detail = {
 					select: function() {
 						comb_kapal1 = this.getValue();
 						comb_kapal2 = this.getRawValue();
-						console.log(comb_kapal1);
+						//console.log(comb_kapal1);
+						//console.log(tgl_sel1);
 						store_detail_kapal.load({params: { id: comb_kapal1, tgl: tgl_sel1}});
-						//Ext.getCmp('toolbar_text').update(comb_kapal2);
-						Ext.getCmp('table_ship').setTitle('Vessel '+comb_kapal2);
+						Ext.getCmp('table_ship').setTitle('Vessel '+comb_kapal2 +' on '+ tgl_sel2);
 						//tabel_detail_kapal
 						//update_text1();
-					}
+					},
+					afterrender : function(){
+							var isi = this.getStore().data.items[0].data['name'];
+							this.setValue(isi);
+							comb_kapal2 = (comb_kapal1 != '') ? comb_kapal2 : isi;
+							Ext.getCmp('table_ship').setTitle('Vessel '+isi+' on '+ Ext.Date.format(new Date(), 'd-M-Y' ));
+							//console.log(isi);
+						}
 				}
-				
-				
 				
 				
 			},{
@@ -324,12 +329,17 @@ var panel_detail = {
 						//console.log()
 						tgl_sel1 = Ext.Date.format(this.getValue(),'Y-m-d');
 						store_detail_kapal.load({params: { id: comb_kapal1, tgl: tgl_sel1}});
+						tgl_sel2 = (tgl_sel1 != '') ? tgl_sel1 : Ext.Date.format(new Date(), 'd-M-Y' );
+						//console.log(tgl_sel2);
+						Ext.getCmp('table_ship').setTitle('Vessel '+comb_kapal2 +' on '+ tgl_sel2);
 						//update_text1();
 					}, 
-					//change : function(){
+					afterrender : function(){
 						//console.log('Date selected: ', this.getValue());
-						
-						//}
+						tgl_sel1 = Ext.Date.format(this.getValue(),'Y-m-d');
+						tgl_sel2 = (tgl_sel1 != '') ? tgl_sel1 : Ext.Date.format(new Date(), 'd-M-Y' );
+						console.log(tgl_sel1);
+						}
 				}
 			},
 			//'-',

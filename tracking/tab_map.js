@@ -152,6 +152,7 @@ function deleteMarkers() {
     markers = [];
 }
 
+
 function gambar_kapal(datapilih){
     deleteMarkers();
     var pos_arr = [];
@@ -264,22 +265,31 @@ function removepath(){
 var selmod = Ext.create('Ext.selection.CheckboxModel',{
     listeners: {
         selectionchange: function(sm, selections) {
-            var text1 = "";
-            Ext.Array.each(selections, function (item) {
-                text1 = text1 + "," + item.get('id');
+            var ship=[],
+            hasil = tabel_daftar_kapal.getView().getSelectionModel().getSelection();
+            
+            Ext.each(hasil, function (item) {
+                       ship.push(item.data.id);
             });
-            var text2 = text1.substr(1, text1.length);
+            
+            //console.log(ship);
+            //var text1 = "";
+            //Ext.Array.each(selections, function (item) {
+                //text1 = text1 + "," + item.get('id');
+            //});
+            //var text2 = text1.substr(1, text1.length);
             //console.log(text2);
             
             Ext.Ajax.request({
                 url: 'get_last_pos_array.php',
-                params: 'id_kapal='+text2,
+                //params: 'id_kapal='+text2,
+                params : 'id='+ship,
                 method: 'GET',
                 success: function (data) {    
-                    //console.log(data.responseText);
-                    if(data.responseText == 'null')
-                        deleteMarkers();
-                    else if(data.responseText != 'null')
+                    console.log(data.responseText);
+                    //if(data.responseText == 'null')
+                        //deleteMarkers();
+                    //else if(data.responseText != 'null')
                         gambar_kapal(data.responseText);                 
 
                 }                
