@@ -6,11 +6,13 @@
   //}
 //mysql_select_db("marine", $con) or die("Database tidak ada");  
 
-$db = new mysqli('localhost', 'marine', 'monita2014', 'marine_1');
+//$db = new mysqli('localhost', 'marine', 'monita2014', 'marine_1');
 
-	if($db->connect_errno > 0){
-		die('Unable to connect to database [' . $db->connect_error . ']');
-	}
+	//if($db->connect_errno > 0){
+		//die('Unable to connect to database [' . $db->connect_error . ']');
+	//}
 	//else echo 'Sukses';
+
+$db = new PDO('mysql:host=localhost;dbname=marine_1', 'marine', 'monita2014');
 
 ?>

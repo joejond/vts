@@ -10,14 +10,19 @@ if(isset($_POST['userid'])) {
 		
 		$sql 	= "SELECT id,username FROM user WHERE username = '".$user."' and password='".MD5($pass)."'";
 		//echo $sql.'<br>';
-		$hasil 	= $db->query($sql);
-		$jml 	= $hasil->num_rows;
+		$sth = $db->prepare($sql);
+		$sth->execute();
+		//$result = $sth->fetchAll();
+		//$statement->rowCount()
+		//$hasil 	= $db->query($sql);
+		//$jml 	= $hasil->num_rows;
+		$jml = $sth->rowCount();
 		
 		if ($user == '' || $pass == ''){
 			$msg = '<p class="text-center text-danger" ><b><span class="glyphicon glyphicon-warning-sign"></span>   Please type your username or password!!</b></p>';
 		}
 		else if ($jml == 1) {
-			while($row = $hasil->fetch_assoc()){
+			while($row = $sth->fetch()){
 				//echo $row['username'] . '<br />';
 				
 				$_SESSION['uid']		= $row['id'];	

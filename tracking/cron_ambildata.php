@@ -81,36 +81,34 @@ while ($row = $hasil->fetch_assoc()){
 				foreach ($retmes->Payload->Fields->Field as $data ){
 					array_push($payload,$data['Value']);
 				}
-				
 			//}			
-			
 			//print_r($payload);
 
-			$tanggal = hexTo32Float(dechex($payload[0]));
-			$date1	= date('Y-m-d H:i:s', $tanggal);
-			echo 'tanggal data ==> '.$date1.'<br>';
-			
-			$urut = urutan($row['modem_id']);
-			
-			//while ($row1 = mysqli_fetch_assoc($urut)){
-			while ($row1 = $urut->fetch_assoc()){
-				//echo $row1['id_tu'];
-				$id_titik = $row1['id_tu'];
-				$no_urut = $row1['urutan_data_monita'];
-				//echo $id_titik.'<br>';
-				//echo $no_urut.'<br>';
-				//$id_urut = substr($angka,1,3);
-				//echo 'id_titik_ukur = '.$angka .'<br>';
-				//echo (int)$id_urut  .'<br>';
-				$nilai = dechex($payload[$no_urut]) ;
-				$nilaix = (strlen($nilai) > 8) ? substr($nilai,8) : $nilai;
-				$value = round(hexTo32Float($nilaix),6);
+				$tanggal = hexTo32Float(dechex($payload[0]));
+				$date1	= date('Y-m-d H:i:s', $tanggal);
+				echo 'tanggal data ==> '.$date1.'<br>';
 				
-				//echo 'data urut ke-'.$no_urut.' => '.$id_titik.' dg value : '.$value.' ==> dari data asli : ' .$payload[$no_urut].'<br>';
+				$urut = urutan($row['modem_id']);
 				
-				insert_titik ($id_titik,$value,$date1);
-			}			
-			echo  '================ <br>';
-		}
+				//while ($row1 = mysqli_fetch_assoc($urut)){
+				while ($row1 = $urut->fetch_assoc()){
+					//echo $row1['id_tu'];
+					$id_titik = $row1['id_tu'];
+					$no_urut = $row1['urutan_data_monita'];
+					//echo $id_titik.'<br>';
+					//echo $no_urut.'<br>';
+					//$id_urut = substr($angka,1,3);
+					//echo 'id_titik_ukur = '.$angka .'<br>';
+					//echo (int)$id_urut  .'<br>';
+					$nilai = dechex($payload[$no_urut]) ;
+					$nilaix = (strlen($nilai) > 8) ? substr($nilai,8) : $nilai;
+					$value = round(hexTo32Float($nilaix),6);
+					
+					//echo 'data urut ke-'.$no_urut.' => '.$id_titik.' dg value : '.$value.' ==> dari data asli : ' .$payload[$no_urut].'<br>';
+					
+					insert_titik ($id_titik,$value,$date1);
+				}			
+				echo  '================ <br>';
+			}
 	}
 }
