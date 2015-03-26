@@ -62,12 +62,16 @@ var jml_point_paths = 0;
 function addMarker(id, location) {    
     Ext.Ajax.request({
         url: 'data_marker.php',
-        params: 'id_kapal='+id,
+        params: 'id='+id,
         method: 'GET',
         success: function (data) {  
+            var gmarker = Ext.JSON.decode(data.responseText),
+            datay = gmarker.marker[0][0];
+            
+            //console.log(gmarker.marker[0][0].nama);
             //console.log(data.responseText);
             var data_marker = [];
-            data_marker = (data.responseText).split(",");
+            //data_marker = (data.responseText).split(",");
             var z = peta1.getMap().getZoom();
             var icosize = (z-5)*5+25;
             var markerImage = new google.maps.MarkerImage('img/ship'+z+'.png',
@@ -79,7 +83,7 @@ function addMarker(id, location) {
                 draggable: false,
                 raiseOnDrag: true,
                 map: peta1.getMap(),
-                labelContent: data_marker[0],
+                labelContent: datay.nama, //data_marker[0],
                 labelAnchor: new google.maps.Point(40, -1*icosize/4),
                 labelClass: "labels", // the CSS class for the label
                 labelStyle: {
@@ -95,25 +99,25 @@ function addMarker(id, location) {
             '</style>'+
             '<table class="altrowstable">' +
             '<tr style="background-color:#d4e3e5;">' +
-            '<th rowspan="7"><IMG src="img/vessel/'+ id +'.jpg"></th><th colspan="6" style="font-size:18px;">' + data_marker[0] + '</th>' +
+            '<th rowspan="7"><IMG src="img/vessel/'+ id +'.jpg"></th><th colspan="6" style="font-size:18px;">' + datay.nama + '</th>' +
             '</tr>' +
             '<tr style="background-color:#c3dde0;">' +
             '<th colspan="2">GPS Data</th><th colspan="2">Engine#1</th><th colspan="2">Engine#2</th>' +
             '</tr>' +
             '<tr style="background-color:#d4e3e5;">' +
-            '<td>Latitude</td><td>' + data_marker[1] + '&deg;</td><td>Speed#1</td><td>' + data_marker[5] + '&nbsp;rpm</td><td>Speed#2</td><td>' + data_marker[6] + '&nbsp;rpm</td>' +
+            '<td>Latitude</td><td>' + datay.lat + '&deg;</td><td>Speed#1</td><td>' + datay.rpm1 + '&nbsp;rpm</td><td>Speed#2</td><td>' + datay.rpm2 + '&nbsp;rpm</td>' +
             '</tr>' +
             '<tr style="background-color:#c3dde0;">' +
-            '<td>Longitude</td><td>' + data_marker[2] + '&deg;</td><td>Propeler#1</td><td>' + data_marker[7] + '&nbsp;rpm</td><td>Propeler#2</td><td>' + data_marker[8] + '&nbsp;rpm</td>' +
+            '<td>Longitude</td><td>' + datay.lng + '&deg;</td><td>Propeler#1</td><td>' + datay.prop1 + '&nbsp;rpm</td><td>Propeler#2</td><td>' + datay.prop2 + '&nbsp;rpm</td>' +
             '</tr>' +
             '<tr style="background-color:#d4e3e5;">' +
-            '<td>Heading</td><td>' + data_marker[3] + '&deg;</td><td>Flowmeter#1</td><td>' + data_marker[9] + '&nbsp;lt</td><td>Flowmeter#2</td><td>' + data_marker[10] + '&nbsp;lt</td>' +
+            '<td>Heading</td><td>' + datay.head + '&deg;</td><td>Flowmeter#1</td><td>' + datay.flow1 + '&nbsp;lt</td><td>Flowmeter#2</td><td>' + datay.flow2 + '&nbsp;lt</td>' +
             '</tr>' +
             '<tr style="background-color:#c3dde0;">' +
-            '<td>Speed</td><td>' + (Number(data_marker[4])).toFixed(2)+ '&nbsp;knot</td><td>Overflow#1</td><td>' + data_marker[11] + '&nbsp;lt</td><td>Overflow#2</td><td>' + data_marker[12] + '&nbsp;lt</td>' +
+            '<td>Speed</td><td>' + (Number(datay.spd)).toFixed(2)+ '&nbsp;knot</td><td>Overflow#1</td><td>' + datay.ovflow1 + '&nbsp;lt</td><td>Overflow#2</td><td>' + datay.ovflow2 + '&nbsp;lt</td>' +
             '</tr>' +
             '<tr style="background-color:#c3dde0;">' +
-            '<td colspan="6" style="text-align: right"> data time : ' + data_marker[15] + '</td>' +
+            '<td colspan="6" style="text-align: right"> data time : ' + datay.waktu + '</td>' +
             '</tr>' +
             '</table>';
     
@@ -155,23 +159,18 @@ function deleteMarkers() {
 
 
 function gambar_kapal(datapilih){
-    console.log(datapilih.posisi[0].id);
+    //console.log(datapilih.posisi[0].id);
     var datax = datapilih.posisi,
-    jum = datapilih.posisi.length;
-    console.log(jum);
+    jum = datax.length;
+    //console.log(jum);
     deleteMarkers();
     var pos_arr = [];
     var loc_arr = [];
-    var pos1 = [];
     //kapal_dipilih = '';
     //pos_arr = datapilih.split("|");
-    jml_kapaldipilih = (pos_arr.length - 1);
     //for(var n = 0; n < (pos_arr.length - 1); n++){
     for(var n = 0; n < jum; n++){
         //console.log(pos_arr[n]);
-        
-        //pos1 = pos_arr[n].split(",");
-        //loc_arr[n] = new google.maps.LatLng(parseFloat(pos1[1]), parseFloat(pos1[2]));
         loc_arr[n] = new google.maps.LatLng(parseFloat(datax[n].lat), parseFloat(datax[n].lng));
         console.log(datax[n].lat +'=='+ datax[n].lng);
         addMarker(parseInt(datax[n].id), loc_arr[n]);
@@ -182,9 +181,6 @@ function gambar_kapal(datapilih){
     if(status_path == 1){
         addpath();
     }
-    //var point1 = new google.maps.LatLng(parseFloat(pos1[1]), parseFloat(pos1[2]));
-    //var point1 = new google.maps.LatLng(parseFloat(datax[0].lat), parseFloat(datax[0].lng));
-    //peta1.getMap().setCenter(point1);
 }
 
 function getdatapath(id, start_tm, stop_tm)
