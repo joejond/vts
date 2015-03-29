@@ -46,10 +46,10 @@ var peta = {
         }
     }
 };
-
+var jum = '';
 var peta1; // untuk gmappanel -> fungsi2 google map API harus diakses melalui Ext.getCmp('id_gmappanel');
 var markers = [];
-var kapal_dipilih;
+var kapal_dipilih = [];
 var jml_kapaldipilih;
 var status_path = 0;
 var paths = [];
@@ -58,6 +58,7 @@ var paths_latlon_tmp = [];
 var paths_lat = [];
 var paths_lon = [];
 var jml_point_paths = 0;
+var jmlpt = 0;
 
 function addMarker(id, location) {    
     Ext.Ajax.request({
@@ -166,59 +167,97 @@ function gambar_kapal(datapilih){
     deleteMarkers();
     var pos_arr = [];
     var loc_arr = [];
-    //kapal_dipilih = '';
+    kapal_dipilih = [];
     //pos_arr = datapilih.split("|");
     //for(var n = 0; n < (pos_arr.length - 1); n++){
     for(var n = 0; n < jum; n++){
         //console.log(pos_arr[n]);
         loc_arr[n] = new google.maps.LatLng(parseFloat(datax[n].lat), parseFloat(datax[n].lng));
-        console.log(datax[n].lat +'=='+ datax[n].lng);
+        //console.log(datax[n].lat +'=='+ datax[n].lng);
         addMarker(parseInt(datax[n].id), loc_arr[n]);
-        //kapal_dipilih = kapal_dipilih + (pos1[0]) + ',';
+        //kapal_dipilih = kapal_dipilih + (datax[n].id) + ',';
+        kapal_dipilih.push (datax[n].id);
+        
+        //console.log(kapal_dipilih);
         var point1 = new google.maps.LatLng(parseFloat(datax[n].lat), parseFloat(datax[n].lng));
 		peta1.getMap().setCenter(point1);
+    
+		
+    
+    
     }
     if(status_path == 1){
-        addpath();
-    }
+			addpath();
+		}
+    
+    //console.log(status_path);
+    
 }
+
+
+
+
 
 function getdatapath(id, start_tm, stop_tm)
 {
     Ext.Ajax.request({
         url: 'data_path.php',
-        params: 'id_kapal='+id+'&start='+start_tm+'&stop='+stop_tm,
+        params: 'id='+id+'&start='+start_tm+'&stop='+stop_tm,
+        //params: {id : id, start : str, stop : stp},
         method: 'GET',
         success: function (data) {
-            paths_loc = (data.responseText).split("|");
-            jml_point_paths = paths_loc.length;
-            for(var n = 0; n < jml_point_paths; n++){
-                paths_latlon_tmp = paths_loc[n].split(",");
-                paths_lat[n] = paths_latlon_tmp[0];
-                paths_lon[n] = paths_latlon_tmp[1];
+			//console.log(data.responseText);
+			
+			var pathisi = Ext.JSON.decode(data.responseText);
+			//console.log(pathisi);
+			
+			var jmlpt = pathisi.track.length;
+			//console.log('jumlah array path (jmlpt) ' +jmlpt);
+			
+            //paths_loc = (data.responseText).split("|");
+            //jml_point_paths = paths_loc.length;
+            for(var n = 0; n < jmlpt; n++){
+                //paths_latlon_tmp = paths_loc[n].split(",");
+                //console.log(pathisi.track[n].lat);
+                //var lat[n]= ,
+                //lng[n] = ;
+                
+                
+                //paths_lat[n] = paths_latlon_tmp[0];
+                //paths_lon[n] = paths_latlon_tmp[1];
+                paths_lat[n] = pathisi.track[n].lat;
+                paths_lon[n] = pathisi.track[n].lng;
+                
+                //console.log (paths_lat[n]+' =&= '+paths_lon[n]);
             }
         }
     })    
 }
 
-function getyyyymmdd(date) {
-    var year = date.getFullYear();
-    var month = (1 + date.getMonth()).toString();
-    month = month.length > 1 ? month : '0' + month;
-    var day = date.getDate().toString();
-    day = day.length > 1 ? day : '0' + day;
-    return '' + year + month + day;
-}
+//function getyyyymmdd(date) {
+    //var year = date.getFullYear();
+    //var month = (1 + date.getMonth()).toString();
+    //month = month.length > 1 ? month : '0' + month;
+    //var day = date.getDate().toString();
+    //day = day.length > 1 ? day : '0' + day;
+    //return '' + year + month + day;
+//}
 
 function addpath(){
-    var tgl_start = Ext.getCmp('start_path').getValue();    
-    var tgl_stop = Ext.getCmp('stop_path').getValue();
+    var tgl_start = Ext.getCmp('start_path').getValue(), str = Ext.Date.format(tgl_start,'Y-m-d');    
+    var tgl_stop = Ext.Date.add(Ext.getCmp('stop_path').getValue(),Ext.Date.DAY,1) ,stp = Ext.Date.format(tgl_stop,'Y-m-d');
     
-    var str_start = getyyyymmdd(tgl_start) + '000000';
-    var str_stop = getyyyymmdd(tgl_stop) + '235959';
+    //console.log('start = '+str + ' & stop = ' + stp);
+    //console.log(tg_1);
+    
+    //var str_start = getyyyymmdd(tgl_start) + '000000';
+    //var str_stop = getyyyymmdd(tgl_stop) + '235959';
+	//console.log (str_start);
+   
     //console.log(kapal_dipilih);
-    var kapal_path = [];
-    kapal_path = kapal_dipilih.split(",");
+    //console.log('jumlah kapal : '+kapal_dipilih.length)
+    //var kapal_path = [];
+    //kapal_path = kapal_dipilih.split(",");
     var z = peta1.getMap().getZoom();
     var polyOptions = {
         strokeColor: '#FF0044',
@@ -236,16 +275,25 @@ function addpath(){
         }]
     };
     
-    for(var n = 0; n < jml_kapaldipilih; n++){
+    for(var n = 0; n < kapal_dipilih.length; n++){
         
-        getdatapath(kapal_path[n], str_start, str_stop);
+        getdatapath(kapal_dipilih[n], str, stp);
+        
+        //console.log(kapal_dipilih[n]);
+        
         
         paths[n] = new google.maps.Polyline(polyOptions);
+        //console.log(paths[n]);
+        //console.log('jmlpt : '+jjjj);
+        
         paths[n].setMap(peta1.getMap());
+        //console.log(paths[n].setMap(peta1.getMap()));
+        //console.log(paths_lat[n]);
+        //console.log('path digambar dri kapal di pilih : '+kapal_dipilih);
+        //console.log('jml pt : '+jmlpoint);
         
-        console.log("path digambar");
-        
-        for(var a = 0; a < jml_point_paths; a++){
+        //for(var a = 0; a < jml_point_paths; a++){
+        for(var a = 0; a < 200; a++){
             (paths[n].getPath()).push(new google.maps.LatLng(paths_lat[a], paths_lon[a]));
         }
         
@@ -261,8 +309,8 @@ function addpath(){
 }
 
 function removepath(){
-    console.log("jml path = "+paths.length);
-    console.log("jml kapal dipilih = "+jml_kapaldipilih);
+    //console.log("jml path = "+paths.length);
+    //console.log("jml kapal dipilih = "+jml_kapaldipilih);
     for(var n = 0; n < jml_kapaldipilih; n++){
         paths[n].setMap(null);
     }
@@ -387,7 +435,7 @@ var ship_list = {
         },
         {
             xtype: 'button',
-            text : 'update',
+            text : 'Show Track',
             id: 'button_update',
             disabled: true,
             handler : function() {

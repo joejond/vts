@@ -38,12 +38,7 @@ try{
 				max(case when tu.id_data_type="12" then d.value end) ovflow2,
 				max(case when tu.id_data_type="14" then round(d.value,2) end) temp2,
 				max(case when tu.id_data_type="16" then round(d.value,2) end) pres2,
-				max(case when tu.id_data_type="17" then d.value end) rh1,
-				max(case when tu.id_data_type="18" then d.value end) rh2,
-				max(case when tu.id_data_type="19" then round(d.value,2) end) batt,
-				max(case when tu.id_data_type="20" then round(d.value,2) end) `char`,
-				tu.id_ship as kapal,  s.name as nama,
-				s.modem_id as modem
+				tu.id_ship as kapal,  s.name as nama
 			FROM data d
 				inner join titik_ukur tu on tu.id_titik_ukur = d.id_titik_ukur
 				inner join ship s on s.id_ship = tu.id_ship

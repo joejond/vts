@@ -96,7 +96,7 @@ var ship_combo2 = new Ext.form.ComboBox({
     listeners: {
         select: function () {
             comb_kapal2 = this.getValue();
-            console.log(comb_kapal2);
+            //console.log(comb_kapal2);
             store_akumulasi.load({
                 params: {
                     name: comb_kapal2,
@@ -118,7 +118,7 @@ var but_export = {
         text: 'export (xls)',
         scale: 'small',
         handler: function () {
-			console.log('export_perjam.php?name=' + comb_kapal2 + '&tgl=' + tgl_daily);
+			//console.log('export_perjam.php?name=' + comb_kapal2 + '&tgl=' + tgl_daily);
             window.open('export_perjam.php?name=' + comb_kapal2 + '&tgl=' + tgl_daily, '_blank'); 
         }
     }]
@@ -505,7 +505,7 @@ var panel_hitung = {
 				format: 'd-M-Y',
 				listeners: {
 					change: function () {
-						console.log(Ext.util.Format.date(Ext.getCmp('date_total').getValue(), 'd-m-Y'));
+						//console.log(Ext.util.Format.date(Ext.getCmp('date_total').getValue(), 'd-m-Y'));
 						tgl_sel2 = Ext.util.Format.date(Ext.getCmp('date_total').getValue(), 'Y-m-d');
 						store_akumulasi.load({params: { name: comb_kapal2, tgl2: tgl_sel2}});
 						store_grafik.load({params: { name: comb_kapal2, tgl2: tgl_sel2}});
