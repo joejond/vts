@@ -27,12 +27,12 @@ try {
 		
 		$data_chart [] = array(
 			'jam' =>  (strlen($i) ==1 )? '0'.$i : $i,
-			'rpm1' => ($r['rpm1_avg'] == '' ) ? 'null' : $r['rpm1_avg'],
-			'rpm2' => ($r['rpm2_avg'] == '' ) ? 'null' : $r['rpm2_avg'],
-			'fuel1' => ($r['rpm1_avg'] == '' ) ? 'null' : $r['flow1_tot'] - $r['overflow1_tot'],
-			'fuel2' => ($r['rpm1_avg'] == '' ) ? 'null' : $r['flow2_tot'] - $r['overflow2_tot'],
-			'rh1' => ($r['rpm1_avg'] == '' ) ? 'null' : $r['runhour1'],
-			'rh2' => ($r['rpm1_avg'] == '' ) ? 'null' : $r['runhour2']
+			'rpm1' => ($r['rpm1_avg'] == '' ) ? null : $r['rpm1_avg'],
+			'rpm2' => ($r['rpm2_avg'] == '' ) ? null : $r['rpm2_avg'],
+			'fuel1' => ($r['rpm1_avg'] == '' ) ? null : $r['flow1_tot'] - $r['overflow1_tot'],
+			'fuel2' => ($r['rpm1_avg'] == '' ) ? null : $r['flow2_tot'] - $r['overflow2_tot'],
+			'rh1' => ($r['rpm1_avg'] == '' ) ? null : $r['runhour1'],
+			'rh2' => ($r['rpm1_avg'] == '' ) ? null : $r['runhour2']
 		);
 	}
 	
