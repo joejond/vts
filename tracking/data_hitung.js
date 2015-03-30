@@ -34,8 +34,10 @@ var gen2_runhour = 0.0;
 var tgl_daily = year1 + "-" + month1 + "-" + day1;
 var tgl_chart = year1 + "-" + month1 + "-" + day1;
 
-var comb_kapal2 = '';
-var tgl_sel2 = '';
+var comb_kapal22 = '';
+var comb_kapal21 = '';
+var tgl_sel21 = '';
+var tgl_sel22 = '';
 
 var model_akumulasi = Ext.define('akumulasi', {
     extend: 'Ext.data.Model',
@@ -56,12 +58,12 @@ var store_akumulasi = Ext.create('Ext.data.Store', {
             messageProperty: 'message'
         }
     },
-    listeners: {
-        'beforeload': function (store, options) {
-            store.proxy.extraParams.name=comb_kapal2;
-			store.proxy.extraParams.tgl2=tgl_sel2;
-        }
-    }
+    //listeners: {
+        //'beforeload': function (store, options) {
+            //store.proxy.extraParams.name=comb_kapal2;
+			//store.proxy.extraParams.tgl2=tgl_sel2;
+        //}
+    //}
 });
 
 var model_combo_kapal2 = Ext.define('Kapal', {
@@ -75,18 +77,19 @@ var store_combo_kapal2 = Ext.create('Ext.data.Store', {
     proxy: {
         type: 'ajax',
         api: {
-            read: 'ship_combo.php'
+            read: 'ship_list.php'
         },
         reader: {
-            totalProperty: 'total',
+			//totalProperty:'total',
             type: 'json',
-            successProperty: 'success',
-            root: 'results',
+            //successProperty: 'success',
+            root: 'ship',
             messageProperty: 'message'
-        }
+        }   
     }
 });
 
+/*
 var ship_combo2 = new Ext.form.ComboBox({
     displayField: 'name',
     queryMode: 'remote',
@@ -110,6 +113,7 @@ var ship_combo2 = new Ext.form.ComboBox({
         }
     }
 });
+* */
 
 var but_export = {
     xtype: 'buttongroup',
@@ -210,7 +214,7 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
 Ext.define('HighChartData', {
     extend: 'Ext.data.Model',
     fields: [{
-        name: 'time',
+        name: 'jam',
         type: 'string'
     }, {
         name: 'rpm1',
@@ -229,11 +233,11 @@ Ext.define('HighChartData', {
         type: 'float',
         useNull: true
     }, {
-        name: 'runhour1',
+        name: 'rh1',
         type: 'float',
         useNull: true
     }, {
-        name: 'runhour2',
+        name: 'rh2',
         type: 'float',
         useNull: true
     }]
@@ -248,16 +252,16 @@ var store_grafik = Ext.create('Ext.data.Store', {
         reader: {
             type: 'json',
             successProperty: 'success',
-            root: 'results',
+            root: 'chart',
             messageProperty: 'message'
         }
     },
-    listeners: {
-        'beforeload': function (store, options) {
-            store.proxy.extraParams.name=comb_kapal2;
-			store.proxy.extraParams.tanggal=tgl_sel2;
-        }
-    },
+    //listeners: {
+        //'beforeload': function (store, options) {
+            //store.proxy.extraParams.name=comb_kapal21;
+			//store.proxy.extraParams.tanggal=tgl_sel21;
+        //}
+    //},
     autoLoad: true
 });
 
@@ -318,7 +322,7 @@ var grafik = new Ext.create('Chart.ux.Highcharts', {
         name: 'fuel main engine #2',
         visible: true
     }, {
-        dataIndex: 'runhour1',
+        dataIndex: 'rh1',
         yAxis: 2,
         type: 'spline',
         color: '#0033FF',
@@ -326,7 +330,7 @@ var grafik = new Ext.create('Chart.ux.Highcharts', {
         name: 'genset #1',
         visible: false
     }, {
-        dataIndex: 'runhour2',
+        dataIndex: 'rh2',
         yAxis: 2,
         type: 'spline',
         color: '#336600',
@@ -489,34 +493,92 @@ function update_text2() {
 
 var panel_hitung = {
     dockedItems: [{
+		padding : '0 0 0 10',
         xtype: 'toolbar',
         dock: 'top',
 		height: 40,
-        items: [
-            'selected ship :',
-            ship_combo2,
-			'-',
-			{
-				fieldLabel: 'Date',
-				id: 'date_total',
-				labelWidth: 40,
-				xtype: 'datefield',
-				value: new Date(),
-				format: 'd-M-Y',
-				listeners: {
-					change: function () {
-						//console.log(Ext.util.Format.date(Ext.getCmp('date_total').getValue(), 'd-m-Y'));
-						tgl_sel2 = Ext.util.Format.date(Ext.getCmp('date_total').getValue(), 'Y-m-d');
-						store_akumulasi.load({params: { name: comb_kapal2, tgl2: tgl_sel2}});
-						store_grafik.load({params: { name: comb_kapal2, tgl2: tgl_sel2}});
-						update_text2();
-						daily_akum();
+        items: [{
+			xtype : 'combobox',
+			fieldLabel: ' Selected Ship',
+			labelWidth : 80,
+			width	: 300,
+			queryMode: 'remote',
+			emptyText: '- select ship -',
+			editable : false,
+			displayField: 'name',
+			valueField: 'id',
+			store: store_combo_kapal2,
+			listeners:{
+				select: function() {
+					comb_kapal21 = this.getValue();
+					comb_kapal22 = this.getRawValue();
+					console.log(comb_kapal21+' --> '+ comb_kapal22);
+					//console.log(tgl_sel1);
+					//store_detail_kapal.load({params: { id: comb_kapal21, tgl: tgl_sel21}});
+					Ext.getCmp('table_chart').setTitle('Vessel '+comb_kapal22 +' on '+ tgl_sel22);
+					//tabel_detail_kapal
+					//update_text1();
+				},
+				afterrender : function(){
+						var isi1 = this.getStore().data.items[0].data['name'];
+						this.setValue(isi1);
+						comb_kapal22 = (comb_kapal21 != '') ? comb_kapal22 : isi1;
+						Ext.getCmp('table_chart').setTitle('Vessel '+isi1+' on '+ Ext.Date.format(new Date(), 'd-M-Y' ));
+						console.log(isi1);
 					}
-				}
-			},
-			'-',
-			{id: 'toolbar_text2', html:'<html><body><div style="font-size: 20px; color:blue">(current view -> '+comb_kapal2+' - date: '+tgl_sel2+')</div></body></html>'}
-        ]
+			}
+		},{
+			padding : '0 0 0 5',
+			fieldLabel: 'Date',
+			id: 'date_total2',
+			labelWidth: 40,
+			xtype: 'datefield',
+			value: new Date(),
+			editable : false,
+			format: 'd-M-Y',
+			listeners: {
+				change: function () {
+					
+					//console.log('Date selected: ', Ext.Date.format(this.getValue(),'Y-m-d'));
+					//console.log()
+					tgl_sel21 = Ext.Date.format(this.getValue(),'Y-m-d');
+					//store_detail_kapal.load({params: { id: comb_kapal21, tgl: tgl_sel21}});
+					tgl_sel22 = (tgl_sel21 != '') ? Ext.Date.format(this.getValue(),'d-M-Y') : Ext.Date.format(new Date(), 'd-M-Y' );
+					//console.log(tgl_sel2);
+					Ext.getCmp('table_chart').setTitle('Vessel '+comb_kapal22 +' on '+ tgl_sel22);
+					//update_text1();
+				}, 
+				afterrender : function(){
+					//console.log('Date selected: ', this.getValue());
+					tgl_sel21 = Ext.Date.format(this.getValue(),'Y-m-d');
+					tgl_sel22 = (tgl_sel21 != '') ? tgl_sel21 : Ext.Date.format(new Date(), 'd-M-Y' );
+					//console.log(tgl_sel21);
+					}
+			}
+			
+			
+			
+			
+			//fieldLabel: 'Date',
+			//id: 'date_total',
+			//labelWidth: 40,
+			//xtype: 'datefield',
+			//value: new Date(),
+			//format: 'd-M-Y',
+			//listeners: {
+				//change: function () {
+					////console.log(Ext.util.Format.date(Ext.getCmp('date_total').getValue(), 'd-m-Y'));
+					////tgl_sel2 = Ext.util.Format.date(Ext.getCmp('date_total').getValue(), 'Y-m-d');
+					////store_akumulasi.load({params: { name: comb_kapal2, tgl2: tgl_sel2}});
+					////store_grafik.load({params: { name: comb_kapal2, tgl2: tgl_sel2}});
+					////update_text2();
+					////daily_akum();
+				//}
+			//}
+			//},
+			//'-',
+			//{id: 'toolbar_text2', html:'<html><body><div style="font-size: 20px; color:blue">(current view -> '+comb_kapal2+' - date: '+tgl_sel2+')</div></body></html>'}
+        }]
     }],
     layout: {
         type: 'vbox',
@@ -524,6 +586,7 @@ var panel_hitung = {
         align: 'stretch'
     },
     items: [{
+		id : 'table_chart',
         title: 'Data Chart',
         flex: 5,
         layout: 'fit',
@@ -608,12 +671,12 @@ function update_grafik() {
 
 Ext.onReady(function () {
 
-    setInterval(function () {
-        daily_akum();
-    }, 6000);
+    //setInterval(function () {
+        //daily_akum();
+    //}, 60*1000);
 
-    setInterval(function () {
-        update_grafik();
-    }, 300000);
+    //setInterval(function () {
+        //update_grafik();
+    //}, 70*1000);
 
 });
