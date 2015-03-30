@@ -247,11 +247,11 @@ var store_grafik = Ext.create('Ext.data.Store', {
     model: 'HighChartData',
     proxy: {
         type: 'ajax',
-        url: 'data_chart.php',
+        url: 'data_chart.php?',
         method: 'GET',
         reader: {
             type: 'json',
-            successProperty: 'success',
+            //successProperty: 'success',
             root: 'chart',
             messageProperty: 'message'
         }
@@ -513,8 +513,8 @@ var panel_hitung = {
 					comb_kapal21 = this.getValue();
 					comb_kapal22 = this.getRawValue();
 					console.log(comb_kapal21+' --> '+ comb_kapal22);
-					//console.log(tgl_sel1);
-					//store_detail_kapal.load({params: { id: comb_kapal21, tgl: tgl_sel21}});
+					console.log(tgl_sel1);
+					store_grafik.load({params: { id: comb_kapal21, tgl: tgl_sel21}});
 					Ext.getCmp('table_chart').setTitle('Vessel '+comb_kapal22 +' on '+ tgl_sel22);
 					//tabel_detail_kapal
 					//update_text1();
@@ -542,7 +542,7 @@ var panel_hitung = {
 					//console.log('Date selected: ', Ext.Date.format(this.getValue(),'Y-m-d'));
 					//console.log()
 					tgl_sel21 = Ext.Date.format(this.getValue(),'Y-m-d');
-					//store_detail_kapal.load({params: { id: comb_kapal21, tgl: tgl_sel21}});
+					store_grafik.load({params: { id: comb_kapal21, tgl: tgl_sel21}});
 					tgl_sel22 = (tgl_sel21 != '') ? Ext.Date.format(this.getValue(),'d-M-Y') : Ext.Date.format(new Date(), 'd-M-Y' );
 					//console.log(tgl_sel2);
 					Ext.getCmp('table_chart').setTitle('Vessel '+comb_kapal22 +' on '+ tgl_sel22);
