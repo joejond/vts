@@ -230,6 +230,25 @@ function getdatapath(id, start_tm, stop_tm)
                 
                 //console.log (paths_lat[n]+' =&= '+paths_lon[n]);
             }
+            
+            //paths[n] = new google.maps.Polyline(polyOptions);
+			////console.log(paths[n]);
+			////console.log('jmlpt : '+jjjj);
+			
+			//paths[n].setMap(peta1.getMap());
+            
+            //for(var a = 0; a < jmlpt; a++){
+				
+				//paths[n] = new google.maps.Polyline(polyOptions);
+				//(paths[n].getPath()).push(new google.maps.LatLng(paths_lat[a], paths_lon[a]));
+				
+				//paths[n].setMap(peta1.getMap());
+			
+			//}
+            
+            
+            
+            
         }
     })    
 }
@@ -283,8 +302,8 @@ function addpath(){
         
         
         paths[n] = new google.maps.Polyline(polyOptions);
-        //console.log(paths[n]);
-        //console.log('jmlpt : '+jjjj);
+        //////console.log(paths[n]);
+        //////console.log('jmlpt : '+jjjj);
         
         paths[n].setMap(peta1.getMap());
         //console.log(paths[n].setMap(peta1.getMap()));
