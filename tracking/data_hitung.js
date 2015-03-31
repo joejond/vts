@@ -621,21 +621,25 @@ var panel_hitung = {
 
 function daily_akum() {
     Ext.Ajax.request({
-        url: 'update_daily.php',
+        url: 'data_grafik_perhari.php',
         method: 'GET',
         success: function (data) {
-            var temp = new Array();
-            temp = (data.responseText).split(",");
-            eng1_daily = parseFloat(temp[0]) - parseFloat(temp[1]);
-            eng2_daily = parseFloat(temp[2]) - parseFloat(temp[3]);
+			var hasil = Ext.JSON.decode(data.responseText);
+			console.log(hasil.g_perhari[0]);
+			console.log(hasil.g_perhari[0].rh2);
+			
+            //var temp = new Array();
+            //temp = (data.responseText).split(",");
+            eng1_daily = parseFloat(hasil.g_perhari[0].tot_fl1) - parseFloat(hasil.g_perhari[0].tot_ovfl1);
+            eng2_daily = parseFloat(hasil.g_perhari[0].tot_fl2) - parseFloat(hasil.g_perhari[0].tot_ovfl2);
             total_daily = eng1_daily + eng2_daily;
-            gen1_runhour = parseFloat(temp[4]);
-            gen2_runhour = parseFloat(temp[5]);
-        },
-        params: {
-            name: comb_kapal2,
-            tgl: tgl_sel2
+            gen1_runhour = parseFloat(hasil.g_perhari[0].rh1);
+            gen2_runhour = parseFloat(hasil.g_perhari[0].rh2);
         }
+        //params: {
+            //name: comb_kapal2,
+            //tgl: tgl_sel2
+        //}
     });
     content_akum = '<style type="text/css">' +
         'table.total_daily {font-family: verdana,arial,sans-serif;font-size:12px;text-align: center;color:#333333;border-width: 1px;border-color: #a9c6c9;border-collapse: collapse;}' +
@@ -673,9 +677,9 @@ function update_grafik() {
 
 Ext.onReady(function () {
 
-    //setInterval(function () {
-        //daily_akum();
-    //}, 60*1000);
+    setInterval(function () {
+        daily_akum();
+    }, 60*1000);
 
     //setInterval(function () {
         //update_grafik();
