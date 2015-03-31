@@ -41,7 +41,7 @@ var tgl_sel22 = '';
 
 var model_akumulasi = Ext.define('akumulasi', {
     extend: 'Ext.data.Model',
-    fields: ['tanggal', 'jam', 'rpm1', 'prop1', 'flow1', 'overflow1', 'temp1', 'press1', 'rpm2', 'prop2', 'flow2', 'overflow2', 'temp2', 'press2', 'runhour1', 'runhour2']
+    fields: [{name : 'tanggal', type : 'string'}, 'jam', 'rpm1', 'prop1', 'flow1', 'overflow1', 'temp1', 'press1', 'rpm2', 'prop2', 'flow2', 'overflow2', 'temp2', 'press2', 'runhour1', 'runhour2']
 });
 
 var store_akumulasi = Ext.create('Ext.data.Store', {
@@ -49,15 +49,15 @@ var store_akumulasi = Ext.create('Ext.data.Store', {
     autoLoad: true,
     proxy: {
         type: 'ajax',
-        url: 'akumulasi_detail.php?',
+        url: 'data_grafik_perjam.php?',
         method: 'GET',
         reader: {
             type: 'json',
-            successProperty: 'success',
-            root: 'results',
+            //successProperty: 'success',
+            root: 'g_perjam',
             messageProperty: 'message'
         }
-    },
+    }
     //listeners: {
         //'beforeload': function (store, options) {
             //store.proxy.extraParams.name=comb_kapal2;
@@ -136,6 +136,8 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
         header: "date",
         width: 120,
         dataIndex: 'tanggal'
+        //renderer: Ext.util.Format.dateRenderer('d-M-Y')
+        //renderer: Ext.util.Format.dateRenderer('d-M-Y')
     }, {
         header: "hour",
         width: 60,
