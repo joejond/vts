@@ -1,7 +1,8 @@
 <?php
 
 session_start();
-include	'../inc/conn_db.php';
+//include	'../inc/conn_db.php';
+include	'../inc/conn_db_linode1.php';
 include	'../inc/cekSession.php';
 
 try {
@@ -47,7 +48,7 @@ try {
 
 	$sth = $db->prepare($query);
 	$sth->execute();
-	$result = $sth->fetchAll();
+	$result = $sth->fetchAll(PDO::FETCH_ASSOC);
 	
 	$jsonResult = array(
         'success' => true,
