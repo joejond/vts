@@ -66,6 +66,29 @@ var store_akumulasi = Ext.create('Ext.data.Store', {
     //}
 });
 
+//var model_grafik_perhari = Ext.define('perhari',{
+	//extend : 'Ext.data.Model',
+	//fields : ['id','fl1', 'ovfl1', 'fl2', 'ovfl2', 'rh1', 'rh2']
+	
+	//});
+
+//var store_grafik_hari = Ext.create('Ext.data.Store',{
+	//model : model_grafik_perhari,
+	//autoload : true,
+	//proxy:{
+		//url: 'data_grafik_perhari.php?',
+        //method: 'GET',
+        //reader: {
+            //type: 'json',
+            ////successProperty: 'success',
+            //root: 'g_perhari',
+            //messageProperty: 'message'
+		
+		//}
+	//}
+	
+//});
+
 var model_combo_kapal2 = Ext.define('Kapal', {
     extend: 'Ext.data.Model',
     fields: ['name']
@@ -487,10 +510,10 @@ var content_akum = '<style type="text/css">' +
     '</tr>' +
     '</table>';
 
-function update_text2() {		
-	var content_text2 = '<html><body><div style="font-size: 20px; color:blue">(current view -> '+comb_kapal2+' - date: '+tgl_sel2+')</div></body></html>';
-	Ext.getCmp('toolbar_text2').update(content_text2);
-}
+//function update_text2() {		
+	//var content_text2 = '<html><body><div style="font-size: 20px; color:blue">(current view -> '+comb_kapal2+' - date: '+tgl_sel2+')</div></body></html>';
+	//Ext.getCmp('toolbar_text2').update(content_text2);
+//}
 
 
 var panel_hitung = {
@@ -517,16 +540,21 @@ var panel_hitung = {
 					console.log(comb_kapal21+' --> '+ comb_kapal22);
 					console.log(tgl_sel1);
 					store_grafik.load({params: { id: comb_kapal21, tgl: tgl_sel21}});
+					store_akumulasi.load({params : { id: comb_kapal21, tgl: tgl_sel21 }});
 					Ext.getCmp('table_chart').setTitle('Vessel '+comb_kapal22 +' on '+ tgl_sel22);
 					//tabel_detail_kapal
 					//update_text1();
 				},
 				afterrender : function(){
 						var isi1 = this.getStore().data.items[0].data['name'];
+						var isiid = this.getStore().data.items[0].data['id'];
 						this.setValue(isi1);
 						comb_kapal22 = (comb_kapal21 != '') ? comb_kapal22 : isi1;
 						Ext.getCmp('table_chart').setTitle('Vessel '+isi1+' on '+ Ext.Date.format(new Date(), 'd-M-Y' ));
-						console.log(isi1);
+						
+						//store_grafik_hari.load({params : { id: comb_kapal22, tgl: tgl_sel21 }});
+						//console.log('comb_kapal22 : '+isiid);
+						//console.log('tgl_sel21  : '+tgl_sel21);
 					}
 			}
 		},{
@@ -545,6 +573,7 @@ var panel_hitung = {
 					//console.log()
 					tgl_sel21 = Ext.Date.format(this.getValue(),'Y-m-d');
 					store_grafik.load({params: { id: comb_kapal21, tgl: tgl_sel21}});
+					store_akumulasi.load({params : { id: comb_kapal21, tgl: tgl_sel21 }});
 					tgl_sel22 = (tgl_sel21 != '') ? Ext.Date.format(this.getValue(),'d-M-Y') : Ext.Date.format(new Date(), 'd-M-Y' );
 					//console.log(tgl_sel2);
 					Ext.getCmp('table_chart').setTitle('Vessel '+comb_kapal22 +' on '+ tgl_sel22);
@@ -555,6 +584,10 @@ var panel_hitung = {
 					tgl_sel21 = Ext.Date.format(this.getValue(),'Y-m-d');
 					tgl_sel22 = (tgl_sel21 != '') ? tgl_sel21 : Ext.Date.format(new Date(), 'd-M-Y' );
 					//console.log(tgl_sel21);
+					//comb_kapal23 = (comb_kapal21 != '') ? '1' : isi1;
+					
+					//console.log('comb_kapal22 : '+comb_kapal23);
+					//console.log('tgl_sel21  : '+tgl_sel21);
 					}
 			}
 			
@@ -625,8 +658,8 @@ function daily_akum() {
         method: 'GET',
         success: function (data) {
 			var hasil = Ext.JSON.decode(data.responseText);
-			console.log(hasil.g_perhari[0]);
-			console.log(hasil.g_perhari[0].rh2);
+			//console.log(hasil.g_perhari[0]);
+			//console.log(hasil.g_perhari[0].rh2);
 			
             //var temp = new Array();
             //temp = (data.responseText).split(",");
@@ -635,11 +668,11 @@ function daily_akum() {
             total_daily = eng1_daily + eng2_daily;
             gen1_runhour = parseFloat(hasil.g_perhari[0].rh1);
             gen2_runhour = parseFloat(hasil.g_perhari[0].rh2);
+        },
+        params: {
+            id: (comb_kapal21 !='') ? comb_kapal21 : '1',
+            tgl: tgl_sel21
         }
-        //params: {
-            //name: comb_kapal2,
-            //tgl: tgl_sel2
-        //}
     });
     content_akum = '<style type="text/css">' +
         'table.total_daily {font-family: verdana,arial,sans-serif;font-size:12px;text-align: center;color:#333333;border-width: 1px;border-color: #a9c6c9;border-collapse: collapse;}' +
@@ -679,10 +712,11 @@ Ext.onReady(function () {
 
     setInterval(function () {
         daily_akum();
-    }, 60*1000);
+        //console.log ('kapal : '+comb_kapal21 + ' & tgl : '+tgl_sel21);
+    }, 6*1000);
 
-    //setInterval(function () {
-        //update_grafik();
-    //}, 70*1000);
+    setInterval(function () {
+        update_grafik();
+    }, 60*1000);
 
 });
