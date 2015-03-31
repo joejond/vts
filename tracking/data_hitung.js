@@ -666,8 +666,13 @@ function daily_akum() {
             eng1_daily = parseFloat(hasil.g_perhari[0].tot_fl1) - parseFloat(hasil.g_perhari[0].tot_ovfl1);
             eng2_daily = parseFloat(hasil.g_perhari[0].tot_fl2) - parseFloat(hasil.g_perhari[0].tot_ovfl2);
             total_daily = eng1_daily + eng2_daily;
-            gen1_runhour = parseFloat(hasil.g_perhari[0].rh1);
-            gen2_runhour = parseFloat(hasil.g_perhari[0].rh2);
+            gen1_runhour = parseFloat(hasil.g_perhari[0].rh1).toFixed(2);
+            //console.log(gen1_runhour);
+            //gen1_runhour = gen1_runhour_1.toFixed(2);
+            gen2_runhour = parseFloat(hasil.g_perhari[0].rh2).toFixed(2);
+            //gen1_runhour = gen2_runhour_1.toFixed(2);
+            
+            
         },
         params: {
             id: (comb_kapal21 !='') ? comb_kapal21 : '1',
