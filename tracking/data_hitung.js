@@ -41,7 +41,7 @@ var tgl_sel22 = '';
 
 var model_akumulasi = Ext.define('akumulasi', {
     extend: 'Ext.data.Model',
-    fields: ['tanggal', 'jam', 'rpm1', 'prop1', 'flow1', 'overflow1', 'temp1', 'press1', 'rpm2', 'prop2', 'flow2', 'overflow2', 'temp2', 'press2', 'runhour1', 'runhour2']
+    fields: [{name : 'tanggal', type : 'string'}, 'jam', 'rpm1', 'prop1', 'flow1', 'overflow1', 'temp1', 'press1', 'rpm2', 'prop2', 'flow2', 'overflow2', 'temp2', 'press2', 'runhour1', 'runhour2']
 });
 
 var store_akumulasi = Ext.create('Ext.data.Store', {
@@ -49,15 +49,15 @@ var store_akumulasi = Ext.create('Ext.data.Store', {
     autoLoad: true,
     proxy: {
         type: 'ajax',
-        url: 'akumulasi_detail.php?',
+        url: 'data_grafik_perjam.php?',
         method: 'GET',
         reader: {
             type: 'json',
-            successProperty: 'success',
-            root: 'results',
+            //successProperty: 'success',
+            root: 'g_perjam',
             messageProperty: 'message'
         }
-    },
+    }
     //listeners: {
         //'beforeload': function (store, options) {
             //store.proxy.extraParams.name=comb_kapal2;
@@ -136,6 +136,8 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
         header: "date",
         width: 120,
         dataIndex: 'tanggal'
+        //renderer: Ext.util.Format.dateRenderer('d-M-Y')
+        //renderer: Ext.util.Format.dateRenderer('d-M-Y')
     }, {
         header: "hour",
         width: 60,
@@ -619,21 +621,25 @@ var panel_hitung = {
 
 function daily_akum() {
     Ext.Ajax.request({
-        url: 'update_daily.php',
+        url: 'data_grafik_perhari.php',
         method: 'GET',
         success: function (data) {
-            var temp = new Array();
-            temp = (data.responseText).split(",");
-            eng1_daily = parseFloat(temp[0]) - parseFloat(temp[1]);
-            eng2_daily = parseFloat(temp[2]) - parseFloat(temp[3]);
+			var hasil = Ext.JSON.decode(data.responseText);
+			console.log(hasil.g_perhari[0]);
+			console.log(hasil.g_perhari[0].rh2);
+			
+            //var temp = new Array();
+            //temp = (data.responseText).split(",");
+            eng1_daily = parseFloat(hasil.g_perhari[0].tot_fl1) - parseFloat(hasil.g_perhari[0].tot_ovfl1);
+            eng2_daily = parseFloat(hasil.g_perhari[0].tot_fl2) - parseFloat(hasil.g_perhari[0].tot_ovfl2);
             total_daily = eng1_daily + eng2_daily;
-            gen1_runhour = parseFloat(temp[4]);
-            gen2_runhour = parseFloat(temp[5]);
-        },
-        params: {
-            name: comb_kapal2,
-            tgl: tgl_sel2
+            gen1_runhour = parseFloat(hasil.g_perhari[0].rh1);
+            gen2_runhour = parseFloat(hasil.g_perhari[0].rh2);
         }
+        //params: {
+            //name: comb_kapal2,
+            //tgl: tgl_sel2
+        //}
     });
     content_akum = '<style type="text/css">' +
         'table.total_daily {font-family: verdana,arial,sans-serif;font-size:12px;text-align: center;color:#333333;border-width: 1px;border-color: #a9c6c9;border-collapse: collapse;}' +
@@ -671,9 +677,9 @@ function update_grafik() {
 
 Ext.onReady(function () {
 
-    //setInterval(function () {
-        //daily_akum();
-    //}, 60*1000);
+    setInterval(function () {
+        daily_akum();
+    }, 60*1000);
 
     //setInterval(function () {
         //update_grafik();
