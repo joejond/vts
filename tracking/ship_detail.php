@@ -1,5 +1,5 @@
 <?php
-
+$start = microtime();
 session_start();
 //include	'../inc/conn_db.php';
 include	'../inc/conn_db_linode1.php';
@@ -63,4 +63,7 @@ try {
 }	
 echo json_encode($jsonResult);
 
+$end = microtime();
+$creationtime = ($end - $start) / 1000;
+printf("Page created in %.5f seconds.", $creationtime);
 ?>

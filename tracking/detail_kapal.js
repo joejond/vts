@@ -21,7 +21,7 @@ var store_detail_kapal = Ext.create('Ext.data.Store', {
     autoLoad: true,
     proxy: {
         type: 'ajax',
-        url: 'ship_detail.php',
+        url: 'ship_detail_sp.php',
         method: 'GET',
         reader: {
             type: 'json',
