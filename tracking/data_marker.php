@@ -51,7 +51,7 @@ try{
 			
 		$hsl = $db->prepare($query);
 		$hsl->execute();
-		$result = $hsl->fetchAll();
+		$result = $hsl->fetchAll(PDO::FETCH_ASSOC);
 		
 		array_push($data,$result);
 		

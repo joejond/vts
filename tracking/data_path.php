@@ -23,7 +23,7 @@ try{
 	//echo 'lat => '.$query.'<br>';
 	$hasil = $db->prepare($query);
 	$hasil->execute();
-	$result = $hasil->fetchAll();
+	$result = $hasil->fetchAll(PDO::FETCH_ASSOC);
 	$jsonResult = array(
         'success' => true,
         'track' => $result

@@ -59,6 +59,7 @@ var paths_lat = [];
 var paths_lon = [];
 var jml_point_paths = 0;
 var jmlpt = 0;
+var data_koor1 = [];
 
 function addMarker(id, location) {    
     Ext.Ajax.request({
@@ -207,7 +208,6 @@ function getdatapath(id, start_tm, stop_tm)
         method: 'GET',
         success: function (data) {
 			//console.log(data.responseText);
-			
 			var pathisi = Ext.JSON.decode(data.responseText);
 			//console.log(pathisi);
 			
@@ -228,26 +228,9 @@ function getdatapath(id, start_tm, stop_tm)
                 paths_lat[n] = pathisi.track[n].lat;
                 paths_lon[n] = pathisi.track[n].lng;
                 
-                //console.log (paths_lat[n]+' =&= '+paths_lon[n]);
+                
+                
             }
-            
-            //paths[n] = new google.maps.Polyline(polyOptions);
-			////console.log(paths[n]);
-			////console.log('jmlpt : '+jjjj);
-			
-			//paths[n].setMap(peta1.getMap());
-            
-            //for(var a = 0; a < jmlpt; a++){
-				
-				//paths[n] = new google.maps.Polyline(polyOptions);
-				//(paths[n].getPath()).push(new google.maps.LatLng(paths_lat[a], paths_lon[a]));
-				
-				//paths[n].setMap(peta1.getMap());
-			
-			//}
-            
-            
-            
             
         }
     })    
@@ -298,7 +281,7 @@ function addpath(){
         
         getdatapath(kapal_dipilih[n], str, stp);
         
-        //console.log(kapal_dipilih[n]);
+        
         
         
         paths[n] = new google.maps.Polyline(polyOptions);
