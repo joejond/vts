@@ -1,8 +1,8 @@
 <?php
 
 session_start();
-//include	'../inc/conn_db.php';
-include	'../inc/conn_db_linode1.php';
+include	'../inc/conn_db.php';
+//include	'../inc/conn_db_linode1.php';
 include	'../inc/cekSession.php';
 
 
