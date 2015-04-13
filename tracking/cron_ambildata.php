@@ -73,7 +73,7 @@ $hasil->execute();
 
 
 while ($row = $hasil->fetch()){
-	
+		
 		$url = 'http://isatdatapro.skywave.com/GLGW/GWServices_v1/RestMessages.svc/get_return_messages.xml/?access_id=70000214&password=STSATI2010&from_id=1450235&mobile_id='.$row['modem_id'].'&start_utc='.$dateambil;
 		echo 'url = '.$url.'<br>';
 		
