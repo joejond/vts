@@ -6,7 +6,7 @@ include	'../inc/cekSession.php';
 
 try {
 	
-	$query = 'SELECT id_ship AS id,name FROM ship';
+	$query = 'call ship_list()';
 	
 	$sth = $db->prepare($query);
 	$sth->execute();
