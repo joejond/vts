@@ -1,5 +1,5 @@
 <?php
-$start = microtime();
+//$start = microtime();
 session_start();
 include	'../inc/conn_db.php';
 //include	'../inc/conn_db_linode1.php';
@@ -10,8 +10,9 @@ try {
 	$id = (isset($_GET['id']) && ($_GET['id'] <> '')) ? $_GET['id'] : '1';
 	$tgl = (isset($_GET['tgl']) && ($_GET['tgl'] <> '')) ? $_GET['tgl'] : date('Y-m-d') ;
 	
-	//echo 'idkapal = '.$id. ' dan tanggal = '.$tgl.'<br>';
-	
+	echo 'idkapal = '.$id. ' dan tanggal = '.$tgl.'<br>';
+	echo 'tanggal sekarang ==> '.date('e').'<br>';	
+
 	$query = 'SELECT d.data_time as waktu, 
 				max(case when tu.id_data_type="1" then round(d.value,2) end) lat,
 				max(case when tu.id_data_type="2" then round(d.value,2) end) lng,
@@ -61,9 +62,9 @@ try {
     );
 
 }	
-echo json_encode($jsonResult);
+//echo json_encode($jsonResult);
 
-$end = microtime();
-$creationtime = ($end - $start) / 1000;
-printf("Page created in %.5f seconds.", $creationtime);
+//$end = microtime();
+//$creationtime = ($end - $start) / 1000;
+//printf("Page created in %.5f seconds.", $creationtime);
 ?>
