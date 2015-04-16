@@ -11,7 +11,7 @@ try {
 	$id = (isset($_GET['id']) && ($_GET['id'] <> '')) ? $_GET['id'] : '1';
 	$tgl = (isset($_GET['tgl']) && ($_GET['tgl'] <> '')) ? $_GET['tgl'] : date('Y-m-d') ;
 	
-	echo 'idkapal = '.$id. ' dan tanggal = '.$tgl.'<br>';
+	//echo 'idkapal = '.$id. ' dan tanggal = '.$tgl.'<br>';
 	for($i=0; $i<24;$i++){
 		//$query = 'SELECT rpm1_avg, rpm2_avg, flow1_tot, overflow1_tot, flow2_tot, overflow2_tot, runhour1, runhour2
 					//FROM data_perjam 
