@@ -13,10 +13,12 @@ try {
 	
 	//echo 'idkapal = '.$id. ' dan tanggal = '.$tgl.'<br>';
 	for($i=0; $i<24;$i++){
-		$query = 'SELECT rpm1_avg, rpm2_avg, flow1_tot, overflow1_tot, flow2_tot, overflow2_tot, runhour1, runhour2
-					FROM data_perjam 
-			where id_ship = '.$id.' and tanggal = "'.$tgl.'" and jam = "'.$i.'"';
-
+		//$query = 'SELECT rpm1_avg, rpm2_avg, flow1_tot, overflow1_tot, flow2_tot, overflow2_tot, runhour1, runhour2
+					//FROM data_perjam 
+			//where id_ship = '.$id.' and tanggal = "'.$tgl.'" and jam = "'.$i.'"';
+		
+		$query = 'call kapal_perjam_chart('.$id.', "'.$tgl.'")';
+		
 		$sth = $db->prepare($query);
 		$sth->execute();
 		
@@ -28,10 +30,10 @@ try {
 		
 		$data_chart [] = array(
 			'jam' =>  (strlen($i) ==1 )? '0'.$i : $i,
-			'rpm1' => ($r['rpm1_avg'] == '' ) ? null : $r['rpm1_avg'],
-			'rpm2' => ($r['rpm2_avg'] == '' ) ? null : $r['rpm2_avg'],
-			'fuel1' => ($r['rpm1_avg'] == '' ) ? null : $r['flow1_tot'] - $r['overflow1_tot'],
-			'fuel2' => ($r['rpm1_avg'] == '' ) ? null : $r['flow2_tot'] - $r['overflow2_tot'],
+			'rpm1' => ($r['rpm1_avg'] == '' ) ? null : $r['rpm1'],
+			'rpm2' => ($r['rpm2_avg'] == '' ) ? null : $r['rpm2'],
+			'fuel1' => ($r['rpm1_avg'] == '' ) ? null : $r['flow1'] - $r['overflow1'],
+			'fuel2' => ($r['rpm1_avg'] == '' ) ? null : $r['flow2'] - $r['overflow2'],
 			'rh1' => ($r['rpm1_avg'] == '' ) ? null : $r['runhour1'],
 			'rh2' => ($r['rpm1_avg'] == '' ) ? null : $r['runhour2']
 		);
