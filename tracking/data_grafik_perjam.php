@@ -17,7 +17,11 @@ try {
 				//WHERE id_ship = '.$id.' and tanggal= "'.$tgl.'"
 				//ORDER BY tanggal desc, jam desc';
 
+<<<<<<< HEAD
 	$query = 'call kapal_perjam($id,$tgl)';
+=======
+	$query = 'call kapal_perjam('.$id.','.$tgl.')';
+>>>>>>> d483fb50fdd0c406a7c7bb1a024f30ed6b3cd3d1
 	$sth = $db->prepare($query);
 	$sth->execute();
 	$result = $sth->fetchAll(PDO::FETCH_ASSOC);
