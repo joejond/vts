@@ -17,7 +17,7 @@ try {
 					//FROM data_perjam 
 			//where id_ship = '.$id.' and tanggal = "'.$tgl.'" and jam = "'.$i.'"';
 		
-		$query = 'call kapal_perjam_chart('.$id.', "'.$tgl.'")';
+		$query = 'call kapal_perjam_chart('.$id.', "'.$tgl.'",'.$i.')';
 		
 		$sth = $db->prepare($query);
 		$sth->execute();
@@ -54,6 +54,6 @@ try {
     );
 
 }	
-//echo json_encode($jsonResult);
+echo json_encode($jsonResult);
 
 ?>
