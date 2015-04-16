@@ -1,8 +1,8 @@
 <?php
 
 session_start();
-include	'../inc/conn_db.php';
-//include	'../inc/conn_db_linode1.php';
+//include	'../inc/conn_db.php';
+include	'../inc/conn_db_linode2.php';
 include	'../inc/cekSession.php';
 
 
@@ -17,7 +17,9 @@ try {
 				//WHERE id_ship = '.$id.' and tanggal= "'.$tgl.'"
 				//ORDER BY tanggal desc, jam desc';
 
-	$query = 'call kapal_perjam('.$id.','.$tgl.')';
+	$query = 'call kapal_perjam('.$id.',"'.$tgl.'")';
+	
+	//echo 'query == '.$query.'<br>';
 	$sth = $db->prepare($query);
 	$sth->execute();
 	$result = $sth->fetchAll(PDO::FETCH_ASSOC);
