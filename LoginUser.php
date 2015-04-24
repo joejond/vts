@@ -1,4 +1,3 @@
-<!--
 <?php 
 session_start();
 include	'inc/conn_db.php';
@@ -18,22 +17,19 @@ else
  $ip = $_SERVER["REMOTE_ADDR"];
 }
 
-//include 'inc/captcha/capca.php';
-
-
-
 if(isset($_POST['userid']) && isset($_POST['capcai'])) {
-		$user = strip_tags(trim($_POST['userid'])); #echo $user;
-		$pass = strip_tags(trim($_POST['passwd'])); #echo $pass;
-		$capca = strip_tags(trim($_POST['capcai'])); echo $capca;
-		$kode = $_SESSION['kode']; echo $kode;
-		$banding = strcmp($kode,$capca); echo $banding;
+		$user = strip_tags(trim($_POST['userid'])); //echo $user;
+		$pass = strip_tags(trim($_POST['passwd'])); //echo $pass;
+		$capca = strip_tags(trim($_POST['capcai'])); //echo $capca;
+		$kode = $_SESSION['kode']; //echo $kode;
+		$banding = strcmp($kode,$capca); //echo $banding;
 		
 		$sql 	= "SELECT id,username,timezone FROM user WHERE username = '".$user."' and password='".MD5($pass)."'";
 		//echo $sql.'<br>';
 		$sth = $db->prepare($sql);
 		$sth->execute();
 		//$result = $sth->fetchAll();
+		//print_r($result);
 		//$statement->rowCount()
 		//$hasil 	= $db->query($sql);
 		//$jml 	= $hasil->num_rows;
@@ -42,6 +38,7 @@ if(isset($_POST['userid']) && isset($_POST['capcai'])) {
 		if ($user == '' || $pass == ''){
 			$msg = '<p class="text-center text-danger" ><b><span class="glyphicon glyphicon-warning-sign"></span>   Please type your username or password!!</b></p>';
 		}
+
 		else if (($jml == 1) && ($banding == 0)) {
 			while($row = $sth->fetch()){
 				//echo $row['username'] . '<br />';
@@ -56,13 +53,10 @@ if(isset($_POST['userid']) && isset($_POST['capcai'])) {
 			
 			}
 			echo '<script type="text/javascript"> window.parent.location ="tracking/index.php";</script>' ;
-			echo 'masuk';
-			//$msg = 'sip mlebu';
 		}
 		
 		else {
 			$msg = '<p class="text-center text-danger"><b><span class="glyphicon glyphicon-warning-sign"></span>  You not authorize to login, please check your username or password.</b></p>';
-		
 		}
 	}
 else {
@@ -87,8 +81,6 @@ else {
 	body {padding-top : 20px;}
 	
 	</style>
-	
-	
 	
 
 </head>
@@ -120,7 +112,7 @@ else {
                 <div class="form-group">
 					<div class="input-group">
 						<span class="input-group-addon">
-							<img src="inc/capca.php" alt="Pass code" height="20" width="110">
+							<img src="inc/capca.php" alt="Pass code" height="20" width="130">
 						</span>
 						<input class="form-control" name="capcai" id="capcai" placeholder="Kode" type="text" >
 						
@@ -133,8 +125,6 @@ else {
 					<button type="submit" class="btn btn-primary btn-block" name="login" id="login" >Login</button>
 				</div>
 				
-				
-				
 				</form>
 			</div>
       	</div>
@@ -144,8 +134,7 @@ else {
 		<div class="col-md-4 col-md-offset-4">
 			<div id="pesan">
 			<div class="well well-sm">
-			
-				<?php echo $msg?>
+				<?php echo $msg; ?>
 			</div>
 		</div>
 	
@@ -163,4 +152,4 @@ else {
 	</script>
 </body>
 </html>
--->
+
