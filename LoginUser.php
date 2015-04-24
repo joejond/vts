@@ -2,13 +2,33 @@
 session_start();
 include	'inc/conn_db.php';
 
-$msg = '<p class="text-center text-danger"><b><span class="glyphicon glyphicon-warning-sign"></span>  Silahkan Login dahulu.</b></p>';
+if (!empty($_SERVER["HTTP_CLIENT_IP"]))
+{
+ //check for ip from share internet
+ $ip = $_SERVER["HTTP_CLIENT_IP"];
+}
+elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"]))
+{
+ // Check for the Proxy User
+ $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+}
+else
+{
+ $ip = $_SERVER["REMOTE_ADDR"];
+}
 
-if(isset($_POST['userid'])) {
+//include 'inc/captcha/capca.php';
+
+
+
+if(isset($_POST['userid']) && isset($_POST['capcai'])) {
 		$user = strip_tags(trim($_POST['userid'])); #echo $user;
 		$pass = strip_tags(trim($_POST['passwd'])); #echo $pass;
+		$capca = strip_tags(trim($_POST['capcai'])); #echo $capca;
+		$kode = $_SESSION['kode']; #echo $kode;
+		$banding = strcmp($kode,$capca); #echo $banding;
 		
-		$sql 	= "SELECT id,username FROM user WHERE username = '".$user."' and password='".MD5($pass)."'";
+		$sql 	= "SELECT id,username,timezone FROM user WHERE username = '".$user."' and password='".MD5($pass)."'";
 		//echo $sql.'<br>';
 		$sth = $db->prepare($sql);
 		$sth->execute();
@@ -21,27 +41,31 @@ if(isset($_POST['userid'])) {
 		if ($user == '' || $pass == ''){
 			$msg = '<p class="text-center text-danger" ><b><span class="glyphicon glyphicon-warning-sign"></span>   Please type your username or password!!</b></p>';
 		}
-		else if ($jml == 1) {
+		else if ($jml == 1 && $banding == 0) {
 			while($row = $sth->fetch()){
 				//echo $row['username'] . '<br />';
 				
 				$_SESSION['uid']		= $row['id'];	
 				$_SESSION['username']	= $row['username'];
+				$_SESSION['timezone']	= $row['timezone'];
+				
+				$sql_log = "update user set last_login = UNIX_TIMESTAMP(NOW()), ipaddress = '".$ip."' where id = ".$row['id']."";
+				$loged = $db->prepare($sql_log);
+				$loged->execute();
 			
 			}
-			
-			
 			echo '<script type="text/javascript"> window.parent.location ="tracking/index.php";</script>' ;
-			
-			
-			
-			
+			//echo 'masuk';
+			//$msg = 'sip mlebu';
 		}
 		
 		else {
 			$msg = '<p class="text-center text-danger"><b><span class="glyphicon glyphicon-warning-sign"></span>  You not authorize to login, please check your username or password.</b></p>';
 		
 		}
+	}
+else {
+	$msg = '<p class="text-center text-danger"><b><span class="glyphicon glyphicon-warning-sign"></span>  Silahkan Login dahulu.</b></p>';
 	}
 
 ?>
@@ -98,8 +122,22 @@ if(isset($_POST['userid'])) {
 					<input class="form-control" name="passwd" id="passwd" placeholder="password" type="password">
                 </div>
                 <div class="form-group">
+					<div class="input-group">
+						<span class="input-group-addon">
+							<img src="inc/capca.php" alt="Pass code" height="20" width="110">
+						</span>
+						<input class="form-control" name="capcai" id="capcai" placeholder="Kode" type="text" >
+						
+					</div>
+					<p class="help-block">Access from <?php echo ' '.$ip;?></p>
+				
+				</div>
+				
+                <div class="form-group">
 					<button type="submit" class="btn btn-primary btn-block" name="login" id="login" >Login</button>
 				</div>
+				
+				
 				
 				</form>
 			</div>

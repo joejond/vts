@@ -4,8 +4,9 @@ Ext.onReady(function() {
 			url: 'get_user_session.php',
 			method: 'GET',
 			success: function(data) {
-				user_login = (data.responseText);
-				//console.log ('yang login = '+user_login);
+				var user = Ext.JSON.decode(data.responseText);
+				user_login = user.loged.user;
+				//console.log ('usernya : '+user.loged.user);
 				Ext.fly('user').update('Welcome '+user_login);
 			},
 			
