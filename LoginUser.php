@@ -1,3 +1,4 @@
+<!--
 <?php 
 session_start();
 include	'inc/conn_db.php';
@@ -41,7 +42,7 @@ if(isset($_POST['userid']) && isset($_POST['capcai'])) {
 		if ($user == '' || $pass == ''){
 			$msg = '<p class="text-center text-danger" ><b><span class="glyphicon glyphicon-warning-sign"></span>   Please type your username or password!!</b></p>';
 		}
-		else if ($jml == 1 && $banding == 0) {
+		else if (($jml == 1) && ($banding == 0)) {
 			while($row = $sth->fetch()){
 				//echo $row['username'] . '<br />';
 				
@@ -55,7 +56,7 @@ if(isset($_POST['userid']) && isset($_POST['capcai'])) {
 			
 			}
 			echo '<script type="text/javascript"> window.parent.location ="tracking/index.php";</script>' ;
-			//echo 'masuk';
+			echo 'masuk';
 			//$msg = 'sip mlebu';
 		}
 		
@@ -162,3 +163,4 @@ else {
 	</script>
 </body>
 </html>
+-->
