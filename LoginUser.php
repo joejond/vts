@@ -87,12 +87,7 @@ else {
 	
 	</style>
 	
-	<script>
-	$(document).ready(function(){
-		$("#pesan").delay(3000).fadeOut('slow');		
-	});
 	
-	</script>
 	
 
 </head>
@@ -159,5 +154,11 @@ else {
 </div>
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script>
+	$(document).ready(function(){
+		$("#pesan").delay(3000).fadeOut('slow');		
+	});
+	
+	</script>
 </body>
 </html>
