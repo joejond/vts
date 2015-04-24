@@ -1,4 +1,4 @@
-<!--
+
 <?php 
 session_start();
 include	'inc/conn_db.php';
@@ -56,7 +56,7 @@ if(isset($_POST['userid']) && isset($_POST['capcai'])) {
 			
 			}
 			echo '<script type="text/javascript"> window.parent.location ="tracking/index.php";</script>' ;
-			echo 'masuk';
+			//echo 'masuk';
 			//$msg = 'sip mlebu';
 		}
 		
@@ -120,7 +120,7 @@ else {
                 <div class="form-group">
 					<div class="input-group">
 						<span class="input-group-addon">
-							<img src="inc/capca.php" alt="Pass code" height="20" width="110">
+							<img src="inc/capca.php" alt="Pass code" height="20" width="130">
 						</span>
 						<input class="form-control" name="capcai" id="capcai" placeholder="Kode" type="text" >
 						
@@ -145,7 +145,7 @@ else {
 			<div id="pesan">
 			<div class="well well-sm">
 			
-				<?php echo $msg?>
+				<?php echo $msg; ?>
 			</div>
 		</div>
 	
@@ -163,4 +163,4 @@ else {
 	</script>
 </body>
 </html>
--->
+
