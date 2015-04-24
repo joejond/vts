@@ -88,7 +88,7 @@ Ext.onReady(function() {
                 render :function() {                
                     Ext.TaskManager.start({
                         run : function() {
-                            Ext.fly('jam').update(Ext.Date.format(new Date(), 'm M Y, H:i:s'));  
+                            Ext.fly('jam').update(Ext.Date.format(new Date(), 'd M Y, H:i:s'));  
                          },
                         //scope: me,
                         interval : 1000
