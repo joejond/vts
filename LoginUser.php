@@ -24,9 +24,9 @@ else
 if(isset($_POST['userid']) && isset($_POST['capcai'])) {
 		$user = strip_tags(trim($_POST['userid'])); #echo $user;
 		$pass = strip_tags(trim($_POST['passwd'])); #echo $pass;
-		$capca = strip_tags(trim($_POST['capcai'])); #echo $capca;
-		$kode = $_SESSION['kode']; #echo $kode;
-		$banding = strcmp($kode,$capca); #echo $banding;
+		$capca = strip_tags(trim($_POST['capcai'])); echo $capca;
+		$kode = $_SESSION['kode']; echo $kode;
+		$banding = strcmp($kode,$capca); echo $banding;
 		
 		$sql 	= "SELECT id,username,timezone FROM user WHERE username = '".$user."' and password='".MD5($pass)."'";
 		//echo $sql.'<br>';
