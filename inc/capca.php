@@ -12,7 +12,7 @@ $ranStr = getRandomWord();
 $_SESSION["kode"] = $ranStr;
 
 $height = 35; //CAPTCHA image height
-$width = 110; //CAPTCHA image width
+$width = 130; //CAPTCHA image width
 $font_size = 26; //CAPTCHA Font size
 
 $image_p = imagecreate($width, $height);
