@@ -231,6 +231,11 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
             header: "genset#2",
             width: 100,
             dataIndex: 'runhour2'
+        }, {
+            header: "genset#3",
+            width: 100,
+            dataIndex: 'runhour3'
+        
         }]
     }]
 });
