@@ -10,7 +10,7 @@ Ext.require([
 
 var model_detail_kapal = Ext.define('detail_kapal', {
     extend: 'Ext.data.Model',
-    fields: ['waktu', 'lat', 'lng', 'spd', 'head', 'rpm1', 'prop1', 'flow1', 'ovflow1', 'temp1', 'pres1', 'rpm2', 'prop2', 'flow2', 'ovflow2', 'temp2', 'pres2', 'rh1', 'rh2', 'batt', 'char','kapal', 'modem']
+    fields: ['waktu', 'lat', 'lng', 'speed', 'heading', 'rpm1', 'prop1', 'inflow1', 'outflow1', 'temp1', 'press1', 'rpm2', 'prop2', 'inflow2', 'outflow2', 'temp2', 'press2', 'runhour1', 'runhour2','runhour3', 'battery', 'charger','kapal', 'modem']
 });
 
 var comb_kapal1 = '';
@@ -115,7 +115,7 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
 		{
 			header: "heading", 
 			width: 45, 
-			dataIndex: 'head'
+			dataIndex: 'heading'
 		}]
 	},
     {
@@ -134,12 +134,12 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
 		{
 			header: "flowmeter#1", 
 			width: 70, 
-			dataIndex: 'flow1'
+			dataIndex: 'inflow1'
 		},
 		{
 			header: "overflow#1", 
 			width: 70, 
-			dataIndex: 'ovflow1'
+			dataIndex: 'outflow1'
 		},
 		{
 			header: "temp#1", 
@@ -149,7 +149,7 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
 		{
 			header: "press#1", 
 			width: 70, 
-			dataIndex: 'pres1'
+			dataIndex: 'press1'
 		}
 		]	  
 	},
@@ -169,12 +169,12 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
 		{
 			header: "flowmeter#2", 
 			width: 70, 
-			dataIndex: 'flow2'
+			dataIndex: 'inflow2'
 		},
 		{
 			header: "overflow#2", 
 			width: 70, 
-			dataIndex: 'ovflow2'
+			dataIndex: 'outflow2'
 		},
 		{
 			header: "temp#2", 
@@ -184,7 +184,7 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
 		{
 			header: "press#2", 
 			width: 70, 
-			dataIndex: 'pres2'
+			dataIndex: 'press2'
 		}
 		]	  
 	},
@@ -194,12 +194,15 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
 		{
 			header: "runhour#1", 
 			width: 70, 
-			dataIndex: 'rh1'
-		},
-		{
+			dataIndex: 'runhour1'
+		},{
 			header: "runhour#2", 
 			width: 70, 
-			dataIndex: 'rh2'
+			dataIndex: 'runhour2'
+		},{
+			header: "runhour#3", 
+			width: 70, 
+			dataIndex: 'runhour3'
 		}
 		]	  
 	},
@@ -209,12 +212,12 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
 		{
 			header: "battery", 
 			width: 70, 
-			dataIndex: 'batt'
+			dataIndex: 'battery'
 		},
 		{
 			header: "charger", 
 			width: 70, 
-			dataIndex: 'char'
+			dataIndex: 'charger'
 		}
 		]	  
 	},

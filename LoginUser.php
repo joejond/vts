@@ -52,15 +52,16 @@ if(isset($_POST['userid']) && isset($_POST['capcai'])) {
 				$loged->execute();
 			
 			}
-			echo '<script type="text/javascript"> window.parent.location ="tracking/index.php";</script>' ;
+			echo '<script type="text/javascript"> window.parent.location ="tracking/#";</script>' ;
+			$msg = '<p class="text-center text-success"><b><span class="glyphicon glyphicon-thumbs-up"></span>  Succesfull Authenticate</b></p>';
 		}
 		
 		else {
-			$msg = '<p class="text-center text-danger"><b><span class="glyphicon glyphicon-warning-sign"></span>  You not authorize to login, please check your username or password.</b></p>';
+			$msg = '<p class="text-center text-danger"><b><span class="glyphicon glyphicon-warning-sign"></span>  You not Authorize to login, please check your username or password.</b></p>';
 		}
 	}
 else {
-	$msg = '<p class="text-center text-danger"><b><span class="glyphicon glyphicon-warning-sign"></span>  Silahkan Login dahulu.</b></p>';
+	$msg = '<p class="text-center text-danger"><b><span class="glyphicon glyphicon-warning-sign"></span>  Please Login First</b></p>';
 	}
 
 ?>

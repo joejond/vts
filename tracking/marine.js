@@ -61,7 +61,7 @@ Ext.onReady(function() {
 				id		: 'app-header-title',
 				html	: document.title,
 				//flex 	: 1,
-				width	: '75%'
+				width	: '70%'
 				
 			},{
 				id		: 'user',
@@ -72,7 +72,7 @@ Ext.onReady(function() {
 				id	: 'jam',
 				xtype	: 'label',
 				//html	: '<div id="jam"></div><span>'+ user_login +' </span>',
-				width	: '10%'			
+				width	: '15%'			
 			},{
 				
 				//id: 'user',
@@ -88,7 +88,7 @@ Ext.onReady(function() {
                 render :function() {                
                     Ext.TaskManager.start({
                         run : function() {
-                            Ext.fly('jam').update(Ext.Date.format(new Date(), 'd M Y, H:i:s'));  
+                            Ext.fly('jam').update(Ext.Date.format(new Date(), 'd M Y, H:i:s T'));  
                          },
                         //scope: me,
                         interval : 1000

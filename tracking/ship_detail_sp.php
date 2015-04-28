@@ -12,7 +12,8 @@ try {
 	
 	//echo 'idkapal = '.$id. ' dan tanggal = '.$tgl.'<br>';
 	
-	$query = 'call data_kapal('.$id.', "'.$tgl.'")';
+	//$query = 'call data_kapal('.$id.', "'.$tgl.'")';
+	$query = 'call data_kapal_dinamis('.$id.', "'.$tgl.'")';
 		//echo 'query = '.$query.'<br>';
 
 	$sth = $db->prepare($query);

@@ -158,13 +158,15 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
     columns: [{
         header: "date",
         width: 120,
+        locked : true,
         dataIndex: 'tanggal'
         //renderer: Ext.util.Format.dateRenderer('d-M-Y')
         //renderer: Ext.util.Format.dateRenderer('d-M-Y')
     }, {
         header: "hour",
         width: 60,
-        dataIndex: 'jam'
+        dataIndex: 'jam',
+        locked : true
     }, {
         header: "engine#1",
         columns: [{
