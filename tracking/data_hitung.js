@@ -39,6 +39,7 @@ var comb_kapal21 = '';
 var tgl_sel21 = '';
 var tgl_sel22 = '';
 
+
 var model_akumulasi = Ext.define('akumulasi', {
     extend: 'Ext.data.Model',
     fields: [{name : 'tanggal', type : 'string'}, 'jam', 'rpm1', 'prop1', 'inflow1', 'outflow1', 'temp1', 'press1', 'rpm2', 'prop2', 'inflow2', 'outflow2', 'temp2', 'press2', 'runhour1', 'runhour2','runhour3']
@@ -157,16 +158,17 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
     flex: 4,
     columns: [{
         header: "date",
-        width: 120,
+        width: 150,
         locked : true,
         dataIndex: 'tanggal'
+        //format : 'd-M-Y H'
+        //renderer: Ext.util.Format.dateRenderer('d-M-Y H')
         //renderer: Ext.util.Format.dateRenderer('d-M-Y')
-        //renderer: Ext.util.Format.dateRenderer('d-M-Y')
-    }, {
-        header: "hour",
-        width: 60,
-        dataIndex: 'jam',
-        locked : true
+    //}, {
+        //header: "hour",
+        //width: 60,
+        //dataIndex: 'jam',
+        //locked : true
     }, {
         header: "engine#1",
         columns: [{

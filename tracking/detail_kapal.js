@@ -322,6 +322,7 @@ var panel_detail = {
 				fieldLabel: 'Date',
 				id: 'date_total1',
 				labelWidth: 40,
+				editable : false,
 				xtype: 'datefield',
 				value: new Date(),
 				format: 'd-M-Y',
@@ -341,7 +342,7 @@ var panel_detail = {
 						//console.log('Date selected: ', this.getValue());
 						tgl_sel1 = Ext.Date.format(this.getValue(),'Y-m-d');
 						tgl_sel2 = (tgl_sel1 != '') ? tgl_sel1 : Ext.Date.format(new Date(), 'd-M-Y' );
-						console.log(tgl_sel1);
+						//console.log(tgl_sel1);
 						}
 				}
 			},
