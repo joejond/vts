@@ -41,7 +41,7 @@ var tgl_sel22 = '';
 
 var model_akumulasi = Ext.define('akumulasi', {
     extend: 'Ext.data.Model',
-    fields: [{name : 'tanggal', type : 'string'}, 'jam', 'rpm1', 'prop1', 'flow1', 'overflow1', 'temp1', 'press1', 'rpm2', 'prop2', 'flow2', 'overflow2', 'temp2', 'press2', 'runhour1', 'runhour2']
+    fields: [{name : 'tanggal', type : 'string'}, 'jam', 'rpm1', 'prop1', 'inflow1', 'outflow1', 'temp1', 'press1', 'rpm2', 'prop2', 'inflow2', 'outflow2', 'temp2', 'press2', 'runhour1', 'runhour2','runhour3']
 });
 
 var store_akumulasi = Ext.create('Ext.data.Store', {
@@ -180,11 +180,11 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
         }, {
             header: "flowmeter#1",
             width: 100,
-            dataIndex: 'flow1'
+            dataIndex: 'inflow1'
         }, {
             header: "overflow#1",
             width: 100,
-            dataIndex: 'overflow1'
+            dataIndex: 'outflow1'
         }, {
             header: "temperature#1",
             width: 100,
@@ -207,11 +207,11 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
         }, {
             header: "flowmeter#2",
             width: 100,
-            dataIndex: 'flow2'
+            dataIndex: 'inflow2'
         }, {
             header: "overflow#2",
             width: 100,
-            dataIndex: 'overflow2'
+            dataIndex: 'outflow2'
         }, {
             header: "temperature#2",
             width: 100,

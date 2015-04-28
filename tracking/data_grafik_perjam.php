@@ -17,7 +17,8 @@ try {
 				//WHERE id_ship = '.$id.' and tanggal= "'.$tgl.'"
 				//ORDER BY tanggal desc, jam desc';
 
-	$query = 'call kapal_perjam('.$id.',"'.$tgl.'")';
+	//$query = 'call kapal_perjam('.$id.',"'.$tgl.'")';
+	$query = 'call data_kapal_perjam_dinamis('.$id.',"'.$tgl.'")';
 	
 	//echo 'query == '.$query.'<br>';
 
