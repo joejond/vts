@@ -110,7 +110,7 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
 		{
 			header: "speed", 
 			width: 40, 
-			dataIndex: 'spd'
+			dataIndex: 'speed'
 		},
 		{
 			header: "heading", 
