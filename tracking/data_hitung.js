@@ -42,7 +42,10 @@ var tgl_sel22 = '';
 
 var model_akumulasi = Ext.define('akumulasi', {
     extend: 'Ext.data.Model',
-    fields: [{name : 'tanggal', type : 'string'}, 'jam', 'rpm1', 'prop1', 'inflow1', 'outflow1', 'temp1', 'press1', 'rpm2', 'prop2', 'inflow2', 'outflow2', 'temp2', 'press2', 'runhour1', 'runhour2','runhour3']
+    fields: [{name : 'tanggal', type : 'string'}, 'jam', 'rpm1', 'prop1', 'inflow1', 'outflow1', 'temp1', 'press1', 
+			'rpm2', 'prop2', 'inflow2', 'outflow2', 'temp2', 'press2', 
+			'rpm3', 'prop3', 'inflow3', 'outflow3', 'temp3', 'press3', 
+			'runhour1', 'runhour2','runhour3']
 });
 
 var store_akumulasi = Ext.create('Ext.data.Store', {
@@ -155,7 +158,7 @@ var but_export = {
 var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
     title: 'akumulasi data flowmeter',
     store: store_akumulasi,
-    flex: 4,
+    flex: 6,
     columns: [{
         header: "date",
         width: 150,
@@ -169,60 +172,87 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
         //width: 60,
         //dataIndex: 'jam',
         //locked : true
-    }, {
-        header: "engine#1",
+    },{
+        header: "Engine #1",
         columns: [{
             header: "engine#1 (avg)",
             width: 100,
             dataIndex: 'rpm1'
-        }, {
+        },{
             header: "propeler#1 (avg)",
             width: 100,
             dataIndex: 'prop1'
-        }, {
+        },{
             header: "flowmeter#1",
             width: 100,
             dataIndex: 'inflow1'
-        }, {
+        },{
             header: "overflow#1",
             width: 100,
             dataIndex: 'outflow1'
-        }, {
+        },{
             header: "temperature#1",
             width: 100,
             dataIndex: 'temp1'
-        }, {
+        },{
             header: "pressure#1",
             width: 100,
             dataIndex: 'press1'
         }]
-    }, {
-        header: "engine#2",
+    },{
+        header: "Engine #2",
         columns: [{
             header: "engine#2 (avg)",
             width: 100,
             dataIndex: 'rpm2'
-        }, {
+        },{
             header: "propeler#2 (avg)",
             width: 100,
             dataIndex: 'prop2'
-        }, {
+        },{
             header: "flowmeter#2",
             width: 100,
             dataIndex: 'inflow2'
-        }, {
+        },{
             header: "overflow#2",
             width: 100,
             dataIndex: 'outflow2'
-        }, {
+        },{
             header: "temperature#2",
             width: 100,
             dataIndex: 'temp2'
-        }, {
+        },{
             header: "pressure#2",
             width: 100,
             dataIndex: 'press2'
         }]
+    },{
+        header: "Engine #3",
+        columns: [{
+            header: "engine#3 (avg)",
+            width: 100,
+            dataIndex: 'rpm3'
+        },{
+            header: "propeler#3 (avg)",
+            width: 100,
+            dataIndex: 'prop3'
+        },{
+            header: "flowmeter#3",
+            width: 100,
+            dataIndex: 'inflow3'
+        },{
+            header: "overflow#3",
+            width: 100,
+            dataIndex: 'outflow3'
+        },{
+            header: "temperature#3",
+            width: 100,
+            dataIndex: 'temp3'
+        },{
+            header: "pressure#3",
+            width: 100,
+            dataIndex: 'press3'
+        }]    
     }, {
         header: "genset run-hour",
         columns: [{
@@ -339,6 +369,13 @@ var grafik = new Ext.create('Chart.ux.Highcharts', {
         type: 'spline',
         name: 'rpm #2',
         visible: true
+     }, {
+        dataIndex: 'rpm3',
+        yAxis: 0,
+        color: '#662200',
+        type: 'spline',
+        name: 'rpm #3',
+        visible: false
     }, {
         dataIndex: 'fuel1',
         yAxis: 1,
