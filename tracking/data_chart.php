@@ -32,9 +32,9 @@ try {
 			'rpm1' => !isset ($rr['rpm1']) ? null : $rr['rpm1'],
 			'rpm2' => !isset ($rr['rpm2']) ? null : $rr['rpm2'],
 			'rpm3' => !isset ($rr['rpm3']) ? null : $rr['rpm3'],  
-			'fuel1' => (!isset ($rr['inflow1'])) or (!isset ($rr['outflow1'])) ? null : ($rr['inflow1']) - ($rr['outflow1']),
-			'fuel2' => (!isset ($rr['inflow2'])) or (!isset ($rr['outflow2'])) ? null : ($rr['inflow2']) - ($rr['outflow2']),
-			'fuel2' => (!isset ($rr['inflow3'])) or (!isset ($rr['outflow3'])) ? null : ($rr['inflow3']) - ($rr['outflow3']),
+			'fuel1' => !isset ($rr['inflow1']) && !isset ($rr['outflow1']) ? null : (($rr['inflow1']) - ($rr['outflow1'])),
+			'fuel2' => !isset ($rr['inflow2']) && !isset ($rr['outflow2']) ? null : (($rr['inflow2']) - ($rr['outflow2'])),
+			'fuel3' => !isset ($rr['inflow3']) && !isset ($rr['outflow3']) ? null : (($rr['inflow3']) - ($rr['outflow3'])),
 			'rh1' => !isset ($rr['runhour1']) ? null : $rr['runhour1'],
 			'rh2' => !isset ($rr['runhour2']) ? null : $rr['runhour2'],
 			'rh3' => !isset ($rr['runhour3']) ? null : $rr['runhour3']

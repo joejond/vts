@@ -393,6 +393,14 @@ var grafik = new Ext.create('Chart.ux.Highcharts', {
         name: 'fuel main engine #2',
         visible: true
     }, {
+        dataIndex: 'fuel3',
+        yAxis: 1,
+        color: '#669900',
+        dashStyle: 'ShortDash',
+        type: 'spline',
+        name: 'fuel main engine #3',
+        visible: false
+    }, {
         dataIndex: 'rh1',
         yAxis: 2,
         type: 'spline',
@@ -407,6 +415,14 @@ var grafik = new Ext.create('Chart.ux.Highcharts', {
         color: '#336600',
         dashStyle: 'ShortDot',
         name: 'genset #2',
+        visible: false
+    }, {
+        dataIndex: 'rh3',
+        yAxis: 2,
+        type: 'spline',
+        color: '#669900',
+        dashStyle: 'ShortDot',
+        name: 'genset #3',
         visible: false
     }],
     store: store_grafik,
