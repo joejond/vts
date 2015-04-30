@@ -343,6 +343,7 @@ var selmod = Ext.create('Ext.selection.CheckboxModel',{
                 method: 'GET',
                 success: function (data) {
 					var isidat = Ext.JSON.decode(data.responseText);
+					console.log (isidat);
                     if(isidat.posisi.length == 0)
                         deleteMarkers();
                     else 
