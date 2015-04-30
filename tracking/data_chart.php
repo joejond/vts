@@ -7,7 +7,7 @@ include	'../inc/cekSession.php';
 
 
 try {
-	
+	//balik
 	$id = (isset($_GET['id']) && ($_GET['id'] <> '')) ? $_GET['id'] : '1';
 	$tgl = (isset($_GET['tgl']) && ($_GET['tgl'] <> '')) ? $_GET['tgl'] : date('Y-m-d') ;
 	
