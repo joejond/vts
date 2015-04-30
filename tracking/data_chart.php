@@ -14,9 +14,9 @@ try {
 	//echo 'idkapal = '.$id. ' dan tanggal = '.$tgl.'<br>';
 	for($i=0; $i<24;$i++){
 			$perjam[] = array(
-				'jam' =>  $i,'rpm1' => 0,'rpm2' => 0,'rpm3' => 0,
-				'fuel1' => 0,'fuel2' => 0,'fuel3' => 0,
-				'rh1' => 0,'rh2' => 0,'rh3' => 0
+				'jam' =>  $i,'rpm1' => null,'rpm2' => null,'rpm3' => null,
+				'fuel1' => null,'fuel2' => null,'fuel3' => null,
+				'rh1' => null,'rh2' => null,'rh3' => null
 			);
 	}
 	
@@ -29,15 +29,15 @@ try {
 	foreach ($result as $rr){
 		$hasil[] = array( 
 			'jam' => $rr['jam'],
-			'rpm1' => $rr['rpm1'],
-			'rpm2' => $rr['rpm2'],
-			'rpm3' => !isset ($rr['rpm3']) ? '0' : $rr['rpm3'],  
-			'fuel1' => ($rr['inflow1']) - ($rr['outflow1']),
-			'fuel2' => ($rr['inflow2']) - ($rr['outflow2']),
-			'fuel2' => (!isset ($rr['inflow3'])) or (!isset ($rr['outflow3'])) ? '0' : ($rr['inflow3']) - ($rr['outflow3']),
-			'rh1' => $rr['runhour1'],
-			'rh2' => $rr['runhour2'],
-			'rh3' => !isset ($rr['runhour3']) ? '0' : $rr['runhour3']
+			'rpm1' => !isset ($rr['rpm1']) ? null : $rr['rpm1'],
+			'rpm2' => !isset ($rr['rpm2']) ? null : $rr['rpm2'],
+			'rpm3' => !isset ($rr['rpm3']) ? null : $rr['rpm3'],  
+			'fuel1' => (!isset ($rr['inflow1'])) or (!isset ($rr['outflow1'])) ? null : ($rr['inflow1']) - ($rr['outflow1']),
+			'fuel2' => (!isset ($rr['inflow2'])) or (!isset ($rr['outflow2'])) ? null : ($rr['inflow2']) - ($rr['outflow2']),
+			'fuel2' => (!isset ($rr['inflow3'])) or (!isset ($rr['outflow3'])) ? null : ($rr['inflow3']) - ($rr['outflow3']),
+			'rh1' => !isset ($rr['runhour1']) ? null : $rr['runhour1'],
+			'rh2' => !isset ($rr['runhour2']) ? null : $rr['runhour2'],
+			'rh3' => !isset ($rr['runhour3']) ? null : $rr['runhour3']
 			
 		);
 	}
