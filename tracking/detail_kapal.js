@@ -92,124 +92,124 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
     flex: 4,
     columns: [
     {
-        header: "time",
-        width: 115, 
+        header: "Date Time",
+        width: 130, 
         dataIndex: 'waktu',
         locked : true
     },
 	{
       header: "Satelite Data",
       columns: [{
-			header: "latitude", 
+			header: "Latitude", 
 			width: 50, 
 			dataIndex: 'lat'
 		},{
-			header: "longitude", 
+			header: "Longitude", 
 			width: 55, 
 			dataIndex: 'lng'
 		},{
-			header: "speed", 
+			header: "Speed", 
 			width: 40, 
 			dataIndex: 'speed'
 		},{
-			header: "heading", 
+			header: "Heading", 
 			width: 45, 
 			dataIndex: 'heading'
 		}]
 	},{
-      header: "Engine #1",
+      header: "PortSide Engine",
       columns: [{
-			header: "rpm#1", 
+			header: "Engine", 
 			width: 70, 
 			dataIndex: 'rpm1'
 		},{
-			header: "prop#1", 
+			header: "Propeller", 
 			width: 70, 
 			dataIndex: 'prop1'
 		},{
-			header: "flowmeter#1", 
+			header: "InFlow", 
 			width: 70, 
 			dataIndex: 'inflow1'
 		},{
-			header: "overflow#1", 
+			header: "OutFlow", 
 			width: 70, 
 			dataIndex: 'outflow1'
 		},{
-			header: "temp#1", 
+			header: "Temp", 
 			width: 70, 
 			dataIndex: 'temp1'
 		},{
-			header: "press#1", 
+			header: "Press", 
 			width: 70, 
 			dataIndex: 'press1'
 		}]	  
 	},{
-      header: "Engine #2",
+      header: "StarBoard Engine",
       columns: [{
-			header: "rpm#2", 
+			header: "Engine", 
 			width: 70, 
 			dataIndex: 'rpm2'
 		},{
-			header: "prop#2", 
+			header: "Propeller", 
 			width: 70, 
 			dataIndex: 'prop2'
 		},{
-			header: "flowmeter#2", 
+			header: "InFlow", 
 			width: 70, 
 			dataIndex: 'inflow2'
 		},{
-			header: "overflow#2", 
+			header: "OutFlow", 
 			width: 70, 
 			dataIndex: 'outflow2'
 		},{
-			header: "temp#2", 
+			header: "Temp", 
 			width: 70, 
 			dataIndex: 'temp2'
 		},{
-			header: "press#2", 
+			header: "Press", 
 			width: 70, 
 			dataIndex: 'press2'
 		}]	  
 	},{
-      header: "Engine #3",
+      header: "Center Engine",
       columns: [{
-			header: "rpm#3", 
+			header: "Engine", 
 			width: 70, 
 			dataIndex: 'rpm3'
 		},{
-			header: "prop#3", 
+			header: "Propeller", 
 			width: 70, 
 			dataIndex: 'prop3'
 		},{
-			header: "flowmeter#3", 
+			header: "InFlow", 
 			width: 70, 
 			dataIndex: 'inflow3'
 		},{
-			header: "overflow#3", 
+			header: "OutFlow", 
 			width: 70, 
 			dataIndex: 'outflow3'
 		},{
-			header: "temp#3", 
+			header: "Temp", 
 			width: 70, 
 			dataIndex: 'temp3'
 		},{
-			header: "press#3", 
+			header: "Press", 
 			width: 70, 
 			dataIndex: 'press3'
 		}]	
 	},{
-      header: "data genset",
+      header: "GenSet",
       columns: [
 		{
-			header: "runhour#1", 
+			header: "GenSet #1", 
 			width: 70, 
 			dataIndex: 'runhour1'
 		},{
-			header: "runhour#2", 
+			header: "GenSet #2", 
 			width: 70, 
 			dataIndex: 'runhour2'
 		},{
-			header: "runhour#3", 
+			header: "GenSet #3", 
 			width: 70, 
 			dataIndex: 'runhour3'
 		}
@@ -218,22 +218,22 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
 	{
       header: "Panel",
       columns: [{
-			header: "battery", 
+			header: "Battery", 
 			width: 70, 
 			dataIndex: 'battery'
 		},{
-			header: "charger", 
+			header: "Charger", 
 			width: 70, 
 			dataIndex: 'charger'
 		}]	  
 	},{
       header: "Source Data",
       columns: [{
-			header: "id kapal", 
-			width: 40, 
-			dataIndex: 'kapal'
-		},{
-			header: "id modem", 
+			//header: "id kapal", 
+			//width: 40, 
+			//dataIndex: 'kapal'
+		//},{
+			header: "Modem S/N", 
 			width: 120, 
 			dataIndex: 'modem'
 		}]	  

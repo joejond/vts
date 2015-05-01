@@ -164,7 +164,7 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
     store: store_akumulasi,
     flex: 6,
     columns: [{
-        header: "date",
+        header: "Date",
         width: 150,
         locked : true,
         dataIndex: 'tanggal'
@@ -177,98 +177,98 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
         //dataIndex: 'jam',
         //locked : true
     },{
-        header: "Engine #1",
+        header: "PortSide",
         columns: [{
-            header: "engine#1 (avg)",
+            header: "Engine (avg)",
             width: 100,
             dataIndex: 'rpm1'
         },{
-            header: "propeler#1 (avg)",
+            header: "Propeller (avg)",
             width: 100,
             dataIndex: 'prop1'
         },{
-            header: "flowmeter#1",
+            header: "InFlow",
             width: 100,
             dataIndex: 'inflow1'
         },{
-            header: "overflow#1",
+            header: "OutFlow",
             width: 100,
             dataIndex: 'outflow1'
         },{
-            header: "temperature#1",
+            header: "Temp",
             width: 100,
             dataIndex: 'temp1'
         },{
-            header: "pressure#1",
+            header: "Press",
             width: 100,
             dataIndex: 'press1'
         }]
     },{
-        header: "Engine #2",
+        header: "StarBoard",
         columns: [{
-            header: "engine#2 (avg)",
+            header: "Engine (avg)",
             width: 100,
             dataIndex: 'rpm2'
         },{
-            header: "propeler#2 (avg)",
+            header: "Propeller (avg)",
             width: 100,
             dataIndex: 'prop2'
         },{
-            header: "flowmeter#2",
+            header: "InFlow",
             width: 100,
             dataIndex: 'inflow2'
         },{
-            header: "overflow#2",
+            header: "OutFlow",
             width: 100,
             dataIndex: 'outflow2'
         },{
-            header: "temperature#2",
+            header: "Temp",
             width: 100,
             dataIndex: 'temp2'
         },{
-            header: "pressure#2",
+            header: "Press",
             width: 100,
             dataIndex: 'press2'
         }]
     },{
-        header: "Engine #3",
+        header: "Center",
         columns: [{
-            header: "engine#3 (avg)",
+            header: "Engine (avg)",
             width: 100,
             dataIndex: 'rpm3'
         },{
-            header: "propeler#3 (avg)",
+            header: "Propeller (avg)",
             width: 100,
             dataIndex: 'prop3'
         },{
-            header: "flowmeter#3",
+            header: "InFlow",
             width: 100,
             dataIndex: 'inflow3'
         },{
-            header: "overflow#3",
+            header: "OutFlow",
             width: 100,
             dataIndex: 'outflow3'
         },{
-            header: "temperature#3",
+            header: "Temp",
             width: 100,
             dataIndex: 'temp3'
         },{
-            header: "pressure#3",
+            header: "Press",
             width: 100,
             dataIndex: 'press3'
         }]    
     }, {
-        header: "genset run-hour",
+        header: "Genset",
         columns: [{
-            header: "genset#1",
+            header: "GenSet #1",
             width: 100,
             dataIndex: 'runhour1'
         }, {
-            header: "genset#2",
+            header: "GenSet #2",
             width: 100,
             dataIndex: 'runhour2'
         }, {
-            header: "genset#3",
+            header: "GenSet #3",
             width: 100,
             dataIndex: 'runhour3'
         
