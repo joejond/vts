@@ -29,8 +29,12 @@ var day1 = now.getDate();
 var total_daily = 0.0;
 var eng1_daily = 0.0;
 var eng2_daily = 0.0;
+var eng3_daily = 0.0;
+var ef3 = 0.0;
 var gen1_runhour = 0.0;
 var gen2_runhour = 0.0;
+var gen3_runhour = 0.0;
+var gen_rh3 = 0.0;
 var tgl_daily = year1 + "-" + month1 + "-" + day1;
 var tgl_chart = year1 + "-" + month1 + "-" + day1;
 
@@ -558,31 +562,35 @@ var time_range_combo = Ext.create('Ext.form.ComboBox', {
 
 
 var content_akum = '<style type="text/css">' +
-    'table.total_daily {font-family: verdana,arial,sans-serif;font-size:12px;text-align: center;color:#333333;border-width: 1px;border-color: #a9c6c9;border-collapse: collapse;}' +
-    'table.total_daily td {border-width: 1px;padding: 4px;border-style: solid;border-color: #a9c6c9;}' +
-    '</style>' +
-    '<table width="100%" class="total_daily">' +
-    '<tr><td colspan="2">Total Daily Fuel</td></tr>' +
-    '<tr><td colspan="2" style="font-size:22px;">' + total_daily + ' Liters</td></tr>' +
-    '<tr>' +
-    '<td>Engine#1</td>' +
-    '<td>Engine#2</td>' +
-    '</tr>' +
-    '<tr>' +
-    '<td><span style="font-size:18px;">' + eng1_daily + ' Liters</span></td>' +
-    '<td><span style="font-size:18px;">' + eng2_daily + ' Liters</span></td>' +
-    '<tr><td colspan="2"></td></tr>' +
-    '<tr><td colspan="2">Genset Daily Running Hours</td></tr>' +
-    '</tr>' +
-    '<tr>' +
-    '<td>genset#1</td>' +
-    '<td>genset#2</td>' +
-    '</tr>' +
-    '<tr>' +
-    '<td><span style="font-size:18px;">' + gen1_runhour + ' Hours</span></td>' +
-    '<td><span style="font-size:18px;">' + gen2_runhour + ' Hours</span></td>' +
-    '</tr>' +
-    '</table>';
+        'table.total_daily {font-family: verdana,arial,sans-serif;font-size:12px;text-align: center;color:#333333;border-width: 1px;border-color: #a9c6c9;border-collapse: collapse;}' +
+        'table.total_daily td {border-width: 1px;padding: 4px;border-style: solid;border-color: #a9c6c9;}' +
+        '</style>' +
+        '<table width="100%" class="total_daily">' +
+        '<tr><td colspan="3">Total Daily Fuel</td></tr>' +
+        '<tr><td colspan="3" style="font-size:22px;">' + total_daily + ' Liters</td></tr>' +
+        '<tr>' +
+        '<td>Engine#1</td>' +
+        '<td>Engine#2</td>' +
+        '<td>Engine#3</td>' +
+        '</tr>' +
+        '<tr>' +
+        '<td><span style="font-size:18px;">' + eng1_daily + ' Lt</span></td>' +
+        '<td><span style="font-size:18px;">' + eng2_daily + ' Lt</span></td>' +
+        '<td><span style="font-size:18px;">' + (isNaN(eng3_daily)?0:eng3_daily) + ' Lt</span></td>' +
+        '<tr><td colspan="3"></td></tr>' +
+        '<tr><td colspan="3">Genset Daily Running Hours</td></tr>' +
+        '</tr>' +
+        '<tr>' +
+        '<td>genset#1</td>' +
+        '<td>genset#2</td>' +
+        '<td>genset#3</td>' +
+        '</tr>' +
+        '<tr>' +
+        '<td><span style="font-size:18px;">' + gen1_runhour + ' Hours</span></td>' +
+        '<td><span style="font-size:18px;">' + gen2_runhour + ' Hours</span></td>' +
+        '<td><span style="font-size:18px;">' + (isNaN(gen3_runhour)?0:gen3_runhour) + ' Hours</span></td>' +
+        '</tr>' +
+        '</table>';
 
 //function update_text2() {		
 	//var content_text2 = '<html><body><div style="font-size: 20px; color:blue">(current view -> '+comb_kapal2+' - date: '+tgl_sel2+')</div></body></html>';
@@ -725,7 +733,6 @@ var panel_hitung = {
         ]
     }]
 };
-
 function daily_akum() {
     Ext.Ajax.request({
         url: 'data_grafik_perhari.php',
@@ -739,11 +746,18 @@ function daily_akum() {
             //temp = (data.responseText).split(",");
             eng1_daily = parseFloat(hasil.g_perhari[0].tot_fl1) - parseFloat(hasil.g_perhari[0].tot_ovfl1);
             eng2_daily = parseFloat(hasil.g_perhari[0].tot_fl2) - parseFloat(hasil.g_perhari[0].tot_ovfl2);
-            total_daily = eng1_daily + eng2_daily;
+            eng3_daily = parseFloat(hasil.g_perhari[0].tot_fl3) - parseFloat(hasil.g_perhari[0].tot_ovfl3);
+            //var ef3 =  isNaN(eng3_daily) ? 0 : eng3_daily ; 
+            //console.log(ef3);
+            
+            total_daily = eng1_daily + eng2_daily + (isNaN(eng3_daily)?0:eng3_daily);
+            //console.log(total_daily);
             gen1_runhour = parseFloat(hasil.g_perhari[0].rh1).toFixed(2);
             //console.log(gen1_runhour);
             //gen1_runhour = gen1_runhour_1.toFixed(2);
             gen2_runhour = parseFloat(hasil.g_perhari[0].rh2).toFixed(2);
+            gen3_runhour = parseFloat(hasil.g_perhari[0].rh3).toFixed(2);
+            //var gen_rh3 =  isNaN(gen3_runhour) ? 0 : gen3_runhour; 
             //gen1_runhour = gen2_runhour_1.toFixed(2);
             
             
@@ -758,25 +772,29 @@ function daily_akum() {
         'table.total_daily td {border-width: 1px;padding: 4px;border-style: solid;border-color: #a9c6c9;}' +
         '</style>' +
         '<table width="100%" class="total_daily">' +
-        '<tr><td colspan="2">Total Daily Fuel</td></tr>' +
-        '<tr><td colspan="2" style="font-size:22px;">' + total_daily + ' Liters</td></tr>' +
+        '<tr><td colspan="3">Total Daily Fuel</td></tr>' +
+        '<tr><td colspan="3" style="font-size:22px;">' + total_daily + ' Liters</td></tr>' +
         '<tr>' +
         '<td>Engine#1</td>' +
         '<td>Engine#2</td>' +
+        '<td>Engine#3</td>' +
         '</tr>' +
         '<tr>' +
-        '<td><span style="font-size:18px;">' + eng1_daily + ' Liters</span></td>' +
-        '<td><span style="font-size:18px;">' + eng2_daily + ' Liters</span></td>' +
-        '<tr><td colspan="2"></td></tr>' +
-        '<tr><td colspan="2">Genset Daily Running Hours</td></tr>' +
+        '<td><span style="font-size:18px;">' + eng1_daily + ' Lt</span></td>' +
+        '<td><span style="font-size:18px;">' + eng2_daily + ' Lt</span></td>' +
+        '<td><span style="font-size:18px;">' + (isNaN(eng3_daily)?0:eng3_daily) + ' Lt</span></td>' +
+        '<tr><td colspan="3"></td></tr>' +
+        '<tr><td colspan="3">Genset Daily Running Hours</td></tr>' +
         '</tr>' +
         '<tr>' +
         '<td>genset#1</td>' +
         '<td>genset#2</td>' +
+        '<td>genset#3</td>' +
         '</tr>' +
         '<tr>' +
         '<td><span style="font-size:18px;">' + gen1_runhour + ' Hours</span></td>' +
         '<td><span style="font-size:18px;">' + gen2_runhour + ' Hours</span></td>' +
+        '<td><span style="font-size:18px;">' + (isNaN(gen3_runhour)?0:gen3_runhour) + ' Hours</span></td>' +
         '</tr>' +
         '</table>';
     Ext.getCmp('panel_daily').update(content_akum);
