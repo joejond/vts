@@ -289,6 +289,10 @@ Ext.define('HighChartData', {
         type: 'float',
         useNull: true
     }, {
+        name: 'rpm3',
+        type: 'float',
+        useNull: true
+    }, {
         name: 'fuel1',
         type: 'float',
         useNull: true
@@ -297,11 +301,19 @@ Ext.define('HighChartData', {
         type: 'float',
         useNull: true
     }, {
+        name: 'fuel3',
+        type: 'float',
+        useNull: true
+    }, {
         name: 'rh1',
         type: 'float',
         useNull: true
     }, {
         name: 'rh2',
+        type: 'float',
+        useNull: true
+    }, {
+        name: 'rh3',
         type: 'float',
         useNull: true
     }]
@@ -372,10 +384,10 @@ var grafik = new Ext.create('Chart.ux.Highcharts', {
      }, {
         dataIndex: 'rpm3',
         yAxis: 0,
-        color: '#662200',
+        color: '#8B6914',
         type: 'spline',
         name: 'rpm #3',
-        visible: false
+        visible: true
     }, {
         dataIndex: 'fuel1',
         yAxis: 1,
@@ -395,11 +407,11 @@ var grafik = new Ext.create('Chart.ux.Highcharts', {
     }, {
         dataIndex: 'fuel3',
         yAxis: 1,
-        color: '#669900',
+        color: '#FF9966',
         dashStyle: 'ShortDash',
         type: 'spline',
         name: 'fuel main engine #3',
-        visible: false
+        visible: true
     }, {
         dataIndex: 'rh1',
         yAxis: 2,
@@ -420,7 +432,7 @@ var grafik = new Ext.create('Chart.ux.Highcharts', {
         dataIndex: 'rh3',
         yAxis: 2,
         type: 'spline',
-        color: '#669900',
+        color: '#6699FF',
         dashStyle: 'ShortDot',
         name: 'genset #3',
         visible: false

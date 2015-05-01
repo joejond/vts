@@ -70,13 +70,13 @@ try {
 			'jam' =>  (strlen($i) ==1 )? '0'.$i : $i,
 			'rpm1' => ($r['rpm1'] == '' ) ? null : $r['rpm1'],
 			'rpm2' => ($r['rpm2'] == '' ) ? null : $r['rpm2'],
-			//'rpm3' => ($r['rpm3'] == '' ) ? null : $r['rpm3'],
+			'rpm3' => ($r['rpm3'] == '' ) ? null : $r['rpm3'],
 			'fuel1' => ($r['flow1'] == '' ) ? null : $r['flow1'] - $r['overflow1'],
 			'fuel2' => ($r['flow2'] == '' ) ? null : $r['flow2'] - $r['overflow2'],
-			//'fuel3' => ($r['flow3'] == '' ) ? null : $r['flow3'] - $r['overflow3'],
+			'fuel3' => ($r['flow3'] == '' ) ? null : $r['flow3'] - $r['overflow3'],
 			'rh1' => ($r['runhour1'] == '' ) ? null : $r['runhour1'],
 			'rh2' => ($r['runhour2'] == '' ) ? null : $r['runhour2'],
-			//'rh3' => ($r['runhour3'] == '' ) ? null : $r['runhour3']
+			'rh3' => ($r['runhour3'] == '' ) ? null : $r['runhour3']
 		);
 		
 		
