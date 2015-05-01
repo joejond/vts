@@ -30,11 +30,11 @@ var total_daily = 0.0;
 var eng1_daily = 0.0;
 var eng2_daily = 0.0;
 var eng3_daily = 0.0;
-var ef3 = 0.0;
+//var ef3 = 0.0;
 var gen1_runhour = 0.0;
 var gen2_runhour = 0.0;
 var gen3_runhour = 0.0;
-var gen_rh3 = 0.0;
+//var gen_rh3 = 0.0;
 var tgl_daily = year1 + "-" + month1 + "-" + day1;
 var tgl_chart = year1 + "-" + month1 + "-" + day1;
 
@@ -626,6 +626,8 @@ var panel_hitung = {
 					Ext.getCmp('table_chart').setTitle('Vessel '+comb_kapal22 +' on '+ tgl_sel22);
 					//tabel_detail_kapal
 					//update_text1();
+					daily_akum();
+					
 				},
 				afterrender : function(){
 						var isi1 = this.getStore().data.items[0].data['name'];
@@ -660,6 +662,7 @@ var panel_hitung = {
 					//console.log(tgl_sel2);
 					Ext.getCmp('table_chart').setTitle('Vessel '+comb_kapal22 +' on '+ tgl_sel22);
 					//update_text1();
+					daily_akum();
 				}, 
 				afterrender : function(){
 					//console.log('Date selected: ', this.getValue());
@@ -744,19 +747,19 @@ function daily_akum() {
 			
             //var temp = new Array();
             //temp = (data.responseText).split(",");
-            eng1_daily = parseFloat(hasil.g_perhari[0].tot_fl1) - parseFloat(hasil.g_perhari[0].tot_ovfl1);
-            eng2_daily = parseFloat(hasil.g_perhari[0].tot_fl2) - parseFloat(hasil.g_perhari[0].tot_ovfl2);
-            eng3_daily = parseFloat(hasil.g_perhari[0].tot_fl3) - parseFloat(hasil.g_perhari[0].tot_ovfl3);
+             eng1_daily = parseFloat(hasil.g_perhari[0].tot_fl1) - parseFloat(hasil.g_perhari[0].tot_ovfl1);
+             eng2_daily = parseFloat(hasil.g_perhari[0].tot_fl2) - parseFloat(hasil.g_perhari[0].tot_ovfl2);
+             eng3_daily = parseFloat(hasil.g_perhari[0].tot_fl3) - parseFloat(hasil.g_perhari[0].tot_ovfl3);
             //var ef3 =  isNaN(eng3_daily) ? 0 : eng3_daily ; 
             //console.log(ef3);
             
-            total_daily = eng1_daily + eng2_daily + (isNaN(eng3_daily)?0:eng3_daily);
+             total_daily = eng1_daily + eng2_daily + (isNaN(eng3_daily)?0:eng3_daily);
             //console.log(total_daily);
-            gen1_runhour = parseFloat(hasil.g_perhari[0].rh1).toFixed(2);
+             gen1_runhour = parseFloat(hasil.g_perhari[0].rh1).toFixed(2);
             //console.log(gen1_runhour);
             //gen1_runhour = gen1_runhour_1.toFixed(2);
-            gen2_runhour = parseFloat(hasil.g_perhari[0].rh2).toFixed(2);
-            gen3_runhour = parseFloat(hasil.g_perhari[0].rh3).toFixed(2);
+             gen2_runhour = parseFloat(hasil.g_perhari[0].rh2).toFixed(2);
+             gen3_runhour = parseFloat(hasil.g_perhari[0].rh3).toFixed(2);
             //var gen_rh3 =  isNaN(gen3_runhour) ? 0 : gen3_runhour; 
             //gen1_runhour = gen2_runhour_1.toFixed(2);
             
