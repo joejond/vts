@@ -13,7 +13,7 @@ var model_detail_kapal = Ext.define('detail_kapal', {
     fields: ['waktu', 'lat', 'lng', 'speed', 'heading', 'rpm1', 'prop1', 'inflow1', 'outflow1', 'temp1', 'press1', 
 			'rpm2', 'prop2', 'inflow2', 'outflow2', 'temp2', 'press2', 
 			'rpm3', 'prop3', 'inflow3', 'outflow3', 'temp3', 'press3', 
-			'runhour1', 'runhour2','runhour3', 'battery', 'charger','kapal', 'modem']
+			'runhour1', 'runhour2','runhour3', 'battery', 'charger', 'modem']
 });
 
 var comb_kapal1 = '';

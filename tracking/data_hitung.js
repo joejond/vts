@@ -627,6 +627,8 @@ var panel_hitung = {
 					//tabel_detail_kapal
 					//update_text1();
 					daily_akum();
+					//console.log('ini pilih kapal');
+					//console.log('ini pilih kapal');
 					
 				},
 				afterrender : function(){
@@ -639,6 +641,7 @@ var panel_hitung = {
 						//store_grafik_hari.load({params : { id: comb_kapal22, tgl: tgl_sel21 }});
 						//console.log('comb_kapal22 : '+isiid);
 						//console.log('tgl_sel21  : '+tgl_sel21);
+						
 					}
 			}
 		},{
@@ -663,6 +666,8 @@ var panel_hitung = {
 					Ext.getCmp('table_chart').setTitle('Vessel '+comb_kapal22 +' on '+ tgl_sel22);
 					//update_text1();
 					daily_akum();
+					//Ext.getCmp('panel_daily').update(content_akum);
+					
 				}, 
 				afterrender : function(){
 					//console.log('Date selected: ', this.getValue());
@@ -740,6 +745,10 @@ function daily_akum() {
     Ext.Ajax.request({
         url: 'data_grafik_perhari.php',
         method: 'GET',
+        params: {
+            id: (comb_kapal21 !='') ? comb_kapal21 : '1',
+            tgl: tgl_sel21
+        },
         success: function (data) {
 			var hasil = Ext.JSON.decode(data.responseText);
 			//console.log(hasil.g_perhari[0]);
@@ -765,42 +774,77 @@ function daily_akum() {
             
             
         },
-        params: {
-            id: (comb_kapal21 !='') ? comb_kapal21 : '1',
-            tgl: tgl_sel21
-        }
+        callback : function (){
+			//daily_akum();
+			content_akum = '<style type="text/css">' +
+			'table.total_daily {font-family: verdana,arial,sans-serif;font-size:12px;text-align: center;color:#333333;border-width: 1px;border-color: #a9c6c9;border-collapse: collapse;}' +
+			'table.total_daily td {border-width: 1px;padding: 4px;border-style: solid;border-color: #a9c6c9;}' +
+			'</style>' +
+			'<table width="100%" class="total_daily">' +
+			'<tr><td colspan="3">Total Daily Fuel</td></tr>' +
+			'<tr><td colspan="3" style="font-size:22px;">' + total_daily + ' Liters</td></tr>' +
+			'<tr>' +
+			'<td>Engine#1</td>' +
+			'<td>Engine#2</td>' +
+			'<td>Engine#3</td>' +
+			'</tr>' +
+			'<tr>' +
+			'<td><span style="font-size:18px;">' + eng1_daily + ' Lt</span></td>' +
+			'<td><span style="font-size:18px;">' + eng2_daily + ' Lt</span></td>' +
+			'<td><span style="font-size:18px;">' + (isNaN(eng3_daily)?0:eng3_daily) + ' Lt</span></td>' +
+			'<tr><td colspan="3"></td></tr>' +
+			'<tr><td colspan="3">Genset Daily Running Hours</td></tr>' +
+			'</tr>' +
+			'<tr>' +
+			'<td>genset#1</td>' +
+			'<td>genset#2</td>' +
+			'<td>genset#3</td>' +
+			'</tr>' +
+			'<tr>' +
+			'<td><span style="font-size:18px;">' + gen1_runhour + ' Hours</span></td>' +
+			'<td><span style="font-size:18px;">' + gen2_runhour + ' Hours</span></td>' +
+			'<td><span style="font-size:18px;">' + (isNaN(gen3_runhour)?0:gen3_runhour) + ' Hours</span></td>' +
+			'</tr>' +
+			'</table>';
+			Ext.getCmp('panel_daily').update(content_akum);
+			
+			}
+        
+        
+        
+        
     });
-    content_akum = '<style type="text/css">' +
-        'table.total_daily {font-family: verdana,arial,sans-serif;font-size:12px;text-align: center;color:#333333;border-width: 1px;border-color: #a9c6c9;border-collapse: collapse;}' +
-        'table.total_daily td {border-width: 1px;padding: 4px;border-style: solid;border-color: #a9c6c9;}' +
-        '</style>' +
-        '<table width="100%" class="total_daily">' +
-        '<tr><td colspan="3">Total Daily Fuel</td></tr>' +
-        '<tr><td colspan="3" style="font-size:22px;">' + total_daily + ' Liters</td></tr>' +
-        '<tr>' +
-        '<td>Engine#1</td>' +
-        '<td>Engine#2</td>' +
-        '<td>Engine#3</td>' +
-        '</tr>' +
-        '<tr>' +
-        '<td><span style="font-size:18px;">' + eng1_daily + ' Lt</span></td>' +
-        '<td><span style="font-size:18px;">' + eng2_daily + ' Lt</span></td>' +
-        '<td><span style="font-size:18px;">' + (isNaN(eng3_daily)?0:eng3_daily) + ' Lt</span></td>' +
-        '<tr><td colspan="3"></td></tr>' +
-        '<tr><td colspan="3">Genset Daily Running Hours</td></tr>' +
-        '</tr>' +
-        '<tr>' +
-        '<td>genset#1</td>' +
-        '<td>genset#2</td>' +
-        '<td>genset#3</td>' +
-        '</tr>' +
-        '<tr>' +
-        '<td><span style="font-size:18px;">' + gen1_runhour + ' Hours</span></td>' +
-        '<td><span style="font-size:18px;">' + gen2_runhour + ' Hours</span></td>' +
-        '<td><span style="font-size:18px;">' + (isNaN(gen3_runhour)?0:gen3_runhour) + ' Hours</span></td>' +
-        '</tr>' +
-        '</table>';
-    Ext.getCmp('panel_daily').update(content_akum);
+    //content_akum = '<style type="text/css">' +
+        //'table.total_daily {font-family: verdana,arial,sans-serif;font-size:12px;text-align: center;color:#333333;border-width: 1px;border-color: #a9c6c9;border-collapse: collapse;}' +
+        //'table.total_daily td {border-width: 1px;padding: 4px;border-style: solid;border-color: #a9c6c9;}' +
+        //'</style>' +
+        //'<table width="100%" class="total_daily">' +
+        //'<tr><td colspan="3">Total Daily Fuel</td></tr>' +
+        //'<tr><td colspan="3" style="font-size:22px;">' + total_daily + ' Liters</td></tr>' +
+        //'<tr>' +
+        //'<td>Engine#1</td>' +
+        //'<td>Engine#2</td>' +
+        //'<td>Engine#3</td>' +
+        //'</tr>' +
+        //'<tr>' +
+        //'<td><span style="font-size:18px;">' + eng1_daily + ' Lt</span></td>' +
+        //'<td><span style="font-size:18px;">' + eng2_daily + ' Lt</span></td>' +
+        //'<td><span style="font-size:18px;">' + (isNaN(eng3_daily)?0:eng3_daily) + ' Lt</span></td>' +
+        //'<tr><td colspan="3"></td></tr>' +
+        //'<tr><td colspan="3">Genset Daily Running Hours</td></tr>' +
+        //'</tr>' +
+        //'<tr>' +
+        //'<td>genset#1</td>' +
+        //'<td>genset#2</td>' +
+        //'<td>genset#3</td>' +
+        //'</tr>' +
+        //'<tr>' +
+        //'<td><span style="font-size:18px;">' + gen1_runhour + ' Hours</span></td>' +
+        //'<td><span style="font-size:18px;">' + gen2_runhour + ' Hours</span></td>' +
+        //'<td><span style="font-size:18px;">' + (isNaN(gen3_runhour)?0:gen3_runhour) + ' Hours</span></td>' +
+        //'</tr>' +
+        //'</table>';
+    //Ext.getCmp('panel_daily').update(content_akum);
 }
 
 function update_grafik() {
@@ -810,13 +854,14 @@ function update_grafik() {
 
 Ext.onReady(function () {
 
-    setInterval(function () {
-        daily_akum();
-        //console.log ('kapal : '+comb_kapal21 + ' & tgl : '+tgl_sel21);
-    }, 6*1000);
+    //setInterval(function () {
+        ////daily_akum();
+        ////console.log ('kapal : '+comb_kapal21 + ' & tgl : '+tgl_sel21);
+    //}, 6*1000);
 
     setInterval(function () {
         update_grafik();
-    }, 60*1000);
+        daily_akum();
+    }, 300*1000);
 
 });
