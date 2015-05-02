@@ -411,7 +411,7 @@ var grafik = new Ext.create('Chart.ux.Highcharts', {
     }, {
         dataIndex: 'fuel3',
         yAxis: 1,
-        color: '#FF9966',
+        color: '#8B6914',
         dashStyle: 'ShortDash',
         type: 'spline',
         name: 'fuel main engine #3',
@@ -436,7 +436,7 @@ var grafik = new Ext.create('Chart.ux.Highcharts', {
         dataIndex: 'rh3',
         yAxis: 2,
         type: 'spline',
-        color: '#6699FF',
+        color: '#8B6914',
         dashStyle: 'ShortDot',
         name: 'genset #3',
         visible: false
