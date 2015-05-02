@@ -44,6 +44,7 @@ var hasil1 = 0.0;
 var hasil2 = 0.0;
 var hasil3 = 0.0;
 var tot_tot = 0.0;
+var judul = '';
 
 
 
@@ -795,6 +796,7 @@ function daily_akum() {
 			hasil3 = isNaN(eng3_daily) ?  'N/A' : (eng3_daily + ' Lt');
 			genset_3 = isNaN(gen3_runhour) ? 'N/A' : (gen3_runhour + ' Hours') ;
             tot_tot = isNaN(rh_engine_tot) ? (total_daily+ ' Lt') : (rh_engine_tot + ' Hours');
+            judul = isNaN(rh_engine_tot) ? (' Fuel Consumption ') : (' Engine Running Hours ');
             
         },
         callback : function (){
@@ -805,7 +807,7 @@ function daily_akum() {
 			'table.total_daily td {border-width: 1px;padding: 4px;border-style: solid;border-color: #a9c6c9;}' +
 			'</style>' +
 			'<table width="100%" class="total_daily">' +
-			'<tr><td colspan="3">Total Daily</td></tr>' +
+			'<tr><td colspan="3">Total Daily'+judul+'</td></tr>' +
 			'<tr><td colspan="3" style="font-size:22px;">' + tot_tot + ' </td></tr>' +
 			'<tr>' +
 			'<td>Engine#1</td>' +
