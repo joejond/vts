@@ -855,7 +855,7 @@ function update_grafik() {
 Ext.onReady(function () {
 
     //setInterval(function () {
-        ////daily_akum();
+    daily_akum();
         ////console.log ('kapal : '+comb_kapal21 + ' & tgl : '+tgl_sel21);
     //}, 6*1000);
 
