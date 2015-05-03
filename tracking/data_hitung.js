@@ -788,7 +788,11 @@ function daily_akum() {
 			
 			rh_engine1 = parseFloat(hasil.g_perhari[0].engrh1).toFixed(2);
 			rh_engine2 = parseFloat(hasil.g_perhari[0].engrh2).toFixed(2);
-			rh_engine_tot = parseFloat(rh_engine1+ rh_engine2).toFixed(2);
+			rh_engine_tot = (parseFloat(rh_engine1) + parseFloat(rh_engine2)).toFixed(2);
+			
+			console.log(rh_engine1);
+			console.log(rh_engine2);
+			console.log(rh_engine_tot);
 			
 			
 			hasil1 = isNaN(eng1_daily) ? (rh_engine1 + ' Hours')  : (eng1_daily + ' Lt') ;
