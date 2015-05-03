@@ -341,7 +341,7 @@ var store_grafik = Ext.create('Ext.data.Store', {
     model: 'HighChartData',
     proxy: {
         type: 'ajax',
-        url: 'data_chart.php?',
+        url: 'data_chart_sp.php?',
         method: 'GET',
         reader: {
             type: 'json',
