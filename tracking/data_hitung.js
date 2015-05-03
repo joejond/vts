@@ -786,9 +786,9 @@ function daily_akum() {
              gen3_runhour = parseFloat(hasil.g_perhari[0].rh3).toFixed(2);
             //gen1_runhour = gen2_runhour_1.toFixed(2);
 			
-			rh_engine1 = parseFloat(hasil.g_perhari[0].engrh1);
-			rh_engine2 = parseFloat(hasil.g_perhari[0].engrh2);
-			rh_engine_tot = rh_engine1+ rh_engine2;
+			rh_engine1 = parseFloat(hasil.g_perhari[0].engrh1).toFixed(2);
+			rh_engine2 = parseFloat(hasil.g_perhari[0].engrh2).toFixed(2);
+			rh_engine_tot = parseFloat(rh_engine1+ rh_engine2).toFixed(2);
 			
 			
 			hasil1 = isNaN(eng1_daily) ? (rh_engine1 + ' Hours')  : (eng1_daily + ' Lt') ;
