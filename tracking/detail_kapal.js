@@ -326,6 +326,7 @@ var panel_detail = {
 				editable : false,
 				xtype: 'datefield',
 				value: new Date(),
+				maxValue: new Date(),
 				format: 'd-M-Y',
 				listeners: {
 					change: function () {

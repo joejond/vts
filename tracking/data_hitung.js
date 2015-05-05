@@ -665,6 +665,7 @@ var panel_hitung = {
 			labelWidth: 40,
 			xtype: 'datefield',
 			value: new Date(),
+			maxValue: new Date(),
 			editable : false,
 			format: 'd-M-Y',
 			listeners: {
