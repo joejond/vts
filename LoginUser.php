@@ -54,12 +54,7 @@ if(isset($_POST['userid']) && isset($_POST['capcai'])) {
 			}
 			echo '<script type="text/javascript"> 
 					window.parent.location ="tracking/#";
-					$(document).ready(function(){
-						$("#marine_login").fadeOut("slow");		
-					});
-					
-			
-			
+								
 			
 			</script>' ;
 			$msg = '<p class="text-center text-success"><b><span class="glyphicon glyphicon-thumbs-up"></span>  Succesfull Authenticate</b></p>';
@@ -107,9 +102,10 @@ else {
 			<h2 class="text-center">Login</h2>
 		</div>
   	</div>
+  	<div id="marine_login">
     <div class="row" >
         <div class="col-md-4 col-md-offset-4" >
-          	<div class="well" id="marine_login">
+          	<div class="well">
 				<form role="form" name="flogin" id="flogin" method="post"  action=""> 
                 <div class="form-group">
 					<label class="control-label">Username</label>
@@ -139,7 +135,7 @@ else {
 			</div>
       	</div>
     </div>
-	
+	</div>
 	<div class="row">
 		<div class="col-md-4 col-md-offset-4">
 			<div id="pesan">
