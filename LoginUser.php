@@ -58,6 +58,7 @@ if(isset($_POST['userid']) && isset($_POST['capcai'])) {
 			
 			</script>' ;
 			$msg = '<p class="text-center text-success"><b><span class="glyphicon glyphicon-thumbs-up"></span>  Succesfull Authenticate</b></p>';
+			$sks = 1;
 		}
 		
 		else {
@@ -148,14 +149,29 @@ else {
 	</div>     
 	
 </div>
+<?php
+$alert = "ini lagi coba";
+?>
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script>
+		//var sukses = <?php echo $sks; ?>;
+		//alert ('ini sukses : '+sukses);
+		//alert ("<?php echo $alert;?>");
+		
 	$(document).ready(function(){
 		$("#pesan").delay(3000).fadeOut('slow');		
+		
+		
+	
 	});
 	
+	
+	
 	</script>
+	
+
+
 </body>
 </html>
 
