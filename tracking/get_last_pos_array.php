@@ -26,14 +26,14 @@ try{
 	//$result = $sth->fetchAll(PDO::FETCH_ASSOC);
 	$posisi = array();
 	while ($row = $sth->fetch()){
-		
+		//array_push = ()
 		//print_r ($row);
 		//echo 'waktu '.$row['wkt'].'<br>';
 		//echo 'nama :'.$row['name'].'<br>';
 		$q_lat = 'select d.value as lat
 				from data d 
 					join titik_ukur tu on tu.id_titik_ukur = d.id_titik_ukur
-				where  d.data_time = "'.$row['wkt'].'" and tu.id_data_type = 1';
+				where  d.data_time = "'.$row['wkt'].'" and tu.id_ship = "'.$row['id'].'" and tu.id_data_type = 1';
 		//echo 'q_lat => '.$q_lat.'<br>';			
 		$lat = $db->prepare($q_lat);
 		$lat->execute();
@@ -47,7 +47,7 @@ try{
 		$q_lng = 'select d1.value as lng
 				from data d1 
 					join titik_ukur tu1 on tu1.id_titik_ukur = d1.id_titik_ukur
-				where  d1.data_time = "'.$row['wkt'].'" and tu1.id_data_type = 2';
+				where  d1.data_time = "'.$row['wkt'].'" and tu1.id_ship = "'.$row['id'].'" and tu1.id_data_type = 2';
 		//echo 'q_lng => '.$q_lng.'<br>';		
 		$lng = $db->prepare($q_lng);
 		$lng->execute();
