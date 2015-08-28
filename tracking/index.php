@@ -8,7 +8,7 @@
 <html>
     <head>
         <meta http-equiv="X-UA-Compatible" content="IE=9"  />
-        <title>MONITA - Vessel Tracking System</title>
+        <title>DEMO >> MONITA - Vessel Tracking System</title>
         <script type="text/javascript" src="../extjs/ext-all.js"></script>
         
         <link rel="icon" type="image/png" href="img/vessel.png">
