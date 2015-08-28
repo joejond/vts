@@ -96,11 +96,11 @@ else {
   	<div class="row">
 		<!--div class="col-md-6 col-md-offset-3 " >
 			<p class="center-block" align="center">
-				<img src="inc/image/ship.png"><h2>Vessel Tracking System</h2>
+				<img src="inc/image/ship.png"><h2>Demo >> Vessel Tracking System</h2>
 			</p>
 		</div-->
 		<div class="col-md-4 col-md-offset-4">
-			<h2 class="text-center">Login</h2>
+			<h2 class="text-center">Demo >> Login</h2>
 		</div>
   	</div>
   	<div id="marine_login">
