@@ -42,7 +42,7 @@ try{
 				tu.id_ship as kapal,  s.name as nama
 			FROM data d
 				inner join titik_ukur tu on tu.id_titik_ukur = d.id_titik_ukur
-				inner join ship s on s.id_ship = tu.id_ship
+				inner join ship_demo s on s.id_ship = tu.id_ship
 				
 			WHERE
 				tu.id_ship = "'.$id.'" and d.data_time like "'.$row['wkt'].'%" 
