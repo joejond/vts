@@ -6,7 +6,7 @@ include	'../inc/cekSession.php';
 
 try {
 	
-	$query = 'call ship_list()';
+	$query = 'call demo_ship_list()';
 	
 	$sth = $db->prepare($query);
 	$sth->execute();
