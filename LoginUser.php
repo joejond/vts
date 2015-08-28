@@ -24,7 +24,7 @@ if(isset($_POST['userid']) && isset($_POST['capcai'])) {
 		$kode = $_SESSION['kode']; //echo $kode;
 		$banding = strcmp($kode,$capca); //echo $banding;
 		
-		$sql 	= "SELECT id,username,timezone FROM user WHERE username = '".$user."' and password='".MD5($pass)."'";
+		$sql 	= "SELECT id,username,timezone FROM user_demo WHERE username = '".$user."' and password='".MD5($pass)."'";
 		//echo $sql.'<br>';
 		$sth = $db->prepare($sql);
 		$sth->execute();
@@ -47,7 +47,7 @@ if(isset($_POST['userid']) && isset($_POST['capcai'])) {
 				$_SESSION['username']	= $row['username'];
 				$_SESSION['timezone']	= $row['timezone'];
 				
-				$sql_log = "update user set last_login = UNIX_TIMESTAMP(NOW()), ipaddress = '".$ip."' where id = ".$row['id']."";
+				$sql_log = "update user_demo set last_login = UNIX_TIMESTAMP(NOW()), ipaddress = '".$ip."' where id = ".$row['id']."";
 				$loged = $db->prepare($sql_log);
 				$loged->execute();
 			
@@ -78,7 +78,7 @@ else {
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login | MONITA - Vessel Tracking System</title>
+    <title>Demo >> Login | MONITA - Vessel Tracking System</title>
 	<link rel="icon" type="image/png" href="tracking/img/vessel.png">
     
 	
