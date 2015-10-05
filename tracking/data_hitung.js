@@ -637,26 +637,28 @@ var content_akum = '<style type="text/css">' +
 			'<tr><td colspan="3">Total Daily Fuel</td></tr>' +
 			'<tr><td colspan="3" style="font-size:22px;">' + total_daily + ' Liters</td></tr>' +
 			'<tr>' +
-			'<td>Engine#1</td>' +
-			'<td>Engine#2</td>' +
-			'<td>Engine#3</td>' +
+			'<td>PortSide</td>' +
+			'<td>StarBoard</td>' +
+			'<td>Center I</td>' +
+			'<td>Center II</td>' +
 			'</tr>' +
 			'<tr>' +
 			'<td><span style="font-size:18px;">' + hasil1 + '</span></td>' +
 			'<td><span style="font-size:18px;">' + hasil2 + '</span></td>' +
 			'<td><span style="font-size:18px;">' + hasil3 + '</span></td>' +
-			'<tr><td colspan="3"></td></tr>' +
-			'<tr><td colspan="3">Genset Daily Running Hours</td></tr>' +
+			'<td><span style="font-size:18px;">' + hasil4 + '</span></td>' +
+			'<tr><td colspan="4"></td></tr>' +
+			'<tr><td colspan="4">Genset Daily Running Hours</td></tr>' +
 			'</tr>' +
 			'<tr>' +
 			'<td>genset#1</td>' +
 			'<td>genset#2</td>' +
-			'<td>genset#3</td>' +
+			'<td colspan="2">genset#3</td>' +
 			'</tr>' +
 			'<tr>' +
 			'<td><span style="font-size:18px;">' + gen1_runhour + ' Hours</span></td>' +
 			'<td><span style="font-size:18px;">' + gen2_runhour + ' Hours</span></td>' +
-			'<td><span style="font-size:18px;">' + genset_3 + '</span></td>' +
+			'<td colspan="2"><span style="font-size:18px;">' + genset_3 + '</span></td>' +
 			'</tr>' +
 			'</table>' ;
 
@@ -833,7 +835,7 @@ function daily_akum() {
              eng3_daily = parseFloat(hasil.g_perhari[0].tot_fl3) - parseFloat(hasil.g_perhari[0].tot_ovfl3);
              eng4_daily = parseFloat(hasil.g_perhari[0].tot_fl4) - parseFloat(hasil.g_perhari[0].tot_ovfl4);
             //var ef3 =  isNaN(eng3_daily) ? 0 : eng3_daily ; 
-            //console.log(ef3);
+            console.log(eng3_daily, eng4_daily);
             
             
              gen1_runhour = parseFloat(hasil.g_perhari[0].rh1).toFixed(2);
