@@ -446,7 +446,7 @@ var grafik = new Ext.create('Chart.ux.Highcharts', {
     }, {
 		dataIndex: 'rpm4',
         yAxis: 0,
-        color: '#E5FA5A',
+        color: '#FA5A6A',
         type: 'spline',
         name: 'rpm #4',
         visible: false
@@ -478,7 +478,7 @@ var grafik = new Ext.create('Chart.ux.Highcharts', {
     }, {
 		dataIndex: 'fuel4',
         yAxis: 1,
-        color: '#E5FA5A',
+        color: '#FA5A6A',
         dashStyle: 'ShortDash',
         type: 'spline',
         name: 'fuel main engine #4',
