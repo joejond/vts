@@ -830,10 +830,11 @@ function daily_akum() {
              eng1_daily = parseFloat(hasil.g_perhari[0].tot_fl1) - parseFloat(hasil.g_perhari[0].tot_ovfl1);
              eng2_daily = parseFloat(hasil.g_perhari[0].tot_fl2) - parseFloat(hasil.g_perhari[0].tot_ovfl2);
              eng3_daily = parseFloat(hasil.g_perhari[0].tot_fl3) - parseFloat(hasil.g_perhari[0].tot_ovfl3);
+             eng4_daily = parseFloat(hasil.g_perhari[0].tot_fl4) - parseFloat(hasil.g_perhari[0].tot_ovfl4);
             //var ef3 =  isNaN(eng3_daily) ? 0 : eng3_daily ; 
             //console.log(ef3);
             
-             total_daily = eng1_daily + eng2_daily + (isNaN(eng3_daily)?0:eng3_daily);
+            
              gen1_runhour = parseFloat(hasil.g_perhari[0].rh1).toFixed(2);
             //gen1_runhour = gen1_runhour_1.toFixed(2);
              gen2_runhour = parseFloat(hasil.g_perhari[0].rh2).toFixed(2);
@@ -848,10 +849,11 @@ function daily_akum() {
 			//console.log(rh_engine2);
 			//console.log(rh_engine_tot);
 			
-			
+			total_daily = eng1_daily + eng2_daily + (isNaN(eng3_daily)?0:eng3_daily) + (isNaN(eng4_daily)?0:eng4_daily);
 			hasil1 = isNaN(eng1_daily) ? (rh_engine1 + ' Hours')  : (eng1_daily + ' Lt') ;
 			hasil2 = isNaN(eng2_daily) ? (rh_engine2 + ' Hours')  : (eng2_daily + ' Lt') ;
 			hasil3 = isNaN(eng3_daily) ?  'N/A' : (eng3_daily + ' Lt');
+			hasil4 = isNaN(eng4_daily) ?  'N/A' : (eng4_daily + ' Lt');
 			genset_3 = isNaN(gen3_runhour) ? 'N/A' : (gen3_runhour + ' Hours') ;
             tot_tot = isNaN(rh_engine_tot) ? (total_daily+ ' Lt') : (rh_engine_tot + ' Hours');
             judul = isNaN(rh_engine_tot) ? (' Fuel Consumption ') : (' Engine Running Hours ');
@@ -865,8 +867,8 @@ function daily_akum() {
 			'table.total_daily td {border-width: 1px;padding: 4px;border-style: solid;border-color: #a9c6c9;}' +
 			'</style>' +
 			'<table width="100%" class="total_daily">' +
-			'<tr><td colspan="3">Total Daily'+judul+'</td></tr>' +
-			'<tr><td colspan="3" style="font-size:22px;">' + tot_tot + ' </td></tr>' +
+			'<tr><td colspan="4">Total Daily'+judul+'</td></tr>' +
+			'<tr><td colspan="4" style="font-size:22px;">' + tot_tot + ' </td></tr>' +
 			'<tr>' +
 			'<td>Engine#1</td>' +
 			'<td>Engine#2</td>' +
@@ -876,6 +878,7 @@ function daily_akum() {
 			'<td><span style="font-size:18px;">' + hasil1 + '</span></td>' +
 			'<td><span style="font-size:18px;">' + hasil2 + '</span></td>' +
 			'<td><span style="font-size:18px;">' + hasil3 + '</span></td>' +
+			'<td><span style="font-size:18px;">' + hasil4 + '</span></td>' +
 			'<tr><td colspan="3"></td></tr>' +
 			'<tr><td colspan="3">Genset Daily Running Hours</td></tr>' +
 			'</tr>' +
