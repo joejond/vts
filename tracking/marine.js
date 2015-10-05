@@ -38,9 +38,9 @@ Ext.onReady(function() {
             type: 'border',
             padding: 5
         },
-        defaults: {
-            split: true
-        },
+        //defaults: {
+            ////split: true
+        //},
         items: [{
             region: 'north',
             //collapsible: false,
