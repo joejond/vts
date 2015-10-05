@@ -44,6 +44,7 @@ var genset_3 = 0.0;
 var hasil1 = 0.0;
 var hasil2 = 0.0;
 var hasil3 = 0.0;
+var hasil4 = 0.0;
 var tot_tot = 0.0;
 var judul = '';
 
@@ -178,7 +179,7 @@ var but_export = {
 var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
     title: 'akumulasi data flowmeter',
     store: store_akumulasi,
-    flex: 6,
+    flex: 5,
     columns: [{
         header: "Date",
         width: 150,
