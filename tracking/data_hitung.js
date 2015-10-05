@@ -63,6 +63,7 @@ var model_akumulasi = Ext.define('akumulasi', {
     fields: [{name : 'tanggal', type : 'string'}, 'jam', 'rpm1', 'prop1', 'inflow1', 'outflow1', 'temp1', 'press1', 
 			'rpm2', 'prop2', 'inflow2', 'outflow2', 'temp2', 'press2', 
 			'rpm3', 'prop3', 'inflow3', 'outflow3', 'temp3', 'press3', 
+			'rpm4', 'prop4', 'inflow4', 'outflow4', 'temp4', 'press4', 
 			'runhour1', 'runhour2','runhour3']
 });
 
@@ -245,7 +246,7 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
             dataIndex: 'press2'
         }]
     },{
-        header: "Center",
+        header: "Center I",
         columns: [{
             header: "Engine (avg)",
             width: 100,
@@ -270,6 +271,33 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
             header: "Press",
             width: 100,
             dataIndex: 'press3'
+        }]    
+    }, {
+		header: "Center II",
+        columns: [{
+            header: "Engine (avg)",
+            width: 100,
+            dataIndex: 'rpm4'
+        },{
+            header: "Propeller (avg)",
+            width: 100,
+            dataIndex: 'prop4'
+        },{
+            header: "InFlow",
+            width: 100,
+            dataIndex: 'inflow4'
+        },{
+            header: "OutFlow",
+            width: 100,
+            dataIndex: 'outflow4'
+        },{
+            header: "Temp",
+            width: 100,
+            dataIndex: 'temp4'
+        },{
+            header: "Press",
+            width: 100,
+            dataIndex: 'press4'
         }]    
     }, {
         header: "Genset",
@@ -311,6 +339,10 @@ Ext.define('HighChartData', {
         type: 'float',
         useNull: true
     }, {
+        name: 'rpm4',
+        type: 'float',
+        useNull: true
+    }, {
         name: 'fuel1',
         type: 'float',
         useNull: true
@@ -320,6 +352,10 @@ Ext.define('HighChartData', {
         useNull: true
     }, {
         name: 'fuel3',
+        type: 'float',
+        useNull: true
+	}, {
+        name: 'fuel4',
         type: 'float',
         useNull: true
     }, {
@@ -406,6 +442,15 @@ var grafik = new Ext.create('Chart.ux.Highcharts', {
         type: 'spline',
         name: 'rpm #3',
         visible: true
+        
+    }, {
+		dataIndex: 'rpm4',
+        yAxis: 0,
+        color: '#E5FA5A',
+        type: 'spline',
+        name: 'rpm #4',
+        visible: false
+        
     }, {
         dataIndex: 'fuel1',
         yAxis: 1,
@@ -430,6 +475,14 @@ var grafik = new Ext.create('Chart.ux.Highcharts', {
         type: 'spline',
         name: 'fuel main engine #3',
         visible: true
+    }, {
+		dataIndex: 'fuel4',
+        yAxis: 1,
+        color: '#E5FA5A',
+        dashStyle: 'ShortDash',
+        type: 'spline',
+        name: 'fuel main engine #4',
+        visible: false
     }, {
         dataIndex: 'rh1',
         yAxis: 2,

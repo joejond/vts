@@ -13,6 +13,7 @@ var model_detail_kapal = Ext.define('detail_kapal', {
     fields: ['waktu', 'lat', 'lng', 'speed', 'heading', 'rpm1', 'prop1', 'inflow1', 'outflow1', 'temp1', 'press1', 
 			'rpm2', 'prop2', 'inflow2', 'outflow2', 'temp2', 'press2', 
 			'rpm3', 'prop3', 'inflow3', 'outflow3', 'temp3', 'press3', 
+			'rpm4', 'prop4', 'inflow4', 'outflow4', 'temp4', 'press4', 
 			'runhour1', 'runhour2','runhour3', 'battery', 'charger', 'modem']
 });
 
@@ -171,7 +172,7 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
 			dataIndex: 'press2'
 		}]	  
 	},{
-      header: "Center Engine",
+      header: "Center I Engine",
       columns: [{
 			header: "Engine", 
 			width: 70, 
@@ -196,6 +197,33 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
 			header: "Press", 
 			width: 70, 
 			dataIndex: 'press3'
+		}]	
+	},{
+		header: "Center II Engine",
+      columns: [{
+			header: "Engine", 
+			width: 70, 
+			dataIndex: 'rpm4'
+		},{
+			header: "Propeller", 
+			width: 70, 
+			dataIndex: 'prop4'
+		},{
+			header: "InFlow", 
+			width: 70, 
+			dataIndex: 'inflow4'
+		},{
+			header: "OutFlow", 
+			width: 70, 
+			dataIndex: 'outflow4'
+		},{
+			header: "Temp", 
+			width: 70, 
+			dataIndex: 'temp4'
+		},{
+			header: "Press", 
+			width: 70, 
+			dataIndex: 'press4'
 		}]	
 	},{
       header: "GenSet",
