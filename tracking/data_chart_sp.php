@@ -18,9 +18,11 @@ try {
 				'rpm1' => null,
 				'rpm2' => null,
 				'rpm3' => null,
+				'rpm4' => null,
 				'fuel1' => null,
 				'fuel2' => null,
 				'fuel3' => null,
+				'fuel4' => null,
 				'rh1' => null,
 				'rh2' => null,
 				'rh3' => null
@@ -44,9 +46,11 @@ try {
 		$perjam[$rr['jam']]['rpm1'] = $rr['rpm1'];
 		$perjam[$rr['jam']]['rpm2'] = $rr['rpm2'];
 		$perjam[$rr['jam']]['rpm3'] = !isset ($rr['rpm3']) ? null : $rr['rpm3'];
+		$perjam[$rr['jam']]['rpm4'] = !isset ($rr['rpm4']) ? null : $rr['rpm4'];
 		$perjam[$rr['jam']]['fuel1'] = ($rr['inflow1']) - ($rr['outflow1']);
 		$perjam[$rr['jam']]['fuel2'] = ($rr['inflow2']) - ($rr['outflow2']);
 		$perjam[$rr['jam']]['fuel3'] = !isset ($rr['inflow3']) && !isset ($rr['outflow3']) ? null : (($rr['inflow3']) - ($rr['outflow3']));
+		$perjam[$rr['jam']]['fuel4'] = !isset ($rr['inflow4']) && !isset ($rr['outflow4']) ? null : (($rr['inflow3']) - ($rr['outflow4']));
 		$perjam[$rr['jam']]['rh1'] = $rr['runhour1'];
 		$perjam[$rr['jam']]['rh2'] = $rr['runhour2'];
 		$perjam[$rr['jam']]['rh3'] = !isset ($rr['runhour3']) ? null : $rr['runhour3'];
