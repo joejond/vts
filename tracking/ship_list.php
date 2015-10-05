@@ -5,7 +5,7 @@ include	'../inc/conn_db.php';
 include	'../inc/cekSession.php';
 
 try {
-	
+	//
 	$query = 'call ship_list()';
 	
 	$sth = $db->prepare($query);
