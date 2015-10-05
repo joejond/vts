@@ -44,6 +44,7 @@ var genset_3 = 0.0;
 var hasil1 = 0.0;
 var hasil2 = 0.0;
 var hasil3 = 0.0;
+var hasil4 = 0.0;
 var tot_tot = 0.0;
 var judul = '';
 
@@ -178,7 +179,7 @@ var but_export = {
 var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
     title: 'akumulasi data flowmeter',
     store: store_akumulasi,
-    flex: 6,
+    flex: 5,
     columns: [{
         header: "Date",
         width: 150,
@@ -634,8 +635,8 @@ var content_akum = '<style type="text/css">' +
 			'table.total_daily td {border-width: 1px;padding: 4px;border-style: solid;border-color: #a9c6c9;}' +
 			'</style>' +
 			'<table width="100%" class="total_daily">' +
-			'<tr><td colspan="3">Total Daily Fuel</td></tr>' +
-			'<tr><td colspan="3" style="font-size:22px;">' + total_daily + ' Liters</td></tr>' +
+			'<tr><td colspan="4">Total Daily'+judul+'</td></tr>' +
+			'<tr><td colspan="4" style="font-size:22px;">' + tot_tot + ' </td></tr>' +
 			'<tr>' +
 			'<td>Engine#1</td>' +
 			'<td>Engine#2</td>' +
@@ -833,7 +834,7 @@ function daily_akum() {
              eng3_daily = parseFloat(hasil.g_perhari[0].tot_fl3) - parseFloat(hasil.g_perhari[0].tot_ovfl3);
              eng4_daily = parseFloat(hasil.g_perhari[0].tot_fl4) - parseFloat(hasil.g_perhari[0].tot_ovfl4);
             //var ef3 =  isNaN(eng3_daily) ? 0 : eng3_daily ; 
-            console.log(eng3_daily, eng4_daily);
+            //console.log(eng3_daily, eng4_daily);
             
             
              gen1_runhour = parseFloat(hasil.g_perhari[0].rh1).toFixed(2);
