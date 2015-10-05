@@ -9,7 +9,6 @@ Ext.onReady(function() {
 				//console.log ('usernya : '+user.loged.user);
 				Ext.fly('user').update('Welcome '+user_login);
 			},
-			
 			params: {}
 	});
 	
@@ -42,8 +41,7 @@ Ext.onReady(function() {
         defaults: {
             split: true
         },
-        items: [
-        {
+        items: [{
             region: 'north',
             //collapsible: false,
             //split: false,
@@ -54,27 +52,22 @@ Ext.onReady(function() {
 			//html: content_t
 			xtype : 'container',
 			layout	: 'hbox',
-			
 			items : [{
-				
 				xtype	: 'component',
 				id		: 'app-header-title',
 				html	: document.title,
 				//flex 	: 1,
 				width	: '70%'
-				
 			},{
 				id		: 'user',
 				xtype	: 'label',
 				width	: '10%'
-				
 			},{
 				id	: 'jam',
 				xtype	: 'label',
 				//html	: '<div id="jam"></div><span>'+ user_login +' </span>',
 				width	: '15%'			
 			},{
-				
 				//id: 'user',
 				xtype	: 'button',
 				text	: 'LOGOUT' + user_login,
@@ -83,7 +76,6 @@ Ext.onReady(function() {
 					window.location = '../LogOutUser.php';
 				}		
 			}],
-			
 			listeners : {
                 render :function() {                
                     Ext.TaskManager.start({
@@ -95,38 +87,31 @@ Ext.onReady(function() {
                     });
                 }
             }
-			
-        },
-        {
+        },{
             region: 'center',
             xtype: 'tabpanel',
             tabPosition: 'left',
             frame: true,
             padding: 5,				
-            items: [
-            {
+            items: [{
                 title: 'MAP VIEW', 
                 layout: 'border',
                 iconCls: 'tab-icon',
                 items: [ peta, ship_list ]
-            },
-            {
+            },{
                 title: 'SHIP - DETAIL DATA', 
                 layout: 'fit',                
                 id: 'detail_tab',
                 items: [ panel_detail ],
                 iconCls: 'tab-icon'
-            },
-            {
+            },{
                 title: 'DAILY REPORT', 
                 layout: 'fit',                
                 id: 'analisis_tab',
                 items: [ panel_hitung ],
                 iconCls: 'tab-icon'
-            }
-            ]           
-        }
-        ]
+            }]           
+        }]
     });    
 	
 	//function update_tittle() {
