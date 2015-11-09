@@ -24,7 +24,10 @@ if(isset($_POST['userid']) && isset($_POST['capcai'])) {
 		$kode = $_SESSION['kode']; //echo $kode;
 		$banding = strcmp($kode,$capca); //echo $banding;
 		
-		$sql 	= "SELECT id,username,timezone FROM user WHERE username = '".$user."' and password='".MD5($pass)."'";
+		$sql 	= "SELECT u.id, u.username ,u.timezone, ur.route, u.id_company 
+					FROM user u
+						join user_route ur on ur.id = u.user_route_id
+					WHERE u.username = '".$user."' and u.password='".MD5($pass)."'";
 		//echo $sql.'<br>';
 		$sth = $db->prepare($sql);
 		$sth->execute();
@@ -33,30 +36,46 @@ if(isset($_POST['userid']) && isset($_POST['capcai'])) {
 		//$statement->rowCount()
 		//$hasil 	= $db->query($sql);
 		//$jml 	= $hasil->num_rows;
+		
 		$jml = $sth->rowCount();
+		$result = $sth->fetch(PDO::FETCH_OBJ);
+		
+		//print_r($result);
 		
 		if ($user == '' || $pass == ''){
 			$msg = '<p class="text-center text-danger" ><b><span class="glyphicon glyphicon-warning-sign"></span>   Please type your username or password!!</b></p>';
 		}
 
 		else if (($jml == 1) && ($banding == 0)) {
-			while($row = $sth->fetch()){
+			//while($row = $sth->fetch()){
+			//foreach($result as $row){
 				//echo $row['username'] . '<br />';
 				
-				$_SESSION['uid']		= $row['id'];	
-				$_SESSION['username']	= $row['username'];
-				$_SESSION['timezone']	= $row['timezone'];
+				//$_SESSION['uid']		= $row['id'];	
+				//$_SESSION['username']	= $row['username'];
+				//$_SESSION['timezone']	= $row['timezone'];
+				$_SESSION['uid']		= $result->id;	
+				$_SESSION['username']	= $result->username;
+				$_SESSION['company']	= $result->id_company;
+				$_SESSION['timezone']	= $result->timezone;
 				
-				$sql_log = "update user set last_login = UNIX_TIMESTAMP(NOW()), ipaddress = '".$ip."' where id = ".$row['id']."";
+				
+				$sql_log = "update user set last_login = UNIX_TIMESTAMP(NOW()), ipaddress = '".$ip."' where id = ".$result->id."";
 				$loged = $db->prepare($sql_log);
 				$loged->execute();
 			
-			}
+			//}
+			
+			
+			//echo 'ini dia - >'. $result->route;
+			//echo  'hahada'.$row['user_route_id'];
+			//*
 			echo '<script type="text/javascript"> 
-					window.parent.location ="tracking/#";
+					window.parent.location ="'.$result->route.'/#";
 								
 			
 			</script>' ;
+			//*/
 			$msg = '<p class="text-center text-success"><b><span class="glyphicon glyphicon-thumbs-up"></span>  Succesfull Authenticate</b></p>';
 			$sks = 1;
 		}

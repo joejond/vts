@@ -638,26 +638,28 @@ var content_akum = '<style type="text/css">' +
 			'<tr><td colspan="4">Total Daily'+judul+'</td></tr>' +
 			'<tr><td colspan="4" style="font-size:22px;">' + tot_tot + ' </td></tr>' +
 			'<tr>' +
-			'<td>Engine#1</td>' +
-			'<td>Engine#2</td>' +
-			'<td>Engine#3</td>' +
+			'<td>PortSide</td>' +
+			'<td>StarBoard</td>' +
+			'<td>Center I</td>' +
+			'<td>Center II</td>' +
 			'</tr>' +
 			'<tr>' +
 			'<td><span style="font-size:18px;">' + hasil1 + '</span></td>' +
 			'<td><span style="font-size:18px;">' + hasil2 + '</span></td>' +
 			'<td><span style="font-size:18px;">' + hasil3 + '</span></td>' +
-			'<tr><td colspan="3"></td></tr>' +
-			'<tr><td colspan="3">Genset Daily Running Hours</td></tr>' +
+			'<td><span style="font-size:18px;">' + hasil4 + '</span></td>' +
+			'<tr><td colspan="4"></td></tr>' +
+			'<tr><td colspan="4">Genset Daily Running Hours</td></tr>' +
 			'</tr>' +
 			'<tr>' +
 			'<td>genset#1</td>' +
 			'<td>genset#2</td>' +
-			'<td>genset#3</td>' +
+			'<td colspan="2">genset#3</td>' +
 			'</tr>' +
 			'<tr>' +
 			'<td><span style="font-size:18px;">' + gen1_runhour + ' Hours</span></td>' +
 			'<td><span style="font-size:18px;">' + gen2_runhour + ' Hours</span></td>' +
-			'<td><span style="font-size:18px;">' + genset_3 + '</span></td>' +
+			'<td colspan="2"><span style="font-size:18px;">' + genset_3 + '</span></td>' +
 			'</tr>' +
 			'</table>' ;
 
