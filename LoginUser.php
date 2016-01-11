@@ -65,7 +65,7 @@ if(isset($_POST['userid']) && isset($_POST['capcai'])) {
 				$loged->execute();
 			
 			//}
-			
+				//print_r ($result);
 			
 			//echo 'ini dia - >'. $result->route;
 			//echo  'hahada'.$row['user_route_id'];
