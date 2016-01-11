@@ -26,7 +26,7 @@ if(isset($_POST['userid']) && isset($_POST['capcai'])) {
 		
 		$sql 	= "SELECT u.id, u.username ,u.timezone, ur.route, u.id_company 
 					FROM user u
-						join user_route ur on ur.id = u.user_route_id
+						join user_route ur on ur.id_company = u.id_company
 					WHERE u.username = '".$user."' and u.password='".MD5($pass)."'";
 		//echo $sql.'<br>';
 		$sth = $db->prepare($sql);
