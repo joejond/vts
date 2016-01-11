@@ -22,7 +22,7 @@ try {
 
 	$sth = $db->prepare($query);
 	$sth->execute();
-
+ah 
 
 	$result = $sth->fetchAll(PDO::FETCH_ASSOC);	
 	
