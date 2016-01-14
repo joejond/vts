@@ -1,12 +1,17 @@
 <?php
 
 session_start();
-include	'../inc/conn_db.php';
+include	'../inc/conn_db_tanker.php';
 include	'../inc/cekSession.php';
 
 try {
+	
+	//echo $_SESSION['timezone'].'<br>';
+	//echo $_SESSION['company'].'<br>';
+	//echo $_SESSION['uid'].'<br>';
 	//
 	$query = 'call ship_list()';
+	//$query = 'select * from ship where ';
 	
 	$sth = $db->prepare($query);
 	$sth->execute();

@@ -118,112 +118,114 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
 			dataIndex: 'heading'
 		}]
 	},{
-      header: "PortSide Engine",
+      header: "Cargo Tank 1P",
       columns: [{
-			header: "Engine", 
+			header: "Level", 
 			width: 70, 
 			dataIndex: 'rpm1'
 		},{
-			header: "Propeller", 
+			header: "Volume", 
 			width: 70, 
 			dataIndex: 'prop1'
-		},{
-			header: "InFlow", 
-			width: 70, 
-			dataIndex: 'inflow1'
-		},{
-			header: "OutFlow", 
-			width: 70, 
-			dataIndex: 'outflow1'
-		},{
-			header: "Temp", 
-			width: 70, 
-			dataIndex: 'temp1'
-		},{
-			header: "Press", 
-			width: 70, 
-			dataIndex: 'press1'
 		}]	  
 	},{
-      header: "StarBoard Engine",
+      header: "Cargo Tank 1S",
       columns: [{
-			header: "Engine", 
+			header: "Level", 
 			width: 70, 
 			dataIndex: 'rpm2'
 		},{
-			header: "Propeller", 
+			header: "Volume", 
 			width: 70, 
 			dataIndex: 'prop2'
-		},{
-			header: "InFlow", 
-			width: 70, 
-			dataIndex: 'inflow2'
-		},{
-			header: "OutFlow", 
-			width: 70, 
-			dataIndex: 'outflow2'
-		},{
-			header: "Temp", 
-			width: 70, 
-			dataIndex: 'temp2'
-		},{
-			header: "Press", 
-			width: 70, 
-			dataIndex: 'press2'
 		}]	  
 	},{
-      header: "Center I Engine",
+      header: "Cargo Tank 2P",
       columns: [{
-			header: "Engine", 
+			header: "Level", 
 			width: 70, 
 			dataIndex: 'rpm3'
 		},{
-			header: "Propeller", 
+			header: "Volume", 
 			width: 70, 
 			dataIndex: 'prop3'
-		},{
-			header: "InFlow", 
-			width: 70, 
-			dataIndex: 'inflow3'
-		},{
-			header: "OutFlow", 
-			width: 70, 
-			dataIndex: 'outflow3'
-		},{
-			header: "Temp", 
-			width: 70, 
-			dataIndex: 'temp3'
-		},{
-			header: "Press", 
-			width: 70, 
-			dataIndex: 'press3'
 		}]	
 	},{
-		header: "Center II Engine",
-      columns: [{
-			header: "Engine", 
+		header: "Cargo Tank 2S",
+      	columns: [{
+			header: "Level", 
 			width: 70, 
 			dataIndex: 'rpm4'
 		},{
-			header: "Propeller", 
+			header: "Volume", 
 			width: 70, 
 			dataIndex: 'prop4'
-		},{
-			header: "InFlow", 
+		}]	
+	},{
+      header: "Cargo Tank 3P",
+      columns: [{
+			header: "Level", 
 			width: 70, 
-			dataIndex: 'inflow4'
+			dataIndex: 'rpm1'
 		},{
-			header: "OutFlow", 
+			header: "Volume", 
 			width: 70, 
-			dataIndex: 'outflow4'
+			dataIndex: 'prop1'
+		}]	  
+	},{
+      header: "Cargo Tank 3S",
+      columns: [{
+			header: "Level", 
+			width: 70, 
+			dataIndex: 'rpm2'
 		},{
-			header: "Temp", 
+			header: "Volume", 
 			width: 70, 
-			dataIndex: 'temp4'
+			dataIndex: 'prop2'
+		}]	  
+	},{
+      header: "Cargo Tank 4P",
+      columns: [{
+			header: "Level", 
+			width: 70, 
+			dataIndex: 'rpm3'
 		},{
-			header: "Press", 
+			header: "Volume", 
 			width: 70, 
-			dataIndex: 'press4'
+			dataIndex: 'prop3'
+		}]	
+	},{
+		header: "Cargo Tank 4S",
+      	columns: [{
+			header: "Level", 
+			width: 70, 
+			dataIndex: 'rpm4'
+		},{
+			header: "Volume", 
+			width: 70, 
+			dataIndex: 'prop4'
+		}]	
+	},{
+      header: "Cargo Tank 5P",
+      columns: [{
+			header: "Level", 
+			width: 70, 
+			dataIndex: 'rpm3'
+		},{
+			header: "Volume", 
+			width: 70, 
+			dataIndex: 'prop3'
+		}]	
+	},{
+		header: "Cargo Tank 5S",
+      	columns: [{
+			header: "Level", 
+			width: 70, 
+			dataIndex: 'rpm4'
+		},{
+			header: "Volume", 
+			width: 70, 
+			dataIndex: 'prop4'
 		}]	
 	},{
       header: "GenSet",
@@ -376,22 +378,23 @@ var panel_detail = {
 						//console.log(tgl_sel1);
 						}
 				}
-			},'->',
-			{
-				xtype : 'button',
-				text : 'Export to Excel',
-				handler : function(){
-					var tgl = Ext.Date.format(Ext.getCmp('date_total1').getValue(),'Y-m-d');
-					var ves = Ext.getCmp('cb_vessel').getValue();
-					console.log('export bro dari '+tgl+' ==> '+ves);
-					Ext.Ajax.request({
-						params : {t : tgl, id: ves },
-						method : 'GET',
-						url : 'export.php'
-					})
+			},
+			// '->',
+			// {
+			// 	xtype : 'button',
+			// 	text : 'Export to Excel',
+			// 	handler : function(){
+			// 		var tgl = Ext.Date.format(Ext.getCmp('date_total1').getValue(),'Y-m-d');
+			// 		var ves = Ext.getCmp('cb_vessel').getValue();
+			// 		console.log('export bro dari '+tgl+' ==> '+ves);
+			// 		Ext.Ajax.request({
+			// 			params : {t : tgl, id: ves },
+			// 			method : 'GET',
+			// 			url : 'export.php'
+			// 		})
 
-				}
-			}
+			// 	}
+			// }
 			//'-',
 			//{
 				//id: 'toolbar_text', 

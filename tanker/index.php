@@ -7,8 +7,10 @@
 ?>
 <html>
     <head>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <meta http-equiv="X-UA-Compatible" content="IE=9"  />
         <title>MONITA - Tanker Tracking System</title>
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3"></script>
         <script type="text/javascript" src="../extjs/ext-all.js"></script>
         
         <link rel="icon" type="image/png" href="img/vessel.png">
@@ -19,7 +21,7 @@
 		<script type="text/javascript" src="../Chart/highcharts-more.js"></script>
 		<script type="text/javascript" src="../Chart/exporting.js"></script>		
         
-        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3&amp;sensor=false"></script>
+       
         
         <style type="text/css">
             .labels {

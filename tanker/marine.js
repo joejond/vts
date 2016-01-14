@@ -1,39 +1,6 @@
 Ext.onReady(function() {
-	var user_login = "";
-	var login_y = Ext.Ajax.request({
-			url: 'get_user_session.php',
-			method: 'GET',
-			success: function(data) {
-				var user = Ext.JSON.decode(data.responseText);
-				user_login = user.loged.user;
-				//console.log ('usernya : '+user.loged.user);
-				Ext.fly('user').update('Welcome '+user_login);
-			},
-			params: {}
-	});
 	
-	//user_login1 = user_login;
-	//console.log (login_y);
-	
-	
-	//var updateClock = function () {
-		//Ext.fly('jam').update(new Date().format('g:i:s A'));
-	//}
-	////var updateClock = function () {
-		////new Date().format('g:i:s A')
-	////};
-
-	//var runner = new Ext.util.TaskRunner();
-	//var task = runner.start({
-		 //run: updateClock,
-		 //interval: 1000
-	//});
-	
-
-	//var time_t = 'dd-MM-YYYY hh:mm';
-	//var content_t = '<html><head><title></title></head><body><div style="background:#E0E0E0; width: 100%; overflow: hidden; vertical-align: middle; "><div style="width: 65px; float: left;"> <img src="header.png"></div><div align=right style="width: 200px; float: right; font-size: 14px;">'+user_login+'  <br> </div><div style="font-size: 28px;">MONITA - Vessel Tracking System</div></div></body></html>';
-	
-    var viewport = Ext.create('Ext.Viewport', {
+    var viewport = Ext.create('Ext.container.Viewport', {
         layout: {
             type: 'border',
             padding: 5
@@ -70,7 +37,7 @@ Ext.onReady(function() {
 			},{
 				//id: 'user',
 				xtype	: 'button',
-				text	: 'LOGOUT' + user_login,
+				text	: 'LOGOUT',
 				width	: '5%',	
 				handler: function(){
 					window.location = '../LogOutUser.php';
@@ -85,55 +52,56 @@ Ext.onReady(function() {
                         //scope: me,
                         interval : 1000
                     });
+                    Ext.Ajax.request({
+						url: 'get_user_session.php',
+						method: 'GET',
+						success: function(data) {
+							var user = Ext.JSON.decode(data.responseText);
+							Ext.fly('user').update('Welcome '+user.loged.user);
+						}
+					});
                 }
             }
         },{
             region: 'center',
             xtype: 'tabpanel',
-            tabPosition: 'left',
+            //tabPosition: 'left',
             frame: true,
-            padding: 5,				
+            padding: 5,		
+            layout : 'fit',		
             items: [{
                 title: 'MAP VIEW', 
                 layout: 'border',
                 iconCls: 'tab-icon',
                 items: [ peta, ship_list ]
+                //items : [{
+						//xtype: 'panel',
+						//html : 'panel1'
+					//}]
             },{
                 title: 'SHIP - DETAIL DATA', 
                 layout: 'fit',                
                 id: 'detail_tab',
+                iconCls: 'tab-icon',
                 items: [ panel_detail ],
-                iconCls: 'tab-icon'
+     //            items : [{
+					// 	xtype: 'panel',
+					// 	html : 'panel2'
+					// }]
             },{
                 title: 'DAILY REPORT', 
                 layout: 'fit',                
                 id: 'analisis_tab',
-                items: [ panel_hitung ],
-                iconCls: 'tab-icon'
+                iconCls: 'tab-icon',
+				//items: [ panel_hitung ],
+				items : [{
+						xtype: 'panel',
+						html : 'panel3'
+					}]
             }]           
         }]
     });    
 	
-	//function update_tittle() {
-	
-		//Ext.Ajax.request({
-			//url: 'servertime.php',
-			//method: 'GET',
-			//success: function(data) {
-			//time_t = (data.responseText);
-			//},
-			//params: {}
-		//});	
-		
-		//var content_t = '<html><head><title></title></head><body><div style="background:#E0E0E0; width: 100%; overflow: hidden; vertical-align: middle; "><div style="width: 65px; float: left;"> <img src="header.png"></div><div align=right style="width: 200px; float: right; font-size: 14px;">'+user_login+'  <a href="http://monita.daunbiru.com:8999/tracking/logout.php">(logout)</a>  <br> '+time_t+' WITA</div><div style="font-size: 28px;">MONITA - Vessel Tracking System</div></div></body></html>';
-
-		//Ext.getCmp('panel_title').update(content_t);
-	//}
-	
-	
-	//setInterval(function() {
-		//update_tittle();
-	//}, 10000);
 
     peta1 = Ext.getCmp('mymap');
 

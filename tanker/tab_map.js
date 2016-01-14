@@ -64,7 +64,8 @@ var data_koor1 = [];
 function addMarker(id, location) {    
     Ext.Ajax.request({
         url: 'data_marker.php',
-        params: 'id='+id,
+        // params: {'id='+}id,
+        params: {id:id},
         method: 'GET',
         success: function (data) {  
             var gmarker = Ext.JSON.decode(data.responseText),
@@ -203,8 +204,8 @@ function getdatapath(id, start_tm, stop_tm)
 {
     Ext.Ajax.request({
         url: 'data_path.php',
-        params: 'id='+id+'&start='+start_tm+'&stop='+stop_tm,
-        //params: {id : id, start : str, stop : stp},
+        // params: 'id='+id+'&start='+start_tm+'&stop='+stop_tm,
+        params: {id : id, start : start_tm, stop : stop_tm},
         method: 'GET',
         success: function (data) {
 			//console.log(data.responseText);
@@ -249,7 +250,7 @@ function addpath(){
     var tgl_start = Ext.getCmp('start_path').getValue(), str = Ext.Date.format(tgl_start,'Y-m-d');    
     var tgl_stop = Ext.Date.add(Ext.getCmp('stop_path').getValue(),Ext.Date.DAY,1) ,stp = Ext.Date.format(tgl_stop,'Y-m-d');
     
-    //console.log('start = '+str + ' & stop = ' + stp);
+    //console.log('start = '+tgl_start + ' & stop = ' + tgl_stop);
     //console.log(tg_1);
     
     //var str_start = getyyyymmdd(tgl_start) + '000000';
@@ -339,11 +340,12 @@ var selmod = Ext.create('Ext.selection.CheckboxModel',{
             
             Ext.Ajax.request({
                 url: 'get_last_pos_array.php',
-                params : 'id='+ship,
+                //params : 'id='+ship,
+                params : {id : ship},
                 method: 'GET',
                 success: function (data) {
 					var isidat = Ext.JSON.decode(data.responseText);
-					//console.log (isidat);
+					console.log (isidat);
                     if(isidat.posisi.length == 0)
                         deleteMarkers();
                     else 
