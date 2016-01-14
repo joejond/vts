@@ -20,21 +20,21 @@ try{
 						join titik_ukur tu on tu.id_titik_ukur = d.id_titik_ukur
 					where tu.id_ship in ('.$id.')
 					group by tu.id_ship'; 
-	echo $q_last;
+	// echo $q_last;
 	$sth = $db->prepare($q_last);
 	$sth->execute();
 	//$result = $sth->fetchAll(PDO::FETCH_ASSOC);
 	$posisi = array();
 	while ($row = $sth->fetch()){
 		//array_push = ()
-		print_r ($row);
+		// print_r ($row);
 		//echo 'waktu '.$row['wkt'].'<br>';
 		//echo 'nama :'.$row['name'].'<br>';
 		$q_lat = 'select d.value as lat
 				from data d 
 					join titik_ukur tu on tu.id_titik_ukur = d.id_titik_ukur
 				where  d.data_time = "'.$row['wkt'].'" and tu.id_ship = "'.$row['id'].'" and tu.id_data_type = 1';
-		echo 'q_lat => '.$q_lat.'<br>';			
+		// echo 'q_lat => '.$q_lat.'<br>';			
 		$lat = $db->prepare($q_lat);
 		$lat->execute();
 		
