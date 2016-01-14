@@ -71,7 +71,8 @@ function addMarker(id, location) {
             var gmarker = Ext.JSON.decode(data.responseText),
             datay = gmarker.marker[0][0];
             
-            //console.log(gmarker.marker[0][0].nama);
+            // console.log(gmarker.marker[0][0].nama);
+            // console.log(gmarker);
             //console.log(data.responseText);
             var data_marker = [];
             //data_marker = (data.responseText).split(",");
