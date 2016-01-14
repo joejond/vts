@@ -83,7 +83,7 @@ Ext.onReady(function() {
                 layout: 'fit',                
                 id: 'detail_tab',
                 iconCls: 'tab-icon',
-                items: [ panel_detail ],
+                items: [ panel_detail ]
      //            items : [{
 					// 	xtype: 'panel',
 					// 	html : 'panel2'
