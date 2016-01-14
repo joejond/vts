@@ -10,11 +10,21 @@ Ext.require([
 
 var model_detail_kapal = Ext.define('detail_kapal', {
     extend: 'Ext.data.Model',
-    fields: ['waktu', 'lat', 'lng', 'speed', 'heading', 'rpm1', 'prop1', 'inflow1', 'outflow1', 'temp1', 'press1', 
-			'rpm2', 'prop2', 'inflow2', 'outflow2', 'temp2', 'press2', 
-			'rpm3', 'prop3', 'inflow3', 'outflow3', 'temp3', 'press3', 
-			'rpm4', 'prop4', 'inflow4', 'outflow4', 'temp4', 'press4', 
-			'runhour1', 'runhour2','runhour3', 'battery', 'charger', 'modem']
+    fields: ['waktu', 'lat', 'lng', 'speed', 'heading', 
+
+    		
+    		"level1","interface1","volume1","gwr_temp1","level_product1",
+    		"level2","interface2","volume2","gwr_temp2","level_product2",
+    		"level3","interface3","volume3","gwr_temp3","level_product3",
+    		"level4","interface4","volume4","gwr_temp4","level_product4",
+    		"level5","interface5","volume5","gwr_temp5","level_product5",
+    		"level6","interface6","volume6","gwr_temp6","level_product6",
+    		"level7","interface7","volume7","gwr_temp7","level_product7",
+    		"level8","interface8","volume8","gwr_temp8","level_product8",
+    		"level9","interface9","volume9","gwr_temp9","level_product9",
+    		"level10","interface10","volume10","gwr_temp10","level_product10",
+    		"battery2","charger2","wind_speed","wind_direction","modem",
+			'battery', 'charger']
 });
 
 var comb_kapal1 = '';
@@ -122,139 +132,137 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
       columns: [{
 			header: "Level", 
 			width: 70, 
-			dataIndex: 'rpm1'
+			dataIndex: 'level_product1'
 		},{
 			header: "Volume", 
 			width: 70, 
-			dataIndex: 'prop1'
+			dataIndex: 'volume1'
 		}]	  
 	},{
       header: "Cargo Tank 1S",
       columns: [{
 			header: "Level", 
 			width: 70, 
-			dataIndex: 'rpm2'
+			dataIndex: 'level_product2'
 		},{
 			header: "Volume", 
 			width: 70, 
-			dataIndex: 'prop2'
+			dataIndex: 'volume2'
 		}]	  
 	},{
       header: "Cargo Tank 2P",
       columns: [{
 			header: "Level", 
 			width: 70, 
-			dataIndex: 'rpm3'
+			dataIndex: 'level_product3'
 		},{
 			header: "Volume", 
 			width: 70, 
-			dataIndex: 'prop3'
+			dataIndex: 'volume3'
 		}]	
 	},{
 		header: "Cargo Tank 2S",
       	columns: [{
 			header: "Level", 
 			width: 70, 
-			dataIndex: 'rpm4'
+			dataIndex: 'level_product4'
 		},{
 			header: "Volume", 
 			width: 70, 
-			dataIndex: 'prop4'
+			dataIndex: 'volume4'
 		}]	
 	},{
       header: "Cargo Tank 3P",
       columns: [{
 			header: "Level", 
 			width: 70, 
-			dataIndex: 'rpm1'
+			dataIndex: 'level_product5'
 		},{
 			header: "Volume", 
 			width: 70, 
-			dataIndex: 'prop1'
+			dataIndex: 'volume5'
 		}]	  
 	},{
       header: "Cargo Tank 3S",
       columns: [{
 			header: "Level", 
 			width: 70, 
-			dataIndex: 'rpm2'
+			dataIndex: 'level_product6'
 		},{
 			header: "Volume", 
 			width: 70, 
-			dataIndex: 'prop2'
+			dataIndex: 'volume6'
 		}]	  
 	},{
       header: "Cargo Tank 4P",
       columns: [{
 			header: "Level", 
 			width: 70, 
-			dataIndex: 'rpm3'
+			dataIndex: 'level_product7'
 		},{
 			header: "Volume", 
 			width: 70, 
-			dataIndex: 'prop3'
+			dataIndex: 'volume7'
 		}]	
 	},{
 		header: "Cargo Tank 4S",
       	columns: [{
 			header: "Level", 
 			width: 70, 
-			dataIndex: 'rpm4'
+			dataIndex: 'level_product8'
 		},{
 			header: "Volume", 
 			width: 70, 
-			dataIndex: 'prop4'
+			dataIndex: 'volume8'
 		}]	
 	},{
       header: "Cargo Tank 5P",
       columns: [{
 			header: "Level", 
 			width: 70, 
-			dataIndex: 'rpm3'
+			dataIndex: 'level_product9'
 		},{
 			header: "Volume", 
 			width: 70, 
-			dataIndex: 'prop3'
+			dataIndex: 'volume9'
 		}]	
 	},{
 		header: "Cargo Tank 5S",
       	columns: [{
 			header: "Level", 
 			width: 70, 
-			dataIndex: 'rpm4'
+			dataIndex: 'level_product10'
 		},{
 			header: "Volume", 
 			width: 70, 
-			dataIndex: 'prop4'
+			dataIndex: 'volume10'
 		}]	
 	},{
-      header: "GenSet",
-      columns: [
-		{
-			header: "GenSet #1", 
+		header: "Panel",
+		columns: [{
+			header: "Wind Dir", 
 			width: 70, 
-			dataIndex: 'runhour1'
+			dataIndex: 'wind_direction'
 		},{
-			header: "GenSet #2", 
+			header: "Wind Speed", 
 			width: 70, 
-			dataIndex: 'runhour2'
+			dataIndex: 'wind_speed'
 		},{
-			header: "GenSet #3", 
-			width: 70, 
-			dataIndex: 'runhour3'
-		}
-		]	  
-	},
-	{
-      header: "Panel",
-      columns: [{
-			header: "Battery", 
+			header: "Battery1", 
 			width: 70, 
 			dataIndex: 'battery'
 		},{
-			header: "Charger", 
+			header: "Charger1", 
 			width: 70, 
 			dataIndex: 'charger'
+		},{
+			header: "Battery2", 
+			width: 70, 
+			dataIndex: 'battery2'
+		},{
+			header: "Charger2", 
+			width: 70, 
+			dataIndex: 'charger2'
 		}]	  
 	},{
       header: "Source Data",

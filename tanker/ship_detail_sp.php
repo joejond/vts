@@ -1,7 +1,7 @@
 <?php
 $start = microtime();
 session_start();
-include	'../inc/conn_db.php';
+include	'../inc/conn_db_tanker.php';
 //include	'../inc/conn_db_linode1.php';
 include	'../inc/cekSession.php';
 
@@ -10,6 +10,7 @@ try {
 	$id = (isset($_GET['id']) && ($_GET['id'] <> '')) ? $_GET['id'] : '1';
 	$tgl = (isset($_GET['tgl']) && ($_GET['tgl'] <> '')) ? $_GET['tgl'] : date('Y-m-d') ;
 
+	// echo $tz; 
 	// $psrh = 1;
 	// $tz = '+08:00';
 	
