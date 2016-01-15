@@ -7,7 +7,7 @@ include	'../inc/cekSession.php';
 
 try {
 	$tz = $_SESSION['timezone'];
-	$id = (isset($_GET['id']) && ($_GET['id'] <> '')) ? $_GET['id'] : '1';
+	$id = (isset($_GET['id']) && ($_GET['id'] <> '')) ? $_GET['id'] : '23';
 	$tgl = (isset($_GET['tgl']) && ($_GET['tgl'] <> '')) ? $_GET['tgl'] : date('Y-m-d') ;
 
 	// echo $tz; 
