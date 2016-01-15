@@ -340,8 +340,8 @@ var panel_detail = {
 					select: function() {
 						comb_kapal1 = this.getValue();
 						comb_kapal2 = this.getRawValue();
-						//console.log(comb_kapal1);
-						//console.log(tgl_sel1);
+						// console.log(comb_kapal1);
+						// console.log(tgl_sel1);
 						store_detail_kapal.load({params: { id: comb_kapal1, tgl: tgl_sel1}});
 						Ext.getCmp('table_ship').setTitle('Vessel '+comb_kapal2 +' on '+ tgl_sel2);
 						//tabel_detail_kapal
@@ -352,7 +352,10 @@ var panel_detail = {
 							this.setValue(isi);
 							comb_kapal2 = (comb_kapal1 != '') ? comb_kapal2 : isi;
 							Ext.getCmp('table_ship').setTitle('Vessel '+isi+' on '+ Ext.Date.format(new Date(), 'd-M-Y' ));
-							//console.log(isi);
+							// console.log(isi);
+							var comb_kapal3 = this.getStore().data.items[0].data['id'];
+							// console.log(comb_kapal3,tgl_sel1);
+							store_detail_kapal.load({params: { id: comb_kapal3, tgl: tgl_sel1}});
 						}
 				}
 				
@@ -379,11 +382,12 @@ var panel_detail = {
 						Ext.getCmp('table_ship').setTitle('Vessel '+comb_kapal2 +' on '+ tgl_sel2);
 						//update_text1();
 					}, 
-					afterrender : function(){
+					beforerender : function(){
 						//console.log('Date selected: ', this.getValue());
 						tgl_sel1 = Ext.Date.format(this.getValue(),'Y-m-d');
 						tgl_sel2 = (tgl_sel1 != '') ? tgl_sel1 : Ext.Date.format(new Date(), 'd-M-Y' );
-						//console.log(tgl_sel1);
+						// var comb_kapal1 = Ext.getCmp('cb_vessel').getStore().data.items[0].data['id'];
+						// console.log(comb_kapal1);
 						}
 				}
 			},
