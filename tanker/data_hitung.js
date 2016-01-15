@@ -62,11 +62,18 @@ var tgl_sel22 = '';
 
 var model_akumulasi = Ext.define('akumulasi', {
     extend: 'Ext.data.Model',
-    fields: [{name : 'tanggal', type : 'string'}, 'jam', 'rpm1', 'prop1', 'inflow1', 'outflow1', 'temp1', 'press1', 
-			'rpm2', 'prop2', 'inflow2', 'outflow2', 'temp2', 'press2', 
-			'rpm3', 'prop3', 'inflow3', 'outflow3', 'temp3', 'press3', 
-			'rpm4', 'prop4', 'inflow4', 'outflow4', 'temp4', 'press4', 
-			'runhour1', 'runhour2','runhour3']
+    fields: [
+            {name : "waktu", type : 'string'},
+            "volume1","level_product1",
+            "volume2","level_product2",
+            "volume3","level_product3",
+            "volume4","level_product4",
+            "volume5","level_product5",
+            "volume6","level_product6",
+            "volume7","level_product7",
+            "volume8","level_product8",
+            "volume9","level_product9",
+            "volume10","level_product10"]
 });
 
 var store_akumulasi = Ext.create('Ext.data.Store', {
@@ -184,7 +191,7 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
         header: "Date",
         width: 150,
         locked : true,
-        dataIndex: 'tanggal'
+        dataIndex: 'waktu'
         //format : 'd-M-Y H'
         //renderer: Ext.util.Format.dateRenderer('d-M-Y H')
         //renderer: Ext.util.Format.dateRenderer('d-M-Y')
