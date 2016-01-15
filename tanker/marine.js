@@ -93,11 +93,11 @@ Ext.onReady(function() {
                 layout: 'fit',                
                 id: 'analisis_tab',
                 iconCls: 'tab-icon',
-				//items: [ panel_hitung ],
-				items : [{
-						xtype: 'panel',
-						html : 'panel3'
-					}]
+				items: [ panel_hitung ]
+				// items : [{
+				// 		xtype: 'panel',
+				// 		html : 'panel3'
+				// 	}]
             }]           
         }]
     });    
