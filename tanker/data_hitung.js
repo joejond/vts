@@ -201,7 +201,7 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
         //dataIndex: 'jam',
         //locked : true
     },{
-        header: "PortSide",
+        header: "Cargo 1P",
         columns: [{
             header: "Engine (avg)",
             width: 100,
