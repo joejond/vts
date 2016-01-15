@@ -12,7 +12,7 @@ try {
 	//
 	$query = 'call ship_list()';
 	//$query = 'select * from ship where ';
-	
+	//echo $query;
 	$sth = $db->prepare($query);
 	$sth->execute();
 	$result = $sth->fetchAll(PDO::FETCH_ASSOC);
