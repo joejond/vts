@@ -203,126 +203,134 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
     },{
         header: "Cargo 1P",
         columns: [{
-            header: "Engine (avg)",
+            header: "Level",
             width: 100,
-            dataIndex: 'rpm1'
+            dataIndex: 'level_product1'
         },{
-            header: "Propeller (avg)",
+            header: "Volume",
             width: 100,
-            dataIndex: 'prop1'
-        },{
-            header: "InFlow",
-            width: 100,
-            dataIndex: 'inflow1'
-        },{
-            header: "OutFlow",
-            width: 100,
-            dataIndex: 'outflow1'
-        },{
-            header: "Temp",
-            width: 100,
-            dataIndex: 'temp1'
-        },{
-            header: "Press",
-            width: 100,
-            dataIndex: 'press1'
+            dataIndex: 'volume1'
         }]
     },{
-        header: "StarBoard",
+        header: "Cargo 1S",
         columns: [{
-            header: "Engine (avg)",
+            header: "Level",
             width: 100,
-            dataIndex: 'rpm2'
+            dataIndex: 'level_product2'
         },{
-            header: "Propeller (avg)",
+            header: "Volume",
             width: 100,
-            dataIndex: 'prop2'
-        },{
-            header: "InFlow",
-            width: 100,
-            dataIndex: 'inflow2'
-        },{
-            header: "OutFlow",
-            width: 100,
-            dataIndex: 'outflow2'
-        },{
-            header: "Temp",
-            width: 100,
-            dataIndex: 'temp2'
-        },{
-            header: "Press",
-            width: 100,
-            dataIndex: 'press2'
+            dataIndex: 'volume2'
         }]
     },{
-        header: "Center I",
+        header: "Cargo 2P",
         columns: [{
-            header: "Engine (avg)",
+            header: "Level",
             width: 100,
-            dataIndex: 'rpm3'
+            dataIndex: 'level_product3'
         },{
-            header: "Propeller (avg)",
+            header: "Volume",
             width: 100,
-            dataIndex: 'prop3'
-        },{
-            header: "InFlow",
-            width: 100,
-            dataIndex: 'inflow3'
-        },{
-            header: "OutFlow",
-            width: 100,
-            dataIndex: 'outflow3'
-        },{
-            header: "Temp",
-            width: 100,
-            dataIndex: 'temp3'
-        },{
-            header: "Press",
-            width: 100,
-            dataIndex: 'press3'
-        }]    
-    }, {
-		header: "Center II",
+            dataIndex: 'volume3'
+        }]
+    },{
+        header: "Cargo 2S",
         columns: [{
-            header: "Engine (avg)",
+            header: "Level",
             width: 100,
-            dataIndex: 'rpm4'
+            dataIndex: 'level_product4'
         },{
-            header: "Propeller (avg)",
+            header: "Volume",
             width: 100,
-            dataIndex: 'prop4'
-        },{
-            header: "InFlow",
-            width: 100,
-            dataIndex: 'inflow4'
-        },{
-            header: "OutFlow",
-            width: 100,
-            dataIndex: 'outflow4'
-        },{
-            header: "Temp",
-            width: 100,
-            dataIndex: 'temp4'
-        },{
-            header: "Press",
-            width: 100,
-            dataIndex: 'press4'
-        }]    
-    }, {
-        header: "Genset",
+            dataIndex: 'volume4'
+        }]
+    },{
+        header: "Cargo 2S",
         columns: [{
-            header: "GenSet #1",
+            header: "Level",
             width: 100,
-            dataIndex: 'runhour1'
-        }, {
-            header: "GenSet #2",
+            dataIndex: 'level_product4'
+        },{
+            header: "Volume",
             width: 100,
-            dataIndex: 'runhour2'
-        }, {
-            header: "GenSet #3",
+            dataIndex: 'volume4'
+        }]
+    },{
+        header: "Cargo 2S",
+        columns: [{
+            header: "Level",
             width: 100,
-            dataIndex: 'runhour3'
-        
+            dataIndex: 'level_product4'
+        },{
+            header: "Volume",
+            width: 100,
+            dataIndex: 'volume4'
+        }]
+    },{
+        header: "Cargo 3P",
+        columns: [{
+            header: "Level",
+            width: 100,
+            dataIndex: 'level_product5'
+        },{
+            header: "Volume",
+            width: 100,
+            dataIndex: 'volume5'
+        }]
+    },{
+        header: "Cargo 3S",
+        columns: [{
+            header: "Level",
+            width: 100,
+            dataIndex: 'level_product6'
+        },{
+            header: "Volume",
+            width: 100,
+            dataIndex: 'volume6'
+        }]
+    },{
+        header: "Cargo 4P",
+        columns: [{
+            header: "Level",
+            width: 100,
+            dataIndex: 'level_product7'
+        },{
+            header: "Volume",
+            width: 100,
+            dataIndex: 'volume7'
+        }]
+    },{
+        header: "Cargo 4S",
+        columns: [{
+            header: "Level",
+            width: 100,
+            dataIndex: 'level_product8'
+        },{
+            header: "Volume",
+            width: 100,
+            dataIndex: 'volume8'
+        }]
+    },{
+        header: "Cargo 5P",
+        columns: [{
+            header: "Level",
+            width: 100,
+            dataIndex: 'level_product9'
+        },{
+            header: "Volume",
+            width: 100,
+            dataIndex: 'volume9'
+        }]
+    },{
+        header: "Cargo 5S",
+        columns: [{
+            header: "Level",
+            width: 100,
+            dataIndex: 'level_product10'
+        },{
+            header: "Volume",
+            width: 100,
+            dataIndex: 'volume10'
         }]
     }]
 });
