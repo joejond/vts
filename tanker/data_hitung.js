@@ -184,7 +184,7 @@ var but_export = {
 };
 
 var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
-    title: 'akumulasi data flowmeter',
+    title: 'Cargo per Jam',
     store: store_akumulasi,
     flex: 5,
     columns: [{
