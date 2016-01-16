@@ -1,44 +1,44 @@
 <?php
 
 session_start();
-include	'../inc/conn_db.php';
+include	'../inc/conn_db_tanker.php';
 //include	'../inc/conn_db_linode2.php';
 include	'../inc/cekSession.php';
 
 
 try {
-	
-	$id = (isset($_GET['id']) && ($_GET['id'] <> '')) ? $_GET['id'] : '1';
+	$tz = $_SESSION['timezone'];
+	$id = (isset($_GET['id']) && ($_GET['id'] <> '')) ? $_GET['id'] : '23';
 	$tgl = (isset($_GET['tgl']) && ($_GET['tgl'] <> '')) ? $_GET['tgl'] : date('Y-m-d') ;
 	
-	//echo 'idkapal = '.$id. ' dan tanggal = '.$tgl.'<br>';
+	echo 'idkapal = '.$id. ' dan tanggal = '.$tgl.' dg tz = '.$tz.'<br>';
 	for($i=0; $i<24;$i++){
 			$perjam[] = array(
 				'jam' =>  $i,
-				'rpm1' => null,
-				'rpm2' => null,
-				'rpm3' => null,
-				'rpm4' => null,
-				'fuel1' => null,
-				'fuel2' => null,
-				'fuel3' => null,
-				'fuel4' => null,
-				'rh1' => null,
-				'rh2' => null,
-				'rh3' => null
+				'volume1' => null,
+				'volume2' => null,
+				'volume3' => null,
+				'volume4' => null,
+				'volume5' => null,
+				'volume6' => null,
+				'volume7' => null,
+				'volume8' => null,
+				'volume9' => null,
+				'volume10' => null
 			);
 	}
 	
 	//echo $perjam['jam'];
-	//echo '<pre>';
-	//print_r($perjam);
-	//echo '<pre>';
+	echo '<pre>';
+	print_r($perjam);
+	echo '<pre>';
 	
-	$query = 'call data_kapal_perjam_chart_dinamis('.$id.',"'.$tgl.'")';
+	$query = 'call data_kapal_perjam_dinamis('.$id.',"'.$tgl.'","'.$tz.'")';
+	// $query = 'call data_kapal_perjam_chart_dinamis('.$id.',"'.$tgl.'")';
 	$sth = $db->prepare($query);
 	$sth->execute();
 	$result = $sth->fetchAll(PDO::FETCH_ASSOC);
-	
+	print_r($result);
 	//$hasil = array();
 	foreach ($result as $rr){
 		//echo $rr['jam'].'<br>';
