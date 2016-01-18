@@ -24,7 +24,8 @@ try {
 				'volume7' => null,
 				'volume8' => null,
 				'volume9' => null,
-				'volume10' => null
+				'volume10' => null,
+				'vol_tot' => null
 			);
 	}
 	
@@ -43,17 +44,31 @@ try {
 	foreach ($result as $rr){
 		//echo $rr['jam'].'<br>';
 		$perjam[$rr['jam']]['jam'] = $rr['jam'];
-		$perjam[$rr['jam']]['rpm1'] = $rr['rpm1'];
-		$perjam[$rr['jam']]['rpm2'] = $rr['rpm2'];
-		$perjam[$rr['jam']]['rpm3'] = !isset ($rr['rpm3']) ? null : $rr['rpm3'];
-		$perjam[$rr['jam']]['rpm4'] = !isset ($rr['rpm4']) ? null : $rr['rpm4'];
-		$perjam[$rr['jam']]['fuel1'] = ($rr['inflow1']) - ($rr['outflow1']);
-		$perjam[$rr['jam']]['fuel2'] = ($rr['inflow2']) - ($rr['outflow2']);
-		$perjam[$rr['jam']]['fuel3'] = !isset ($rr['inflow3']) && !isset ($rr['outflow3']) ? null : (($rr['inflow3']) - ($rr['outflow3']));
-		$perjam[$rr['jam']]['fuel4'] = !isset ($rr['inflow4']) && !isset ($rr['outflow4']) ? null : (($rr['inflow3']) - ($rr['outflow4']));
-		$perjam[$rr['jam']]['rh1'] = $rr['runhour1'];
-		$perjam[$rr['jam']]['rh2'] = $rr['runhour2'];
-		$perjam[$rr['jam']]['rh3'] = !isset ($rr['runhour3']) ? null : $rr['runhour3'];
+		$perjam[$rr['jam']]['volume1'] = $rr['volume1'];
+		$perjam[$rr['jam']]['volume2'] = $rr['volume2'];
+		$perjam[$rr['jam']]['volume3'] = $rr['volume3'];
+		$perjam[$rr['jam']]['volume4'] = $rr['volume4'];
+		$perjam[$rr['jam']]['volume5'] = $rr['volume5'];
+		$perjam[$rr['jam']]['volume6'] = $rr['volume6'];
+		$perjam[$rr['jam']]['volume7'] = $rr['volume7'];
+		$perjam[$rr['jam']]['volume8'] = $rr['volume8'];
+		$perjam[$rr['jam']]['volume9'] = $rr['volume9'];
+		$perjam[$rr['jam']]['volume10'] = $rr['volume10'];
+
+		if (isset($rr['volume1']) || isset($rr['volume2']) || isset($rr['volume3']) ||isset($rr['volume4']) || isset($rr['volume5']) || isset($rr['volume6']) || isset($rr['volume7']) || isset($rr['volume8']) || isset($rr['volume9']) || isset($rr['volume10']) ){
+			$tot = $rr['volume1'] + $rr['volume2'] + $rr['volume3'] + $rr['volume4'] + $rr['volume5'] +$rr['volume6']+ $rr['volume7']+$rr['volume8']+$rr['volume9']+$rr['volume10']			
+		}
+		$perjam[$rr['jam']]['vol_tot'] = $tot;
+
+		// $perjam[$rr['jam']]['rpm3'] = !isset ($rr['rpm3']) ? null : $rr['rpm3'];
+		// $perjam[$rr['jam']]['rpm4'] = !isset ($rr['rpm4']) ? null : $rr['rpm4'];
+		// $perjam[$rr['jam']]['fuel1'] = ($rr['inflow1']) - ($rr['outflow1']);
+		// $perjam[$rr['jam']]['fuel2'] = ($rr['inflow2']) - ($rr['outflow2']);
+		// $perjam[$rr['jam']]['fuel3'] = !isset ($rr['inflow3']) && !isset ($rr['outflow3']) ? null : (($rr['inflow3']) - ($rr['outflow3']));
+		// $perjam[$rr['jam']]['fuel4'] = !isset ($rr['inflow4']) && !isset ($rr['outflow4']) ? null : (($rr['inflow3']) - ($rr['outflow4']));
+		// $perjam[$rr['jam']]['rh1'] = $rr['runhour1'];
+		// $perjam[$rr['jam']]['rh2'] = $rr['runhour2'];
+		// $perjam[$rr['jam']]['rh3'] = !isset ($rr['runhour3']) ? null : $rr['runhour3'];
 		
 	}
 	
