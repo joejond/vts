@@ -56,7 +56,7 @@ try {
 		$perjam[$rr['jam']]['volume10'] = $rr['volume10'];
 
 		if (isset($rr['volume1']) || isset($rr['volume2']) || isset($rr['volume3']) ||isset($rr['volume4']) || isset($rr['volume5']) || isset($rr['volume6']) || isset($rr['volume7']) || isset($rr['volume8']) || isset($rr['volume9']) || isset($rr['volume10']) ){
-			$tot = $rr['volume1'] + $rr['volume2'] + $rr['volume3'] + $rr['volume4'] + $rr['volume5'] +$rr['volume6']+ $rr['volume7']+$rr['volume8']+$rr['volume9']+$rr['volume10']			
+			$tot = $rr['volume1'] + $rr['volume2'] + $rr['volume3'] + $rr['volume4'] + $rr['volume5'] +$rr['volume6']+ $rr['volume7']+$rr['volume8']+$rr['volume9']+$rr['volume10'];			
 		}
 		$perjam[$rr['jam']]['vol_tot'] = $tot;
 
