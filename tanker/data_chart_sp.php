@@ -11,7 +11,7 @@ try {
 	$id = (isset($_GET['id']) && ($_GET['id'] <> '')) ? $_GET['id'] : '23';
 	$tgl = (isset($_GET['tgl']) && ($_GET['tgl'] <> '')) ? $_GET['tgl'] : date('Y-m-d') ;
 	
-	echo 'idkapal = '.$id. ' dan tanggal = '.$tgl.' dg tz = '.$tz.'<br>';
+	// echo 'idkapal = '.$id. ' dan tanggal = '.$tgl.' dg tz = '.$tz.'<br>';
 	for($i=0; $i<24;$i++){
 			$perjam[] = array(
 				'jam' =>  $i,
@@ -30,16 +30,16 @@ try {
 	}
 	
 	//echo $perjam['jam'];
-	echo '<pre>';
-	print_r($perjam);
-	echo '<pre>';
+	// echo '<pre>';
+	// print_r($perjam);
+	// echo '<pre>';
 	
 	$query = 'call data_kapal_perjam_dinamis('.$id.',"'.$tgl.'","'.$tz.'")';
 	// $query = 'call data_kapal_perjam_chart_dinamis('.$id.',"'.$tgl.'")';
 	$sth = $db->prepare($query);
 	$sth->execute();
 	$result = $sth->fetchAll(PDO::FETCH_ASSOC);
-	print_r($result);
+	// print_r($result);
 	//$hasil = array();
 	foreach ($result as $rr){
 		//echo $rr['jam'].'<br>';
