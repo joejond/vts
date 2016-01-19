@@ -344,47 +344,47 @@ Ext.define('HighChartData', {
         name: 'jam',
         type: 'string'
     }, {
-        name: 'rpm1',
+        name: 'volume1',
         type: 'float',
         useNull: true
     }, {
-        name: 'rpm2',
+        name: 'volume2',
         type: 'float',
         useNull: true
     }, {
-        name: 'rpm3',
+        name: 'volume3',
         type: 'float',
         useNull: true
     }, {
-        name: 'rpm4',
+        name: 'volume4',
         type: 'float',
         useNull: true
     }, {
-        name: 'fuel1',
+        name: 'volume5',
         type: 'float',
         useNull: true
     }, {
-        name: 'fuel2',
+        name: 'volume6',
         type: 'float',
         useNull: true
     }, {
-        name: 'fuel3',
-        type: 'float',
-        useNull: true
-	}, {
-        name: 'fuel4',
+        name: 'volume7',
         type: 'float',
         useNull: true
     }, {
-        name: 'rh1',
+        name: 'volume8',
         type: 'float',
         useNull: true
     }, {
-        name: 'rh2',
+        name: 'volume9',
         type: 'float',
         useNull: true
     }, {
-        name: 'rh3',
+        name: 'volume10',
+        type: 'float',
+        useNull: true
+    }, {
+        name: 'vol_tot',
         type: 'float',
         useNull: true
     }]
@@ -439,25 +439,25 @@ var genSeries = function () {
 var grafik = new Ext.create('Chart.ux.Highcharts', {
     id: 'chart',
     series: [{
-        dataIndex: 'rpm1',
+        dataIndex: 'volume1',
         yAxis: 0,
-        type: 'spline',
+        type: 'column',
         color: '#0033FF',
-        name: 'rpm #1',
+        name: 'Cargo #1',
         visible: true
     }, {
-        dataIndex: 'rpm2',
+        dataIndex: 'volume2',
         yAxis: 0,
         color: '#336600',
-        type: 'spline',
-        name: 'rpm #2',
+        type: 'column',
+        name: 'Cargo #2',
         visible: true
      }, {
-        dataIndex: 'rpm3',
+        dataIndex: 'volume3',
         yAxis: 0,
         color: '#8B6914',
-        type: 'spline',
-        name: 'rpm #3',
+        type: 'column',
+        name: 'Cargo #3',
         visible: true
         
     }, {
@@ -465,7 +465,7 @@ var grafik = new Ext.create('Chart.ux.Highcharts', {
         yAxis: 0,
         color: '#FA5A6A',
         type: 'spline',
-        name: 'rpm #4',
+        name: 'Cargo #4',
         visible: false
         
     }, {
@@ -526,7 +526,7 @@ var grafik = new Ext.create('Chart.ux.Highcharts', {
         visible: false
     }],
     store: store_grafik,
-    xField: 'time',
+    xField: 'jam',
     chartConfig: {
         chart: {
             marginRight: 250,
@@ -607,6 +607,13 @@ var grafik = new Ext.create('Chart.ux.Highcharts', {
                 animation: {
                     duration: 1000,
                     easing: 'swing'
+                }
+            },
+            column: {
+                stacking: 'normal',
+                dataLabels: {
+                    enabled: true,
+                    color: 'white'
                 }
             }
         },

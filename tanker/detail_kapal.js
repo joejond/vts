@@ -147,7 +147,7 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
 		},{
 			header: "Volume", 
 			width: 70, 
-			dataIndex: 'volume2'
+			dataIndex: 'volume6'
 		}]	  
 	},{
       header: "Cargo Tank 2P",
@@ -158,7 +158,7 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
 		},{
 			header: "Volume", 
 			width: 70, 
-			dataIndex: 'volume3'
+			dataIndex: 'volume2'
 		}]	
 	},{
 		header: "Cargo Tank 2S",
@@ -169,7 +169,7 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
 		},{
 			header: "Volume", 
 			width: 70, 
-			dataIndex: 'volume4'
+			dataIndex: 'volume7'
 		}]	
 	},{
       header: "Cargo Tank 3P",
@@ -180,7 +180,7 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
 		},{
 			header: "Volume", 
 			width: 70, 
-			dataIndex: 'volume5'
+			dataIndex: 'volume3'
 		}]	  
 	},{
       header: "Cargo Tank 3S",
@@ -191,7 +191,7 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
 		},{
 			header: "Volume", 
 			width: 70, 
-			dataIndex: 'volume6'
+			dataIndex: 'volume8'
 		}]	  
 	},{
       header: "Cargo Tank 4P",
@@ -202,7 +202,7 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
 		},{
 			header: "Volume", 
 			width: 70, 
-			dataIndex: 'volume7'
+			dataIndex: 'volume4'
 		}]	
 	},{
 		header: "Cargo Tank 4S",
@@ -213,7 +213,7 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
 		},{
 			header: "Volume", 
 			width: 70, 
-			dataIndex: 'volume8'
+			dataIndex: 'volume9'
 		}]	
 	},{
       header: "Cargo Tank 5P",
@@ -224,7 +224,7 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
 		},{
 			header: "Volume", 
 			width: 70, 
-			dataIndex: 'volume9'
+			dataIndex: 'volume5'
 		}]	
 	},{
 		header: "Cargo Tank 5S",
