@@ -443,87 +443,134 @@ var grafik = new Ext.create('Chart.ux.Highcharts', {
         yAxis: 0,
         type: 'column',
         color: '#0033FF',
-        name: 'Cargo #1',
+        name: 'Cargo #1P',
         visible: true
     }, {
-        dataIndex: 'volume2',
+        dataIndex: 'volume6',
         yAxis: 0,
         color: '#336600',
         type: 'column',
-        name: 'Cargo #2',
+        name: 'Cargo #1S',
         visible: true
      }, {
-        dataIndex: 'volume3',
+        dataIndex: 'volume2',
         yAxis: 0,
         color: '#8B6914',
         type: 'column',
-        name: 'Cargo #3',
+        name: 'Cargo #2P',
         visible: true
         
     }, {
-		dataIndex: 'rpm4',
+        dataIndex: 'volume7',
         yAxis: 0,
         color: '#FA5A6A',
-        type: 'spline',
-        name: 'Cargo #4',
-        visible: false
-        
-    }, {
-        dataIndex: 'fuel1',
-        yAxis: 1,
-        type: 'spline',
-        color: '#0033FF',
-        dashStyle: 'ShortDash',
-        name: 'fuel main engine #1',
+        type: 'column',
+        name: 'Cargo #2S',
         visible: true
     }, {
-        dataIndex: 'fuel2',
-        yAxis: 1,
-        color: '#336600',
-        dashStyle: 'ShortDash',
-        type: 'spline',
-        name: 'fuel main engine #2',
+        dataIndex: 'volume3',
+        yAxis: 0,
+        color: '#FA5A03',
+        type: 'column',
+        name: 'Cargo #3P',
         visible: true
     }, {
-        dataIndex: 'fuel3',
-        yAxis: 1,
-        color: '#8B6914',
-        dashStyle: 'ShortDash',
-        type: 'spline',
-        name: 'fuel main engine #3',
+        dataIndex: 'volume8',
+        yAxis: 0,
+        color: '#FA5A0A',
+        type: 'column',
+        name: 'Cargo #3S',
         visible: true
     }, {
-		dataIndex: 'fuel4',
-        yAxis: 1,
-        color: '#FA5A6A',
-        dashStyle: 'ShortDash',
-        type: 'spline',
-        name: 'fuel main engine #4',
-        visible: false
+        dataIndex: 'volume4',
+        yAxis: 0,
+        color: '#FA5A0B',
+        type: 'column',
+        name: 'Cargo #4P',
+        visible: true
     }, {
-        dataIndex: 'rh1',
-        yAxis: 2,
-        type: 'spline',
-        color: '#0033FF',
-        dashStyle: 'ShortDot',
-        name: 'genset #1',
-        visible: false
+        dataIndex: 'volume9',
+        yAxis: 0,
+        color: '#FA5A0C',
+        type: 'column',
+        name: 'Cargo #4S',
+        visible: true
     }, {
-        dataIndex: 'rh2',
-        yAxis: 2,
-        type: 'spline',
-        color: '#336600',
-        dashStyle: 'ShortDot',
-        name: 'genset #2',
-        visible: false
+        dataIndex: 'volume5',
+        yAxis: 0,
+        color: '#FA5A0D',
+        type: 'column',
+        name: 'Cargo #5P',
+        visible: true
     }, {
-        dataIndex: 'rh3',
-        yAxis: 2,
-        type: 'spline',
-        color: '#8B6914',
-        dashStyle: 'ShortDot',
-        name: 'genset #3',
-        visible: false
+		dataIndex: 'volume10',
+        yAxis: 0,
+        color: '#FA5A0E',
+        type: 'column',
+        name: 'Cargo #5S',
+        visible: true
+    
+    
+
+
+
+
+  //   }, {
+  //       dataIndex: 'fuel1',
+  //       yAxis: 0,
+  //       type: 'column',
+  //       color: '#0033FF',
+  //       // dashStyle: 'ShortDash',
+  //       name: 'fuel main engine #1',
+  //       visible: true
+  //   }, {
+  //       dataIndex: 'fuel2',
+  //       yAxis: 0,
+  //       color: '#336600',
+  //       // dashStyle: 'ShortDash',
+  //       type: 'spline',
+  //       name: 'fuel main engine #2',
+  //       visible: true
+  //   }, {
+  //       dataIndex: 'fuel3',
+  //       yAxis: 1,
+  //       color: '#8B6914',
+  //       dashStyle: 'ShortDash',
+  //       type: 'spline',
+  //       name: 'fuel main engine #3',
+  //       visible: true
+  //   }, {
+		// dataIndex: 'fuel4',
+  //       yAxis: 1,
+  //       color: '#FA5A6A',
+  //       dashStyle: 'ShortDash',
+  //       type: 'spline',
+  //       name: 'fuel main engine #4',
+  //       visible: false
+  //   }, {
+  //       dataIndex: 'rh1',
+  //       yAxis: 2,
+  //       type: 'spline',
+  //       color: '#0033FF',
+  //       dashStyle: 'ShortDot',
+  //       name: 'genset #1',
+  //       visible: false
+  //   }, {
+  //       dataIndex: 'rh2',
+  //       yAxis: 2,
+  //       type: 'spline',
+  //       color: '#336600',
+  //       dashStyle: 'ShortDot',
+  //       name: 'genset #2',
+  //       visible: false
+  //   }, {
+  //       dataIndex: 'rh3',
+  //       yAxis: 2,
+  //       type: 'spline',
+  //       color: '#8B6914',
+  //       dashStyle: 'ShortDot',
+  //       name: 'genset #3',
+  //       visible: false
     }],
     store: store_grafik,
     xField: 'jam',
@@ -565,42 +612,42 @@ var grafik = new Ext.create('Chart.ux.Highcharts', {
                 }
             },
             title: {
-                text: 'Engine Speed (rpm)',
+                text: 'Cargo Volume (KL)',
                 style: {
                     color: '#89A54E'
                 }
             },
             min: 0
-        }, {
-            gridLineWidth: 0,
-            title: {
-                text: 'flowmeter (liters)',
-                style: {
-                    color: '#AA4643'
-                }
-            },
-            labels: {
-                style: {
-                    color: '#AA4643'
-                }
-            },
-            min: 0,
-            opposite: true
-        }, {
-            gridLineWidth: 0,
-            title: {
-                text: 'runhour (hours)',
-                style: {
-                    color: '#BB4643'
-                }
-            },
-            labels: {
-                style: {
-                    color: '#BB4643'
-                }
-            },
-            min: 0,
-            opposite: true
+        // }, {
+        //     gridLineWidth: 0,
+        //     title: {
+        //         text: 'flowmeter (liters)',
+        //         style: {
+        //             color: '#AA4643'
+        //         }
+        //     },
+        //     labels: {
+        //         style: {
+        //             color: '#AA4643'
+        //         }
+        //     },
+        //     min: 0,
+        //     opposite: true
+        // }, {
+        //     gridLineWidth: 0,
+        //     title: {
+        //         text: 'runhour (hours)',
+        //         style: {
+        //             color: '#BB4643'
+        //         }
+        //     },
+        //     labels: {
+        //         style: {
+        //             color: '#BB4643'
+        //         }
+        //     },
+        //     min: 0,
+        //     opposite: true
         }],
         plotOptions: {
             series: {
