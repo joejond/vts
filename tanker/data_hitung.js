@@ -814,6 +814,7 @@ var panel_hitung = {
 					//tabel_detail_kapal
 					//update_text1();
 					daily_akum();
+                    // daily_cargo(comb_kapal21,tgl_sel21);
 					//console.log('ini pilih kapal');
 					//console.log('ini pilih kapal');
 					
@@ -854,6 +855,7 @@ var panel_hitung = {
 					Ext.getCmp('table_chart').setTitle('Vessel '+comb_kapal22 +' on '+ tgl_sel22);
 					//update_text1();
 					daily_akum();
+                    // daily_cargo(comb_kapal21,tgl_sel21);
 					//Ext.getCmp('panel_daily').update(content_akum);
 					
 				}, 
@@ -930,53 +932,91 @@ var panel_hitung = {
     }]
 };
 
-var eng_rh1 = '';
+function daily_cargo(cb,tg){
+
+    var cb1 = (cb!='')? cb : '23';
+    console.log(cb1,tg);
+    // console.log(store_grafik);
+    // store_grafik.load({
+    //     // success : function(data){
+    //     //     alert('sukses');
+    //     // }, 
+    //     callback: function(options, response,success) {
+    //     if (success) {
+    //             // console.log(success);
+    //             console.log(response.response.responseText);
+    //             console.log(options);
+    //             // console.log(options, success, response, records);
+    //             // alert ('ke loadd');
+    //         }           
+    //     }
+
+    // });
+    //     params: { id: cb1, tgl: tg},
+    //     success : function(data){
+    //         console.log('success bro');
+    //         console.log(data);
+    //     }
+    // );
+
+}
+
+// var eng_rh1 = '';
+var cargo_p='';
+var cargo_s='';
+var cargo_tot='';
 function daily_akum() {
     Ext.Ajax.request({
         url: 'data_grafik_perhari.php',
         method: 'GET',
         params: {
-            id: (comb_kapal21 !='') ? comb_kapal21 : '1',
+            id: (comb_kapal21 !='') ? comb_kapal21 : '23',
             tgl: tgl_sel21
         },
         success: function (data) {
 			var hasil = Ext.JSON.decode(data.responseText);
-			//console.log(hasil.g_perhari[0]);
+			console.log(hasil.g_perhari[0]);
+            var dt = hasil.g_perhari[0];
+
 			//console.log(hasil.g_perhari[0].tot_fl1 +' -&- '+hasil.g_perhari[0].tot_fl2 );
 			//var flow = (hasil.g_perhari[0].tot_fl1 === null) ? hasil.g_perhari[0].engrh1 : hasil.g_perhari[0].tot_fl1;
 			//console.log('rh engine = '+  flow);
             //var temp = new Array();
             //temp = (data.responseText).split(",");
-             eng1_daily = parseFloat(hasil.g_perhari[0].tot_fl1) - parseFloat(hasil.g_perhari[0].tot_ovfl1);
-             eng2_daily = parseFloat(hasil.g_perhari[0].tot_fl2) - parseFloat(hasil.g_perhari[0].tot_ovfl2);
-             eng3_daily = parseFloat(hasil.g_perhari[0].tot_fl3) - parseFloat(hasil.g_perhari[0].tot_ovfl3);
-             eng4_daily = parseFloat(hasil.g_perhari[0].tot_fl4) - parseFloat(hasil.g_perhari[0].tot_ovfl4);
-            //var ef3 =  isNaN(eng3_daily) ? 0 : eng3_daily ; 
-            //console.log(eng3_daily, eng4_daily);
+            cargo_p = parseFloat(dt.volume1)+parseFloat(dt.volume2)+parseFloat(dt.volume3)+parseFloat(dt.volume4)+parseFloat(dt.volume5);
+            cargo_s = parseFloat(dt.volume6)+parseFloat(dt.volume7)+parseFloat(dt.volume8)+parseFloat(dt.volume9)+parseFloat(dt.volume10);
+            cargo_tot = cargo_p + cargo_s;
+
+   //           eng1_daily = parseFloat(hasil.g_perhari[0].tot_fl1) - parseFloat(hasil.g_perhari[0].tot_ovfl1);
+   //           eng2_daily = parseFloat(hasil.g_perhari[0].tot_fl2) - parseFloat(hasil.g_perhari[0].tot_ovfl2);
+   //           eng3_daily = parseFloat(hasil.g_perhari[0].tot_fl3) - parseFloat(hasil.g_perhari[0].tot_ovfl3);
+   //           eng4_daily = parseFloat(hasil.g_perhari[0].tot_fl4) - parseFloat(hasil.g_perhari[0].tot_ovfl4);
+   //          //var ef3 =  isNaN(eng3_daily) ? 0 : eng3_daily ; 
+   //          //console.log(eng3_daily, eng4_daily);
             
             
-             gen1_runhour = parseFloat(hasil.g_perhari[0].rh1).toFixed(2);
-            //gen1_runhour = gen1_runhour_1.toFixed(2);
-             gen2_runhour = parseFloat(hasil.g_perhari[0].rh2).toFixed(2);
-             gen3_runhour = parseFloat(hasil.g_perhari[0].rh3).toFixed(2);
-            //gen1_runhour = gen2_runhour_1.toFixed(2);
+   //           gen1_runhour = parseFloat(hasil.g_perhari[0].rh1).toFixed(2);
+   //          //gen1_runhour = gen1_runhour_1.toFixed(2);
+   //           gen2_runhour = parseFloat(hasil.g_perhari[0].rh2).toFixed(2);
+   //           gen3_runhour = parseFloat(hasil.g_perhari[0].rh3).toFixed(2);
+   //          //gen1_runhour = gen2_runhour_1.toFixed(2);
 			
-			rh_engine1 = parseFloat(hasil.g_perhari[0].engrh1).toFixed(2);
-			rh_engine2 = parseFloat(hasil.g_perhari[0].engrh2).toFixed(2);
-			rh_engine_tot = (parseFloat(rh_engine1) + parseFloat(rh_engine2)).toFixed(2);
+			// rh_engine1 = parseFloat(hasil.g_perhari[0].engrh1).toFixed(2);
+			// rh_engine2 = parseFloat(hasil.g_perhari[0].engrh2).toFixed(2);
+			// rh_engine_tot = (parseFloat(rh_engine1) + parseFloat(rh_engine2)).toFixed(2);
 			
 			//console.log(rh_engine1);
 			//console.log(rh_engine2);
 			//console.log(rh_engine_tot);
 			
-			total_daily = eng1_daily + eng2_daily + (isNaN(eng3_daily)?0:eng3_daily) + (isNaN(eng4_daily)?0:eng4_daily);
-			hasil1 = isNaN(eng1_daily) ? (rh_engine1 + ' Hours')  : (eng1_daily + ' Lt') ;
-			hasil2 = isNaN(eng2_daily) ? (rh_engine2 + ' Hours')  : (eng2_daily + ' Lt') ;
-			hasil3 = isNaN(eng3_daily) ?  'N/A' : (eng3_daily + ' Lt');
-			hasil4 = isNaN(eng4_daily) ?  'N/A' : (eng4_daily + ' Lt');
-			genset_3 = isNaN(gen3_runhour) ? 'N/A' : (gen3_runhour + ' Hours') ;
-            tot_tot = isNaN(rh_engine_tot) ? (total_daily+ ' Lt') : (rh_engine_tot + ' Hours');
-            judul = isNaN(rh_engine_tot) ? (' Fuel Consumption ') : (' Engine Running Hours ');
+			// total_daily = eng1_daily + eng2_daily + (isNaN(eng3_daily)?0:eng3_daily) + (isNaN(eng4_daily)?0:eng4_daily);
+			// hasil_p = isNaN(eng1_daily) ? (rh_engine1 + ' Hours')  : (eng1_daily + ' Lt') ;
+			// hasil_s = isNaN(eng2_daily) ? (rh_engine2 + ' Hours')  : (eng2_daily + ' Lt') ;
+			// hasil3 = isNaN(eng3_daily) ?  'N/A' : (eng3_daily + ' Lt');
+			// hasil4 = isNaN(eng4_daily) ?  'N/A' : (eng4_daily + ' Lt');
+			// genset_3 = isNaN(gen3_runhour) ? 'N/A' : (gen3_runhour + ' Hours') ;
+   //          tot_tot = isNaN(rh_engine_tot) ? (total_daily+ ' Lt') : (rh_engine_tot + ' Hours');
+   //          judul = isNaN(rh_engine_tot) ? (' Fuel Consumption ') : (' Engine Running Hours ');
             
         },
         callback : function (){
@@ -988,14 +1028,14 @@ function daily_akum() {
 			'</style>' +
 			'<table width="100%" class="total_daily">' +
 			'<tr><td colspan="2">Total Cargo Tanker</td></tr>' +
-			'<tr><td colspan="2" style="font-size:22px;">' + tot_tot + ' </td></tr>' +
+			'<tr><td colspan="2" style="font-size:22px;">' + cargo_tot + ' KL </td></tr>' +
 			'<tr>' +
 			'<td>PortSide</td>' +
 			'<td>StarBoard</td>' +
 			'</tr>' +
 			'<tr>' +
-			'<td><span style="font-size:18px;">' + hasil1 + '</span></td>' +
-			'<td><span style="font-size:18px;">' + hasil2 + '</span></td>' +
+			'<td><span style="font-size:18px;">' + cargo_p + ' KL </span></td>' +
+			'<td><span style="font-size:18px;">' + cargo_s + ' KL </span></td>' +
 			'<tr><td colspan="2"></td></tr>' +
 			// '<tr><td colspan="4">Genset Daily Running Hours</td></tr>' +
 			// '</tr>' +

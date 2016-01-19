@@ -7,7 +7,7 @@ include	'../inc/cekSession.php';
 
 
 try {
-	
+	$tz = $_SESSION['timezone'];
 	$id = (isset($_GET['id']) && ($_GET['id'] <> '')) ? $_GET['id'] : '23';
 	$tgl = (isset($_GET['tgl']) && ($_GET['tgl'] <> '')) ? $_GET['tgl'] : date('Y-m-d') ;
 	//echo 'idkapal = '.$id. ' dan tanggal = '.$tgl.'<br>';
@@ -15,7 +15,7 @@ try {
 				//FROM data_perjam 
 				//WHERE id_ship = '.$id.' and tanggal= "'.$tgl.'"';
 
-	$query = 'call kapal_perhari('.$id.',"'.$tgl.'")';
+	$query = 'call data_kapal_perjam_last_dinamis('.$id.',"'.$tgl.'","'.$tz.'")';
 	
 	$sth = $db->prepare($query);
 	$sth->execute();
