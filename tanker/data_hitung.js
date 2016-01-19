@@ -932,34 +932,34 @@ var panel_hitung = {
     }]
 };
 
-function daily_cargo(cb,tg){
+// function daily_cargo(cb,tg){
 
-    var cb1 = (cb!='')? cb : '23';
-    console.log(cb1,tg);
-    // console.log(store_grafik);
-    // store_grafik.load({
-    //     // success : function(data){
-    //     //     alert('sukses');
-    //     // }, 
-    //     callback: function(options, response,success) {
-    //     if (success) {
-    //             // console.log(success);
-    //             console.log(response.response.responseText);
-    //             console.log(options);
-    //             // console.log(options, success, response, records);
-    //             // alert ('ke loadd');
-    //         }           
-    //     }
+//     var cb1 = (cb!='')? cb : '23';
+//     console.log(cb1,tg);
+//     // console.log(store_grafik);
+//     // store_grafik.load({
+//     //     // success : function(data){
+//     //     //     alert('sukses');
+//     //     // }, 
+//     //     callback: function(options, response,success) {
+//     //     if (success) {
+//     //             // console.log(success);
+//     //             console.log(response.response.responseText);
+//     //             console.log(options);
+//     //             // console.log(options, success, response, records);
+//     //             // alert ('ke loadd');
+//     //         }           
+//     //     }
 
-    // });
-    //     params: { id: cb1, tgl: tg},
-    //     success : function(data){
-    //         console.log('success bro');
-    //         console.log(data);
-    //     }
-    // );
+//     // });
+//     //     params: { id: cb1, tgl: tg},
+//     //     success : function(data){
+//     //         console.log('success bro');
+//     //         console.log(data);
+//     //     }
+//     // );
 
-}
+// }
 
 // var eng_rh1 = '';
 var cargo_p='';
@@ -975,7 +975,7 @@ function daily_akum() {
         },
         success: function (data) {
 			var hasil = Ext.JSON.decode(data.responseText);
-			console.log(hasil.g_perhari[0]);
+			// console.log(hasil.g_perhari[0]);
             var dt = hasil.g_perhari[0];
 
 			//console.log(hasil.g_perhari[0].tot_fl1 +' -&- '+hasil.g_perhari[0].tot_fl2 );
