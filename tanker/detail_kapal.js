@@ -143,7 +143,7 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
       columns: [{
 			header: "Level", 
 			width: 70, 
-			dataIndex: 'level_product2'
+			dataIndex: 'level_product6'
 		},{
 			header: "Volume", 
 			width: 70, 
@@ -154,7 +154,7 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
       columns: [{
 			header: "Level", 
 			width: 70, 
-			dataIndex: 'level_product3'
+			dataIndex: 'level_product2'
 		},{
 			header: "Volume", 
 			width: 70, 
@@ -165,7 +165,7 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
       	columns: [{
 			header: "Level", 
 			width: 70, 
-			dataIndex: 'level_product4'
+			dataIndex: 'level_product7'
 		},{
 			header: "Volume", 
 			width: 70, 
@@ -176,7 +176,7 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
       columns: [{
 			header: "Level", 
 			width: 70, 
-			dataIndex: 'level_product5'
+			dataIndex: 'level_product3'
 		},{
 			header: "Volume", 
 			width: 70, 
@@ -187,7 +187,7 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
       columns: [{
 			header: "Level", 
 			width: 70, 
-			dataIndex: 'level_product6'
+			dataIndex: 'level_product8'
 		},{
 			header: "Volume", 
 			width: 70, 
@@ -198,7 +198,7 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
       columns: [{
 			header: "Level", 
 			width: 70, 
-			dataIndex: 'level_product7'
+			dataIndex: 'level_product4'
 		},{
 			header: "Volume", 
 			width: 70, 
@@ -209,7 +209,7 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
       	columns: [{
 			header: "Level", 
 			width: 70, 
-			dataIndex: 'level_product8'
+			dataIndex: 'level_product9'
 		},{
 			header: "Volume", 
 			width: 70, 
@@ -220,7 +220,7 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
       columns: [{
 			header: "Level", 
 			width: 70, 
-			dataIndex: 'level_product9'
+			dataIndex: 'level_product5'
 		},{
 			header: "Volume", 
 			width: 70, 
