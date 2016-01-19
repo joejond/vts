@@ -617,6 +617,13 @@ var grafik = new Ext.create('Chart.ux.Highcharts', {
                     color: '#89A54E'
                 }
             },
+            stackLabels: {
+                enabled: true,
+                style: {
+                    fontWeight: 'bold',
+                    color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                }
+            },
             min: 0
         // }, {
         //     gridLineWidth: 0,
@@ -658,16 +665,28 @@ var grafik = new Ext.create('Chart.ux.Highcharts', {
             },
             column: {
                 stacking: 'normal',
-                dataLabels: {
-                    enabled: true,
-                    color: 'white'
-                }
+                // dataLabels: {
+                //     // enabled: true,
+                //     color: 'white',
+                //     style: {
+                //         'fontSize': '70%'
+                //     }
+                // }
+                // dataLabels: {
+                //     enabled: true,
+                //     color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+                //     style: {
+                //         textShadow: '0 0 3px black'
+                //     }
+                // }
             }
         },
         tooltip: {
-            formatter: function () {
-                return '<b>' + this.series.name + '</b><br/>hour-' + this.x + ': ' + this.y;
-            }
+            // formatter: function () {
+            //     return '<b>' + this.series.name + '</b><br/>hour-' + this.x + ': ' + this.y;
+            // }
+            headerFormat: '<b>Hour-{point.x}</b><br/>',
+            pointFormat: '{series.name}: {point.y} KL<br/>Total Cargo: {point.stackTotal} KL'
 
         },
         credits: {
@@ -676,10 +695,11 @@ var grafik = new Ext.create('Chart.ux.Highcharts', {
         },
         legend: {
             layout: 'vertical',
+            floating: true,
             align: 'right',
             verticalAlign: 'top',
-            x: -10,
-            y: 50,
+            x: -8,
+            y: 30,
             borderWidth: 0
         }
     }
