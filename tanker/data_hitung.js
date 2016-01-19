@@ -1028,7 +1028,7 @@ function daily_akum() {
 			'</style>' +
 			'<table width="100%" class="total_daily">' +
 			'<tr><td colspan="2">Total Cargo Tanker</td></tr>' +
-			'<tr><td colspan="2" style="font-size:22px;">' + cargo_tot + ' KL </td></tr>' +
+			'<tr><td colspan="2" style="font-size:22px;">' + cargo_tot.toFixed(2) + ' KL </td></tr>' +
 			'<tr>' +
 			'<td>PortSide</td>' +
 			'<td>StarBoard</td>' +
