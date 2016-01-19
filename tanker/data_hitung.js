@@ -442,20 +442,20 @@ var grafik = new Ext.create('Chart.ux.Highcharts', {
         dataIndex: 'volume1',
         yAxis: 0,
         type: 'column',
-        color: '#0033FF',
+        // color: '#0033FF',
         name: 'Cargo #1P',
         visible: true
     }, {
         dataIndex: 'volume6',
         yAxis: 0,
-        color: '#336600',
+        // color: '#336600',
         type: 'column',
         name: 'Cargo #1S',
         visible: true
      }, {
         dataIndex: 'volume2',
         yAxis: 0,
-        color: '#8B6914',
+        // color: '#8B6914',
         type: 'column',
         name: 'Cargo #2P',
         visible: true
@@ -463,49 +463,49 @@ var grafik = new Ext.create('Chart.ux.Highcharts', {
     }, {
         dataIndex: 'volume7',
         yAxis: 0,
-        color: '#FA5A6A',
+        // color: '#FA5A6A',
         type: 'column',
         name: 'Cargo #2S',
         visible: true
     }, {
         dataIndex: 'volume3',
         yAxis: 0,
-        color: '#FA5A03',
+        // color: '#FA5A03',
         type: 'column',
         name: 'Cargo #3P',
         visible: true
     }, {
         dataIndex: 'volume8',
         yAxis: 0,
-        color: '#FA5A0A',
+        // color: '#FA5A0A',
         type: 'column',
         name: 'Cargo #3S',
         visible: true
     }, {
         dataIndex: 'volume4',
         yAxis: 0,
-        color: '#FA5A0B',
+        // color: '#FA5A0B',
         type: 'column',
         name: 'Cargo #4P',
         visible: true
     }, {
         dataIndex: 'volume9',
         yAxis: 0,
-        color: '#FA5A0C',
+        // color: '#FA5A0C',
         type: 'column',
         name: 'Cargo #4S',
         visible: true
     }, {
         dataIndex: 'volume5',
         yAxis: 0,
-        color: '#FA5A0D',
+        // color: '#FA5A0D',
         type: 'column',
         name: 'Cargo #5P',
         visible: true
     }, {
 		dataIndex: 'volume10',
         yAxis: 0,
-        color: '#FA5A0E',
+        // color: '#FA5A0E',
         type: 'column',
         name: 'Cargo #5S',
         visible: true
