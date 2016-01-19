@@ -718,39 +718,66 @@ var time_range_combo = Ext.create('Ext.form.ComboBox', {
     valueField: 'tipe_range'
 });
 
-
 var content_akum = '<style type="text/css">' +
-			'table.total_daily {font-family: verdana,arial,sans-serif;font-size:12px;text-align: center;color:#333333;border-width: 1px;border-color: #a9c6c9;border-collapse: collapse;}' +
-			'table.total_daily td {border-width: 1px;padding: 4px;border-style: solid;border-color: #a9c6c9;}' +
-			'</style>' +
-			'<table width="100%" class="total_daily">' +
-			'<tr><td colspan="4">Total Daily'+judul+'</td></tr>' +
-			'<tr><td colspan="4" style="font-size:22px;">' + tot_tot + ' </td></tr>' +
-			'<tr>' +
-			'<td>PortSide</td>' +
-			'<td>StarBoard</td>' +
-			'<td>Center I</td>' +
-			'<td>Center II</td>' +
-			'</tr>' +
-			'<tr>' +
-			'<td><span style="font-size:18px;">' + hasil1 + '</span></td>' +
-			'<td><span style="font-size:18px;">' + hasil2 + '</span></td>' +
-			'<td><span style="font-size:18px;">' + hasil3 + '</span></td>' +
-			'<td><span style="font-size:18px;">' + hasil4 + '</span></td>' +
-			'<tr><td colspan="4"></td></tr>' +
-			'<tr><td colspan="4">Genset Daily Running Hours</td></tr>' +
-			'</tr>' +
-			'<tr>' +
-			'<td>genset#1</td>' +
-			'<td>genset#2</td>' +
-			'<td colspan="2">genset#3</td>' +
-			'</tr>' +
-			'<tr>' +
-			'<td><span style="font-size:18px;">' + gen1_runhour + ' Hours</span></td>' +
-			'<td><span style="font-size:18px;">' + gen2_runhour + ' Hours</span></td>' +
-			'<td colspan="2"><span style="font-size:18px;">' + genset_3 + '</span></td>' +
-			'</tr>' +
-			'</table>' ;
+            'table.total_daily {font-family: verdana,arial,sans-serif;font-size:12px;text-align: center;color:#333333;border-width: 1px;border-color: #a9c6c9;border-collapse: collapse;}' +
+            'table.total_daily td {border-width: 1px;padding: 4px;border-style: solid;border-color: #a9c6c9;}' +
+            '</style>' +
+            '<table width="100%" class="total_daily">' +
+            '<tr><td colspan="2">Total Cargo Tanker</td></tr>' +
+            '<tr><td colspan="2" style="font-size:22px;">' + tot_tot + ' </td></tr>' +
+            '<tr>' +
+            '<td>PortSide</td>' +
+            '<td>StarBoard</td>' +
+            '</tr>' +
+            '<tr>' +
+            '<td><span style="font-size:18px;">' + hasil1 + '</span></td>' +
+            '<td><span style="font-size:18px;">' + hasil2 + '</span></td>' +
+            '<tr><td colspan="2"></td></tr>' +
+            // '<tr><td colspan="4">Genset Daily Running Hours</td></tr>' +
+            // '</tr>' +
+            // '<tr>' +
+            // '<td>genset#1</td>' +
+            // '<td>genset#2</td>' +
+            // '<td colspan="2">genset#3</td>' +
+            // '</tr>' +
+            // '<tr>' +
+            // '<td><span style="font-size:18px;">' + gen1_runhour + ' Hours</span></td>' +
+            // '<td><span style="font-size:18px;">' + gen2_runhour + ' Hours</span></td>' +
+            // '<td colspan="2"><span style="font-size:18px;">' + genset_3 + '</span></td>' +
+            // '</tr>' +
+            '</table>' ;
+// var content_akum = '<style type="text/css">' +
+// 			'table.total_daily {font-family: verdana,arial,sans-serif;font-size:12px;text-align: center;color:#333333;border-width: 1px;border-color: #a9c6c9;border-collapse: collapse;}' +
+// 			'table.total_daily td {border-width: 1px;padding: 4px;border-style: solid;border-color: #a9c6c9;}' +
+// 			'</style>' +
+// 			'<table width="100%" class="total_daily">' +
+// 			'<tr><td colspan="4">Total Daily'+judul+'</td></tr>' +
+// 			'<tr><td colspan="4" style="font-size:22px;">' + tot_tot + ' </td></tr>' +
+// 			'<tr>' +
+// 			'<td>PortSide</td>' +
+// 			'<td>StarBoard</td>' +
+// 			'<td>Center I</td>' +
+// 			'<td>Center II</td>' +
+// 			'</tr>' +
+// 			'<tr>' +
+// 			'<td><span style="font-size:18px;">' + hasil1 + '</span></td>' +
+// 			'<td><span style="font-size:18px;">' + hasil2 + '</span></td>' +
+// 			'<td><span style="font-size:18px;">' + hasil3 + '</span></td>' +
+// 			'<td><span style="font-size:18px;">' + hasil4 + '</span></td>' +
+// 			'<tr><td colspan="4"></td></tr>' +
+// 			'<tr><td colspan="4">Genset Daily Running Hours</td></tr>' +
+// 			'</tr>' +
+// 			'<tr>' +
+// 			'<td>genset#1</td>' +
+// 			'<td>genset#2</td>' +
+// 			'<td colspan="2">genset#3</td>' +
+// 			'</tr>' +
+// 			'<tr>' +
+// 			'<td><span style="font-size:18px;">' + gen1_runhour + ' Hours</span></td>' +
+// 			'<td><span style="font-size:18px;">' + gen2_runhour + ' Hours</span></td>' +
+// 			'<td colspan="2"><span style="font-size:18px;">' + genset_3 + '</span></td>' +
+// 			'</tr>' +
+// 			'</table>' ;
 
 //function update_text2() {		
 	//var content_text2 = '<html><body><div style="font-size: 20px; color:blue">(current view -> '+comb_kapal2+' - date: '+tgl_sel2+')</div></body></html>';
@@ -960,32 +987,28 @@ function daily_akum() {
 			'table.total_daily td {border-width: 1px;padding: 4px;border-style: solid;border-color: #a9c6c9;}' +
 			'</style>' +
 			'<table width="100%" class="total_daily">' +
-			'<tr><td colspan="4">Total Daily'+judul+'</td></tr>' +
-			'<tr><td colspan="4" style="font-size:22px;">' + tot_tot + ' </td></tr>' +
+			'<tr><td colspan="2">Total Cargo Tanker</td></tr>' +
+			'<tr><td colspan="2" style="font-size:22px;">' + tot_tot + ' </td></tr>' +
 			'<tr>' +
 			'<td>PortSide</td>' +
 			'<td>StarBoard</td>' +
-			'<td>Center I</td>' +
-			'<td>Center II</td>' +
 			'</tr>' +
 			'<tr>' +
 			'<td><span style="font-size:18px;">' + hasil1 + '</span></td>' +
 			'<td><span style="font-size:18px;">' + hasil2 + '</span></td>' +
-			'<td><span style="font-size:18px;">' + hasil3 + '</span></td>' +
-			'<td><span style="font-size:18px;">' + hasil4 + '</span></td>' +
-			'<tr><td colspan="4"></td></tr>' +
-			'<tr><td colspan="4">Genset Daily Running Hours</td></tr>' +
-			'</tr>' +
-			'<tr>' +
-			'<td>genset#1</td>' +
-			'<td>genset#2</td>' +
-			'<td colspan="2">genset#3</td>' +
-			'</tr>' +
-			'<tr>' +
-			'<td><span style="font-size:18px;">' + gen1_runhour + ' Hours</span></td>' +
-			'<td><span style="font-size:18px;">' + gen2_runhour + ' Hours</span></td>' +
-			'<td colspan="2"><span style="font-size:18px;">' + genset_3 + '</span></td>' +
-			'</tr>' +
+			'<tr><td colspan="2"></td></tr>' +
+			// '<tr><td colspan="4">Genset Daily Running Hours</td></tr>' +
+			// '</tr>' +
+			// '<tr>' +
+			// '<td>genset#1</td>' +
+			// '<td>genset#2</td>' +
+			// '<td colspan="2">genset#3</td>' +
+			// '</tr>' +
+			// '<tr>' +
+			// '<td><span style="font-size:18px;">' + gen1_runhour + ' Hours</span></td>' +
+			// '<td><span style="font-size:18px;">' + gen2_runhour + ' Hours</span></td>' +
+			// '<td colspan="2"><span style="font-size:18px;">' + genset_3 + '</span></td>' +
+			// '</tr>' +
 			'</table>' ;
 			Ext.getCmp('panel_daily').update(content_akum);
 			
