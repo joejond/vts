@@ -216,72 +216,6 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
         columns: [{
             header: "Level",
             width: 100,
-            dataIndex: 'level_product2'
-        },{
-            header: "Volume",
-            width: 100,
-            dataIndex: 'volume2'
-        }]
-    },{
-        header: "Cargo 2P",
-        columns: [{
-            header: "Level",
-            width: 100,
-            dataIndex: 'level_product3'
-        },{
-            header: "Volume",
-            width: 100,
-            dataIndex: 'volume3'
-        }]
-    },{
-        header: "Cargo 2S",
-        columns: [{
-            header: "Level",
-            width: 100,
-            dataIndex: 'level_product4'
-        },{
-            header: "Volume",
-            width: 100,
-            dataIndex: 'volume4'
-        }]
-    },{
-        header: "Cargo 2S",
-        columns: [{
-            header: "Level",
-            width: 100,
-            dataIndex: 'level_product4'
-        },{
-            header: "Volume",
-            width: 100,
-            dataIndex: 'volume4'
-        }]
-    },{
-        header: "Cargo 2S",
-        columns: [{
-            header: "Level",
-            width: 100,
-            dataIndex: 'level_product4'
-        },{
-            header: "Volume",
-            width: 100,
-            dataIndex: 'volume4'
-        }]
-    },{
-        header: "Cargo 3P",
-        columns: [{
-            header: "Level",
-            width: 100,
-            dataIndex: 'level_product5'
-        },{
-            header: "Volume",
-            width: 100,
-            dataIndex: 'volume5'
-        }]
-    },{
-        header: "Cargo 3S",
-        columns: [{
-            header: "Level",
-            width: 100,
             dataIndex: 'level_product6'
         },{
             header: "Volume",
@@ -289,7 +223,18 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
             dataIndex: 'volume6'
         }]
     },{
-        header: "Cargo 4P",
+        header: "Cargo 2P",
+        columns: [{
+            header: "Level",
+            width: 100,
+            dataIndex: 'level_product2'
+        },{
+            header: "Volume",
+            width: 100,
+            dataIndex: 'volume2'
+        }]
+    },{
+        header: "Cargo 2S",
         columns: [{
             header: "Level",
             width: 100,
@@ -300,7 +245,18 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
             dataIndex: 'volume7'
         }]
     },{
-        header: "Cargo 4S",
+        header: "Cargo 3P",
+        columns: [{
+            header: "Level",
+            width: 100,
+            dataIndex: 'level_product3'
+        },{
+            header: "Volume",
+            width: 100,
+            dataIndex: 'volume3'
+        }]
+    },{
+        header: "Cargo 3S",
         columns: [{
             header: "Level",
             width: 100,
@@ -311,7 +267,18 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
             dataIndex: 'volume8'
         }]
     },{
-        header: "Cargo 5P",
+        header: "Cargo 4P",
+        columns: [{
+            header: "Level",
+            width: 100,
+            dataIndex: 'level_product4'
+        },{
+            header: "Volume",
+            width: 100,
+            dataIndex: 'volume4'
+        }]
+    },{
+        header: "Cargo 4S",
         columns: [{
             header: "Level",
             width: 100,
@@ -320,6 +287,17 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
             header: "Volume",
             width: 100,
             dataIndex: 'volume9'
+        }]
+    },{
+        header: "Cargo 5P",
+        columns: [{
+            header: "Level",
+            width: 100,
+            dataIndex: 'level_product5'
+        },{
+            header: "Volume",
+            width: 100,
+            dataIndex: 'volume5'
         }]
     },{
         header: "Cargo 5S",
