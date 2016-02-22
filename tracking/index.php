@@ -39,6 +39,7 @@
             font-size:25px;
             font-weight:bold;
             text-shadow:0 2px 0 white
+            
         }
         
         </style>            
