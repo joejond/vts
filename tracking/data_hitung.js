@@ -325,29 +325,12 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
         xtype : 'button',
         text : 'Export xls',
         handler : function(){
-            console.log('ini kiirm ke excel');
-            console.log(comb_kapal22,tgl_sel22);
+            // console.log('ini kiirm ke excel');
+            // console.log(comb_kapal22,tgl_sel22);
 
             var id_kpl = (comb_kapal21 === '')? '1' : comb_kapal21;
-            console.log(id_kpl,tgl_sel21);
+            // console.log(id_kpl,tgl_sel21);
             window.open('export_data_perjam.php?id='+id_kpl+'&t='+tgl_sel21);
-            // ,'_blank');
-            // Ext.Ajax.request({
-            //     url: 'export_data_perjam.php',
-            //     method : 'GET',
-            //     params: {
-            //         id: id_kpl,
-            //         t: tgl_sel21
-            //     },
-            //     // ,
-            //     success: function(response){
-            //         var text = response.responseText;
-            //         console.log("sukses");
-            //         // process server response here
-            //     }
-            // });
-
-            // comb_kapal21, tgl: tgl_sel21
 
         }
         // tooltip: 'Export to xls files'
