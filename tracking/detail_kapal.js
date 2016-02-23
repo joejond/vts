@@ -376,21 +376,24 @@ var panel_detail = {
 						//console.log(tgl_sel1);
 						}
 				}
-			//},'->',
-			//{
-				//xtype : 'button',
-				//text : 'Export to Excel',
-				//handler : function(){
-					//var tgl = Ext.Date.format(Ext.getCmp('date_total1').getValue(),'Y-m-d');
-					//var ves = Ext.getCmp('cb_vessel').getValue();
-					//console.log('export bro dari '+tgl+' ==> '+ves);
-					//Ext.Ajax.request({
-						//params : {t : tgl, id: ves },
-						//method : 'GET',
-						//url : 'export.php'
-					//})
+			},'->',
+			{
+				xtype : 'button',
+				text : 'Export to Excel',
+				handler : function(){
+					var tgl = Ext.Date.format(Ext.getCmp('date_total1').getValue(),'Y-m-d');
+					var ves = Ext.getCmp('cb_vessel').getValue();
+					// console.log(comb_kapal1);
+					var kpl = (comb_kapal1=== '')?'1':comb_kapal1;
+					// console.log('export bro dari '+tgl+' ==> '+kpl);
+					window.open('export_data_detail.php?id='+kpl+'&t='+tgl);
+					// Ext.Ajax.request({
+					// 	params : {t : tgl, id: ves },
+					// 	method : 'GET',
+					// 	url : 'export.php'
+					// })
 
-				//}
+				}
 			}
 			//'-',
 			//{
