@@ -98,18 +98,18 @@ Ext.onReady(function() {
                 layout: 'border',
                 iconCls: 'tab-icon',
                 items: [ peta, ship_list ]
-            },{
-            //     title: 'SHIP - DETAIL DATA', 
-            //     layout: 'fit',                
-            //     id: 'detail_tab',
-            //     items: [ panel_detail ],
-            //     iconCls: 'tab-icon'
             // },{
-                title: 'DAILY REPORT', 
-                layout: 'fit',                
-                id: 'analisis_tab',
-                items: [ panel_hitung ],
-                iconCls: 'tab-icon'
+            // //     title: 'SHIP - DETAIL DATA', 
+            // //     layout: 'fit',                
+            // //     id: 'detail_tab',
+            // //     items: [ panel_detail ],
+            // //     iconCls: 'tab-icon'
+            // // },{
+            //     title: 'DAILY REPORT', 
+            //     layout: 'fit',                
+            //     id: 'analisis_tab',
+            //     items: [ panel_hitung ],
+            //     iconCls: 'tab-icon'
             }]           
         }]
     });    
