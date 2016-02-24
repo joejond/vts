@@ -394,6 +394,7 @@ var window_fuel = Ext.create('Ext.window.Window',{
     title : 'fuel window',
     width : 400,
     modal : true,
+    closable: false,
     layout : {
         type : 'fit',
         align : 'stretch' 
