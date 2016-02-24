@@ -419,7 +419,7 @@ var window_fuel = Ext.create('Ext.window.Window',{
     buttons : [{
         text : 'Close',
         handler : function(){
-            this.up('.window').close();
+            this.up('.window').hide();
         }
     }]
 
