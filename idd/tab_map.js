@@ -371,9 +371,138 @@ var tabel_daftar_kapal = Ext.create('Ext.grid.Panel', {
         //width: 120, 
         flex : 1,
         dataIndex: 'name'
+    },
+    {
+        xtype: 'actioncolumn',
+        width: 30,
+        items: [{
+            icon: 'img/fuel.png',
+            handler: function(grid, rowIndex, colIndex){
+                var data = grid.getStore().getAt(rowIndex).getData();
+                window_fuel.show();
+                window_fuel.setTitle ('Daily Fuel '+data.name);
+                window_fuel.vessel = data.id;
+                hitung_fuel(new Date(),data.id);
+            }
+        }]
     }
+
     ]
 });
+
+var window_fuel = Ext.create('Ext.window.Window',{
+    title : 'fuel window',
+    width : 400,
+    modal : true,
+    layout : {
+        type : 'fit',
+        align : 'stretch' 
+    },
+    items : [{
+        xtype : 'panel',
+        itemId : 'hasil_hitung',
+    }],
+    tbar :[{
+        xtype : 'datefield',
+        fieldLabel : 'Date ',
+        format : 'd M Y',
+        value : new Date(),
+        maxValue : new Date(),
+        listeners : {
+            change :function(){
+                var kpl = this.up('.window').vessel;
+                hitung_fuel(this.getValue(),kpl);
+            }
+        }
+    }],
+
+    buttons : [{
+        text : 'Close',
+        handler : function(){
+            this.up('.window').close();
+        }
+    }]
+
+});
+
+function hitung_fuel(tgl,id){
+    var tg = Ext.Date.format(tgl,'Y-m-d');
+    Ext.Ajax.request({
+        url: 'data_grafik_perhari.php',
+        method: 'GET',
+        params: {id:id,tgl: tg},
+        success:function(data){
+            var hasil = Ext.JSON.decode(data.responseText);
+            detail_hitung(hasil);
+            window_fuel.getComponent('hasil_hitung').update(detail_hitung(hasil));
+        }
+    })
+}
+
+function detail_hitung(data){
+    var hasil = data.g_perhari[0],
+    fuel_eng1 = parseFloat(hasil.tot_fl1) - parseFloat(hasil.tot_ovfl1),
+    fuel_eng2 = parseFloat(hasil.tot_fl2) - parseFloat(hasil.tot_ovfl2),
+    fuel_eng3 = parseFloat(hasil.tot_fl3) - parseFloat(hasil.tot_ovfl3),
+    fuel_eng4 = parseFloat(hasil.tot_fl4) - parseFloat(hasil.tot_ovfl4),
+    col,tot_fuel,colrh,tot_rh,jdl_eng,isi_eng,jdl_rh,isi_rh;
+
+    if (isNaN(fuel_eng3) && isNaN(fuel_eng4) ){
+        col = 2;
+        tot_fuel = fuel_eng1+fuel_eng2;
+        jdl_eng = '<td>PortSide</td><td>StarBoard</td>';
+        isi_eng = '<td><span style="font-size:18px;">' + fuel_eng1 + '</span></td>' +
+                    '<td><span style="font-size:18px;">' + fuel_eng2 + '</span></td>';
+    }
+    else if (isNaN(fuel_eng4)){
+        col = 3;
+        tot_fuel = fuel_eng1+fuel_eng2+fuel_eng3;
+        jdl_eng = '<td>PortSide</td><td>StarBoard</td><td>Center</td>';
+        isi_eng = '<td><span style="font-size:18px;">' + fuel_eng1 + '</span></td>' +
+                    '<td><span style="font-size:18px;">' + fuel_eng2 + '</span></td>'+
+                    '<td><span style="font-size:18px;">' + fuel_eng3 + '</span></td>';
+    }
+    else {
+        col = 4;
+        tot_fuel = fuel_eng1+fuel_eng2+fuel_eng3+fuel_eng4;
+        jdl_eng = '<td>PortSide</td><td>StarBoard</td><td>Center I</td><td>Center II</td>';
+        isi_eng = '<td><span style="font-size:18px;">' + fuel_eng1 + '</span></td>' +
+                    '<td><span style="font-size:18px;">' + fuel_eng2 + '</span></td>'+
+                    '<td><span style="font-size:18px;">' + fuel_eng3 + '</span></td>'+
+                    '<td><span style="font-size:18px;">' + fuel_eng3 + '</span></td>';
+    }
+    if(hasil.rh3){
+        colrh = 3;
+        tot_rh = parseFloat(hasil.rh1)+parseFloat(hasil.rh2)+parseFloat(hasil.rh3);
+        jdl_rh = '<td>GenSet#1</td><td>GenSet#2</td><td>GenSet#3</td>';
+        isi_rh = '<td><span style="font-size:18px;">' + hasil.rh1 + ' Hours</span></td>' +
+                    '<td><span style="font-size:18px;">' + hasil.rh2 + ' Hours</span></td>' +
+                    '<td><span style="font-size:18px;">' + hasil.rh3 + ' Hours</span></td>';
+    }
+    else {
+        colrh = 2;
+        tot_rh = parseFloat(hasil.rh1)+parseFloat(hasil.rh2);
+        jdl_rh = '<td>GenSet#1</td><td>GenSet#2</td>';
+        isi_rh = '<td><span style="font-size:18px;">' + hasil.rh1 + ' Hours</span></td>' +
+                    '<td><span style="font-size:18px;">' + hasil.rh2 + ' Hours</span></td>';
+    }
+    var isi_panel = '<style type="text/css">' +
+            'table.total_daily {font-family: verdana,arial,sans-serif;font-size:12px;text-align: center;color:#333333;border-width: 1px;border-color: #a9c6c9;border-collapse: collapse;}' +
+            'table.total_daily td {border-width: 1px;padding: 4px;border-style: solid;border-color: #a9c6c9;}' +
+            '</style>' +
+            '<table width="100%" class="total_daily">' +
+            '<tr><td colspan="'+col+'">Total Daily Fuel Consumption</td></tr>' +
+            '<tr><td colspan="'+col+'" style="font-size:22px;">' + tot_fuel + ' </td></tr>' +
+            '<tr>' + jdl_eng+'</tr>' +
+            '<tr>' + isi_eng+'</tr>'+
+            '<tr><td colspan="'+colrh+'"></td></tr>' +
+            '<tr><td colspan="'+colrh+'">Genset Daily Running Hours</td></tr>' +
+            '<tr>' +jdl_rh+'</tr>' +
+            '<tr>' +isi_rh+'</tr>' +
+            '</table>' ;
+
+    return isi_panel;
+}
 
 var ship_list = {
     title: "Ship List",

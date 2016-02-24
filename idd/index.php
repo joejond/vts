@@ -45,8 +45,8 @@
         </style>            
         <script type="text/javascript" src="markerwithlabel.js"></script>
         <script type="text/javascript" src="tab_map.js"></script>
-        <script type="text/javascript" src="detail_kapal.js"></script>
-        <script type="text/javascript" src="data_hitung.js"></script>
+        <!-- <script type="text/javascript" src="detail_kapal.js"></script> -->
+        <!-- <script type="text/javascript" src="data_hitung.js"></script> -->
         <script type="text/javascript" src="marine.js"></script>
     </head>
     <body></body>
