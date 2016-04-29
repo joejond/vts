@@ -64,16 +64,16 @@ var model_akumulasi = Ext.define('akumulasi', {
     extend: 'Ext.data.Model',
     fields: [
             {name : "waktu", type : 'string'},
-            "volume1","level_product1",
-            "volume2","level_product2",
-            "volume3","level_product3",
-            "volume4","level_product4",
-            "volume5","level_product5",
-            "volume6","level_product6",
-            "volume7","level_product7",
-            "volume8","level_product8",
-            "volume9","level_product9",
-            "volume10","level_product10"]
+            "volume1","level_product1","delta_v1",
+            "volume2","level_product2","delta_v2",
+            "volume3","level_product3","delta_v3",
+            "volume4","level_product4","delta_v4",
+            "volume5","level_product5","delta_v5",
+            "volume6","level_product6","delta_v6",
+            "volume7","level_product7","delta_v7",
+            "volume8","level_product8","delta_v8",
+            "volume9","level_product9","delta_v9",
+            "volume10","level_product10","delta_v10"]
 });
 
 var store_akumulasi = Ext.create('Ext.data.Store', {
