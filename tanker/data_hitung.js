@@ -1052,8 +1052,8 @@ function daily_akum() {
 			'<td>StarBoard</td>' +
 			'</tr>' +
 			'<tr>' +
-			'<td><span style="font-size:18px;">' + cargo_p + ' KL </span></td>' +
-			'<td><span style="font-size:18px;">' + cargo_s + ' KL </span></td>' +
+			'<td><span style="font-size:18px;">' + cargo_p.toFixed(2) + ' KL </span></td>' +
+			'<td><span style="font-size:18px;">' + cargo_s.toFixed(2) + ' KL </span></td>' +
 			'<tr><td colspan="2"></td></tr>' +
 			// '<tr><td colspan="4">Genset Daily Running Hours</td></tr>' +
 			// '</tr>' +
