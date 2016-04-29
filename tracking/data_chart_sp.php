@@ -50,7 +50,7 @@ try {
 		$perjam[$rr['jam']]['fuel1'] = ($rr['inflow1']) - ($rr['outflow1']);
 		$perjam[$rr['jam']]['fuel2'] = ($rr['inflow2']) - ($rr['outflow2']);
 		$perjam[$rr['jam']]['fuel3'] = !isset ($rr['inflow3']) && !isset ($rr['outflow3']) ? null : (($rr['inflow3']) - ($rr['outflow3']));
-		$perjam[$rr['jam']]['fuel4'] = !isset ($rr['inflow4']) && !isset ($rr['outflow4']) ? null : (($rr['inflow3']) - ($rr['outflow4']));
+		$perjam[$rr['jam']]['fuel4'] = !isset ($rr['inflow4']) && !isset ($rr['outflow4']) ? null : (($rr['inflow4']) - ($rr['outflow4']));
 		$perjam[$rr['jam']]['rh1'] = $rr['runhour1'];
 		$perjam[$rr['jam']]['rh2'] = $rr['runhour2'];
 		$perjam[$rr['jam']]['rh3'] = !isset ($rr['runhour3']) ? null : $rr['runhour3'];
