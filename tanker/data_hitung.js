@@ -174,7 +174,7 @@ var but_export = {
     xtype: 'buttongroup',
     frame: false,
     items: [{
-        text: 'export (xls)',
+        text: 'Export (xls)',
         scale: 'small',
         handler: function () {
 			//console.log('export_perjam.php?name=' + comb_kapal2 + '&tgl=' + tgl_daily);
@@ -210,6 +210,10 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
             header: "Volume",
             width: 100,
             dataIndex: 'volume1'
+        },{
+            header: "Selisih",
+            width: 100,
+            dataIndex: 'delta_v1'
         }]
     },{
         header: "Cargo 1S",
@@ -221,6 +225,10 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
             header: "Volume",
             width: 100,
             dataIndex: 'volume6'
+        },{ 
+            header: "Selisih",
+            width: 100,
+            dataIndex: 'delta_v6'
         }]
     },{
         header: "Cargo 2P",
@@ -232,6 +240,10 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
             header: "Volume",
             width: 100,
             dataIndex: 'volume2'
+        },{ 
+            header: "Selisih",
+            width: 100,
+            dataIndex: 'delta_v2'
         }]
     },{
         header: "Cargo 2S",
@@ -243,6 +255,10 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
             header: "Volume",
             width: 100,
             dataIndex: 'volume7'
+        },{ 
+            header: "Selisih",
+            width: 100,
+            dataIndex: 'delta_v7'
         }]
     },{
         header: "Cargo 3P",
@@ -254,6 +270,10 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
             header: "Volume",
             width: 100,
             dataIndex: 'volume3'
+        },{ 
+            header: "Selisih",
+            width: 100,
+            dataIndex: 'delta_v3'
         }]
     },{
         header: "Cargo 3S",
@@ -265,6 +285,10 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
             header: "Volume",
             width: 100,
             dataIndex: 'volume8'
+        },{ 
+            header: "Selisih",
+            width: 100,
+            dataIndex: 'delta_v8'
         }]
     },{
         header: "Cargo 4P",
@@ -276,6 +300,10 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
             header: "Volume",
             width: 100,
             dataIndex: 'volume4'
+        },{ 
+            header: "Selisih",
+            width: 100,
+            dataIndex: 'delta_v4'
         }]
     },{
         header: "Cargo 4S",
@@ -287,6 +315,10 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
             header: "Volume",
             width: 100,
             dataIndex: 'volume9'
+        },{ 
+            header: "Selisih",
+            width: 100,
+            dataIndex: 'delta_v9'
         }]
     },{
         header: "Cargo 5P",
@@ -298,6 +330,10 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
             header: "Volume",
             width: 100,
             dataIndex: 'volume5'
+        },{ 
+            header: "Selisih",
+            width: 100,
+            dataIndex: 'delta_v5'
         }]
     },{
         header: "Cargo 5S",
@@ -309,6 +345,10 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
             header: "Volume",
             width: 100,
             dataIndex: 'volume10'
+        },{ 
+            header: "Selisih",
+            width: 100,
+            dataIndex: 'delta_v10'
         }]
     }]
 });
