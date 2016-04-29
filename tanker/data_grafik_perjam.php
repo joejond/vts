@@ -31,6 +31,27 @@ try {
 	$sth->execute();
 	$result = $sth->fetchAll(PDO::FETCH_ASSOC);
 	
+	// print_r($result);
+
+	// echo "panjang array result".sizeof($result);
+
+	// for ($i=0; $i<sizeof($result); $i++){
+	// 	echo "<br>";
+	// 	echo "jam ke ". $result[$i]["jam"]."<br>";
+	// 	echo "enol => ".$result[$i]["volume1"]."<br>";
+	// 	echo "satu => ".$result[$i]["level1"]."<br>";
+	// 	// echo "dua => ".$result[$i][2]."<br>";
+
+	// 	$a= $result[$i]["volume1"] - ((isset($result[$i+1]["volume1"])) ?  $result[$i+1]["volume1"] : 0);
+	// 	echo $result[$i]["volume1"] . " - ".((isset($result[$i+1]["volume1"])) ?  $result[$i+1]["volume1"] : 0)." ===>> ".$a."<br>";
+	// 	if ($a < -0.1 || $a> 0.1){
+	// 		echo "change <br>";
+	// 	}
+	// 	else
+	// 		echo "no change <br>";
+	// 	echo "<br>";
+	// }
+
 	$jsonResult = array(
         'success' => true,
         'g_perjam' => $result
