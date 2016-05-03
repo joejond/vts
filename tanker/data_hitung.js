@@ -1010,6 +1010,14 @@ function daily_akum() {
             else {
                 console.log("plus");
             }
+            if (parseFloat(dt.delta_v2) < 0){
+                console.log("minus");
+                output += parseFloat(dt.delta_v2);
+            }
+
+            else {
+                console.log("plus");
+            }
             // if (parseFloat(dt.delta_v1) < 0) parseFloat(output) += parseFloat(dt.delta_v1); 
             // if (parseFloat(dt.delta_v2) < 0) parseFloat(output) += parseFloat(dt.delta_v2); 
             // if (parseFloat(dt.delta_v3) < 0) parseFloat(output) += parseFloat(dt.delta_v3); 
