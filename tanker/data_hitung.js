@@ -1002,16 +1002,16 @@ function daily_akum() {
             cargo_s = parseFloat(dt.volume6)+parseFloat(dt.volume7)+parseFloat(dt.volume8)+parseFloat(dt.volume9)+parseFloat(dt.volume10);
             cargo_tot = cargo_p + cargo_s;
             
-            (parseFloat(dt.delta_v1) < 0) ? (parseFloat(output) += parseFloat(dt.delta_v1)) : (parseFloat(input) += parseFloat(dt.delta_v1)) ; 
-            (parseFloat(dt.delta_v2) < 0) ? (parseFloat(output) += parseFloat(dt.delta_v2)) : (parseFloat(input) += parseFloat(dt.delta_v2)) ; 
-            (parseFloat(dt.delta_v3) < 0) ? (parseFloat(output) += parseFloat(dt.delta_v3)) : (parseFloat(input) += parseFloat(dt.delta_v3)) ; 
-            (parseFloat(dt.delta_v4) < 0) ? (parseFloat(output) += parseFloat(dt.delta_v4)) : (parseFloat(input) += parseFloat(dt.delta_v4)) ; 
-            (parseFloat(dt.delta_v5) < 0) ? (parseFloat(output) += parseFloat(dt.delta_v5)) : (parseFloat(input) += parseFloat(dt.delta_v5)) ; 
-            (parseFloat(dt.delta_v6) < 0) ? (parseFloat(output) += parseFloat(dt.delta_v6)) : (parseFloat(input) += parseFloat(dt.delta_v6)) ; 
-            (parseFloat(dt.delta_v7) < 0) ? (parseFloat(output) += parseFloat(dt.delta_v7)) : (parseFloat(input) += parseFloat(dt.delta_v7)) ; 
-            (parseFloat(dt.delta_v8) < 0) ? (parseFloat(output) += parseFloat(dt.delta_v8)) : (parseFloat(input) += parseFloat(dt.delta_v8)) ; 
-            (parseFloat(dt.delta_v9) < 0) ? (parseFloat(output) += parseFloat(dt.delta_v9)) : (parseFloat(input) += parseFloat(dt.delta_v9)) ; 
-            (parseFloat(dt.delta_v10) < 0) ? (parseFloat(output) += parseFloat(dt.delta_v10)) : (parseFloat(input) += parseFloat(dt.delta_v10)) ;
+            if (parseFloat(dt.delta_v1) < 0) parseFloat(output) += parseFloat(dt.delta_v1); 
+            if (parseFloat(dt.delta_v2) < 0) parseFloat(output) += parseFloat(dt.delta_v2); 
+            if (parseFloat(dt.delta_v3) < 0) parseFloat(output) += parseFloat(dt.delta_v3); 
+            if (parseFloat(dt.delta_v4) < 0) parseFloat(output) += parseFloat(dt.delta_v4); 
+            if (parseFloat(dt.delta_v5) < 0) parseFloat(output) += parseFloat(dt.delta_v5); 
+            if (parseFloat(dt.delta_v6) < 0) parseFloat(output) += parseFloat(dt.delta_v6); 
+            if (parseFloat(dt.delta_v7) < 0) parseFloat(output) += parseFloat(dt.delta_v7); 
+            if (parseFloat(dt.delta_v8) < 0) parseFloat(output) += parseFloat(dt.delta_v8); 
+            if (parseFloat(dt.delta_v9) < 0) parseFloat(output) += parseFloat(dt.delta_v9); 
+            if (parseFloat(dt.delta_v10) < 0) parseFloat(output) += parseFloat(dt.delta_v10);
 
             console.log("input "+input, "output "+output);
             
