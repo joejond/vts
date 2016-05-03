@@ -986,7 +986,8 @@ var cargo_tot='';
 var input = 0; 
 var output = 0;
 function daily_akum() {
-    
+    input = 0;
+    output = 0;
     Ext.Ajax.request({
         url: 'data_grafik_perhari.php',
         method: 'GET',
@@ -1001,23 +1002,6 @@ function daily_akum() {
             cargo_p = parseFloat(dt.volume1)+parseFloat(dt.volume2)+parseFloat(dt.volume3)+parseFloat(dt.volume4)+parseFloat(dt.volume5);
             cargo_s = parseFloat(dt.volume6)+parseFloat(dt.volume7)+parseFloat(dt.volume8)+parseFloat(dt.volume9)+parseFloat(dt.volume10);
             cargo_tot = cargo_p + cargo_s;
-            
-            // if (parseFloat(dt.delta_v1) < 0){
-            //     console.log("dv1 minus");
-            //     // output += parseFloat(dt.delta_v1);
-            // }
-
-            // else {
-            //     console.log("dv1 plus");
-            // }
-            // if (parseFloat(dt.delta_v2) < 0){
-            //     console.log("dv2 minus");
-            //     // output += parseFloat(dt.delta_v2);
-            // }
-
-            // else {
-            //     console.log("dv2 plus");
-            // }
 
             (parseFloat(dt.delta_v1) < 0) ? (output += parseFloat(dt.delta_v1)) : (input += parseFloat(dt.delta_v1)); 
             (parseFloat(dt.delta_v2) < 0) ? (output += parseFloat(dt.delta_v2)) : (input += parseFloat(dt.delta_v2)); 
@@ -1029,10 +1013,7 @@ function daily_akum() {
             (parseFloat(dt.delta_v8) < 0) ? (output += parseFloat(dt.delta_v8)) : (input += parseFloat(dt.delta_v8)); 
             (parseFloat(dt.delta_v9) < 0) ? (output += parseFloat(dt.delta_v9)) : (input += parseFloat(dt.delta_v9)); 
             (parseFloat(dt.delta_v10) < 0) ? (output += parseFloat(dt.delta_v10)) : (input += parseFloat(dt.delta_v10)); 
-
-
-            console.log("input "+input, "output "+output);
-            
+            // console.log("input "+input, "output "+output);
         },
         callback : function (){
 			//daily_akum();
@@ -1068,41 +1049,7 @@ function daily_akum() {
 			
 			}
         
-        
-        
-        
     });
-    //content_akum = '<style type="text/css">' +
-        //'table.total_daily {font-family: verdana,arial,sans-serif;font-size:12px;text-align: center;color:#333333;border-width: 1px;border-color: #a9c6c9;border-collapse: collapse;}' +
-        //'table.total_daily td {border-width: 1px;padding: 4px;border-style: solid;border-color: #a9c6c9;}' +
-        //'</style>' +
-        //'<table width="100%" class="total_daily">' +
-        //'<tr><td colspan="3">Total Daily Fuel</td></tr>' +
-        //'<tr><td colspan="3" style="font-size:22px;">' + total_daily + ' Liters</td></tr>' +
-        //'<tr>' +
-        //'<td>Engine#1</td>' +
-        //'<td>Engine#2</td>' +
-        //'<td>Engine#3</td>' +
-        //'</tr>' +
-        //'<tr>' +
-        //'<td><span style="font-size:18px;">' + eng1_daily + ' Lt</span></td>' +
-        //'<td><span style="font-size:18px;">' + eng2_daily + ' Lt</span></td>' +
-        //'<td><span style="font-size:18px;">' + (isNaN(eng3_daily)?0:eng3_daily) + ' Lt</span></td>' +
-        //'<tr><td colspan="3"></td></tr>' +
-        //'<tr><td colspan="3">Genset Daily Running Hours</td></tr>' +
-        //'</tr>' +
-        //'<tr>' +
-        //'<td>genset#1</td>' +
-        //'<td>genset#2</td>' +
-        //'<td>genset#3</td>' +
-        //'</tr>' +
-        //'<tr>' +
-        //'<td><span style="font-size:18px;">' + gen1_runhour + ' Hours</span></td>' +
-        //'<td><span style="font-size:18px;">' + gen2_runhour + ' Hours</span></td>' +
-        //'<td><span style="font-size:18px;">' + (isNaN(gen3_runhour)?0:gen3_runhour) + ' Hours</span></td>' +
-        //'</tr>' +
-        //'</table>';
-    //Ext.getCmp('panel_daily').update(content_akum);
 }
 
 function update_grafik() {
