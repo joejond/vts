@@ -1002,16 +1002,16 @@ function daily_akum() {
             cargo_s = parseFloat(dt.volume6)+parseFloat(dt.volume7)+parseFloat(dt.volume8)+parseFloat(dt.volume9)+parseFloat(dt.volume10);
             cargo_tot = cargo_p + cargo_s;
             
-            (parseFloat(dt.delta_v1) < 0) ? (output += parseFloat(dt.delta_v1)) : (input += parseFloat(dt.delta_v1)) ; 
-            (parseFloat(dt.delta_v2) < 0) ? (output += parseFloat(dt.delta_v2)) : (input += parseFloat(dt.delta_v2)) ; 
-            (parseFloat(dt.delta_v3) < 0) ? (output += parseFloat(dt.delta_v3)) : (input += parseFloat(dt.delta_v3)) ; 
-            (parseFloat(dt.delta_v4) < 0) ? (output += parseFloat(dt.delta_v4)) : (input += parseFloat(dt.delta_v4)) ; 
-            (parseFloat(dt.delta_v5) < 0) ? (output += parseFloat(dt.delta_v5)) : (input += parseFloat(dt.delta_v5)) ; 
-            (parseFloat(dt.delta_v6) < 0) ? (output += parseFloat(dt.delta_v6)) : (input += parseFloat(dt.delta_v6)) ; 
-            (parseFloat(dt.delta_v7) < 0) ? (output += parseFloat(dt.delta_v7)) : (input += parseFloat(dt.delta_v7)) ; 
-            (parseFloat(dt.delta_v8) < 0) ? (output += parseFloat(dt.delta_v8)) : (input += parseFloat(dt.delta_v8)) ; 
-            (parseFloat(dt.delta_v9) < 0) ? (output += parseFloat(dt.delta_v9)) : (input += parseFloat(dt.delta_v9)) ; 
-            (parseFloat(dt.delta_v10) < 0) ? (output += parseFloat(dt.delta_v10)) : (input += parseFloat(dt.delta_v10)) ;
+            (parseFloat(dt.delta_v1) < 0) ? (parseFloat(output) += parseFloat(dt.delta_v1)) : (parseFloat(input) += parseFloat(dt.delta_v1)) ; 
+            (parseFloat(dt.delta_v2) < 0) ? (parseFloat(output) += parseFloat(dt.delta_v2)) : (parseFloat(input) += parseFloat(dt.delta_v2)) ; 
+            (parseFloat(dt.delta_v3) < 0) ? (parseFloat(output) += parseFloat(dt.delta_v3)) : (parseFloat(input) += parseFloat(dt.delta_v3)) ; 
+            (parseFloat(dt.delta_v4) < 0) ? (parseFloat(output) += parseFloat(dt.delta_v4)) : (parseFloat(input) += parseFloat(dt.delta_v4)) ; 
+            (parseFloat(dt.delta_v5) < 0) ? (parseFloat(output) += parseFloat(dt.delta_v5)) : (parseFloat(input) += parseFloat(dt.delta_v5)) ; 
+            (parseFloat(dt.delta_v6) < 0) ? (parseFloat(output) += parseFloat(dt.delta_v6)) : (parseFloat(input) += parseFloat(dt.delta_v6)) ; 
+            (parseFloat(dt.delta_v7) < 0) ? (parseFloat(output) += parseFloat(dt.delta_v7)) : (parseFloat(input) += parseFloat(dt.delta_v7)) ; 
+            (parseFloat(dt.delta_v8) < 0) ? (parseFloat(output) += parseFloat(dt.delta_v8)) : (parseFloat(input) += parseFloat(dt.delta_v8)) ; 
+            (parseFloat(dt.delta_v9) < 0) ? (parseFloat(output) += parseFloat(dt.delta_v9)) : (parseFloat(input) += parseFloat(dt.delta_v9)) ; 
+            (parseFloat(dt.delta_v10) < 0) ? (parseFloat(output) += parseFloat(dt.delta_v10)) : (parseFloat(input) += parseFloat(dt.delta_v10)) ;
 
             console.log("input "+input, "output "+output);
             
@@ -1041,10 +1041,10 @@ function daily_akum() {
 			'<td>Oil OUT</td>' +
 			// '<td colspan="2">genset#3</td>' +
 			'</tr>' +
-			// '<tr>' +
-			// '<td><span style="font-size:18px;">' + input.toFixed(2) + ' KL</span></td>' +
-			// '<td><span style="font-size:18px;">' + output.toFixed(2) + ' KL</span></td>' +
-			// '</tr>' +
+			'<tr>' +
+			'<td><span style="font-size:18px;">' + input.toFixed(2) + ' KL</span></td>' +
+			'<td><span style="font-size:18px;">' + output.toFixed(2) + ' KL</span></td>' +
+			'</tr>' +
 			'</table>' ;
 			Ext.getCmp('panel_daily').update(content_akum);
 			
