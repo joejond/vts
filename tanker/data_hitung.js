@@ -980,13 +980,13 @@ var panel_hitung = {
 // }
 
 // var eng_rh1 = '';
-
+var cargo_p='';
+var cargo_s='';
+var cargo_tot='';
+var input = ''; 
+var output = '';
 function daily_akum() {
-    var cargo_p='';
-    var cargo_s='';
-    var cargo_tot='';
-    var input = ''; 
-    var output = '';
+    
     Ext.Ajax.request({
         url: 'data_grafik_perhari.php',
         method: 'GET',
