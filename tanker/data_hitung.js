@@ -1003,22 +1003,26 @@ function daily_akum() {
             cargo_tot = cargo_p + cargo_s;
             
             if (parseFloat(dt.delta_v1) < 0){
-                console.log("minus");
-                output += parseFloat(dt.delta_v1);
+                console.log("dv1 minus");
+                // output += parseFloat(dt.delta_v1);
             }
 
             else {
-                console.log("plus");
+                console.log("dv1 plus");
             }
             if (parseFloat(dt.delta_v2) < 0){
-                console.log("minus");
-                output += parseFloat(dt.delta_v2);
+                console.log("dv2 minus");
+                // output += parseFloat(dt.delta_v2);
             }
 
             else {
-                console.log("plus");
+                console.log("dv2 plus");
             }
-            // if (parseFloat(dt.delta_v1) < 0) parseFloat(output) += parseFloat(dt.delta_v1); 
+
+            (parseFloat(dt.delta_v1) < 0) ? (output += parseFloat(dt.delta_v1)) : (input += parseFloat(dt.delta_v1)); 
+            (parseFloat(dt.delta_v2) < 0) ? (output += parseFloat(dt.delta_v2)) : (input += parseFloat(dt.delta_v2)); 
+
+            // if (parseFloat(dt.delta_v1) < 0) parseFloat(output) += parseFloat(dt.delta_v1) < 0; 
             // if (parseFloat(dt.delta_v2) < 0) parseFloat(output) += parseFloat(dt.delta_v2); 
             // if (parseFloat(dt.delta_v3) < 0) parseFloat(output) += parseFloat(dt.delta_v3); 
             // if (parseFloat(dt.delta_v4) < 0) parseFloat(output) += parseFloat(dt.delta_v4); 
