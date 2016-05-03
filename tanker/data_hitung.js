@@ -983,6 +983,7 @@ var panel_hitung = {
 var cargo_p='';
 var cargo_s='';
 var cargo_tot='';
+var input = 0, output = 0;
 function daily_akum() {
     Ext.Ajax.request({
         url: 'data_grafik_perhari.php',
@@ -993,8 +994,8 @@ function daily_akum() {
         },
         success: function (data) {
 			var hasil = Ext.JSON.decode(data.responseText);
-			// console.log(hasil.g_perhari[0]);
-            var dt = hasil.g_perhari[0];
+			// console.log(hasil.g_perhari);
+            var dt = hasil.g_perhari;
 
 			//console.log(hasil.g_perhari[0].tot_fl1 +' -&- '+hasil.g_perhari[0].tot_fl2 );
 			//var flow = (hasil.g_perhari[0].tot_fl1 === null) ? hasil.g_perhari[0].engrh1 : hasil.g_perhari[0].tot_fl1;
@@ -1004,37 +1005,19 @@ function daily_akum() {
             cargo_p = parseFloat(dt.volume1)+parseFloat(dt.volume2)+parseFloat(dt.volume3)+parseFloat(dt.volume4)+parseFloat(dt.volume5);
             cargo_s = parseFloat(dt.volume6)+parseFloat(dt.volume7)+parseFloat(dt.volume8)+parseFloat(dt.volume9)+parseFloat(dt.volume10);
             cargo_tot = cargo_p + cargo_s;
+            
+            (parseFloat(dt.delta_v1) < 0) ? (output += parseFloat(dt.delta_v1)) : (input += parseFloat(dt.delta_v1)) ; 
+            (parseFloat(dt.delta_v2) < 0) ? (output += parseFloat(dt.delta_v2)) : (input += parseFloat(dt.delta_v2)) ; 
+            (parseFloat(dt.delta_v3) < 0) ? (output += parseFloat(dt.delta_v3)) : (input += parseFloat(dt.delta_v3)) ; 
+            (parseFloat(dt.delta_v4) < 0) ? (output += parseFloat(dt.delta_v4)) : (input += parseFloat(dt.delta_v4)) ; 
+            (parseFloat(dt.delta_v5) < 0) ? (output += parseFloat(dt.delta_v5)) : (input += parseFloat(dt.delta_v5)) ; 
+            (parseFloat(dt.delta_v6) < 0) ? (output += parseFloat(dt.delta_v6)) : (input += parseFloat(dt.delta_v6)) ; 
+            (parseFloat(dt.delta_v7) < 0) ? (output += parseFloat(dt.delta_v7)) : (input += parseFloat(dt.delta_v7)) ; 
+            (parseFloat(dt.delta_v8) < 0) ? (output += parseFloat(dt.delta_v8)) : (input += parseFloat(dt.delta_v8)) ; 
+            (parseFloat(dt.delta_v9) < 0) ? (output += parseFloat(dt.delta_v9)) : (input += parseFloat(dt.delta_v9)) ; 
+            (parseFloat(dt.delta_v10) < 0) ? (output += parseFloat(dt.delta_v10)) : (input += parseFloat(dt.delta_v10)) ;
 
-   //           eng1_daily = parseFloat(hasil.g_perhari[0].tot_fl1) - parseFloat(hasil.g_perhari[0].tot_ovfl1);
-   //           eng2_daily = parseFloat(hasil.g_perhari[0].tot_fl2) - parseFloat(hasil.g_perhari[0].tot_ovfl2);
-   //           eng3_daily = parseFloat(hasil.g_perhari[0].tot_fl3) - parseFloat(hasil.g_perhari[0].tot_ovfl3);
-   //           eng4_daily = parseFloat(hasil.g_perhari[0].tot_fl4) - parseFloat(hasil.g_perhari[0].tot_ovfl4);
-   //          //var ef3 =  isNaN(eng3_daily) ? 0 : eng3_daily ; 
-   //          //console.log(eng3_daily, eng4_daily);
-            
-            
-   //           gen1_runhour = parseFloat(hasil.g_perhari[0].rh1).toFixed(2);
-   //          //gen1_runhour = gen1_runhour_1.toFixed(2);
-   //           gen2_runhour = parseFloat(hasil.g_perhari[0].rh2).toFixed(2);
-   //           gen3_runhour = parseFloat(hasil.g_perhari[0].rh3).toFixed(2);
-   //          //gen1_runhour = gen2_runhour_1.toFixed(2);
-			
-			// rh_engine1 = parseFloat(hasil.g_perhari[0].engrh1).toFixed(2);
-			// rh_engine2 = parseFloat(hasil.g_perhari[0].engrh2).toFixed(2);
-			// rh_engine_tot = (parseFloat(rh_engine1) + parseFloat(rh_engine2)).toFixed(2);
-			
-			//console.log(rh_engine1);
-			//console.log(rh_engine2);
-			//console.log(rh_engine_tot);
-			
-			// total_daily = eng1_daily + eng2_daily + (isNaN(eng3_daily)?0:eng3_daily) + (isNaN(eng4_daily)?0:eng4_daily);
-			// hasil_p = isNaN(eng1_daily) ? (rh_engine1 + ' Hours')  : (eng1_daily + ' Lt') ;
-			// hasil_s = isNaN(eng2_daily) ? (rh_engine2 + ' Hours')  : (eng2_daily + ' Lt') ;
-			// hasil3 = isNaN(eng3_daily) ?  'N/A' : (eng3_daily + ' Lt');
-			// hasil4 = isNaN(eng4_daily) ?  'N/A' : (eng4_daily + ' Lt');
-			// genset_3 = isNaN(gen3_runhour) ? 'N/A' : (gen3_runhour + ' Hours') ;
-   //          tot_tot = isNaN(rh_engine_tot) ? (total_daily+ ' Lt') : (rh_engine_tot + ' Hours');
-   //          judul = isNaN(rh_engine_tot) ? (' Fuel Consumption ') : (' Engine Running Hours ');
+
             
         },
         callback : function (){
@@ -1051,22 +1034,22 @@ function daily_akum() {
 			'<td>PortSide</td>' +
 			'<td>StarBoard</td>' +
 			'</tr>' +
-			'<tr>' +
+			// '<tr>' +
 			'<td><span style="font-size:18px;">' + cargo_p.toFixed(2) + ' KL </span></td>' +
 			'<td><span style="font-size:18px;">' + cargo_s.toFixed(2) + ' KL </span></td>' +
 			'<tr><td colspan="2"></td></tr>' +
-			// '<tr><td colspan="4">Genset Daily Running Hours</td></tr>' +
+			'<tr><td colspan="2">Oil Transfer</td></tr>' +
 			// '</tr>' +
-			// '<tr>' +
-			// '<td>genset#1</td>' +
-			// '<td>genset#2</td>' +
+			'<tr>' +
+			'<td>Oil IN</td>' +
+			'<td>Oil OUT</td>' +
 			// '<td colspan="2">genset#3</td>' +
-			// '</tr>' +
-			// '<tr>' +
-			// '<td><span style="font-size:18px;">' + gen1_runhour + ' Hours</span></td>' +
-			// '<td><span style="font-size:18px;">' + gen2_runhour + ' Hours</span></td>' +
+			'</tr>' +
+			'<tr>' +
+			'<td><span style="font-size:18px;">' + input.toFixed(2) + ' KL</span></td>' +
+			'<td><span style="font-size:18px;">' + output.toFixed(2) + ' KL</span></td>' +
 			// '<td colspan="2"><span style="font-size:18px;">' + genset_3 + '</span></td>' +
-			// '</tr>' +
+			'</tr>' +
 			'</table>' ;
 			Ext.getCmp('panel_daily').update(content_akum);
 			
