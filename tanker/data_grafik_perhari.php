@@ -61,7 +61,7 @@ try {
 		$bb["delta_v7"] = $value["delta_v7"]; 
 		$bb["delta_v8"] = $value["delta_v8"]; 
 		$bb["delta_v9"] = $value["delta_v9"]; 
-		$bb["delta_v5"] = $value["delta_v5"]; 
+		$bb["delta_v10"] = $value["delta_v10"]; 
 		$bb["waktu"] = $value["waktu"]; 
 	}
 

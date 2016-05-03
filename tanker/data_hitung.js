@@ -1002,6 +1002,12 @@ function daily_akum() {
             cargo_s = parseFloat(dt.volume6)+parseFloat(dt.volume7)+parseFloat(dt.volume8)+parseFloat(dt.volume9)+parseFloat(dt.volume10);
             cargo_tot = cargo_p + cargo_s;
             
+            if (parseFloat(dt.delta_v1) < 0){
+                console.log("minus");
+            }
+            else {
+                console.log("plus");
+            }
             // if (parseFloat(dt.delta_v1) < 0) parseFloat(output) += parseFloat(dt.delta_v1); 
             // if (parseFloat(dt.delta_v2) < 0) parseFloat(output) += parseFloat(dt.delta_v2); 
             // if (parseFloat(dt.delta_v3) < 0) parseFloat(output) += parseFloat(dt.delta_v3); 
