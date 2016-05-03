@@ -980,11 +980,13 @@ var panel_hitung = {
 // }
 
 // var eng_rh1 = '';
-var cargo_p='';
-var cargo_s='';
-var cargo_tot='';
-var input = 0, output = 0;
+
 function daily_akum() {
+    var cargo_p='';
+    var cargo_s='';
+    var cargo_tot='';
+    var input = ''; 
+    var output = '';
     Ext.Ajax.request({
         url: 'data_grafik_perhari.php',
         method: 'GET',
@@ -996,12 +998,6 @@ function daily_akum() {
 			var hasil = Ext.JSON.decode(data.responseText);
 			// console.log(hasil.g_perhari);
             var dt = hasil.g_perhari;
-
-			//console.log(hasil.g_perhari[0].tot_fl1 +' -&- '+hasil.g_perhari[0].tot_fl2 );
-			//var flow = (hasil.g_perhari[0].tot_fl1 === null) ? hasil.g_perhari[0].engrh1 : hasil.g_perhari[0].tot_fl1;
-			//console.log('rh engine = '+  flow);
-            //var temp = new Array();
-            //temp = (data.responseText).split(",");
             cargo_p = parseFloat(dt.volume1)+parseFloat(dt.volume2)+parseFloat(dt.volume3)+parseFloat(dt.volume4)+parseFloat(dt.volume5);
             cargo_s = parseFloat(dt.volume6)+parseFloat(dt.volume7)+parseFloat(dt.volume8)+parseFloat(dt.volume9)+parseFloat(dt.volume10);
             cargo_tot = cargo_p + cargo_s;
@@ -1017,7 +1013,7 @@ function daily_akum() {
             (parseFloat(dt.delta_v9) < 0) ? (output += parseFloat(dt.delta_v9)) : (input += parseFloat(dt.delta_v9)) ; 
             (parseFloat(dt.delta_v10) < 0) ? (output += parseFloat(dt.delta_v10)) : (input += parseFloat(dt.delta_v10)) ;
 
-
+            console.log("input "+input, "output "+output);
             
         },
         callback : function (){
