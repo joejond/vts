@@ -1004,7 +1004,9 @@ function daily_akum() {
             
             if (parseFloat(dt.delta_v1) < 0){
                 console.log("minus");
+                output += parseFloat(delta_v1);
             }
+
             else {
                 console.log("plus");
             }
