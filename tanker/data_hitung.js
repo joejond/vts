@@ -1002,22 +1002,22 @@ function daily_akum() {
             cargo_s = parseFloat(dt.volume6)+parseFloat(dt.volume7)+parseFloat(dt.volume8)+parseFloat(dt.volume9)+parseFloat(dt.volume10);
             cargo_tot = cargo_p + cargo_s;
             
-            if (parseFloat(dt.delta_v1) < 0){
-                console.log("dv1 minus");
-                // output += parseFloat(dt.delta_v1);
-            }
+            // if (parseFloat(dt.delta_v1) < 0){
+            //     console.log("dv1 minus");
+            //     // output += parseFloat(dt.delta_v1);
+            // }
 
-            else {
-                console.log("dv1 plus");
-            }
-            if (parseFloat(dt.delta_v2) < 0){
-                console.log("dv2 minus");
-                // output += parseFloat(dt.delta_v2);
-            }
+            // else {
+            //     console.log("dv1 plus");
+            // }
+            // if (parseFloat(dt.delta_v2) < 0){
+            //     console.log("dv2 minus");
+            //     // output += parseFloat(dt.delta_v2);
+            // }
 
-            else {
-                console.log("dv2 plus");
-            }
+            // else {
+            //     console.log("dv2 plus");
+            // }
 
             (parseFloat(dt.delta_v1) < 0) ? (output += parseFloat(dt.delta_v1)) : (input += parseFloat(dt.delta_v1)); 
             (parseFloat(dt.delta_v2) < 0) ? (output += parseFloat(dt.delta_v2)) : (input += parseFloat(dt.delta_v2)); 
@@ -1059,10 +1059,10 @@ function daily_akum() {
 			'<td>Oil OUT</td>' +
 			// '<td colspan="2">genset#3</td>' +
 			'</tr>' +
-			// '<tr>' +
-			// '<td><span style="font-size:18px;">' + input.toFixed(2) + ' KL</span></td>' +
-			// '<td><span style="font-size:18px;">' + output.toFixed(2) + ' KL</span></td>' +
-			// '</tr>' +
+			'<tr>' +
+			'<td><span style="font-size:18px;">' + (parseFloat(input)).toFixed(2) + ' KL</span></td>' +
+			'<td><span style="font-size:18px;">' + (parseFloat(output)).toFixed(2) + ' KL</span></td>' +
+			'</tr>' +
 			'</table>' ;
 			Ext.getCmp('panel_daily').update(content_akum);
 			
