@@ -401,6 +401,7 @@ var ship_list = {
             boxLabel: 'show track path',
             listeners:{
                 change: function(checkbox, newValue, oldValue, eOpts) {
+                    // console.log(checkbox,newValue,oldValue,eOpts);
                     if (newValue) {
                         Ext.getCmp('start_path').enable();
                         Ext.getCmp('stop_path').enable();
@@ -413,6 +414,9 @@ var ship_list = {
                         Ext.getCmp('button_update').disable();
                         status_path = 0;
                         // removepath();
+                        if (rute_track){
+                            showTracking(null);
+                        }
                     }
                 }
                 
@@ -440,23 +444,33 @@ var ship_list = {
             xtype: 'button',
             text : 'Show Track',
             id: 'button_update',
-            enableToggle : true,
+            // enableToggle : true,
             disabled: true,
-            toggleHandler : function(a,b){
-                b ? createTrackPath() : removeTrackPath();
+            handler : function(){
+                createTrackPath();
             }
+            // toggleHandler : function(a,b){
+            //     b ? createTrackPath() : removeTrackPath();
+            // }
         }]
     },
     tabel_daftar_kapal
     ]
 }
+var rute_track;
 
 function createTrackPath(){
-    var peta = peta1.getMap();
     var tgl_start = Ext.getCmp('start_path').getValue(), str = Ext.Date.format(tgl_start,'Y-m-d');    
     var tgl_stop = Ext.Date.add(Ext.getCmp('stop_path').getValue(),Ext.Date.DAY,1) ,stp = Ext.Date.format(tgl_stop,'Y-m-d');
     var idv = this.getIdVesselTrack();
-    this.getVesselTrack(idv,str,stp);
+    if (rute_track) {
+        this.showTracking(null);
+        this.getVesselTrack(idv,str,stp);
+    }
+    else
+    {
+        this.getVesselTrack(idv,str,stp);
+    }
 }
 
 function removeTrackPath(){
@@ -490,7 +504,7 @@ function getVesselTrack(id, start, stop)
     }
 }
 
-var rute_track;
+
 function buatTrack(r){
     rute_track = new google.maps.Polyline({
         path: r,
@@ -509,5 +523,6 @@ function buatTrack(r){
 }
 
 function showTracking(map){
+    // console.log(rute_track);
     rute_track.setMap(map);
 }
