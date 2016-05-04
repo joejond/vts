@@ -189,11 +189,9 @@ function gambar_kapal(datapilih){
     
     
     }
-    if(status_path == 1){
-			addpath();
-		}
-    
-    //console.log(status_path);
+  //   if(status_path == 1){
+		// 	addpath();
+		// }
     
 }
 
@@ -201,42 +199,41 @@ function gambar_kapal(datapilih){
 
 
 
-function getdatapath(id, start_tm, stop_tm)
-{
-    Ext.Ajax.request({
-        url: 'data_path.php',
-        // params: 'id='+id+'&start='+start_tm+'&stop='+stop_tm,
-        params: {id : id, start : start_tm, stop : stop_tm},
-        method: 'GET',
-        success: function (data) {
-			//console.log(data.responseText);
-			var pathisi = Ext.JSON.decode(data.responseText);
-			//console.log(pathisi);
+// function getdatapath(id, start_tm, stop_tm)
+// {
+//     Ext.Ajax.request({
+//         url: 'data_path.php',
+//         // params: 'id='+id+'&start='+start_tm+'&stop='+stop_tm,
+//         params: {id : id, start : start_tm, stop : stop_tm},
+//         method: 'GET',
+//         success: function (data) {
+// 			//console.log(data.responseText);
+// 			var pathisi = Ext.JSON.decode(data.responseText);
+// 			//console.log(pathisi);
+// 			var jmlpt = pathisi.track.length;
+// 			//console.log('jumlah array path (jmlpt) ' +jmlpt);
 			
-			var jmlpt = pathisi.track.length;
-			//console.log('jumlah array path (jmlpt) ' +jmlpt);
-			
-            //paths_loc = (data.responseText).split("|");
-            //jml_point_paths = paths_loc.length;
-            for(var n = 0; n < jmlpt; n++){
-                //paths_latlon_tmp = paths_loc[n].split(",");
-                //console.log(pathisi.track[n].lat);
-                //var lat[n]= ,
-                //lng[n] = ;
+//             //paths_loc = (data.responseText).split("|");
+//             //jml_point_paths = paths_loc.length;
+//             for(var n = 0; n < jmlpt; n++){
+//                 //paths_latlon_tmp = paths_loc[n].split(",");
+//                 //console.log(pathisi.track[n].lat);
+//                 //var lat[n]= ,
+//                 //lng[n] = ;
                 
                 
-                //paths_lat[n] = paths_latlon_tmp[0];
-                //paths_lon[n] = paths_latlon_tmp[1];
-                paths_lat[n] = pathisi.track[n].lat;
-                paths_lon[n] = pathisi.track[n].lng;
+//                 //paths_lat[n] = paths_latlon_tmp[0];
+//                 //paths_lon[n] = paths_latlon_tmp[1];
+//                 paths_lat[n] = pathisi.track[n].lat;
+//                 paths_lon[n] = pathisi.track[n].lng;
                 
                 
                 
-            }
+//             }
             
-        }
-    })    
-}
+//         }
+//     })    
+// }
 
 //function getyyyymmdd(date) {
     //var year = date.getFullYear();
@@ -247,79 +244,79 @@ function getdatapath(id, start_tm, stop_tm)
     //return '' + year + month + day;
 //}
 
-function addpath(){
-    var tgl_start = Ext.getCmp('start_path').getValue(), str = Ext.Date.format(tgl_start,'Y-m-d');    
-    var tgl_stop = Ext.Date.add(Ext.getCmp('stop_path').getValue(),Ext.Date.DAY,1) ,stp = Ext.Date.format(tgl_stop,'Y-m-d');
+// function addpath(){
+//     var tgl_start = Ext.getCmp('start_path').getValue(), str = Ext.Date.format(tgl_start,'Y-m-d');    
+//     var tgl_stop = Ext.Date.add(Ext.getCmp('stop_path').getValue(),Ext.Date.DAY,1) ,stp = Ext.Date.format(tgl_stop,'Y-m-d');
     
-    //console.log('start = '+tgl_start + ' & stop = ' + tgl_stop);
-    //console.log(tg_1);
+//     //console.log('start = '+tgl_start + ' & stop = ' + tgl_stop);
+//     //console.log(tg_1);
     
-    //var str_start = getyyyymmdd(tgl_start) + '000000';
-    //var str_stop = getyyyymmdd(tgl_stop) + '235959';
-	//console.log (str_start);
+//     //var str_start = getyyyymmdd(tgl_start) + '000000';
+//     //var str_stop = getyyyymmdd(tgl_stop) + '235959';
+// 	//console.log (str_start);
    
-    //console.log(kapal_dipilih);
-    //console.log('jumlah kapal : '+kapal_dipilih.length)
-    //var kapal_path = [];
-    //kapal_path = kapal_dipilih.split(",");
-    var z = peta1.getMap().getZoom();
-    var polyOptions = {
-        strokeColor: '#FF0044',
-        strokeOpacity: 1.0,
-        strokeWeight: 1,
-        icons: [{
-            icon: {
-                path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
-                strokeColor:'#0000ff',
-                fillColor:'#0000ff',
-                fillOpacity:1
-            },
-            repeat:'200px',
-            path:[]
-        }]
-    };
+//     //console.log(kapal_dipilih);
+//     //console.log('jumlah kapal : '+kapal_dipilih.length)
+//     //var kapal_path = [];
+//     //kapal_path = kapal_dipilih.split(",");
+//     var z = peta1.getMap().getZoom();
+//     var polyOptions = {
+//         strokeColor: '#FF0044',
+//         strokeOpacity: 1.0,
+//         strokeWeight: 1,
+//         icons: [{
+//             icon: {
+//                 path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+//                 strokeColor:'#0000ff',
+//                 fillColor:'#0000ff',
+//                 fillOpacity:1
+//             },
+//             repeat:'200px',
+//             path:[]
+//         }]
+//     };
     
-    for(var n = 0; n < kapal_dipilih.length; n++){
+//     for(var n = 0; n < kapal_dipilih.length; n++){
         
-        getdatapath(kapal_dipilih[n], str, stp);
-        
-        
+//         getdatapath(kapal_dipilih[n], str, stp);
         
         
-        paths[n] = new google.maps.Polyline(polyOptions);
-        //////console.log(paths[n]);
-        //////console.log('jmlpt : '+jjjj);
         
-        paths[n].setMap(peta1.getMap());
-        //console.log(paths[n].setMap(peta1.getMap()));
-        //console.log(paths_lat[n]);
-        //console.log('path digambar dri kapal di pilih : '+kapal_dipilih);
-        //console.log('jml pt : '+jmlpoint);
         
-        //for(var a = 0; a < jml_point_paths; a++){
-        for(var a = 0; a < 200; a++){
-            (paths[n].getPath()).push(new google.maps.LatLng(paths_lat[a], paths_lon[a]));
-        }
+//         paths[n] = new google.maps.Polyline(polyOptions);
+//         //////console.log(paths[n]);
+//         //////console.log('jmlpt : '+jjjj);
         
-//        var count = 0;
-//        window.setInterval(function() {
-//            count = (count + 1) % 200;
-//
-//            var icons = paths[n].get('icons');
-//            icons[0].offset = (count / 2) + '%';
-//            paths[n].set('icons', icons);
-//        }, 20);       
-    }
-}
+//         paths[n].setMap(peta1.getMap());
+//         //console.log(paths[n].setMap(peta1.getMap()));
+//         //console.log(paths_lat[n]);
+//         //console.log('path digambar dri kapal di pilih : '+kapal_dipilih);
+//         //console.log('jml pt : '+jmlpoint);
+        
+//         //for(var a = 0; a < jml_point_paths; a++){
+//         for(var a = 0; a < 200; a++){
+//             (paths[n].getPath()).push(new google.maps.LatLng(paths_lat[a], paths_lon[a]));
+//         }
+        
+// //        var count = 0;
+// //        window.setInterval(function() {
+// //            count = (count + 1) % 200;
+// //
+// //            var icons = paths[n].get('icons');
+// //            icons[0].offset = (count / 2) + '%';
+// //            paths[n].set('icons', icons);
+// //        }, 20);       
+//     }
+// }
 
-function removepath(){
-    //console.log("jml path = "+paths.length);
-    //console.log("jml kapal dipilih = "+jml_kapaldipilih);
-    for(var n = 0; n < jml_kapaldipilih; n++){
-        paths[n].setMap(null);
-    }
-    paths = [];
-}
+// function removepath(){
+//     //console.log("jml path = "+paths.length);
+//     //console.log("jml kapal dipilih = "+jml_kapaldipilih);
+//     for(var n = 0; n < jml_kapaldipilih; n++){
+//         paths[n].setMap(null);
+//     }
+//     paths = [];
+// }
 
 var selmod = Ext.create('Ext.selection.CheckboxModel',{
     listeners: {
@@ -409,13 +406,13 @@ var ship_list = {
                         Ext.getCmp('stop_path').enable();
                         Ext.getCmp('button_update').enable();
                         status_path = 1;
-                        addpath();
+                        // addpath();
                     } else {
                         Ext.getCmp('start_path').disable();
                         Ext.getCmp('stop_path').disable();
                         Ext.getCmp('button_update').disable();
                         status_path = 0;
-                        removepath();
+                        // removepath();
                     }
                 }
                 
@@ -443,13 +440,74 @@ var ship_list = {
             xtype: 'button',
             text : 'Show Track',
             id: 'button_update',
+            enableToggle : true,
             disabled: true,
-            handler : function() {
-                removepath();
-                addpath();
-            }           
+            toggleHandler : function(a,b){
+                b ? createTrackPath() : removeTrackPath();
+            }
         }]
     },
     tabel_daftar_kapal
     ]
+}
+
+function createTrackPath(){
+    var peta = peta1.getMap();
+    var tgl_start = Ext.getCmp('start_path').getValue(), str = Ext.Date.format(tgl_start,'Y-m-d');    
+    var tgl_stop = Ext.Date.add(Ext.getCmp('stop_path').getValue(),Ext.Date.DAY,1) ,stp = Ext.Date.format(tgl_stop,'Y-m-d');
+    var idv = this.getIdVesselTrack();
+    this.getVesselTrack(idv,str,stp);
+}
+
+function removeTrackPath(){
+    this.showTracking(null);
+}
+
+function getIdVesselTrack(){
+    var id_ves = tabel_daftar_kapal.getView().getSelectionModel().getSelection();
+    if (id_ves.length == 1) return id_ves[0].getData().id;
+    else return "undefined";
+}
+
+function getVesselTrack(id, start, stop)
+{
+    rute = [];
+    if (id === "undefined") return Ext.Msg.alert('Tracking', 'Please select one of Vessel');
+    else{
+        Ext.Ajax.request({
+            url : 'data_path.php',
+            params : {id:id,start:start,stop:stop},
+            method : 'GET',
+            success : function(data){
+                var isi = Ext.JSON.decode(data.responseText);
+                Ext.each(isi.track, function(value,idx){
+                    rute.push({lat :parseFloat(value.lat), lng:parseFloat(value.lng)});
+                });
+                this.buatTrack(rute);
+                this.showTracking(peta1.getMap());
+            }
+        });
+    }
+}
+
+var rute_track;
+function buatTrack(r){
+    rute_track = new google.maps.Polyline({
+        path: r,
+        strokeColor: '#FF0000',
+        strokeWeight: 1,
+        icons: [{
+            icon : {
+                path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+                strokeColor:'#0000ff',
+                fillColor:'#0000ff',
+                fillOpacity:1
+            },
+            repeat:'200px'
+        }]
+    });
+}
+
+function showTracking(map){
+    rute_track.setMap(map);
 }
