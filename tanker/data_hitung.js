@@ -630,13 +630,15 @@ var grafik = new Ext.create('Chart.ux.Highcharts', {
                 }
             },
             title: {
-                text: 'Cargo Volume (KL)',
+                text: 'Cargo Volume (kL)',
                 style: {
                     color: '#89A54E'
                 }
             },
             stackLabels: {
                 enabled: true,
+		rotation: -90,
+//		format: '{point.stackTotal:.1f} kL',
                 style: {
                     fontWeight: 'bold',
                     color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
@@ -704,7 +706,7 @@ var grafik = new Ext.create('Chart.ux.Highcharts', {
             //     return '<b>' + this.series.name + '</b><br/>hour-' + this.x + ': ' + this.y;
             // }
             headerFormat: '<b>Hour-{point.x}</b><br/>',
-            pointFormat: '{series.name}: {point.y} KL<br/>Total Cargo: {point.stackTotal} KL'
+            pointFormat: '{series.name}: {point.y} kL<br/>Total Cargo: {point.stackTotal} kL'
 
         },
         credits: {
@@ -1024,14 +1026,14 @@ function daily_akum() {
 			'</style>' +
 			'<table width="100%" class="total_daily">' +
 			'<tr><td colspan="2">Total Cargo Tanker</td></tr>' +
-			'<tr><td colspan="2" style="font-size:22px;">' + cargo_tot.toFixed(2) + ' KL </td></tr>' +
+			'<tr><td colspan="2" style="font-size:22px;">' + cargo_tot.toFixed(2) + ' kL </td></tr>' +
 			'<tr>' +
 			'<td>PortSide</td>' +
 			'<td>StarBoard</td>' +
 			'</tr>' +
 			// '<tr>' +
-			'<td><span style="font-size:18px;">' + cargo_p.toFixed(2) + ' KL </span></td>' +
-			'<td><span style="font-size:18px;">' + cargo_s.toFixed(2) + ' KL </span></td>' +
+			'<td><span style="font-size:18px;">' + cargo_p.toFixed(2) + ' kL </span></td>' +
+			'<td><span style="font-size:18px;">' + cargo_s.toFixed(2) + ' kL </span></td>' +
 			'<tr><td colspan="2"></td></tr>' +
 			'<tr><td colspan="2">Oil Transfer</td></tr>' +
 			// '</tr>' +
@@ -1041,8 +1043,8 @@ function daily_akum() {
 			// '<td colspan="2">genset#3</td>' +
 			'</tr>' +
 			'<tr>' +
-			'<td><span style="font-size:18px;">' + (parseFloat(input)).toFixed(2) + ' KL</span></td>' +
-			'<td><span style="font-size:18px;">' + (parseFloat(output)).toFixed(2) + ' KL</span></td>' +
+			'<td><span style="font-size:18px;">' + (parseFloat(input)).toFixed(2) + ' kL</span></td>' +
+			'<td><span style="font-size:18px;">' + (parseFloat(output)).toFixed(2) + ' kL</span></td>' +
 			'</tr>' +
 			'</table>' ;
 			Ext.getCmp('panel_daily').update(content_akum);
