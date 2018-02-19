@@ -62,6 +62,8 @@ function urutan ($modem_id){
 	
 	}
 
+echo "<h1>Ini dimatikan !!</h1>";
+
 $dateambil = isset($_GET['start'])?  date('Y-m-d H:i:s', strtotime($_GET['start'])) : date ('Y-m-d H:i:s',time()-10 * 3600); //3 jam WIB sebelum jam UTC 
 echo 'ambil data tgl (utc - 7 - 2 jam) = '.$dateambil.'<br>';
 
