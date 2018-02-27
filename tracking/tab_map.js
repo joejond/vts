@@ -23,11 +23,11 @@ var store_daftar_kapal = Ext.create('Ext.data.Store', {
             successProperty: 'success',
             root: 'ship',
             messageProperty: 'message'
-        }            
+        }
     }
 });
 
-var peta = {	
+var peta = {
     xtype: 'gmappanel',
     //margin: '5 5 5 5',
     region: 'center',
@@ -61,15 +61,38 @@ var jml_point_paths = 0;
 var jmlpt = 0;
 var data_koor1 = [];
 
-function addMarker(id, location) {    
+function lukis_kapal(id,location)
+{
+  var z = peta1.getMap().getZoom();
+  var icosize = (z-5)*5+25;
+  var markerImage = new google.maps.MarkerImage('img/ship'+z+'.png',
+      new google.maps.Size(icosize, icosize),
+      new google.maps.Point(0, 0),
+      new google.maps.Point(icosize/2, icosize/2));
+  var marker = new MarkerWithLabel({
+      position: location,
+      draggable: false,
+      raiseOnDrag: true,
+      map: peta1.getMap(),
+      labelContent: 'SAYAAAA',//datay.nama, //data_marker[0],
+      labelAnchor: new google.maps.Point(40, -1*icosize/4),
+      labelClass: "labels", // the CSS class for the label
+      labelStyle: {
+          opacity: 1
+      },
+      icon: markerImage
+  });
+}
+
+function addMarker(id, location) {
     Ext.Ajax.request({
         url: 'data_marker.php',
         params: 'id='+id,
         method: 'GET',
-        success: function (data) {  
+        success: function (data) {
             var gmarker = Ext.JSON.decode(data.responseText),
             datay = gmarker.marker[0][0];
-            
+
             //console.log(gmarker.marker[0][0].nama);
             //console.log(data.responseText);
             var data_marker = [];
@@ -93,7 +116,7 @@ function addMarker(id, location) {
                 },
                 icon: markerImage
             });
-            var content1 = 
+            var content1 =
             '<style type="text/css">' +
             'table.altrowstable {font-family: verdana,arial,sans-serif;font-size:10px;color:#333333;border-width: 1px;border-color: #a9c6c9;border-collapse: collapse;}' +
             'table.altrowstable th {border-width: 1px;padding: 4px;border-style: solid;border-color: #a9c6c9;}' +
@@ -122,18 +145,18 @@ function addMarker(id, location) {
             '<td colspan="6" style="text-align: right"> data time : ' + datay.waktu + '</td>' +
             '</tr>' +
             '</table>';
-    
+
             var infowindow1 = new google.maps.InfoWindow({
                 content: content1,
                 maxWidth: 1000
             });
-    
+
             markers.push(marker);
             google.maps.event.addListener(marker, 'click', function() {
                 infowindow1.open(peta1.getMap(), marker);
             });
-        }                
-    });   
+        }
+    });
 }
 
 function setAllMap(map) {
@@ -164,7 +187,7 @@ function gambar_kapal(datapilih){
     //console.log(datapilih.posisi[0].id);
     var datax = datapilih.posisi,
     jum = datax.length;
-    //console.log(jum);
+    // console.log(jum);
     deleteMarkers();
     var pos_arr = [];
     var loc_arr = [];
@@ -172,27 +195,28 @@ function gambar_kapal(datapilih){
     //pos_arr = datapilih.split("|");
     //for(var n = 0; n < (pos_arr.length - 1); n++){
     for(var n = 0; n < jum; n++){
-        //console.log(pos_arr[n]);
+        // console.log(pos_arr[n]);
         loc_arr[n] = new google.maps.LatLng(parseFloat(datax[n].lat), parseFloat(datax[n].lng));
-        //console.log(datax[n].lat +'=='+ datax[n].lng);
-        addMarker(parseInt(datax[n].id), loc_arr[n]);
+        // console.log(datax[n].lat +'=='+ datax[n].lng);
+        // addMarker(parseInt(datax[n].id), loc_arr[n]);
+        lukis_kapal(parseInt(datax[n].id), loc_arr[n]);
         //kapal_dipilih = kapal_dipilih + (datax[n].id) + ',';
         kapal_dipilih.push (datax[n].id);
-        
+
         //console.log(kapal_dipilih);
         var point1 = new google.maps.LatLng(parseFloat(datax[n].lat), parseFloat(datax[n].lng));
 		peta1.getMap().setCenter(point1);
-    
-		
-    
-    
+
+
+
+
     }
     if(status_path == 1){
 			addpath();
 		}
-    
+
     //console.log(status_path);
-    
+
 }
 
 
@@ -210,10 +234,10 @@ function getdatapath(id, start_tm, stop_tm)
 			//console.log(data.responseText);
 			var pathisi = Ext.JSON.decode(data.responseText);
 			//console.log(pathisi);
-			
+
 			var jmlpt = pathisi.track.length;
 			//console.log('jumlah array path (jmlpt) ' +jmlpt);
-			
+
             //paths_loc = (data.responseText).split("|");
             //jml_point_paths = paths_loc.length;
             for(var n = 0; n < jmlpt; n++){
@@ -221,19 +245,19 @@ function getdatapath(id, start_tm, stop_tm)
                 //console.log(pathisi.track[n].lat);
                 //var lat[n]= ,
                 //lng[n] = ;
-                
-                
+
+
                 //paths_lat[n] = paths_latlon_tmp[0];
                 //paths_lon[n] = paths_latlon_tmp[1];
                 paths_lat[n] = pathisi.track[n].lat;
                 paths_lon[n] = pathisi.track[n].lng;
-                
-                
-                
+
+
+
             }
-            
+
         }
-    })    
+    })
 }
 
 //function getyyyymmdd(date) {
@@ -246,16 +270,16 @@ function getdatapath(id, start_tm, stop_tm)
 //}
 
 function addpath(){
-    var tgl_start = Ext.getCmp('start_path').getValue(), str = Ext.Date.format(tgl_start,'Y-m-d');    
+    var tgl_start = Ext.getCmp('start_path').getValue(), str = Ext.Date.format(tgl_start,'Y-m-d');
     var tgl_stop = Ext.Date.add(Ext.getCmp('stop_path').getValue(),Ext.Date.DAY,1) ,stp = Ext.Date.format(tgl_stop,'Y-m-d');
-    
+
     //console.log('start = '+str + ' & stop = ' + stp);
     //console.log(tg_1);
-    
+
     //var str_start = getyyyymmdd(tgl_start) + '000000';
     //var str_stop = getyyyymmdd(tgl_stop) + '235959';
 	//console.log (str_start);
-   
+
     //console.log(kapal_dipilih);
     //console.log('jumlah kapal : '+kapal_dipilih.length)
     //var kapal_path = [];
@@ -276,29 +300,29 @@ function addpath(){
             path:[]
         }]
     };
-    
+
     for(var n = 0; n < kapal_dipilih.length; n++){
-        
+
         getdatapath(kapal_dipilih[n], str, stp);
-        
-        
-        
-        
+
+
+
+
         paths[n] = new google.maps.Polyline(polyOptions);
         //////console.log(paths[n]);
         //////console.log('jmlpt : '+jjjj);
-        
+
         paths[n].setMap(peta1.getMap());
         //console.log(paths[n].setMap(peta1.getMap()));
         //console.log(paths_lat[n]);
         //console.log('path digambar dri kapal di pilih : '+kapal_dipilih);
         //console.log('jml pt : '+jmlpoint);
-        
+
         //for(var a = 0; a < jml_point_paths; a++){
         for(var a = 0; a < 200; a++){
             (paths[n].getPath()).push(new google.maps.LatLng(paths_lat[a], paths_lon[a]));
         }
-        
+
 //        var count = 0;
 //        window.setInterval(function() {
 //            count = (count + 1) % 200;
@@ -306,7 +330,7 @@ function addpath(){
 //            var icons = paths[n].get('icons');
 //            icons[0].offset = (count / 2) + '%';
 //            paths[n].set('icons', icons);
-//        }, 20);       
+//        }, 20);
     }
 }
 
@@ -324,34 +348,35 @@ var selmod = Ext.create('Ext.selection.CheckboxModel',{
         selectionchange: function(sm, selections) {
             var ship=[],
             hasil = tabel_daftar_kapal.getView().getSelectionModel().getSelection();
-            
+            // console.log('pencet ');;
+
             Ext.each(hasil, function (item) {
                        ship.push(item.data.id);
             });
-            
-            //console.log(ship);
+
+            // console.log(ship);
             //var text1 = "";
             //Ext.Array.each(selections, function (item) {
                 //text1 = text1 + "," + item.get('id');
             //});
             //var text2 = text1.substr(1, text1.length);
             //console.log(text2);
-            
+
             Ext.Ajax.request({
                 url: 'get_last_pos_array.php',
                 params : 'id='+ship,
                 method: 'GET',
                 success: function (data) {
-					var isidat = Ext.JSON.decode(data.responseText);
-					//console.log (isidat);
+                    var isidat = Ext.JSON.decode(data.responseText);
+					              //  console.log (isidat);
                     if(isidat.posisi.length == 0)
                         deleteMarkers();
-                    else 
-                        gambar_kapal(isidat);                 
+                    else
+                        gambar_kapal(isidat);
 
-                }                
+                }
             });
-        }        
+        }
     }
 });
 
@@ -361,18 +386,17 @@ var tabel_daftar_kapal = Ext.create('Ext.grid.Panel', {
     selModel: selmod,
     columns: [
     {
-        text: "Id", 
+        text: "Id",
         hidden: true,
-        width: 30, 
+        width: 30,
         dataIndex: 'id'
     },
     {
-        text: "Name", 
-        //width: 120, 
+        text: "Name",
+        //width: 120,
         flex : 1,
         dataIndex: 'name'
-    }
-    ]
+    }]
 });
 
 var ship_list = {
@@ -387,8 +411,8 @@ var ship_list = {
         align: 'stretch'
     },
     border: false,
-    items:[    
-    {                            
+    items:[
+    {
         height: 140,
         layout: 'form',
         id: 'simpleForm',
@@ -415,7 +439,7 @@ var ship_list = {
                         removepath();
                     }
                 }
-                
+
             }
         },{
             fieldLabel: 'Start Date',
@@ -444,7 +468,7 @@ var ship_list = {
             handler : function() {
                 removepath();
                 addpath();
-            }           
+            }
         }]
     },
     tabel_daftar_kapal

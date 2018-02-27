@@ -69,6 +69,58 @@
 //window.location.reload;
 /*Router*/
 
+//<<<<<<< HEAD
+//=======
+function setcookie(n,v,e)
+{
+		var d = new Date();
+    d.setTime(d.getTime() + (e*24*60*60*1000));
+    var expires = "; expires="+ d.toUTCString();
+		console.log(expires);
+    document.cookie = n + "=" + v+ expires +";path=/";
+}
+function cookiename(){
+  return 'marine';
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    // console.log(name);
+    var ca = document.cookie.split(';');
+    // console.log(ca);
+    var panj = name.length;
+    // console.log(panj);
+
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        // console.log(c);
+
+
+        while (c.charAt(0) == ' ') {
+            c = c.substring(name.length+1);
+            console.log("jika c.charAt(0) == ' '");
+            console.log(c);
+            return c;
+            // debugger;
+            // var kk = c.split('=');
+            // console.log(kk);
+        }
+        if (c.indexOf(name) == 0) {
+          // console.log("baru masuk sisni");
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+function getDataCookies(cname)
+{
+  var hsl = getCookie(cname);
+  var dt = JSON.parse(atob(hsl));
+  return dt;
+
+}
+//>>>>>>> acbcd4121c59d1900b3ea98bec84944ec035c339
 
 function getAPI()
 {
@@ -82,18 +134,35 @@ function getAPI()
 	//}
 
 	//return (loc.hostname == 'localhost')? 'http://localhost:1336' : 'http://'+ loc.hostname +':1336';
+//<<<<<<< HEAD
 	// return 'http://10.10.10.11:1336';
-	return 'http://project.daunbiru.com:1336';
+//	return 'http://project.daunbiru.com:1336';
+//=======
+	return 'http://10.10.10.11:1336';
+	// return 'http://project.daunbiru.com';
+	// return 'http://119.18.154.234:1336';
+	// return '192.168.1.17:1337';
+//>>>>>>> acbcd4121c59d1900b3ea98bec84944ec035c339
 
 }
 
 
 
 
-function TimeZone(tz)
+//<<<<<<< HEAD
+//function TimeZone(tz)
+//{
+//	var tanda = tz<0 ? "+":"-";
+//	var a =Math.abs(tz/60);
+//=======
+function getTimeZone()
 {
-	var tanda = tz<0 ? "+":"-";
-	var a =Math.abs(tz/60);
+	var d = new Date(), tz = d.getTimezoneOffset(),
+
+
+	tanda = tz<0 ? "+":"-",
+	a =Math.abs(tz/60);
+//>>>>>>> acbcd4121c59d1900b3ea98bec84944ec035c339
 	a = a<10 ? a=tanda+"0"+a+":00" : a=tanda+a+":00";
 
 	return a;
