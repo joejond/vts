@@ -62,10 +62,10 @@ var tgl_sel22 = '';
 
 var model_akumulasi = Ext.define('akumulasi', {
     extend: 'Ext.data.Model',
-    fields: [{name : 'tanggal', type : 'string'}, 'jam', 'rpm1', 'prop1', 'inflow1', 'outflow1', 'temp1', 'press1', 
-			'rpm2', 'prop2', 'inflow2', 'outflow2', 'temp2', 'press2', 
-			'rpm3', 'prop3', 'inflow3', 'outflow3', 'temp3', 'press3', 
-			'rpm4', 'prop4', 'inflow4', 'outflow4', 'temp4', 'press4', 
+    fields: [{name : 'tanggal', type : 'string'}, 'jam', 'rpm1', 'prop1', 'inflow1', 'outflow1', 'temp1', 'press1',
+			'rpm2', 'prop2', 'inflow2', 'outflow2', 'temp2', 'press2',
+			'rpm3', 'prop3', 'inflow3', 'outflow3', 'temp3', 'press3',
+			'rpm4', 'prop4', 'inflow4', 'outflow4', 'temp4', 'press4',
 			'runhour1', 'runhour2','runhour3']
 });
 
@@ -94,7 +94,7 @@ var store_akumulasi = Ext.create('Ext.data.Store', {
 //var model_grafik_perhari = Ext.define('perhari',{
 	//extend : 'Ext.data.Model',
 	//fields : ['id','fl1', 'ovfl1', 'fl2', 'ovfl2', 'rh1', 'rh2']
-	
+
 	//});
 
 //var store_grafik_hari = Ext.create('Ext.data.Store',{
@@ -108,10 +108,10 @@ var store_akumulasi = Ext.create('Ext.data.Store', {
             ////successProperty: 'success',
             //root: 'g_perhari',
             //messageProperty: 'message'
-		
+
 		//}
 	//}
-	
+
 //});
 
 var model_combo_kapal2 = Ext.define('Kapal', {
@@ -133,7 +133,7 @@ var store_combo_kapal2 = Ext.create('Ext.data.Store', {
             //successProperty: 'success',
             root: 'ship',
             messageProperty: 'message'
-        }   
+        }
     }
 });
 
@@ -173,7 +173,7 @@ var but_export = {
 			//console.log('export_perjam.php?name=' + comb_kapal2 + '&tgl=' + tgl_daily);
             // window.open('export_perjam.php?name=' + comb_kapal2 + '&tgl=' + tgl_daily, '_blank');
             console.log(comb_kapal22,tgl_sel22);
-            // Vessel '+comb_kapal22 +' on '+ tgl_sel22 
+            // Vessel '+comb_kapal22 +' on '+ tgl_sel22
         }
     }]
 };
@@ -183,10 +183,10 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
     store: store_akumulasi,
     flex: 5,
     columns: [{
-        header: "Date",
-        width: 150,
+        header: "Jam",
+        width: 50,
         locked : true,
-        dataIndex: 'tanggal'
+        dataIndex: 'jam'
         //format : 'd-M-Y H'
         //renderer: Ext.util.Format.dateRenderer('d-M-Y H')
         //renderer: Ext.util.Format.dateRenderer('d-M-Y')
@@ -198,127 +198,92 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
     },{
         header: "PortSide",
         columns: [{
-            header: "Engine (avg)",
+            header: "RunHours",
             width: 100,
-            dataIndex: 'rpm1'
+            dataIndex: 'ME1-RH'
         },{
-            header: "Propeller (avg)",
+            header: "Fuel",
             width: 100,
-            dataIndex: 'prop1'
+            dataIndex: 'fuel'
         },{
-            header: "InFlow",
+            header: "RPM",
             width: 100,
-            dataIndex: 'inflow1'
-        },{
-            header: "OutFlow",
-            width: 100,
-            dataIndex: 'outflow1'
-        },{
-            header: "Temp",
-            width: 100,
-            dataIndex: 'temp1'
-        },{
-            header: "Press",
-            width: 100,
-            dataIndex: 'press1'
+            dataIndex: 'rpm'
+        // },{
+        //     header: "OutFlow",
+        //     width: 100,
+        //     dataIndex: 'outflow1'
+        // },{
+        //     header: "Temp",
+        //     width: 100,
+        //     dataIndex: 'temp1'
+        // },{
+        //     header: "Press",
+        //     width: 100,
+        //     dataIndex: 'press1'
         }]
     },{
         header: "StarBoard",
         columns: [{
-            header: "Engine (avg)",
-            width: 100,
-            dataIndex: 'rpm2'
-        },{
-            header: "Propeller (avg)",
-            width: 100,
-            dataIndex: 'prop2'
-        },{
-            header: "InFlow",
-            width: 100,
-            dataIndex: 'inflow2'
-        },{
-            header: "OutFlow",
-            width: 100,
-            dataIndex: 'outflow2'
-        },{
-            header: "Temp",
-            width: 100,
-            dataIndex: 'temp2'
-        },{
-            header: "Press",
-            width: 100,
-            dataIndex: 'press2'
+          header: "RunHours",
+          width: 100,
+          dataIndex: 'ME1-RH'
+      },{
+          header: "Fuel",
+          width: 100,
+          dataIndex: 'fuel'
+      },{
+          header: "RPM",
+          width: 100,
+          dataIndex: 'rpm'
         }]
     },{
-        header: "Center I",
+        header: "Auxalary I",
         columns: [{
-            header: "Engine (avg)",
-            width: 100,
-            dataIndex: 'rpm3'
-        },{
-            header: "Propeller (avg)",
-            width: 100,
-            dataIndex: 'prop3'
-        },{
-            header: "InFlow",
-            width: 100,
-            dataIndex: 'inflow3'
-        },{
-            header: "OutFlow",
-            width: 100,
-            dataIndex: 'outflow3'
-        },{
-            header: "Temp",
-            width: 100,
-            dataIndex: 'temp3'
-        },{
-            header: "Press",
-            width: 100,
-            dataIndex: 'press3'
-        }]    
-    }, {
-		header: "Center II",
-        columns: [{
-            header: "Engine (avg)",
-            width: 100,
-            dataIndex: 'rpm4'
-        },{
-            header: "Propeller (avg)",
-            width: 100,
-            dataIndex: 'prop4'
-        },{
-            header: "InFlow",
-            width: 100,
-            dataIndex: 'inflow4'
-        },{
-            header: "OutFlow",
-            width: 100,
-            dataIndex: 'outflow4'
-        },{
-            header: "Temp",
-            width: 100,
-            dataIndex: 'temp4'
-        },{
-            header: "Press",
-            width: 100,
-            dataIndex: 'press4'
-        }]    
-    }, {
-        header: "Genset",
-        columns: [{
-            header: "GenSet #1",
-            width: 100,
-            dataIndex: 'runhour1'
-        }, {
-            header: "GenSet #2",
-            width: 100,
-            dataIndex: 'runhour2'
-        }, {
-            header: "GenSet #3",
-            width: 100,
-            dataIndex: 'runhour3'
-        
+          header: "RunHours",
+          width: 100,
+          dataIndex: 'ME1-RH'
+      },{
+          header: "Fuel",
+          width: 100,
+          dataIndex: 'fuel'
+      },{
+          header: "RPM",
+          width: 100,
+          dataIndex: 'rpm'
         }]
+    }, {
+		header: "Auxalary II",
+        columns: [{
+          header: "RunHours",
+          width: 100,
+          dataIndex: 'ME1-RH'
+      },{
+          header: "Fuel",
+          width: 100,
+          dataIndex: 'fuel'
+      },{
+          header: "RPM",
+          width: 100,
+          dataIndex: 'rpm'
+        }]
+    }, {
+      header: "Distance",
+      width: 100,
+      dataIndex: 'runhour1'
+  }, {
+      header: "Speed",
+      width: 100,
+      dataIndex: 'runhour2'
+        // header: "",
+        // columns: [{
+        //
+        // // }, {
+        // //     header: "GenSet #3",
+        // //     width: 100,
+        // //     dataIndex: 'runhour3'
+        //
+        // }]
     }],
 
     tbar : ['->',{
@@ -461,7 +426,7 @@ var grafik = new Ext.create('Chart.ux.Highcharts', {
         type: 'spline',
         name: 'rpm #3',
         visible: true
-        
+
     }, {
 		dataIndex: 'rpm4',
         yAxis: 0,
@@ -469,7 +434,7 @@ var grafik = new Ext.create('Chart.ux.Highcharts', {
         type: 'spline',
         name: 'rpm #4',
         visible: false
-        
+
     }, {
         dataIndex: 'fuel1',
         yAxis: 1,
@@ -680,7 +645,7 @@ var content_akum = '<style type="text/css">' +
 			'</tr>' +
 			'</table>' ;
 
-//function update_text2() {		
+//function update_text2() {
 	//var content_text2 = '<html><body><div style="font-size: 20px; color:blue">(current view -> '+comb_kapal2+' - date: '+tgl_sel2+')</div></body></html>';
 	//Ext.getCmp('toolbar_text2').update(content_text2);
 //}
@@ -717,7 +682,7 @@ var panel_hitung = {
 					daily_akum();
 					//console.log('ini pilih kapal');
 					//console.log('ini pilih kapal');
-					
+
 				},
 				afterrender : function(){
 						var isi1 = this.getStore().data.items[0].data['name'];
@@ -725,11 +690,11 @@ var panel_hitung = {
 						this.setValue(isi1);
 						comb_kapal22 = (comb_kapal21 != '') ? comb_kapal22 : isi1;
 						Ext.getCmp('table_chart').setTitle('Vessel '+isi1+' on '+ Ext.Date.format(new Date(), 'd-M-Y' ));
-						
+
 						//store_grafik_hari.load({params : { id: comb_kapal22, tgl: tgl_sel21 }});
 						//console.log('comb_kapal22 : '+isiid);
 						//console.log('tgl_sel21  : '+tgl_sel21);
-						
+
 					}
 			}
 		},{
@@ -744,7 +709,7 @@ var panel_hitung = {
 			format: 'd-M-Y',
 			listeners: {
 				change: function () {
-					
+
 					//console.log('Date selected: ', Ext.Date.format(this.getValue(),'Y-m-d'));
 					//console.log()
 					tgl_sel21 = Ext.Date.format(this.getValue(),'Y-m-d');
@@ -756,23 +721,23 @@ var panel_hitung = {
 					//update_text1();
 					daily_akum();
 					//Ext.getCmp('panel_daily').update(content_akum);
-					
-				}, 
+
+				},
 				afterrender : function(){
 					//console.log('Date selected: ', this.getValue());
 					tgl_sel21 = Ext.Date.format(this.getValue(),'Y-m-d');
 					tgl_sel22 = (tgl_sel21 != '') ? tgl_sel21 : Ext.Date.format(new Date(), 'd-M-Y' );
 					//console.log(tgl_sel21);
 					//comb_kapal23 = (comb_kapal21 != '') ? '1' : isi1;
-					
+
 					//console.log('comb_kapal22 : '+comb_kapal23);
 					//console.log('tgl_sel21  : '+tgl_sel21);
 					}
 			}
-			
-			
-			
-			
+
+
+
+
 			//fieldLabel: 'Date',
 			//id: 'date_total',
 			//labelWidth: 40,
@@ -848,29 +813,33 @@ function daily_akum() {
 			//console.log('rh engine = '+  flow);
             //var temp = new Array();
             //temp = (data.responseText).split(",");
+
+            /*
              eng1_daily = parseFloat(hasil.g_perhari[0].tot_fl1) - parseFloat(hasil.g_perhari[0].tot_ovfl1);
              eng2_daily = parseFloat(hasil.g_perhari[0].tot_fl2) - parseFloat(hasil.g_perhari[0].tot_ovfl2);
              eng3_daily = parseFloat(hasil.g_perhari[0].tot_fl3) - parseFloat(hasil.g_perhari[0].tot_ovfl3);
              eng4_daily = parseFloat(hasil.g_perhari[0].tot_fl4) - parseFloat(hasil.g_perhari[0].tot_ovfl4);
-            //var ef3 =  isNaN(eng3_daily) ? 0 : eng3_daily ; 
+
+             */
+            //var ef3 =  isNaN(eng3_daily) ? 0 : eng3_daily ;
             //console.log(eng3_daily, eng4_daily);
-            
-            
+
+/*
              gen1_runhour = parseFloat(hasil.g_perhari[0].rh1).toFixed(2);
             //gen1_runhour = gen1_runhour_1.toFixed(2);
              gen2_runhour = parseFloat(hasil.g_perhari[0].rh2).toFixed(2);
              gen3_runhour = parseFloat(hasil.g_perhari[0].rh3).toFixed(2);
             //gen1_runhour = gen2_runhour_1.toFixed(2);
-			
+
 			rh_engine1 = parseFloat(hasil.g_perhari[0].engrh1).toFixed(2);
 			rh_engine2 = parseFloat(hasil.g_perhari[0].engrh2).toFixed(2);
 			rh_engine_tot = (parseFloat(rh_engine1) + parseFloat(rh_engine2)).toFixed(2);
-			
+
 			//console.log(rh_engine1);
 			//console.log(rh_engine2);
 			//console.log(rh_engine_tot);
-			
-			total_daily = eng1_daily + eng2_daily + (isNaN(eng3_daily)?0:eng3_daily) + (isNaN(eng4_daily)?0:eng4_daily);
+      total_daily = 5000;
+			// total_daily = eng1_daily + eng2_daily + (isNaN(eng3_daily)?0:eng3_daily) + (isNaN(eng4_daily)?0:eng4_daily);
 			hasil1 = isNaN(eng1_daily) ? (rh_engine1 + ' Hours')  : (eng1_daily + ' Lt') ;
 			hasil2 = isNaN(eng2_daily) ? (rh_engine2 + ' Hours')  : (eng2_daily + ' Lt') ;
 			hasil3 = isNaN(eng3_daily) ?  'N/A' : (eng3_daily + ' Lt');
@@ -878,50 +847,55 @@ function daily_akum() {
 			genset_3 = isNaN(gen3_runhour) ? 'N/A' : (gen3_runhour + ' Hours') ;
             tot_tot = isNaN(rh_engine_tot) ? (total_daily+ ' Lt') : (rh_engine_tot + ' Hours');
             judul = isNaN(rh_engine_tot) ? (' Fuel Consumption ') : (' Engine Running Hours ');
-            
+*/
         },
         callback : function (){
 			//daily_akum();
-			
+
 			content_akum = '<style type="text/css">' +
 			'table.total_daily {font-family: verdana,arial,sans-serif;font-size:12px;text-align: center;color:#333333;border-width: 1px;border-color: #a9c6c9;border-collapse: collapse;}' +
 			'table.total_daily td {border-width: 1px;padding: 4px;border-style: solid;border-color: #a9c6c9;}' +
 			'</style>' +
 			'<table width="100%" class="total_daily">' +
-			'<tr><td colspan="4">Total Daily'+judul+'</td></tr>' +
-			'<tr><td colspan="4" style="font-size:22px;">' + tot_tot + ' </td></tr>' +
+			'<tr><td colspan="2">Total Daily'+judul+'</td></tr>' +
+			'<tr><td colspan="2" style="font-size:22px;">' + tot_tot + ' </td></tr>' +
+			'<tr><td>PortSide</td><td>StarBoard</td></tr>' +
 			'<tr>' +
-			'<td>PortSide</td>' +
-			'<td>StarBoard</td>' +
-			'<td>Center I</td>' +
-			'<td>Center II</td>' +
-			'</tr>' +
-			'<tr>' +
-			'<td><span style="font-size:18px;">' + hasil1 + '</span></td>' +
-			'<td><span style="font-size:18px;">' + hasil2 + '</span></td>' +
-			'<td><span style="font-size:18px;">' + hasil3 + '</span></td>' +
-			'<td><span style="font-size:18px;">' + hasil4 + '</span></td>' +
-			'<tr><td colspan="4"></td></tr>' +
-			'<tr><td colspan="4">Genset Daily Running Hours</td></tr>' +
+			'<td><span style="font-size:18px;"> uuuu' + hasil1 + '</span></td>' +
+			'<td><span style="font-size:18px;"> iiii' + hasil2 + '</span></td>'+
+      '</tr>' +
+      '<tr>'+
+      '<td><span style="font-size:18px;"> rh' + hasil1 + '</span></td>' +
+			'<td><span style="font-size:18px;"> rh2' + hasil2 + '</span></td>'+
+      '</tr>' +
+			// '<td><span style="font-size:18px;">' + hasil3 + '</span></td>' +
+			// '<td><span style="font-size:18px;">' + hasil4 + '</span></td>' +
+			'<tr><td colspan="2"></td></tr>' +
+			'<tr><td colspan="2">Genset Daily</td></tr>' +
 			'</tr>' +
 			'<tr>' +
 			'<td>genset#1</td>' +
 			'<td>genset#2</td>' +
-			'<td colspan="2">genset#3</td>' +
+			// '<td colspan="2">genset#3</td>' +
 			'</tr>' +
 			'<tr>' +
-			'<td><span style="font-size:18px;">' + gen1_runhour + ' Hours</span></td>' +
-			'<td><span style="font-size:18px;">' + gen2_runhour + ' Hours</span></td>' +
-			'<td colspan="2"><span style="font-size:18px;">' + genset_3 + '</span></td>' +
+			'<td><span style="font-size:18px;"> xxx' + gen1_runhour + ' liter</span></td>' +
+			'<td><span style="font-size:18px;">yyy ' + gen2_runhour + ' liter</span></td>' +
+			// '<td colspan="2"><span style="font-size:18px;">' + genset_3 + '</span></td>' +
+			'</tr>' +
+      '<tr>' +
+			'<td><span style="font-size:18px;"> xxx' + gen1_runhour + ' Hours</span></td>' +
+			'<td><span style="font-size:18px;">yyy ' + gen2_runhour + ' Hours</span></td>' +
+			// '<td colspan="2"><span style="font-size:18px;">' + genset_3 + '</span></td>' +
 			'</tr>' +
 			'</table>' ;
 			Ext.getCmp('panel_daily').update(content_akum);
-			
+
 			}
-        
-        
-        
-        
+
+
+
+
     });
     //content_akum = '<style type="text/css">' +
         //'table.total_daily {font-family: verdana,arial,sans-serif;font-size:12px;text-align: center;color:#333333;border-width: 1px;border-color: #a9c6c9;border-collapse: collapse;}' +

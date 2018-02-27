@@ -78,7 +78,7 @@ Ext.onReady(function() {
 				width	: '5%',
 				handler: function(){
 					window.location = '../LogOutUser.php';
-					console.log("logout");
+					// console.log("logout");
 				}
 			}],
 			listeners : {
@@ -120,8 +120,8 @@ Ext.onReady(function() {
 							title: 'REPORT AD-HOC',
 							layout: 'fit',
 							id: 'adhoc_rep',
-							// items: panel,
-							xtype: 'panel',
+							items: [ panel_r_adhoc ],
+							// xtype: 'panel',
 							iconCls: 'tab-icon'
 
             }]

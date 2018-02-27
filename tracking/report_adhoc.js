@@ -84,189 +84,189 @@ Ext.require([
 //     //}
 // //});
 //
-// var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
-//     //id : 'table_ship',
-//     //jdl : '',
-//     id : 'table_ship',
-//     title: 'Data Ship',
-//     store : store_detail_kapal,
-//     flex: 4,
-//     columns: [
-//     {
-//         header: "Date Time",
-//         width: 130,
-//         dataIndex: 'waktu',
-//         locked : true
-//     },
-// 	{
-//       header: "Satelite Data",
-//       columns: [{
-// 			header: "Latitude",
-// 			width: 50,
-// 			dataIndex: 'lat'
-// 		},{
-// 			header: "Longitude",
-// 			width: 55,
-// 			dataIndex: 'lng'
-// 		},{
-// 			header: "Speed",
-// 			width: 40,
-// 			dataIndex: 'speed'
-// 		},{
-// 			header: "Heading",
-// 			width: 45,
-// 			dataIndex: 'heading'
-// 		}]
-// 	},{
-//       header: "PortSide Engine",
-//       columns: [{
-// 			header: "Engine",
-// 			width: 70,
-// 			dataIndex: 'rpm1'
-// 		},{
-// 			header: "Propeller",
-// 			width: 70,
-// 			dataIndex: 'prop1'
-// 		},{
-// 			header: "InFlow",
-// 			width: 70,
-// 			dataIndex: 'inflow1'
-// 		},{
-// 			header: "OutFlow",
-// 			width: 70,
-// 			dataIndex: 'outflow1'
-// 		},{
-// 			header: "Temp",
-// 			width: 70,
-// 			dataIndex: 'temp1'
-// 		},{
-// 			header: "Press",
-// 			width: 70,
-// 			dataIndex: 'press1'
-// 		}]
-// 	},{
-//       header: "StarBoard Engine",
-//       columns: [{
-// 			header: "Engine",
-// 			width: 70,
-// 			dataIndex: 'rpm2'
-// 		},{
-// 			header: "Propeller",
-// 			width: 70,
-// 			dataIndex: 'prop2'
-// 		},{
-// 			header: "InFlow",
-// 			width: 70,
-// 			dataIndex: 'inflow2'
-// 		},{
-// 			header: "OutFlow",
-// 			width: 70,
-// 			dataIndex: 'outflow2'
-// 		},{
-// 			header: "Temp",
-// 			width: 70,
-// 			dataIndex: 'temp2'
-// 		},{
-// 			header: "Press",
-// 			width: 70,
-// 			dataIndex: 'press2'
-// 		}]
-// 	},{
-//       header: "Center I Engine",
-//       columns: [{
-// 			header: "Engine",
-// 			width: 70,
-// 			dataIndex: 'rpm3'
-// 		},{
-// 			header: "Propeller",
-// 			width: 70,
-// 			dataIndex: 'prop3'
-// 		},{
-// 			header: "InFlow",
-// 			width: 70,
-// 			dataIndex: 'inflow3'
-// 		},{
-// 			header: "OutFlow",
-// 			width: 70,
-// 			dataIndex: 'outflow3'
-// 		},{
-// 			header: "Temp",
-// 			width: 70,
-// 			dataIndex: 'temp3'
-// 		},{
-// 			header: "Press",
-// 			width: 70,
-// 			dataIndex: 'press3'
-// 		}]
-// 	},{
-// 		header: "Center II Engine",
-//       columns: [{
-// 			header: "Engine",
-// 			width: 70,
-// 			dataIndex: 'rpm4'
-// 		},{
-// 			header: "Propeller",
-// 			width: 70,
-// 			dataIndex: 'prop4'
-// 		},{
-// 			header: "InFlow",
-// 			width: 70,
-// 			dataIndex: 'inflow4'
-// 		},{
-// 			header: "OutFlow",
-// 			width: 70,
-// 			dataIndex: 'outflow4'
-// 		},{
-// 			header: "Temp",
-// 			width: 70,
-// 			dataIndex: 'temp4'
-// 		},{
-// 			header: "Press",
-// 			width: 70,
-// 			dataIndex: 'press4'
-// 		}]
-// 	},{
-//       header: "GenSet",
-//       columns: [
-// 		{
-// 			header: "GenSet #1",
-// 			width: 70,
-// 			dataIndex: 'runhour1'
-// 		},{
-// 			header: "GenSet #2",
-// 			width: 70,
-// 			dataIndex: 'runhour2'
-// 		},{
-// 			header: "GenSet #3",
-// 			width: 70,
-// 			dataIndex: 'runhour3'
-// 		}
-// 		]
-// 	},
-// 	{
-//       header: "Panel",
-//       columns: [{
-// 			header: "Battery",
-// 			width: 70,
-// 			dataIndex: 'battery'
-// 		},{
-// 			header: "Charger",
-// 			width: 70,
-// 			dataIndex: 'charger'
-// 		}]
-// 	},{
-//       header: "Source Data",
-//       columns: [{
-// 			//header: "id kapal",
-// 			//width: 40,
-// 			//dataIndex: 'kapal'
-// 		//},{
-// 			header: "Modem S/N",
-// 			width: 120,
-// 			dataIndex: 'modem'
-// 		}]
-// 	}]
-// });
+var tabel_r_adhoc = Ext.create('Ext.grid.Panel', {
+    //id : 'table_ship',
+    //jdl : '',
+    id : 'table_ship',
+    title: 'Data Ship',
+    // store : store_detail_kapal,
+    flex: 4,
+    columns: [
+    {
+        header: "Date Time",
+        width: 130,
+        dataIndex: 'waktu',
+        locked : true
+    },
+	{
+      header: "Satelite Data",
+      columns: [{
+			header: "Latitude",
+			width: 50,
+			dataIndex: 'lat'
+		},{
+			header: "Longitude",
+			width: 55,
+			dataIndex: 'lng'
+		},{
+			header: "Speed",
+			width: 40,
+			dataIndex: 'speed'
+		},{
+			header: "Heading",
+			width: 45,
+			dataIndex: 'heading'
+		}]
+	},{
+      header: "PortSide Engine",
+      columns: [{
+			header: "Engine",
+			width: 70,
+			dataIndex: 'rpm1'
+		},{
+			header: "Propeller",
+			width: 70,
+			dataIndex: 'prop1'
+		},{
+			header: "InFlow",
+			width: 70,
+			dataIndex: 'inflow1'
+		},{
+			header: "OutFlow",
+			width: 70,
+			dataIndex: 'outflow1'
+		},{
+			header: "Temp",
+			width: 70,
+			dataIndex: 'temp1'
+		},{
+			header: "Press",
+			width: 70,
+			dataIndex: 'press1'
+		}]
+	},{
+      header: "StarBoard Engine",
+      columns: [{
+			header: "Engine",
+			width: 70,
+			dataIndex: 'rpm2'
+		},{
+			header: "Propeller",
+			width: 70,
+			dataIndex: 'prop2'
+		},{
+			header: "InFlow",
+			width: 70,
+			dataIndex: 'inflow2'
+		},{
+			header: "OutFlow",
+			width: 70,
+			dataIndex: 'outflow2'
+		},{
+			header: "Temp",
+			width: 70,
+			dataIndex: 'temp2'
+		},{
+			header: "Press",
+			width: 70,
+			dataIndex: 'press2'
+		}]
+	},{
+      header: "Center I Engine",
+      columns: [{
+			header: "Engine",
+			width: 70,
+			dataIndex: 'rpm3'
+		},{
+			header: "Propeller",
+			width: 70,
+			dataIndex: 'prop3'
+		},{
+			header: "InFlow",
+			width: 70,
+			dataIndex: 'inflow3'
+		},{
+			header: "OutFlow",
+			width: 70,
+			dataIndex: 'outflow3'
+		},{
+			header: "Temp",
+			width: 70,
+			dataIndex: 'temp3'
+		},{
+			header: "Press",
+			width: 70,
+			dataIndex: 'press3'
+		}]
+	},{
+		header: "Center II Engine",
+      columns: [{
+			header: "Engine",
+			width: 70,
+			dataIndex: 'rpm4'
+		},{
+			header: "Propeller",
+			width: 70,
+			dataIndex: 'prop4'
+		},{
+			header: "InFlow",
+			width: 70,
+			dataIndex: 'inflow4'
+		},{
+			header: "OutFlow",
+			width: 70,
+			dataIndex: 'outflow4'
+		},{
+			header: "Temp",
+			width: 70,
+			dataIndex: 'temp4'
+		},{
+			header: "Press",
+			width: 70,
+			dataIndex: 'press4'
+		}]
+	},{
+      header: "GenSet",
+      columns: [
+		{
+			header: "GenSet #1",
+			width: 70,
+			dataIndex: 'runhour1'
+		},{
+			header: "GenSet #2",
+			width: 70,
+			dataIndex: 'runhour2'
+		},{
+			header: "GenSet #3",
+			width: 70,
+			dataIndex: 'runhour3'
+		}
+		]
+	},
+	{
+      header: "Panel",
+      columns: [{
+			header: "Battery",
+			width: 70,
+			dataIndex: 'battery'
+		},{
+			header: "Charger",
+			width: 70,
+			dataIndex: 'charger'
+		}]
+	},{
+      header: "Source Data",
+      columns: [{
+			//header: "id kapal",
+			//width: 40,
+			//dataIndex: 'kapal'
+		//},{
+			header: "Modem S/N",
+			width: 120,
+			dataIndex: 'modem'
+		}]
+	}]
+});
 //
 //
 //
@@ -308,7 +308,7 @@ var panel_r_adhoc = {
 		padding : '0 0 0 10',
         xtype: 'toolbar',
         dock: 'top',
-		height: 40,
+				height: 40,
         items: [{
 
 		    //'selected ship :',
@@ -320,7 +320,7 @@ var panel_r_adhoc = {
 				fieldLabel: ' Selected Ship',
 				labelWidth : 80,
 				width	: 300,
-				queryMode: 'remote',
+				// queryMode: 'remote',
 				emptyText: '- select ship -',
 				editable : false,
 				displayField: 'name',
@@ -328,20 +328,20 @@ var panel_r_adhoc = {
 				// store: store_combo_kapal1,
 				listeners:{
 					select: function() {
-						comb_kapal1 = this.getValue();
-						comb_kapal2 = this.getRawValue();
+						// comb_kapal1 = this.getValue();
+						// comb_kapal2 = this.getRawValue();
 						//console.log(comb_kapal1);
 						//console.log(tgl_sel1);
 						// store_detail_kapal.load({params: { id: comb_kapal1, tgl: tgl_sel1}});
-						Ext.getCmp('table_ship').setTitle('Vessel '+comb_kapal2 +' on '+ tgl_sel2);
+						// Ext.getCmp('table_ship').setTitle('Vessel '+comb_kapal2 +' on '+ tgl_sel2);
 						//tabel_detail_kapal
 						//update_text1();
 					},
 					afterrender : function(){
-							var isi = this.getStore().data.items[0].data['name'];
-							this.setValue(isi);
-							comb_kapal2 = (comb_kapal1 != '') ? comb_kapal2 : isi;
-							Ext.getCmp('table_ship').setTitle('Vessel '+isi+' on '+ Ext.Date.format(new Date(), 'd-M-Y' ));
+							// var isi = this.getStore().data.items[0].data['name'];
+							// this.setValue(isi);
+							// comb_kapal2 = (comb_kapal1 != '') ? comb_kapal2 : isi;
+							// Ext.getCmp('table_ship').setTitle('Vessel '+isi+' on '+ Ext.Date.format(new Date(), 'd-M-Y' ));
 							//console.log(isi);
 						}
 				}
@@ -362,17 +362,17 @@ var panel_r_adhoc = {
 
 						//console.log('Date selected: ', Ext.Date.format(this.getValue(),'Y-m-d'));
 						//console.log()
-						tgl_sel1 = Ext.Date.format(this.getValue(),'Y-m-d');
-						// store_detail_kapal.load({params: { id: comb_kapal1, tgl: tgl_sel1}});
-						tgl_sel2 = (tgl_sel1 != '') ? tgl_sel1 : Ext.Date.format(new Date(), 'd-M-Y' );
-						//console.log(tgl_sel2);
-						Ext.getCmp('table_ship').setTitle('Vessel '+comb_kapal2 +' on '+ tgl_sel2);
+						// tgl_sel1 = Ext.Date.format(this.getValue(),'Y-m-d');
+						// // store_detail_kapal.load({params: { id: comb_kapal1, tgl: tgl_sel1}});
+						// tgl_sel2 = (tgl_sel1 != '') ? tgl_sel1 : Ext.Date.format(new Date(), 'd-M-Y' );
+						// //console.log(tgl_sel2);
+						// Ext.getCmp('table_ship').setTitle('Vessel '+comb_kapal2 +' on '+ tgl_sel2);
 						//update_text1();
 					},
 					afterrender : function(){
 						//console.log('Date selected: ', this.getValue());
-						tgl_sel1 = Ext.Date.format(this.getValue(),'Y-m-d');
-						tgl_sel2 = (tgl_sel1 != '') ? tgl_sel1 : Ext.Date.format(new Date(), 'd-M-Y' );
+						// tgl_sel1 = Ext.Date.format(this.getValue(),'Y-m-d');
+						// tgl_sel2 = (tgl_sel1 != '') ? tgl_sel1 : Ext.Date.format(new Date(), 'd-M-Y' );
 						//console.log(tgl_sel1);
 						}
 				}
@@ -381,12 +381,12 @@ var panel_r_adhoc = {
 				xtype : 'button',
 				text : 'Export to Excel',
 				handler : function(){
-					var tgl = Ext.Date.format(Ext.getCmp('date_total1').getValue(),'Y-m-d');
-					var ves = Ext.getCmp('cb_vessel').getValue();
-					// console.log(comb_kapal1);
-					var kpl = (comb_kapal1=== '')?'1':comb_kapal1;
-					// console.log('export bro dari '+tgl+' ==> '+kpl);
-					window.open('export_data_detail.php?id='+kpl+'&t='+tgl);
+					// var tgl = Ext.Date.format(Ext.getCmp('date_total1').getValue(),'Y-m-d');
+					// var ves = Ext.getCmp('cb_vessel').getValue();
+					// // console.log(comb_kapal1);
+					// var kpl = (comb_kapal1=== '')?'1':comb_kapal1;
+					// // console.log('export bro dari '+tgl+' ==> '+kpl);
+					// window.open('export_data_detail.php?id='+kpl+'&t='+tgl);
 					// Ext.Ajax.request({
 					// 	params : {t : tgl, id: ves },
 					// 	method : 'GET',
@@ -410,7 +410,8 @@ var panel_r_adhoc = {
         align: 'stretch'
     },
     items: [
-        tabel_detail_kapal
+        // tabel_detail_kapal
+        tabel_r_adhoc
         /*
         ,{
             xtype: 'splitter'
