@@ -235,12 +235,14 @@ session_start();
                   var objd = btoa(obj);
                   setcookie('marine',objd,30);
                   var dir = '/project/vts';
-                  var host = document.location.origin+dir;
-                  // console.log(host+dir);
+                  var host = document.location.origin;
+                  console.log(host);
+                  // console.log(window.parent);
 
-                  // debugger;
+
+                  debugger;
                   // window.location = "http://localhost/project/vts/tracking";
-                  window.location = host+"/tracking";
+                  // window.location = host+"/tracking";
                 }
             },
             error: function(d){
