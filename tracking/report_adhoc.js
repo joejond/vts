@@ -87,185 +87,64 @@ Ext.require([
 var tabel_r_adhoc = Ext.create('Ext.grid.Panel', {
     //id : 'table_ship',
     //jdl : '',
-    id : 'table_ship',
-    title: 'Data Ship',
+    id : 'table_ship_adhoc',
+    title: 'Report Ad-Hoc',
     // store : store_detail_kapal,
     flex: 4,
     columns: [
     {
-        header: "Date Time",
-        width: 130,
+        header: "Date",
+        width: 100,
         dataIndex: 'waktu',
         locked : true
-    },
-	{
-      header: "Satelite Data",
+    },{
+      	header: "Working Distance",
+				width: 100,
+				dataIndex: 'dist'
+		},{
+				header: "Working Hours",
+				width: 100,
+				dataIndex: 'hours'
+		},{
+				header: "Average Speed",
+				width: 100,
+				dataIndex: 'speed'
+		},{
+			header: "Main Engine",
       columns: [{
-			header: "Latitude",
-			width: 50,
-			dataIndex: 'lat'
-		},{
-			header: "Longitude",
-			width: 55,
-			dataIndex: 'lng'
-		},{
-			header: "Speed",
-			width: 40,
-			dataIndex: 'speed'
-		},{
-			header: "Heading",
-			width: 45,
-			dataIndex: 'heading'
-		}]
+					header: "Daily Consumption",
+					width: 100,
+					dataIndex: 'day_cons'
+			},{
+					header: "Daily Rate",
+					width: 100,
+					dataIndex: 'day_rate'
+
+			}]
 	},{
-      header: "PortSide Engine",
+      header: "Auxiliary Engine",
       columns: [{
-			header: "Engine",
-			width: 70,
-			dataIndex: 'rpm1'
-		},{
-			header: "Propeller",
-			width: 70,
-			dataIndex: 'prop1'
-		},{
-			header: "InFlow",
-			width: 70,
-			dataIndex: 'inflow1'
-		},{
-			header: "OutFlow",
-			width: 70,
-			dataIndex: 'outflow1'
-		},{
-			header: "Temp",
-			width: 70,
-			dataIndex: 'temp1'
-		},{
-			header: "Press",
-			width: 70,
-			dataIndex: 'press1'
-		}]
+					header: "Daily Consumption",
+					width: 100,
+					dataIndex: 'day_cons'
+			},{
+					header: "Daily Rate",
+					width: 100,
+					dataIndex: 'day_rate'
+
+			}]
 	},{
-      header: "StarBoard Engine",
-      columns: [{
-			header: "Engine",
-			width: 70,
+      header: "Remaining onBoard",
+			width: 200,
 			dataIndex: 'rpm2'
-		},{
-			header: "Propeller",
-			width: 70,
-			dataIndex: 'prop2'
-		},{
-			header: "InFlow",
-			width: 70,
-			dataIndex: 'inflow2'
-		},{
-			header: "OutFlow",
-			width: 70,
-			dataIndex: 'outflow2'
-		},{
-			header: "Temp",
-			width: 70,
-			dataIndex: 'temp2'
-		},{
-			header: "Press",
-			width: 70,
-			dataIndex: 'press2'
-		}]
 	},{
-      header: "Center I Engine",
-      columns: [{
-			header: "Engine",
-			width: 70,
-			dataIndex: 'rpm3'
-		},{
-			header: "Propeller",
-			width: 70,
-			dataIndex: 'prop3'
-		},{
-			header: "InFlow",
-			width: 70,
-			dataIndex: 'inflow3'
-		},{
-			header: "OutFlow",
-			width: 70,
-			dataIndex: 'outflow3'
-		},{
-			header: "Temp",
-			width: 70,
-			dataIndex: 'temp3'
-		},{
-			header: "Press",
-			width: 70,
-			dataIndex: 'press3'
+
+			header: "Last Fuel Loding",
+			width: 200,
+			dataIndex: 'rpm2'
+
 		}]
-	},{
-		header: "Center II Engine",
-      columns: [{
-			header: "Engine",
-			width: 70,
-			dataIndex: 'rpm4'
-		},{
-			header: "Propeller",
-			width: 70,
-			dataIndex: 'prop4'
-		},{
-			header: "InFlow",
-			width: 70,
-			dataIndex: 'inflow4'
-		},{
-			header: "OutFlow",
-			width: 70,
-			dataIndex: 'outflow4'
-		},{
-			header: "Temp",
-			width: 70,
-			dataIndex: 'temp4'
-		},{
-			header: "Press",
-			width: 70,
-			dataIndex: 'press4'
-		}]
-	},{
-      header: "GenSet",
-      columns: [
-		{
-			header: "GenSet #1",
-			width: 70,
-			dataIndex: 'runhour1'
-		},{
-			header: "GenSet #2",
-			width: 70,
-			dataIndex: 'runhour2'
-		},{
-			header: "GenSet #3",
-			width: 70,
-			dataIndex: 'runhour3'
-		}
-		]
-	},
-	{
-      header: "Panel",
-      columns: [{
-			header: "Battery",
-			width: 70,
-			dataIndex: 'battery'
-		},{
-			header: "Charger",
-			width: 70,
-			dataIndex: 'charger'
-		}]
-	},{
-      header: "Source Data",
-      columns: [{
-			//header: "id kapal",
-			//width: 40,
-			//dataIndex: 'kapal'
-		//},{
-			header: "Modem S/N",
-			width: 120,
-			dataIndex: 'modem'
-		}]
-	}]
+
 });
 //
 //
