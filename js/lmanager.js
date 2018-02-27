@@ -121,7 +121,7 @@ function getDataCookies(cname)
 
 function getAPI()
 {
-	var loc = window.location;
+	// var loc = window.location;
 	//console.log(loc);
 
 	//if(loc.hostname == 'localhost'){
