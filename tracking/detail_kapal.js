@@ -66,8 +66,7 @@ var store_detail_kapal = Ext.create('Ext.data.Store', {
     proxy: {
         type: 'ajax',
         // url: 'ship_detail_sp.php',
-				url: getAPI()+'/get_data_bima',
-				// url: 'http://10.10.10.11:1336/get_data_bima',
+				url: 'http://10.10.10.11:1336/get_data_bima',
         // url: 'http://192.168.1.17:1337/get_data_bima?id=8&user_id=4&tz=%2B07:00&tgl=2018-02-26',
         method: 'GET',
         // reader: {
@@ -421,8 +420,9 @@ var panel_detail = {
 						//console.log('Date selected: ', Ext.Date.format(this.getValue(),'Y-m-d'));
 						//console.log()
 						var dt = getDataCookies(cookiename());
-						var param = {user_id: dt.idu,id:comb_kapal1,tgl:tgl_sel1,tz: getTimeZone()};
+
 						tgl_sel1 = Ext.Date.format(this.getValue(),'Y-m-d');
+						var param = {user_id: dt.idu,id:comb_kapal1,tgl:tgl_sel1,tz: getTimeZone()};
 						// store_detail_kapal.load({params: { id: comb_kapal1, tgl: tgl_sel1}});
 						store_detail_kapal.load({params: param});
 						tgl_sel2 = (tgl_sel1 != '') ? tgl_sel1 : Ext.Date.format(new Date(), 'd-M-Y' );

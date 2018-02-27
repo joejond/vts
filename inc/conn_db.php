@@ -13,8 +13,12 @@
 	//}
 	//else echo 'Sukses';
 
+//<<<<<<< HEAD
+//$db = new PDO('mysql:host=localhost;dbname=monita4', 'monita4', 'monita4');
+//=======
 // $db = new PDO('mysql:host=localhost;dbname=marine_1', 'marine', 'monita2014');
 $db = new PDO('mysql:host=10.10.10.11;dbname=monita4', 'monita4', 'monita4');
+//>>>>>>> acbcd4121c59d1900b3ea98bec84944ec035c339
 
 $redis = new Redis;
 $redis->connect('10.10.10.11',6379);

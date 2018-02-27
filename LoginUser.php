@@ -2,6 +2,7 @@
 // error_reporting(-1);
 // ini_set('display_errors', 'On');
 session_start();
+//>>>>>>> acbcd4121c59d1900b3ea98bec84944ec035c339
 //include	'inc/conn_db.php';
 
 //if (!empty($_SERVER["HTTP_CLIENT_IP"]))
@@ -25,8 +26,13 @@ session_start();
 		//$capca = strip_tags(trim($_POST['capcai'])); //echo $capca;
 		//$kode = $_SESSION['kode']; //echo $kode;
 		//$banding = strcmp($kode,$capca); //echo $banding;
+//<<<<<<< HEAD
 
 		//$sql 	= "SELECT u.id, u.username ,u.timezone, ur.route, u.id_company
+//=======
+
+		//$sql 	= "SELECT u.id, u.username ,u.timezone, ur.route, u.id_company
+//>>>>>>> acbcd4121c59d1900b3ea98bec84944ec035c339
 					//FROM user u
 						//join user_route ur on ur.id_company = u.id_company
 					//WHERE u.username = '".$user."' and u.password='".MD5($pass)."'";
@@ -38,12 +44,21 @@ session_start();
 		////$statement->rowCount()
 		////$hasil 	= $db->query($sql);
 		////$jml 	= $hasil->num_rows;
+//<<<<<<< HEAD
 
 		//$jml = $sth->rowCount();
 		//$result = $sth->fetch(PDO::FETCH_OBJ);
 
 		////print_r($result);
 
+//=======
+
+		//$jml = $sth->rowCount();
+		//$result = $sth->fetch(PDO::FETCH_OBJ);
+
+		////print_r($result);
+
+//>>>>>>> acbcd4121c59d1900b3ea98bec84944ec035c339
 		//if ($user == '' || $pass == ''){
 			//$msg = '<p class="text-center text-danger" ><b><span class="glyphicon glyphicon-warning-sign"></span>   Please type your username or password!!</b></p>';
 		//}
@@ -52,6 +67,7 @@ session_start();
 			////while($row = $sth->fetch()){
 			////foreach($result as $row){
 				////echo $row['username'] . '<br />';
+//<<<<<<< HEAD
 
 				////$_SESSION['uid']		= $row['id'];
 				////$_SESSION['username']	= $row['username'];
@@ -76,12 +92,42 @@ session_start();
 					//window.parent.location ="'.$result->route.'/#";
 
 
+//=======
+
+				////$_SESSION['uid']		= $row['id'];
+				////$_SESSION['username']	= $row['username'];
+				////$_SESSION['timezone']	= $row['timezone'];
+				//$_SESSION['uid']		= $result->id;
+				//$_SESSION['username']	= $result->username;
+				//$_SESSION['company']	= $result->id_company;
+				//$_SESSION['timezone']	= $result->timezone;
+
+
+				//$sql_log = "update user set last_login = UNIX_TIMESTAMP(NOW()), ipaddress = '".$ip."' where id = ".$result->id."";
+				//$loged = $db->prepare($sql_log);
+				//$loged->execute();
+
+			////}
+				////print_r ($result);
+
+			////echo 'ini dia - >'. $result->route;
+			////echo  'hahada'.$row['user_route_id'];
+			////*
+			//echo '<script type="text/javascript">
+					//window.parent.location ="'.$result->route.'/#";
+
+
+//>>>>>>> acbcd4121c59d1900b3ea98bec84944ec035c339
 			//</script>' ;
 			////*/
 			//$msg = '<p class="text-center text-success"><b><span class="glyphicon glyphicon-thumbs-up"></span>  Succesfull Authenticate</b></p>';
 			//$sks = 1;
 		//}
+//<<<<<<< HEAD
 
+//=======
+
+//>>>>>>> acbcd4121c59d1900b3ea98bec84944ec035c339
 		//else {
 			//$msg = '<p class="text-center text-danger"><b><span class="glyphicon glyphicon-warning-sign"></span>  You not Authorize to login, please check your username or password.</b></p>';
 		//}
@@ -174,6 +220,7 @@ session_start();
 //$alert = "ini lagi coba";
 ?>
     <script src="js/jquery.min.js"></script>
+    <script src="js/lmanager.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <!-- <script src="js/lmanager_62.js"></script> -->
     <script src="js/lmanager.js"></script>
@@ -186,6 +233,15 @@ session_start();
 
 
 	$(document).ready(function(){
+//<<<<<<< HEAD
+//		$("#pesan").delay(3000).fadeOut('slow');
+
+//		$("#flogin").submit(function(){
+//				console.log("di submit");
+//				var uname = $("input[name='userid']").val(),
+//				pas = $("input[name='passwd']").val();
+
+//=======
 		//$("#pesan").delay(3000).fadeOut('slow');
 
 		$("#flogin").submit(function(){
@@ -197,12 +253,63 @@ session_start();
 				//lname = $("input[name='lname']").val(),
 				//perusahaan = $("input[name='perusahaan']").val();
 
+//>>>>>>> acbcd4121c59d1900b3ea98bec84944ec035c339
 				console.log(uname,encodeMD5(pas));
 
 
 				var dt = {u:$("input[name='userid']").val(),p:encodeMD5(pas)};
 				var j = JSON.stringify(dt);
 				var uid = btoa(j);
+//<<<<<<< HEAD
+//				var tgl = new Date();
+//				var n = tgl.getTimezoneOffset();
+
+//				console.log(dt,uid,atob(uid));
+				//console.log(Base64.encode(j));
+//				console.log(TimeZone(n));
+
+				//console.log(getAPI());
+
+        // $.ajax({
+        //   url: getAPI()+ "/auth/login?idu=eyJ1IjoicGVsaW5kbzMiLCJwIjoiNDI2MjY2ZGRiNTY5ZTJmZjQxZDU2MGIwYzIxZmY1MjkifQ==",
+        //   success : function(data){
+        //     console.log('masukk');
+        //   }
+        //
+        //
+        // });
+        // var api= localhost;
+//			console.log(window.location.hostname);
+//			$.ajax(
+//			{
+				// Post the variable fetch to url.
+//				type : 'post',
+//				url : "http://10.10.10.11:1336/auth/login",
+//				dataType : 'json', // expected returned data format.
+//				crossDomain : true,
+//				withCredentials: true,
+//				data :{idu : uid},
+				//data :{idu : 'eyJ1IjoicGVsaW5kbzMiLCJwIjoiNDI2MjY2ZGRiNTY5ZTJmZjQxZDU2MGIwYzIxZmY1MjkifQ'},
+				//data :{idu : 'eyJ1IjoicGVsaW5kbzMiLCJwIjoiNDI2MjY2ZGRiNTY5ZTJmZjQxZDU2MGIwYzIxZmY1MjkifQ'},
+//				success : function(data)
+//				{
+					// This happens AFTER the backend has returned an JSON array (or other object type)
+//				  //  var res1, res2;
+//					console.log("yaya ya");
+//				},
+
+//				complete : function(data)
+//				{
+					// do something, not critical.
+//					console.log("gagal nononon");
+//				}
+//			});
+
+//		});
+
+
+
+//=======
 				// var tgl = new Date();
 				// var n = tgl.getTimezoneOffset();
         // var e = jsEncode.encode("Hello world!","123");
@@ -234,15 +341,10 @@ session_start();
 
                   var objd = btoa(obj);
                   setcookie('marine',objd,30);
-                  var dir = '/project/vts';
                   var host = document.location.origin;
-                  console.log(host);
-                  // console.log(window.parent);
 
-
-                  debugger;
-                  // window.location = "http://localhost/project/vts/tracking";
-                  // window.location = host+"/tracking";
+                window.parent.location = (host == 'http://localhost') ? (host+"/project/vts/tracking"):(host+"/vts/tracking");
+                
                 }
             },
             error: function(d){
@@ -268,6 +370,7 @@ session_start();
 
 
 
+//>>>>>>> acbcd4121c59d1900b3ea98bec84944ec035c339
 	});
 
 

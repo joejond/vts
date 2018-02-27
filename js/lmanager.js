@@ -69,6 +69,8 @@
 //window.location.reload;
 /*Router*/
 
+//<<<<<<< HEAD
+//=======
 function setcookie(n,v,e)
 {
 		var d = new Date();
@@ -118,11 +120,12 @@ function getDataCookies(cname)
   return dt;
 
 }
+//>>>>>>> acbcd4121c59d1900b3ea98bec84944ec035c339
 
 function getAPI()
 {
-	// var loc = window.location;
-	//console.log(loc);
+	var loc = window.location;
+	console.log(loc.hostname);
 
 	//if(loc.hostname == 'localhost'){
 		//return 'http://localhost:1336';
@@ -131,16 +134,27 @@ function getAPI()
 	//}
 
 	//return (loc.hostname == 'localhost')? 'http://localhost:1336' : 'http://'+ loc.hostname +':1336';
+//<<<<<<< HEAD
+	// return 'http://10.10.10.11:1336';
+//	return 'http://project.daunbiru.com:1336';
+//=======
 	return 'http://10.10.10.11:1336';
 	// return 'http://project.daunbiru.com';
 	// return 'http://119.18.154.234:1336';
 	// return '192.168.1.17:1337';
+//>>>>>>> acbcd4121c59d1900b3ea98bec84944ec035c339
 
 }
 
 
 
 
+//<<<<<<< HEAD
+//function TimeZone(tz)
+//{
+//	var tanda = tz<0 ? "+":"-";
+//	var a =Math.abs(tz/60);
+//=======
 function getTimeZone()
 {
 	var d = new Date(), tz = d.getTimezoneOffset(),
@@ -148,6 +162,7 @@ function getTimeZone()
 
 	tanda = tz<0 ? "+":"-",
 	a =Math.abs(tz/60);
+//>>>>>>> acbcd4121c59d1900b3ea98bec84944ec035c339
 	a = a<10 ? a=tanda+"0"+a+":00" : a=tanda+a+":00";
 
 	return a;
