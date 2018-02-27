@@ -234,7 +234,13 @@ session_start();
 
                   var objd = btoa(obj);
                   setcookie('marine',objd,30);
-                  window.location = "http://localhost/project/vts/tracking";
+                  var dir = '/project/vts';
+                  var host = document.location.origin+dir;
+                  // console.log(host+dir);
+
+                  // debugger;
+                  // window.location = "http://localhost/project/vts/tracking";
+                  window.location = host+"/tracking";
                 }
             },
             error: function(d){
