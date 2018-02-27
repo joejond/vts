@@ -29,10 +29,12 @@ var day1 = now.getDate();
 var total_daily = 0.0;
 var eng1_daily = 0.0;
 var eng2_daily = 0.0;
-var eng3_daily = 0.0;
-var eng4_daily = 0.0;
+var ae1_daily = 0.0;
+var ae2_daily = 0.0;
 var rh_engine1 = 0.0;
 var rh_engine2 = 0.0;
+var rh_ae1 = 0.0;
+var rh_ae2 = 0.0;
 var rh_engine_tot = 0.0;
 
 //var ef3 = 0.0;
@@ -617,33 +619,39 @@ var content_akum = '<style type="text/css">' +
 			'table.total_daily td {border-width: 1px;padding: 4px;border-style: solid;border-color: #a9c6c9;}' +
 			'</style>' +
 			'<table width="100%" class="total_daily">' +
-			'<tr><td colspan="4">Total Daily'+judul+'</td></tr>' +
-			'<tr><td colspan="4" style="font-size:22px;">' + tot_tot + ' </td></tr>' +
+			'<tr><td colspan="2">Total Daily</td></tr>' +
+			'<tr><td colspan="2" style="font-size:22px;">' + total_daily + ' Liters</td></tr>' +
+			'<tr><td>PortSide</td><td>StarBoard</td></tr>' +
 			'<tr>' +
-			'<td>PortSide</td>' +
-			'<td>StarBoard</td>' +
-			'<td>Center I</td>' +
-			'<td>Center II</td>' +
-			'</tr>' +
-			'<tr>' +
-			'<td><span style="font-size:18px;">' + hasil1 + '</span></td>' +
-			'<td><span style="font-size:18px;">' + hasil2 + '</span></td>' +
-			'<td><span style="font-size:18px;">' + hasil3 + '</span></td>' +
-			'<td><span style="font-size:18px;">' + hasil4 + '</span></td>' +
-			'<tr><td colspan="4"></td></tr>' +
-			'<tr><td colspan="4">Genset Daily Running Hours</td></tr>' +
+			'<td><span style="font-size:18px;"> ' + eng1_daily + ' Liters</span></td>' +
+			'<td><span style="font-size:18px;"> ' + eng2_daily + ' Liters</span></td>'+
+      '</tr>' +
+      '<tr>'+
+      '<td><span style="font-size:18px;"> ' + rh_engine1 + ' Hours</span></td>' +
+			'<td><span style="font-size:18px;"> ' + rh_engine2 + ' Hours</span></td>'+
+      '</tr>' +
+			// '<td><span style="font-size:18px;">' + hasil3 + '</span></td>' +
+			// '<td><span style="font-size:18px;">' + hasil4 + '</span></td>' +
+			'<tr><td colspan="2"></td></tr>' +
+			'<tr><td colspan="2">Genset Daily</td></tr>' +
 			'</tr>' +
 			'<tr>' +
 			'<td>genset#1</td>' +
 			'<td>genset#2</td>' +
-			'<td colspan="2">genset#3</td>' +
+			// '<td colspan="2">genset#3</td>' +
 			'</tr>' +
 			'<tr>' +
-			'<td><span style="font-size:18px;">' + gen1_runhour + ' Hours</span></td>' +
-			'<td><span style="font-size:18px;">' + gen2_runhour + ' Hours</span></td>' +
-			'<td colspan="2"><span style="font-size:18px;">' + genset_3 + '</span></td>' +
+			'<td><span style="font-size:18px;"> ' + ae1_daily + ' Liters</span></td>' +
+			'<td><span style="font-size:18px;">' + ae2_daily + ' Liters</span></td>' +
+			// '<td colspan="2"><span style="font-size:18px;">' + genset_3 + '</span></td>' +
+			'</tr>' +
+      '<tr>' +
+			'<td><span style="font-size:18px;">' + rh_ae1 + ' Hours</span></td>' +
+			'<td><span style="font-size:18px;">' + rh_ae2 + ' Hours</span></td>' +
+			// '<td colspan="2"><span style="font-size:18px;">' + genset_3 + '</span></td>' +
 			'</tr>' +
 			'</table>' ;
+
 
 //function update_text2() {
 	//var content_text2 = '<html><body><div style="font-size: 20px; color:blue">(current view -> '+comb_kapal2+' - date: '+tgl_sel2+')</div></body></html>';
@@ -799,14 +807,19 @@ var panel_hitung = {
 var eng_rh1 = '';
 function daily_akum() {
     Ext.Ajax.request({
-        url: 'data_grafik_perhari.php',
+        // url: 'data_grafik_perhari.php',
+        url: 'http://10.10.10.11:1336/get_data_summary_bima?tgl=2018-02-27&tz=%2B07:00',
         method: 'GET',
-        params: {
-            id: (comb_kapal21 !='') ? comb_kapal21 : '1',
-            tgl: tgl_sel21
-        },
+        // params: {
+        //     id: (comb_kapal21 !='') ? comb_kapal21 : '1',
+        //     tgl: tgl_sel21
+        // },
         success: function (data) {
-			var hasil = Ext.JSON.decode(data.responseText);
+    			var hasil = Ext.JSON.decode(data.responseText);
+          console.log(hasil[0]);
+          var x = hasil[0];
+          console.log(x['ME1 Daily Consumtion']);
+
 			//console.log(hasil.g_perhari[0]);
 			//console.log(hasil.g_perhari[0].tot_fl1 +' -&- '+hasil.g_perhari[0].tot_fl2 );
 			//var flow = (hasil.g_perhari[0].tot_fl1 === null) ? hasil.g_perhari[0].engrh1 : hasil.g_perhari[0].tot_fl1;
@@ -814,13 +827,19 @@ function daily_akum() {
             //var temp = new Array();
             //temp = (data.responseText).split(",");
 
-            /*
-             eng1_daily = parseFloat(hasil.g_perhari[0].tot_fl1) - parseFloat(hasil.g_perhari[0].tot_ovfl1);
-             eng2_daily = parseFloat(hasil.g_perhari[0].tot_fl2) - parseFloat(hasil.g_perhari[0].tot_ovfl2);
-             eng3_daily = parseFloat(hasil.g_perhari[0].tot_fl3) - parseFloat(hasil.g_perhari[0].tot_ovfl3);
-             eng4_daily = parseFloat(hasil.g_perhari[0].tot_fl4) - parseFloat(hasil.g_perhari[0].tot_ovfl4);
+            //*
+             eng1_daily = parseFloat(x['ME1 Daily Consumtion']).toFixed(2) ;
+             eng2_daily = parseFloat(x['ME2 Daily Consumtion']).toFixed(2) ;
+             rh_engine1 = parseFloat(x['ME1 Working Hours']).toFixed(2) ;
+             rh_engine2 = parseFloat(x['ME2 Working Hours']).toFixed(2) ;
+             ae1_daily = parseFloat(x['AE1 Daily Consumtion']).toFixed(2) ;
+             ae2_daily = parseFloat(x['AE2 Daily Consumtion']).toFixed(2) ;
+             rh_ae1 = parseFloat(x['AE1 Working Hours']).toFixed(2) ;
+             rh_ae2 = parseFloat(x['AE2 Working Hours']).toFixed(2) ;
+             total_daily = parseFloat(x['Total Daily']).toFixed(2) ;
 
-             */
+
+             //*/
             //var ef3 =  isNaN(eng3_daily) ? 0 : eng3_daily ;
             //console.log(eng3_daily, eng4_daily);
 
@@ -857,16 +876,16 @@ function daily_akum() {
 			'table.total_daily td {border-width: 1px;padding: 4px;border-style: solid;border-color: #a9c6c9;}' +
 			'</style>' +
 			'<table width="100%" class="total_daily">' +
-			'<tr><td colspan="2">Total Daily'+judul+'</td></tr>' +
-			'<tr><td colspan="2" style="font-size:22px;">' + tot_tot + ' </td></tr>' +
+			'<tr><td colspan="2">Total Daily</td></tr>' +
+			'<tr><td colspan="2" style="font-size:22px;">' + total_daily + ' Liters</td></tr>' +
 			'<tr><td>PortSide</td><td>StarBoard</td></tr>' +
 			'<tr>' +
-			'<td><span style="font-size:18px;"> uuuu' + hasil1 + '</span></td>' +
-			'<td><span style="font-size:18px;"> iiii' + hasil2 + '</span></td>'+
+			'<td><span style="font-size:18px;"> ' + eng1_daily + ' Liters</span></td>' +
+			'<td><span style="font-size:18px;"> ' + eng2_daily + ' Liters</span></td>'+
       '</tr>' +
       '<tr>'+
-      '<td><span style="font-size:18px;"> rh' + hasil1 + '</span></td>' +
-			'<td><span style="font-size:18px;"> rh2' + hasil2 + '</span></td>'+
+      '<td><span style="font-size:18px;"> ' + rh_engine1 + ' Hours</span></td>' +
+			'<td><span style="font-size:18px;"> ' + rh_engine2 + ' Hours</span></td>'+
       '</tr>' +
 			// '<td><span style="font-size:18px;">' + hasil3 + '</span></td>' +
 			// '<td><span style="font-size:18px;">' + hasil4 + '</span></td>' +
@@ -879,13 +898,13 @@ function daily_akum() {
 			// '<td colspan="2">genset#3</td>' +
 			'</tr>' +
 			'<tr>' +
-			'<td><span style="font-size:18px;"> xxx' + gen1_runhour + ' liter</span></td>' +
-			'<td><span style="font-size:18px;">yyy ' + gen2_runhour + ' liter</span></td>' +
+			'<td><span style="font-size:18px;">' + ae1_daily + ' Liter</span></td>' +
+			'<td><span style="font-size:18px;">' + ae2_daily + ' Liter</span></td>' +
 			// '<td colspan="2"><span style="font-size:18px;">' + genset_3 + '</span></td>' +
 			'</tr>' +
       '<tr>' +
-			'<td><span style="font-size:18px;"> xxx' + gen1_runhour + ' Hours</span></td>' +
-			'<td><span style="font-size:18px;">yyy ' + gen2_runhour + ' Hours</span></td>' +
+			'<td><span style="font-size:18px;">' + rh_ae1 + ' Hours</span></td>' +
+			'<td><span style="font-size:18px;">' + rh_ae2 + ' Hours</span></td>' +
 			// '<td colspan="2"><span style="font-size:18px;">' + genset_3 + '</span></td>' +
 			'</tr>' +
 			'</table>' ;
