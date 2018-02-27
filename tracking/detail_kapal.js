@@ -1,6 +1,6 @@
 Ext.require([
-	'*', 
-	'Ext.grid.plugin.CellEditing', 
+	'*',
+	'Ext.grid.plugin.CellEditing',
 	'Ext.grid.*',
     'Ext.data.*',
     'Ext.util.*',
@@ -10,12 +10,52 @@ Ext.require([
 
 var model_detail_kapal = Ext.define('detail_kapal', {
     extend: 'Ext.data.Model',
-    fields: ['waktu', 'lat', 'lng', 'speed', 'heading', 'rpm1', 'prop1', 'inflow1', 'outflow1', 'temp1', 'press1', 
-			'rpm2', 'prop2', 'inflow2', 'outflow2', 'temp2', 'press2', 
-			'rpm3', 'prop3', 'inflow3', 'outflow3', 'temp3', 'press3', 
-			'rpm4', 'prop4', 'inflow4', 'outflow4', 'temp4', 'press4', 
-			'runhour1', 'runhour2','runhour3', 'battery', 'charger', 'modem']
-});
+    // fields: ['waktu', 'lat', 'lng', 'speed', 'heading', 'rpm1', 'prop1', 'inflow1', 'outflow1', 'temp1', 'press1',
+		// 	'rpm2', 'prop2', 'inflow2', 'outflow2', 'temp2', 'press2',
+		// 	'rpm3', 'prop3', 'inflow3', 'outflow3', 'temp3', 'press3',
+		// 	'rpm4', 'prop4', 'inflow4', 'outflow4', 'temp4', 'press4',
+		// 	'runhour1', 'runhour2','runhour3', 'battery', 'charger', 'modem']
+
+		fields:[
+			"PM - Door","PM-VBatt","PM-VCharg",
+			"ME1-FM In","ME1-FM Ov","ME1-FM Tem",
+			"ME2-FM In","ME2-FM Ov","ME2-FM Tem",
+			"AE1-FM In","AE1-FM Ov","AE1-FM Temp",
+			"AE2-FM In","AE2-FM Ov","AE2-FM Tem",
+			"ME1-RPM","ME1-RH","ME2-RPM","ME2-RH",
+			"AE1-RPM","AE1-RH","AE2-RPM","AE2-RH",
+			"PE-Door","PE-VCharge","PE-VBatt",
+			"GPS-Lattitude","GPS-Longitude","GPS-Heading","GPS-Velocity",
+			"working distance","working hour","average speed","main engine daily comsumption","main engine consumtion rate",
+			"auxiliary engine daily consumtion","auxiliary engine consumtion rate","remaining onboard",
+			"ME1-Fuel Hourly","AE1-Fuel-Usage","FormulaContoh","Fuel-Bunkering",
+			"ME2-Fuel-Usage","Total Fuel Usage","Working Distances","Work Hours",
+			"ME Dialy consumption","ME1 Working Hours ",
+			"AE1-RH-Daily","AE2-RH-Daily","AE1-FuelUsage","AE2-FuelUsage","ME2-FuelUsage","ME1-FuelUsage","Total-FuelUsage",
+			"F_Sound_Check",{name:"t",type:"date"}
+		]
+
+		// fields:[
+		//
+		// 				"PM-Door","PM-VBatt",	"PM-VCharge",
+		// 				"ME1-Inflow",	"ME1-Overflow",	"ME1-Temp",
+		// 				"ME2-Inflow",	"ME2-Overflow",	"ME2-Temp",
+		// 				"AE1-Inflow",	"AE1-OverFlow",	"AE1-Temp",
+		// 				"AE2-Inflow",	"AE2-OverFlow", "AE2-Temp",
+		// 				"ME1-RPM",	"ME1-Running Hour",
+		// 				"ME2-RPM",	"ME2-Running Hour",
+		// 				"AE1-RPM",	"AE1-Running Hour",
+		// 				"AE2-RPM",	"AE2-Running Hour",
+		// 				"PE-Door",	"PE-VCharge", "PE-Vbatt",
+		// 				"GPS-Lattitude",	"GPS-Longitude",	"GPS-Heading",	"GPS-Velocity",
+		// 				"working distance (km)",	"working hour",	"average speed (km/h)",
+		// 				"main engine daily comsumptio (liter)",	"main engine consumtion rate (liter)",
+		// 				"auxiliary engine daily consumtion (liter)",	"auxiliary engine consumtion rate (liter)",
+		// 				"remaining onboard (liter)",	"Fuel_Bunkering",
+		// 				"ME2-Fuel-Usage-Hourly", 	"Totalizer",	"Working Distance", "Working hours",	"ME Daily consumption",
+		// 				"AE1-FuelUsage",	"AE2-FuelUsage",	"ME2-Fuel-Usage",  	"ME1-Fuel-Usage", 	"Total-Fuel-Usage",	"F_Sound_Check",
+		// 				{name:"t",type:'date'} ]
+	});
 
 var comb_kapal1 = '';
 var tgl_sel1 = '';
@@ -25,14 +65,16 @@ var store_detail_kapal = Ext.create('Ext.data.Store', {
     autoLoad: true,
     proxy: {
         type: 'ajax',
-        url: 'ship_detail_sp.php',
+        // url: 'ship_detail_sp.php',
+				url: 'http://192.168.1.17:1337/get_data_bima',
+        // url: 'http://192.168.1.17:1337/get_data_bima?id=8&user_id=4&tz=%2B07:00&tgl=2018-02-26',
         method: 'GET',
-        reader: {
-            type: 'json',
-            //successProperty: 'success',
-            root: 'detail_ship',
-            messageProperty: 'message'
-        }            
+        // reader: {
+        //     type: 'json',
+        //     //successProperty: 'success',
+        //     root: '',
+        //     // messageProperty: 'message'
+        // }
     },
 	//listeners: {
 		//'beforeload': function(store, options) {
@@ -61,7 +103,7 @@ var store_combo_kapal1 = Ext.create('Ext.data.Store', {
             //successProperty: 'success',
             root: 'ship',
             messageProperty: 'message'
-        }            
+        }
     }
 });
 
@@ -74,9 +116,9 @@ var store_combo_kapal1 = Ext.create('Ext.data.Store', {
     //store: store_combo_kapal1,
     //listeners:{
         //select: function() {
-								
+
         //comb_kapal1 = this.getValue();
-        
+
         //console.log(comb_kapal1);
         //store_detail_kapal.load({params: { name: comb_kapal1, tgl: tgl_sel1}});
 		//update_text1();
@@ -94,177 +136,177 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
     columns: [
     {
         header: "Date Time",
-        width: 130, 
-        dataIndex: 'waktu',
+        width: 130,
+        dataIndex: 't',
+				renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s'),
         locked : true
     },
 	{
       header: "Satelite Data",
       columns: [{
-			header: "Latitude", 
-			width: 50, 
-			dataIndex: 'lat'
+			header: "Latitude",
+			width: 50,
+			dataIndex: 'GPS-Lattitude'
 		},{
-			header: "Longitude", 
-			width: 55, 
-			dataIndex: 'lng'
+			header: "Longitude",
+			width: 55,
+			dataIndex: 'GPS-Longitude'
 		},{
-			header: "Speed", 
-			width: 40, 
-			dataIndex: 'speed'
+			header: "Speed",
+			width: 40,
+			dataIndex: 'GPS-Velocity'
 		},{
-			header: "Heading", 
-			width: 45, 
-			dataIndex: 'heading'
+			header: "Heading",
+			width: 45,
+			dataIndex: 'GPS-Heading'
 		}]
 	},{
       header: "PortSide Engine",
       columns: [{
-			header: "Engine", 
-			width: 70, 
-			dataIndex: 'rpm1'
-		},{
-			header: "Propeller", 
-			width: 70, 
-			dataIndex: 'prop1'
-		},{
-			header: "InFlow", 
-			width: 70, 
-			dataIndex: 'inflow1'
-		},{
-			header: "OutFlow", 
-			width: 70, 
-			dataIndex: 'outflow1'
-		},{
-			header: "Temp", 
-			width: 70, 
-			dataIndex: 'temp1'
-		},{
-			header: "Press", 
-			width: 70, 
-			dataIndex: 'press1'
-		}]	  
+				header: "FM-In",
+				width: 70,
+				dataIndex: 'ME1-FM In'
+			},{
+				header: "FM-Ov",
+				width: 70,
+				dataIndex: 'ME1-FM Ov'
+			},{
+				header: "FM-Temp",
+				width: 70,
+				dataIndex: 'ME1-FM Tem'
+			},{
+				header: "RPM",
+				width: 70,
+				dataIndex: 'ME1-RPM'
+			},{
+				header: "RunHours",
+				width: 70,
+				dataIndex: 'ME1-RH'
+			// },{
+			// 	header: "Press",
+			// 	width: 70,
+			// 	dataIndex: 'press1'
+			}]
 	},{
-      header: "StarBoard Engine",
-      columns: [{
-			header: "Engine", 
-			width: 70, 
-			dataIndex: 'rpm2'
-		},{
-			header: "Propeller", 
-			width: 70, 
-			dataIndex: 'prop2'
-		},{
-			header: "InFlow", 
-			width: 70, 
-			dataIndex: 'inflow2'
-		},{
-			header: "OutFlow", 
-			width: 70, 
-			dataIndex: 'outflow2'
-		},{
-			header: "Temp", 
-			width: 70, 
-			dataIndex: 'temp2'
-		},{
-			header: "Press", 
-			width: 70, 
-			dataIndex: 'press2'
-		}]	  
+      header: "PortSide Engine",
+			columns: [{
+				header: "FM-In",
+				width: 70,
+				dataIndex: 'ME2-FM In'
+			},{
+				header: "FM-Ov",
+				width: 70,
+				dataIndex: 'ME2-FM Ov'
+			},{
+				header: "FM-Temp",
+				width: 70,
+				dataIndex: 'ME2-FM Tem'
+			},{
+				header: "RPM",
+				width: 70,
+				dataIndex: 'ME2-RPM'
+			},{
+				header: "RunHours",
+				width: 70,
+				dataIndex: 'ME2-RH'
+			// },{
+			// 	header: "Press",
+			// 	width: 70,
+			// 	dataIndex: 'press1'
+			}]
 	},{
-      header: "Center I Engine",
-      columns: [{
-			header: "Engine", 
-			width: 70, 
-			dataIndex: 'rpm3'
-		},{
-			header: "Propeller", 
-			width: 70, 
-			dataIndex: 'prop3'
-		},{
-			header: "InFlow", 
-			width: 70, 
-			dataIndex: 'inflow3'
-		},{
-			header: "OutFlow", 
-			width: 70, 
-			dataIndex: 'outflow3'
-		},{
-			header: "Temp", 
-			width: 70, 
-			dataIndex: 'temp3'
-		},{
-			header: "Press", 
-			width: 70, 
-			dataIndex: 'press3'
-		}]	
+      header: "Aux Engine 1",
+			columns: [{
+				header: "FM-In",
+				width: 70,
+				dataIndex: 'AE1-FM In'
+			},{
+				header: "FM-Ov",
+				width: 70,
+				dataIndex: 'AE1-FM Ov'
+			},{
+				header: "FM-Temp",
+				width: 70,
+				dataIndex: 'AE1-FM Temp'
+			},{
+				header: "RPM",
+				width: 70,
+				dataIndex: 'AE1-RPM'
+			},{
+				header: "RunHours",
+				width: 70,
+				dataIndex: 'AE1-RH'
+			// },{
+			// 	header: "Press",
+			// 	width: 70,
+			// 	dataIndex: 'press1'
+			}]
 	},{
-		header: "Center II Engine",
-      columns: [{
-			header: "Engine", 
-			width: 70, 
-			dataIndex: 'rpm4'
+		header: "Aux Engine II",
+		columns: [{
+			header: "FM-In",
+			width: 70,
+			dataIndex: 'AE2-FM In'
 		},{
-			header: "Propeller", 
-			width: 70, 
-			dataIndex: 'prop4'
+			header: "FM-Ov",
+			width: 70,
+			dataIndex: 'AE2-FM Ov'
 		},{
-			header: "InFlow", 
-			width: 70, 
-			dataIndex: 'inflow4'
+			header: "FM-Temp",
+			width: 70,
+			dataIndex: 'AE2-FM Tem'
 		},{
-			header: "OutFlow", 
-			width: 70, 
-			dataIndex: 'outflow4'
+			header: "RPM",
+			width: 70,
+			dataIndex: 'AE2-RPM'
 		},{
-			header: "Temp", 
-			width: 70, 
-			dataIndex: 'temp4'
-		},{
-			header: "Press", 
-			width: 70, 
-			dataIndex: 'press4'
-		}]	
-	},{
-      header: "GenSet",
-      columns: [
-		{
-			header: "GenSet #1", 
-			width: 70, 
-			dataIndex: 'runhour1'
-		},{
-			header: "GenSet #2", 
-			width: 70, 
-			dataIndex: 'runhour2'
-		},{
-			header: "GenSet #3", 
-			width: 70, 
-			dataIndex: 'runhour3'
-		}
-		]	  
+			header: "RunHours",
+			width: 70,
+			dataIndex: 'AE2-RH'
+		// },{
+		// 	header: "Press",
+		// 	width: 70,
+		// 	dataIndex: 'press1'
+		}]
 	},
 	{
       header: "Panel",
       columns: [{
-			header: "Battery", 
-			width: 70, 
-			dataIndex: 'battery'
-		},{
-			header: "Charger", 
-			width: 70, 
-			dataIndex: 'charger'
-		}]	  
-	},{
-      header: "Source Data",
-      columns: [{
-			//header: "id kapal", 
-			//width: 40, 
-			//dataIndex: 'kapal'
-		//},{
-			header: "Modem S/N", 
-			width: 120, 
-			dataIndex: 'modem'
-		}]	  
+				header: "PM Battery",
+				width: 70,
+				dataIndex: 'PM-VBatt'
+			},{
+				header: "PM Charger",
+				width: 70,
+				dataIndex: 'PM-VCharg'
+			},{
+				header: "PM Door",
+				width: 70,
+				dataIndex: 'PM - Door'
+			},{
+				header: "PE Battery",
+				width: 70,
+				dataIndex: 'PE-VBatt'
+			},{
+				header: "PE Charger",
+				width: 70,
+				dataIndex: 'PE-VCharge'
+			},{
+				header: "PE Door",
+				width: 70,
+				dataIndex: 'PE-Door'
+			}]
+	// },{
+  //     header: "Source Data",
+  //     columns: [{
+	// 		//header: "id kapal",
+	// 		//width: 40,
+	// 		//dataIndex: 'kapal'
+	// 	//},{
+	// 		header: "Modem S/N",
+	// 		width: 120,
+	// 		dataIndex: 'modem'
+	// 	}]
 	}]
 });
 
@@ -296,11 +338,11 @@ var range = Ext.create('Ext.data.Store', {
     //valueField: 'tipe_range'
 //});
 
-//function update_text1() {		
+//function update_text1() {
 	//var content_text1 = '<html><body><div style="font-size: 20px; color:blue">(current view -> '+comb_kapal1+' - date: '+tgl_sel1+')</div></body></html>';
 	//Ext.getCmp('toolbar_text').update(content_text1);
 	////Ext.getCmp('table_ship').setTitle(content_text1);
-	
+
 //}
 
 var panel_detail = {
@@ -310,7 +352,7 @@ var panel_detail = {
         dock: 'top',
 		height: 40,
         items: [{
-		
+
 		    //'selected ship :',
             //ship_combo1,
 			//'-',
@@ -330,9 +372,23 @@ var panel_detail = {
 					select: function() {
 						comb_kapal1 = this.getValue();
 						comb_kapal2 = this.getRawValue();
-						//console.log(comb_kapal1);
+						// console.log(comb_kapal1);
+						// var d = new Date();
+						// var z= TimeZone(d);
+						// console.log(getTimeZone());
+						// console.log(x);
+						// var x= getCookie("marine");
+						var dt = getDataCookies('marine');
+						// console.log(atob(x));
+						// console.log(JSON.parse(atob(x)));
+						// var dt = JSON.parse(atob(x));
+						// console.log(dt);
 						//console.log(tgl_sel1);
-						store_detail_kapal.load({params: { id: comb_kapal1, tgl: tgl_sel1}});
+						// id=8&user_id=4&tz=%2B07:00&tgl=2018-02-26
+						var param = {user_id: dt.idu,id:comb_kapal1,tgl:tgl_sel1,tz: getTimeZone()};
+						// console.log(param);
+						// store_detail_kapal.load({params: { id: comb_kapal1, tgl: tgl_sel1}});
+						store_detail_kapal.load({params: param});
 						Ext.getCmp('table_ship').setTitle('Vessel '+comb_kapal2 +' on '+ tgl_sel2);
 						//tabel_detail_kapal
 						//update_text1();
@@ -345,8 +401,8 @@ var panel_detail = {
 							//console.log(isi);
 						}
 				}
-				
-				
+
+
 			},{
 				padding : '0 0 0 5',
 				fieldLabel: 'Date',
@@ -359,16 +415,19 @@ var panel_detail = {
 				format: 'd-M-Y',
 				listeners: {
 					change: function () {
-						
+
 						//console.log('Date selected: ', Ext.Date.format(this.getValue(),'Y-m-d'));
 						//console.log()
+						var dt = getDataCookies(cookiename());
+						var param = {user_id: dt.idu,id:comb_kapal1,tgl:tgl_sel1,tz: getTimeZone()};
 						tgl_sel1 = Ext.Date.format(this.getValue(),'Y-m-d');
-						store_detail_kapal.load({params: { id: comb_kapal1, tgl: tgl_sel1}});
+						// store_detail_kapal.load({params: { id: comb_kapal1, tgl: tgl_sel1}});
+						store_detail_kapal.load({params: param});
 						tgl_sel2 = (tgl_sel1 != '') ? tgl_sel1 : Ext.Date.format(new Date(), 'd-M-Y' );
 						//console.log(tgl_sel2);
 						Ext.getCmp('table_ship').setTitle('Vessel '+comb_kapal2 +' on '+ tgl_sel2);
 						//update_text1();
-					}, 
+					},
 					afterrender : function(){
 						//console.log('Date selected: ', this.getValue());
 						tgl_sel1 = Ext.Date.format(this.getValue(),'Y-m-d');
@@ -386,7 +445,7 @@ var panel_detail = {
 					// console.log(comb_kapal1);
 					var kpl = (comb_kapal1=== '')?'1':comb_kapal1;
 					// console.log('export bro dari '+tgl+' ==> '+kpl);
-					window.open('export_data_detail.php?id='+kpl+'&t='+tgl);
+					// window.open('export_data_detail.php?id='+kpl+'&t='+tgl);
 					// Ext.Ajax.request({
 					// 	params : {t : tgl, id: ves },
 					// 	method : 'GET',
@@ -397,10 +456,10 @@ var panel_detail = {
 			}
 			//'-',
 			//{
-				//id: 'toolbar_text', 
+				//id: 'toolbar_text',
 				//xtype : 'label'
 				////html:'<html><body><div style="font-size: 20px; color:blue">(current view -> '+comb_kapal1+' - date: '+tgl_sel1+')</div></body></html>'
-			
+
 			//}
         ]
     }],
@@ -420,7 +479,7 @@ var panel_detail = {
 			split : true,
 			border: true,
 			items:[{
-				xtype: "component",            
+				xtype: "component",
 				id: 'iframe-win',
 				width: '100%',
 				height: '100%',
@@ -430,8 +489,8 @@ var panel_detail = {
 					src : "visualmonita/visualmonita1.php?xmlfile=layout/kapal.xml"
 				}
 			}]
-            
+
         }
-        */ 
+        */
     ]
 };

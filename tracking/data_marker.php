@@ -3,7 +3,7 @@
 session_start();
 include	'../inc/conn_db.php';
 //include	'../inc/conn_db_linode1.php';
-include	'../inc/cekSession.php';
+// include	'../inc/cekSession.php';
 
 
 try{
@@ -12,14 +12,14 @@ try{
 	$id = isset($_GET['id']) ? $_GET['id'] : '';
 
 	//echo $id;
-	
+
 	$q_last = 'select tu.id_ship as id, max(d.data_time) as wkt
 					from data d
 						join titik_ukur tu on tu.id_titik_ukur = d.id_titik_ukur
 					where tu.id_ship = '.$id.'';
 	$maxt = $db->prepare($q_last);
 	$maxt->execute();
-	
+
 	$data = array();
 	while ($row = $maxt->fetch()){
 		$query = 'SELECT d.data_time as waktu,
@@ -43,33 +43,33 @@ try{
 			FROM data d
 				inner join titik_ukur tu on tu.id_titik_ukur = d.id_titik_ukur
 				inner join ship s on s.id_ship = tu.id_ship
-				
+
 			WHERE
-				tu.id_ship = "'.$id.'" and d.data_time like "'.$row['wkt'].'%" 
+				tu.id_ship = "'.$id.'" and d.data_time like "'.$row['wkt'].'%"
 			GROUP BY d.data_time
 			ORDER BY d.data_time desc';
-			
+
 		$hsl = $db->prepare($query);
 		$hsl->execute();
 		$result = $hsl->fetchAll(PDO::FETCH_ASSOC);
-		
+
 		array_push($data,$result);
-		
-	} 
-					
+
+	}
+
 	$jsonResult = array(
         'success' => true,
         'marker' => $data
-    );				
-	
-} 
+    );
+
+}
 catch(Exception $e) {
     $jsonResult = array(
         'success' => false,
         'message' => $e->getMessage()
     );
 
-}	
+}
 echo json_encode($jsonResult);
 
 ?>
