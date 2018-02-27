@@ -347,7 +347,7 @@ session_start();
 
                   // debugger;
                   // window.location = "http://localhost/project/vts/tracking";
-                  window.location = host+"/tracking";
+                  window.parent.location = "/vts/tracking";
                 }
             },
             error: function(d){
