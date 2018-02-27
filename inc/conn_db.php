@@ -13,6 +13,6 @@
 	//}
 	//else echo 'Sukses';
 
-$db = new PDO('mysql:host=localhost;dbname=marine_1', 'marine', 'monita2014');
+$db = new PDO('mysql:host=localhost;dbname=monita4', 'monita4', 'monita4');
 
 ?>
