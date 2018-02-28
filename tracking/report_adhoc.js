@@ -7,52 +7,6 @@ Ext.require([
 	'Ext.toolbar.Paging'
 ]);
 
-// <<<<<<< HEAD
-// //Store untuk ComboVesselName
-// var model_combo_vessel_adhoc = Ext.define('Kapal', {
-//     extend: 'Ext.data.Model',
-//     fields: ['name']
-// });
-
-// //Model untuk ComboVesselName
-// var store_combo_vessel_adhoc = Ext.create('Ext.data.Store', {
-//     model: model_combo_kapal,
-// =======
-//
-// var model_detail_kapal = Ext.define('detail_kapal', {
-//     extend: 'Ext.data.Model',
-//     fields: ['waktu', 'lat', 'lng', 'speed', 'heading', 'rpm1', 'prop1', 'inflow1', 'outflow1', 'temp1', 'press1',
-// 			'rpm2', 'prop2', 'inflow2', 'outflow2', 'temp2', 'press2',
-// 			'rpm3', 'prop3', 'inflow3', 'outflow3', 'temp3', 'press3',
-// 			'rpm4', 'prop4', 'inflow4', 'outflow4', 'temp4', 'press4',
-// 			'runhour1', 'runhour2','runhour3', 'battery', 'charger', 'modem']
-// });
-//
-// var comb_kapal1 = '';
-// var tgl_sel1 = '';
-//
-// var store_detail_kapal = Ext.create('Ext.data.Store', {
-//     model: model_detail_kapal,
-//     autoLoad: true,
-//     proxy: {
-//         type: 'ajax',
-//         url: 'ship_detail_sp.php',
-//         method: 'GET',
-//         reader: {
-//             type: 'json',
-//             //successProperty: 'success',
-//             root: 'detail_ship',
-//             messageProperty: 'message'
-//         }
-//     },
-// 	//listeners: {
-// 		//'beforeload': function(store, options) {
-// 			//store.proxy.extraParams.name=comb_kapal1;
-// 			//store.proxy.extraParams.tgl=tgl_sel1;
-// 		//}
-// 	//}
-// });
-//
 var model_combo_kapal_ad = Ext.define('Kapal', {
     extend: 'Ext.data.Model',
     fields: ['name']
@@ -60,7 +14,6 @@ var model_combo_kapal_ad = Ext.define('Kapal', {
 //
 var store_combo_kapal_ad = Ext.create('Ext.data.Store', {
     model: model_combo_kapal_ad,
-//>>>>>>> pelindo3
     autoLoad: true,
     proxy: {
         type: 'ajax',
@@ -77,29 +30,46 @@ var store_combo_kapal_ad = Ext.create('Ext.data.Store', {
     }
 });
 
-/*
 
 var model_adhoc_kapal = Ext.define('adhoc_kapal', {
     extend: 'Ext.data.Model',
-		fields:[
-			"PM - Door","PM-VBatt","PM-VCharg",
-			"ME1-FM In","ME1-FM Ov","ME1-FM Tem",
-			"ME2-FM In","ME2-FM Ov","ME2-FM Tem",
-			"AE1-FM In","AE1-FM Ov","AE1-FM Temp",
-			"AE2-FM In","AE2-FM Ov","AE2-FM Tem",
-			"ME1-RPM","ME1-RH","ME2-RPM","ME2-RH",
-			"AE1-RPM","AE1-RH","AE2-RPM","AE2-RH",
-			"PE-Door","PE-VCharge","PE-VBatt",
-			"GPS-Lattitude","GPS-Longitude","GPS-Heading","GPS-Velocity",
-			"working distance","working hour","average speed","main engine daily comsumption","main engine consumtion rate",
-			"auxiliary engine daily consumtion","auxiliary engine consumtion rate","remaining onboard",
-			"ME1-Fuel Hourly","AE1-Fuel-Usage","FormulaContoh","Fuel-Bunkering",
-			"ME2-Fuel-Usage","Total Fuel Usage","Working Distances","Work Hours",
-			"ME Dialy consumption","ME1 Working Hours ",
-			"AE1-RH-Daily","AE2-RH-Daily","AE1-FuelUsage","AE2-FuelUsage","ME2-FuelUsage","ME1-FuelUsage","Total-FuelUsage",
-			"F_Sound_Check",{name:"t",type:"date"}
-		]
+    fields:[
+		    "date",
+		    "working distance",
+		    "average speed",
+		    "working hours ME1",
+		    "working hours ME2",
+		    "ME1 daily consumption",
+		    "ME1 consumption rate",
+		    "ME2 daily consumtion",
+		    "ME2 consumtion rate",
+		    "AE1 consumtion" ,
+		    "AE2 consumtion",
+		    "ME1 average rpm",
+		    "ME2 average rpm",
+		    "AE1 average rpm",
+		    "AE2 average rpm"
+		 ]
+		// fields:[
+		// 	"PM - Door","PM-VBatt","PM-VCharg",
+		// 	"ME1-FM In","ME1-FM Ov","ME1-FM Tem",
+		// 	"ME2-FM In","ME2-FM Ov","ME2-FM Tem",
+		// 	"AE1-FM In","AE1-FM Ov","AE1-FM Temp",
+		// 	"AE2-FM In","AE2-FM Ov","AE2-FM Tem",
+		// 	"ME1-RPM","ME1-RH","ME2-RPM","ME2-RH",
+		// 	"AE1-RPM","AE1-RH","AE2-RPM","AE2-RH",
+		// 	"PE-Door","PE-VCharge","PE-VBatt",
+		// 	"GPS-Lattitude","GPS-Longitude","GPS-Heading","GPS-Velocity",
+		// 	"working distance","working hour","average speed","main engine daily comsumption","main engine consumtion rate",
+		// 	"auxiliary engine daily consumtion","auxiliary engine consumtion rate","remaining onboard",
+		// 	"ME1-Fuel Hourly","AE1-Fuel-Usage","FormulaContoh","Fuel-Bunkering",
+		// 	"ME2-Fuel-Usage","Total Fuel Usage","Working Distances","Work Hours",
+		// 	"ME Dialy consumption","ME1 Working Hours ",
+		// 	"AE1-RH-Daily","AE2-RH-Daily","AE1-FuelUsage","AE2-FuelUsage","ME2-FuelUsage","ME1-FuelUsage","Total-FuelUsage",
+		// 	"F_Sound_Check",{name:"t",type:"date"}
+		// ]
 });
+
 
 
 var store_adhoc_kapal = Ext.create('Ext.data.Store', {
@@ -109,7 +79,8 @@ var store_adhoc_kapal = Ext.create('Ext.data.Store', {
         type: 'ajax',
         // url: 'ship_detail_sp.php',
 		//	url: 'http://project.daunbiru.com:1336/get_data_bima',
-        // url: 'http://192.168.1.17:1337/get_data_bima?id=8&user_id=4&tz=%2B07:00&tgl=2018-02-26',
+        url: 'http://192.168.1.17:1337/get_data_adhoc?m=2018-02',
+        //url: 'http://project.daunbiru.com:1337/get_data_bima?id=8&user_id=4&tz=%2B07&tgl=2018-02-01',
         method: 'GET',
         // reader: {
         //     type: 'json',
@@ -126,89 +97,100 @@ var store_adhoc_kapal = Ext.create('Ext.data.Store', {
 	//}
 });
 
-
-*/
-
-//
-// //var ship_combo1 = new Ext.form.ComboBox({
-//     //displayField: 'name',
-//     //queryMode: 'remote',
-//     //valueField: 'name',
-//     //width: 200,
-//     //store: store_combo_kapal1,
-//     //listeners:{
-//         //select: function() {
-//
-//         //comb_kapal1 = this.getValue();
-//
-//         //console.log(comb_kapal1);
-//         //store_detail_kapal.load({params: { name: comb_kapal1, tgl: tgl_sel1}});
-// 		//update_text1();
-//         //}
-//     //}
-// //});
-//
-//>>>>>>> pelindo3
-
 var tabel_r_adhoc = Ext.create('Ext.grid.Panel', {
-    //id : 'table_ship',
-    //jdl : '',
+
     id : 'table_ship_adhoc',
     title: 'Report Ad-Hoc',
-    //store : store_table_vessel_adhoc,
+    store : store_adhoc_kapal,
     flex: 4,
     columns: [
     {
         header: "Date",
         width: 100,
-        dataIndex: 'waktu',
+        dataIndex: 'date',
         locked : true
     },{
       	header: "Working Distance",
-				width: 100,
-				dataIndex: 'dist'
+		width: 100,
+		dataIndex: 'working distance'
 		},{
+		header: "Average Speed",
+		width: 100,
+		dataIndex: 'average speed'
+	},{
+		header: "ME Portside",
+      	columns: [{
+			header: "Working Hours",
+			width: 100,
+			dataIndex: 'working hours ME1'
+				},{
+				header: "Daily Consumption",
+				width: 100,
+				dataIndex: 'ME1 daily consumption'
+				},{
+				header: "Hourly Rate",
+				width: 100,
+				dataIndex: 'ME1 consumption rate'
+				}]
+			},{
+				header: "ME Starboard",
+      			columns: [{
 				header: "Working Hours",
 				width: 100,
-				dataIndex: 'hours'
-		},{
-				header: "Average Speed",
-				width: 100,
-				dataIndex: 'speed'
-		},{
-			header: "Main Engine",
-      columns: [{
+				dataIndex: 'working hours ME2'
+				},{
 					header: "Daily Consumption",
 					width: 100,
-					dataIndex: 'day_cons'
-			},{
+					dataIndex: 'ME2 daily consumption'
+				},{
 					header: "Hourly Rate",
 					width: 100,
-					dataIndex: 'hour_rate'
+					dataIndex: 'ME2 consumption rate'
 
 			}]
-	},{
-      header: "Auxiliary Engine",
-      columns: [{
-					header: "Daily Consumption (l)",
-					width: 100,
-					dataIndex: 'day_cons'
 			},{
-					header: "Hourly Rate",
+      			header: "AE1",
+      			columns: [{
+					header: "Daily Consumption",
 					width: 100,
-					dataIndex: 'hour_rate'
+					dataIndex: 'AE1 consumtion'
+				},{
+					header: "RPM(rata2)",
+					width: 100,
+					dataIndex: 'AE1 average rpm'
 
 			}]
-	},{
-      header: "Remaining onBoard",
+			},{
+      			header: "AE2",
+      			columns: [{
+					header: "Daily Consumption",
+					width: 100,
+					dataIndex: 'AE2 consumtion'
+			},{
+					header: "RPM (rata2)",
+					width: 100,
+					dataIndex: 'ME1 average rpm'
+
+			}]
+		},
+		{
+			header: "Total Daily Fuel",
+			width: 100,
+			dataIndex: 'Total-FuelUsage'
+		},{
+     		header: "Remaining onBoard",
 			width: 200,
 			dataIndex: 'rpm2'
-	},{
+		},{
 
 			header: "Last Fuel Loading",
 			width: 200,
-			dataIndex: 'rpm2'
+			dataIndex: 'Fuel-Bunkering'
 
+		},{
+			header: "F_Sound_Check",
+			width: 150,
+			dataIndex: 'F_Sound_Check'
 		}]
 
 });
@@ -288,6 +270,7 @@ var panel_r_adhoc = {
 						// tgl_sel1 = Ext.Date.format(this.getValue(),'Y-m-d');
 						// tgl_sel2 = (tgl_sel1 != '') ? tgl_sel1 : Ext.Date.format(new Date(), 'd-M-Y' );
 						//console.log(tgl_sel1);
+						console.log("Tanggal dipilih");
 						}
 				}
 			},'->',
