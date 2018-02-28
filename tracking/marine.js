@@ -116,13 +116,13 @@ Ext.onReady(function() {
                 id: 'analisis_tab',
                 items: [ panel_hitung ],
                 iconCls: 'tab-icon'
-						},{
-							title: 'REPORT AD-HOC',
-							layout: 'fit',
-							id: 'adhoc_rep',
-							items: [ panel_r_adhoc ],
-							// xtype: 'panel',
-							iconCls: 'tab-icon'
+			},{
+				title: 'REPORT AD-HOC',
+				layout: 'fit',
+				id: 'adhoc_rep',
+				items: [ panel_r_adhoc ],
+				// xtype: 'panel',
+				iconCls: 'tab-icon'
 
             }]
         }]
