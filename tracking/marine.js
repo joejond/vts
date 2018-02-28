@@ -92,7 +92,7 @@ Ext.onReady(function() {
                         interval : 1000
                     });
 										console.log('render bro');
-										console.log(getAPI());
+										// console.log(getAPI());
 										// console.log('host => '+host_ku);
                 }
             }
@@ -126,6 +126,14 @@ Ext.onReady(function() {
 							items: [ panel_r_adhoc ],
 							// abc:'asdasd',
 							// xtype: 'panel',
+							iconCls: 'tab-icon'
+						},{
+							title: 'SUMMARY',
+							layout: 'fit',
+							id: 'summ_tab',
+							// items: [ panel_r_adhoc ],
+							// abc:'asdasd',
+							xtype: 'panel',
 							iconCls: 'tab-icon'
 
             }]

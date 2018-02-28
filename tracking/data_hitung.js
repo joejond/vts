@@ -77,10 +77,10 @@ var model_akumulasi_perjam = Ext.define('akumulasi', {
 
       fields:[
         "date","time","Total Daily",
-        "ME1 Daily Consumtion","ME1 Working Hours",
-        "ME2 Daily Consumtion","ME2 Working Hours",
-        "AE1 Daily Consumtion","AE1 Working Hours",
-        "AE2 Daily Consumtion","AE2 Working Hours"
+        "working distance","average speed",
+        "working hours ME1","working hours ME2","working hours AE1","working hours AE2",
+        "ME1 consumtion","ME2 consumtion","AE1 consumtion","AE2 consumtion",
+        "ME1 average rpm","ME2 average rpm","AE1 average rpm","AE2 average rpm"
       ]
 
 
@@ -92,7 +92,9 @@ var store_akumulasi_perjam = Ext.create('Ext.data.Store', {
     autoLoad: true,
     proxy: {
         type: 'ajax',
-        url: getAPI()+'/get_data_summary_bima_hourly',
+        // url: 'http://10.10.10.11:1336/get_data_summary_bima_hourly',
+        // url: 'http://10.10.10.11:1336/get_data_summary_ship_hourly',
+        url: 'http://192.168.1.17:1337/get_data_summary_ship_hourly',
         method: 'GET',
         // reader: {
         //     type: 'json',
@@ -204,7 +206,10 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
         header: "Jam",
         width: 50,
         locked : true,
-        dataIndex: 'time'
+        dataIndex: 'time',
+        renderer: function(value) {
+            return "<b>" + value + "</b>";
+        }
         //format : 'd-M-Y H'
         //renderer: Ext.util.Format.dateRenderer('d-M-Y H')
         //renderer: Ext.util.Format.dateRenderer('d-M-Y')
@@ -218,69 +223,82 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
         columns: [{
             header: "RunHours",
             width: 100,
-            dataIndex: 'ME1 Working Hours'
+            dataIndex: 'working hours ME1',
+            renderer: function(v){return parseFloat(v).toFixed(2);}
         },{
             header: "Fuel",
             width: 100,
-            dataIndex: 'ME1 Daily Consumtion'
+            dataIndex: 'ME1 consumtion',
+            renderer: function(v){return parseFloat(v).toFixed(2);}
         },{
             header: "RPM",
             width: 100,
-            dataIndex: 'rpm'
+            dataIndex: 'ME1 average rpm',
+            renderer: function(v){return parseFloat(v).toFixed(2);}
         }]
     },{
         header: "StarBoard",
         columns: [{
           header: "RunHours",
           width: 100,
-          dataIndex: 'ME1 Working Hours'
+          dataIndex: 'working hours ME2',
+          renderer: function(v){return parseFloat(v).toFixed(2);}
       },{
           header: "Fuel",
           width: 100,
-          dataIndex: 'ME2 Daily Consumtion'
+          dataIndex: 'ME2 consumtion',
+          renderer: function(v){return parseFloat(v).toFixed(2);}
       },{
           header: "RPM",
           width: 100,
-          dataIndex: 'rpm'
+          dataIndex: 'ME2 average rpm',
+          renderer: function(v){return parseFloat(v).toFixed(2);}
         }]
     },{
         header: "Auxalary I",
         columns: [{
           header: "RunHours",
           width: 100,
-          dataIndex: 'AE1 Working Hours'
+          dataIndex: 'working hours AE1'
       },{
           header: "Fuel",
           width: 100,
-          dataIndex: 'AE1 Daily Consumtion'
+          dataIndex: 'AE1 consumtion',
+          renderer: function(v){return parseFloat(v).toFixed(2);}
       },{
           header: "RPM",
           width: 100,
-          dataIndex: 'rpm'
+          dataIndex: 'AE1 average rpm',
+          renderer: function(v){return parseFloat(v).toFixed(2);}
         }]
     }, {
 		header: "Auxalary II",
         columns: [{
           header: "RunHours",
           width: 100,
-          dataIndex: 'AE2 Working Hours'
+          dataIndex: 'working hours AE2',
+          renderer: function(v){return parseFloat(v).toFixed(2);}
       },{
           header: "Fuel",
           width: 100,
-          dataIndex: 'AE2 Daily Consumtion'
+          dataIndex: 'AE2 consumtion',
+          renderer: function(v){return parseFloat(v).toFixed(2);}
       },{
           header: "RPM",
           width: 100,
-          dataIndex: 'rpm'
+          dataIndex: 'AE2 average rpm',
+          renderer: function(v){return parseFloat(v).toFixed(2);}
         }]
     }, {
       header: "Distance",
       width: 100,
-      dataIndex: 'runhour1'
+      dataIndex: 'working distance',
+      renderer: function(v){return parseFloat(v).toFixed(2);}
   }, {
       header: "Speed",
       width: 100,
-      dataIndex: 'runhour2'
+      dataIndex: 'average speed',
+      renderer: function(v){return parseFloat(v).toFixed(2);}
 
   }],
 
@@ -491,6 +509,7 @@ var grafik = new Ext.create('Chart.ux.Highcharts', {
         visible: false
     }],
     store: store_grafik,
+    // store: store_akumulasi_perjam,
     xField: 'time',
     chartConfig: {
         chart: {
@@ -691,19 +710,19 @@ var panel_hitung = {
 
 				},
 				afterrender : function(){
-						var isi1 = this.getStore().data.items[0].data['name'];
-						var isiid = this.getStore().data.items[0].data['id'];
-						this.setValue(isi1);
-						comb_kapal22 = (comb_kapal21 != '') ? comb_kapal22 : isi1;
-						Ext.getCmp('table_chart').setTitle('Vessel '+isi1+' on '+ Ext.Date.format(new Date(), 'd-M-Y' ));
+						// var isi1 = this.getStore().data.items[0].data['name'];
+						// var isiid = this.getStore().data.items[0].data['id'];
+						// this.setValue(isi1);
+						// comb_kapal22 = (comb_kapal21 != '') ? comb_kapal22 : isi1;
+						// Ext.getCmp('table_chart').setTitle('Vessel '+isi1+' on '+ Ext.Date.format(new Date(), 'd-M-Y' ));
 
 						//store_grafik_hari.load({params : { id: comb_kapal22, tgl: tgl_sel21 }});
 						//console.log('comb_kapal22 : '+isiid);
 						//console.log('tgl_sel21  : '+tgl_sel21);
-            console.log('disini tampil');
+            // console.log('disini tampil');
 
-            var hostnya = getAPI();
-            console.log(hostnya);
+            // var hostnya = getAPI();
+            // console.log(hostnya);
 
 					}
 			}
@@ -811,14 +830,26 @@ var eng_rh1 = '';
 function daily_akum() {
     Ext.Ajax.request({
         // url: 'data_grafik_perhari.php',
-        // url: 'http://10.10.10.11:1336/get_data_summary_bima?tgl=2018-02-27&tz=%2B07:00',
+// <<<<<<< HEAD
+//         // url: 'http://10.10.10.11:1336/get_data_summary_bima?tgl=2018-02-27&tz=%2B07:00',
+//         url: 'http://10.10.10.11:1336/get_data_summary_bima',
+//         method: 'GET',
+//         params: {
+//         //     id: (comb_kapal21 !='') ? comb_kapal21 : '1',
+//             tz:getTimeZone(),
+//             tgl: tgl_sel21
+//         },
+// =======
+        // url: 'http://project.daunbiru.com:1336/get_data_summary_bima',
         url: 'http://10.10.10.11:1336/get_data_summary_bima',
         method: 'GET',
-        params: {
+         params: {
         //     id: (comb_kapal21 !='') ? comb_kapal21 : '1',
-            tz:getTimeZone(),
-            tgl: tgl_sel21
-        },
+				    tz:getTimeZone(),
+             tgl: tgl_sel21
+
+         },
+// >>>>>>> cokro
         success: function (data) {
     			var hasil = Ext.JSON.decode(data.responseText);
           console.log(hasil[0]);

@@ -227,9 +227,9 @@ session_start();
     <!-- <script src="js/jsencode.js"></script> -->
     <!-- <script src="js/base64.min.js"></script> -->
     <script>
-		//var sukses = <?php echo $sks; ?>;
+		//var sukses = <?php //echo $sks; ?>;
 		//alert ('ini sukses : '+sukses);
-		//alert ("<?php echo $alert;?>");
+		//alert ("<?php //echo $alert;?>");
 
 
 	$(document).ready(function(){
@@ -320,7 +320,7 @@ session_start();
         {
             // Post the variable fetch to url.
             type : 'post',
-            url : getAPI()+'/auth/login',
+            url : 'http://project.daunbiru.com:1336/auth/login',
             dataType : 'json', // expected returned data format.
             // crossDomain : true,
             data :{idu : uid},
@@ -343,7 +343,7 @@ session_start();
                   setcookie('marine',objd,30);
                   var host = document.location.origin;
 
-                window.parent.location = (host == 'http://localhost') ? (host+"/project/vts/tracking"):(host+"/vts/tracking");
+                  window.parent.location = (host == 'http://localhost') ? (host+"/project/vts/tracking"):(host+"/vts/tracking");
 
                 }
             },

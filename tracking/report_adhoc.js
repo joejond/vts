@@ -42,28 +42,28 @@ Ext.require([
 // 	//}
 // });
 //
-// var model_combo_kapal1 = Ext.define('Kapal', {
-//     extend: 'Ext.data.Model',
-//     fields: ['name']
-// });
+var model_combo_kapal_ad = Ext.define('Kapal', {
+    extend: 'Ext.data.Model',
+    fields: ['name']
+});
 //
-// var store_combo_kapal1 = Ext.create('Ext.data.Store', {
-//     model: model_combo_kapal1,
-//     autoLoad: true,
-//     proxy: {
-//         type: 'ajax',
-//         api: {
-//             read: 'ship_list.php'
-//         },
-//         reader: {
-// 			//totalProperty:'total',
-//             type: 'json',
-//             //successProperty: 'success',
-//             root: 'ship',
-//             messageProperty: 'message'
-//         }
-//     }
-// });
+var store_combo_kapal_ad = Ext.create('Ext.data.Store', {
+    model: model_combo_kapal_ad,
+    autoLoad: true,
+    proxy: {
+        type: 'ajax',
+        api: {
+            read: 'ship_list.php'
+        },
+        reader: {
+			//totalProperty:'total',
+            type: 'json',
+            //successProperty: 'success',
+            root: 'ship',
+            messageProperty: 'message'
+        }
+    }
+});
 //
 //
 // //var ship_combo1 = new Ext.form.ComboBox({
@@ -204,7 +204,7 @@ var panel_r_adhoc = {
 				editable : false,
 				displayField: 'name',
 				valueField: 'id',
-				// store: store_combo_kapal1,
+				store: store_combo_kapal_ad,
 				listeners:{
 					select: function() {
 						// comb_kapal1 = this.getValue();
@@ -228,14 +228,14 @@ var panel_r_adhoc = {
 
 			},{
 				padding : '0 0 0 5',
-				fieldLabel: 'Date',
+				fieldLabel: 'Date ',
 				id: 'date_total1',
 				labelWidth: 40,
 				editable : false,
 				xtype: 'datefield',
 				value: new Date(),
 				maxValue: new Date(),
-				format: 'd-M-Y',
+				format: 'F',
 				listeners: {
 					change: function () {
 
