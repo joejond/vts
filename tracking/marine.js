@@ -131,9 +131,9 @@ Ext.onReady(function() {
 							title: 'SUMMARY',
 							layout: 'fit',
 							id: 'summ_tab',
-							// items: [ panel_r_adhoc ],
+							items: [ panel_r_sum ],
 							// abc:'asdasd',
-							xtype: 'panel',
+							// xtype: 'panel',
 							iconCls: 'tab-icon'
 
             }]

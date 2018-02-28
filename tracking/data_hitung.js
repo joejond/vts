@@ -323,68 +323,31 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
 
 Ext.define('HighChartData', {
     extend: 'Ext.data.Model',
-    fields: [{
-        name: 'jam',
-        type: 'string'
-    }, {
-        name: 'rpm1',
-        type: 'float',
-        useNull: true
-    }, {
-        name: 'rpm2',
-        type: 'float',
-        useNull: true
-    }, {
-        name: 'rpm3',
-        type: 'float',
-        useNull: true
-    }, {
-        name: 'rpm4',
-        type: 'float',
-        useNull: true
-    }, {
-        name: 'fuel1',
-        type: 'float',
-        useNull: true
-    }, {
-        name: 'fuel2',
-        type: 'float',
-        useNull: true
-    }, {
-        name: 'fuel3',
-        type: 'float',
-        useNull: true
-	}, {
-        name: 'fuel4',
-        type: 'float',
-        useNull: true
-    }, {
-        name: 'rh1',
-        type: 'float',
-        useNull: true
-    }, {
-        name: 'rh2',
-        type: 'float',
-        useNull: true
-    }, {
-        name: 'rh3',
-        type: 'float',
-        useNull: true
-    }]
+    fields: [
+      {name: 'time',type: 'string'},
+      {name: 'ME1 average rpm',type: 'float',useNull: true},
+      {name: 'ME2 average rpm',type: 'float',useNull: true},
+      {name: 'AE1 average rpm',type: 'float',useNull: true},
+      {name: 'AE2 average rpm',type: 'float',useNull: true},
+      {name: 'ME1 consumtion',type: 'float',useNull: true},
+      {name: 'ME2 consumtion',type: 'float',useNull: true},
+      {name: 'AE1 consumtion',type: 'float',useNull: true},
+      {name: 'AE2 consumtion',type: 'float',useNull: true},
+      {name: 'working hours ME1',type: 'float',useNull: true},
+      {name: 'working hours ME2',type: 'float',useNull: true},
+      {name: 'working hours AE1',type: 'float',useNull: true},
+      {name: 'working hours AE2',type: 'float',useNull: true},
+      {name: 'Total Perjam',type: 'float',useNull: true}
+    ]
 });
 
 var store_grafik = Ext.create('Ext.data.Store', {
     model: 'HighChartData',
     proxy: {
         type: 'ajax',
-        url: 'data_chart_sp.php?',
-        method: 'GET',
-        reader: {
-            type: 'json',
-            //successProperty: 'success',
-            root: 'chart',
-            messageProperty: 'message'
-        }
+        // url: 'data_chart_sp.php?',
+        url: 'http://192.168.1.17:1337/get_data_summary_ship_graphic',
+
     },
     //listeners: {
         //'beforeload': function (store, options) {
@@ -422,26 +385,33 @@ var genSeries = function () {
 var grafik = new Ext.create('Chart.ux.Highcharts', {
     id: 'chart',
     series: [{
-        dataIndex: 'rpm1',
+        dataIndex: 'ME1 average rpm',
         yAxis: 0,
         type: 'spline',
         color: '#0033FF',
         name: 'rpm #1',
         visible: true
     }, {
-        dataIndex: 'rpm2',
+        dataIndex: 'ME2 average rpm',
         yAxis: 0,
         color: '#336600',
         type: 'spline',
         name: 'rpm #2',
         visible: true
      }, {
-        dataIndex: 'rpm3',
+        dataIndex: 'AE1 average rpm',
         yAxis: 0,
         color: '#8B6914',
         type: 'spline',
         name: 'rpm #3',
         visible: true
+    }, {
+         dataIndex: 'AE2 average rpm',
+         yAxis: 0,
+         color: '#8B6900',
+         type: 'spline',
+         name: 'rpm #4',
+         visible: true
 
     }, {
 		dataIndex: 'rpm4',
@@ -452,7 +422,7 @@ var grafik = new Ext.create('Chart.ux.Highcharts', {
         visible: false
 
     }, {
-        dataIndex: 'fuel1',
+        dataIndex: 'ME1 consumtion',
         yAxis: 1,
         type: 'spline',
         color: '#0033FF',
@@ -460,7 +430,7 @@ var grafik = new Ext.create('Chart.ux.Highcharts', {
         name: 'fuel main engine #1',
         visible: true
     }, {
-        dataIndex: 'fuel2',
+        dataIndex: 'ME2 consumtion',
         yAxis: 1,
         color: '#336600',
         dashStyle: 'ShortDash',
@@ -468,7 +438,7 @@ var grafik = new Ext.create('Chart.ux.Highcharts', {
         name: 'fuel main engine #2',
         visible: true
     }, {
-        dataIndex: 'fuel3',
+        dataIndex: 'AE1 consumtion',
         yAxis: 1,
         color: '#8B6914',
         dashStyle: 'ShortDash',
@@ -476,37 +446,53 @@ var grafik = new Ext.create('Chart.ux.Highcharts', {
         name: 'fuel main engine #3',
         visible: true
     }, {
-		dataIndex: 'fuel4',
+		    dataIndex: 'AE2 consumtion',
         yAxis: 1,
         color: '#FA5A6A',
         dashStyle: 'ShortDash',
         type: 'spline',
         name: 'fuel main engine #4',
-        visible: false
+        visible: true
     }, {
-        dataIndex: 'rh1',
+        dataIndex: 'working hours ME1',
         yAxis: 2,
         type: 'spline',
         color: '#0033FF',
         dashStyle: 'ShortDot',
         name: 'genset #1',
-        visible: false
+        visible: true
     }, {
-        dataIndex: 'rh2',
+        dataIndex: 'working hours ME2',
         yAxis: 2,
         type: 'spline',
         color: '#336600',
         dashStyle: 'ShortDot',
         name: 'genset #2',
-        visible: false
+        visible: true
     }, {
-        dataIndex: 'rh3',
+        dataIndex: 'working hours AE1',
         yAxis: 2,
         type: 'spline',
         color: '#8B6914',
         dashStyle: 'ShortDot',
         name: 'genset #3',
-        visible: false
+        visible: true
+    }, {
+        dataIndex: 'working hours AE2',
+        yAxis: 2,
+        type: 'spline',
+        color: '#8B6914',
+        dashStyle: 'ShortDot',
+        name: 'genset #4',
+        visible: true
+    }, {
+        dataIndex: 'Total Perjam',
+        yAxis: 1,
+        type: 'spline',
+        color: '#FF00FF',
+        dashStyle: 'ShortDot',
+        name: 'Total Fuel',
+        visible: true
     }],
     store: store_grafik,
     // store: store_akumulasi_perjam,
@@ -554,6 +540,7 @@ var grafik = new Ext.create('Chart.ux.Highcharts', {
                     color: '#89A54E'
                 }
             },
+
             min: 0
         }, {
             gridLineWidth: 0,
@@ -568,6 +555,19 @@ var grafik = new Ext.create('Chart.ux.Highcharts', {
                     color: '#AA4643'
                 }
             },
+            plotLines:[{
+                value : 1000.1,
+                color: 'red',
+                width: 1,
+                dashStyle: 'longdashdot',
+                label:{
+                  text: 'Daily Limit',
+                  align: 'left',
+                  style:{
+                    color:'blue'
+                  }
+                }
+            }],
             min: 0,
             opposite: true
         }, {
@@ -698,8 +698,8 @@ var panel_hitung = {
 					comb_kapal22 = this.getRawValue();
 					//console.log(comb_kapal21+' --> '+ comb_kapal22);
 					//console.log(tgl_sel1);
-					store_grafik.load({params: { id: comb_kapal21, tgl: tgl_sel21}});
-					store_akumulasi.load({params : { id: comb_kapal21, tgl: tgl_sel21 }});
+					store_grafik.load({params: { /*id: comb_kapal21, */tz: getTimeZone(), tgl: tgl_sel21}});
+					store_akumulasi.load({params : { /*id: comb_kapal21,*/ tz: getTimeZone(),tgl: tgl_sel21 }});
 					Ext.getCmp('table_chart').setTitle('Vessel '+comb_kapal22 +' on '+ tgl_sel22);
 					//tabel_detail_kapal
 					//update_text1();
@@ -716,7 +716,8 @@ var panel_hitung = {
 						// comb_kapal22 = (comb_kapal21 != '') ? comb_kapal22 : isi1;
 						// Ext.getCmp('table_chart').setTitle('Vessel '+isi1+' on '+ Ext.Date.format(new Date(), 'd-M-Y' ));
 
-						//store_grafik_hari.load({params : { id: comb_kapal22, tgl: tgl_sel21 }});
+						// store_grafik_hari.load({params : { id: comb_kapal22, tgl: tgl_sel21 }});
+						// store_grafik_hari.load({params : { tz: getTimeZone(), tgl: tgl_sel21 }});
 						//console.log('comb_kapal22 : '+isiid);
 						//console.log('tgl_sel21  : '+tgl_sel21);
             // console.log('disini tampil');
@@ -742,7 +743,8 @@ var panel_hitung = {
 					//console.log('Date selected: ', Ext.Date.format(this.getValue(),'Y-m-d'));
 					//console.log()
 					tgl_sel21 = Ext.Date.format(this.getValue(),'Y-m-d');
-					store_grafik.load({params: { id: comb_kapal21, tgl: tgl_sel21}});
+					// store_grafik.load({params: { id: comb_kapal21, tgl: tgl_sel21}});
+					store_grafik.load({params: { /*id: comb_kapal21,*/ tz:getTimeZone() , tgl: tgl_sel21}});
 					// store_akumulasi.load({params : { id: comb_kapal21, tgl: tgl_sel21 }});
 					store_akumulasi_perjam.load({params : { /*id: comb_kapal21,*/ tz:getTimeZone(), tgl: tgl_sel21 }});
 					tgl_sel22 = (tgl_sel21 != '') ? Ext.Date.format(this.getValue(),'d-M-Y') : Ext.Date.format(new Date(), 'd-M-Y' );

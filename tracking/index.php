@@ -83,6 +83,7 @@
         <script type="text/javascript" src="data_hitung.js"></script>
         <script type="text/javascript" src="marine.js"></script>
 				<script type="text/javascript" src="report_adhoc.js"></script>
+				<script type="text/javascript" src="report_sum.js"></script>
 				<script type="text/javascript" src="../js/lmanager.js"></script>
 
     </head>
