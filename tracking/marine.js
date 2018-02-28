@@ -1,5 +1,6 @@
 Ext.onReady(function() {
 	var user_login = "";
+	// host_ku = "hasndasdasd";
 // Ext.fly('user').update('Welcome '+user_login);
 ///*
 	// var login_y = Ext.Ajax.request({
@@ -91,6 +92,8 @@ Ext.onReady(function() {
                         interval : 1000
                     });
 										console.log('render bro');
+										console.log(getAPI());
+										// console.log('host => '+host_ku);
                 }
             }
         },{
@@ -121,6 +124,7 @@ Ext.onReady(function() {
 							layout: 'fit',
 							id: 'adhoc_rep',
 							items: [ panel_r_adhoc ],
+							// abc:'asdasd',
 							// xtype: 'panel',
 							iconCls: 'tab-icon'
 

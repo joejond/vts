@@ -268,7 +268,7 @@ session_start();
 				//console.log(Base64.encode(j));
 //				console.log(TimeZone(n));
 
-				//console.log(getAPI());
+				// console.log(getAPI());
 
         // $.ajax({
         //   url: getAPI()+ "/auth/login?idu=eyJ1IjoicGVsaW5kbzMiLCJwIjoiNDI2MjY2ZGRiNTY5ZTJmZjQxZDU2MGIwYzIxZmY1MjkifQ==",
@@ -344,7 +344,7 @@ session_start();
                   var host = document.location.origin;
 
                 window.parent.location = (host == 'http://localhost') ? (host+"/project/vts/tracking"):(host+"/vts/tracking");
-                
+
                 }
             },
             error: function(d){

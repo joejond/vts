@@ -20,7 +20,9 @@ Ext.require([
     'Ext.util.*',
     'Ext.toolbar.Paging'
 ]);
-
+// console.log("masuk data_hitung++");
+// console.log(host_ku);
+// debugger;
 var now = new Date();
 var year1 = now.getFullYear();
 var month1 = now.getMonth() + 1;
@@ -50,6 +52,8 @@ var hasil4 = 0.0;
 var tot_tot = 0.0;
 var judul = '';
 
+var hostnya;
+
 
 
 //var gen_rh3 = 0.0;
@@ -60,30 +64,42 @@ var comb_kapal22 = '';
 var comb_kapal21 = '';
 var tgl_sel21 = '';
 var tgl_sel22 = '';
+  // var hostku = ini_host_api();
+  // console.log(host_ku);
 
-
-var model_akumulasi = Ext.define('akumulasi', {
+var model_akumulasi_perjam = Ext.define('akumulasi', {
     extend: 'Ext.data.Model',
-    fields: [{name : 'tanggal', type : 'string'}, 'jam', 'rpm1', 'prop1', 'inflow1', 'outflow1', 'temp1', 'press1',
-			'rpm2', 'prop2', 'inflow2', 'outflow2', 'temp2', 'press2',
-			'rpm3', 'prop3', 'inflow3', 'outflow3', 'temp3', 'press3',
-			'rpm4', 'prop4', 'inflow4', 'outflow4', 'temp4', 'press4',
-			'runhour1', 'runhour2','runhour3']
+    // fields: [{name : 'tanggal', type : 'string'}, 'jam', 'rpm1', 'prop1', 'inflow1', 'outflow1', 'temp1', 'press1',
+		// 	'rpm2', 'prop2', 'inflow2', 'outflow2', 'temp2', 'press2',
+		// 	'rpm3', 'prop3', 'inflow3', 'outflow3', 'temp3', 'press3',
+		// 	'rpm4', 'prop4', 'inflow4', 'outflow4', 'temp4', 'press4',
+		// 	'runhour1', 'runhour2','runhour3']
+
+      fields:[
+        "date","time","Total Daily",
+        "ME1 Daily Consumtion","ME1 Working Hours",
+        "ME2 Daily Consumtion","ME2 Working Hours",
+        "AE1 Daily Consumtion","AE1 Working Hours",
+        "AE2 Daily Consumtion","AE2 Working Hours"
+      ]
+
+
+
 });
 
-var store_akumulasi = Ext.create('Ext.data.Store', {
-    model: model_akumulasi,
+var store_akumulasi_perjam = Ext.create('Ext.data.Store', {
+    model: model_akumulasi_perjam,
     autoLoad: true,
     proxy: {
         type: 'ajax',
-        url: 'data_grafik_perjam.php?',
+        url: getAPI()+'/get_data_summary_bima_hourly',
         method: 'GET',
-        reader: {
-            type: 'json',
-            //successProperty: 'success',
-            root: 'g_perjam',
-            messageProperty: 'message'
-        }
+        // reader: {
+        //     type: 'json',
+        //     //successProperty: 'success',
+        //     root: 'g_perjam',
+        //     messageProperty: 'message'
+        // }
     }
     //listeners: {
         //'beforeload': function (store, options) {
@@ -182,13 +198,13 @@ var but_export = {
 
 var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
     title: 'Daily Flowmeter',
-    store: store_akumulasi,
+    store: store_akumulasi_perjam,
     flex: 5,
     columns: [{
         header: "Jam",
         width: 50,
         locked : true,
-        dataIndex: 'jam'
+        dataIndex: 'time'
         //format : 'd-M-Y H'
         //renderer: Ext.util.Format.dateRenderer('d-M-Y H')
         //renderer: Ext.util.Format.dateRenderer('d-M-Y')
@@ -202,38 +218,26 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
         columns: [{
             header: "RunHours",
             width: 100,
-            dataIndex: 'ME1-RH'
+            dataIndex: 'ME1 Working Hours'
         },{
             header: "Fuel",
             width: 100,
-            dataIndex: 'fuel'
+            dataIndex: 'ME1 Daily Consumtion'
         },{
             header: "RPM",
             width: 100,
             dataIndex: 'rpm'
-        // },{
-        //     header: "OutFlow",
-        //     width: 100,
-        //     dataIndex: 'outflow1'
-        // },{
-        //     header: "Temp",
-        //     width: 100,
-        //     dataIndex: 'temp1'
-        // },{
-        //     header: "Press",
-        //     width: 100,
-        //     dataIndex: 'press1'
         }]
     },{
         header: "StarBoard",
         columns: [{
           header: "RunHours",
           width: 100,
-          dataIndex: 'ME1-RH'
+          dataIndex: 'ME1 Working Hours'
       },{
           header: "Fuel",
           width: 100,
-          dataIndex: 'fuel'
+          dataIndex: 'ME2 Daily Consumtion'
       },{
           header: "RPM",
           width: 100,
@@ -244,11 +248,11 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
         columns: [{
           header: "RunHours",
           width: 100,
-          dataIndex: 'ME1-RH'
+          dataIndex: 'AE1 Working Hours'
       },{
           header: "Fuel",
           width: 100,
-          dataIndex: 'fuel'
+          dataIndex: 'AE1 Daily Consumtion'
       },{
           header: "RPM",
           width: 100,
@@ -259,11 +263,11 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
         columns: [{
           header: "RunHours",
           width: 100,
-          dataIndex: 'ME1-RH'
+          dataIndex: 'AE2 Working Hours'
       },{
           header: "Fuel",
           width: 100,
-          dataIndex: 'fuel'
+          dataIndex: 'AE2 Daily Consumtion'
       },{
           header: "RPM",
           width: 100,
@@ -277,16 +281,8 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
       header: "Speed",
       width: 100,
       dataIndex: 'runhour2'
-        // header: "",
-        // columns: [{
-        //
-        // // }, {
-        // //     header: "GenSet #3",
-        // //     width: 100,
-        // //     dataIndex: 'runhour3'
-        //
-        // }]
-    }],
+
+  }],
 
     tbar : ['->',{
         xtype : 'button',
@@ -660,6 +656,7 @@ var content_akum = '<style type="text/css">' +
 
 
 var panel_hitung = {
+    // test : 'aa',
     dockedItems: [{
 		padding : '0 0 0 10',
         xtype: 'toolbar',
@@ -690,6 +687,7 @@ var panel_hitung = {
 					daily_akum();
 					//console.log('ini pilih kapal');
 					//console.log('ini pilih kapal');
+          // console.log('ini abc --> '+abc);
 
 				},
 				afterrender : function(){
@@ -702,6 +700,10 @@ var panel_hitung = {
 						//store_grafik_hari.load({params : { id: comb_kapal22, tgl: tgl_sel21 }});
 						//console.log('comb_kapal22 : '+isiid);
 						//console.log('tgl_sel21  : '+tgl_sel21);
+            console.log('disini tampil');
+
+            var hostnya = getAPI();
+            console.log(hostnya);
 
 					}
 			}
@@ -717,12 +719,13 @@ var panel_hitung = {
 			format: 'd-M-Y',
 			listeners: {
 				change: function () {
-
+          // console.log('ini test--> '+test);
 					//console.log('Date selected: ', Ext.Date.format(this.getValue(),'Y-m-d'));
 					//console.log()
 					tgl_sel21 = Ext.Date.format(this.getValue(),'Y-m-d');
 					store_grafik.load({params: { id: comb_kapal21, tgl: tgl_sel21}});
-					store_akumulasi.load({params : { id: comb_kapal21, tgl: tgl_sel21 }});
+					// store_akumulasi.load({params : { id: comb_kapal21, tgl: tgl_sel21 }});
+					store_akumulasi_perjam.load({params : { /*id: comb_kapal21,*/ tz:getTimeZone(), tgl: tgl_sel21 }});
 					tgl_sel22 = (tgl_sel21 != '') ? Ext.Date.format(this.getValue(),'d-M-Y') : Ext.Date.format(new Date(), 'd-M-Y' );
 					//console.log(tgl_sel2);
 					Ext.getCmp('table_chart').setTitle('Vessel '+comb_kapal22 +' on '+ tgl_sel22);
@@ -808,17 +811,19 @@ var eng_rh1 = '';
 function daily_akum() {
     Ext.Ajax.request({
         // url: 'data_grafik_perhari.php',
-        url: 'http://10.10.10.11:1336/get_data_summary_bima?tgl=2018-02-27&tz=%2B07:00',
+        // url: 'http://10.10.10.11:1336/get_data_summary_bima?tgl=2018-02-27&tz=%2B07:00',
+        url: 'http://10.10.10.11:1336/get_data_summary_bima',
         method: 'GET',
-        // params: {
+        params: {
         //     id: (comb_kapal21 !='') ? comb_kapal21 : '1',
-        //     tgl: tgl_sel21
-        // },
+            tz:getTimeZone(),
+            tgl: tgl_sel21
+        },
         success: function (data) {
     			var hasil = Ext.JSON.decode(data.responseText);
           console.log(hasil[0]);
           var x = hasil[0];
-          console.log(x['ME1 Daily Consumtion']);
+          // console.log(x['ME1 Daily Consumtion']);
 
 			//console.log(hasil.g_perhari[0]);
 			//console.log(hasil.g_perhari[0].tot_fl1 +' -&- '+hasil.g_perhari[0].tot_fl2 );
