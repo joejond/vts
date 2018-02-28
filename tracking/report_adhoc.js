@@ -226,7 +226,7 @@ var panel_r_adhoc = {
 			//'-',
 			//{
 				xtype : 'combobox',
-				id : 'cb_vessel',
+				id : 'cb_vessel_adhoc',
 				fieldLabel: ' Selected Ship',
 				labelWidth : 80,
 				width	: 300,
@@ -264,7 +264,7 @@ var panel_r_adhoc = {
 			},{
 				padding : '0 0 0 5',
 				fieldLabel: 'Date ',
-				id: 'date_total1',
+				id: 'date_total_adhoc',
 				labelWidth: 40,
 				editable : false,
 				xtype: 'datefield',

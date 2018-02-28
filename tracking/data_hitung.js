@@ -93,8 +93,8 @@ var store_akumulasi_perjam = Ext.create('Ext.data.Store', {
     proxy: {
         type: 'ajax',
         // url: 'http://10.10.10.11:1336/get_data_summary_bima_hourly',
-        // url: 'http://10.10.10.11:1336/get_data_summary_ship_hourly',
-        url: 'http://192.168.1.17:1337/get_data_summary_ship_hourly',
+        url: 'http://10.10.10.11:1336/get_data_summary_ship_hourly',
+        // url: 'http://192.168.1.17:1337/get_data_summary_ship_hourly',
         method: 'GET',
         // reader: {
         //     type: 'json',
