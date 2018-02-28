@@ -7,17 +7,17 @@ Ext.require([
 	'Ext.toolbar.Paging'
 ]);
 
-<<<<<<< HEAD
-//Store untuk ComboVesselName
-var model_combo_vessel_adhoc = Ext.define('Kapal', {
-    extend: 'Ext.data.Model',
-    fields: ['name']
-});
+// <<<<<<< HEAD
+// //Store untuk ComboVesselName
+// var model_combo_vessel_adhoc = Ext.define('Kapal', {
+//     extend: 'Ext.data.Model',
+//     fields: ['name']
+// });
 
-//Model untuk ComboVesselName
-var store_combo_vessel_adhoc = Ext.create('Ext.data.Store', {
-    model: model_combo_kapal,
-=======
+// //Model untuk ComboVesselName
+// var store_combo_vessel_adhoc = Ext.create('Ext.data.Store', {
+//     model: model_combo_kapal,
+// =======
 //
 // var model_detail_kapal = Ext.define('detail_kapal', {
 //     extend: 'Ext.data.Model',
@@ -60,7 +60,7 @@ var model_combo_kapal_ad = Ext.define('Kapal', {
 //
 var store_combo_kapal_ad = Ext.create('Ext.data.Store', {
     model: model_combo_kapal_ad,
->>>>>>> pelindo3
+//>>>>>>> pelindo3
     autoLoad: true,
     proxy: {
         type: 'ajax',
@@ -76,7 +76,6 @@ var store_combo_kapal_ad = Ext.create('Ext.data.Store', {
         }
     }
 });
-<<<<<<< HEAD
 
 /*
 
@@ -130,8 +129,6 @@ var store_adhoc_kapal = Ext.create('Ext.data.Store', {
 
 */
 
-=======
-//
 //
 // //var ship_combo1 = new Ext.form.ComboBox({
 //     //displayField: 'name',
@@ -151,7 +148,8 @@ var store_adhoc_kapal = Ext.create('Ext.data.Store', {
 //     //}
 // //});
 //
->>>>>>> pelindo3
+//>>>>>>> pelindo3
+
 var tabel_r_adhoc = Ext.create('Ext.grid.Panel', {
     //id : 'table_ship',
     //jdl : '',
@@ -237,11 +235,9 @@ var panel_r_adhoc = {
 				editable : false,
 				displayField: 'name',
 				valueField: 'id',
-<<<<<<< HEAD
-				//store: store_combo_vessel_adhoc,
-=======
+
 				store: store_combo_kapal_ad,
->>>>>>> pelindo3
+
 				listeners:{
 					select: function() {
 						// comb_kapal1 = this.getValue();
