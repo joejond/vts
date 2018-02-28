@@ -808,12 +808,13 @@ var eng_rh1 = '';
 function daily_akum() {
     Ext.Ajax.request({
         // url: 'data_grafik_perhari.php',
-        url: 'http://10.10.10.11:1336/get_data_summary_bima?tgl=2018-02-27&tz=%2B07:00',
+        url: 'http://project.daunbiru.com:1336/get_data_summary_bima',
         method: 'GET',
-        // params: {
+         params: {
         //     id: (comb_kapal21 !='') ? comb_kapal21 : '1',
-        //     tgl: tgl_sel21
-        // },
+				tz:getTimeZone(),
+             tgl: tgl_sel21
+         },
         success: function (data) {
     			var hasil = Ext.JSON.decode(data.responseText);
           console.log(hasil[0]);

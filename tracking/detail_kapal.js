@@ -66,7 +66,7 @@ var store_detail_kapal = Ext.create('Ext.data.Store', {
     proxy: {
         type: 'ajax',
         // url: 'ship_detail_sp.php',
-				url: 'http://10.10.10.11:1336/get_data_bima',
+				url: 'http://project.daunbiru.com:1336/get_data_bima',
         // url: 'http://192.168.1.17:1337/get_data_bima?id=8&user_id=4&tz=%2B07:00&tgl=2018-02-26',
         method: 'GET',
         // reader: {

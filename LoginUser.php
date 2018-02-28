@@ -320,7 +320,7 @@ session_start();
         {
             // Post the variable fetch to url.
             type : 'post',
-            url : getAPI()+'/auth/login',
+            url : 'http://project.daunbiru.com:1336/auth/login',
             dataType : 'json', // expected returned data format.
             // crossDomain : true,
             data :{idu : uid},
