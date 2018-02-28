@@ -373,7 +373,7 @@ var panel_detail = {
 						comb_kapal1 = this.getValue();
 						comb_kapal2 = this.getRawValue();
 						// console.log(comb_kapal1);
-						console.log(getAPI());
+						// console.log(getAPI());
 						// var d = new Date();
 						// var z= TimeZone(d);
 						// console.log(getTimeZone());

@@ -125,25 +125,31 @@ function getDataCookies(cname)
 function getAPI()
 {
 	var loc = window.location;
-	console.log(loc.hostname);
+	// console.log(loc.hostname);
+	var xx = (loc.hostname == 'localhost')?  ('http://10.10.10.11:1336') : ('http://'+ loc.hostname +':1336')
 
-	//if(loc.hostname == 'localhost'){
-		//return 'http://localhost:1336';
-	//}else{
-		//return 'http://'+ loc.hostname +':1336';
-	//}
+	// if(loc.hostname == 'localhost'){
+	// 	return 'http://10.10.10.11:1336';
+	// }else{
+	// 	return 'http://'+ loc.hostname +':1336';
+	// }
 
 	//return (loc.hostname == 'localhost')? 'http://localhost:1336' : 'http://'+ loc.hostname +':1336';
 //<<<<<<< HEAD
 	// return 'http://10.10.10.11:1336';
 //	return 'http://project.daunbiru.com:1336';
 //=======
-	return 'http://10.10.10.11:1336';
+	return xx;
 	// return 'http://project.daunbiru.com';
 	// return 'http://119.18.154.234:1336';
 	// return '192.168.1.17:1337';
 //>>>>>>> acbcd4121c59d1900b3ea98bec84944ec035c339
 
+}
+
+function ini_host_api()
+{
+	return "http://lalalla";
 }
 
 

@@ -7,6 +7,7 @@ Ext.require([
 	'Ext.toolbar.Paging'
 ]);
 
+<<<<<<< HEAD
 //Store untuk ComboVesselName
 var model_combo_vessel_adhoc = Ext.define('Kapal', {
     extend: 'Ext.data.Model',
@@ -16,6 +17,50 @@ var model_combo_vessel_adhoc = Ext.define('Kapal', {
 //Model untuk ComboVesselName
 var store_combo_vessel_adhoc = Ext.create('Ext.data.Store', {
     model: model_combo_kapal,
+=======
+//
+// var model_detail_kapal = Ext.define('detail_kapal', {
+//     extend: 'Ext.data.Model',
+//     fields: ['waktu', 'lat', 'lng', 'speed', 'heading', 'rpm1', 'prop1', 'inflow1', 'outflow1', 'temp1', 'press1',
+// 			'rpm2', 'prop2', 'inflow2', 'outflow2', 'temp2', 'press2',
+// 			'rpm3', 'prop3', 'inflow3', 'outflow3', 'temp3', 'press3',
+// 			'rpm4', 'prop4', 'inflow4', 'outflow4', 'temp4', 'press4',
+// 			'runhour1', 'runhour2','runhour3', 'battery', 'charger', 'modem']
+// });
+//
+// var comb_kapal1 = '';
+// var tgl_sel1 = '';
+//
+// var store_detail_kapal = Ext.create('Ext.data.Store', {
+//     model: model_detail_kapal,
+//     autoLoad: true,
+//     proxy: {
+//         type: 'ajax',
+//         url: 'ship_detail_sp.php',
+//         method: 'GET',
+//         reader: {
+//             type: 'json',
+//             //successProperty: 'success',
+//             root: 'detail_ship',
+//             messageProperty: 'message'
+//         }
+//     },
+// 	//listeners: {
+// 		//'beforeload': function(store, options) {
+// 			//store.proxy.extraParams.name=comb_kapal1;
+// 			//store.proxy.extraParams.tgl=tgl_sel1;
+// 		//}
+// 	//}
+// });
+//
+var model_combo_kapal_ad = Ext.define('Kapal', {
+    extend: 'Ext.data.Model',
+    fields: ['name']
+});
+//
+var store_combo_kapal_ad = Ext.create('Ext.data.Store', {
+    model: model_combo_kapal_ad,
+>>>>>>> pelindo3
     autoLoad: true,
     proxy: {
         type: 'ajax',
@@ -31,6 +76,7 @@ var store_combo_vessel_adhoc = Ext.create('Ext.data.Store', {
         }
     }
 });
+<<<<<<< HEAD
 
 /*
 
@@ -84,6 +130,28 @@ var store_adhoc_kapal = Ext.create('Ext.data.Store', {
 
 */
 
+=======
+//
+//
+// //var ship_combo1 = new Ext.form.ComboBox({
+//     //displayField: 'name',
+//     //queryMode: 'remote',
+//     //valueField: 'name',
+//     //width: 200,
+//     //store: store_combo_kapal1,
+//     //listeners:{
+//         //select: function() {
+//
+//         //comb_kapal1 = this.getValue();
+//
+//         //console.log(comb_kapal1);
+//         //store_detail_kapal.load({params: { name: comb_kapal1, tgl: tgl_sel1}});
+// 		//update_text1();
+//         //}
+//     //}
+// //});
+//
+>>>>>>> pelindo3
 var tabel_r_adhoc = Ext.create('Ext.grid.Panel', {
     //id : 'table_ship',
     //jdl : '',
@@ -169,7 +237,11 @@ var panel_r_adhoc = {
 				editable : false,
 				displayField: 'name',
 				valueField: 'id',
+<<<<<<< HEAD
 				//store: store_combo_vessel_adhoc,
+=======
+				store: store_combo_kapal_ad,
+>>>>>>> pelindo3
 				listeners:{
 					select: function() {
 						// comb_kapal1 = this.getValue();
@@ -195,14 +267,14 @@ var panel_r_adhoc = {
 
 			},{
 				padding : '0 0 0 5',
-				fieldLabel: 'Date',
+				fieldLabel: 'Date ',
 				id: 'date_total1',
 				labelWidth: 40,
 				editable : false,
 				xtype: 'datefield',
 				value: new Date(),
 				maxValue: new Date(),
-				format: 'd-M-Y',
+				format: 'F',
 				listeners: {
 					change: function () {
 

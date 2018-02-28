@@ -227,9 +227,9 @@ session_start();
     <!-- <script src="js/jsencode.js"></script> -->
     <!-- <script src="js/base64.min.js"></script> -->
     <script>
-		//var sukses = <?php echo $sks; ?>;
+		//var sukses = <?php //echo $sks; ?>;
 		//alert ('ini sukses : '+sukses);
-		//alert ("<?php echo $alert;?>");
+		//alert ("<?php //echo $alert;?>");
 
 
 	$(document).ready(function(){
@@ -268,7 +268,7 @@ session_start();
 				//console.log(Base64.encode(j));
 //				console.log(TimeZone(n));
 
-				//console.log(getAPI());
+				// console.log(getAPI());
 
         // $.ajax({
         //   url: getAPI()+ "/auth/login?idu=eyJ1IjoicGVsaW5kbzMiLCJwIjoiNDI2MjY2ZGRiNTY5ZTJmZjQxZDU2MGIwYzIxZmY1MjkifQ==",
@@ -343,8 +343,8 @@ session_start();
                   setcookie('marine',objd,30);
                   var host = document.location.origin;
 
-                window.parent.location = (host == 'http://localhost') ? (host+"/project/vts/tracking"):(host+"/vts/tracking");
-                
+                  window.parent.location = (host == 'http://localhost') ? (host+"/project/vts/tracking"):(host+"/vts/tracking");
+
                 }
             },
             error: function(d){

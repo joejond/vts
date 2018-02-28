@@ -1,5 +1,6 @@
 Ext.onReady(function() {
 	var user_login = "";
+	// host_ku = "hasndasdasd";
 // Ext.fly('user').update('Welcome '+user_login);
 ///*
 	// var login_y = Ext.Ajax.request({
@@ -91,6 +92,8 @@ Ext.onReady(function() {
                         interval : 1000
                     });
 										console.log('render bro');
+										// console.log(getAPI());
+										// console.log('host => '+host_ku);
                 }
             }
         },{
@@ -116,6 +119,7 @@ Ext.onReady(function() {
                 id: 'analisis_tab',
                 items: [ panel_hitung ],
                 iconCls: 'tab-icon'
+<<<<<<< HEAD
 			},{
 				title: 'REPORT AD-HOC',
 				layout: 'fit',
@@ -123,6 +127,24 @@ Ext.onReady(function() {
 				items: [ panel_r_adhoc ],
 				// xtype: 'panel',
 				iconCls: 'tab-icon'
+=======
+						},{
+							title: 'REPORT AD-HOC',
+							layout: 'fit',
+							id: 'adhoc_rep',
+							items: [ panel_r_adhoc ],
+							// abc:'asdasd',
+							// xtype: 'panel',
+							iconCls: 'tab-icon'
+						},{
+							title: 'SUMMARY',
+							layout: 'fit',
+							id: 'summ_tab',
+							// items: [ panel_r_adhoc ],
+							// abc:'asdasd',
+							xtype: 'panel',
+							iconCls: 'tab-icon'
+>>>>>>> pelindo3
 
             }]
         }]
