@@ -346,7 +346,8 @@ var store_grafik = Ext.create('Ext.data.Store', {
     proxy: {
         type: 'ajax',
         // url: 'data_chart_sp.php?',
-        url: 'http://192.168.1.17:1337/get_data_summary_ship_graphic',
+        // url: 'http://192.168.1.17:1337/get_data_summary_ship_graphic',
+        url: 'http://10.10.10.11:1336/get_data_summary_ship_graphic',
 
     },
     //listeners: {
