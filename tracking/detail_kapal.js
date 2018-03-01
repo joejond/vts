@@ -59,6 +59,7 @@ var model_detail_kapal = Ext.define('detail_kapal', {
 
 var comb_kapal1 = '';
 var tgl_sel1 = '';
+var id_kpl = '';
 
 var store_detail_kapal = Ext.create('Ext.data.Store', {
     model: model_detail_kapal,
@@ -66,7 +67,8 @@ var store_detail_kapal = Ext.create('Ext.data.Store', {
     proxy: {
         type: 'ajax',
         // url: 'ship_detail_sp.php',
-			url: 'http://project.daunbiru.com:1336/get_data_bima',
+				// url: 'http://project.daunbiru.com:1336/get_data_bima',
+				url: getAPI()+'/get_data_bima',
         // url: 'http://192.168.1.17:1337/get_data_bima?id=8&user_id=4&tz=%2B07:00&tgl=2018-02-26',
         method: 'GET',
         // reader: {
@@ -182,10 +184,7 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
 				header: "RunHours",
 				width: 70,
 				dataIndex: 'ME1-RH'
-			// },{
-			// 	header: "Press",
-			// 	width: 70,
-			// 	dataIndex: 'press1'
+
 			}]
 	},{
       header: "PortSide Engine",
@@ -209,10 +208,7 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
 				header: "RunHours",
 				width: 70,
 				dataIndex: 'ME2-RH'
-			// },{
-			// 	header: "Press",
-			// 	width: 70,
-			// 	dataIndex: 'press1'
+
 			}]
 	},{
       header: "Aux Engine 1",
@@ -372,30 +368,27 @@ var panel_detail = {
 					select: function() {
 						comb_kapal1 = this.getValue();
 						comb_kapal2 = this.getRawValue();
-
 						var param = {user_id: dt.idu,id:comb_kapal1,tgl:tgl_sel1,tz: getTimeZone()};
-						// console.log(param);
-						// store_detail_kapal.load({params: { id: comb_kapal1, tgl: tgl_sel1}});
 						store_detail_kapal.load({params: param});
 						Ext.getCmp('table_ship').setTitle('Vessel '+comb_kapal2 +' on '+ tgl_sel2);
 						//tabel_detail_kapal
 						//update_text1();
+						// console.log(comb_kapal1,comb_kapal2);
 					},
 					afterrender : function(){
 							var isi = this.getStore().data.items[0].data['name'];
 							this.setValue(isi);
+							id_kpl = this.getValue();
 							comb_kapal2 = (comb_kapal1 != '') ? comb_kapal2 : isi;
-							//console.log(isi);
-							var id_kpl = this.getStore().data.items[0].data['id'];
+
 							var tgl_ini = Ext.getCmp('date_total_harian').getValue();
 							var tgl_sesuai = Ext.Date.format(tgl_ini, 'd-M-Y' );
-							var param = {user_id: dt.idu,id:comb_kapal1,tgl:tgl_sel1,tz: getTimeZone()};
+							var param = {user_id: dt.idu,id:id_kpl,tgl:tgl_sel1,tz: getTimeZone()};
 							// console.log(param);
 							// store_detail_kapal.load({params: { id: comb_kapal1, tgl: tgl_sel1}});
 							store_detail_kapal.load({params: param});
-							console.log('====>>>> ',this.getStore().data.items[0].data['id']+' === >> ',tgl_ini);
+							// console.log('====>>>> ',this.getStore().data.items[0].data['id']+' === >> ',tgl_ini);
 							Ext.getCmp('table_ship').setTitle('Vessel '+isi+' on '+ tgl_sesuai);
-
 						}
 				}
 
@@ -412,16 +405,6 @@ var panel_detail = {
 				format: 'd-M-Y',
 				listeners: {
 					change: function () {
-
-						//console.log('Date selected: ', Ext.Date.format(this.getValue(),'Y-m-d'));
-						//console.log()
-						// var dt = getDataCookies('marine');
-						// var kukis = Ext.util.Cookies.get("marine");
-						// console.log(kukis);
-						// debugger;
-						// console.log("isi coookies",dt);
-						var dt = JSON.parse(atob(Ext.util.Cookies.get("marine")));
-						// console.log(dt.idu);
 						tgl_sel1 = Ext.Date.format(this.getValue(),'Y-m-d');
 						var param = {user_id: dt.idu,id:comb_kapal1,tgl:tgl_sel1,tz: getTimeZone()};
 						// store_detail_kapal.load({params: { id: comb_kapal1, tgl: tgl_sel1}});
@@ -435,8 +418,10 @@ var panel_detail = {
 						//console.log('Date selected: ', this.getValue());
 						tgl_sel1 = Ext.Date.format(this.getValue(),'Y-m-d');
 						tgl_sel2 = (tgl_sel1 != '') ? tgl_sel1 : Ext.Date.format(new Date(), 'd-M-Y' );
-						//console.log(tgl_sel1);
-						}
+						var param = {user_id: dt.idu,id:comb_kapal1,tgl:tgl_sel1,tz: getTimeZone()};
+
+						store_detail_kapal.load({params: param});
+					}
 				}
 			},'->',
 			{
@@ -473,27 +458,5 @@ var panel_detail = {
     },
     items: [
         tabel_detail_kapal
-        /*
-        ,{
-            xtype: 'splitter'
-        },{
-			title: 'visual data view',
-			flex: 5,
-			split : true,
-			border: true,
-			items:[{
-				xtype: "component",
-				id: 'iframe-win',
-				width: '100%',
-				height: '100%',
-				title: 'Visual',
-				autoEl: {
-					tag : "iframe",
-					src : "visualmonita/visualmonita1.php?xmlfile=layout/kapal.xml"
-				}
-			}]
-
-        }
-        */
     ]
 };

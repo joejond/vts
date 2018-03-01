@@ -20,9 +20,7 @@ Ext.require([
     'Ext.util.*',
     'Ext.toolbar.Paging'
 ]);
-// console.log("masuk data_hitung++");
-// console.log(host_ku);
-// debugger;
+
 var now = new Date();
 var year1 = now.getFullYear();
 var month1 = now.getMonth() + 1;
@@ -52,8 +50,8 @@ var hasil4 = 0.0;
 var tot_tot = 0.0;
 var judul = '';
 
-var hostnya = 'http://10.10.10.11:1336';
-console.log('jajal getApi===> '+getAPI());
+// var hostnya = 'http://10.10.10.11:1336';
+// console.log('jajal getApi===> '+getAPI());
 
 
 
@@ -84,10 +82,9 @@ var model_akumulasi_perjam = Ext.define('akumulasi', {
 
 var store_akumulasi_perjam = Ext.create('Ext.data.Store', {
     model: model_akumulasi_perjam,
-    autoLoad: true,
+    // autoLoad: true,
     proxy: {
         type: 'ajax',
-        // url: hostnya+'/get_data_summary_bima_hourly',
         url: getAPI()+'/get_data_summary_ship_hourly',
         // url: 'http://10.10.10.11:1336/get_data_summary_ship_hourly',
         // url: 'http://192.168.1.17:1337/get_data_summary_ship_hourly',
@@ -130,28 +127,28 @@ var store_akumulasi_perjam = Ext.create('Ext.data.Store', {
 
 //});
 
-var model_combo_kapal2 = Ext.define('Kapal', {
-    extend: 'Ext.data.Model',
-    fields: ['name']
-});
-
-var store_combo_kapal2 = Ext.create('Ext.data.Store', {
-    model: model_combo_kapal2,
-    autoLoad: true,
-    proxy: {
-        type: 'ajax',
-        api: {
-            read: 'ship_list.php'
-        },
-        reader: {
-			//totalProperty:'total',
-            type: 'json',
-            //successProperty: 'success',
-            root: 'ship',
-            messageProperty: 'message'
-        }
-    }
-});
+// var model_combo_kapal2 = Ext.define('Kapal', {
+//     extend: 'Ext.data.Model',
+//     fields: ['name']
+// });
+//
+// var store_combo_kapal2 = Ext.create('Ext.data.Store', {
+//     model: model_combo_kapal2,
+//     autoLoad: true,
+//     proxy: {
+//         type: 'ajax',
+//         api: {
+//             read: 'ship_list.php'
+//         },
+//         reader: {
+// 			//totalProperty:'total',
+//             type: 'json',
+//             //successProperty: 'success',
+//             root: 'ship',
+//             messageProperty: 'message'
+//         }
+//     }
+// });
 
 /*
 var ship_combo2 = new Ext.form.ComboBox({
@@ -247,7 +244,7 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
           renderer: function(v){return parseFloat(v).toFixed(2);}
         }]
     },{
-        header: "Auxalary I",
+        header: "Auxiliary I",
         columns: [{
           header: "RunHours",
           width: 100,
@@ -264,7 +261,7 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
           renderer: function(v){return parseFloat(v).toFixed(2);}
         }]
     }, {
-		header: "Auxalary II",
+		header: "Auxiliary II",
         columns: [{
           header: "RunHours",
           width: 100,
@@ -301,9 +298,9 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
             // console.log('ini kiirm ke excel');
             // console.log(comb_kapal22,tgl_sel22);
 
-            var id_kpl = (comb_kapal21 === '')? '1' : comb_kapal21;
+            // var id_kpl = (comb_kapal21 === '')? '1' : comb_kapal21;
             // console.log(id_kpl,tgl_sel21);
-            window.open('export_data_perjam.php?id='+id_kpl+'&t='+tgl_sel21);
+            // window.open('export_data_perjam.php?id='+id_kpl+'&t='+tgl_sel21);
 
         }
         // tooltip: 'Export to xls files'
@@ -349,32 +346,8 @@ var store_grafik = Ext.create('Ext.data.Store', {
 			//store.proxy.extraParams.tanggal=tgl_sel21;
         //}
     //},
-    autoLoad: false
+    // autoLoad: false
 });
-
-
-var randomFromTo = function (from, to) {
-    return Math.floor(Math.random() * (to - from + 1) + from);
-};
-
-var seriesNum = 2;
-
-var genSeries = function () {
-    var temps = [];
-    for (var i = 0; i < 20; i++) {
-        temps[i] = randomFromTo(15, 30);
-    }
-
-    var series = {
-        type: 'spline',
-        name: seriesNum + ' days ago',
-        data: temps
-    };
-
-    seriesNum++;
-
-    return series;
-};
 
 var grafik = new Ext.create('Chart.ux.Highcharts', {
     id: 'chart',
@@ -550,7 +523,7 @@ var grafik = new Ext.create('Chart.ux.Highcharts', {
                 }
             },
             plotLines:[{
-                value : 1000.1,
+                value : 1000,
                 color: 'red',
                 width: 1,
                 dashStyle: 'longdashdot',
@@ -590,7 +563,7 @@ var grafik = new Ext.create('Chart.ux.Highcharts', {
         },
         tooltip: {
             formatter: function () {
-                return '<b>' + this.series.name + '</b><br/>hour-' + this.x + ': ' + this.y;
+                return '<b>' + this.series.name + '</b><br/>hour-' + this.x + ': ' + parseFloat(this.y).toFixed(2);
             }
 
         },
@@ -657,7 +630,6 @@ var content_akum = '<style type="text/css">' +
 			'</table>' ;
 
 var panel_hitung = {
-    // test : 'aa',
     dockedItems: [{
 		    padding : '0 0 0 10',
         xtype: 'toolbar',
@@ -727,59 +699,36 @@ var panel_hitung = {
 			editable : false,
 			format: 'd-M-Y',
 			listeners: {
-				change: function () {
-          // console.log('ini test--> '+test);
-					//console.log('Date selected: ', Ext.Date.format(this.getValue(),'Y-m-d'));
-					//console.log()
-					tgl_sel21 = Ext.Date.format(this.getValue(),'Y-m-d');
-          console.log('onchage ==> ',tgl_sel21);
-					// store_grafik.load({params: { id: comb_kapal21, tgl: tgl_sel21}});
-					store_grafik.load({params: { /*id: comb_kapal21,*/ tz:getTimeZone() , tgl: tgl_sel21}});
-					// store_akumulasi.load({params : { id: comb_kapal21, tgl: tgl_sel21 }});
-					store_akumulasi_perjam.load({params : { /*id: comb_kapal21,*/ tz:getTimeZone(), tgl: tgl_sel21 }});
-					tgl_sel22 = (tgl_sel21 != '') ? Ext.Date.format(this.getValue(),'d-M-Y') : Ext.Date.format(new Date(), 'd-M-Y' );
-					// console.log(tgl_sel2);
-					Ext.getCmp('table_chart').setTitle('Vessel '+comb_kapal22 +' on '+ tgl_sel22);
-					//update_text1();
-					daily_akum();
-					//Ext.getCmp('panel_daily').update(content_akum);
+    				change: function () {
+              // console.log('ini test--> '+test);
+    					//console.log('Date selected: ', Ext.Date.format(this.getValue(),'Y-m-d'));
+    					//console.log()
+    					tgl_sel21 = Ext.Date.format(this.getValue(),'Y-m-d');
+              console.log('onchage ==> ',tgl_sel21);
+    					// store_grafik.load({params: { id: comb_kapal21, tgl: tgl_sel21}});
+    					store_grafik.load({params: { /*id: comb_kapal21,*/ tz:getTimeZone() , tgl: tgl_sel21}});
+    					// store_akumulasi.load({params : { id: comb_kapal21, tgl: tgl_sel21 }});
+    					store_akumulasi_perjam.load({params : { /*id: comb_kapal21,*/ tz:getTimeZone(), tgl: tgl_sel21 }});
+    					tgl_sel22 = (tgl_sel21 != '') ? Ext.Date.format(this.getValue(),'d-M-Y') : Ext.Date.format(new Date(), 'd-M-Y' );
+    					// console.log(tgl_sel2);
+    					Ext.getCmp('table_chart').setTitle('Vessel '+comb_kapal22 +' on '+ tgl_sel22);
+    					//update_text1();
+    					daily_akum();
+    					//Ext.getCmp('panel_daily').update(content_akum);
 
-				},
-				afterrender : function(){
-					console.log('Date selected: ', this.getValue());
-					tgl_sel21 = Ext.Date.format(this.getValue(),'Y-m-d');
-					tgl_sel22 = (tgl_sel21 != '') ? tgl_sel21 : Ext.Date.format(new Date(), 'd-M-Y' );
-					// console.log('===> di tanggal '+tgl_sel21+ 'kapalnya ==> '+comb_kapal22);
-					//comb_kapal23 = (comb_kapal21 != '') ? '1' : isi1;
+    				},
+    				afterrender : function(){
+    					// console.log('Date selected: ', this.getValue());
+    					tgl_sel21 = Ext.Date.format(this.getValue(),'Y-m-d');
+    					tgl_sel22 = (tgl_sel21 != '') ? tgl_sel21 : Ext.Date.format(new Date(), 'd-M-Y' );
+    					// console.log('===> di tanggal '+tgl_sel21+ 'kapalnya ==> '+comb_kapal22);
+    					//comb_kapal23 = (comb_kapal21 != '') ? '1' : isi1;
 
-					//console.log('comb_kapal22 : '+comb_kapal23);
-					// console.log('tgl_sel21  : '+tgl_sel21);
-					}
-			}
-
-
-
-
-			//fieldLabel: 'Date',
-			//id: 'date_total',
-			//labelWidth: 40,
-			//xtype: 'datefield',
-			//value: new Date(),
-			//format: 'd-M-Y',
-			//listeners: {
-				//change: function () {
-					////console.log(Ext.util.Format.date(Ext.getCmp('date_total').getValue(), 'd-m-Y'));
-					////tgl_sel2 = Ext.util.Format.date(Ext.getCmp('date_total').getValue(), 'Y-m-d');
-					////store_akumulasi.load({params: { name: comb_kapal2, tgl2: tgl_sel2}});
-					////store_grafik.load({params: { name: comb_kapal2, tgl2: tgl_sel2}});
-					////update_text2();
-					////daily_akum();
-				//}
-			//}
-			//},
-			//'-',
-			//{id: 'toolbar_text2', html:'<html><body><div style="font-size: 20px; color:blue">(current view -> '+comb_kapal2+' - date: '+tgl_sel2+')</div></body></html>'}
-        }]
+    					//console.log('comb_kapal22 : '+comb_kapal23);
+    					// console.log('tgl_sel21  : '+tgl_sel21);
+					   }
+		     }
+      }]
     }],
     layout: {
         type: 'vbox',
@@ -797,6 +746,7 @@ var panel_hitung = {
     }, {
         flex: 3,
         border: false,
+        height: 100,
         layout: {
             type: 'hbox',
             pack: 'start',
@@ -821,31 +771,15 @@ var panel_hitung = {
 var eng_rh1 = '';
 function daily_akum() {
     Ext.Ajax.request({
-        // url: 'data_grafik_perhari.php',
-// <<<<<<< HEAD
-//         // url: 'http://10.10.10.11:1336/get_data_summary_bima?tgl=2018-02-27&tz=%2B07:00',
-//         url: 'http://10.10.10.11:1336/get_data_summary_bima',
-//         method: 'GET',
-//         params: {
-//         //     id: (comb_kapal21 !='') ? comb_kapal21 : '1',
-//             tz:getTimeZone(),
-//             tgl: tgl_sel21
-//         },
-// =======
         // url: 'http://project.daunbiru.com:1336/get_data_summary_bima',
         url: getAPI()+'/get_data_summary_bima',
         method: 'GET',
-         params: {
-        //     id: (comb_kapal21 !='') ? comb_kapal21 : '1',
-				    tz:getTimeZone(),
-             tgl: tgl_sel21
+        params: {tz:getTimeZone(),tgl: tgl_sel21},
 
-         },
-// >>>>>>> cokro
         success: function (data) {
-    			var hasil = Ext.JSON.decode(data.responseText);
-          console.log(hasil[0]);
-          var x = hasil[0];
+    			   var hasil = Ext.JSON.decode(data.responseText);
+          // console.log(hasil[0]);
+              var x = hasil[0];
 
              eng1_daily = parseFloat(x['ME1 Daily Consumtion']).toFixed(2) ;
              eng2_daily = parseFloat(x['ME2 Daily Consumtion']).toFixed(2) ;
@@ -882,12 +816,10 @@ function daily_akum() {
             			'<tr>' +
             			'<td>genset#1</td>' +
             			'<td>genset#2</td>' +
-            			// '<td colspan="2">genset#3</td>' +
             			'</tr>' +
             			'<tr>' +
             			'<td><span style="font-size:18px;">' + ae1_daily + ' Liter</span></td>' +
             			'<td><span style="font-size:18px;">' + ae2_daily + ' Liter</span></td>' +
-            			// '<td colspan="2"><span style="font-size:18px;">' + genset_3 + '</span></td>' +
             			'</tr>' +
                   '<tr>' +
             			'<td><span style="font-size:18px;">' + rh_ae1 + ' Hours</span></td>' +
@@ -902,7 +834,8 @@ function daily_akum() {
 
 function update_grafik() {
     store_grafik.reload();
-    //grafik.draw();
+    store_akumulasi_perjam.reload();
+
 }
 
 Ext.onReady(function () {

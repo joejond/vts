@@ -8,62 +8,74 @@ Ext.require([
 ]);
 
 //
-// var model_detail_kapal = Ext.define('detail_kapal', {
-//     extend: 'Ext.data.Model',
-//     fields: ['waktu', 'lat', 'lng', 'speed', 'heading', 'rpm1', 'prop1', 'inflow1', 'outflow1', 'temp1', 'press1',
-// 			'rpm2', 'prop2', 'inflow2', 'outflow2', 'temp2', 'press2',
-// 			'rpm3', 'prop3', 'inflow3', 'outflow3', 'temp3', 'press3',
-// 			'rpm4', 'prop4', 'inflow4', 'outflow4', 'temp4', 'press4',
-// 			'runhour1', 'runhour2','runhour3', 'battery', 'charger', 'modem']
-// });
+var model_detail_sum = Ext.define('detail_kapal_sum', {
+    extend: 'Ext.data.Model',
+    fields: [
+			{name:'date',type:'date'},
+			'working distance','average speed',
+			'working hours ME1','working hours ME2',
+			'ME1 daily consumption','ME2 daily consumption',
+			'ME1 consumption rate','ME2 consumption rate',
+			'ME1 average rpm','ME2 average rpm','AE1 average rpm','AE2 average rpm',
+			'AE1 consumtion', 'AE2 consumtion','vessel'
+			//
+			// 'waktu', 'lat', 'lng', 'speed', 'heading', 'rpm1', 'prop1', 'inflow1', 'outflow1', 'temp1', 'press1',
+			// 'rpm2', 'prop2', 'inflow2', 'outflow2', 'temp2', 'press2',
+			// 'rpm3', 'prop3', 'inflow3', 'outflow3', 'temp3', 'press3',
+			// 'rpm4', 'prop4', 'inflow4', 'outflow4', 'temp4', 'press4',
+			// 'runhour1', 'runhour2','runhour3', 'battery', 'charger', 'modem']
+		]
+});
 //
 // var comb_kapal1 = '';
-// var tgl_sel1 = '';
+var tgl_sel_sum = '';
+var dtt= JSON.parse(atob(Ext.util.Cookies.get("marine")));
 //
-// var store_detail_kapal = Ext.create('Ext.data.Store', {
-//     model: model_detail_kapal,
-//     autoLoad: true,
-//     proxy: {
-//         type: 'ajax',
-//         url: 'ship_detail_sp.php',
-//         method: 'GET',
-//         reader: {
-//             type: 'json',
-//             //successProperty: 'success',
-//             root: 'detail_ship',
-//             messageProperty: 'message'
-//         }
-//     },
+var store_detail_sum = Ext.create('Ext.data.Store', {
+    model: model_detail_sum,
+    autoLoad: true,
+    proxy: {
+        type: 'ajax',
+        // url: 'http://192.168.1.17:1337/get_data_summary_ship?tgl=2018-02-26&tz=%2B07:00&user_id=4&id=8',
+        url: 'http://192.168.1.17:1337/get_data_summary_ship',
+        method: 'GET',
+        // reader: {
+        //     type: 'json',
+        //     //successProperty: 'success',
+        //     root: 'detail_ship',
+        //     messageProperty: 'message'
+        // }
+    },
 // 	//listeners: {
 // 		//'beforeload': function(store, options) {
 // 			//store.proxy.extraParams.name=comb_kapal1;
 // 			//store.proxy.extraParams.tgl=tgl_sel1;
 // 		//}
 // 	//}
+});
+//
+// var model_combo_kapal_ad = Ext.define('Kapal', {
+//     extend: 'Ext.data.Model',
+//     fields: ['name']
 // });
-//
-var model_combo_kapal_ad = Ext.define('Kapal', {
-    extend: 'Ext.data.Model',
-    fields: ['name']
-});
-//
-var store_combo_kapal_ad = Ext.create('Ext.data.Store', {
-    model: model_combo_kapal_ad,
-    autoLoad: true,
-    proxy: {
-        type: 'ajax',
-        api: {
-            read: 'ship_list.php'
-        },
-        reader: {
-			//totalProperty:'total',
-            type: 'json',
-            //successProperty: 'success',
-            root: 'ship',
-            messageProperty: 'message'
-        }
-    }
-});
+// //
+// var store_combo_kapal_ad = Ext.create('Ext.data.Store', {
+//     model: model_combo_kapal_ad,
+//     autoLoad: true,
+//     proxy: {
+//         type: 'ajax',
+//         api: {
+//             read: 'ship_list.php'
+//         },
+//         reader: {
+// 			//totalProperty:'total',
+//             type: 'json',
+//             //successProperty: 'success',
+//             root: 'ship',
+//             messageProperty: 'message'
+//         }
+//     }
+// });
 //
 //
 // //var ship_combo1 = new Ext.form.ComboBox({
@@ -89,48 +101,56 @@ var tabel_r_sum = Ext.create('Ext.grid.Panel', {
     //jdl : '',
     id : 'table_ship_sum',
     title: 'Summary',
-    // store : store_detail_kapal,
+    store : store_detail_sum,
     flex: 4,
     columns: [
     {
         header: "Vessel",
         width: 100,
-        dataIndex: 'ship',
+        dataIndex: 'vessel',
         locked : true
     },{
       	header: "Working Distance",
 				width: 100,
-				dataIndex: 'dist'
+				dataIndex: 'working distance'
 		},{
 				header: "Working Hours",
-				width: 100,
-				dataIndex: 'hours'
+				columns:[{
+					header: 'ME1 RH',
+					width: 100,
+					dataIndex: 'working hours ME1'
+				},{
+					header: 'ME2 RH',
+					width: 100,
+					dataIndex: 'working hours ME2'
+				}]
+
 		},{
 				header: "Average Speed",
 				width: 100,
-				dataIndex: 'speed'
+				dataIndex: 'average speed'
 		},{
 			header: "Main Engine",
       columns: [{
 					header: "Daily Consumption",
 					width: 100,
-					dataIndex: 'day_cons'
+					dataIndex: 'ME1 daily consumption'
 			},{
 					header: "Daily Rate",
 					width: 100,
-					dataIndex: 'day_rate'
+					dataIndex: 'ME1 consumption rate'
 
 			}]
 	},{
       header: "Auxiliary Engine",
       columns: [{
-					header: "Daily Consumption",
+					header: "AE1 Fuel",
 					width: 100,
-					dataIndex: 'day_cons'
+					dataIndex: 'AE1 consumtion'
 			},{
-					header: "Daily Rate",
+					header: "AE2 Fuel",
 					width: 100,
-					dataIndex: 'day_rate'
+					dataIndex: 'AE2 consumtion'
 
 			}]
 	},{
@@ -190,43 +210,7 @@ var panel_r_sum = {
 				height: 40,
         items: [{
 
-		    //'selected ship :',
-            //ship_combo1,
-			//'-',
-			//{
-			// 	xtype : 'combobox',
-			// 	id : 'cb_vessel_sum',
-			// 	fieldLabel: ' Selected Ship',
-			// 	labelWidth : 80,
-			// 	width	: 300,
-			// 	// queryMode: 'remote',
-			// 	emptyText: '- select ship -',
-			// 	editable : false,
-			// 	displayField: 'name',
-			// 	valueField: 'id',
-			// 	store: store_combo_kapal1,
-			// 	listeners:{
-			// 		select: function() {
-			// 			// comb_kapal1 = this.getValue();
-			// 			// comb_kapal2 = this.getRawValue();
-			// 			//console.log(comb_kapal1);
-			// 			//console.log(tgl_sel1);
-			// 			// store_detail_kapal.load({params: { id: comb_kapal1, tgl: tgl_sel1}});
-			// 			// Ext.getCmp('table_ship').setTitle('Vessel '+comb_kapal2 +' on '+ tgl_sel2);
-			// 			//tabel_detail_kapal
-			// 			//update_text1();
-			// 		},
-			// 		afterrender : function(){
-			// 				var bbb = this.getStore().data.items[0].data['name'];
-			// 				this.setValue(isi);
-			// 				// comb_kapal2 = (comb_kapal1 != '') ? comb_kapal2 : isi;
-			// 				// Ext.getCmp('table_ship').setTitle('Vessel '+isi+' on '+ Ext.Date.format(new Date(), 'd-M-Y' ));
-			// 				//console.log(isi);
-			// 			}
-			// 	}
-			//
-			//
-			// },{
+
 				padding : '0 0 0 5',
 				fieldLabel: 'Date ',
 				id: 'date_total_sum',
@@ -240,8 +224,10 @@ var panel_r_sum = {
 					change: function () {
 
 						//console.log('Date selected: ', Ext.Date.format(this.getValue(),'Y-m-d'));
-						//console.log()
-						// tgl_sel1 = Ext.Date.format(this.getValue(),'Y-m-d');
+						// console.log('onselected');
+						tgl_sel_sum = Ext.Date.format(this.getValue(),'Y-m-d');
+						var param = {user_id: dtt.idu,tgl:tgl_sel_sum,tz: getTimeZone()};
+						store_detail_sum.load({params:param});
 						// // store_detail_kapal.load({params: { id: comb_kapal1, tgl: tgl_sel1}});
 						// tgl_sel2 = (tgl_sel1 != '') ? tgl_sel1 : Ext.Date.format(new Date(), 'd-M-Y' );
 						// //console.log(tgl_sel2);
@@ -249,8 +235,12 @@ var panel_r_sum = {
 						//update_text1();
 					},
 					afterrender : function(){
-						//console.log('Date selected: ', this.getValue());
-						// tgl_sel1 = Ext.Date.format(this.getValue(),'Y-m-d');
+						console.log('Date selected: ', this.getValue());
+
+						tgl_sel_sum = Ext.Date.format(this.getValue(),'Y-m-d');
+						// var dtt= JSON.parse(atob(Ext.util.Cookies.get("marine")));
+						var param = {user_id: dtt.idu,tgl:tgl_sel_sum,tz: getTimeZone()};
+						store_detail_sum.load({params:param});
 						// tgl_sel2 = (tgl_sel1 != '') ? tgl_sel1 : Ext.Date.format(new Date(), 'd-M-Y' );
 						//console.log(tgl_sel1);
 						}
@@ -291,27 +281,6 @@ var panel_r_sum = {
     items: [
         // tabel_detail_kapal
         tabel_r_sum
-        /*
-        ,{
-            xtype: 'splitter'
-        },{
-			title: 'visual data view',
-			flex: 5,
-			split : true,
-			border: true,
-			items:[{
-				xtype: "component",
-				id: 'iframe-win',
-				width: '100%',
-				height: '100%',
-				title: 'Visual',
-				autoEl: {
-					tag : "iframe",
-					src : "visualmonita/visualmonita1.php?xmlfile=layout/kapal.xml"
-				}
-			}]
 
-        }
-        */
     ]
 };
