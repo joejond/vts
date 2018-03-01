@@ -79,6 +79,28 @@ function setcookie(n,v,e)
 		console.log(expires);
     document.cookie = n + "=" + v+ expires +";path=/";
 }
+
+function getAPI()
+{
+	var loc = window.location;
+	// console.log(loc.hostname);
+	var xx = (loc.hostname == 'localhost')?  ('http://10.10.10.11:1336') : ('http://'+ loc.hostname +':1336')
+
+	// if(loc.hostname == 'localhost'){
+	// 	return 'http://10.10.10.11:1336';
+	// }else{
+	// 	return 'http://'+ loc.hostname +':1336';
+	// }
+
+	//return (loc.hostname == 'localhost')? 'http://localhost:1336' : 'http://'+ loc.hostname +':1336';
+//<<<<<<< HEAD
+	// return 'http://10.10.10.11:1336';
+//	return 'http://project.daunbiru.com:1336';
+//=======
+	return xx;
+
+}
+
 function cookiename(){
   return 'marine';
 }
@@ -87,7 +109,7 @@ function getCookie(cname) {
     var name = cname + "=";
     // console.log(name);
     var ca = document.cookie.split(';');
-    // console.log(ca);
+    console.log(ca);
     var panj = name.length;
     // console.log(panj);
 
@@ -110,42 +132,21 @@ function getCookie(cname) {
             return c.substring(name.length, c.length);
         }
     }
+
     return "";
 }
 
 function getDataCookies(cname)
 {
-  var hsl = getCookie(cname);
+console.log(cname);
+	var hsl = getCookie(cname);
+
   var dt = JSON.parse(atob(hsl));
   return dt;
 
 }
 //>>>>>>> acbcd4121c59d1900b3ea98bec84944ec035c339
 
-function getAPI()
-{
-	var loc = window.location;
-	// console.log(loc.hostname);
-	var xx = (loc.hostname == 'localhost')?  ('http://10.10.10.11:1336') : ('http://'+ loc.hostname +':1336')
-
-	// if(loc.hostname == 'localhost'){
-	// 	return 'http://10.10.10.11:1336';
-	// }else{
-	// 	return 'http://'+ loc.hostname +':1336';
-	// }
-
-	//return (loc.hostname == 'localhost')? 'http://localhost:1336' : 'http://'+ loc.hostname +':1336';
-//<<<<<<< HEAD
-	// return 'http://10.10.10.11:1336';
-//	return 'http://project.daunbiru.com:1336';
-//=======
-	return xx;
-	// return 'http://project.daunbiru.com';
-	// return 'http://119.18.154.234:1336';
-	// return '192.168.1.17:1337';
-//>>>>>>> acbcd4121c59d1900b3ea98bec84944ec035c339
-
-}
 
 function ini_host_api()
 {

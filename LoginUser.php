@@ -244,98 +244,29 @@ session_start();
 //=======
 		//$("#pesan").delay(3000).fadeOut('slow');
 
-		$("#flogin").submit(function(){
+   $("#flogin").submit(function(){
 				console.log("di submit");
-				var uname = $("input[name='userid']").val(),
-				//pas = encodeMD5($("input[name='passwdregist']").val()),
-				//email = $("input[name='email']").val(),
-				pas = $("input[name='passwd']").val();
-				//lname = $("input[name='lname']").val(),
-				//perusahaan = $("input[name='perusahaan']").val();
-
-//>>>>>>> acbcd4121c59d1900b3ea98bec84944ec035c339
-				console.log(uname,encodeMD5(pas));
-
+      var uname = $("input[name='userid']").val(),
+      pas = $("input[name='passwd']").val();
 
 				var dt = {u:$("input[name='userid']").val(),p:encodeMD5(pas)};
 				var j = JSON.stringify(dt);
 				var uid = btoa(j);
-//<<<<<<< HEAD
-//				var tgl = new Date();
-//				var n = tgl.getTimezoneOffset();
-
-//				console.log(dt,uid,atob(uid));
-				//console.log(Base64.encode(j));
-//				console.log(TimeZone(n));
-
-				// console.log(getAPI());
-
-        // $.ajax({
-        //   url: getAPI()+ "/auth/login?idu=eyJ1IjoicGVsaW5kbzMiLCJwIjoiNDI2MjY2ZGRiNTY5ZTJmZjQxZDU2MGIwYzIxZmY1MjkifQ==",
-        //   success : function(data){
-        //     console.log('masukk');
-        //   }
-        //
-        //
-        // });
-        // var api= localhost;
-//			console.log(window.location.hostname);
-//			$.ajax(
-//			{
-				// Post the variable fetch to url.
-//				type : 'post',
-//				url : "http://10.10.10.11:1336/auth/login",
-//				dataType : 'json', // expected returned data format.
-//				crossDomain : true,
-//				withCredentials: true,
-//				data :{idu : uid},
-				//data :{idu : 'eyJ1IjoicGVsaW5kbzMiLCJwIjoiNDI2MjY2ZGRiNTY5ZTJmZjQxZDU2MGIwYzIxZmY1MjkifQ'},
-				//data :{idu : 'eyJ1IjoicGVsaW5kbzMiLCJwIjoiNDI2MjY2ZGRiNTY5ZTJmZjQxZDU2MGIwYzIxZmY1MjkifQ'},
-//				success : function(data)
-//				{
-					// This happens AFTER the backend has returned an JSON array (or other object type)
-//				  //  var res1, res2;
-//					console.log("yaya ya");
-//				},
-
-//				complete : function(data)
-//				{
-					// do something, not critical.
-//					console.log("gagal nononon");
-//				}
-//			});
-
-//		});
-
-
-
-//=======
-				// var tgl = new Date();
-				// var n = tgl.getTimezoneOffset();
-        // var e = jsEncode.encode("Hello world!","123");
-        // var d = jsEncode.encode(e,"123");
-
 
         $.ajax(
         {
             // Post the variable fetch to url.
             type : 'post',
-            url : 'http://project.daunbiru.com:1336/auth/login',
+            // url : 'http://project.daunbiru.com:1336/auth/login',
+            url : getAPI()+'/auth/login',
             dataType : 'json', // expected returned data format.
             // crossDomain : true,
             data :{idu : uid},
             // data :{idu : 'eyJ1IjoicGVsaW5kbzMiLCJwIjoiNDI2MjY2ZGRiNTY5ZTJmZjQxZDU2MGIwYzIxZmY1MjkifQ=='},
             success : function(data)
             {
-              // debugger;
-                // This happens AFTER the backend has returned an JSON array (or other object type)
-              //  var res1, res2;
-                // console.log(data);
                 if (data.success){
-                  // console.log('seteleh OK');
-                  // var decode = atob(data.auth);
 
-                  // console.log(JSON.parse(decode));
                   var res = JSON.parse(atob(data.auth));
                   var obj = JSON.stringify({idu:res.uid,u:res.nama,tz:getTimeZone()});
 
@@ -351,7 +282,7 @@ session_start();
                 // debugger;
                 alert("User or Password not Match.. \n Please re-login ");
                 console.log('error brroooooo');
-                console.log(d);
+                // console.log(d);
             },
             complete : function(data)
             {
@@ -361,16 +292,7 @@ session_start();
             }
         });
 
-
-
 			});
-
-
-
-
-
-
-//>>>>>>> acbcd4121c59d1900b3ea98bec84944ec035c339
 	});
 
 
@@ -378,20 +300,6 @@ session_start();
 	</script>
 
 <?php
-// if(isset($_COOKIE['marine'])){
-//   $dec64= base64_decode($_COOKIE['marine']);
-//   echo $dec64;
-//   $result = json_decode($dec64);
-//   // // echo $hsl->{'u'}."<br>";
-//   // // echo $hsl->{'tz'}."<br>";
-//   //
-//   $_SESSION['id']		= $result->{'idu'};
-//   $_SESSION['username']	= $result->{'u'};
-//   // // $_SESSION['company']	= $result->id_company;
-//   $_SESSION['timezone']	= $result->{'tz'};
-//
-// }
-
  ?>
 
 </body>

@@ -7,6 +7,81 @@ Ext.require([
 	'Ext.toolbar.Paging'
 ]);
 
+Ext.define('Ext.form.field.Month', {
+        extend: 'Ext.form.field.Date',
+        alias: 'widget.monthfield',
+        requires: ['Ext.picker.Month'],
+        alternateClassName: ['Ext.form.MonthField', 'Ext.form.Month'],
+        selectMonth: null,
+        createPicker: function() {
+            var me = this,
+                format = Ext.String.format;
+            return Ext.create('Ext.picker.Month', {
+                pickerField: me,
+                ownerCt: me.ownerCt,
+                renderTo: document.body,
+                floating: true,
+                hidden: true,
+                focusOnShow: true,
+                minDate: me.minValue,
+                maxDate: me.maxValue,
+                disabledDatesRE: me.disabledDatesRE,
+                disabledDatesText: me.disabledDatesText,
+                disabledDays: me.disabledDays,
+                disabledDaysText: me.disabledDaysText,
+                format: me.format,
+                showToday: me.showToday,
+                startDay: me.startDay,
+                minText: format(me.minText, me.formatDate(me.minValue)),
+                maxText: format(me.maxText, me.formatDate(me.maxValue)),
+                listeners: {
+                    select: {
+                        scope: me,
+                        fn: me.onSelect
+                    },
+                    monthdblclick: {
+                        scope: me,
+                        fn: me.onOKClick
+                    },
+                    yeardblclick: {
+                        scope: me,
+                        fn: me.onOKClick
+                    },
+                    OkClick: {
+                        scope: me,
+                        fn: me.onOKClick
+                    },
+                    CancelClick: {
+                        scope: me,
+                        fn: me.onCancelClick
+                    }
+                },
+                keyNavConfig: {
+                    esc: function() {
+                        me.collapse();
+                    }
+                }
+            });
+        },
+        onCancelClick: function() {
+            var me = this;
+            me.selectMonth = null;
+            me.collapse();
+        },
+        onOKClick: function() {
+            var me = this;
+            if (me.selectMonth) {
+                me.setValue(me.selectMonth);
+                me.fireEvent('select', me, me.selectMonth);
+            }
+            me.collapse();
+        },
+        onSelect: function(m, d) {
+            var me = this;
+            me.selectMonth = new Date((d[0] + 1) + '/1/' + d[1]);
+        }
+    });
+
 //
 // var model_detail_kapal = Ext.define('detail_kapal', {
 //     extend: 'Ext.data.Model',
@@ -194,52 +269,58 @@ var panel_r_adhoc = {
             //ship_combo1,
 			//'-',
 			//{
-				xtype : 'combobox',
-				id : 'cb_vessel_adhoc',
-				fieldLabel: ' Selected Ship',
-				labelWidth : 80,
-				width	: 300,
-				// queryMode: 'remote',
-				emptyText: '- select ship -',
-				editable : false,
-				displayField: 'name',
-				valueField: 'id',
-				store: store_combo_kapal_ad,
-				listeners:{
-					select: function() {
-						// comb_kapal1 = this.getValue();
-						// comb_kapal2 = this.getRawValue();
-						//console.log(comb_kapal1);
-						//console.log(tgl_sel1);
-						// store_detail_kapal.load({params: { id: comb_kapal1, tgl: tgl_sel1}});
-						// Ext.getCmp('table_ship').setTitle('Vessel '+comb_kapal2 +' on '+ tgl_sel2);
-						//tabel_detail_kapal
-						//update_text1();
-					},
-					afterrender : function(){
-							// var isi = this.getStore().data.items[0].data['name'];
-							// this.setValue(isi);
-							// comb_kapal2 = (comb_kapal1 != '') ? comb_kapal2 : isi;
-							// Ext.getCmp('table_ship').setTitle('Vessel '+isi+' on '+ Ext.Date.format(new Date(), 'd-M-Y' ));
-							//console.log(isi);
-						}
-				}
+									xtype : 'combobox',
+									id : 'cb_vessel_adhoc',
+									fieldLabel: ' Selected Ship',
+									labelWidth : 80,
+									width	: 300,
+									// queryMode: 'remote',
+									emptyText: '- select ship -',
+									editable : false,
+									displayField: 'name',
+									valueField: 'id',
+									store: store_combo_kapal1,
+									listeners:{
+										select: function() {
+											// comb_kapal1 = this.getValue();
+											// comb_kapal2 = this.getRawValue();
+											//console.log(comb_kapal1);
+											//console.log(tgl_sel1);
+											// store_detail_kapal.load({params: { id: comb_kapal1, tgl: tgl_sel1}});
+											// Ext.getCmp('table_ship').setTitle('Vessel '+comb_kapal2 +' on '+ tgl_sel2);
+											//tabel_detail_kapal
+											//update_text1();
+										},
+										afterrender : function(){
+												var aaa = this.getStore().data.items[0].data['name'];
+												this.setValue(aaa);
+												// comb_kapal2 = (comb_kapal1 != '') ? comb_kapal2 : isi;
+												// Ext.getCmp('table_ship').setTitle('Vessel '+isi+' on '+ Ext.Date.format(new Date(), 'd-M-Y' ));
+												//console.log(isi);
+											}
+									}
 
 
 			},{
-				padding : '0 0 0 5',
+				// padding : '0 0 0 5',
 				fieldLabel: 'Date ',
-				id: 'date_total_adhoc',
+				// id: 'date_total_adhoc',
 				labelWidth: 40,
-				editable : false,
-				xtype: 'datefield',
+				// editable : false,
+				// xtype: 'datefield',
+				xtype: 'monthfield',
+				submitFormat: 'Y-m-d',
+        //         name: 'month',
+				//
+        //         format: 'F, Y',
 				value: new Date(),
-				maxValue: new Date(),
-				format: 'F',
+				// maxValue: new Date(),
+				format: 'F, Y',
+
 				listeners: {
 					change: function () {
 
-						//console.log('Date selected: ', Ext.Date.format(this.getValue(),'Y-m-d'));
+						console.log('Date selected: ', Ext.Date.format(this.getValue(),'Y-m-d'));
 						//console.log()
 						// tgl_sel1 = Ext.Date.format(this.getValue(),'Y-m-d');
 						// // store_detail_kapal.load({params: { id: comb_kapal1, tgl: tgl_sel1}});
@@ -249,7 +330,7 @@ var panel_r_adhoc = {
 						//update_text1();
 					},
 					afterrender : function(){
-						//console.log('Date selected: ', this.getValue());
+						console.log('Date selected: ', this.getValue());
 						// tgl_sel1 = Ext.Date.format(this.getValue(),'Y-m-d');
 						// tgl_sel2 = (tgl_sel1 != '') ? tgl_sel1 : Ext.Date.format(new Date(), 'd-M-Y' );
 						//console.log(tgl_sel1);

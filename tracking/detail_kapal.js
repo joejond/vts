@@ -7,7 +7,7 @@ Ext.require([
 	'Ext.toolbar.Paging'
 ]);
 
-
+var dt = JSON.parse(atob(Ext.util.Cookies.get("marine")));
 var model_detail_kapal = Ext.define('detail_kapal', {
     extend: 'Ext.data.Model',
     // fields: ['waktu', 'lat', 'lng', 'speed', 'heading', 'rpm1', 'prop1', 'inflow1', 'outflow1', 'temp1', 'press1',
@@ -372,20 +372,7 @@ var panel_detail = {
 					select: function() {
 						comb_kapal1 = this.getValue();
 						comb_kapal2 = this.getRawValue();
-						// console.log(comb_kapal1);
-						// console.log(getAPI());
-						// var d = new Date();
-						// var z= TimeZone(d);
-						// console.log(getTimeZone());
-						// console.log(x);
-						// var x= getCookie("marine");
-						var dt = getDataCookies('marine');
-						// console.log(atob(x));
-						// console.log(JSON.parse(atob(x)));
-						// var dt = JSON.parse(atob(x));
-						// console.log(dt);
-						//console.log(tgl_sel1);
-						// id=8&user_id=4&tz=%2B07:00&tgl=2018-02-26
+
 						var param = {user_id: dt.idu,id:comb_kapal1,tgl:tgl_sel1,tz: getTimeZone()};
 						// console.log(param);
 						// store_detail_kapal.load({params: { id: comb_kapal1, tgl: tgl_sel1}});
@@ -398,8 +385,17 @@ var panel_detail = {
 							var isi = this.getStore().data.items[0].data['name'];
 							this.setValue(isi);
 							comb_kapal2 = (comb_kapal1 != '') ? comb_kapal2 : isi;
-							Ext.getCmp('table_ship').setTitle('Vessel '+isi+' on '+ Ext.Date.format(new Date(), 'd-M-Y' ));
 							//console.log(isi);
+							var id_kpl = this.getStore().data.items[0].data['id'];
+							var tgl_ini = Ext.getCmp('date_total_harian').getValue();
+							var tgl_sesuai = Ext.Date.format(tgl_ini, 'd-M-Y' );
+							var param = {user_id: dt.idu,id:comb_kapal1,tgl:tgl_sel1,tz: getTimeZone()};
+							// console.log(param);
+							// store_detail_kapal.load({params: { id: comb_kapal1, tgl: tgl_sel1}});
+							store_detail_kapal.load({params: param});
+							console.log('====>>>> ',this.getStore().data.items[0].data['id']+' === >> ',tgl_ini);
+							Ext.getCmp('table_ship').setTitle('Vessel '+isi+' on '+ tgl_sesuai);
+
 						}
 				}
 
@@ -407,7 +403,7 @@ var panel_detail = {
 			},{
 				padding : '0 0 0 5',
 				fieldLabel: 'Date',
-				id: 'date_total1',
+				id: 'date_total_harian',
 				labelWidth: 40,
 				editable : false,
 				xtype: 'datefield',
@@ -419,8 +415,13 @@ var panel_detail = {
 
 						//console.log('Date selected: ', Ext.Date.format(this.getValue(),'Y-m-d'));
 						//console.log()
-						var dt = getDataCookies(cookiename());
-
+						// var dt = getDataCookies('marine');
+						// var kukis = Ext.util.Cookies.get("marine");
+						// console.log(kukis);
+						// debugger;
+						// console.log("isi coookies",dt);
+						var dt = JSON.parse(atob(Ext.util.Cookies.get("marine")));
+						// console.log(dt.idu);
 						tgl_sel1 = Ext.Date.format(this.getValue(),'Y-m-d');
 						var param = {user_id: dt.idu,id:comb_kapal1,tgl:tgl_sel1,tz: getTimeZone()};
 						// store_detail_kapal.load({params: { id: comb_kapal1, tgl: tgl_sel1}});
