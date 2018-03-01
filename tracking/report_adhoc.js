@@ -7,6 +7,118 @@ Ext.require([
 	'Ext.toolbar.Paging'
 ]);
 
+
+Ext.define('Ext.form.field.Month', {
+        extend: 'Ext.form.field.Date',
+        alias: 'widget.monthfield',
+        requires: ['Ext.picker.Month'],
+        alternateClassName: ['Ext.form.MonthField', 'Ext.form.Month'],
+        selectMonth: null,
+        createPicker: function() {
+            var me = this,
+                format = Ext.String.format;
+            return Ext.create('Ext.picker.Month', {
+                pickerField: me,
+                ownerCt: me.ownerCt,
+                renderTo: document.body,
+                floating: true,
+                hidden: true,
+                focusOnShow: true,
+                minDate: me.minValue,
+                maxDate: me.maxValue,
+                disabledDatesRE: me.disabledDatesRE,
+                disabledDatesText: me.disabledDatesText,
+                disabledDays: me.disabledDays,
+                disabledDaysText: me.disabledDaysText,
+                format: me.format,
+                showToday: me.showToday,
+                startDay: me.startDay,
+                minText: format(me.minText, me.formatDate(me.minValue)),
+                maxText: format(me.maxText, me.formatDate(me.maxValue)),
+                listeners: {
+                    select: {
+                        scope: me,
+                        fn: me.onSelect
+                    },
+                    monthdblclick: {
+                        scope: me,
+                        fn: me.onOKClick
+                    },
+                    yeardblclick: {
+                        scope: me,
+                        fn: me.onOKClick
+                    },
+                    OkClick: {
+                        scope: me,
+                        fn: me.onOKClick
+                    },
+                    CancelClick: {
+                        scope: me,
+                        fn: me.onCancelClick
+                    }
+                },
+                keyNavConfig: {
+                    esc: function() {
+                        me.collapse();
+                    }
+                }
+            });
+        },
+        onCancelClick: function() {
+            var me = this;
+            me.selectMonth = null;
+            me.collapse();
+        },
+        onOKClick: function() {
+            var me = this;
+            if (me.selectMonth) {
+                me.setValue(me.selectMonth);
+                me.fireEvent('select', me, me.selectMonth);
+            }
+            me.collapse();
+        },
+        onSelect: function(m, d) {
+            var me = this;
+            me.selectMonth = new Date((d[0] + 1) + '/1/' + d[1]);
+        }
+    });
+
+//
+// var model_detail_kapal = Ext.define('detail_kapal', {
+//     extend: 'Ext.data.Model',
+//     fields: ['waktu', 'lat', 'lng', 'speed', 'heading', 'rpm1', 'prop1', 'inflow1', 'outflow1', 'temp1', 'press1',
+// 			'rpm2', 'prop2', 'inflow2', 'outflow2', 'temp2', 'press2',
+// 			'rpm3', 'prop3', 'inflow3', 'outflow3', 'temp3', 'press3',
+// 			'rpm4', 'prop4', 'inflow4', 'outflow4', 'temp4', 'press4',
+// 			'runhour1', 'runhour2','runhour3', 'battery', 'charger', 'modem']
+// });
+//
+// var comb_kapal1 = '';
+// var tgl_sel1 = '';
+//
+// var store_detail_kapal = Ext.create('Ext.data.Store', {
+//     model: model_detail_kapal,
+//     autoLoad: true,
+//     proxy: {
+//         type: 'ajax',
+//         url: 'ship_detail_sp.php',
+//         method: 'GET',
+//         reader: {
+//             type: 'json',
+//             //successProperty: 'success',
+//             root: 'detail_ship',
+//             messageProperty: 'message'
+//         }
+//     },
+// 	//listeners: {
+// 		//'beforeload': function(store, options) {
+// 			//store.proxy.extraParams.name=comb_kapal1;
+// 			//store.proxy.extraParams.tgl=tgl_sel1;
+// 		//}
+// 	//}
+// });
+//
+
 var model_combo_kapal_ad = Ext.define('Kapal', {
     extend: 'Ext.data.Model',
     fields: ['name']
@@ -192,77 +304,99 @@ var panel_r_adhoc = {
             //ship_combo1,
 			//'-',
 			//{
+
 				xtype : 'combobox',
 				id : 'cb_vessel_adhoc',
 				fieldLabel: ' Selected Ship',
 				labelWidth : 80,
 				width	: 300,
 				// queryMode: 'remote',
-				emptyText: '- Select vessel -',
+				emptyText: '- select ship -',
 				editable : false,
 				displayField: 'name',
 				valueField: 'id',
-
-				store: store_combo_kapal_ad,
-
+				store: store_combo_kapal1,
 				listeners:{
 					select: function() {
 						// comb_kapal1 = this.getValue();
 						// comb_kapal2 = this.getRawValue();
 						//console.log(comb_kapal1);
 						//console.log(tgl_sel1);
-						var cb_vessel_adhoc=1; 
-						var month='2018-02';
-						store_adhoc_kapal.load({params: { id: cb_vessel_adhoc, m: month}});
+						// store_detail_kapal.load({params: { id: comb_kapal1, tgl: tgl_sel1}});
 						// Ext.getCmp('table_ship').setTitle('Vessel '+comb_kapal2 +' on '+ tgl_sel2);
 						//tabel_detail_kapal
 						//update_text1();
-						console.log("Combo box adhoc selected [" + comb_kapal1 +"]" );
+						// Ext.getCmp('table_ship').setTitle('Vessel '+comb_kapal2 +' on '+ tgl_sel2);
+						//tabel_detail_kapal
+						//update_text1();
+
+						//var vessel_id=1; 
+						var month='2018-02'; 
+						
+						id_vessel_adhoc=this.getValue();
+						store_adhoc_kapal.load({params: { id: id_vessel_adhoc, m: month}});
+
+						console.log("Combo box adhoc selected [" + id_vessel_adhoc +"],[" + month +"]");
 					},
 					afterrender : function(){
-							//var isi = this.getStore().data.items[0].data['name'];
-							//this.setValue(isi);
-							//comb_kapal2 = (comb_kapal1 != '') ? comb_kapal2 : isi;
-							// Ext.getCmp('table_ship').setTitle('Vessel '+isi+' on '+ Ext.Date.format(new Date(), 'd-M-Y' ));
-							//console.log(isi);
-							var cb_vessel_adhoc=1; 
-							var month='2018-02';
-							store_adhoc_kapal.load({params: { id: cb_vessel_adhoc, m: month}});
-							console.log("Combo box adhoc afterrender : [" + cb_vessel_adhoc +"],[" + month +"]");
-							console.log(this.getStore());
-						} 
-				}
+						var nama_vessel = this.getStore().data.items[0].data['name'];
+						this.setValue(nama_vessel);
+						// comb_kapal2 = (comb_kapal1 != '') ? comb_kapal2 : isi;
+						// Ext.getCmp('table_ship').setTitle('Vessel '+isi+' on '+ Ext.Date.format(new Date(), 'd-M-Y' ));
+						//console.log(isi);
 
+						var id_vessel_adhoc=1; 
+						var month_adhoc='2018-02';
+						id_vessel_adhoc=this.getValue();
+						store_adhoc_kapal.load({params: { id: id_vessel_adhoc, m: month_adhoc}});
+						console.log("Combo box adhoc afterrender : [" + id_vessel_adhoc +"],[" + month_adhoc +"]");
+						console.log(this.getStore());
+								}
+						}
 
 			},{
-				padding : '0 0 0 5',
+				// padding : '0 0 0 5',
 				fieldLabel: 'Date ',
-				id: 'date_total_adhoc',
+				id: 'combo_month_adhoc',
 				labelWidth: 40,
-				editable : false,
-				xtype: 'datefield',
+				// editable : false,
+				// xtype: 'datefield',
+				xtype: 'monthfield',
+				submitFormat: 'Y-m-d',
+        //         name: 'month',
+				//
+        //         format: 'F, Y',
 				value: new Date(),
-				maxValue: new Date(),
-				format: 'F',
+				// maxValue: new Date(),
+				format: 'F, Y',
+
 				listeners: {
 					change: function () {
 
-						//console.log('Date selected: ', Ext.Date.format(this.getValue(),'Y-m-d'));
+						console.log('Date selected: ', Ext.Date.format(this.getValue(),'Y-m-d'));
 						//console.log()
 						// tgl_sel1 = Ext.Date.format(this.getValue(),'Y-m-d');
 						// // store_detail_kapal.load({params: { id: comb_kapal1, tgl: tgl_sel1}});
 						// tgl_sel2 = (tgl_sel1 != '') ? tgl_sel1 : Ext.Date.format(new Date(), 'd-M-Y' );
 						// //console.log(tgl_sel2);
-						// Ext.getCmp('table_ship').setTitle('Vessel '+comb_kapal2 +' on '+ tgl_sel2);
+
+						//Ext.getCmp('table_ship').setTitle('Vessel '+comb_kapal2 +' on '+ tgl_sel2);
+						var month=this.getValue;
+						console.log("Combo box adhoc afterrender : [" + cb_vessel_adhoc +"],[" + month +"]");
+						
+						//store_adhoc_kapal.load({params: { id: cb_vessel_adhoc, m: month}});
 						//update_text1();
 					},
 					afterrender : function(){
-						//console.log('Date selected: ', this.getValue());
+						console.log('Date selected: ', this.getValue());
 						// tgl_sel1 = Ext.Date.format(this.getValue(),'Y-m-d');
 						// tgl_sel2 = (tgl_sel1 != '') ? tgl_sel1 : Ext.Date.format(new Date(), 'd-M-Y' );
 						//console.log(tgl_sel1);
-						console.log("Tanggal dipilih");
-						}
+						var month_adhoc= this.getValue();
+						//var id_vessel_adhoc=cb_vessel_adhoc.getValue();
+						console.log("Bulan dipilih: " + month_adhoc);
+						//store_adhoc_kapal.load({params: { id: id_vessel_adhoc, m: month}});
+						} 
 				}
 			},'->',
 			{

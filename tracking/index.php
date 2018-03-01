@@ -78,13 +78,14 @@
         <!-- <script type="text/javascript" src="https://cdn.rawgit.com/googlemaps/v3-utility-library/master/markerwithlabel/src/markerwithlabel.js"></script> -->
         <!-- https://cdn.rawgit.com/googlemaps/v3-utility-library/master/markerwithlabel/src/markerwithlabel.js -->
 				<!-- <script type="text/javascript" src="../js/lmanager_62.js"></script> -->
+				<script type="text/javascript" src="../js/lmanager.js" sync></script>
 				<script type="text/javascript" src="tab_map.js"></script>
         <script type="text/javascript" src="detail_kapal.js"></script>
         <script type="text/javascript" src="data_hitung.js"></script>
         <script type="text/javascript" src="marine.js"></script>
 				<script type="text/javascript" src="report_adhoc.js"></script>
 				<script type="text/javascript" src="report_sum.js"></script>
-				<script type="text/javascript" src="../js/lmanager.js"></script>
+
 
     </head>
     <body></body>
