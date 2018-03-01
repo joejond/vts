@@ -37,7 +37,7 @@ var store_detail_sum = Ext.create('Ext.data.Store', {
     proxy: {
         type: 'ajax',
         // url: 'http://192.168.1.17:1337/get_data_summary_ship?tgl=2018-02-26&tz=%2B07:00&user_id=4&id=8',
-        url: 'http://192.168.1.17:1337/get_data_summary_ship',
+        url: getAPI()+'/get_data_summary_ship',
         method: 'GET',
         // reader: {
         //     type: 'json',

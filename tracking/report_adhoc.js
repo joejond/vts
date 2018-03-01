@@ -179,7 +179,7 @@ var store_adhoc_kapal = Ext.create('Ext.data.Store', {
         //url: 'http://project.daunbiru.com:1337/get_data_bima?id=8&user_id=4&tz=%2B07&tgl=2018-02-01',
         method: 'GET',
         // reader: {
-        //     type: 'json', 
+        //     type: 'json',
         //     //successProperty: 'success',
         //     root: '',
         //     // messageProperty: 'message'
@@ -330,9 +330,9 @@ var panel_r_adhoc = {
 						//tabel_detail_kapal
 						//update_text1();
 
-						//var vessel_id=1; 
-						var month='2018-02'; 
-						
+						//var vessel_id=1;
+						var month='2018-02';
+
 						id_vessel_adhoc=this.getValue();
 						store_adhoc_kapal.load({params: { id: id_vessel_adhoc, m: month}});
 
@@ -345,7 +345,7 @@ var panel_r_adhoc = {
 						// Ext.getCmp('table_ship').setTitle('Vessel '+isi+' on '+ Ext.Date.format(new Date(), 'd-M-Y' ));
 						//console.log(isi);
 
-						var id_vessel_adhoc=1; 
+						var id_vessel_adhoc=1;
 						var month_adhoc='2018-02';
 						id_vessel_adhoc=this.getValue();
 						store_adhoc_kapal.load({params: { id: id_vessel_adhoc, m: month_adhoc}});
@@ -383,7 +383,7 @@ var panel_r_adhoc = {
 						//Ext.getCmp('table_ship').setTitle('Vessel '+comb_kapal2 +' on '+ tgl_sel2);
 						var month=this.getValue;
 						console.log("Combo box adhoc afterrender : [" + cb_vessel_adhoc +"],[" + month +"]");
-						
+
 						//store_adhoc_kapal.load({params: { id: cb_vessel_adhoc, m: month}});
 						//update_text1();
 					},
@@ -396,10 +396,25 @@ var panel_r_adhoc = {
 						//var id_vessel_adhoc=cb_vessel_adhoc.getValue();
 						console.log("Bulan dipilih: " + month_adhoc);
 						//store_adhoc_kapal.load({params: { id: id_vessel_adhoc, m: month}});
-						} 
+						}
 				}
 			},'->',
 			{
+				xtype : 'button',
+				text:'Add Fuel',
+				listeners:{
+					click: function() {
+	            // this == the button, as we are in the local scope
+	            // this.setText('I was clicked!');
+							console.log('diklik');
+							window_fuel.show();
+							window_fuel.setTitle ('Daily Fuel ');//+data.name);
+							// window_fuel.vessel = data.id;
+							// hitung_fuel(new Date(),data.id);
+	        },
+				}
+
+			},{
 				xtype : 'button',
 				text : 'Export to Excel',
 				handler : function(){
@@ -458,3 +473,53 @@ var panel_r_adhoc = {
         */
     ]
 };
+
+var window_fuel = Ext.create('Ext.window.Window',{
+    title : 'fuel window',
+    width : 400,
+    modal : true,
+    closable: false,
+    layout : {
+        type : 'fit',
+        align : 'stretch'
+    },
+    items : [{
+        xtype : 'tabpanel',
+				width: 400,
+			    height: 300,
+			    defaults: {
+			        bodyPadding: 10,
+			        scrollable: true
+			    },
+				items: [{
+			        title: 'Fuel-Bunkering',
+			        // html: KitchenSink.DummyText.longText
+			    }, {
+			        title: 'Fuel-Sounding',
+			        // html: KitchenSink.DummyText.extraLongText
+
+			    }]
+        // itemId : 'hasil_hitung',
+    }],
+    // tbar :[{
+    //     xtype : 'datefield',
+    //     fieldLabel : 'Date ',
+    //     format : 'd M Y',
+    //     value : new Date(),
+    //     maxValue : new Date(),
+    //     listeners : {
+    //         change :function(){
+    //             var kpl = this.up('.window').vessel;
+    //             hitung_fuel(this.getValue(),kpl);
+    //         }
+    //     }
+    // }],
+
+    buttons : [{
+        text : 'Close',
+        handler : function(){
+            this.up('.window').hide();
+        }
+    }]
+
+});
