@@ -34,7 +34,7 @@ var store_combo_kapal_ad = Ext.create('Ext.data.Store', {
 var model_adhoc_kapal = Ext.define('adhoc_kapal', {
     extend: 'Ext.data.Model',
     fields:[
-		    "date",
+		    {name:"date",type:"date"},
 		    "working distance",
 		    "average speed",
 		    "working hours ME1",
@@ -50,40 +50,24 @@ var model_adhoc_kapal = Ext.define('adhoc_kapal', {
 		    "AE1 average rpm",
 		    "AE2 average rpm"
 		 ]
-		// fields:[
-		// 	"PM - Door","PM-VBatt","PM-VCharg",
-		// 	"ME1-FM In","ME1-FM Ov","ME1-FM Tem",
-		// 	"ME2-FM In","ME2-FM Ov","ME2-FM Tem",
-		// 	"AE1-FM In","AE1-FM Ov","AE1-FM Temp",
-		// 	"AE2-FM In","AE2-FM Ov","AE2-FM Tem",
-		// 	"ME1-RPM","ME1-RH","ME2-RPM","ME2-RH",
-		// 	"AE1-RPM","AE1-RH","AE2-RPM","AE2-RH",
-		// 	"PE-Door","PE-VCharge","PE-VBatt",
-		// 	"GPS-Lattitude","GPS-Longitude","GPS-Heading","GPS-Velocity",
-		// 	"working distance","working hour","average speed","main engine daily comsumption","main engine consumtion rate",
-		// 	"auxiliary engine daily consumtion","auxiliary engine consumtion rate","remaining onboard",
-		// 	"ME1-Fuel Hourly","AE1-Fuel-Usage","FormulaContoh","Fuel-Bunkering",
-		// 	"ME2-Fuel-Usage","Total Fuel Usage","Working Distances","Work Hours",
-		// 	"ME Dialy consumption","ME1 Working Hours ",
-		// 	"AE1-RH-Daily","AE2-RH-Daily","AE1-FuelUsage","AE2-FuelUsage","ME2-FuelUsage","ME1-FuelUsage","Total-FuelUsage",
-		// 	"F_Sound_Check",{name:"t",type:"date"}
-		// ]
 });
 
 
 
 var store_adhoc_kapal = Ext.create('Ext.data.Store', {
     model: model_adhoc_kapal,
-    autoLoad: true,
+    //autoLoad: true,
     proxy: {
         type: 'ajax',
         // url: 'ship_detail_sp.php',
 		//	url: 'http://project.daunbiru.com:1336/get_data_bima',
-        url: 'http://192.168.1.17:1337/get_data_adhoc?m=2018-02',
+        //url: 'http://192.168.1.17:1337/get_data_adhoc?m=2018-02',
+        //url:'http://project.daunbiru.com:1336/get_data_adhoc?m=2018-02',
+        url:'http://project.daunbiru.com:1336/get_data_adhoc',
         //url: 'http://project.daunbiru.com:1337/get_data_bima?id=8&user_id=4&tz=%2B07&tgl=2018-02-01',
         method: 'GET',
         // reader: {
-        //     type: 'json',
+        //     type: 'json', 
         //     //successProperty: 'success',
         //     root: '',
         //     // messageProperty: 'message'
@@ -108,6 +92,7 @@ var tabel_r_adhoc = Ext.create('Ext.grid.Panel', {
         header: "Date",
         width: 100,
         dataIndex: 'date',
+		renderer: Ext.util.Format.dateRenderer('d-M-Y'),
         locked : true
     },{
       	header: "Working Distance",
@@ -226,20 +211,26 @@ var panel_r_adhoc = {
 						// comb_kapal2 = this.getRawValue();
 						//console.log(comb_kapal1);
 						//console.log(tgl_sel1);
-						// store_detail_kapal.load({params: { id: comb_kapal1, tgl: tgl_sel1}});
+						var cb_vessel_adhoc=1; 
+						var month='2018-02';
+						store_adhoc_kapal.load({params: { id: cb_vessel_adhoc, m: month}});
 						// Ext.getCmp('table_ship').setTitle('Vessel '+comb_kapal2 +' on '+ tgl_sel2);
 						//tabel_detail_kapal
 						//update_text1();
-						console.log("Combo box selected");
+						console.log("Combo box adhoc selected [" + comb_kapal1 +"]" );
 					},
 					afterrender : function(){
-							// var isi = this.getStore().data.items[0].data['name'];
-							// this.setValue(isi);
-							// comb_kapal2 = (comb_kapal1 != '') ? comb_kapal2 : isi;
+							//var isi = this.getStore().data.items[0].data['name'];
+							//this.setValue(isi);
+							//comb_kapal2 = (comb_kapal1 != '') ? comb_kapal2 : isi;
 							// Ext.getCmp('table_ship').setTitle('Vessel '+isi+' on '+ Ext.Date.format(new Date(), 'd-M-Y' ));
 							//console.log(isi);
-							console.log("Combo box afterrender");
-						}
+							var cb_vessel_adhoc=1; 
+							var month='2018-02';
+							store_adhoc_kapal.load({params: { id: cb_vessel_adhoc, m: month}});
+							console.log("Combo box adhoc afterrender : [" + cb_vessel_adhoc +"],[" + month +"]");
+							console.log(this.getStore());
+						} 
 				}
 
 
@@ -307,7 +298,7 @@ var panel_r_adhoc = {
         align: 'stretch'
     },
     items: [
-        // tabel_detail_kapal
+        // tabel_adhoc
         tabel_r_adhoc
         /*
         ,{
