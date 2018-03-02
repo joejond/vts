@@ -1,3 +1,4 @@
+
 Ext.Loader.setConfig({
     enabled: true,
     disableCaching: true, // For debug only
@@ -65,6 +66,7 @@ var tgl_sel21 = '';
 var tgl_sel22 = '';
   // var hostku = ini_host_api();
   // console.log(host_ku);
+
 
 var model_akumulasi_perjam = Ext.define('akumulasi', {
     extend: 'Ext.data.Model',
@@ -727,8 +729,18 @@ var panel_hitung = {
 
     					//console.log('comb_kapal22 : '+comb_kapal23);
     					// console.log('tgl_sel21  : '+tgl_sel21);
-					   }
+              // console.log('after render di tanggal');
+              // update_status();
+
+            }
 		     }
+       },'->',{
+         xtype:'label',
+         id: 'idstatus',
+         width: 400
+        //  padding : '0 0 2 0'
+        //  text:'adsasdsa
+        // html:'<b style="color:red;">ABCSDSDS</b>'
       }]
     }],
     layout: {
@@ -831,6 +843,49 @@ function daily_akum() {
 
 			         }
     });
+}
+
+function ambil_status()
+{
+  Ext.Ajax.request({
+    url: getAPI()+ '/pelindo/status',
+    method: 'GET',
+    // params: {tz:getTimeZone(),tgl: tgl_sel21},
+
+    success: function (data) {
+      var hasil = Ext.JSON.decode(data.responseText);
+      // console.log(hasil);
+      // console.log(hasil.lastUpdate);
+      var stat = (hasil.status =='Ok') ? '<b style="color:red;">'+hasil.status+'</b>' : '<b style="color:green;">'+hasil.status+'</b>';
+
+      Ext.getCmp('idstatus').update('<p style="font-size:14px;">Last Data : '+hasil.lastUpdate + ' >> ' +stat+'</p>');
+      //  var x = hasil[0];
+    }
+  });
+}
+
+
+// var hh = '<b style="color:red;"> Status </b>'
+var timer,i;
+function start() {
+    timer = setInterval(function(){
+      ambil_status();
+    //  Ext.getCmp('idstatus').update(hh+i);
+     // Ext.fly('idstatus').('hasdgasdasdas' + x);
+    //  console.log('update status fungsi  ===');i++;
+   },5000);
+}start();
+
+function update_status(x)
+{
+  if (x==1){
+    console.log('idup');
+    start();
+  }
+  else {
+    console.log('mati');
+    clearInterval(timer);
+  }
 }
 
 function update_grafik() {
