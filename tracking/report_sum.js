@@ -112,33 +112,39 @@ var tabel_r_sum = Ext.create('Ext.grid.Panel', {
     },{
       	header: "Working Distance",
 				width: 100,
-				dataIndex: 'working distance'
+				dataIndex: 'working distance',
+				renderer: function(v){return parseFloat(v).toFixed(2);}
 		},{
 				header: "Working Hours",
 				columns:[{
 					header: 'ME1 RH',
 					width: 100,
-					dataIndex: 'working hours ME1'
+					dataIndex: 'working hours ME1',
+					renderer: function(v){return parseFloat(v).toFixed(2);}
 				},{
 					header: 'ME2 RH',
 					width: 100,
-					dataIndex: 'working hours ME2'
+					dataIndex: 'working hours ME2',
+					renderer: function(v){return parseFloat(v).toFixed(2);}
 				}]
 
 		},{
 				header: "Average Speed",
 				width: 100,
-				dataIndex: 'average speed'
+				dataIndex: 'average speed',
+				renderer: function(v){return parseFloat(v).toFixed(2);}
 		},{
 			header: "Main Engine",
       columns: [{
 					header: "Daily Consumption",
 					width: 100,
-					dataIndex: 'ME1 daily consumption'
+					dataIndex: 'ME1 daily consumption',
+					renderer: function(v){return parseFloat(v).toFixed(2);}
 			},{
 					header: "Daily Rate",
 					width: 100,
-					dataIndex: 'ME1 consumption rate'
+					dataIndex: 'ME1 consumption rate',
+					renderer: function(v){return parseFloat(v).toFixed(2);}
 
 			}]
 	},{
@@ -146,11 +152,13 @@ var tabel_r_sum = Ext.create('Ext.grid.Panel', {
       columns: [{
 					header: "AE1 Fuel",
 					width: 100,
-					dataIndex: 'AE1 consumtion'
+					dataIndex: 'AE1 consumtion',
+					renderer: function(v){return parseFloat(v).toFixed(2);}
 			},{
 					header: "AE2 Fuel",
 					width: 100,
-					dataIndex: 'AE2 consumtion'
+					dataIndex: 'AE2 consumtion',
+					renderer: function(v){return parseFloat(v).toFixed(2);}
 
 			}]
 	},{
