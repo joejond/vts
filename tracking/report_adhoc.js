@@ -541,7 +541,7 @@ var panel_form_bunker = Ext.create('Ext.form.Panel', {
 							console.log(dt);
 							Ext.Ajax.request({
 							    // url: getAPI()+'/pelindo/custom_input',
-							    url: 'http://192.168.1.17:1337/pelindo/custom_input',
+							    url: getAPI()+'/pelindo/custom_input',
 									method:'POST',
 
 							    params: dt,
@@ -572,7 +572,7 @@ var store_fuel_sonding = Ext.create('Ext.data.Store', {
     autoLoad: true,
 		proxy: {
 				type: 'ajax',
-				url:'http://10.10.10.11:1336/pelindo/custom_input?titik_ukur_id=12005',
+				url:getAPI()+'/pelindo/custom_input?titik_ukur_id=12005',
 				method: 'GET',
 				// params: {titik_ukur_id:12005},
 				// reader: {
@@ -718,7 +718,8 @@ var store_fuel_bunker = Ext.create('Ext.data.Store', {
 		proxy: {
 				type: 'ajax',
 				// url:'http://10.10.10.11:1336/pelindo/custom_input?titik_ukur_id=11033',
-				url:'http://192.168.1.17:1337/pelindo/custom_input?titik_ukur_id=11033',
+				// url:'http://192.168.1.17:1337/pelindo/custom_input?titik_ukur_id=11033',
+				url:getAPI()+'/pelindo/custom_input?titik_ukur_id=11033',
 				method: 'GET',
 				// params: {titik_ukur_id:12005},
 				// reader: {
