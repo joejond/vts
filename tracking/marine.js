@@ -58,7 +58,8 @@ Ext.onReady(function() {
 										var uu = JSON.parse(atob(Ext.util.Cookies.get("marine")));
 										// console.log(uu);
 										Ext.fly('user').update('Welcome '+uu.u);
-
+										// console.log('tab muali muncul');
+										update_status(0);
                 }
             }
         },{
@@ -70,6 +71,7 @@ Ext.onReady(function() {
             items: [{
                 title: 'MAP VIEW',
                 layout: 'border',
+								id: 'map_tab',
                 iconCls: 'tab-icon',
                 items: [ peta , ship_list ]
             },{
@@ -99,11 +101,21 @@ Ext.onReady(function() {
 							items: [ panel_r_sum ],
 							iconCls: 'tab-icon'
 
-            }]
+            }],
+						listeners: {
+
+							tabchange: function(tabPanel, newCard, oldCard, eOpts){
+								// console.log(tabPanel, newCard, oldCard, eOpts);
+								// console.log(newCard.id);
+								var tab = newCard.id;
+								(tab == 'analisis_tab')?update_status(1):update_status(0);
+
+							}
+						}
         }]
     });
 
-	
+
 
     peta1 = Ext.getCmp('mymap');
 

@@ -630,7 +630,9 @@ var panel_form_sonding = Ext.create('Ext.form.Panel', {
         handler: function() {
             var form = this.up('form').getForm();
             if (form.isValid()) {
+							console.log('lalala');
                 form.submit({
+									// console.log('lalala');
                     success: function(form, action) {
                        Ext.Msg.alert('Success', action.result.msg);
                     },
@@ -645,7 +647,7 @@ var panel_form_sonding = Ext.create('Ext.form.Panel', {
 });
 
 var tabel_fuel_bunker = Ext.create('Ext.grid.Panel', {
-    title: 'History Bunkering',
+    title: 'History Sounding',
     //store: Ext.data.StoreManager.lookup('simpsonsStore'),
     columns: [
         { text: 'DateTime', dataIndex: 'name' },
