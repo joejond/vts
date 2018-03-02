@@ -873,7 +873,7 @@ function start() {
     //  Ext.getCmp('idstatus').update(hh+i);
      // Ext.fly('idstatus').('hasdgasdasdas' + x);
     //  console.log('update status fungsi  ===');i++;
-   },5000);
+  },10*1000);
 }start();
 
 function update_status(x)
