@@ -3,7 +3,7 @@
 Ext.Loader.setConfig({
   enabled: true,
   disableCaching: true,
-  Path: {'Ext.ux.exporter': 'ux/Exporter'}
+  Path: {'Ext.ux.Exporter': 'ux/Exporter'}
 });
 
 Ext.require([
@@ -15,11 +15,12 @@ Ext.require([
 	'Ext.toolbar.Paging'
 ]);
 
-Ext.require(['Ext.ux.exporter.Base64',
-			'Ext.ux.exporter.Button',
-			'Ext.ux.exporter.csvFormatter.CsvFormatter',
-			'Ext.ux.exporter.excelFormatter.ExcelFormatter'
-	]);
+// Ext.require([
+// 			'Ext.ux.Exporter.Base64',
+// 			'Ext.ux.Exporter.Button',
+// 			'Ext.ux.Exporter.csvFormatter.CsvFormatter',
+// 			'Ext.ux.Exporter.excelFormatter.ExcelFormatter'
+// 	]);
 
 
 
@@ -454,12 +455,6 @@ var panel_r_adhoc = {
 var panel_form_bunker = Ext.create('Ext.form.Panel', {
     // title: 'Form Fuel Bunkering',
     bodyPadding: 5,
-    // width: 350,
-
-    // The form will submit an AJAX request to this URL when submitted
-    // url: 'save-form.php',
-
-    // Fields will be arranged vertically, stretched to full width
     layout: 'anchor',
     defaults: {
         anchor: '100%'
@@ -478,14 +473,14 @@ var panel_form_bunker = Ext.create('Ext.form.Panel', {
 				 	hideLabel: 'true'
 				},
 				items: [{
-					 	name: 'tgl_nya',
+					 	name: 'date',
 					 	xtype:'datefield',
 					 	flex: 2,
 						value: new Date(),
 						format: 'd-M-Y',
 					 	allowBlank: false
 				}, {
-					 	name: 'time_nya',
+					 	name: 'time',
 					 	flex: 2,
 					 	margin: '0 0 0 6',
 					 	xtype:'timefield',
@@ -494,103 +489,14 @@ var panel_form_bunker = Ext.create('Ext.form.Panel', {
 						format: 'H:i',
 						allowBlank: false
 					}]
-				},{
-	        fieldLabel: 'Total Fuel',
-	        name: 'fuel_bunk',
-	        allowBlank: false
-    }],
-
-    // Reset and Submit buttons
-    buttons: [{
-        text: 'Reset',
-        handler: function() {
-            this.up('form').getForm().reset();
-        }
-    }, {
-        text: 'Submit',
-        formBind: true, //only enabled once the form is valid
-        disabled: true,
-        handler: function() {
-            var form = this.up('form').getForm();
-            if (form.isValid()) {
-                form.submit({
-                    success: function(form, action) {
-                       Ext.Msg.alert('Success', action.result.msg);
-                    },
-                    failure: function(form, action) {
-                        Ext.Msg.alert('Failed', action.result.msg);
-                    }
-                });
-            }
-        }
-    }],
-    // renderTo: Ext.getBody()
-});
-
-var tabel_fuel_sonding = Ext.create('Ext.grid.Panel', {
-    title: 'History Bunkering',
-    //store: Ext.data.StoreManager.lookup('simpsonsStore'),
-    columns: [
-        { text: 'DateTime', dataIndex: 'name' },
-        { text: 'Level', dataIndex: 'email', flex: 1 },
-        { text: 'Volume', dataIndex: 'vol', flex: 1 },
-        { text: 'action', dataIndex: 'phone' }
-    ],
-    height: 200,
-    // width: 400,
-    // renderTo: Ext.getBody()
-});
-
-var panel_form_sonding = Ext.create('Ext.form.Panel', {
-    // title: 'Form Fuel Bunkering',
-    bodyPadding: 5,
-    // width: 350,
-
-    // The form will submit an AJAX request to this URL when submitted
-    // url: 'save-form.php',
-
-    // Fields will be arranged vertically, stretched to full width
-    layout: 'anchor',
-    defaults: {
-        anchor: '100%'
-    },
-
-    // The fields
-    defaultType: 'textfield',
-    items: [{
-
-				xtype: 'fieldcontainer',
-				fieldLabel: 'Date Time',
-				layout: 'hbox',
-				combineErrors: true,
-				// defaultType: 'textfield',
-				defaults: {
-				 	hideLabel: 'true'
-				},
-				items: [{
-					 	name: 'tgl_son',
-					 	xtype:'datefield',
-					 	flex: 2,
-						value: new Date(),
-						format: 'd-M-Y',
-					 	allowBlank: false
-				}, {
-					 	name: 'time_son',
-					 	flex: 2,
-					 	margin: '0 0 0 6',
-					 	xtype:'timefield',
-						increment:30,
-						value: new Date(),
-						format: 'H:i',
-						allowBlank: false
-					}]
-				},{
-	        fieldLabel: 'Fuel Level',
-	        name: 'fuel_sond',
-	        allowBlank: false
 				},{
 					fieldLabel: 'Fuel Volume',
-					name: 'fuel_vol',
+					xtype:'numberfield',
+					name: 'value',
+					minValue: 0,
+					hideTrigger: true,
+					keyNavEnabled: false,
+					mouseWheelEnabled: false,
 					allowBlank: false
     }],
 
@@ -607,26 +513,204 @@ var panel_form_sonding = Ext.create('Ext.form.Panel', {
         handler: function() {
             var form = this.up('form').getForm();
             if (form.isValid()) {
-                form.submit({
-                    success: function(form, action) {
-                       Ext.Msg.alert('Success', action.result.msg);
-                    },
-                    failure: function(form, action) {
-                        Ext.Msg.alert('Failed', action.result.msg);
-                    }
-                });
+							var dt = form.getValues();
+							dt.titik_ukur_id = 11033;
+							console.log(dt);
+							Ext.Ajax.request({
+							    url: getAPI()+'/pelindo/custom_input',
+									method:'POST',
+
+							    params: dt,
+							    success: function(response){
+							        var text = response.responseText;
+							        // console.log(text);
+											Ext.Msg.alert('Fuel-Bunkering', 'Sukses.</br>('+dt.date+' '+dt.time+':00) = '+dt.value+' Liters');
+							    }
+							});
+							form.reset();
+							store_fuel_bunker.reload();
+							
             }
         }
     }],
     // renderTo: Ext.getBody()
 });
 
+
+var model_fuel_sonding = Ext.define('Fuel_Sonding', {
+    extend: 'Ext.data.Model',
+    fields: ['date','volume']
+});
+//
+var store_fuel_sonding = Ext.create('Ext.data.Store', {
+    model: model_fuel_sonding,
+    autoLoad: true,
+		proxy: {
+				type: 'ajax',
+				url:'http://10.10.10.11:1336/pelindo/custom_input?titik_ukur_id=12005',
+				method: 'GET',
+				// params: {titik_ukur_id:12005},
+				// reader: {
+				//     type: 'json',
+				//     //successProperty: 'success',
+				//     root: '',
+				//     // messageProperty: 'message'
+				// }
+		},
+});
+
+var tabel_fuel_sonding = Ext.create('Ext.grid.Panel', {
+    title: 'History Sounding',
+    store: store_fuel_sonding,
+    columns: [
+        { text: 'DateTime', dataIndex: 'date' },
+        // { text: 'Level', dataIndex: 'email', flex: 1 },
+        { text: 'Volume', dataIndex: 'volume', flex: 1 },
+        { text: 'action', dataIndex: 'phone' }
+    ],
+		// layout :'fit',
+		autoscroll: true,
+    height: 200,
+
+});
+
+var panel_form_sonding = Ext.create('Ext.form.Panel', {
+    // title: 'Form Fuel Bunkering',
+    bodyPadding: 5,
+
+    layout: 'anchor',
+    defaults: {
+        anchor: '100%'
+    },
+
+    // The fields
+    defaultType: 'textfield',
+    items: [{
+
+				xtype: 'fieldcontainer',
+				fieldLabel: 'Date Time',
+				layout: 'hbox',
+				combineErrors: true,
+				// defaultType: 'textfield',
+				defaults: {
+				 	hideLabel: 'true'
+				},
+				items: [{
+					 	name: 'date',
+					 	xtype:'datefield',
+					 	flex: 2,
+						value: new Date(),
+						format: 'd-M-Y',
+						submitFormat: 'Y-m-d',
+					 	allowBlank: false
+				}, {
+					 	name: 'time',
+					 	flex: 2,
+					 	margin: '0 0 0 6',
+					 	xtype:'timefield',
+						increment:30,
+						value: new Date(),
+						format: 'H:i',
+						allowBlank: false
+					}]
+				// },{
+	      //   fieldLabel: 'Fuel Level',
+	      //   name: 'fuel_sond',
+	      //   allowBlank: false
+				},{
+					fieldLabel: 'Fuel Volume',
+					xtype:'numberfield',
+					name: 'value',
+					minValue: 0,
+	        hideTrigger: true,
+	        keyNavEnabled: false,
+	        mouseWheelEnabled: false,
+					allowBlank: false
+    }],
+
+    // Reset and Submit buttons
+    buttons: [{
+        text: 'Reset',
+        handler: function() {
+            this.up('form').getForm().reset();
+        }
+    }, {
+        text: 'Submit',
+        formBind: true, //only enabled once the form is valid
+        disabled: true,
+        handler: function() {
+            var form = this.up('form').getForm();
+            if (form.isValid()) {
+
+							// console.log('lalala');
+							// console.log('id titik ukur ==> 12005');
+
+							// console.log(form.getValues());
+							var dt = form.getValues();
+							// console.log(dt.tgl_son+' '+dt.time_son+':00');
+							// var dt_tgl = dt.tgl_son+' '+dt.time_son+':00';
+							// var dt_vol = dt.vol_son;
+							// var dt_tu = 12005;
+							dt.titik_ukur_id = 12005;
+							console.log(dt);
+							Ext.Ajax.request({
+							    url: getAPI()+'/pelindo/custom_input',
+									method:'POST',
+									// jsonData:json,
+							    params: dt,
+							    success: function(response){
+							        var text = response.responseText;
+							        // console.log(text);
+											Ext.Msg.alert('Fuel-Sounding', 'Sukses.</br>('+dt.date+' '+dt.time+':00) = '+dt.value+' Liters');
+							    }
+							});
+							form.reset();
+							store_fuel_sonding.reload();
+							// store_fuel_sonding.load({params:{titik_ukur_id: dt.titik_ukur_id}});
+							// tabel_fuel_sonding.reload();
+                // form.submit({
+								// 	// console.log('lalala');
+                //     success: function(form, action) {
+                //        Ext.Msg.alert('Success', action.result.msg);
+                //     },
+                //     failure: function(form, action) {
+                //         Ext.Msg.alert('Failed', action.result.msg);
+                //     }
+                // });
+            }
+        }
+    }],
+    // renderTo: Ext.getBody()
+});
+var model_fuel_bunker = Ext.define('Fuel_Sonding', {
+    extend: 'Ext.data.Model',
+    fields: ['date','total']
+});
+//
+var store_fuel_bunker = Ext.create('Ext.data.Store', {
+    model: model_fuel_bunker,
+    autoLoad: true,
+		proxy: {
+				type: 'ajax',
+				url:'http://10.10.10.11:1336/pelindo/custom_input?titik_ukur_id=11033',
+				method: 'GET',
+				// params: {titik_ukur_id:12005},
+				// reader: {
+				//     type: 'json',
+				//     //successProperty: 'success',
+				//     root: '',
+				//     // messageProperty: 'message'
+				// }
+		},
+});
 var tabel_fuel_bunker = Ext.create('Ext.grid.Panel', {
     title: 'History Bunkering',
-    //store: Ext.data.StoreManager.lookup('simpsonsStore'),
+
+    store: store_fuel_bunker,
+
     columns: [
-        { text: 'DateTime', dataIndex: 'name' },
-        { text: 'Total', dataIndex: 'email', flex: 1 },
+        { text: 'DateTime', dataIndex: 'date' },
+        { text: 'Total', dataIndex: 'total', flex: 1 },
         { text: 'action', dataIndex: 'phone' }
     ],
     height: 200,
