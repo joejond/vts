@@ -3,10 +3,8 @@
 Ext.Loader.setConfig({
   enabled: true,
   disableCaching: true,
-  Path: {'Exporter': '../Exporter/' }
+  Path: {'Ext.ux.exporter': 'ux/Exporter'}
 });
-
-//Ext.Loader.setPath('Excel', '../Excel/');
 
 Ext.require([
 	'*',
@@ -17,10 +15,11 @@ Ext.require([
 	'Ext.toolbar.Paging'
 ]);
 
-Ext.require(['Exporter.*',
-	'Exporter.ExcelFormater.*',
-	'Exporter.CSVFormatter.*',
-	'Exporter.Button']);
+Ext.require(['Ext.ux.exporter.Base64',
+			'Ext.ux.exporter.Button',
+			'Ext.ux.exporter.csvFormatter.CsvFormatter',
+			'Ext.ux.exporter.excelFormatter.ExcelFormatter'
+	]);
 
 
 
@@ -99,41 +98,6 @@ Ext.define('Ext.form.field.Month', {
         }
     });
 
-//
-// var model_detail_kapal = Ext.define('detail_kapal', {
-//     extend: 'Ext.data.Model',
-//     fields: ['waktu', 'lat', 'lng', 'speed', 'heading', 'rpm1', 'prop1', 'inflow1', 'outflow1', 'temp1', 'press1',
-// 			'rpm2', 'prop2', 'inflow2', 'outflow2', 'temp2', 'press2',
-// 			'rpm3', 'prop3', 'inflow3', 'outflow3', 'temp3', 'press3',
-// 			'rpm4', 'prop4', 'inflow4', 'outflow4', 'temp4', 'press4',
-// 			'runhour1', 'runhour2','runhour3', 'battery', 'charger', 'modem']
-// });
-//
-// var comb_kapal1 = '';
-// var tgl_sel1 = '';
-//
-// var store_detail_kapal = Ext.create('Ext.data.Store', {
-//     model: model_detail_kapal,
-//     autoLoad: true,
-//     proxy: {
-//         type: 'ajax',
-//         url: 'ship_detail_sp.php',
-//         method: 'GET',
-//         reader: {
-//             type: 'json',
-//             //successProperty: 'success',
-//             root: 'detail_ship',
-//             messageProperty: 'message'
-//         }
-//     },
-// 	//listeners: {
-// 		//'beforeload': function(store, options) {
-// 			//store.proxy.extraParams.name=comb_kapal1;
-// 			//store.proxy.extraParams.tgl=tgl_sel1;
-// 		//}
-// 	//}
-// });
-//
 
 var model_combo_kapal_ad = Ext.define('Kapal', {
     extend: 'Ext.data.Model',
@@ -215,6 +179,9 @@ var tabel_r_adhoc = Ext.create('Ext.grid.Panel', {
 
     id : 'table_ship_adhoc',
     title: 'Report Ad-Hoc',
+    uses: [
+        'Ext.ux.exporter.Exporter'
+    ],
     store : store_adhoc_kapal,
     flex: 4,
     columns: [
@@ -325,10 +292,10 @@ var tabel_r_adhoc = Ext.create('Ext.grid.Panel', {
 });
 
 //Create the Download button and add it to the top toolbar
-var exportButton = new Ext.ux.Exporter.Button({
-  component: tabel_r_adhoc,
-  text     : "Download as .xls"
-});
+// var exportButton = new Ext.ux.Exporter.Button({
+//   component: tabel_r_adhoc,
+//   text     : "Download as .xls"
+// });
 
 var panel_r_adhoc = {
 	dockedItems: [{
@@ -446,13 +413,9 @@ var panel_r_adhoc = {
 
 				}
 			}
-			//'-',
-			//{
-				//id: 'toolbar_text',
-				//xtype : 'label'
-				////html:'<html><body><div style="font-size: 20px; color:blue">(current view -> '+comb_kapal1+' - date: '+tgl_sel1+')</div></body></html>'
-
-			//}
+			// ,{
+   //              xtype: 'exporterbutton'
+   //          }
         ]
     }],
     layout: {
@@ -644,9 +607,7 @@ var panel_form_sonding = Ext.create('Ext.form.Panel', {
         handler: function() {
             var form = this.up('form').getForm();
             if (form.isValid()) {
-							console.log('lalala');
                 form.submit({
-									// console.log('lalala');
                     success: function(form, action) {
                        Ext.Msg.alert('Success', action.result.msg);
                     },
@@ -661,7 +622,7 @@ var panel_form_sonding = Ext.create('Ext.form.Panel', {
 });
 
 var tabel_fuel_bunker = Ext.create('Ext.grid.Panel', {
-    title: 'History Sounding',
+    title: 'History Bunkering',
     //store: Ext.data.StoreManager.lookup('simpsonsStore'),
     columns: [
         { text: 'DateTime', dataIndex: 'name' },
