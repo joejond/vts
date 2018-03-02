@@ -272,6 +272,7 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
           width: 100,
           dataIndex: 'AE2 consumtion',
           renderer: function(v){return parseFloat(v).toFixed(2);}
+          // renderer: function(v){return (v==null)? null :  parseFloat(v).toFixed(2);}
       },{
           header: "RPM",
           width: 100,
@@ -736,7 +737,7 @@ var panel_hitung = {
         align: 'stretch'
     },
     items: [{
-		id : 'table_chart',
+		    id : 'table_chart',
         title: 'Data Chart',
         flex: 5,
         layout: 'fit',

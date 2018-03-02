@@ -474,6 +474,189 @@ var panel_r_adhoc = {
     ]
 };
 
+var panel_form_bunker = Ext.create('Ext.form.Panel', {
+    // title: 'Form Fuel Bunkering',
+    bodyPadding: 5,
+    // width: 350,
+
+    // The form will submit an AJAX request to this URL when submitted
+    // url: 'save-form.php',
+
+    // Fields will be arranged vertically, stretched to full width
+    layout: 'anchor',
+    defaults: {
+        anchor: '100%'
+    },
+
+    // The fields
+    defaultType: 'textfield',
+    items: [{
+
+				xtype: 'fieldcontainer',
+				fieldLabel: 'Date Time',
+				layout: 'hbox',
+				combineErrors: true,
+				// defaultType: 'textfield',
+				defaults: {
+				 	hideLabel: 'true'
+				},
+				items: [{
+					 	name: 'tgl_nya',
+					 	xtype:'datefield',
+					 	flex: 2,
+						value: new Date(),
+						format: 'd-M-Y',
+					 	allowBlank: false
+				}, {
+					 	name: 'time_nya',
+					 	flex: 2,
+					 	margin: '0 0 0 6',
+					 	xtype:'timefield',
+						increment:30,
+						value: new Date(),
+						format: 'H:i',
+						allowBlank: false
+					}]
+				},{
+	        fieldLabel: 'Total Fuel',
+	        name: 'fuel_bunk',
+	        allowBlank: false
+    }],
+
+    // Reset and Submit buttons
+    buttons: [{
+        text: 'Reset',
+        handler: function() {
+            this.up('form').getForm().reset();
+        }
+    }, {
+        text: 'Submit',
+        formBind: true, //only enabled once the form is valid
+        disabled: true,
+        handler: function() {
+            var form = this.up('form').getForm();
+            if (form.isValid()) {
+                form.submit({
+                    success: function(form, action) {
+                       Ext.Msg.alert('Success', action.result.msg);
+                    },
+                    failure: function(form, action) {
+                        Ext.Msg.alert('Failed', action.result.msg);
+                    }
+                });
+            }
+        }
+    }],
+    // renderTo: Ext.getBody()
+});
+
+var tabel_fuel_sonding = Ext.create('Ext.grid.Panel', {
+    title: 'History Bunkering',
+    //store: Ext.data.StoreManager.lookup('simpsonsStore'),
+    columns: [
+        { text: 'DateTime', dataIndex: 'name' },
+        { text: 'Level', dataIndex: 'email', flex: 1 },
+        { text: 'Volume', dataIndex: 'vol', flex: 1 },
+        { text: 'action', dataIndex: 'phone' }
+    ],
+    height: 200,
+    // width: 400,
+    // renderTo: Ext.getBody()
+});
+
+var panel_form_sonding = Ext.create('Ext.form.Panel', {
+    // title: 'Form Fuel Bunkering',
+    bodyPadding: 5,
+    // width: 350,
+
+    // The form will submit an AJAX request to this URL when submitted
+    // url: 'save-form.php',
+
+    // Fields will be arranged vertically, stretched to full width
+    layout: 'anchor',
+    defaults: {
+        anchor: '100%'
+    },
+
+    // The fields
+    defaultType: 'textfield',
+    items: [{
+
+				xtype: 'fieldcontainer',
+				fieldLabel: 'Date Time',
+				layout: 'hbox',
+				combineErrors: true,
+				// defaultType: 'textfield',
+				defaults: {
+				 	hideLabel: 'true'
+				},
+				items: [{
+					 	name: 'tgl_son',
+					 	xtype:'datefield',
+					 	flex: 2,
+						value: new Date(),
+						format: 'd-M-Y',
+					 	allowBlank: false
+				}, {
+					 	name: 'time_son',
+					 	flex: 2,
+					 	margin: '0 0 0 6',
+					 	xtype:'timefield',
+						increment:30,
+						value: new Date(),
+						format: 'H:i',
+						allowBlank: false
+					}]
+				},{
+	        fieldLabel: 'Fuel Level',
+	        name: 'fuel_sond',
+	        allowBlank: false
+				},{
+					fieldLabel: 'Fuel Volume',
+					name: 'fuel_vol',
+					allowBlank: false
+    }],
+
+    // Reset and Submit buttons
+    buttons: [{
+        text: 'Reset',
+        handler: function() {
+            this.up('form').getForm().reset();
+        }
+    }, {
+        text: 'Submit',
+        formBind: true, //only enabled once the form is valid
+        disabled: true,
+        handler: function() {
+            var form = this.up('form').getForm();
+            if (form.isValid()) {
+                form.submit({
+                    success: function(form, action) {
+                       Ext.Msg.alert('Success', action.result.msg);
+                    },
+                    failure: function(form, action) {
+                        Ext.Msg.alert('Failed', action.result.msg);
+                    }
+                });
+            }
+        }
+    }],
+    // renderTo: Ext.getBody()
+});
+
+var tabel_fuel_bunker = Ext.create('Ext.grid.Panel', {
+    title: 'History Bunkering',
+    //store: Ext.data.StoreManager.lookup('simpsonsStore'),
+    columns: [
+        { text: 'DateTime', dataIndex: 'name' },
+        { text: 'Total', dataIndex: 'email', flex: 1 },
+        { text: 'action', dataIndex: 'phone' }
+    ],
+    height: 200,
+    // width: 400,
+    // renderTo: Ext.getBody()
+});
+
 var window_fuel = Ext.create('Ext.window.Window',{
     title : 'fuel window',
     width : 400,
@@ -486,34 +669,25 @@ var window_fuel = Ext.create('Ext.window.Window',{
     items : [{
         xtype : 'tabpanel',
 				width: 400,
-			    height: 300,
-			    defaults: {
-			        bodyPadding: 10,
-			        scrollable: true
-			    },
+		    height: 300,
+		    defaults: {
+		        // bodyPadding: 10,
+		        scrollable: true
+		    },
 				items: [{
 			        title: 'Fuel-Bunkering',
-			        // html: KitchenSink.DummyText.longText
+							layout:{
+								type:'vbox',
+								align:'stretch'
+							},
+							items:[ panel_form_bunker,tabel_fuel_bunker]
+
 			    }, {
 			        title: 'Fuel-Sounding',
-			        // html: KitchenSink.DummyText.extraLongText
-
+							items:[ panel_form_sonding,tabel_fuel_sonding]
 			    }]
         // itemId : 'hasil_hitung',
     }],
-    // tbar :[{
-    //     xtype : 'datefield',
-    //     fieldLabel : 'Date ',
-    //     format : 'd M Y',
-    //     value : new Date(),
-    //     maxValue : new Date(),
-    //     listeners : {
-    //         change :function(){
-    //             var kpl = this.up('.window').vessel;
-    //             hitung_fuel(this.getValue(),kpl);
-    //         }
-    //     }
-    // }],
 
     buttons : [{
         text : 'Close',
@@ -523,3 +697,10 @@ var window_fuel = Ext.create('Ext.window.Window',{
     }]
 
 });
+
+
+
+
+
+
+// });
