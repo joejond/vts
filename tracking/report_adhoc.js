@@ -1,3 +1,11 @@
+
+
+Ext.Loader.setConfig({
+  enabled: true,
+  disableCaching: true,
+  Path: {'Ext.ux.Exporter': '/ux/Exporter'}
+});
+
 Ext.require([
 	'*',
 	'Ext.grid.plugin.CellEditing',
@@ -6,6 +14,13 @@ Ext.require([
     'Ext.util.*',
 	'Ext.toolbar.Paging'
 ]);
+
+// Ext.require([
+// 			'Ext.ux.Exporter.Base64',
+// 			'Ext.ux.Exporter.Button',
+// 			'Ext.ux.Exporter.csvFormatter.CsvFormatter',
+// 			'Ext.ux.Exporter.excelFormatter.ExcelFormatter'
+// 	]);
 
 
 Ext.define('Ext.form.field.Month', {
@@ -83,41 +98,6 @@ Ext.define('Ext.form.field.Month', {
         }
     });
 
-//
-// var model_detail_kapal = Ext.define('detail_kapal', {
-//     extend: 'Ext.data.Model',
-//     fields: ['waktu', 'lat', 'lng', 'speed', 'heading', 'rpm1', 'prop1', 'inflow1', 'outflow1', 'temp1', 'press1',
-// 			'rpm2', 'prop2', 'inflow2', 'outflow2', 'temp2', 'press2',
-// 			'rpm3', 'prop3', 'inflow3', 'outflow3', 'temp3', 'press3',
-// 			'rpm4', 'prop4', 'inflow4', 'outflow4', 'temp4', 'press4',
-// 			'runhour1', 'runhour2','runhour3', 'battery', 'charger', 'modem']
-// });
-//
-// var comb_kapal1 = '';
-// var tgl_sel1 = '';
-//
-// var store_detail_kapal = Ext.create('Ext.data.Store', {
-//     model: model_detail_kapal,
-//     autoLoad: true,
-//     proxy: {
-//         type: 'ajax',
-//         url: 'ship_detail_sp.php',
-//         method: 'GET',
-//         reader: {
-//             type: 'json',
-//             //successProperty: 'success',
-//             root: 'detail_ship',
-//             messageProperty: 'message'
-//         }
-//     },
-// 	//listeners: {
-// 		//'beforeload': function(store, options) {
-// 			//store.proxy.extraParams.name=comb_kapal1;
-// 			//store.proxy.extraParams.tgl=tgl_sel1;
-// 		//}
-// 	//}
-// });
-//
 
 var model_combo_kapal_ad = Ext.define('Kapal', {
     extend: 'Ext.data.Model',
@@ -160,7 +140,13 @@ var model_adhoc_kapal = Ext.define('adhoc_kapal', {
 		    "ME1 average rpm",
 		    "ME2 average rpm",
 		    "AE1 average rpm",
-		    "AE2 average rpm"
+		    "AE2 average rpm",
+		    "Total daily fuel",
+		    "F_Sound check",
+		    "Last fuel loading",
+		    "Remaining on board"
+
+
 		 ]
 });
 
@@ -176,6 +162,7 @@ var store_adhoc_kapal = Ext.create('Ext.data.Store', {
         //url: 'http://192.168.1.17:1337/get_data_adhoc?m=2018-02',
         //url:'http://project.daunbiru.com:1336/get_data_adhoc?m=2018-02',
         url:'http://project.daunbiru.com:1336/get_data_adhoc',
+        timeout: 40000,
         //url: 'http://project.daunbiru.com:1337/get_data_bima?id=8&user_id=4&tz=%2B07&tgl=2018-02-01',
         method: 'GET',
         // reader: {
@@ -193,10 +180,15 @@ var store_adhoc_kapal = Ext.create('Ext.data.Store', {
 	//}
 });
 
+
+
 var tabel_r_adhoc = Ext.create('Ext.grid.Panel', {
 
     id : 'table_ship_adhoc',
     title: 'Report Ad-Hoc',
+    uses: [
+        'Ext.ux.exporter.Exporter'
+    ],
     store : store_adhoc_kapal,
     flex: 4,
     columns: [
@@ -207,54 +199,63 @@ var tabel_r_adhoc = Ext.create('Ext.grid.Panel', {
 		renderer: Ext.util.Format.dateRenderer('d-M-Y'),
         locked : true
     },{
-      	header: "Working Distance",
+      	header: "Working Dist.\n(km)",
 		width: 100,
-		dataIndex: 'working distance'
+		dataIndex: 'working distance',
+		renderer: function(v){return parseFloat(v).toFixed(2);}
 		},{
 		header: "Average Speed",
 		width: 100,
-		dataIndex: 'average speed'
+		dataIndex: 'average speed',
+		renderer: function(v){return parseFloat(v).toFixed(2);}
 	},{
 		header: "ME Portside",
       	columns: [{
-			header: "Working Hours",
-			width: 100,
-			dataIndex: 'working hours ME1'
+				header: "Working Hours",
+				width: 100,
+				dataIndex: 'working hours ME1',
+				renderer: function(v){return parseFloat(v).toFixed(2);}
 				},{
 				header: "Daily Consumption",
 				width: 100,
-				dataIndex: 'ME1 daily consumption'
+				dataIndex: 'ME1 daily consumption',
+				renderer: function(v){return parseFloat(v).toFixed(2);}
 				},{
 				header: "Hourly Rate",
 				width: 100,
-				dataIndex: 'ME1 consumption rate'
+				dataIndex: 'ME1 consumption rate',
+				renderer: function(v){return parseFloat(v).toFixed(2);}
 				}]
 			},{
 				header: "ME Starboard",
       			columns: [{
 				header: "Working Hours",
 				width: 100,
-				dataIndex: 'working hours ME2'
+				dataIndex: 'working hours ME2',
+				renderer: function(v){return parseFloat(v).toFixed(2);}
 				},{
 					header: "Daily Consumption",
 					width: 100,
-					dataIndex: 'ME2 daily consumption'
+					dataIndex: 'ME2 daily consumption',
+					renderer: function(v){return parseFloat(v).toFixed(2);}
 				},{
 					header: "Hourly Rate",
 					width: 100,
-					dataIndex: 'ME2 consumption rate'
-
+					dataIndex: 'ME2 consumption rate',
+					renderer: function(v){return parseFloat(v).toFixed(2);}
 			}]
 			},{
       			header: "AE1",
       			columns: [{
 					header: "Daily Consumption",
 					width: 100,
-					dataIndex: 'AE1 consumtion'
+					dataIndex: 'AE1 consumtion',
+					renderer: function(v){return parseFloat(v).toFixed(2);}
 				},{
 					header: "RPM(rata2)",
 					width: 100,
-					dataIndex: 'AE1 average rpm'
+					dataIndex: 'AE1 average rpm',
+					renderer: function(v){return parseFloat(v).toFixed(2);}
 
 			}]
 			},{
@@ -262,35 +263,46 @@ var tabel_r_adhoc = Ext.create('Ext.grid.Panel', {
       			columns: [{
 					header: "Daily Consumption",
 					width: 100,
-					dataIndex: 'AE2 consumtion'
+					dataIndex: 'AE2 consumtion',
+					renderer: function(v){return parseFloat(v).toFixed(2);}
 			},{
 					header: "RPM (rata2)",
 					width: 100,
-					dataIndex: 'ME1 average rpm'
+					dataIndex: 'ME1 average rpm',
+					renderer: function(v){return parseFloat(v).toFixed(2);}
 
 			}]
 		},
 		{
 			header: "Total Daily Fuel",
 			width: 100,
-			dataIndex: 'Total-FuelUsage'
+			dataIndex: 'Total daily fuel',
+			renderer: function(v){return parseFloat(v).toFixed(2);}
 		},{
      		header: "Remaining onBoard",
 			width: 200,
-			dataIndex: 'rpm2'
+			dataIndex: 'Remaining on board',
+			renderer: function(v){return parseFloat(v).toFixed(2);}
 		},{
 
 			header: "Last Fuel Loading",
 			width: 200,
-			dataIndex: 'Fuel-Bunkering'
-
+			dataIndex: 'Last fuel loading',
+			renderer: function(v){return parseFloat(v).toFixed(2);}	
 		},{
 			header: "F_Sound_Check",
 			width: 150,
-			dataIndex: 'F_Sound_Check'
+			dataIndex: 'F_Sound check',
+			renderer: function(v){return parseFloat(v).toFixed(2);}
 		}]
 
 });
+
+//Create the Download button and add it to the top toolbar
+// var exportButton = new Ext.ux.Exporter.Button({
+//   component: tabel_r_adhoc,
+//   text     : "Download as .xls"
+// });
 
 var panel_r_adhoc = {
 	dockedItems: [{
@@ -318,41 +330,25 @@ var panel_r_adhoc = {
 				store: store_combo_kapal1,
 				listeners:{
 					select: function() {
-						// comb_kapal1 = this.getValue();
-						// comb_kapal2 = this.getRawValue();
-						//console.log(comb_kapal1);
-						//console.log(tgl_sel1);
-						// store_detail_kapal.load({params: { id: comb_kapal1, tgl: tgl_sel1}});
-						// Ext.getCmp('table_ship').setTitle('Vessel '+comb_kapal2 +' on '+ tgl_sel2);
-						//tabel_detail_kapal
-						//update_text1();
-						// Ext.getCmp('table_ship').setTitle('Vessel '+comb_kapal2 +' on '+ tgl_sel2);
-						//tabel_detail_kapal
-						//update_text1();
-
-						//var vessel_id=1;
 						var month='2018-02';
-
-						id_vessel_adhoc=this.getValue();
 						store_adhoc_kapal.load({params: { id: id_vessel_adhoc, m: month}});
-
 						console.log("Combo box adhoc selected [" + id_vessel_adhoc +"],[" + month +"]");
 					},
 					afterrender : function(){
-						var nama_vessel = this.getStore().data.items[0].data['name'];
-						this.setValue(nama_vessel);
-						// comb_kapal2 = (comb_kapal1 != '') ? comb_kapal2 : isi;
-						// Ext.getCmp('table_ship').setTitle('Vessel '+isi+' on '+ Ext.Date.format(new Date(), 'd-M-Y' ));
-						//console.log(isi);
+						var isi = this.getStore().data.items[0].data['name'];
+						this.setValue(isi);
+						id_vessel_adhoc = this.getValue();
+						comb_kapal2 = (comb_kapal1 != '') ? comb_kapal2 : isi;
+						var month_adhoc =Ext.Date.format(Ext.getCmp('combo_month_adhoc').getValue(),'Y-m');
+						//var month_adhoc = Ext.getCmp('combo_month_adhoc').getValue();
+						var param = {user_id: dt.idu,id:id_kpl,tgl:tgl_sel1,tz: getTimeZone()};
 
-						var id_vessel_adhoc=1;
-						var month_adhoc='2018-02';
-						id_vessel_adhoc=this.getValue();
-						store_adhoc_kapal.load({params: { id: id_vessel_adhoc, m: month_adhoc}});
+
 						console.log("Combo box adhoc afterrender : [" + id_vessel_adhoc +"],[" + month_adhoc +"]");
+						store_adhoc_kapal.load({params: { id: id_vessel_adhoc, m: month_adhoc}});
 						console.log(this.getStore());
-								}
 						}
+				}
 
 			},{
 				// padding : '0 0 0 5',
@@ -373,19 +369,11 @@ var panel_r_adhoc = {
 				listeners: {
 					change: function () {
 
-						console.log('Date selected: ', Ext.Date.format(this.getValue(),'Y-m-d'));
-						//console.log()
-						// tgl_sel1 = Ext.Date.format(this.getValue(),'Y-m-d');
-						// // store_detail_kapal.load({params: { id: comb_kapal1, tgl: tgl_sel1}});
-						// tgl_sel2 = (tgl_sel1 != '') ? tgl_sel1 : Ext.Date.format(new Date(), 'd-M-Y' );
-						// //console.log(tgl_sel2);
+						var id_vessel_adhoc=Ext.getCmp('cb_vessel_adhoc').getValue();
+						var month_adhoc=Ext.Date.format(this.getValue(),'Y-m');
+						console.log("Combo box adhoc afterrender : [" + cb_vessel_adhoc +"],[" + month_adhoc +"]");
+						store_adhoc_kapal.load({params: { id: id_vessel_adhoc, m: month_adhoc}});
 
-						//Ext.getCmp('table_ship').setTitle('Vessel '+comb_kapal2 +' on '+ tgl_sel2);
-						var month=this.getValue;
-						console.log("Combo box adhoc afterrender : [" + cb_vessel_adhoc +"],[" + month +"]");
-
-						//store_adhoc_kapal.load({params: { id: cb_vessel_adhoc, m: month}});
-						//update_text1();
 					},
 					afterrender : function(){
 						console.log('Date selected: ', this.getValue());
@@ -432,13 +420,9 @@ var panel_r_adhoc = {
 
 				}
 			}
-			//'-',
-			//{
-				//id: 'toolbar_text',
-				//xtype : 'label'
-				////html:'<html><body><div style="font-size: 20px; color:blue">(current view -> '+comb_kapal1+' - date: '+tgl_sel1+')</div></body></html>'
-
-			//}
+			// ,{
+   //              xtype: 'exporterbutton'
+   //          }
         ]
     }],
     layout: {
@@ -499,8 +483,8 @@ var panel_form_bunker = Ext.create('Ext.form.Panel', {
 					 	xtype:'datefield',
 					 	flex: 2,
 						value: new Date(),
-						format: 'd-M-Y',
 						submitFormat: 'Y-m-d',
+						format: 'd-M-Y',
 					 	allowBlank: false
 				}, {
 					 	name: 'time',
@@ -540,7 +524,7 @@ var panel_form_bunker = Ext.create('Ext.form.Panel', {
 							dt.titik_ukur_id = 11033;
 							console.log(dt);
 							Ext.Ajax.request({
-							    // url: getAPI()+'/pelindo/custom_input',
+
 							    url: getAPI()+'/pelindo/custom_input',
 									method:'POST',
 
@@ -549,12 +533,11 @@ var panel_form_bunker = Ext.create('Ext.form.Panel', {
 							        var text = response.responseText;
 							        // console.log(text);
 											Ext.Msg.alert('Fuel-Bunkering', 'Sukses.</br>('+dt.date+' '+dt.time+':00) = '+dt.value+' Liters');
-											store_fuel_bunker.reload();
 							    }
 							});
 							form.reset();
-
-
+							store_fuel_bunker.reload();
+							
             }
         }
     }],
@@ -666,6 +649,7 @@ var panel_form_sonding = Ext.create('Ext.form.Panel', {
         handler: function() {
             var form = this.up('form').getForm();
             if (form.isValid()) {
+
 							// console.log('lalala');
 							// console.log('id titik ukur ==> 12005');
 
@@ -686,11 +670,10 @@ var panel_form_sonding = Ext.create('Ext.form.Panel', {
 							        var text = response.responseText;
 							        // console.log(text);
 											Ext.Msg.alert('Fuel-Sounding', 'Sukses.</br>('+dt.date+' '+dt.time+':00) = '+dt.value+' Liters');
-											store_fuel_sonding.reload();
-									}
+							    }
 							});
 							form.reset();
-
+							store_fuel_sonding.reload();
 							// store_fuel_sonding.load({params:{titik_ukur_id: dt.titik_ukur_id}});
 							// tabel_fuel_sonding.reload();
                 // form.submit({
@@ -717,9 +700,11 @@ var store_fuel_bunker = Ext.create('Ext.data.Store', {
     autoLoad: true,
 		proxy: {
 				type: 'ajax',
+
 				// url:'http://10.10.10.11:1336/pelindo/custom_input?titik_ukur_id=11033',
 				// url:'http://192.168.1.17:1337/pelindo/custom_input?titik_ukur_id=11033',
 				url:getAPI()+'/pelindo/custom_input?titik_ukur_id=11033',
+
 				method: 'GET',
 				// params: {titik_ukur_id:12005},
 				// reader: {
@@ -732,7 +717,9 @@ var store_fuel_bunker = Ext.create('Ext.data.Store', {
 });
 var tabel_fuel_bunker = Ext.create('Ext.grid.Panel', {
     title: 'History Bunkering',
+
     store: store_fuel_bunker,
+
     columns: [
         { text: 'DateTime', dataIndex: 'date' },
         { text: 'Total', dataIndex: 'total', flex: 1 },
@@ -787,6 +774,3 @@ var window_fuel = Ext.create('Ext.window.Window',{
 
 
 
-
-
-// });
