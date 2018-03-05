@@ -288,7 +288,7 @@ var tabel_r_adhoc = Ext.create('Ext.grid.Panel', {
 			header: "Last Fuel Loading",
 			width: 200,
 			dataIndex: 'Last fuel loading',
-			renderer: function(v){return parseFloat(v).toFixed(2);}	
+			renderer: function(v){return parseFloat(v).toFixed(2);}
 		},{
 			header: "F_Sound_Check",
 			width: 150,
@@ -482,6 +482,7 @@ var panel_form_bunker = Ext.create('Ext.form.Panel', {
 					 	name: 'date',
 					 	xtype:'datefield',
 					 	flex: 2,
+            maxValue: new Date(),
 						value: new Date(),
 						submitFormat: 'Y-m-d',
 						format: 'd-M-Y',
@@ -537,7 +538,7 @@ var panel_form_bunker = Ext.create('Ext.form.Panel', {
 							});
 							form.reset();
 							store_fuel_bunker.reload();
-							
+
             }
         }
     }],
@@ -577,8 +578,9 @@ var tabel_fuel_sonding = Ext.create('Ext.grid.Panel', {
         { text: 'action', dataIndex: 'phone' }
     ],
 		// layout :'fit',
-		autoscroll: true,
-    height: 200,
+    flex:1
+		// autoscroll: true,
+    // height: 200,
 
 });
 
@@ -607,6 +609,7 @@ var panel_form_sonding = Ext.create('Ext.form.Panel', {
 					 	name: 'date',
 					 	xtype:'datefield',
 					 	flex: 2,
+            maxValue: new Date(),
 						value: new Date(),
 						format: 'd-M-Y',
 						submitFormat: 'Y-m-d',
@@ -669,11 +672,12 @@ var panel_form_sonding = Ext.create('Ext.form.Panel', {
 							    success: function(response){
 							        var text = response.responseText;
 							        // console.log(text);
-											Ext.Msg.alert('Fuel-Sounding', 'Sukses.</br>('+dt.date+' '+dt.time+':00) = '+dt.value+' Liters');
-							    }
+              				Ext.Msg.alert('Fuel-Sounding', 'Sukses.</br>('+dt.date+' '+dt.time+':00) = '+dt.value+' Liters');
+                      store_fuel_sonding.reload();
+                  }
 							});
 							form.reset();
-							store_fuel_sonding.reload();
+
 							// store_fuel_sonding.load({params:{titik_ukur_id: dt.titik_ukur_id}});
 							// tabel_fuel_sonding.reload();
                 // form.submit({
@@ -725,7 +729,8 @@ var tabel_fuel_bunker = Ext.create('Ext.grid.Panel', {
         { text: 'Total', dataIndex: 'total', flex: 1 },
         { text: 'action', dataIndex: 'phone' }
     ],
-    height: 200,
+    // height: 200,
+    flex:1
     // width: 400,
     // renderTo: Ext.getBody()
 });
@@ -770,7 +775,3 @@ var window_fuel = Ext.create('Ext.window.Window',{
     }]
 
 });
-
-
-
-

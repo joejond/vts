@@ -3,7 +3,13 @@ Ext.Loader.setConfig({
     enabled: true
 });
 
-Ext.require(['*', 'Ext.ux.GMapPanel', 'Ext.grid.plugin.CellEditing', 'Ext.ux.statusbar.StatusBar']);
+Ext.require(['*',
+    'Ext.ux.GMapPanel',
+    'Ext.grid.plugin.CellEditing',
+    'Ext.ux.statusbar.StatusBar',
+    'Ext.ux.WebSocket',
+    'Ext.ux.WebSocketManager'
+  ]);
 
 var model_daftar_kapal = Ext.define('Kapal', {
     extend: 'Ext.data.Model',
@@ -20,7 +26,7 @@ var store_daftar_kapal = Ext.create('Ext.data.Store', {
         },
         reader: {
             type: 'json',
-            successProperty: 'success',
+            successPropertday: 'success',
             root: 'ship',
             messageProperty: 'message'
         }
@@ -41,11 +47,120 @@ var peta = {
         lng: 120.0
     },
     listeners:{
-        'zoom_changed':function() {
-        //console.log('zoomnya berubah');
-        }
+      //   'zoom_changed':function() {
+      //   //console.log('zoomnya berubah');
+      // },
+      boxready: function()
+      {
+        // var kukis = Ext.util.Cookies.get("marine");
+
+        // console.log(dt);
+        // Ext.Ajax.request({
+        //     url: getAPI()+'/asset/tree',
+        //     params: {
+        //         user_id: dt.idu
+        //     },
+        //     method:'get',
+        //     success: function(data){
+        //         var res = Ext.JSON.decode(data.responseText);
+        //         console.log(res);
+        //
+        //         Crawler(8,res).then(function(data){
+        //             console.log(data);
+        //
+        //             var mapmap= data.filter(function(dd){
+        //                 // if(dd.id == 1027) return dd;
+        //                 return (dd.id==1027);
+        //
+        //             });
+        //
+        //             console.log(mapmap);
+        //
+        //
+        //         });
+        //
+        //         console.log(hsl_soket);
+        //
+        //
+        //         // debugger;
+        //         // process server response here
+        //     }
+        // });
+
+        // Ext.Ajax.request
+        // console.log('keliatan mapnya brooo');
+        this.ws;
+
+      }
     }
 };
+
+// var ws_mulai = Ext.ux
+var hsl_soket;
+var lokasi;
+
+var ws = Ext.create ('Ext.ux.WebSocket', {
+  url: 'ws://10.10.10.11:1234' ,
+  listeners: {
+    open: function (ws) {
+      // if (Ext.get(ws.url))
+      // {
+      console.log('opeeeeeennn');
+      console.log(ws);
+      ws.send('usr:4');
+      // }
+
+      // Ext.get(ws.url).dom.innerHTML += '> WebSocket just open!<br/>';
+    } ,
+    message: function (ws, data) {
+      // Ext.get(ws.url).dom.innerHTML += '> ' + data + '<br/>';
+      // console.log(JSON.parse(data));
+      var hsl_soket = JSON.parse(data);
+      console.log(hsl_soket);
+
+      var hhh= hsl_soket.monita.filter(function(d){
+        // if(type_tu =="27") {return value;}
+        return d.type_tu==27 || d.type_tu==28 || d.type_tu==29 || d.type_tu==30;
+      });
+
+      var arr ={};
+      console.log(hhh);
+      hhh.forEach(function(d){
+
+        console.log(d.nama_tu +"==> "+d.value);
+        if(d.type_tu ==27){
+          arr.lat=d.value;
+        }
+        if(d.type_tu ==28){
+          arr.lng=d.value;
+        }
+        if(d.type_tu ==29){
+          arr.head=d.value;
+        }
+        if(d.type_tu ==28){
+          arr.speed=d.value;
+        }
+
+      });
+      console.log(arr);
+      lokasi = new google.maps.LatLng(parseFloat(arr.lat), parseFloat(arr.lng));
+      lukis_kapal(8,lokasi);
+
+
+    } ,
+    close: function (ws) {
+      console.log('jadi close');
+      // var panel = Ext.getCmp ('panel' + ws.url);
+      //
+      // if ((panel != null) || (panel != undefined)) {
+      // 	panel.destroy ();
+      // }
+    }
+  }
+});
+
+
+
 var jum = '';
 var peta1; // untuk gmappanel -> fungsi2 google map API harus diakses melalui Ext.getCmp('id_gmappanel');
 var markers = [];
@@ -74,7 +189,7 @@ function lukis_kapal(id,location)
       draggable: false,
       raiseOnDrag: true,
       map: peta1.getMap(),
-      labelContent: 'SAYAAAA',//datay.nama, //data_marker[0],
+      labelContent: 'Bima3',//datay.nama, //data_marker[0],
       labelAnchor: new google.maps.Point(40, -1*icosize/4),
       labelClass: "labels", // the CSS class for the label
       labelStyle: {

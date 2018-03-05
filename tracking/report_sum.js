@@ -17,7 +17,7 @@ var model_detail_sum = Ext.define('detail_kapal_sum', {
 			'ME1 daily consumption','ME2 daily consumption',
 			'ME1 consumption rate','ME2 consumption rate',
 			'ME1 average rpm','ME2 average rpm','AE1 average rpm','AE2 average rpm',
-			'AE1 consumtion', 'AE2 consumtion','vessel'
+			'AE1 consumtion', 'AE2 consumtion','vessel','Remaining on board','Last fuel loading'
 			//
 			// 'waktu', 'lat', 'lng', 'speed', 'heading', 'rpm1', 'prop1', 'inflow1', 'outflow1', 'temp1', 'press1',
 			// 'rpm2', 'prop2', 'inflow2', 'outflow2', 'temp2', 'press2',
@@ -164,12 +164,14 @@ var tabel_r_sum = Ext.create('Ext.grid.Panel', {
 	},{
       header: "Remaining onBoard",
 			width: 200,
-			dataIndex: 'rpm2'
+			dataIndex: 'Remaining on board',
+			renderer: function(v){return parseFloat(v).toFixed(2);}
 	},{
 
 			header: "Last Fuel Loding",
 			width: 200,
-			dataIndex: 'rpm2'
+			dataIndex: 'Last fuel loading',
+			renderer: function(v){return parseFloat(v).toFixed(2);}
 
 		}]
 

@@ -109,6 +109,8 @@ Ext.onReady(function() {
 								// console.log(newCard.id);
 								var tab = newCard.id;
 								(tab == 'analisis_tab')?update_status(1):update_status(0);
+								console.log(ws);
+								ws.close;
 
 							}
 						}

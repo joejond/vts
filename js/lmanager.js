@@ -306,3 +306,88 @@ function encodeMD5(str)
 
 	return temp.toLowerCase();
 };
+
+
+var data = [];
+var listPoint = [];
+
+function Crawler (id,tree) {
+  data = [];
+  listPoint = [];
+
+  return run(id,tree);
+}
+
+function run (id,tree) { //id could be aset_id / id_titik_ukur
+
+  data = [];
+  listPoint = [];
+
+  // return
+    getSameId(id, tree);
+    if(data){
+      getLastChildren(id, data);
+      if(listPoint){
+        return Promise.resolve(listPoint);
+      }
+    }else{
+      return Promise.reject(null);
+    }
+  // );
+}
+
+function getLastChildren(id, dataFiletered) {
+  this.data = [];
+  let hasChildren = false;
+
+  dataFiletered.forEach( (el) => {
+    if(!el.children){
+      listPoint.push(el);
+      if(this.data.length > 0){
+        hasChildren = true;
+      }
+    }else{
+      this.data.push(...el.children);
+      hasChildren = true;
+    }
+  });
+
+  if(hasChildren){
+    getLastChildren(id, this.data);
+  }else{
+    console.log(listPoint.length);
+    return true;
+  }
+}
+
+function getSameId (id, record) {
+
+  let currentIndex = 0;
+  let gotcha = 0;
+  let hasChildren = false;
+  this.cdata = [];
+
+  record.forEach( (el, i) => {
+    if(el.id == id){
+      gotcha = 1;
+      data.push(el);
+      if(this.cdata.length > 0){
+        hasChildren = true;
+      }
+    }else{
+
+      if(el.children){
+        this.cdata.push(...el.children);
+      }
+      hasChildren = true;
+    }
+
+  });
+
+  if(hasChildren){
+    getSameId(id, this.cdata);
+  }else{
+    return true;
+  }
+
+}
