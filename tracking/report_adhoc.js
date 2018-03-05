@@ -162,6 +162,7 @@ var store_adhoc_kapal = Ext.create('Ext.data.Store', {
         //url: 'http://192.168.1.17:1337/get_data_adhoc?m=2018-02',
         //url:'http://project.daunbiru.com:1336/get_data_adhoc?m=2018-02',
         url:'http://project.daunbiru.com:1336/get_data_adhoc',
+        timeout: 40000,
         //url: 'http://project.daunbiru.com:1337/get_data_bima?id=8&user_id=4&tz=%2B07&tgl=2018-02-01',
         method: 'GET',
         // reader: {

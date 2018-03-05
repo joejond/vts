@@ -14,7 +14,7 @@ try {
 						join user_company uc on uc.id = ud.company_id
 						join aset a on a.user_company_id = uc.id
 						join aset_cat ac on ac.id = a.aset_cat_id
-						where u.id = $id_user and ac.id = 3";
+						where u.id = $id_user and ac.id = 3 and a.id=8";
 // echo $query;
 	// $query = 'call ship_list()';
 
