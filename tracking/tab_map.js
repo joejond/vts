@@ -52,6 +52,12 @@ var peta = {
       //   'zoom_changed':function() {
       //   //console.log('zoomnya berubah');
       // },
+      mapready:function(win,gmap){
+        console.log('onmapready');
+        console.log('window ==> ', win);
+        console.log('gmap ==> ', gmap);
+
+      },
       afterrender: function(){
           console.log('after render');
           // flag_bound = 0;
@@ -63,12 +69,12 @@ var peta = {
                   // console.log('map tak klik');
                   resetCenterVessel(peta1.getMap());
                 });
-                infowind = new google.maps.InfoWindow();
+                // infowind = new google.maps.InfoWindow();
 
-                muncul = new google.maps.InfoWindow({
-                    content: infoVessel,
-                    // maxWidth: 1000
-                });
+                // muncul = new google.maps.InfoWindow({
+                //     content: infoVessel,
+                //     // maxWidth: 1000
+                // });
 
           }, 500);
 
@@ -155,6 +161,7 @@ var ws = Ext.create ('Ext.ux.WebSocket', {
     message: function (ws, data) {
       // Ext.get(ws.url).dom.innerHTML += '> ' + data + '<br/>';
       // console.log(JSON.parse(data));
+      var mm = 0;
       var hsl_soket = JSON.parse(data);
 
       console.log(hsl_soket);
@@ -185,7 +192,23 @@ var ws = Ext.create ('Ext.ux.WebSocket', {
 
       });
       console.log(arr);
-      console.log(new Date(arr.waktu * 1000) );
+      // console.log(new Date(arr.waktu * 1000) );
+      var a,b;
+      if (mm==0){
+        a = arr.lat;
+        b = arr.lng;
+        mm =1;
+      }
+
+      if(arr.lat === a )
+
+
+
+
+
+
+
+
       // addMarkerVessel(arr);
       /*bersihkan dahulu marking kapal*/
       deleteTandaKapal();
@@ -244,9 +267,9 @@ function addTandaKapal(data)
   marker_marker.push(tanda);
   // console.log(marker_marker,' <== buat tanda',marker_marker[0].getPosition().lat());
 }
-var infoVessel = '<table><tr><td><b> Bima3-t </b></td></tr>'+
-  '<tr><td><b>Last Seen : </b>'+Ext.date.Format(new Date(arr.waktu * 1000), 'd-m Y H:i:s') +'</td></tr>'+
-  '</table>';
+// var infoVessel = '<table><tr><td><b> Bima3-t </b></td></tr>'+
+//   '<tr><td><b>Last Seen : </b>'+Ext.date.Format(new Date(arr.waktu * 1000), 'd-m Y H:i:s') +'</td></tr>'+
+//   '</table>';
 
 function setTandaOnMap(map) {
   for (var i = 0; i < marker_marker.length; i++) {
@@ -265,12 +288,19 @@ function setTandaOnMap(map) {
     marker_marker[i].addListener('mouseout',function(){
       console.log('da da ..... ');
       // infowind.close();
-        muncul.open(peta1.getMap(),marker_marker[i]);
+        // muncul.open(peta1.getMap(),marker_marker[i]);
     });
     marker_marker[i].addListener('click',function(){
       console.log('on klik');
-      muncul.open(peta1.getMap(),marker_marker[i]);
+      // muncul.open(peta1.getMap(),marker_marker[i]);
     });
+
+    var info = new google.maps.InfoWindow({
+      content: '<b>ini kapal BIMA-333</b>',
+      // map: map1.getMap()
+    })
+
+
   }
   // console.log('flag_bound bfr==> '+flag_bound);
   // if (flag_bound===0)
