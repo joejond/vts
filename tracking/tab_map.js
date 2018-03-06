@@ -33,8 +33,14 @@ var store_daftar_kapal = Ext.create('Ext.data.Store', {
     }
 });
 // var flag_bound;
-var infowin;
+var info_info;
 var muncul;
+var atlas;
+var hsl_soket;
+var lokasi;
+var TaskVessel;
+var infowindow;
+arr_data={};
 var peta = {
     xtype: 'gmappanel',
     //margin: '5 5 5 5',
@@ -49,42 +55,36 @@ var peta = {
         lng: 120.0
     },
     listeners:{
-      //   'zoom_changed':function() {
-      //   //console.log('zoomnya berubah');
-      // },
       mapready:function(win,gmap){
-        console.log('onmapready');
-        console.log('window ==> ', win);
-        console.log('gmap ==> ', gmap);
+        // console.log('onmapready');
+        // console.log('window ==> ', win);
+        // console.log('gmap ==> ', gmap);
+        atlas = gmap;
+        info_info = new google.maps.InfoWindow();
+        TaskVessel = new Ext.util.TaskRunner();
+        // console.log(info_info);
+        resetCenterVessel(gmap);
+        onClickPeta(gmap);
+        var ws = Ext.create ('Ext.ux.WebSocket', {
+          url:   getWS(),
+          // url: 'ws://10.10.10.11:1234' ,
+          listeners: {
+            open: function (ws) {
+                ws.send('usr:'+dt.idu);
+            } ,
+            message: function (ws, data) {
+              prosesDataSocket(JSON.parse(data));
+            } ,
+            close: function (ws) {
+              console.log('jadi close');
+            }
+          }
+        });
+
+        TaskVessel.start(taskUpdV);
 
       },
-      afterrender: function(){
-          console.log('after render');
-          // flag_bound = 0;
 
-          Ext.Function.defer(function(){
-              // console.log(peta1.getMap());
-              // eventKlik();
-                peta1.getMap().addListener('click',function(){
-                  // console.log('map tak klik');
-                  resetCenterVessel(peta1.getMap());
-                });
-                // infowind = new google.maps.InfoWindow();
-
-                // muncul = new google.maps.InfoWindow({
-                //     content: infoVessel,
-                //     // maxWidth: 1000
-                // });
-
-          }, 500);
-
-          // console.log(peta1.getMap());
-      //   peta1.getMap().addListener('click',function(){
-      //     resetCenterVessel();
-      //   });
-
-
-      },
       boxready: function()
       {
         // var kukis = Ext.util.Cookies.get("marine");
@@ -99,8 +99,10 @@ var peta = {
             method:'get',
             success: function(data){
                 var res = Ext.JSON.decode(data.responseText);
-                console.log(res);
-                console.log(res[0].children[1].name);
+                // console.log(res);
+                // console.log(res[0].children[1].name);
+                var namanya = res[0].children[1].name;
+                arr_data.nama = namanya;
 
                 // Crawler(8,res).then(function(data){
                 //     console.log(data);
@@ -126,7 +128,7 @@ var peta = {
 
         // Ext.Ajax.request
         // console.log('keliatan mapnya brooo');
-        this.ws;
+        // ws;
         // console.log('ciba peta',peta1.getMap());
 
 
@@ -134,118 +136,69 @@ var peta = {
     }
 };
 
-// peta1.getMap().addListener('click',function(event){
-//     console.log('klik klik');
-// });
-
-// var ws_mulai = Ext.ux
-var hsl_soket;
-var lokasi;
-
-var ws = Ext.create ('Ext.ux.WebSocket', {
-  url:   getWS(),
-  // url: 'ws://10.10.10.11:1234' ,
-  listeners: {
-    open: function (ws) {
-      // if (Ext.get(ws.url))
-      // {
-      console.log('opeeeeeennn');
-
-
-      // console.log(ws);
-      ws.send('usr:4');
-      // }
-
-      // Ext.get(ws.url).dom.innerHTML += '> WebSocket just open!<br/>';
-    } ,
-    message: function (ws, data) {
-      // Ext.get(ws.url).dom.innerHTML += '> ' + data + '<br/>';
-      // console.log(JSON.parse(data));
-      var mm = 0;
-      var hsl_soket = JSON.parse(data);
-
-      console.log(hsl_soket);
-
-      var hhh= hsl_soket.monita.filter(function(d){
-        // if(type_tu =="27") {return value;}
-        return d.type_tu==27 || d.type_tu==28 || d.type_tu==29 || d.type_tu==30;
-      });
-
-      var arr ={};
-      // console.log(hhh);
-      hhh.forEach(function(d){
-
-        console.log(d.nama_tu +"==> "+d.value);
-        if(d.type_tu ==27){
-          arr.lat=d.value;
-          arr.waktu=d.epochtime;
-        }
-        if(d.type_tu ==28){
-          arr.lng=d.value;
-        }
-        if(d.type_tu ==29){
-          arr.head=d.value;
-        }
-        if(d.type_tu ==30){
-          arr.speed=d.value;
-        }
-
-      });
-      console.log(arr);
-      // console.log(new Date(arr.waktu * 1000) );
-      var a,b;
-      if (mm==0){
-        a = arr.lat;
-        b = arr.lng;
-        mm =1;
-      }
-
-      if(arr.lat === a )
+function onClickPeta(map){
+  atlas.addListener('click',function(a,b){
+    console.log('terklik sodara');
+    resetCenterVessel(map);
+  });
+}
 
 
 
+function prosesDataSocket(data){
+  // console.log(data);
+  var hhh= data.monita.filter(function(d){
+    // if(type_tu =="27") {return value;}
+    return d.type_tu==27 || d.type_tu==28 || d.type_tu==29 || d.type_tu==30;
+  });
 
-
-
-
-
-      // addMarkerVessel(arr);
-      /*bersihkan dahulu marking kapal*/
-      deleteTandaKapal();
-      /*Buat tanda kapal dahulu*/
-      addTandaKapal(arr);
-      /*tampilkan kapal*/
-      // showTandaKapal(peta1.getMap());
-      setTandaOnMap(peta1.getMap());
-
-      // resetCenterVessel(peta1.getMap());
-
-      // marker_marker[0].setMap(peta1.getMap());
-
-
-      // console.log(peta1.getMap());
-
-      // lokasi = new google.maps.LatLng(parseFloat(arr.lat), parseFloat(arr.lng));
-      // lukis_kapal(8,lokasi);
-
-
-    } ,
-    close: function (ws) {
-      console.log('jadi close');
-      // var panel = Ext.getCmp ('panel' + ws.url);
-      //
-      // if ((panel != null) || (panel != undefined)) {
-      // 	panel.destroy ();
-      // }
+  // var arr ={};
+  // console.log(hhh);
+  hhh.forEach(function(d){
+    // switch (d.type_tu) {
+    //   case 27: arr_data.lat=d.value;break;
+    //   case 28: arr_data.lng=d.value;break;
+    //   case 29: arr_data.head=d.value;break;
+    //   case 30: arr_data.speed=d.value;break;
+    //   default:arr_data.waktu=d.epochtime;
+    // }
+    if(d.type_tu ==27){
+      arr_data.lat=d.value;
+      arr_data.waktu=d.epochtime;
     }
-  }
-});
+    if(d.type_tu ==28){
+      arr_data.lng=d.value;
+    }
+    if(d.type_tu ==29){
+      arr_data.head=d.value;
+    }
+    if(d.type_tu ==30){
+      arr_data.speed=d.value;
+    }
+
+  });
+}
+// var aa =1;
+var taskUpdV = {
+      run: function(){
+        // console.log(aa);
+        deleteTandaKapal();
+        /*Buat tanda kapal dahulu*/
+        addTandaKapal(arr_data);
+        /*tampilkan kapal*/
+        // showTandaKapal(peta1.getMap());
+        setTandaOnMap(atlas);
+        // aa++;
+      },
+      interval: 1000 * 5
+  };
+
 var marker_marker=[];
 
 function addTandaKapal(data)
 {
   // console.log(peta1.getMap());
-  // console.log(data);
+  console.log('addTandaKapal == > ',data);
 
   var tanda = new google.maps.Marker({
     position : new google.maps.LatLng(data.lat,data.lng),
@@ -265,59 +218,90 @@ function addTandaKapal(data)
     //*/
     });
   marker_marker.push(tanda);
+  // create_infowindow(tanda,data);
   // console.log(marker_marker,' <== buat tanda',marker_marker[0].getPosition().lat());
 }
-// var infoVessel = '<table><tr><td><b> Bima3-t </b></td></tr>'+
-//   '<tr><td><b>Last Seen : </b>'+Ext.date.Format(new Date(arr.waktu * 1000), 'd-m Y H:i:s') +'</td></tr>'+
-//   '</table>';
+var infoVessel = '<table><tr><td><b>'+arr_data.nama+'</b></td></tr>'+
+  '<tr><td><b>Last Seen : </b>'+Ext.Date.format(new Date(arr_data.waktu * 1000), 'd-m Y H:i:s') +'</td></tr>'+
+  '</table>';
+
+
+
+function create_infowindow(t,d){
+  var date = new Date(d.waktu*1000);
+  var year = date.getFullYear();
+  var month = date.getMonth() + 1;
+  var day = date.getDate();
+  var hours = date.getHours();
+  var minutes = date.getMinutes();
+  var seconds = date.getSeconds();
+
+  info_ves = '<h3>'+d.nama+'</h3>';
+  // info_ves += '<p> '+ coords + '</p>';
+  info_ves += '<p> Last Updated : '+ me.pad(day,2) +'/'+me.pad(month,2)+'/'+year +' '+ hours+':'+me.pad(minutes,2)+':'+me.pad(seconds,2) + '</p>';
+
+
+  google.maps.event.addListener(t, 'mouseover', function() {
+    info_info.close();
+    info_info.setContent(infoVessel);
+    info_info.open(atlas,t);
+  });
+
+  google.maps.event.addListener(t, 'mouseout', function() {
+    info_info.close();
+    // info_info.setContent(info_ves);
+    // info_info.open(atlas,t);
+  });
+
+}
 
 function setTandaOnMap(map) {
   for (var i = 0; i < marker_marker.length; i++) {
     // console.log(i, ' buat tanda');
+
     marker_marker[i].setMap(map);
-    marker_marker[i].addListener('mouseover',function(){
-      console.log('mouse lewat.....');
-      // infowind.close();
-			// infowind.setContent(infoVessel);
-			// infowind.open(map,marker_marker[i]);
 
+    // console.log('marker_marker[i] '+i+' ==> ',marker_marker[i]);
+    // marker_marker[i].addListener('mouseover',function(){
+    //   console.log('mouse lewat.....');
+    //   // console.log(info_info);
+    //   // infowind.close();
+    //   // info_info.setContent('<b>HALOOOOOOOOOO</b>');
+    //   // info_info.open(atlas,marker_marker[i]);
+		// 	// infowind.setContent(infoVessel);
+		// 	// infowind.open(map,marker_marker[i]);
+    //
+    //
+    //
+    // });
+    // var infowindow22 = new google.maps.InfoWindow({
+    //   // content: contentString
+    //   content: '<p>ABDAFDA</p>'
+    // });
+    //
+    // marker_marker[i].addListener('mouseout',function(){
+    //   console.log('da da ..... ');
+    //   // infowind.close();
+    //     // muncul.open(peta1.getMap(),marker_marker[i]);
+    // });
+    // marker_marker[i].addListener('click',function(){
+    //
+    //   console.log('on klik',map);
+    //   console.log('on klik',marker_marker[i]);
+    //   // muncul.open(peta1.getMap(),marker_marker[i]);
+    //
+    //
+    //
+    //   infowindow22.open(atlas, marker_marker[i]);
+    // });
 
-
-    });
-
-    marker_marker[i].addListener('mouseout',function(){
-      console.log('da da ..... ');
-      // infowind.close();
-        // muncul.open(peta1.getMap(),marker_marker[i]);
-    });
-    marker_marker[i].addListener('click',function(){
-      console.log('on klik');
-      // muncul.open(peta1.getMap(),marker_marker[i]);
-    });
-
-    var info = new google.maps.InfoWindow({
-      content: '<b>ini kapal BIMA-333</b>',
-      // map: map1.getMap()
-    })
+    // var info = new google.maps.InfoWindow({
+    //   content: '<b>ini kapal BIMA-333</b>',
+    //   // map: map1.getMap()
+    // })
 
 
   }
-  // console.log('flag_bound bfr==> '+flag_bound);
-  // if (flag_bound===0)
-  // {
-  //   Ext.Function.defer(function(){
-  //   //     console.log(peta1.getMap());
-  //       eventKlik();
-  //   //       // peta1.getMap().addListener('click',function(){
-  //   //       //   console.log('map tak klik');
-  //   //       //   // resetCenterVessel();
-  //   //       // });
-  //   }, 500);
-  //   // resetCenterVessel(peta1.getMap(),marker_marker);
-  //   // eventKlik();
-  //   flag_bound = 1;
-  // }
-  // console.log('flag_bound aft==> '+flag_bound);
 
 }
 
@@ -354,18 +338,6 @@ function resetCenterVessel(map){
 
 }
 
-function eventKlik()
-{
-  console.log('eventKlik');
-  // peta1.getMap().addListener('click',function(){
-    // console.log('peta diklik');
-    resetCenterVessel(peta1.getMap());
-  // });
-}
-
-
-
-
 
 var jum = '';
 var peta1; // untuk gmappanel -> fungsi2 google map API harus diakses melalui Ext.getCmp('id_gmappanel');
@@ -381,288 +353,288 @@ var paths_lon = [];
 var jml_point_paths = 0;
 var jmlpt = 0;
 var data_koor1 = [];
-
-function lukis_kapal(id,location)
-{
-  var z = peta1.getMap().getZoom();
-  var icosize = (z-5)*5+25;
-  var markerImage = new google.maps.MarkerImage('img/ship'+z+'.png',
-      new google.maps.Size(icosize, icosize),
-      new google.maps.Point(0, 0),
-      new google.maps.Point(icosize/2, icosize/2));
-  var marker = new MarkerWithLabel({
-      position: location,
-      draggable: false,
-      raiseOnDrag: true,
-      map: peta1.getMap(),
-      labelContent: 'Bima3',//datay.nama, //data_marker[0],
-      labelAnchor: new google.maps.Point(40, -1*icosize/4),
-      labelClass: "labels", // the CSS class for the label
-      labelStyle: {
-          opacity: 1
-      },
-      icon: markerImage
-  });
-}
-
-function addMarker(id, location) {
-    Ext.Ajax.request({
-        url: 'data_marker.php',
-        params: 'id='+id,
-        method: 'GET',
-        success: function (data) {
-            var gmarker = Ext.JSON.decode(data.responseText),
-            datay = gmarker.marker[0][0];
-
-            //console.log(gmarker.marker[0][0].nama);
-            //console.log(data.responseText);
-            var data_marker = [];
-            //data_marker = (data.responseText).split(",");
-            var z = peta1.getMap().getZoom();
-            var icosize = (z-5)*5+25;
-            var markerImage = new google.maps.MarkerImage('img/ship'+z+'.png',
-                new google.maps.Size(icosize, icosize),
-                new google.maps.Point(0, 0),
-                new google.maps.Point(icosize/2, icosize/2));
-            var marker = new MarkerWithLabel({
-                position: location,
-                draggable: false,
-                raiseOnDrag: true,
-                map: peta1.getMap(),
-                labelContent: datay.nama, //data_marker[0],
-                labelAnchor: new google.maps.Point(40, -1*icosize/4),
-                labelClass: "labels", // the CSS class for the label
-                labelStyle: {
-                    opacity: 1
-                },
-                icon: markerImage
-            });
-            var content1 =
-            '<style type="text/css">' +
-            'table.altrowstable {font-family: verdana,arial,sans-serif;font-size:10px;color:#333333;border-width: 1px;border-color: #a9c6c9;border-collapse: collapse;}' +
-            'table.altrowstable th {border-width: 1px;padding: 4px;border-style: solid;border-color: #a9c6c9;}' +
-            'table.altrowstable td {border-width: 1px;padding: 4px;border-style: solid;border-color: #a9c6c9;}' +
-            '</style>'+
-            '<table class="altrowstable">' +
-            '<tr style="background-color:#d4e3e5;">' +
-            '<th rowspan="7"><IMG src="img/vessel/'+ id +'.jpg"></th><th colspan="6" style="font-size:18px;">' + datay.nama + '</th>' +
-            '</tr>' +
-            '<tr style="background-color:#c3dde0;">' +
-            '<th colspan="2">GPS Data</th><th colspan="2">Engine#1</th><th colspan="2">Engine#2</th>' +
-            '</tr>' +
-            '<tr style="background-color:#d4e3e5;">' +
-            '<td>Latitude</td><td>' + datay.lat + '&deg;</td><td>Speed#1</td><td>' + datay.rpm1 + '&nbsp;rpm</td><td>Speed#2</td><td>' + datay.rpm2 + '&nbsp;rpm</td>' +
-            '</tr>' +
-            '<tr style="background-color:#c3dde0;">' +
-            '<td>Longitude</td><td>' + datay.lng + '&deg;</td><td>Propeler#1</td><td>' + datay.prop1 + '&nbsp;rpm</td><td>Propeler#2</td><td>' + datay.prop2 + '&nbsp;rpm</td>' +
-            '</tr>' +
-            '<tr style="background-color:#d4e3e5;">' +
-            '<td>Heading</td><td>' + datay.head + '&deg;</td><td>Flowmeter#1</td><td>' + datay.flow1 + '&nbsp;lt</td><td>Flowmeter#2</td><td>' + datay.flow2 + '&nbsp;lt</td>' +
-            '</tr>' +
-            '<tr style="background-color:#c3dde0;">' +
-            '<td>Speed</td><td>' + (Number(datay.spd)).toFixed(2)+ '&nbsp;knot</td><td>Overflow#1</td><td>' + datay.ovflow1 + '&nbsp;lt</td><td>Overflow#2</td><td>' + datay.ovflow2 + '&nbsp;lt</td>' +
-            '</tr>' +
-            '<tr style="background-color:#c3dde0;">' +
-            '<td colspan="6" style="text-align: right"> data time : ' + datay.waktu + '</td>' +
-            '</tr>' +
-            '</table>';
-
-            var infowindow1 = new google.maps.InfoWindow({
-                content: content1,
-                maxWidth: 1000
-            });
-
-            markers.push(marker);
-            google.maps.event.addListener(marker, 'click', function() {
-                infowindow1.open(peta1.getMap(), marker);
-            });
-        }
-    });
-}
-
-function setAllMap(map) {
-    for (var i = 0; i < markers.length; i++) {
-        markers[i].setMap(map);
-    }
-}
-
-// Removes the markers from the map, but keeps them in the array.
-function clearMarkers() {
-    setAllMap(null);
-}
-
-// Shows any markers currently in the array.
-function showMarkers() {
-    setAllMap(peta1.getMap());
-}
-
-// Deletes all markers in the array by removing references to them.
-function deleteMarkers() {
-    clearMarkers();
-    markers = [];
-    setAllMap(peta1.getMap());
-}
-
-
-function gambar_kapal(datapilih){
-    //console.log(datapilih.posisi[0].id);
-    var datax = datapilih.posisi,
-    jum = datax.length;
-    // console.log(jum);
-    deleteMarkers();
-    var pos_arr = [];
-    var loc_arr = [];
-    kapal_dipilih = [];
-    //pos_arr = datapilih.split("|");
-    //for(var n = 0; n < (pos_arr.length - 1); n++){
-    for(var n = 0; n < jum; n++){
-        // console.log(pos_arr[n]);
-        loc_arr[n] = new google.maps.LatLng(parseFloat(datax[n].lat), parseFloat(datax[n].lng));
-        // console.log(datax[n].lat +'=='+ datax[n].lng);
-        // addMarker(parseInt(datax[n].id), loc_arr[n]);
-        lukis_kapal(parseInt(datax[n].id), loc_arr[n]);
-        //kapal_dipilih = kapal_dipilih + (datax[n].id) + ',';
-        kapal_dipilih.push (datax[n].id);
-
-        //console.log(kapal_dipilih);
-        var point1 = new google.maps.LatLng(parseFloat(datax[n].lat), parseFloat(datax[n].lng));
-		peta1.getMap().setCenter(point1);
-
-
-
-
-    }
-    if(status_path == 1){
-			addpath();
-		}
-
-    //console.log(status_path);
-
-}
-
-
-
-
-
-function getdatapath(id, start_tm, stop_tm)
-{
-    Ext.Ajax.request({
-        url: 'data_path.php',
-        params: 'id='+id+'&start='+start_tm+'&stop='+stop_tm,
-        //params: {id : id, start : str, stop : stp},
-        method: 'GET',
-        success: function (data) {
-			//console.log(data.responseText);
-			var pathisi = Ext.JSON.decode(data.responseText);
-			//console.log(pathisi);
-
-			var jmlpt = pathisi.track.length;
-			//console.log('jumlah array path (jmlpt) ' +jmlpt);
-
-            //paths_loc = (data.responseText).split("|");
-            //jml_point_paths = paths_loc.length;
-            for(var n = 0; n < jmlpt; n++){
-                //paths_latlon_tmp = paths_loc[n].split(",");
-                //console.log(pathisi.track[n].lat);
-                //var lat[n]= ,
-                //lng[n] = ;
-
-
-                //paths_lat[n] = paths_latlon_tmp[0];
-                //paths_lon[n] = paths_latlon_tmp[1];
-                paths_lat[n] = pathisi.track[n].lat;
-                paths_lon[n] = pathisi.track[n].lng;
-
-
-
-            }
-
-        }
-    })
-}
-
-//function getyyyymmdd(date) {
-    //var year = date.getFullYear();
-    //var month = (1 + date.getMonth()).toString();
-    //month = month.length > 1 ? month : '0' + month;
-    //var day = date.getDate().toString();
-    //day = day.length > 1 ? day : '0' + day;
-    //return '' + year + month + day;
-//}
-
-function addpath(){
-    var tgl_start = Ext.getCmp('start_path').getValue(), str = Ext.Date.format(tgl_start,'Y-m-d');
-    var tgl_stop = Ext.Date.add(Ext.getCmp('stop_path').getValue(),Ext.Date.DAY,1) ,stp = Ext.Date.format(tgl_stop,'Y-m-d');
-
-    //console.log('start = '+str + ' & stop = ' + stp);
-    //console.log(tg_1);
-
-    //var str_start = getyyyymmdd(tgl_start) + '000000';
-    //var str_stop = getyyyymmdd(tgl_stop) + '235959';
-	//console.log (str_start);
-
-    //console.log(kapal_dipilih);
-    //console.log('jumlah kapal : '+kapal_dipilih.length)
-    //var kapal_path = [];
-    //kapal_path = kapal_dipilih.split(",");
-    var z = peta1.getMap().getZoom();
-    var polyOptions = {
-        strokeColor: '#FF0044',
-        strokeOpacity: 1.0,
-        strokeWeight: 1,
-        icons: [{
-            icon: {
-                path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
-                strokeColor:'#0000ff',
-                fillColor:'#0000ff',
-                fillOpacity:1
-            },
-            repeat:'200px',
-            path:[]
-        }]
-    };
-
-    for(var n = 0; n < kapal_dipilih.length; n++){
-
-        getdatapath(kapal_dipilih[n], str, stp);
-
-
-
-
-        paths[n] = new google.maps.Polyline(polyOptions);
-        //////console.log(paths[n]);
-        //////console.log('jmlpt : '+jjjj);
-
-        paths[n].setMap(peta1.getMap());
-        //console.log(paths[n].setMap(peta1.getMap()));
-        //console.log(paths_lat[n]);
-        //console.log('path digambar dri kapal di pilih : '+kapal_dipilih);
-        //console.log('jml pt : '+jmlpoint);
-
-        //for(var a = 0; a < jml_point_paths; a++){
-        for(var a = 0; a < 200; a++){
-            (paths[n].getPath()).push(new google.maps.LatLng(paths_lat[a], paths_lon[a]));
-        }
-
-//        var count = 0;
-//        window.setInterval(function() {
-//            count = (count + 1) % 200;
 //
-//            var icons = paths[n].get('icons');
-//            icons[0].offset = (count / 2) + '%';
-//            paths[n].set('icons', icons);
-//        }, 20);
-    }
-}
-
-function removepath(){
-    //console.log("jml path = "+paths.length);
-    //console.log("jml kapal dipilih = "+jml_kapaldipilih);
-    for(var n = 0; n < jml_kapaldipilih; n++){
-        paths[n].setMap(null);
-    }
-    paths = [];
-}
+// function lukis_kapal(id,location)
+// {
+//   var z = peta1.getMap().getZoom();
+//   var icosize = (z-5)*5+25;
+//   var markerImage = new google.maps.MarkerImage('img/ship'+z+'.png',
+//       new google.maps.Size(icosize, icosize),
+//       new google.maps.Point(0, 0),
+//       new google.maps.Point(icosize/2, icosize/2));
+//   var marker = new MarkerWithLabel({
+//       position: location,
+//       draggable: false,
+//       raiseOnDrag: true,
+//       map: peta1.getMap(),
+//       labelContent: 'Bima3',//datay.nama, //data_marker[0],
+//       labelAnchor: new google.maps.Point(40, -1*icosize/4),
+//       labelClass: "labels", // the CSS class for the label
+//       labelStyle: {
+//           opacity: 1
+//       },
+//       icon: markerImage
+//   });
+// }
+//
+// function addMarker(id, location) {
+//     Ext.Ajax.request({
+//         url: 'data_marker.php',
+//         params: 'id='+id,
+//         method: 'GET',
+//         success: function (data) {
+//             var gmarker = Ext.JSON.decode(data.responseText),
+//             datay = gmarker.marker[0][0];
+//
+//             //console.log(gmarker.marker[0][0].nama);
+//             //console.log(data.responseText);
+//             var data_marker = [];
+//             //data_marker = (data.responseText).split(",");
+//             var z = peta1.getMap().getZoom();
+//             var icosize = (z-5)*5+25;
+//             var markerImage = new google.maps.MarkerImage('img/ship'+z+'.png',
+//                 new google.maps.Size(icosize, icosize),
+//                 new google.maps.Point(0, 0),
+//                 new google.maps.Point(icosize/2, icosize/2));
+//             var marker = new MarkerWithLabel({
+//                 position: location,
+//                 draggable: false,
+//                 raiseOnDrag: true,
+//                 map: peta1.getMap(),
+//                 labelContent: datay.nama, //data_marker[0],
+//                 labelAnchor: new google.maps.Point(40, -1*icosize/4),
+//                 labelClass: "labels", // the CSS class for the label
+//                 labelStyle: {
+//                     opacity: 1
+//                 },
+//                 icon: markerImage
+//             });
+//             var content1 =
+//             '<style type="text/css">' +
+//             'table.altrowstable {font-family: verdana,arial,sans-serif;font-size:10px;color:#333333;border-width: 1px;border-color: #a9c6c9;border-collapse: collapse;}' +
+//             'table.altrowstable th {border-width: 1px;padding: 4px;border-style: solid;border-color: #a9c6c9;}' +
+//             'table.altrowstable td {border-width: 1px;padding: 4px;border-style: solid;border-color: #a9c6c9;}' +
+//             '</style>'+
+//             '<table class="altrowstable">' +
+//             '<tr style="background-color:#d4e3e5;">' +
+//             '<th rowspan="7"><IMG src="img/vessel/'+ id +'.jpg"></th><th colspan="6" style="font-size:18px;">' + datay.nama + '</th>' +
+//             '</tr>' +
+//             '<tr style="background-color:#c3dde0;">' +
+//             '<th colspan="2">GPS Data</th><th colspan="2">Engine#1</th><th colspan="2">Engine#2</th>' +
+//             '</tr>' +
+//             '<tr style="background-color:#d4e3e5;">' +
+//             '<td>Latitude</td><td>' + datay.lat + '&deg;</td><td>Speed#1</td><td>' + datay.rpm1 + '&nbsp;rpm</td><td>Speed#2</td><td>' + datay.rpm2 + '&nbsp;rpm</td>' +
+//             '</tr>' +
+//             '<tr style="background-color:#c3dde0;">' +
+//             '<td>Longitude</td><td>' + datay.lng + '&deg;</td><td>Propeler#1</td><td>' + datay.prop1 + '&nbsp;rpm</td><td>Propeler#2</td><td>' + datay.prop2 + '&nbsp;rpm</td>' +
+//             '</tr>' +
+//             '<tr style="background-color:#d4e3e5;">' +
+//             '<td>Heading</td><td>' + datay.head + '&deg;</td><td>Flowmeter#1</td><td>' + datay.flow1 + '&nbsp;lt</td><td>Flowmeter#2</td><td>' + datay.flow2 + '&nbsp;lt</td>' +
+//             '</tr>' +
+//             '<tr style="background-color:#c3dde0;">' +
+//             '<td>Speed</td><td>' + (Number(datay.spd)).toFixed(2)+ '&nbsp;knot</td><td>Overflow#1</td><td>' + datay.ovflow1 + '&nbsp;lt</td><td>Overflow#2</td><td>' + datay.ovflow2 + '&nbsp;lt</td>' +
+//             '</tr>' +
+//             '<tr style="background-color:#c3dde0;">' +
+//             '<td colspan="6" style="text-align: right"> data time : ' + datay.waktu + '</td>' +
+//             '</tr>' +
+//             '</table>';
+//
+//             var infowindow1 = new google.maps.InfoWindow({
+//                 content: content1,
+//                 maxWidth: 1000
+//             });
+//
+//             markers.push(marker);
+//             google.maps.event.addListener(marker, 'click', function() {
+//                 infowindow1.open(peta1.getMap(), marker);
+//             });
+//         }
+//     });
+// }
+//
+// function setAllMap(map) {
+//     for (var i = 0; i < markers.length; i++) {
+//         markers[i].setMap(map);
+//     }
+// }
+//
+// // Removes the markers from the map, but keeps them in the array.
+// function clearMarkers() {
+//     setAllMap(null);
+// }
+//
+// // Shows any markers currently in the array.
+// function showMarkers() {
+//     setAllMap(peta1.getMap());
+// }
+//
+// // Deletes all markers in the array by removing references to them.
+// function deleteMarkers() {
+//     clearMarkers();
+//     markers = [];
+//     setAllMap(peta1.getMap());
+// }
+//
+//
+// function gambar_kapal(datapilih){
+//     //console.log(datapilih.posisi[0].id);
+//     var datax = datapilih.posisi,
+//     jum = datax.length;
+//     // console.log(jum);
+//     deleteMarkers();
+//     var pos_arr = [];
+//     var loc_arr = [];
+//     kapal_dipilih = [];
+//     //pos_arr = datapilih.split("|");
+//     //for(var n = 0; n < (pos_arr.length - 1); n++){
+//     for(var n = 0; n < jum; n++){
+//         // console.log(pos_arr[n]);
+//         loc_arr[n] = new google.maps.LatLng(parseFloat(datax[n].lat), parseFloat(datax[n].lng));
+//         // console.log(datax[n].lat +'=='+ datax[n].lng);
+//         // addMarker(parseInt(datax[n].id), loc_arr[n]);
+//         lukis_kapal(parseInt(datax[n].id), loc_arr[n]);
+//         //kapal_dipilih = kapal_dipilih + (datax[n].id) + ',';
+//         kapal_dipilih.push (datax[n].id);
+//
+//         //console.log(kapal_dipilih);
+//         var point1 = new google.maps.LatLng(parseFloat(datax[n].lat), parseFloat(datax[n].lng));
+// 		peta1.getMap().setCenter(point1);
+//
+//
+//
+//
+//     }
+//     if(status_path == 1){
+// 			addpath();
+// 		}
+//
+//     //console.log(status_path);
+//
+// }
+//
+//
+//
+//
+//
+// function getdatapath(id, start_tm, stop_tm)
+// {
+//     Ext.Ajax.request({
+//         url: 'data_path.php',
+//         params: 'id='+id+'&start='+start_tm+'&stop='+stop_tm,
+//         //params: {id : id, start : str, stop : stp},
+//         method: 'GET',
+//         success: function (data) {
+// 			//console.log(data.responseText);
+// 			var pathisi = Ext.JSON.decode(data.responseText);
+// 			//console.log(pathisi);
+//
+// 			var jmlpt = pathisi.track.length;
+// 			//console.log('jumlah array path (jmlpt) ' +jmlpt);
+//
+//             //paths_loc = (data.responseText).split("|");
+//             //jml_point_paths = paths_loc.length;
+//             for(var n = 0; n < jmlpt; n++){
+//                 //paths_latlon_tmp = paths_loc[n].split(",");
+//                 //console.log(pathisi.track[n].lat);
+//                 //var lat[n]= ,
+//                 //lng[n] = ;
+//
+//
+//                 //paths_lat[n] = paths_latlon_tmp[0];
+//                 //paths_lon[n] = paths_latlon_tmp[1];
+//                 paths_lat[n] = pathisi.track[n].lat;
+//                 paths_lon[n] = pathisi.track[n].lng;
+//
+//
+//
+//             }
+//
+//         }
+//     })
+// }
+//
+// //function getyyyymmdd(date) {
+//     //var year = date.getFullYear();
+//     //var month = (1 + date.getMonth()).toString();
+//     //month = month.length > 1 ? month : '0' + month;
+//     //var day = date.getDate().toString();
+//     //day = day.length > 1 ? day : '0' + day;
+//     //return '' + year + month + day;
+// //}
+//
+// function addpath(){
+//     var tgl_start = Ext.getCmp('start_path').getValue(), str = Ext.Date.format(tgl_start,'Y-m-d');
+//     var tgl_stop = Ext.Date.add(Ext.getCmp('stop_path').getValue(),Ext.Date.DAY,1) ,stp = Ext.Date.format(tgl_stop,'Y-m-d');
+//
+//     //console.log('start = '+str + ' & stop = ' + stp);
+//     //console.log(tg_1);
+//
+//     //var str_start = getyyyymmdd(tgl_start) + '000000';
+//     //var str_stop = getyyyymmdd(tgl_stop) + '235959';
+// 	//console.log (str_start);
+//
+//     //console.log(kapal_dipilih);
+//     //console.log('jumlah kapal : '+kapal_dipilih.length)
+//     //var kapal_path = [];
+//     //kapal_path = kapal_dipilih.split(",");
+//     var z = peta1.getMap().getZoom();
+//     var polyOptions = {
+//         strokeColor: '#FF0044',
+//         strokeOpacity: 1.0,
+//         strokeWeight: 1,
+//         icons: [{
+//             icon: {
+//                 path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+//                 strokeColor:'#0000ff',
+//                 fillColor:'#0000ff',
+//                 fillOpacity:1
+//             },
+//             repeat:'200px',
+//             path:[]
+//         }]
+//     };
+//
+//     for(var n = 0; n < kapal_dipilih.length; n++){
+//
+//         getdatapath(kapal_dipilih[n], str, stp);
+//
+//
+//
+//
+//         paths[n] = new google.maps.Polyline(polyOptions);
+//         //////console.log(paths[n]);
+//         //////console.log('jmlpt : '+jjjj);
+//
+//         paths[n].setMap(peta1.getMap());
+//         //console.log(paths[n].setMap(peta1.getMap()));
+//         //console.log(paths_lat[n]);
+//         //console.log('path digambar dri kapal di pilih : '+kapal_dipilih);
+//         //console.log('jml pt : '+jmlpoint);
+//
+//         //for(var a = 0; a < jml_point_paths; a++){
+//         for(var a = 0; a < 200; a++){
+//             (paths[n].getPath()).push(new google.maps.LatLng(paths_lat[a], paths_lon[a]));
+//         }
+//
+// //        var count = 0;
+// //        window.setInterval(function() {
+// //            count = (count + 1) % 200;
+// //
+// //            var icons = paths[n].get('icons');
+// //            icons[0].offset = (count / 2) + '%';
+// //            paths[n].set('icons', icons);
+// //        }, 20);
+//     }
+// }
+//
+// function removepath(){
+//     //console.log("jml path = "+paths.length);
+//     //console.log("jml kapal dipilih = "+jml_kapaldipilih);
+//     for(var n = 0; n < jml_kapaldipilih; n++){
+//         paths[n].setMap(null);
+//     }
+//     paths = [];
+// }
 
 var selmod = Ext.create('Ext.selection.CheckboxModel',{
     listeners: {
@@ -726,6 +698,7 @@ var ship_list = {
     region: 'east',
     width: 200,
     collapsible: true,
+    collapsed: true,
     layout: {
         type: 'vbox',
         pack: 'start',
