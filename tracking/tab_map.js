@@ -50,9 +50,17 @@ var peta = {
       //   'zoom_changed':function() {
       //   //console.log('zoomnya berubah');
       // },
+      afterrender: function(){
+          console.log('after render');
+          // console.log(peta1.getMap());
+      //   peta1.getMap().addListener('click',function(){
+      //     resetCenterVessel();
+      //   });
+      },
       boxready: function()
       {
         // var kukis = Ext.util.Cookies.get("marine");
+
 
         // console.log(dt);
         // Ext.Ajax.request({
@@ -90,6 +98,8 @@ var peta = {
         // Ext.Ajax.request
         // console.log('keliatan mapnya brooo');
         this.ws;
+        // console.log('ciba peta',peta1.getMap());
+
 
       }
     }
@@ -100,7 +110,8 @@ var hsl_soket;
 var lokasi;
 
 var ws = Ext.create ('Ext.ux.WebSocket', {
-  url: 'ws://10.10.10.11:1234' ,
+  url:   getWS(),
+  // url: 'ws://10.10.10.11:1234' ,
   listeners: {
     open: function (ws) {
       // if (Ext.get(ws.url))
@@ -116,7 +127,7 @@ var ws = Ext.create ('Ext.ux.WebSocket', {
       // Ext.get(ws.url).dom.innerHTML += '> ' + data + '<br/>';
       // console.log(JSON.parse(data));
       var hsl_soket = JSON.parse(data);
-      console.log(hsl_soket);
+      // console.log(hsl_soket);
 
       var hhh= hsl_soket.monita.filter(function(d){
         // if(type_tu =="27") {return value;}
@@ -124,7 +135,7 @@ var ws = Ext.create ('Ext.ux.WebSocket', {
       });
 
       var arr ={};
-      console.log(hhh);
+      // console.log(hhh);
       hhh.forEach(function(d){
 
         console.log(d.nama_tu +"==> "+d.value);
@@ -143,8 +154,24 @@ var ws = Ext.create ('Ext.ux.WebSocket', {
 
       });
       console.log(arr);
-      lokasi = new google.maps.LatLng(parseFloat(arr.lat), parseFloat(arr.lng));
-      lukis_kapal(8,lokasi);
+      // addMarkerVessel(arr);
+      /*bersihkan dahulu marking kapal*/
+      deleteTandaKapal();
+      /*Buat tanda kapal dahulu*/
+      addTandaKapal(arr);
+      /*tampilkan kapal*/
+      // showTandaKapal(peta1.getMap());
+      setTandaOnMap(peta1.getMap());
+
+      // resetCenterVessel(peta1.getMap());
+
+      // marker_marker[0].setMap(peta1.getMap());
+
+
+      // console.log(peta1.getMap());
+
+      // lokasi = new google.maps.LatLng(parseFloat(arr.lat), parseFloat(arr.lng));
+      // lukis_kapal(8,lokasi);
 
 
     } ,
@@ -158,8 +185,80 @@ var ws = Ext.create ('Ext.ux.WebSocket', {
     }
   }
 });
+var marker_marker=[];
+
+function addTandaKapal(data)
+{
+  // console.log(peta1.getMap());
+  // console.log(data);
+
+  var tanda = new google.maps.Marker({
+    position : new google.maps.LatLng(data.lat,data.lng),
+    // map : peta1.getMap(),
+    //*
+    icon : {
+        path: 'm 7.8794646,25.370535 0,2 -1,0 0,6 6.0312504,0.09375 0,-6 -1,0 0,-2 -4.0312504,-0.09375 z M 9.910715,7.4514688 c -1.0000004,0 -1.1709724,0.331348 -2.0000004,2 -0.829028,1.6686512 -2.96875,8.0128162 -2.96875,8.0128162 l -0.03125,0 0,0.0625 0,19.9375 10.0000004,0 0,-19.9375 0,-0.0625 -0.03125,0 c 0,0 -2.139722,-6.344165 -2.96875,-8.0128162 -0.829028,-1.668652 -1,-2 -2,-2 z',
+        //path: 'm -2.02025,5.2254321 0,1.9999997 -1,0 0,6.0000012 6.0312504,0.09375 0,-6.0000012 -1,0 0,-1.9999997 -4.0312504,-0.09375 z M 0.01100037,-12.693634 c -1.00000038,0 -1.17097237,0.331348 -2.00000037,2 -0.829028,1.6686508 -2.96875,8.0128161 -2.96875,8.0128161 l -0.03125,0 0,0.0625 0,19.9375009 10.0000004,0 0,-19.9375009 0,-0.0625 -0.03125,0 c 0,0 -2.139722,-6.3441653 -2.96875,-8.0128161 -0.829028,-1.668652 -1,-2 -2.00000003,-2 z',
+        // path: pth,
+        scale: 1,
+        rotation : parseFloat(data.head), //+parseFloat(cor),		// koreksi
+        strokeColor: 'black',
+        strokeWeight: 1,
+        fillColor: '#FF0000',
+        fillOpacity: 0.8
+      }
+    //*/
+    });
+  marker_marker.push(tanda);
+  // console.log(marker_marker,' <== buat tanda',marker_marker[0].getPosition().lat());
+}
+
+function setTandaOnMap(map) {
+  for (var i = 0; i < marker_marker.length; i++) {
+    // console.log(i, ' buat tanda');
+    marker_marker[i].setMap(map);
+    marker_marker[i].addListener('mouseover',function(){
+      console.log('mouse lewat.....');
+    });
+
+    marker_marker[i].addListener('mouseout',function(){
+      console.log('da da ..... ');
+    });
+  }
+}
+
+function clearTandaOnMap() {
+  // console.log('clearTandaOnMap');
+   setTandaOnMap(null);
+}
+
+function showTandaKapal(map) {
+  setTandaOnMap(map);
+}
+
+function deleteTandaKapal() {
+  // console.log('deleteTandaKapal');
+  clearTandaOnMap();
+  // console.log('kosongkan marker ==> ',marker_marker);
+  marker_marker = [];
+}
+
+function resetCenterVessel(map){
+  // console.log(this.markers);
+  var bounds = new google.maps.LatLngBounds();
+
+    for (var i=0; i<marker_marker.length; i++) {
+        if(marker_marker[i].getVisible()) {
+            bounds.extend( marker_marker[i].getPosition() );
+        }
+    }
+
+    map.fitBounds(bounds);
+    map.setZoom(10);
 
 
+
+}
 
 var jum = '';
 var peta1; // untuk gmappanel -> fungsi2 google map API harus diakses melalui Ext.getCmp('id_gmappanel');

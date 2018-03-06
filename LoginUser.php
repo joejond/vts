@@ -274,7 +274,7 @@ session_start();
                   setcookie('marine',objd,30);
                   var host = document.location.origin;
 
-                  window.parent.location = (host == 'http://localhost') ? (host+"/project/vts/tracking"):(host+"/vts/tracking");
+                  window.parent.location = (host == 'http://localhost') ? (host+"/project/vts/tracking"): (host == 'http://127.0.0.1')?(host+"/project/vts/tracking") :  (host+"/vts/tracking");
 
                 }
             },

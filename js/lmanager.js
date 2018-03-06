@@ -30,6 +30,15 @@ function getAPI()
 
 }
 
+function getWS()
+{
+		var loc = window.location;
+		var xx = (loc.hostname == 'localhost')?  ('ws://10.10.10.11:1234') : ('ws://project.daunbiru.com:1234');
+		return xx;
+
+
+}
+
 function cookiename(){
   return 'marine';
 }
