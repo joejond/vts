@@ -10,13 +10,7 @@ Ext.require([
 var dt = JSON.parse(atob(Ext.util.Cookies.get("marine")));
 var model_detail_kapal = Ext.define('detail_kapal', {
     extend: 'Ext.data.Model',
-    // fields: ['waktu', 'lat', 'lng', 'speed', 'heading', 'rpm1', 'prop1', 'inflow1', 'outflow1', 'temp1', 'press1',
-		// 	'rpm2', 'prop2', 'inflow2', 'outflow2', 'temp2', 'press2',
-		// 	'rpm3', 'prop3', 'inflow3', 'outflow3', 'temp3', 'press3',
-		// 	'rpm4', 'prop4', 'inflow4', 'outflow4', 'temp4', 'press4',
-		// 	'runhour1', 'runhour2','runhour3', 'battery', 'charger', 'modem']
-
-		fields:[
+  		fields:[
 			"PM - Door","PM-VBatt","PM-VCharg",
 			"ME1-FM In","ME1-FM Ov","ME1-FM Tem",
 			"ME2-FM In","ME2-FM Ov","ME2-FM Tem",
@@ -34,27 +28,6 @@ var model_detail_kapal = Ext.define('detail_kapal', {
 			"AE1-RH-Daily","AE2-RH-Daily","AE1-FuelUsage","AE2-FuelUsage","ME2-FuelUsage","ME1-FuelUsage","Total-FuelUsage",
 			"F_Sound_Check",{name:"t",type:"date"}
 		]
-
-		// fields:[
-		//
-		// 				"PM-Door","PM-VBatt",	"PM-VCharge",
-		// 				"ME1-Inflow",	"ME1-Overflow",	"ME1-Temp",
-		// 				"ME2-Inflow",	"ME2-Overflow",	"ME2-Temp",
-		// 				"AE1-Inflow",	"AE1-OverFlow",	"AE1-Temp",
-		// 				"AE2-Inflow",	"AE2-OverFlow", "AE2-Temp",
-		// 				"ME1-RPM",	"ME1-Running Hour",
-		// 				"ME2-RPM",	"ME2-Running Hour",
-		// 				"AE1-RPM",	"AE1-Running Hour",
-		// 				"AE2-RPM",	"AE2-Running Hour",
-		// 				"PE-Door",	"PE-VCharge", "PE-Vbatt",
-		// 				"GPS-Lattitude",	"GPS-Longitude",	"GPS-Heading",	"GPS-Velocity",
-		// 				"working distance (km)",	"working hour",	"average speed (km/h)",
-		// 				"main engine daily comsumptio (liter)",	"main engine consumtion rate (liter)",
-		// 				"auxiliary engine daily consumtion (liter)",	"auxiliary engine consumtion rate (liter)",
-		// 				"remaining onboard (liter)",	"Fuel_Bunkering",
-		// 				"ME2-Fuel-Usage-Hourly", 	"Totalizer",	"Working Distance", "Working hours",	"ME Daily consumption",
-		// 				"AE1-FuelUsage",	"AE2-FuelUsage",	"ME2-Fuel-Usage",  	"ME1-Fuel-Usage", 	"Total-Fuel-Usage",	"F_Sound_Check",
-		// 				{name:"t",type:'date'} ]
 	});
 
 var comb_kapal1 = '';
@@ -86,6 +59,194 @@ var store_detail_kapal = Ext.create('Ext.data.Store', {
 	//}
 });
 
+//==================================================================
+var detail_jam_index;
+var store_detail_jam = Ext.create('Ext.data.Store', {
+    model: model_detail_kapal,
+    autoLoad: true,
+    proxy: {
+        type: 'ajax',
+		url: getAPI()+'/get_data_bima',
+        method: 'GET',
+    },
+
+});
+var tabel_detail_jam = Ext.create('Ext.grid.Panel', {
+    title: 'Tabel Detail Jam',
+    store: store_detail_kapal,
+    listeners: {
+			afterrender : function(){
+				//tgl_sel1 = Ext.Date.format(this.getValue(),'Y-m-d');
+				//tgl_sel2 = (tgl_sel1 != '') ? tgl_sel1 : Ext.Date.format(new Date(), 'd-M-Y' );
+				//var param = {user_id: dt.idu,id:comb_kapal1,tgl:tgl_sel1,tz: getTimeZone()};
+				console.log("[tabel_detail_jam] afterrender: " + detail_jam_index);		
+				//store_detail_kapal.load({params: param});
+			},
+			show: function(){
+				console.log("[tabel_detail_jam] show:" + detail_jam_index);
+			}
+		},
+    columns: [{
+        header: "Date Time",
+        width: 130,
+        dataIndex: 't',
+				renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s'),
+        locked : true
+    },{
+      header: "Satelite Data",
+      columns: [{
+			header: "Latitude",
+			width: 50,
+			dataIndex: 'GPS-Lattitude'
+		},{
+			header: "Longitude",
+			width: 55,
+			dataIndex: 'GPS-Longitude'
+		},{
+			header: "Speed",
+			width: 40,
+			dataIndex: 'GPS-Velocity'
+		},{
+			header: "Heading",
+			width: 45,
+			dataIndex: 'GPS-Heading'
+		}]
+	},{
+      header: "PortSide Engine",
+      columns: [{
+				header: "FM-In",
+				width: 70,
+				dataIndex: 'ME1-FM In'
+			},{
+				header: "FM-Ov",
+				width: 70,
+				dataIndex: 'ME1-FM Ov'
+			},{
+				header: "FM-Temp",
+				width: 70,
+				dataIndex: 'ME1-FM Tem'
+			},{
+				header: "RPM",
+				width: 70,
+				dataIndex: 'ME1-RPM'
+			},{
+				header: "RunHours",
+				width: 70,
+				dataIndex: 'ME1-RH'
+
+			}]
+	},{
+      header: "PortSide Engine",
+			columns: [{
+				header: "FM-In",
+				width: 70,
+				dataIndex: 'ME2-FM In'
+			},{
+				header: "FM-Ov",
+				width: 70,
+				dataIndex: 'ME2-FM Ov'
+			},{
+				header: "FM-Temp",
+				width: 70,
+				dataIndex: 'ME2-FM Tem'
+			},{
+				header: "RPM",
+				width: 70,
+				dataIndex: 'ME2-RPM'
+			},{
+				header: "RunHours",
+				width: 70,
+				dataIndex: 'ME2-RH'
+
+			}]
+	},{
+      header: "Aux Engine 1",
+			columns: [{
+				header: "FM-In",
+				width: 70,
+				dataIndex: 'AE1-FM In'
+			},{
+				header: "FM-Ov",
+				width: 70,
+				dataIndex: 'AE1-FM Ov'
+			},{
+				header: "FM-Temp",
+				width: 70,
+				dataIndex: 'AE1-FM Temp'
+			},{
+				header: "RPM",
+				width: 70,
+				dataIndex: 'AE1-RPM'
+			},{
+				header: "RunHours",
+				width: 70,
+				dataIndex: 'AE1-RH'
+			// },{
+			// 	header: "Press",
+			// 	width: 70,
+			// 	dataIndex: 'press1'
+			}]
+	},{
+		header: "Aux Engine II",
+		columns: [{
+			header: "FM-In",
+			width: 70,
+			dataIndex: 'AE2-FM In'
+		},{
+			header: "FM-Ov",
+			width: 70,
+			dataIndex: 'AE2-FM Ov'
+		},{
+			header: "FM-Temp",
+			width: 70,
+			dataIndex: 'AE2-FM Tem'
+		},{
+			header: "RPM",
+			width: 70,
+			dataIndex: 'AE2-RPM'
+		},{
+			header: "RunHours",
+			width: 70,
+			dataIndex: 'AE2-RH'
+		// },{
+		// 	header: "Press",
+		// 	width: 70,
+		// 	dataIndex: 'press1'
+		}]
+	},
+	{
+      header: "Panel",
+      columns: [{
+				header: "PM Battery",
+				width: 70,
+				dataIndex: 'PM-VBatt'
+			},{
+				header: "PM Charger",
+				width: 70,
+				dataIndex: 'PM-VCharg'
+			},{
+				header: "PM Door",
+				width: 70,
+				dataIndex: 'PM - Door'
+			},{
+				header: "PE Battery",
+				width: 70,
+				dataIndex: 'PE-VBatt'
+			},{
+				header: "PE Charger",
+				width: 70,
+				dataIndex: 'PE-VCharge'
+			},{
+				header: "PE Door",
+				width: 70,
+				dataIndex: 'PE-Door'
+			}]
+	}],
+    flex:1
+});
+
+//==================================================================
+
 var model_combo_kapal1 = Ext.define('Kapal', {
     extend: 'Ext.data.Model',
     fields: ['name']
@@ -109,25 +270,6 @@ var store_combo_kapal1 = Ext.create('Ext.data.Store', {
     }
 });
 
-
-//var ship_combo1 = new Ext.form.ComboBox({
-    //displayField: 'name',
-    //queryMode: 'remote',
-    //valueField: 'name',
-    //width: 200,
-    //store: store_combo_kapal1,
-    //listeners:{
-        //select: function() {
-
-        //comb_kapal1 = this.getValue();
-
-        //console.log(comb_kapal1);
-        //store_detail_kapal.load({params: { name: comb_kapal1, tgl: tgl_sel1}});
-		//update_text1();
-        //}
-    //}
-//});
-
 var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
     //id : 'table_ship',
     //jdl : '',
@@ -135,6 +277,14 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
     title: 'Data Ship',
     store : store_detail_kapal,
     flex: 4,
+    listeners: {
+		    	select: function(selModel, record, index, options){
+		        	detail_jam_index=index; 
+		        	//alert("Select: " + index); 
+		        	//window_detail_jam.afterrender();
+		        	window_detail_jam.show();
+		    	},
+			},
     columns: [
     {
         header: "Date Time",
@@ -460,3 +610,39 @@ var panel_detail = {
         tabel_detail_kapal
     ]
 };
+
+var window_detail_jam = Ext.create('Ext.window.Window',{
+    title : 'Raw Data Detail',
+    width : 400,
+    modal : true,
+    closable: false,
+    layout : {
+        type : 'fit',
+        align : 'stretch'
+    },
+    items : [{
+        xtype : 'tabpanel',
+				width: 400,
+		    height: 300,
+		    defaults: {
+		        // bodyPadding: 10,
+		        scrollable: true
+		    },
+				items: [{
+			        title: 'Raw Data Detail',
+							layout:{
+								type:'vbox',
+								align:'stretch'
+							},
+							items:[ tabel_detail_jam]
+			    }]
+    }],
+
+    buttons : [{
+        text : 'Close',
+        handler : function(){
+            this.up('.window').hide();
+        }
+    }]
+
+});
