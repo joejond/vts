@@ -40,31 +40,27 @@ var hsl_soket;
 var lokasi;
 var TaskVessel;
 var infowindow;
-arr_data={};
+data_obj={};
+arr_dat=[];
 var peta = {
     xtype: 'gmappanel',
     //margin: '5 5 5 5',
     region: 'center',
     id: 'mymap',
-    zoomLevel: 7,
+    zoomLevel: 8,
     gmapType: 'map',
     mapConfOpts: ['enableScrollWheelZoom','enableDoubleClickZoom','enableDragging'],
     mapControls: ['GSmallMapControl','GMapTypeControl'],
     setCenter: {
-        lat: 4.5,
-        lng: 120.0
+        lat: -7,
+        lng: 115.0
     },
     listeners:{
       mapready:function(win,gmap){
-        // console.log('onmapready');
-        // console.log('window ==> ', win);
-        // console.log('gmap ==> ', gmap);
+        console.log('onmapready');
         atlas = gmap;
         info_info = new google.maps.InfoWindow();
-        TaskVessel = new Ext.util.TaskRunner();
-        // console.log(info_info);
-        resetCenterVessel(gmap);
-        onClickPeta(gmap);
+
         var ws = Ext.create ('Ext.ux.WebSocket', {
           url:   getWS(),
           // url: 'ws://10.10.10.11:1234' ,
@@ -80,8 +76,9 @@ var peta = {
             }
           }
         });
-
+        TaskVessel = new Ext.util.TaskRunner();
         TaskVessel.start(taskUpdV);
+        onClickPeta(atlas);
 
       },
 
@@ -102,7 +99,7 @@ var peta = {
                 // console.log(res);
                 // console.log(res[0].children[1].name);
                 var namanya = res[0].children[1].name;
-                arr_data.nama = namanya;
+                data_obj.nama = namanya;
 
                 // Crawler(8,res).then(function(data){
                 //     console.log(data);
@@ -137,8 +134,8 @@ var peta = {
 };
 
 function onClickPeta(map){
-  atlas.addListener('click',function(a,b){
-    console.log('terklik sodara');
+  atlas.addListener('click',function(){
+    // console.log('terklik sodara');
     resetCenterVessel(map);
   });
 }
@@ -155,50 +152,59 @@ function prosesDataSocket(data){
   // var arr ={};
   // console.log(hhh);
   hhh.forEach(function(d){
-    // switch (d.type_tu) {
-    //   case 27: arr_data.lat=d.value;break;
-    //   case 28: arr_data.lng=d.value;break;
-    //   case 29: arr_data.head=d.value;break;
-    //   case 30: arr_data.speed=d.value;break;
-    //   default:arr_data.waktu=d.epochtime;
-    // }
+    arr_dat =[];
     if(d.type_tu ==27){
-      arr_data.lat=d.value;
-      arr_data.waktu=d.epochtime;
+      data_obj.lat=d.value;
+      data_obj.waktu=d.epochtime;
     }
     if(d.type_tu ==28){
-      arr_data.lng=d.value;
+      data_obj.lng=d.value;
     }
     if(d.type_tu ==29){
-      arr_data.head=d.value;
+      data_obj.head=d.value;
     }
     if(d.type_tu ==30){
-      arr_data.speed=d.value;
+      data_obj.speed=d.value;
     }
 
   });
+  arr_dat.push(data_obj);
+  // console.log(arr_dat);
+
 }
 // var aa =1;
+var marker_marker =[];
 var taskUpdV = {
       run: function(){
         // console.log(aa);
         deleteTandaKapal();
-        /*Buat tanda kapal dahulu*/
-        addTandaKapal(arr_data);
+        proses_kapal(arr_dat);
         /*tampilkan kapal*/
-        // showTandaKapal(peta1.getMap());
+        // showTandaKapal(atlas);
         setTandaOnMap(atlas);
         // aa++;
       },
-      interval: 1000 * 5
+      interval: 1000 * 1
   };
 
-var marker_marker=[];
+
+// var marker_marker;
+function proses_kapal(d)
+{
+  marker_marker=[];
+  // console.log('proses_kapal ',d);
+  for (var i = 0; i <d.length; i++){
+    // console.log('proses_kapal ke ['+i+'] => ',d);
+    marker_marker.push(addTandaKapal(d[i]));
+  }
+  // console.log(marker_marker);
+
+}
 
 function addTandaKapal(data)
 {
   // console.log(peta1.getMap());
-  console.log('addTandaKapal == > ',data);
+  // console.log('addTandaKapal == > ',data);
 
   var tanda = new google.maps.Marker({
     position : new google.maps.LatLng(data.lat,data.lng),
@@ -217,37 +223,51 @@ function addTandaKapal(data)
       }
     //*/
     });
-  marker_marker.push(tanda);
-  // create_infowindow(tanda,data);
+
+//
+  // marker_marker.push(tanda);
+  create_infowindow(tanda,data);
+
+  return tanda;
   // console.log(marker_marker,' <== buat tanda',marker_marker[0].getPosition().lat());
 }
-var infoVessel = '<table><tr><td><b>'+arr_data.nama+'</b></td></tr>'+
-  '<tr><td><b>Last Seen : </b>'+Ext.Date.format(new Date(arr_data.waktu * 1000), 'd-m Y H:i:s') +'</td></tr>'+
-  '</table>';
+// var infoVessel = '<table><tr><td><b>'+arr_data.nama+'</b></td></tr>'+
+//   '<tr><td><b>Last Seen : </b>'+Ext.Date.format(new Date(arr_data.waktu * 1000), 'd-m Y H:i:s') +'</td></tr>'+
+//   '</table>';
 
 
 
 function create_infowindow(t,d){
-  var date = new Date(d.waktu*1000);
-  var year = date.getFullYear();
-  var month = date.getMonth() + 1;
-  var day = date.getDate();
-  var hours = date.getHours();
-  var minutes = date.getMinutes();
-  var seconds = date.getSeconds();
+  // console.log(t);
+  // console.log(d);
+  // var date = new Date(d.waktu*1000);
+  // var year = date.getFullYear();
+  // var month = date.getMonth() + 1;
+  // var day = date.getDate();
+  // var hours = date.getHours();
+  // var minutes = date.getMinutes();
+  // var seconds = date.getSeconds();
+  var lati = ((parseFloat(d.lat) < 0) ? Math.abs(parseFloat(d.lat).toFixed(3))+'&deg; S' : parseFloat(d.lat).toFixed(3)+'&deg; N');
+  var long = ((parseFloat(d.lng) < 0) ? Math.abs(parseFloat(d.lng).toFixed(3))+'&deg; W' : parseFloat(d.lng).toFixed(3)+'&deg; E');
 
+
+  // info_ves = '<h3> BIMA-333 </h3>';
   info_ves = '<h3>'+d.nama+'</h3>';
+  info_ves += '<p>Position : '+lati+', ' + long+' </p>';
+  info_ves +='<p>Last Update : '+ Ext.Date.format(new Date(d.waktu*1000),'d-m-Y H:i:s')+'</p>'
   // info_ves += '<p> '+ coords + '</p>';
-  info_ves += '<p> Last Updated : '+ me.pad(day,2) +'/'+me.pad(month,2)+'/'+year +' '+ hours+':'+me.pad(minutes,2)+':'+me.pad(seconds,2) + '</p>';
+  // info_ves += '<p> Last Updated : '+ me.pad(day,2) +'/'+me.pad(month,2)+'/'+year +' '+ hours+':'+me.pad(minutes,2)+':'+me.pad(seconds,2) + '</p>';
 
 
   google.maps.event.addListener(t, 'mouseover', function() {
+    // console.log('lewat');
     info_info.close();
-    info_info.setContent(infoVessel);
+    info_info.setContent(info_ves);
     info_info.open(atlas,t);
   });
 
   google.maps.event.addListener(t, 'mouseout', function() {
+    // console.log('ilang');
     info_info.close();
     // info_info.setContent(info_ves);
     // info_info.open(atlas,t);
@@ -256,57 +276,20 @@ function create_infowindow(t,d){
 }
 
 function setTandaOnMap(map) {
+  // console.log('setTandaOnMap ==> ', marker_marker);
+  // m.setMap(map);
+
+
   for (var i = 0; i < marker_marker.length; i++) {
     // console.log(i, ' buat tanda');
 
     marker_marker[i].setMap(map);
-
-    // console.log('marker_marker[i] '+i+' ==> ',marker_marker[i]);
-    // marker_marker[i].addListener('mouseover',function(){
-    //   console.log('mouse lewat.....');
-    //   // console.log(info_info);
-    //   // infowind.close();
-    //   // info_info.setContent('<b>HALOOOOOOOOOO</b>');
-    //   // info_info.open(atlas,marker_marker[i]);
-		// 	// infowind.setContent(infoVessel);
-		// 	// infowind.open(map,marker_marker[i]);
-    //
-    //
-    //
-    // });
-    // var infowindow22 = new google.maps.InfoWindow({
-    //   // content: contentString
-    //   content: '<p>ABDAFDA</p>'
-    // });
-    //
-    // marker_marker[i].addListener('mouseout',function(){
-    //   console.log('da da ..... ');
-    //   // infowind.close();
-    //     // muncul.open(peta1.getMap(),marker_marker[i]);
-    // });
-    // marker_marker[i].addListener('click',function(){
-    //
-    //   console.log('on klik',map);
-    //   console.log('on klik',marker_marker[i]);
-    //   // muncul.open(peta1.getMap(),marker_marker[i]);
-    //
-    //
-    //
-    //   infowindow22.open(atlas, marker_marker[i]);
-    // });
-
-    // var info = new google.maps.InfoWindow({
-    //   content: '<b>ini kapal BIMA-333</b>',
-    //   // map: map1.getMap()
-    // })
-
-
   }
 
 }
 
 function clearTandaOnMap() {
-  // console.log('clearTandaOnMap');
+  // console.log('clearTandaOnMap to null');
    setTandaOnMap(null);
 }
 
@@ -315,8 +298,9 @@ function showTandaKapal(map) {
 }
 
 function deleteTandaKapal() {
-  // console.log('deleteTandaKapal');
+  // console.log('deleteTandaKapal',marker_marker);
   clearTandaOnMap();
+  // marker_marker ='';
   // console.log('kosongkan marker ==> ',marker_marker);
   marker_marker = [];
 }
