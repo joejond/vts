@@ -76,11 +76,11 @@ var tabel_detail_jam = Ext.create('Ext.grid.Panel', {
     store: store_detail_kapal,
     listeners: {
 			afterrender : function(){
-				console.log("[tabel_detail_jam] afterrender: " + detail_jam_index);		
+				console.log("[tabel_detail_jam] afterrender: " + detail_jam_index);
 				//tgl_sel1 = Ext.Date.format(this.getValue(),'Y-m-d');
 				//tgl_sel2 = (tgl_sel1 != '') ? tgl_sel1 : Ext.Date.format(new Date(), 'd-M-Y' );
 				//var param = {user_id: dt.idu,id:comb_kapal1,tgl:tgl_sel1,tz: getTimeZone()};
-				
+
 				//store_detail_kapal.load({params: param});
 			},
 			show: function(){
@@ -280,12 +280,12 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
     flex: 4,
     listeners: {
 		    	select: function(selModel, record, index, options){
-		        	detail_jam_index=index; 
-		        	 
+		        	detail_jam_index=index;
+
 		   //      	tgl_sel1 = Ext.Date.format(Ext.getCmp('comb_kapal1').getValue(),'Y-m-d');
 					// tgl_sel2 = (tgl_sel1 != '') ? tgl_sel1 : Ext.Date.format(new Date(), 'd-M-Y' );
 					// var param = {user_id: dt.idu,id:comb_kapal1,tgl:tgl_sel1,tz: getTimeZone()};
-				
+
 					// store_detail_jam.load({params: param});
 		        	window_detail_jam.show();
 		    	},
@@ -624,8 +624,11 @@ var window_detail_jam = Ext.create('Ext.window.Window',{
     listeners: {
     	boxready: function(){
     		console.log("Window detail_jam: " + detail_jam_index);
-    	}
-    }, 
+    	},
+			show: function(panel){
+				console.log("Window onShow : "+detail_jam_index);
+			}
+    },
     layout : {
         type : 'fit',
         align : 'stretch'
@@ -652,6 +655,7 @@ var window_detail_jam = Ext.create('Ext.window.Window',{
         text : 'Close',
         handler : function(){
             this.up('.window').hide();
+            // this.up('.window').destroy();
         }
     }]
 
