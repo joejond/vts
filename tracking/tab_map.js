@@ -42,6 +42,7 @@ var TaskVessel;
 var infowindow;
 data_obj={};
 arr_dat=[];
+var panel_ship;
 var peta = {
     xtype: 'gmappanel',
     //margin: '5 5 5 5',
@@ -179,12 +180,13 @@ var taskUpdV = {
         // console.log(aa);
         deleteTandaKapal();
         proses_kapal(arr_dat);
+        // deleteTandaKapal();
         /*tampilkan kapal*/
         // showTandaKapal(atlas);
         setTandaOnMap(atlas);
         // aa++;
       },
-      interval: 1000 * 1
+      interval: 1000 * 3
   };
 
 
@@ -238,18 +240,23 @@ function addTandaKapal(data)
 
 
 function create_infowindow(t,d){
-  // console.log(t);
-  // console.log(d);
-  // var date = new Date(d.waktu*1000);
-  // var year = date.getFullYear();
-  // var month = date.getMonth() + 1;
-  // var day = date.getDate();
-  // var hours = date.getHours();
-  // var minutes = date.getMinutes();
-  // var seconds = date.getSeconds();
+
   var lati = ((parseFloat(d.lat) < 0) ? Math.abs(parseFloat(d.lat).toFixed(3))+'&deg; S' : parseFloat(d.lat).toFixed(3)+'&deg; N');
   var long = ((parseFloat(d.lng) < 0) ? Math.abs(parseFloat(d.lng).toFixed(3))+'&deg; W' : parseFloat(d.lng).toFixed(3)+'&deg; E');
 
+  // var detailVessel = '<html><table>'+
+  //   '<tr><td rowspan = "5"><img src="'+d.img+'"></td><td><b>Vessel</b></td><td>:</td><td align="right"><b>'+d.nama+'</b></td> </tr>'+
+  //   // '<tr><td><b>IMO</b></td><td>:</td><td align="right">'+d.imo+'</td></tr>'+
+  //   '<tr><td><b>Latitude</b></td><td>:</td><td align="right">'+lati +'</td></tr>'+
+  //   '<tr><td><b>Longitude</b></td><td>:</td><td align="right">'+long+'</td></tr>'+
+  //   '<tr><td><b>Speed</b></td><td>:</td><td align="right">'+d.speed+' Kts</td></tr>'+
+  //   '<tr><td><b>Heading</b></td><td>:</td><td align="right">'+d.heading+'&deg;</td></tr>'+
+  //   // '<tr><td colspan = "2"><button id="track"; ">Tracking </button>'+ ((role.fms) ? '<button id="fuel">Detail </button>' : '' )   +'</td></tr>'+
+  //   '<tr><td colspan = "2">'+
+  //     // '<button id="track" style="visibility:hidden;" > Tracking </button>'+
+  //     '<button id="trackoption" >Tracking</button>'+
+  //     // '<button id="fuel" style="visibility:'+((role.fms) ? 'visible' : 'hidden')+';">Detail </button></td></tr>'+
+  //   '</table></html>';
 
   // info_ves = '<h3> BIMA-333 </h3>';
   info_ves = '<h3>'+d.nama+'</h3>';
@@ -273,18 +280,24 @@ function create_infowindow(t,d){
     // info_info.open(atlas,t);
   });
 
+  google.maps.event.addListener(t, 'click', function() {
+    // console.log('click ilang');
+    info_info.close();
+    // info_info.setContent(detailVessel);
+    // info_info.open(atlas,t);
+
+    panel_ship=Ext.getCmp('ship_list_panel_id');
+    // console.log(panel_ship);
+    // ship_list.setCollapsed(false);
+    panel_ship.expand();
+  });
+
 }
 
 function setTandaOnMap(map) {
-  // console.log('setTandaOnMap ==> ', marker_marker);
-  // m.setMap(map);
-
-
-  for (var i = 0; i < marker_marker.length; i++) {
-    // console.log(i, ' buat tanda');
-
-    marker_marker[i].setMap(map);
-  }
+    for (var i = 0; i < marker_marker.length; i++) {
+        marker_marker[i].setMap(map);
+    }
 
 }
 
@@ -314,7 +327,8 @@ function resetCenterVessel(map){
             bounds.extend( marker_marker[i].getPosition() );
         }
     }
-
+    if(panel_ship != undefined)
+      panel_ship.collapse();
     map.fitBounds(bounds);
     map.setZoom(8);
 
@@ -678,6 +692,7 @@ var tabel_daftar_kapal = Ext.create('Ext.grid.Panel', {
 
 var ship_list = {
     title: "Ship List",
+    id:'ship_list_panel_id',
     split: true,
     region: 'east',
     width: 200,
