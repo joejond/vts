@@ -281,14 +281,11 @@ function create_infowindow(t,d){
   });
 
   google.maps.event.addListener(t, 'click', function() {
-    // console.log('click ilang');
     info_info.close();
     // info_info.setContent(detailVessel);
     // info_info.open(atlas,t);
-
     panel_ship=Ext.getCmp('ship_list_panel_id');
-    // console.log(panel_ship);
-    // ship_list.setCollapsed(false);
+    panel_ship.isidata = d;
     panel_ship.expand();
   });
 
@@ -671,6 +668,62 @@ var selmod = Ext.create('Ext.selection.CheckboxModel',{
     }
 });
 
+var panel_form_tracking = Ext.create('Ext.form.Panel', {
+    // title: 'Tracking',
+    bodyPadding: 5,
+    layout: 'anchor',
+    defaults: {
+        anchor: '100%'
+    },
+
+    // The fields
+    defaultType: 'textfield',
+    items: [{
+					fieldLabel: 'Date Tracking',
+					xtype:'datefield',
+					name: 'value',
+          format: 'd-M-Y',
+          value: new Date(),
+          maxValue: new Date(),
+					allowBlank: false
+    }],
+
+    // Reset and Submit buttons
+    buttons: [{
+
+        text: 'Submit',
+        formBind: true, //only enabled once the form is valid
+        disabled: true,
+        handler: function() {
+            var form = this.up('form').getForm();
+            if (form.isValid()) {
+              console.log('dipencet');
+
+              console.log(Ext.getCmp('ship_list_panel_id').isidata);
+							// var dt = form.getValues();
+							// dt.titik_ukur_id = 11033;
+							// console.log(dt);
+							// Ext.Ajax.request({
+              //
+							//     url: getAPI()+'/pelindo/custom_input',
+							// 		method:'POST',
+              //
+							//     params: dt,
+							//     success: function(response){
+							//         var text = response.responseText;
+							//         // console.log(text);
+							// 				Ext.Msg.alert('Fuel-Bunkering', 'Sukses.</br>('+dt.date+' '+dt.time+':00) = '+dt.value+' Liters');
+							//     }
+							// });
+							form.reset();
+							// store_fuel_bunker.reload();
+
+            }
+        }
+    }],
+    // renderTo: Ext.getBody()
+});
+
 var tabel_daftar_kapal = Ext.create('Ext.grid.Panel', {
     store : store_daftar_kapal,
     flex: 4,
@@ -695,7 +748,7 @@ var ship_list = {
     id:'ship_list_panel_id',
     split: true,
     region: 'east',
-    width: 200,
+    width: 250,
     collapsible: true,
     collapsed: true,
     layout: {
@@ -705,65 +758,70 @@ var ship_list = {
     },
     border: false,
     items:[
-    {
-        height: 140,
-        layout: 'form',
-        id: 'simpleForm',
-        padding: 10,
-        frame: true,
-        items: [
-        {
-            xtype: 'checkboxfield',
-            name: 'checkbox1',
-            boxLabel: 'show track path',
-            listeners:{
-                change: function(checkbox, newValue, oldValue, eOpts) {
-                    if (newValue) {
-                        Ext.getCmp('start_path').enable();
-                        Ext.getCmp('stop_path').enable();
-                        Ext.getCmp('button_update').enable();
-                        status_path = 1;
-                        addpath();
-                    } else {
-                        Ext.getCmp('start_path').disable();
-                        Ext.getCmp('stop_path').disable();
-                        Ext.getCmp('button_update').disable();
-                        status_path = 0;
-                        removepath();
-                    }
-                }
+    // {
+    //     height: 140,
+    //     layout: 'form',
+    //     id: 'simpleForm',
+    //     padding: 10,
+    //     frame: true,
+    //     items: [
+        // {
 
-            }
-        },{
-            fieldLabel: 'Start Date',
-            name: 'date',
-            id: 'start_path',
-            labelWidth: 70,
-            xtype: 'datefield',
-            value: new Date(),
-            format: 'd-M-Y',
-            disabled: true
-        },{
-            fieldLabel: 'Stop Date',
-            name: 'date',
-            id: 'stop_path',
-            labelWidth: 70,
-            xtype: 'datefield',
-            value: new Date(),
-            format: 'd-M-Y',
-            disabled: true
-        },
-        {
-            xtype: 'button',
-            text : 'Show Track',
-            id: 'button_update',
-            disabled: true,
-            handler : function() {
-                removepath();
-                addpath();
-            }
-        }]
-    },
+          panel_form_tracking,
+        //
+        //     xtype: 'checkboxfield',
+        //     name: 'checkbox1',
+        //     boxLabel: 'show track path',
+        //     listeners:{
+        //         change: function(checkbox, newValue, oldValue, eOpts) {
+        //             if (newValue) {
+        //                 Ext.getCmp('start_path').enable();
+        //                 Ext.getCmp('stop_path').enable();
+        //                 Ext.getCmp('button_update').enable();
+        //                 status_path = 1;
+        //                 addpath();
+        //             } else {
+        //                 Ext.getCmp('start_path').disable();
+        //                 Ext.getCmp('stop_path').disable();
+        //                 Ext.getCmp('button_update').disable();
+        //                 status_path = 0;
+        //                 removepath();
+        //             }
+        //         }
+        //
+        //     }
+        // },{
+        //     fieldLabel: 'Start Date',
+        //     name: 'date',
+        //     id: 'start_path',
+        //     labelWidth: 70,
+        //     xtype: 'datefield',
+        //     value: new Date(),
+        //     maxValue: new Date(),
+        //     format: 'd-M-Y',
+        //     // disabled: true
+        // },{
+        // //     fieldLabel: 'Stop Date',
+        // //     name: 'date',
+        // //     id: 'stop_path',
+        // //     labelWidth: 70,
+        // //     xtype: 'datefield',
+        // //     value: new Date(),
+        // //     format: 'd-M-Y',
+        // //     disabled: true
+        // // },
+        // // {
+        //     xtype: 'button',
+        //     text : 'Show Track',
+        //     id: 'button_update',
+        //     disabled: true,
+        //     handler : function() {
+        //         removepath();
+        //         addpath();
+        //     }
+        // }
+    //   ]
+    // },
     tabel_daftar_kapal
     ]
 }
