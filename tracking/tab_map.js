@@ -40,6 +40,8 @@ var hsl_soket;
 var lokasi;
 var TaskVessel;
 var infowindow;
+var garis;
+
 data_obj={};
 arr_dat=[];
 var panel_ship;
@@ -61,6 +63,7 @@ var peta = {
         console.log('onmapready');
         atlas = gmap;
         info_info = new google.maps.InfoWindow();
+        garis = new google.maps.Polyline();
 
         var ws = Ext.create ('Ext.ux.WebSocket', {
           url:   getWS(),
@@ -99,8 +102,13 @@ var peta = {
                 var res = Ext.JSON.decode(data.responseText);
                 // console.log(res);
                 // console.log(res[0].children[1].name);
+                /*
+                * Sementara .........
+                *
+                */
                 var namanya = res[0].children[1].name;
                 data_obj.nama = namanya;
+                data_obj.id = 8;
 
                 // Crawler(8,res).then(function(data){
                 //     console.log(data);
@@ -123,13 +131,6 @@ var peta = {
                 // process server response here
             }
         });
-
-        // Ext.Ajax.request
-        // console.log('keliatan mapnya brooo');
-        // ws;
-        // console.log('ciba peta',peta1.getMap());
-
-
       }
     }
 };
@@ -233,11 +234,6 @@ function addTandaKapal(data)
   return tanda;
   // console.log(marker_marker,' <== buat tanda',marker_marker[0].getPosition().lat());
 }
-// var infoVessel = '<table><tr><td><b>'+arr_data.nama+'</b></td></tr>'+
-//   '<tr><td><b>Last Seen : </b>'+Ext.Date.format(new Date(arr_data.waktu * 1000), 'd-m Y H:i:s') +'</td></tr>'+
-//   '</table>';
-
-
 
 function create_infowindow(t,d){
 
@@ -315,6 +311,69 @@ function deleteTandaKapal() {
   marker_marker = [];
 }
 
+/* ===== buat Tracking =====*/
+var rute;
+function create_rute(d)
+{
+  rute = [];
+  d.forEach(function(v){
+    rute.push({lat:v['GPS-Lattitude'],lng:v['GPS-Longitude']});
+  });
+  // console.log(rute);
+  return rute;
+}
+
+function create_tracking(d_rute,d_vessel){
+    console.log(d_rute);
+    console.log(d_vessel);
+
+
+
+  // var me = this;
+  // var rute =[];
+  // // me.marker_track = [];
+  // Ext.each(d_rute, function(value,index) {
+  //   console.log(value);
+  //   // me.buatMarkerTrack(value.getData());
+  //   // rute.push(value.getData());
+  // });
+  // console.log(trc);
+  // me.getMap;
+  var lineSymbol = {
+    path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+    scale : 2.5
+    };
+
+  garis.setOptions({
+    path: d_rute,
+    map : atlas,
+    icons: [{
+      icon: lineSymbol,
+      offset: '10%',
+      repeat : '20%'
+    }],
+    strokeColor: '#000FFF',
+    // strokeColor: d_vessel.color,
+    strokeOpacity: 0.8,
+    strokeWeight: 3
+  });
+
+  // me.buatTrackingPoly(me.getMap);
+
+  // me.setMarkerRute(me.getMap);
+
+  // me.buatMarkerTrack();
+
+  // google.maps.event.addListener(me.garis,'mouseover',function(){
+  // 	console.log('maouse lewat polyline');
+  // 	me.infowin.close();
+  // 	me.infowin.setContent("halo bro");
+  // 	me.infowin.open(me.getMap);
+  // });
+}
+
+/* ===== end of Tracking ===== */
+
 function resetCenterVessel(map){
   // console.log(this.markers);
   var bounds = new google.maps.LatLngBounds();
@@ -324,8 +383,7 @@ function resetCenterVessel(map){
             bounds.extend( marker_marker[i].getPosition() );
         }
     }
-    if(panel_ship != undefined)
-      panel_ship.collapse();
+    if(panel_ship != undefined) panel_ship.collapse();
     map.fitBounds(bounds);
     map.setZoom(8);
 
@@ -675,13 +733,10 @@ var panel_form_tracking = Ext.create('Ext.form.Panel', {
     defaults: {
         anchor: '100%'
     },
-
-    // The fields
-    defaultType: 'textfield',
     items: [{
 					fieldLabel: 'Date Tracking',
 					xtype:'datefield',
-					name: 'start',
+					name: 'end',
           format: 'd-M-Y',
           value: new Date(),
           maxValue: new Date(),
@@ -699,25 +754,41 @@ var panel_form_tracking = Ext.create('Ext.form.Panel', {
             var form = this.up('form').getForm();
             if (form.isValid()) {
               console.log('dipencet');
-
+              // console.log(this);
               console.log(Ext.getCmp('ship_list_panel_id').isidata);
+              var vessel = Ext.getCmp('ship_list_panel_id').isidata;
 							var dt = form.getValues();
-              dt.end = dt.start - 86400;
-              dt.density = 'h';
+              // dt.id = vessel.id;
+              dt.start = dt.end - 86400;
+              dt.density = 'm';
 							// dt.titik_ukur_id = 11033;
 							console.log(dt);
-							// Ext.Ajax.request({
-              //
-							//     url: getAPI()+'/pelindo/custom_input',
-							// 		method:'POST',
-              //
-							//     params: dt,
-							//     success: function(response){
-							//         var text = response.responseText;
-							//         // console.log(text);
-							// 				Ext.Msg.alert('Fuel-Bunkering', 'Sukses.</br>('+dt.date+' '+dt.time+':00) = '+dt.value+' Liters');
-							//     }
-							// });
+							Ext.Ajax.request({
+                  url   : getAPI()+'/map/track-marine',
+									method:'get',
+							    params: dt,
+							    success: function(response){
+							        var res = JSON.parse(response.responseText);
+							        // console.log(res);
+                      // var dat_rute=[];
+
+                      // res.forEach(function(v){
+                      //     dat_rute.push(
+                      //       {lat:v['GPS-Lattitude'],lng:v['GPS-Longitude'],head:v['GPS-Heading'],speed:v['GPS-Velocity'],waktu:v.epochtime,vessel:v.nama,id_ves:v.id}
+                      //     )
+                      // });
+                      // console.log(res);
+                      // console.log(create_rute(res));
+                      var d_rute = create_rute(res);
+                      create_tracking(d_rute,res);
+											// Ext.Msg.alert('Fuel-Bunkering', 'Sukses.</br>('+dt.date+' '+dt.time+':00) = '+dt.value+' Liters');
+							    },
+                  callback: function(a,b,c){
+                    console.log(a);
+                    console.log(b);
+                    console.log(c);
+                  }
+							});
 							form.reset();
 							// store_fuel_bunker.reload();
 
@@ -726,6 +797,7 @@ var panel_form_tracking = Ext.create('Ext.form.Panel', {
     }],
     // renderTo: Ext.getBody()
 });
+
 
 var tabel_daftar_kapal = Ext.create('Ext.grid.Panel', {
     store : store_daftar_kapal,
