@@ -681,10 +681,11 @@ var panel_form_tracking = Ext.create('Ext.form.Panel', {
     items: [{
 					fieldLabel: 'Date Tracking',
 					xtype:'datefield',
-					name: 'value',
+					name: 'start',
           format: 'd-M-Y',
           value: new Date(),
           maxValue: new Date(),
+          submitFormat:'U',
 					allowBlank: false
     }],
 
@@ -700,9 +701,11 @@ var panel_form_tracking = Ext.create('Ext.form.Panel', {
               console.log('dipencet');
 
               console.log(Ext.getCmp('ship_list_panel_id').isidata);
-							// var dt = form.getValues();
+							var dt = form.getValues();
+              dt.end = dt.start - 86400;
+              dt.density = 'h';
 							// dt.titik_ukur_id = 11033;
-							// console.log(dt);
+							console.log(dt);
 							// Ext.Ajax.request({
               //
 							//     url: getAPI()+'/pelindo/custom_input',

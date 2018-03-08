@@ -82,29 +82,29 @@ Ext.define('MyGrid', {
     downloadExcelXml: function(includeHidden, title){
     	console.log("downloadExcelXml");
     	 if (!title) title = this.title;
- 
+
         var vExportContent = this.getExcelXml(includeHidden, title);
         var location = 'data:application/vnd.ms-excel;base64,' + Base64.encode(vExportContent);
- 
-        //  dynamically create and anchor tag to force download with suggested filename 
+
+        //  dynamically create and anchor tag to force download with suggested filename
         //  note: download attribute is Google Chrome specific
-        
- 
+
+
         if (!Ext.isChrome) {
             var gridEl = this.getEl();
- 
+
             var el = Ext.DomHelper.append(gridEl, {
                 tag: "a",
                 download: title + "-" + Ext.Date.format(new Date(), 'Y-m-d Hi') + '.xls',
                 href: location
             });
- 
+
             el.click();
- 
+
             Ext.fly(el).destroy();
- 
+
         } else {
- 
+
             var form = this.down('form#uploadForm');
             if (form) {
                 form.destroy();
@@ -121,29 +121,29 @@ Ext.define('MyGrid', {
                     value: vExportContent
                 }]
             });
- 
+
             form.getForm().submit();
- 
+
         }
     },
-    
- 
+
+
         // Welcome to XML Hell
         // See: http://msdn.microsoft.com/en-us/library/office/aa140066(v=office.10).aspx
         // for more details
- 
-    
+
+
     getExcelXml: function(includeHidden, title) {
- 
+
         var theTitle = title || this.title;
- 
+
         var worksheet = this.createWorksheet(includeHidden, theTitle);
         var totalWidth = 0;
         var cm=this.columnManager.getColumns();
         totalWidth=cm.length;
         console.log("getExcelXml, totalWidth: " +  totalWidth);
 
- 
+
         return ''.concat(
             '<?xml version="1.0"?>',
             '<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet" xmlns:html="http://www.w3.org/TR/REC-html40">',
@@ -155,9 +155,9 @@ Ext.define('MyGrid', {
             '<ProtectStructure>False</ProtectStructure>',
             '<ProtectWindows>False</ProtectWindows>',
             '</ExcelWorkbook>',
- 
+
             '<Styles>',
- 
+
             '<Style ss:ID="Default" ss:Name="Normal">',
             '<Alignment ss:Vertical="Bottom"/>',
             '<Borders/>',
@@ -166,121 +166,121 @@ Ext.define('MyGrid', {
             '<NumberFormat/>',
             '<Protection/>',
             '</Style>',
- 
+
             '<Style ss:ID="title">',
             '<Borders />',
             '<Font ss:Bold="1" ss:Size="18" />',
             '<Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1" />',
             '<NumberFormat ss:Format="@" />',
             '</Style>',
- 
+
             '<Style ss:ID="headercell">',
             '<Font ss:Bold="1" ss:Size="10" />',
             '<Alignment ss:Horizontal="Center" ss:WrapText="1" />',
             '<Interior ss:Color="#A3C9F1" ss:Pattern="Solid" />',
             '</Style>',
- 
- 
+
+
             '<Style ss:ID="even">',
             '<Interior ss:Color="#CCFFFF" ss:Pattern="Solid" />',
             '</Style>',
- 
- 
+
+
             '<Style ss:ID="evendate" ss:Parent="even">',
             '<NumberFormat ss:Format="yyyy-mm-dd" />',
             '</Style>',
- 
- 
+
+
             '<Style ss:ID="evenint" ss:Parent="even">',
             '<Numberformat ss:Format="0" />',
             '</Style>',
- 
+
             '<Style ss:ID="evenfloat" ss:Parent="even">',
             '<Numberformat ss:Format="0.00" />',
             '</Style>',
- 
+
             '<Style ss:ID="odd">',
             '<Interior ss:Color="#CCCCFF" ss:Pattern="Solid" />',
             '</Style>',
- 
+
             '<Style ss:ID="groupSeparator">',
             '<Interior ss:Color="#D3D3D3" ss:Pattern="Solid" />',
             '</Style>',
- 
+
             '<Style ss:ID="odddate" ss:Parent="odd">',
             '<NumberFormat ss:Format="yyyy-mm-dd" />',
             '</Style>',
- 
+
             '<Style ss:ID="oddint" ss:Parent="odd">',
             '<NumberFormat Format="0" />',
             '</Style>',
- 
+
             '<Style ss:ID="oddfloat" ss:Parent="odd">',
             '<NumberFormat Format="0.00" />',
             '</Style>',
- 
- 
+
+
             '</Styles>',
             worksheet.xml,
             '</Workbook>'
         );
     },
         /*
- 
+
         Support function to return field info from store based on fieldname
- 
+
     */
- 
+
     getModelField: function(fieldName) {
  		console.log("getModelField: ");
         var fields = this.store.model.getFields();
-        
+
         for (var i = 0; i < fields.length; i++) {
-        	
+
             if (fields[i].name === fieldName) {
             	console.log("fields ["+i+"] name: "+ fields[i].name +  ", type: : " + fields[i].type );
                 return fields[i];
             }
         }
     },
- 
+
     /*
-         
+
         Convert store into Excel Worksheet
- 
+
     */
     generateEmptyGroupRow: function(dataIndex, value, cellTypes, includeHidden) {
- 		
+
  		console.log("generateEmptyGroupRow ");
         //var cm = this.columnManager.columns;
         var cm = this.columnManager.getColumns();
        // var colCount = cm.length;
-        var colCount; 
+        var colCount;
         colCount=cm.length;
         // if(this.columnManager.columns!=null){
         // 	colCount=this.columnManager.columns.length;
         // }
         // else{
-        // 	colCount=17;	
+        // 	colCount=17;
         // }
 
         var rowTpl = '<Row ss:AutoFitHeight="0"><Cell ss:StyleID="groupSeparator" ss:MergeAcross="{0}"><Data ss:Type="String"><html:b>{1}</html:b></Data></Cell></Row>';
         var visibleCols = 0;
- 
+
         // rowXml += '<Cell ss:StyleID="groupSeparator">'
- 
+
         for (var j = 0; j < colCount; j++) {
             if (cm[j].xtype != 'actioncolumn' && (cm[j].dataIndex != '') && (includeHidden || !cm[j].hidden)) {
                 // rowXml += '<Cell ss:StyleID="groupSeparator"/>';
                 visibleCols++;
             }
         }
- 
+
         // rowXml += "</Row>";
- 
+
         return Ext.String.format(rowTpl, visibleCols - 1, value);
     },
- 
+
      createWorksheet: function(includeHidden, theTitle) {
      	console.log("createWorksheet");
         // Calculate cell data types and extra class names which affect formatting
@@ -288,7 +288,7 @@ Ext.define('MyGrid', {
         var cellTypeClass = [];
         //var cm = this.columnManager.columns;
         var cm = this.columnManager.getColumns();
- 
+
         var totalWidthInPixels = 0;
         var colXml = '';
         var headerXml = '';
@@ -302,7 +302,7 @@ Ext.define('MyGrid', {
             if (cm[i].xtype != 'actioncolumn' && (cm[i].dataIndex != '') && (includeHidden || !cm[i].hidden)) {
                 var w = cm[i].getEl().getWidth();
                 totalWidthInPixels += w;
- 
+
                 if (cm[i].text === "") {
                     cellType.push("None");
                     cellTypeClass.push("");
@@ -312,14 +312,14 @@ Ext.define('MyGrid', {
                     headerXml += '<Cell ss:StyleID="headercell">' +
                         '<Data ss:Type="String">' + cm[i].text + '</Data>' +
                         '<NamedCell ss:Name="Print_Titles"></NamedCell></Cell>';
- 
- 
+
+
                     var fld = this.getModelField(cm[i].dataIndex);
                     //console.log("fld.type: " + fld.name);
                     if(fld=="date"){
                     	//console.log("Tanggal dicetak: " + fld.name);
                     	cellType.push("DateTime");
-                    	cellTypeClass.push("date"); 
+                    	cellTypeClass.push("date");
                     }
                     else{
                     	cellType.push("String");
@@ -334,9 +334,9 @@ Ext.define('MyGrid', {
                     //         cellType.push("Number");
                     //         cellTypeClass.push("float");
                     //         break;
- 
+
                     //     case "bool":
- 
+
                     //     case "boolean":
                     //         cellType.push("String");
                     //         cellTypeClass.push("");
@@ -354,28 +354,28 @@ Ext.define('MyGrid', {
             }
         }
         var visibleColumnCount = cellType.length - visibleColumnCountReduction;
- 
+
         var result = {
             height: 9000,
             width: Math.floor(totalWidthInPixels * 30) + 50
         };
- 
+
         // Generate worksheet header details.
- 
+
         // determine number of rows
         var numGridRows = this.store.getCount() + 2;
         if (!Ext.isEmpty(this.store.groupField) || this.store.groupers.items.length > 0) {
             numGridRows = numGridRows + this.store.getGroups().length;
         }
- 
+
         // create header for worksheet
         var t = ''.concat(
             '<Worksheet ss:Name="' + theTitle + '">',
- 
+
             '<Names>',
             '<NamedRange ss:Name="Print_Titles" ss:RefersTo="=\'' + theTitle + '\'!R1:R2">',
             '</NamedRange></Names>',
- 
+
             '<Table ss:ExpandedColumnCount="' + (visibleColumnCount + 2),
             '" ss:ExpandedRowCount="' + numGridRows + '" x:FullColumns="1" x:FullRows="1" ss:DefaultColumnWidth="65" ss:DefaultRowHeight="15">',
             colXml,
@@ -389,7 +389,7 @@ Ext.define('MyGrid', {
             headerXml +
             '</Row>'
         );
- 
+
         // Generate the data rows from the data in the Store
         var groupVal = "";
         var groupField = "";
@@ -397,7 +397,7 @@ Ext.define('MyGrid', {
             groupField = this.store.groupers.keys[0];
         }
         for (var i = 0, it = this.store.data.items, l = it.length; i < l; i++) {
- 
+
             if (!Ext.isEmpty(groupField)) {
                 if (groupVal != this.store.getAt(i).get(groupField)) {
                     groupVal = this.store.getAt(i).get(groupField);
@@ -425,7 +425,7 @@ Ext.define('MyGrid', {
             }
             t += '</Row>';
         }
- 
+
         result.xml = t.concat(
             '</Table>',
             '<WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">',
@@ -629,12 +629,12 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
 				},{
 				header: "Daily Consumption",
 				width: 100,
-				dataIndex: 'ME1 daily consumption',
+				dataIndex: 'ME1 daily consumtion',
 				renderer: function(v){return parseFloat(v).toFixed(2);}
 				},{
 				header: "Hourly Rate",
 				width: 100,
-				dataIndex: 'ME1 consumption rate',
+				dataIndex: 'ME1 consumtion rate',
 				renderer: function(v){return parseFloat(v).toFixed(2);}
 				}]
 			},{
