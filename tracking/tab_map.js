@@ -139,6 +139,7 @@ function onClickPeta(map){
   atlas.addListener('click',function(){
     // console.log('terklik sodara');
     resetCenterVessel(map);
+    show_tracking(null);
   });
 }
 
@@ -210,19 +211,18 @@ function addTandaKapal(data)
   // console.log('addTandaKapal == > ',data);
 
   var tanda = new google.maps.Marker({
-    position : new google.maps.LatLng(data.lat,data.lng),
+    position : new google.maps.LatLng(parseFloat(data.lat).toFixed(3),parseFloat(data.lng).toFixed(3)),
     // map : peta1.getMap(),
     //*
     icon : {
-        path: 'm 7.8794646,25.370535 0,2 -1,0 0,6 6.0312504,0.09375 0,-6 -1,0 0,-2 -4.0312504,-0.09375 z M 9.910715,7.4514688 c -1.0000004,0 -1.1709724,0.331348 -2.0000004,2 -0.829028,1.6686512 -2.96875,8.0128162 -2.96875,8.0128162 l -0.03125,0 0,0.0625 0,19.9375 10.0000004,0 0,-19.9375 0,-0.0625 -0.03125,0 c 0,0 -2.139722,-6.344165 -2.96875,-8.0128162 -0.829028,-1.668652 -1,-2 -2,-2 z',
-        //path: 'm -2.02025,5.2254321 0,1.9999997 -1,0 0,6.0000012 6.0312504,0.09375 0,-6.0000012 -1,0 0,-1.9999997 -4.0312504,-0.09375 z M 0.01100037,-12.693634 c -1.00000038,0 -1.17097237,0.331348 -2.00000037,2 -0.829028,1.6686508 -2.96875,8.0128161 -2.96875,8.0128161 l -0.03125,0 0,0.0625 0,19.9375009 10.0000004,0 0,-19.9375009 0,-0.0625 -0.03125,0 c 0,0 -2.139722,-6.3441653 -2.96875,-8.0128161 -0.829028,-1.668652 -1,-2 -2.00000003,-2 z',
+        path: 'm -2.02025,5.2254321 0,1.9999997 -1,0 0,6.0000012 6.0312504,0.09375 0,-6.0000012 -1,0 0,-1.9999997 -4.0312504,-0.09375 z M 0.01100037,-12.693634 c -1.00000038,0 -1.17097237,0.331348 -2.00000037,2 -0.829028,1.6686508 -2.96875,8.0128161 -2.96875,8.0128161 l -0.03125,0 0,0.0625 0,19.9375009 10.0000004,0 0,-19.9375009 0,-0.0625 -0.03125,0 c 0,0 -2.139722,-6.3441653 -2.96875,-8.0128161 -0.829028,-1.668652 -1,-2 -2.00000003,-2 z',
         // path: pth,
         scale: 1,
         rotation : parseFloat(data.head), //+parseFloat(cor),		// koreksi
         strokeColor: 'black',
         strokeWeight: 1,
         fillColor: '#FF0000',
-        fillOpacity: 0.8
+        fillOpacity: 0.7
       }
     //*/
     });
@@ -324,8 +324,8 @@ function create_rute(d)
 }
 
 function create_tracking(d_rute,d_vessel){
-    console.log(d_rute);
-    console.log(d_vessel);
+    // console.log(d_rute);
+    // console.log(d_vessel);
 
 
 
@@ -346,7 +346,7 @@ function create_tracking(d_rute,d_vessel){
 
   garis.setOptions({
     path: d_rute,
-    map : atlas,
+    // map : atlas,
     icons: [{
       icon: lineSymbol,
       offset: '10%',
@@ -370,6 +370,10 @@ function create_tracking(d_rute,d_vessel){
   // 	me.infowin.setContent("halo bro");
   // 	me.infowin.open(me.getMap);
   // });
+}
+
+function show_tracking(map){
+  garis.setMap(map);
 }
 
 /* ===== end of Tracking ===== */
@@ -740,7 +744,7 @@ var panel_form_tracking = Ext.create('Ext.form.Panel', {
           format: 'd-M-Y',
           value: new Date(),
           maxValue: new Date(),
-          submitFormat:'U',
+          submitFormat:'timestamp',
 					allowBlank: false
     }],
 
@@ -753,16 +757,27 @@ var panel_form_tracking = Ext.create('Ext.form.Panel', {
         handler: function() {
             var form = this.up('form').getForm();
             if (form.isValid()) {
-              console.log('dipencet');
+              var tg = new Date();
+              console.log(tg.getTime());
+              // console.log('dipencet');
               // console.log(this);
               console.log(Ext.getCmp('ship_list_panel_id').isidata);
               var vessel = Ext.getCmp('ship_list_panel_id').isidata;
 							var dt = form.getValues();
               // dt.id = vessel.id;
+              console.log(dt.end);
+              var tt = new Date(dt.end);
+              console.log('end ==> '+ tt.getTime());
+              // dt.end = parseInt(dt.end) + (7*3600);
+              dt.end = parseInt(tg.getTime()/1000);
               dt.start = dt.end - 86400;
-              dt.density = 'm';
+              dt.density = 's';
 							// dt.titik_ukur_id = 11033;
 							console.log(dt);
+
+              // create_tracking(create_rute1(1),dt);
+
+
 							Ext.Ajax.request({
                   url   : getAPI()+'/map/track-marine',
 									method:'get',
@@ -779,14 +794,19 @@ var panel_form_tracking = Ext.create('Ext.form.Panel', {
                       // });
                       // console.log(res);
                       // console.log(create_rute(res));
+
+
                       var d_rute = create_rute(res);
                       create_tracking(d_rute,res);
-											// Ext.Msg.alert('Fuel-Bunkering', 'Sukses.</br>('+dt.date+' '+dt.time+':00) = '+dt.value+' Liters');
+                      show_tracking(atlas);
+
+
+                      // Ext.Msg.alert('Fuel-Bunkering', 'Sukses.</br>('+dt.date+' '+dt.time+':00) = '+dt.value+' Liters');
 							    },
                   callback: function(a,b,c){
-                    console.log(a);
-                    console.log(b);
-                    console.log(c);
+                    // console.log(a);
+                    // console.log(b);
+                    // console.log(c);
                   }
 							});
 							form.reset();
