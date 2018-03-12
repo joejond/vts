@@ -40,7 +40,8 @@ var hsl_soket;
 var lokasi;
 var TaskVessel;
 var infowindow;
-var garis;
+var garis=[];
+var bounds;
 
 data_obj={};
 arr_dat=[];
@@ -63,7 +64,8 @@ var peta = {
         console.log('onmapready');
         atlas = gmap;
         info_info = new google.maps.InfoWindow();
-        garis = new google.maps.Polyline();
+        // garis = new google.maps.Polyline();
+        bounds = new google.maps.LatLngBounds();
 
         var ws = Ext.create ('Ext.ux.WebSocket', {
           url:   getWS(),
@@ -227,7 +229,7 @@ function addTandaKapal(data)
     //*/
     });
 
-//
+
   // marker_marker.push(tanda);
   create_infowindow(tanda,data);
 
@@ -326,6 +328,24 @@ function create_rute(d)
 function create_tracking(d_rute,d_vessel){
     // console.log(d_rute);
     // console.log(d_vessel);
+  var warna = ['#0000ff','#660099','#ff0000'];
+  var jml_rute = d_rute.length;
+  var persen_50 = (Math.floor(jml_rute * 0.5));
+  var persen_30 = (Math.floor(jml_rute * 0.3));
+  // var sisa = jml_rute - last_30;
+
+  var rute1 =[],rute2=[],rute3=[];
+
+  for(var i=0; i< persen_50; i++){
+    rute1.push(d_rute[i]);
+  }
+  for(var i=persen_50; i<(persen_50+persen_30); i++){
+    rute2.push(d_rute[i]);
+  }
+  for(var i=(persen_50+persen_30); i<jml_rute; i++){
+    rute3.push(d_rute[i]);
+  }
+
 
 
 
@@ -340,23 +360,48 @@ function create_tracking(d_rute,d_vessel){
   // console.log(trc);
   // me.getMap;
   var lineSymbol = {
-    path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+    path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
     scale : 2.5
     };
 
-  garis.setOptions({
-    path: d_rute,
+  garis[0] = new google.maps.Polyline({
+    path:rute1,
     // map : atlas,
     icons: [{
       icon: lineSymbol,
       offset: '10%',
-      repeat : '20%'
+      repeat : '400px'
     }],
-    strokeColor: '#000FFF',
-    // strokeColor: d_vessel.color,
+    strokeColor:warna[0],
+    strokeOpacity: 0.4,
+    strokeWeight: 3
+  });
+
+  garis[1] = new google.maps.Polyline({
+    path:rute2,
+    // map : atlas,
+    icons: [{
+      icon: lineSymbol,
+      offset: '10%',
+      repeat : '250px'
+    }],
+    strokeColor:warna[1],
+    strokeOpacity: 0.6,
+    strokeWeight: 3
+  });
+  garis[2] = new google.maps.Polyline({
+    path:rute3,
+    // map : atlas,
+    icons: [{
+      icon: lineSymbol,
+      offset: '10%',
+      repeat : '150px'
+    }],
+    strokeColor:warna[2],
     strokeOpacity: 0.8,
     strokeWeight: 3
   });
+
 
   // me.buatTrackingPoly(me.getMap);
 
@@ -373,14 +418,17 @@ function create_tracking(d_rute,d_vessel){
 }
 
 function show_tracking(map){
-  garis.setMap(map);
+  // garis.setMap(map);
+  for(var i=0;i < garis.length;i++){
+    garis[i].setMap(map);
+  }
 }
 
 /* ===== end of Tracking ===== */
 
 function resetCenterVessel(map){
   // console.log(this.markers);
-  var bounds = new google.maps.LatLngBounds();
+  // var bounds = new google.maps.LatLngBounds();
 
     for (var i=0; i<marker_marker.length; i++) {
         if(marker_marker[i].getVisible()) {
@@ -391,6 +439,24 @@ function resetCenterVessel(map){
     map.fitBounds(bounds);
     map.setZoom(8);
 
+
+
+}
+
+function resetCenterTracking(map){
+
+  for (var i=0;i<rute.length; i++){
+    // console.log(rute[i]);
+    var latlng= new google.maps.LatLng(rute[i].lat,rute[i].lng);
+    // console.log(rute[i].getPosition());
+    // if(rute[i].getVisible()){
+      bounds.extend(latlng);
+    // }
+
+    map.fitBounds(bounds);
+    map.setZoom(15);
+
+  }
 
 
 }
@@ -738,14 +804,55 @@ var panel_form_tracking = Ext.create('Ext.form.Panel', {
         anchor: '100%'
     },
     items: [{
-					fieldLabel: 'Date Tracking',
+      xtype: 'radiogroup',
+      fieldLabel: 'Tracking',
+      columns:1,
+      items: [
+          {boxLabel: 'Last 24H', name: 'track_period', inputValue: '24h', checked: true},
+          {boxLabel: 'Today', name: 'track_period', inputValue: 'today'},
+          {boxLabel: 'Periode', name: 'track_period', inputValue: 'period', reference : 'periode'}
+      ],
+      listeners:{
+        change: function( a,newValue, oldValue){
+          // console.log(newValue,oldValue);
+          if (newValue.track_period == 'period'){
+            Ext.getCmp('track_start').setDisabled(false);
+            Ext.getCmp('track_end').setDisabled(false);
+            // console.log('disable');
+          }
+          else{
+            Ext.getCmp('track_start').setDisabled(true);
+            Ext.getCmp('track_end').setDisabled(true);
+          }
+        }
+      }
+    },{
+					fieldLabel: 'Track Start',
 					xtype:'datefield',
-					name: 'end',
+          disabled:'true',
+          id: 'track_start',
+					name: 'tr_start',
           format: 'd-M-Y',
-          value: new Date(),
-          maxValue: new Date(),
-          submitFormat:'timestamp',
+          // value: new Date(),
+          // maxValue: new Date(),
+          vtype: 'daterange',
+          endDateField: 'track_end',
+          // submitFormat:'timestamp',
+          submitFormat:'Y-m-d',
 					allowBlank: false
+    },{
+          fieldLabel: 'Track End',
+          xtype:'datefield',
+          disabled:'true',
+          id: 'track_end',
+          name: 'tr_end',
+          format: 'd-M-Y',
+          // maxValue: new Date(),
+          // value: new Date(),
+          vtype: 'daterange',
+          startDateField: 'track_start',
+          submitFormat:'Y-m-d',
+          allowBlank: false
     }],
 
     // Reset and Submit buttons
@@ -757,25 +864,44 @@ var panel_form_tracking = Ext.create('Ext.form.Panel', {
         handler: function() {
             var form = this.up('form').getForm();
             if (form.isValid()) {
+
+              show_tracking(null);
+
               var tg = new Date();
               console.log(tg.getTime());
+
               // console.log('dipencet');
               // console.log(this);
               console.log(Ext.getCmp('ship_list_panel_id').isidata);
               var vessel = Ext.getCmp('ship_list_panel_id').isidata;
 							var dt = form.getValues();
-              // dt.id = vessel.id;
-              console.log(dt.end);
-              var tt = new Date(dt.end);
-              console.log('end ==> '+ tt.getTime());
-              // dt.end = parseInt(dt.end) + (7*3600);
-              dt.end = parseInt(tg.getTime()/1000);
-              dt.start = dt.end - 86400;
-              dt.density = 's';
-							// dt.titik_ukur_id = 11033;
-							console.log(dt);
 
-              // create_tracking(create_rute1(1),dt);
+              if(dt.track_period === '24h')
+              {
+                // console.log('24 jam');
+                dt.end = parseInt(tg.getTime() /1000);
+                dt.start = dt.end - 86400;
+                // console.log('waktu sekarang (epcohtime) => ',Math.floor(new Date().getTime() /1000) );
+                dt.density = 's';
+              }
+              else if(dt.track_period === 'today')
+              {
+                // console.log('to day');
+                dt.start = parseInt(new Date(tg.getFullYear()+'-' +(tg.getMonth() +1)+'-'+tg.getDate() + ' 00:00:00' ).getTime()/1000);
+                dt.end = parseInt(tg.getTime() /1000);
+                dt.density = 's';
+              }
+              else {
+                console.log('periode');
+                dt.start = parseInt(new Date(dt.tr_start + ' 00:00:00' ).getTime()/1000);
+                dt.end = parseInt(new Date(dt.tr_end + ' 00:00:00' ).getTime()/1000);
+                dt.density = 'h';
+
+              }
+
+              delete dt.track_period;
+              delete dt.tr_start;
+              delete dt.tr_end;
 
 
 							Ext.Ajax.request({
@@ -784,29 +910,15 @@ var panel_form_tracking = Ext.create('Ext.form.Panel', {
 							    params: dt,
 							    success: function(response){
 							        var res = JSON.parse(response.responseText);
-							        // console.log(res);
-                      // var dat_rute=[];
-
-                      // res.forEach(function(v){
-                      //     dat_rute.push(
-                      //       {lat:v['GPS-Lattitude'],lng:v['GPS-Longitude'],head:v['GPS-Heading'],speed:v['GPS-Velocity'],waktu:v.epochtime,vessel:v.nama,id_ves:v.id}
-                      //     )
-                      // });
-                      // console.log(res);
-                      // console.log(create_rute(res));
-
 
                       var d_rute = create_rute(res);
                       create_tracking(d_rute,res);
                       show_tracking(atlas);
+                      resetCenterTracking(atlas);
 
-
-                      // Ext.Msg.alert('Fuel-Bunkering', 'Sukses.</br>('+dt.date+' '+dt.time+':00) = '+dt.value+' Liters');
 							    },
                   callback: function(a,b,c){
-                    // console.log(a);
-                    // console.log(b);
-                    // console.log(c);
+
                   }
 							});
 							form.reset();
@@ -817,6 +929,45 @@ var panel_form_tracking = Ext.create('Ext.form.Panel', {
     }],
     // renderTo: Ext.getBody()
 });
+
+Ext.apply(Ext.form.field.VTypes, {
+        daterange: function(val, field) {
+            var date = field.parseDate(val);
+
+            if (!date) {
+                return false;
+            }
+            if (field.startDateField && (!this.dateRangeMax || (date.getTime() != this.dateRangeMax.getTime()))) {
+                var start = field.up('form').down('#' + field.startDateField);
+                start.setMaxValue(date);
+                start.validate();
+                this.dateRangeMax = date;
+            }
+            else if (field.endDateField && (!this.dateRangeMin || (date.getTime() != this.dateRangeMin.getTime()))) {
+                var end = field.up('form').down('#' + field.endDateField);
+                end.setMinValue(date);
+                end.validate();
+                this.dateRangeMin = date;
+            }
+            /*
+             * Always return true since we're only using this vtype to set the
+             * min/max allowed values (these are tested for after the vtype test)
+             */
+            return true;
+        },
+
+        daterangeText: 'Start date must be less than end date',
+
+        // password: function(val, field) {
+        //     if (field.initialPassField) {
+        //         var pwd = field.up('form').down('#' + field.initialPassField);
+        //         return (val == pwd.getValue());
+        //     }
+        //     return true;
+        // },
+        //
+        // passwordText: 'Passwords do not match'
+    });
 
 
 var tabel_daftar_kapal = Ext.create('Ext.grid.Panel', {
@@ -853,6 +1004,7 @@ var ship_list = {
     },
     border: false,
     items:[
+        panel_form_tracking,
     // {
     //     height: 140,
     //     layout: 'form',
@@ -862,7 +1014,7 @@ var ship_list = {
     //     items: [
         // {
 
-          panel_form_tracking,
+
         //
         //     xtype: 'checkboxfield',
         //     name: 'checkbox1',
@@ -917,6 +1069,7 @@ var ship_list = {
         // }
     //   ]
     // },
-    tabel_daftar_kapal
+    /*ditutup dulu*/
+    // tabel_daftar_kapal
     ]
 }
