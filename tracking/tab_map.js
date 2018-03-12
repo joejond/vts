@@ -42,6 +42,7 @@ var TaskVessel;
 var infowindow;
 var garis=[];
 var bounds;
+var ws;
 
 data_obj={};
 arr_dat=[];
@@ -67,7 +68,7 @@ var peta = {
         // garis = new google.maps.Polyline();
         bounds = new google.maps.LatLngBounds();
 
-        var ws = Ext.create ('Ext.ux.WebSocket', {
+        ws = Ext.create ('Ext.ux.WebSocket', {
           url:   getWS(),
           // url: 'ws://10.10.10.11:1234' ,
           listeners: {
@@ -85,6 +86,14 @@ var peta = {
         TaskVessel = new Ext.util.TaskRunner();
         TaskVessel.start(taskUpdV);
         onClickPeta(atlas);
+        // ws.close();
+        //
+        // console.log('open');
+        // ws.open();
+        // console.log('send')
+        // ws.send('usr:4');
+        // console.log(ws);
+        // console.log(ws.getStatus());
 
       },
 
@@ -241,20 +250,6 @@ function create_infowindow(t,d){
 
   var lati = ((parseFloat(d.lat) < 0) ? Math.abs(parseFloat(d.lat).toFixed(3))+'&deg; S' : parseFloat(d.lat).toFixed(3)+'&deg; N');
   var long = ((parseFloat(d.lng) < 0) ? Math.abs(parseFloat(d.lng).toFixed(3))+'&deg; W' : parseFloat(d.lng).toFixed(3)+'&deg; E');
-
-  // var detailVessel = '<html><table>'+
-  //   '<tr><td rowspan = "5"><img src="'+d.img+'"></td><td><b>Vessel</b></td><td>:</td><td align="right"><b>'+d.nama+'</b></td> </tr>'+
-  //   // '<tr><td><b>IMO</b></td><td>:</td><td align="right">'+d.imo+'</td></tr>'+
-  //   '<tr><td><b>Latitude</b></td><td>:</td><td align="right">'+lati +'</td></tr>'+
-  //   '<tr><td><b>Longitude</b></td><td>:</td><td align="right">'+long+'</td></tr>'+
-  //   '<tr><td><b>Speed</b></td><td>:</td><td align="right">'+d.speed+' Kts</td></tr>'+
-  //   '<tr><td><b>Heading</b></td><td>:</td><td align="right">'+d.heading+'&deg;</td></tr>'+
-  //   // '<tr><td colspan = "2"><button id="track"; ">Tracking </button>'+ ((role.fms) ? '<button id="fuel">Detail </button>' : '' )   +'</td></tr>'+
-  //   '<tr><td colspan = "2">'+
-  //     // '<button id="track" style="visibility:hidden;" > Tracking </button>'+
-  //     '<button id="trackoption" >Tracking</button>'+
-  //     // '<button id="fuel" style="visibility:'+((role.fms) ? 'visible' : 'hidden')+';">Detail </button></td></tr>'+
-  //   '</table></html>';
 
   // info_ves = '<h3> BIMA-333 </h3>';
   info_ves = '<h3>'+d.nama+'</h3>';
