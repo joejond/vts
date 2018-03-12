@@ -864,6 +864,7 @@ var panel_form_tracking = Ext.create('Ext.form.Panel', {
         handler: function() {
             var form = this.up('form').getForm();
             if (form.isValid()) {
+              myMask.show();
 
               show_tracking(null);
 
@@ -915,6 +916,7 @@ var panel_form_tracking = Ext.create('Ext.form.Panel', {
                       create_tracking(d_rute,res);
                       show_tracking(atlas);
                       resetCenterTracking(atlas);
+                      myMask.hide();
 
 							    },
                   callback: function(a,b,c){
@@ -928,6 +930,11 @@ var panel_form_tracking = Ext.create('Ext.form.Panel', {
         }
     }],
     // renderTo: Ext.getBody()
+});
+
+var myMask = new Ext.LoadMask({
+    msg    : 'Please wait...',
+    target : panel_form_tracking
 });
 
 Ext.apply(Ext.form.field.VTypes, {
