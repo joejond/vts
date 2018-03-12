@@ -675,7 +675,7 @@ var window_detail_jam = Ext.create('Ext.window.Window',{
     },
     items : [{
         xtype : 'tabpanel',
-				width: 400,
+				width: 800,
 		    height: 300,
 		    defaults: {
 		        // bodyPadding: 10,
