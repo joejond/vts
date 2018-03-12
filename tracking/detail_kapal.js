@@ -656,7 +656,7 @@ var panel_detail = {
 
 var window_detail_jam = Ext.create('Ext.window.Window',{
     title : 'Raw Data Detail',
-    width : 400,
+    width : 800,
     modal : true,
     closable: false,
     listeners: {
@@ -675,7 +675,7 @@ var window_detail_jam = Ext.create('Ext.window.Window',{
     },
     items : [{
         xtype : 'tabpanel',
-				width: 800,
+				// width: 00,
 		    height: 300,
 		    defaults: {
 		        // bodyPadding: 10,
