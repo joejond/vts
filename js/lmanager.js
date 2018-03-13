@@ -14,7 +14,7 @@ function getAPI()
 	// console.log(loc.hostname);
 	// var xx = (loc.hostname == 'localhost')?  ('http://10.10.10.11:1336') : ('http://'+ loc.hostname +':1336');
 	var xx = (loc.hostname == 'localhost')?  ('http://10.10.10.11:1336') : (loc.hostname == '127.0.0.1')? ('http://project.daunbiru.com:1336'):('http://'+ loc.hostname +':1336');
-	console.log(xx);
+	// console.log(xx);
 	// if(loc.hostname == 'localhost'){
 	// 	return 'http://10.10.10.11:1336';
 	// }else{

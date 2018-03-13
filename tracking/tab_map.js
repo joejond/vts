@@ -222,7 +222,7 @@ function addTandaKapal(data)
   // console.log('addTandaKapal == > ',data);
 
   var tanda = new google.maps.Marker({
-    position : new google.maps.LatLng(parseFloat(data.lat).toFixed(3),parseFloat(data.lng).toFixed(3)),
+    position : new google.maps.LatLng(data.lat,data.lng),
     // map : peta1.getMap(),
     //*
     icon : {
@@ -314,9 +314,11 @@ function create_rute(d)
 {
   rute = [];
   d.forEach(function(v){
-    rute.push({lat:v['GPS-Lattitude'],lng:v['GPS-Longitude']});
+    rute.push({lat: v['GPS-Lattitude']  ,lng:v['GPS-Longitude']});
   });
-  // console.log(rute);
+  // rute = rute.replace(/"/g, "");
+  console.log(rute);
+
   return rute;
 }
 
@@ -360,7 +362,7 @@ function create_tracking(d_rute,d_vessel){
     };
 
   garis[0] = new google.maps.Polyline({
-    path:rute1,
+    path: rute1 ,
     // map : atlas,
     icons: [{
       icon: lineSymbol,
