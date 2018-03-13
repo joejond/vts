@@ -317,7 +317,7 @@ function create_rute(d)
     rute.push({lat: v['GPS-Lattitude']  ,lng:v['GPS-Longitude']});
   });
   // rute = rute.replace(/"/g, "");
-  console.log(rute);
+  // console.log(rute);
 
   return rute;
 }
@@ -890,7 +890,7 @@ var panel_form_tracking = Ext.create('Ext.form.Panel', {
                 dt.density = 's';
               }
               else {
-                console.log('periode');
+                // console.log('periode');
                 dt.start = parseInt(new Date(dt.tr_start + ' 00:00:00' ).getTime()/1000);
                 dt.end = parseInt(new Date(dt.tr_end + ' 00:00:00' ).getTime()/1000);
                 dt.density = 'h';
