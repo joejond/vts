@@ -322,8 +322,8 @@ Ext.define('MyGrid', {
                     	cellTypeClass.push("date");
                     }
                     else{
-                    	cellType.push("String");
-                    	cellTypeClass.push("");
+                    	cellType.push("Number");
+                    	cellTypeClass.push("float");
 					}
                     // switch (fld.type) {
                     //     case "int":
