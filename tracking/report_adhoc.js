@@ -553,8 +553,8 @@ var model_adhoc_kapal = Ext.define('adhoc_kapal', {
 		    {name:"average speed",type: "Number"},
 		    {name:"working hours ME1",type: "Number"},
 		    {name:"working hours ME2",type: "Number"},
-		    {name:"ME1 daily consumtion",type: "Number"},
-		    {name:"ME1 consumtion rate",type: "Number"},
+		    {name:"ME1 daily consumption",type: "Number"},
+		    {name:"ME1 consumption rate",type: "Number"},
 		    {name:"ME2 daily consumtion",type: "Number"},
 		    {name:"ME2 consumtion rate",type: "Number"},
 		    {name:"AE1 consumtion" ,type: "Number"},
@@ -620,7 +620,7 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
 		dataIndex: 'average speed',
 		renderer: function(v){return parseFloat(v).toFixed(2);}
 	},{
-		header: "ME Portside",
+		header: "Portside",
       	columns: [{
 				header: "Working Hours",
 				width: 100,
@@ -638,7 +638,7 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
 				renderer: function(v){return parseFloat(v).toFixed(2);}
 				}]
 			},{
-				header: "ME Starboard",
+				header: "StarBoard",
       			columns: [{
 				header: "Working Hours",
 				width: 100,
@@ -656,7 +656,7 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
 					renderer: function(v){return parseFloat(v).toFixed(2);}
 			}]
 			},{
-      			header: "AE1",
+      			header: "PortSide GenSet",
       			columns: [{
 					header: "Daily Consumption",
 					width: 100,
@@ -670,7 +670,7 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
 
 			}]
 			},{
-      			header: "AE2",
+      			header: "StarBoard Genset",
       			columns: [{
 					header: "Daily Consumption",
 					width: 100,
