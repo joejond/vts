@@ -199,7 +199,7 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
     flex: 5,
     columns: [{
         header: "Jam",
-        width: 50,
+        width: 150,
         locked : true,
         dataIndex: 'time',
         renderer: function(value) {
@@ -246,11 +246,12 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
           renderer: function(v){return parseFloat(v).toFixed(2);}
         }]
     },{
-        header: "Auxiliary I",
+        header: "PortSide GenSet",
         columns: [{
           header: "RunHours",
           width: 100,
-          dataIndex: 'working hours AE1'
+          dataIndex: 'working hours AE1',
+	  renderer: function(v){return parseFloat(v).toFixed(2);}
       },{
           header: "Fuel",
           width: 100,
@@ -263,7 +264,7 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
           renderer: function(v){return parseFloat(v).toFixed(2);}
         }]
     }, {
-		header: "Auxiliary II",
+		header: "StarBoard GenSet",
         columns: [{
           header: "RunHours",
           width: 100,
@@ -382,14 +383,6 @@ var grafik = new Ext.create('Chart.ux.Highcharts', {
          type: 'spline',
          name: 'rpm #4',
          visible: true
-
-    }, {
-		dataIndex: 'rpm4',
-        yAxis: 0,
-        color: '#FA5A6A',
-        type: 'spline',
-        name: 'rpm #4',
-        visible: false
 
     }, {
         dataIndex: 'ME1 consumtion',
@@ -856,7 +849,7 @@ function ambil_status()
       var hasil = Ext.JSON.decode(data.responseText);
       // console.log(hasil);
       // console.log(hasil.lastUpdate);
-      var stat = (hasil.status =='Ok') ? '<b style="color:red;">'+hasil.status+'</b>' : '<b style="color:green;">'+hasil.status+'</b>';
+      var stat = (hasil.status =='Ok') ? '<b style="color:green;">'+hasil.status+'</b>' : '<b style="color:red;">'+hasil.status+'</b>';
 
       Ext.getCmp('idstatus').update('<p style="font-size:14px;">Last Data : '+hasil.lastUpdate + ' >> ' +stat+'</p>');
       //  var x = hasil[0];
