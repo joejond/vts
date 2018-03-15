@@ -49,7 +49,7 @@
         <!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3&amp;sensor=false"></script> -->
 				<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?&key=AIzaSyC-UUPT4sbJjlVTR19z9tt-bBvkVVdeLmI&callback=" defer></script>
         <!-- <script type="text/javascript" src="https://cdn.rawgit.com/googlemaps/v3-utility-library/master/markerwithlabel/src/markerwithlabel.js" defer></script> -->
-        <script type="text/javascript" src="markerwithlabel.js" defer></script>
+        <!-- <script type="text/javascript" src="markerwithlabel.js" defer></script> -->
 
 
         <style type="text/css">

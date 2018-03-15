@@ -98,7 +98,7 @@ var store_detail_jam = Ext.create('Ext.data.Store', {
     autoLoad: true,
     proxy: {
         type: 'ajax',
-		url: getAPI()+'/get_data_bima',
+				url: getAPI()+'/get_data_bima',
         method: 'GET',
     },
 
