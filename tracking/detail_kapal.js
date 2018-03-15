@@ -58,7 +58,7 @@ var id_kpl = '';
 
 var store_detail_kapal = Ext.create('Ext.data.Store', {
     model: model_detail_kapal,
-    autoLoad: true,
+   // autoLoad: true,
     proxy: {
         type: 'ajax',
         // url: 'ship_detail_sp.php',
@@ -83,7 +83,7 @@ var store_detail_kapal = Ext.create('Ext.data.Store', {
 
 var store_detail_kapal_detik = Ext.create('Ext.data.Store', {
     model: model_detail_kapal_detik,
-    autoLoad: true,
+    //autoLoad: true,
     proxy: {
         type: 'ajax',
 				url: getAPI()+'/get_data_bima',
@@ -95,7 +95,7 @@ var store_detail_kapal_detik = Ext.create('Ext.data.Store', {
 var detail_jam_index;
 var store_detail_jam = Ext.create('Ext.data.Store', {
     model: model_detail_kapal,
-    autoLoad: true,
+    //autoLoad: true,
     proxy: {
         type: 'ajax',
 				url: getAPI()+'/get_data_bima',
@@ -170,7 +170,7 @@ var tabel_detail_jam = Ext.create('Ext.grid.Panel', {
 
 			}]
 	},{
-      header: "PortSide Engine",
+      header: "StarBoard Engine",
 			columns: [{
 				header: "FM-In",
 				width: 70,
@@ -194,7 +194,7 @@ var tabel_detail_jam = Ext.create('Ext.grid.Panel', {
 
 			}]
 	},{
-      header: "Aux Engine 1",
+      header: "PortSide GenSet",
 			columns: [{
 				header: "FM-In",
 				width: 70,
@@ -221,7 +221,7 @@ var tabel_detail_jam = Ext.create('Ext.grid.Panel', {
 			// 	dataIndex: 'press1'
 			}]
 	},{
-		header: "Aux Engine II",
+		header: "StarBoard GenSet",
 		columns: [{
 			header: "FM-In",
 			width: 70,
@@ -380,7 +380,7 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
 
 			}]
 	},{
-      header: "PortSide Engine",
+      header: "StarBoard Engine",
 			columns: [{
 				header: "FM-In",
 				width: 70,
@@ -404,7 +404,7 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
 
 			}]
 	},{
-      header: "Aux Engine 1",
+      header: "PortSide GenSet",
 			columns: [{
 				header: "FM-In",
 				width: 70,
@@ -431,7 +431,7 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
 			// 	dataIndex: 'press1'
 			}]
 	},{
-		header: "Aux Engine II",
+		header: "StarBoard Genset",
 		columns: [{
 			header: "FM-In",
 			width: 70,

@@ -70,8 +70,7 @@ var peta = {
 
         ws = Ext.create ('Ext.ux.WebSocket', {
           url:   getWS(),
-          // url: 'ws://10.10.10.11:1234' ,
-          listeners: {
+	  listeners: {
             open: function (ws) {
                 ws.send('usr:'+dt.idu);
             } ,

@@ -322,8 +322,8 @@ Ext.define('MyGrid', {
                     	cellTypeClass.push("date");
                     }
                     else{
-                    	cellType.push("String");
-                    	cellTypeClass.push("");
+                    	cellType.push("Number");
+                    	cellTypeClass.push("float");
 					}
                     // switch (fld.type) {
                     //     case "int":
@@ -620,7 +620,7 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
 		dataIndex: 'average speed',
 		renderer: function(v){return parseFloat(v).toFixed(2);}
 	},{
-		header: "ME Portside",
+		header: "Portside",
       	columns: [{
 				header: "Working Hours",
 				width: 100,
@@ -629,16 +629,16 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
 				},{
 				header: "Daily Consumption",
 				width: 100,
-				dataIndex: 'ME1 daily consumtion',
+				dataIndex: 'ME1 daily consumption',
 				renderer: function(v){return parseFloat(v).toFixed(2);}
 				},{
 				header: "Hourly Rate",
 				width: 100,
-				dataIndex: 'ME1 consumtion rate',
+				dataIndex: 'ME1 consumption rate',
 				renderer: function(v){return parseFloat(v).toFixed(2);}
 				}]
 			},{
-				header: "ME Starboard",
+				header: "StarBoard",
       			columns: [{
 				header: "Working Hours",
 				width: 100,
@@ -647,16 +647,16 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
 				},{
 					header: "Daily Consumption",
 					width: 100,
-					dataIndex: 'ME2 daily consumption',
+					dataIndex: 'ME2 daily consumtion',
 					renderer: function(v){return parseFloat(v).toFixed(2);}
 				},{
 					header: "Hourly Rate",
 					width: 100,
-					dataIndex: 'ME2 consumption rate',
+					dataIndex: 'ME2 consumtion rate',
 					renderer: function(v){return parseFloat(v).toFixed(2);}
 			}]
 			},{
-      			header: "AE1",
+      			header: "PortSide GenSet",
       			columns: [{
 					header: "Daily Consumption",
 					width: 100,
@@ -670,7 +670,7 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
 
 			}]
 			},{
-      			header: "AE2",
+      			header: "StarBoard Genset",
       			columns: [{
 					header: "Daily Consumption",
 					width: 100,
