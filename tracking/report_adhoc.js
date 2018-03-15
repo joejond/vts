@@ -322,8 +322,8 @@ Ext.define('MyGrid', {
                     	cellTypeClass.push("date");
                     }
                     else{
-                    	cellType.push("String");
-                    	cellTypeClass.push("");
+                    	cellType.push("Number");
+                    	cellTypeClass.push("float");
 					}
                     // switch (fld.type) {
                     //     case "int":
@@ -553,8 +553,8 @@ var model_adhoc_kapal = Ext.define('adhoc_kapal', {
 		    {name:"average speed",type: "Number"},
 		    {name:"working hours ME1",type: "Number"},
 		    {name:"working hours ME2",type: "Number"},
-		    {name:"ME1 daily consumption",type: "Number"},
-		    {name:"ME1 consumption rate",type: "Number"},
+		    {name:"ME1 daily consumtion",type: "Number"},
+		    {name:"ME1 consumtion rate",type: "Number"},
 		    {name:"ME2 daily consumtion",type: "Number"},
 		    {name:"ME2 consumtion rate",type: "Number"},
 		    {name:"AE1 consumtion" ,type: "Number"},
