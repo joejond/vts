@@ -219,7 +219,7 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
         },{
             header: "Fuel",
             width: 100,
-            dataIndex: 'ME1 consumtion',
+            dataIndex: 'ME2 consumtion',
             renderer: function(v){return parseFloat(v).toFixed(2);}
         },{
             header: "RPM",
@@ -237,7 +237,7 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
       },{
           header: "Fuel",
           width: 100,
-          dataIndex: 'ME2 consumtion',
+          dataIndex: 'ME1 consumtion',
           renderer: function(v){return parseFloat(v).toFixed(2);}
       },{
           header: "RPM",
@@ -255,7 +255,7 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
       },{
           header: "Fuel",
           width: 100,
-          dataIndex: 'AE1 consumtion',
+          dataIndex: 'AE2 consumtion',
           renderer: function(v){return parseFloat(v).toFixed(2);}
       },{
           header: "RPM",
@@ -273,7 +273,7 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
       },{
           header: "Fuel",
           width: 100,
-          dataIndex: 'AE2 consumtion',
+          dataIndex: 'AE1 consumtion',
           renderer: function(v){return parseFloat(v).toFixed(2);}
           // renderer: function(v){return (v==null)? null :  parseFloat(v).toFixed(2);}
       },{
@@ -385,7 +385,7 @@ var grafik = new Ext.create('Chart.ux.Highcharts', {
          visible: true
 
     }, {
-        dataIndex: 'ME1 consumtion',
+        dataIndex: 'ME2 consumtion',
         yAxis: 1,
         type: 'spline',
         color: '#0033FF',
@@ -393,7 +393,7 @@ var grafik = new Ext.create('Chart.ux.Highcharts', {
         name: 'fuel main engine #1',
         visible: true
     }, {
-        dataIndex: 'ME2 consumtion',
+        dataIndex: 'ME1 consumtion',
         yAxis: 1,
         color: '#336600',
         dashStyle: 'ShortDash',
@@ -401,7 +401,7 @@ var grafik = new Ext.create('Chart.ux.Highcharts', {
         name: 'fuel main engine #2',
         visible: true
     }, {
-        dataIndex: 'AE1 consumtion',
+        dataIndex: 'AE2 consumtion',
         yAxis: 1,
         color: '#8B6914',
         dashStyle: 'ShortDash',
@@ -409,7 +409,7 @@ var grafik = new Ext.create('Chart.ux.Highcharts', {
         name: 'fuel main engine #3',
         visible: true
     }, {
-		    dataIndex: 'AE2 consumtion',
+		    dataIndex: 'AE1 consumtion',
         yAxis: 1,
         color: '#FA5A6A',
         dashStyle: 'ShortDash',
@@ -787,12 +787,12 @@ function daily_akum() {
           // console.log(hasil[0]);
               var x = hasil[0];
 
-             eng1_daily = parseFloat(x['ME1 Daily Consumtion']).toFixed(2) ;
-             eng2_daily = parseFloat(x['ME2 Daily Consumtion']).toFixed(2) ;
+             eng1_daily = parseFloat(x['ME2 Daily Consumtion']).toFixed(2) ;
+             eng2_daily = parseFloat(x['ME1 Daily Consumtion']).toFixed(2) ;
              rh_engine1 = parseFloat(x['ME1 Working Hours']).toFixed(2) ;
              rh_engine2 = parseFloat(x['ME2 Working Hours']).toFixed(2) ;
-             ae1_daily = parseFloat(x['AE1 Daily Consumtion']).toFixed(2) ;
-             ae2_daily = parseFloat(x['AE2 Daily Consumtion']).toFixed(2) ;
+             ae1_daily = parseFloat(x['AE2 Daily Consumtion']).toFixed(2) ;
+             ae2_daily = parseFloat(x['AE1 Daily Consumtion']).toFixed(2) ;
              rh_ae1 = parseFloat(x['AE1 Working Hours']).toFixed(2) ;
              rh_ae2 = parseFloat(x['AE2 Working Hours']).toFixed(2) ;
              total_daily = parseFloat(x['Total Daily']).toFixed(2) ;
