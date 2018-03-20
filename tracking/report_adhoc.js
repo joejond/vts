@@ -624,7 +624,7 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
       	columns: [{
 				header: "Working Hours",
 				width: 100,
-				dataIndex: 'working hours ME1',
+				dataIndex: 'working hours ME2',
 				renderer: function(v){return parseFloat(v).toFixed(2);}
 				},{
 				header: "Daily Consumption",
@@ -634,7 +634,7 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
 				},{
 				header: "Hourly Rate",
 				width: 100,
-				dataIndex: 'ME1 consumption rate',
+				dataIndex: 'ME2 consumtion rate',
 				renderer: function(v){return parseFloat(v).toFixed(2);}
 				}]
 			},{
@@ -642,7 +642,7 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
       			columns: [{
 				header: "Working Hours",
 				width: 100,
-				dataIndex: 'working hours ME2',
+				dataIndex: 'working hours ME1',
 				renderer: function(v){return parseFloat(v).toFixed(2);}
 				},{
 					header: "Daily Consumption",
@@ -652,7 +652,7 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
 				},{
 					header: "Hourly Rate",
 					width: 100,
-					dataIndex: 'ME2 consumtion rate',
+					dataIndex: 'ME1 consumption rate',
 					renderer: function(v){return parseFloat(v).toFixed(2);}
 			}]
 			},{
@@ -665,7 +665,7 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
 				},{
 					header: "RPM(rata2)",
 					width: 100,
-					dataIndex: 'AE1 average rpm',
+					dataIndex: 'AE2 average rpm',
 					renderer: function(v){return parseFloat(v).toFixed(2);}
 
 			}]
@@ -679,7 +679,7 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
 			},{
 					header: "RPM (rata2)",
 					width: 100,
-					dataIndex: 'ME1 average rpm',
+					dataIndex: 'AE1 average rpm',
 					renderer: function(v){return parseFloat(v).toFixed(2);}
 
 			}]

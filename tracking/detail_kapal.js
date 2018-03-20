@@ -162,11 +162,11 @@ var tabel_detail_jam = Ext.create('Ext.grid.Panel', {
 			},{
 				header: "RPM",
 				width: 70,
-				dataIndex: 'ME1-RPM'
+				dataIndex: 'ME2-RPM'
 			},{
 				header: "RunHours",
 				width: 70,
-				dataIndex: 'ME1-RH'
+				dataIndex: 'ME2-RH'
 
 			}]
 	},{
@@ -186,11 +186,11 @@ var tabel_detail_jam = Ext.create('Ext.grid.Panel', {
 			},{
 				header: "RPM",
 				width: 70,
-				dataIndex: 'ME2-RPM'
+				dataIndex: 'ME1-RPM'
 			},{
 				header: "RunHours",
 				width: 70,
-				dataIndex: 'ME2-RH'
+				dataIndex: 'ME1-RH'
 
 			}]
 	},{
@@ -210,11 +210,11 @@ var tabel_detail_jam = Ext.create('Ext.grid.Panel', {
 			},{
 				header: "RPM",
 				width: 70,
-				dataIndex: 'AE1-RPM'
+				dataIndex: 'AE2-RPM'
 			},{
 				header: "RunHours",
 				width: 70,
-				dataIndex: 'AE1-RH'
+				dataIndex: 'AE2-RH'
 			// },{
 			// 	header: "Press",
 			// 	width: 70,
@@ -237,11 +237,11 @@ var tabel_detail_jam = Ext.create('Ext.grid.Panel', {
 		},{
 			header: "RPM",
 			width: 70,
-			dataIndex: 'AE2-RPM'
+			dataIndex: 'AE1-RPM'
 		},{
 			header: "RunHours",
 			width: 70,
-			dataIndex: 'AE2-RH'
+			dataIndex: 'AE1-RH'
 		// },{
 		// 	header: "Press",
 		// 	width: 70,
@@ -372,11 +372,11 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
 			},{
 				header: "RPM",
 				width: 70,
-				dataIndex: 'ME1-RPM'
+				dataIndex: 'ME2-RPM'
 			},{
 				header: "RunHours",
 				width: 70,
-				dataIndex: 'ME1-RH'
+				dataIndex: 'ME2-RH'
 
 			}]
 	},{
@@ -396,11 +396,11 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
 			},{
 				header: "RPM",
 				width: 70,
-				dataIndex: 'ME2-RPM'
+				dataIndex: 'ME1-RPM'
 			},{
 				header: "RunHours",
 				width: 70,
-				dataIndex: 'ME2-RH'
+				dataIndex: 'ME1-RH'
 
 			}]
 	},{
@@ -420,11 +420,11 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
 			},{
 				header: "RPM",
 				width: 70,
-				dataIndex: 'AE1-RPM'
+				dataIndex: 'AE2-RPM'
 			},{
 				header: "RunHours",
 				width: 70,
-				dataIndex: 'AE1-RH'
+				dataIndex: 'AE2-RH'
 			// },{
 			// 	header: "Press",
 			// 	width: 70,
@@ -447,11 +447,11 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
 		},{
 			header: "RPM",
 			width: 70,
-			dataIndex: 'AE2-RPM'
+			dataIndex: 'AE1-RPM'
 		},{
 			header: "RunHours",
 			width: 70,
-			dataIndex: 'AE2-RH'
+			dataIndex: 'AE1-RH'
 		// },{
 		// 	header: "Press",
 		// 	width: 70,
