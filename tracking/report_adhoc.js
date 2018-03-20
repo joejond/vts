@@ -315,16 +315,18 @@ Ext.define('MyGrid', {
 
 
                     var fld = this.getModelField(cm[i].dataIndex);
+                    // console.log('field id', fld);
                     //console.log("fld.type: " + fld.name);
-                    if(fld=="date"){
+                    if(fld.name=="date"){
                     	//console.log("Tanggal dicetak: " + fld.name);
-                    	cellType.push("DateTime");
+                    	// cellType.push("DateTime");
+                      cellType.push("String");
                     	cellTypeClass.push("date");
                     }
                     else{
                     	cellType.push("Number");
                     	cellTypeClass.push("float");
-					}
+					          }
                     // switch (fld.type) {
                     //     case "int":
                     //         cellType.push("Number");
@@ -353,6 +355,7 @@ Ext.define('MyGrid', {
                 }
             }
         }
+        // console.log(cellType);
         var visibleColumnCount = cellType.length - visibleColumnCountReduction;
 
         var result = {
@@ -397,13 +400,14 @@ Ext.define('MyGrid', {
             groupField = this.store.groupers.keys[0];
         }
         for (var i = 0, it = this.store.data.items, l = it.length; i < l; i++) {
-
+            var temp = '';
             if (!Ext.isEmpty(groupField)) {
                 if (groupVal != this.store.getAt(i).get(groupField)) {
                     groupVal = this.store.getAt(i).get(groupField);
                     t += this.generateEmptyGroupRow(groupField, groupVal, cellType, includeHidden);
                 }
             }
+            temp += '<Row>';
             t += '<Row>';
             var cellClass = (i & 1) ? 'odd' : 'even';
             r = it[i].data;
@@ -412,19 +416,28 @@ Ext.define('MyGrid', {
                 if (cm[j].xtype != 'actioncolumn' && (cm[j].dataIndex != '') && (includeHidden || !cm[j].hidden)) {
                     var v = r[cm[j].dataIndex];
                     if (cellType[k] !== "None") {
-                        t += '<Cell ss:StyleID="' + cellClass + cellTypeClass[k] + '"><Data ss:Type="' + cellType[k] + '">';
                         if (cellType[k] == 'DateTime') {
+                            temp += '<Cell><Data ss:Type="' + cellType[k] + '">';
+                            t += '<Cell><Data ss:Type="' + cellType[k] + '">';
+                            temp += Ext.Date.format(v, 'Y-m-d');
                             t += Ext.Date.format(v, 'Y-m-d');
                         } else {
+                            temp += '<Cell ss:StyleID="' + cellClass + cellTypeClass[k] + '"><Data ss:Type="' + cellType[k] + '">';
+                            t += '<Cell ss:StyleID="' + cellClass + cellTypeClass[k] + '"><Data ss:Type="' + cellType[k] + '">';
+                            temp += v
                             t += v;
                         }
+                        temp += '</Data></Cell>';
                         t += '</Data></Cell>';
                     }
                     k++;
                 }
             }
+            temp += '</Row>';
             t += '</Row>';
         }
+        console.log('temp', temp);
+        console.log('t', t);
 
         result.xml = t.concat(
             '</Table>',
@@ -566,7 +579,8 @@ var model_adhoc_kapal = Ext.define('adhoc_kapal', {
 		    {name:"Total daily fuel",type: "Number"},
 		    {name: "F_Sound check",type: "Number"},
 		    {name:"Last fuel loading",type: "Number"},
-		    {name: "Remaining on board",type: "Number"}
+		    {name: "Remaining on board",type: "Number"},
+        {name: "Work Order",type: "String"}
 		 ]
 	}
 );
@@ -705,6 +719,11 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
 			width: 150,
 			dataIndex: 'F_Sound check',
 			renderer: function(v){return parseFloat(v).toFixed(2);}
+		},{
+			header: "Work Order",
+			width: 200,
+			dataIndex: 'Work Order',
+			renderer: function(v){return parseFloat(v).toFixed(2);}
 		}]
 
 });
@@ -799,6 +818,15 @@ var panel_r_adhoc = {
 							window_fuel.setTitle ('Daily Fuel ');//+data.name);
 							// window_fuel.vessel = data.id;
 							// hitung_fuel(new Date(),data.id);
+	        		},
+				}
+			}, {
+				xtype : 'button',
+				text:'Add Work Order',
+				listeners:{
+					click: function() {
+							window_work_order.show();
+							window_work_order.setTitle ('Work Order');//+data.name);
 	        		},
 				}
 
@@ -926,6 +954,92 @@ var panel_form_bunker = Ext.create('Ext.form.Panel', {
     // renderTo: Ext.getBody()
 });
 
+var panel_form_work_order = Ext.create('Ext.form.Panel', {
+    // title: 'Form Fuel Bunkering',
+    bodyPadding: 5,
+    layout: 'anchor',
+    defaults: {
+        anchor: '100%'
+    },
+
+    // The fields
+    defaultType: 'textfield',
+    items: [{
+
+				xtype: 'fieldcontainer',
+				fieldLabel: 'Date Time',
+				layout: 'hbox',
+				combineErrors: true,
+				// defaultType: 'textfield',
+				defaults: {
+				 	hideLabel: 'true'
+				},
+				items: [{
+					 	name: 'date',
+					 	xtype:'datefield',
+					 	flex: 2,
+            maxValue: new Date(),
+						value: new Date(),
+						submitFormat: 'Y-m-d',
+						format: 'd-M-Y',
+					 	allowBlank: false
+				}, {
+					 	name: 'time',
+					 	flex: 2,
+					 	margin: '0 0 0 6',
+					 	xtype:'timefield',
+						increment:30,
+						value: new Date(),
+						format: 'H:i',
+						allowBlank: false
+					}]
+				},{
+					fieldLabel: 'Work Order Number',
+					xtype:'textfield',
+          name: 'value',
+					hideTrigger: true,
+					keyNavEnabled: false,
+					mouseWheelEnabled: false,
+					allowBlank: false
+    }],
+
+    // Reset and Submit buttons
+    buttons: [{
+        text: 'Reset',
+        handler: function() {
+            this.up('form').getForm().reset();
+        }
+    }, {
+        text: 'Submit',
+        formBind: true, //only enabled once the form is valid
+        disabled: true,
+        handler: function() {
+            var form = this.up('form').getForm();
+            if (form.isValid()) {
+							var dt = form.getValues();
+							dt.titik_ukur_id = 11106;
+							console.log('Work Order dt = ',dt);
+							Ext.Ajax.request({
+
+							    url: getAPI()+'/pelindo/work_order',
+									method:'POST',
+
+							    params: dt,
+							    success: function(response){
+							        var text = response.responseText;
+							        // console.log(text);
+											Ext.Msg.alert('Work Order', 'Sukses.</br>('+dt.date+' '+dt.time+':00) = '+dt.value);
+							    }
+							});
+							form.reset();
+							store_work_order.reload();
+
+            }
+        }
+    }],
+    // renderTo: Ext.getBody()
+});
+
 
 var model_fuel_sonding = Ext.define('Fuel_Sonding', {
     extend: 'Ext.data.Model',
@@ -950,7 +1064,7 @@ var store_fuel_sonding = Ext.create('Ext.data.Store', {
 });
 
 var tabel_fuel_sonding = Ext.create('Ext.grid.Panel', {
-    title: 'History Sounding',
+    title: 'History - Sounding',
     store: store_fuel_sonding,
     columns: [
         { text: 'DateTime', dataIndex: 'date' },
@@ -1079,6 +1193,10 @@ var model_fuel_bunker = Ext.define('Fuel_Sonding', {
     extend: 'Ext.data.Model',
     fields: ['date','total']
 });
+var model_work_order = Ext.define('Work_Order', {
+    extend: 'Ext.data.Model',
+    fields: ['date','order_number']
+});
 //
 var store_fuel_bunker = Ext.create('Ext.data.Store', {
     model: model_fuel_bunker,
@@ -1100,8 +1218,30 @@ var store_fuel_bunker = Ext.create('Ext.data.Store', {
 				// }
 		},
 });
+
+var store_work_order = Ext.create('Ext.data.Store', {
+    model: model_fuel_bunker,
+    autoLoad: true,
+		proxy: {
+				type: 'ajax',
+
+				// url:'http://10.10.10.11:1336/pelindo/custom_input?titik_ukur_id=11033',
+				// url:'http://192.168.1.17:1337/pelindo/custom_input?titik_ukur_id=11033',
+				url:getAPI()+'/pelindo/work_order?titik_ukur_id=11106',
+
+				method: 'GET',
+				// params: {titik_ukur_id:12005},
+				// reader: {
+				//     type: 'json',
+				//     //successProperty: 'success',
+				//     root: '',
+				//     // messageProperty: 'message'
+				// }
+		},
+});
+
 var tabel_fuel_bunker = Ext.create('Ext.grid.Panel', {
-    title: 'History Bunkering',
+    title: 'History - Bunkering',
 
     store: store_fuel_bunker,
 
@@ -1109,6 +1249,22 @@ var tabel_fuel_bunker = Ext.create('Ext.grid.Panel', {
         { text: 'DateTime', dataIndex: 'date' },
         { text: 'Total', dataIndex: 'total', flex: 1 },
         { text: 'action', dataIndex: 'phone' }
+    ],
+    // height: 200,
+    flex:1
+    // width: 400,
+    // renderTo: Ext.getBody()
+});
+
+var tabel_work_order = Ext.create('Ext.grid.Panel', {
+    title: 'History - Work Order',
+
+    store: store_work_order,
+
+    columns: [
+        { text: 'DateTime', dataIndex: 'date' },
+        { text: 'Order Number', dataIndex: 'order_number', flex: 1 },
+        { text: 'action', dataIndex: 'action' }
     ],
     // height: 200,
     flex:1
@@ -1147,6 +1303,33 @@ var window_fuel = Ext.create('Ext.window.Window',{
 			    }]
         // itemId : 'hasil_hitung',
     }],
+
+    buttons : [{
+        text : 'Close',
+        handler : function(){
+            this.up('.window').hide();
+        }
+    }]
+
+});
+
+var window_work_order = Ext.create('Ext.window.Window',{
+    title : 'work order window',
+    width : 400,
+    modal : true,
+    closable: false,
+    layout : {
+        type : 'fit',
+        align : 'stretch'
+    },
+    items : [{
+          layout:{
+            type:'vbox',
+            align:'stretch'
+          },
+          items:[ panel_form_work_order,tabel_work_order]
+
+      }],
 
     buttons : [{
         text : 'Close',
