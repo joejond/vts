@@ -206,7 +206,7 @@ var tabel_detail_jam = Ext.create('Ext.grid.Panel', {
 			},{
 				header: "FM-Temp",
 				width: 70,
-				dataIndex: 'AE2-FM Temp'
+				dataIndex: 'AE2-FM Tem'
 			},{
 				header: "RPM",
 				width: 70,
@@ -233,7 +233,7 @@ var tabel_detail_jam = Ext.create('Ext.grid.Panel', {
 		},{
 			header: "FM-Temp",
 			width: 70,
-			dataIndex: 'AE1-FM Tem'
+			dataIndex: 'AE1-FM Temp'
 		},{
 			header: "RPM",
 			width: 70,
@@ -416,7 +416,7 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
 			},{
 				header: "FM-Temp",
 				width: 70,
-				dataIndex: 'AE2-FM Temp'
+				dataIndex: 'AE2-FM Tem'
 			},{
 				header: "RPM",
 				width: 70,
@@ -443,7 +443,7 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
 		},{
 			header: "FM-Temp",
 			width: 70,
-			dataIndex: 'AE1-FM Tem'
+			dataIndex: 'AE1-FM Temp'
 		},{
 			header: "RPM",
 			width: 70,

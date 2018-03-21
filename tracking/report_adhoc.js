@@ -1195,7 +1195,7 @@ var model_fuel_bunker = Ext.define('Fuel_Sonding', {
 });
 var model_work_order = Ext.define('Work_Order', {
     extend: 'Ext.data.Model',
-    fields: ['date','order_number']
+    fields: ['date','work_order']
 });
 //
 var store_fuel_bunker = Ext.create('Ext.data.Store', {
@@ -1220,7 +1220,7 @@ var store_fuel_bunker = Ext.create('Ext.data.Store', {
 });
 
 var store_work_order = Ext.create('Ext.data.Store', {
-    model: model_fuel_bunker,
+    model: model_work_order,
     autoLoad: true,
 		proxy: {
 				type: 'ajax',
@@ -1263,7 +1263,7 @@ var tabel_work_order = Ext.create('Ext.grid.Panel', {
 
     columns: [
         { text: 'DateTime', dataIndex: 'date' },
-        { text: 'Order Number', dataIndex: 'order_number', flex: 1 },
+        { text: 'Order Number', dataIndex: 'work_order', flex: 1 },
         { text: 'action', dataIndex: 'action' }
     ],
     // height: 200,
