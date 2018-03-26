@@ -151,7 +151,7 @@ function onClickPeta(map){
     resetCenterVessel(map);
     show_tracking(null);
 
-    buntut.stop();
+    if (buntut) buntut.stop();
   });
 }
 
@@ -332,10 +332,10 @@ function create_rute_buntut(d){
                 // data_ws.t = arr_dat[0].waktu;
 
                 if(JSON.stringify(data_ws) === JSON.stringify(akhir)){
-                  console.log('sama');
+                  // console.log('sama');
                 }
                 else {
-                  console.log('beda');
+                  // console.log('beda');
                   d_rute.push(data_ws);
                   d_rute.shift();
                   // console.log(d_rute.length);
@@ -623,44 +623,63 @@ var panel_form_tracking = Ext.create('Ext.form.Panel', {
         change: function( a,newValue, oldValue){
           // console.log(newValue,oldValue);
           if (newValue.track_period == 'period'){
-            Ext.getCmp('track_start').setDisabled(false);
-            Ext.getCmp('track_end').setDisabled(false);
+            // Ext.getCmp('track_start').setDisabled(false);
+            // Ext.getCmp('track_end').setDisabled(false);
+            Ext.getCmp('track_date').setDisabled(false);
             // console.log('disable');
           }
           else{
-            Ext.getCmp('track_start').setDisabled(true);
-            Ext.getCmp('track_end').setDisabled(true);
+            // Ext.getCmp('track_start').setDisabled(true);
+            // Ext.getCmp('track_end').setDisabled(true);
+            Ext.getCmp('track_date').setDisabled(true);
           }
         }
       }
-    },{
-					fieldLabel: 'Track Start',
+    },
+    {
+					fieldLabel: 'Track Date',
 					xtype:'datefield',
           disabled:'true',
-          id: 'track_start',
-					name: 'tr_start',
+          id: 'track_date',
+					name: 'tr_date',
           format: 'd-M-Y',
           // value: new Date(),
-          // maxValue: new Date(),
+          maxValue: new Date(),
           vtype: 'daterange',
-          endDateField: 'track_end',
+          // endDateField: 'track_end',
           // submitFormat:'timestamp',
-          submitFormat:'Y-m-d',
-					allowBlank: false
-    },{
-          fieldLabel: 'Track End',
-          xtype:'datefield',
-          disabled:'true',
-          id: 'track_end',
-          name: 'tr_end',
-          format: 'd-M-Y',
-          // maxValue: new Date(),
-          // value: new Date(),
-          vtype: 'daterange',
-          startDateField: 'track_start',
-          submitFormat:'Y-m-d',
-          allowBlank: false
-    }],
+          submitFormat:'Y-m-d'
+					// allowBlank: false
+    }
+    // {
+		// 			fieldLabel: 'Track Start',
+		// 			xtype:'datefield',
+    //       disabled:'true',
+    //       id: 'track_start',
+		// 			name: 'tr_start',
+    //       format: 'd-M-Y',
+    //       // value: new Date(),
+    //       // maxValue: new Date(),
+    //       vtype: 'daterange',
+    //       endDateField: 'track_end',
+    //       // submitFormat:'timestamp',
+    //       submitFormat:'Y-m-d'
+		// 			// allowBlank: false
+    // },{
+    //       fieldLabel: 'Track End',
+    //       xtype:'datefield',
+    //       disabled:'true',
+    //       id: 'track_end',
+    //       name: 'tr_end',
+    //       format: 'd-M-Y',
+    //       // maxValue: new Date(),
+    //       // value: new Date(),
+    //       vtype: 'daterange',
+    //       startDateField: 'track_start',
+    //       submitFormat:'Y-m-d'
+    //       // allowBlank: false
+    // }
+  ],
 
     // Reset and Submit buttons
     buttons: [{
@@ -671,7 +690,7 @@ var panel_form_tracking = Ext.create('Ext.form.Panel', {
         handler: function() {
 
             // console.log(taskBuntut);
-            buntut.stop();
+            if (buntut) buntut.stop();
 
             var form = this.up('form').getForm();
             if (form.isValid()) {
@@ -679,6 +698,7 @@ var panel_form_tracking = Ext.create('Ext.form.Panel', {
 
               show_tracking(null);
 
+              var valid = false;
               var tg = new Date();
               console.log(tg.getTime());
 
@@ -695,6 +715,8 @@ var panel_form_tracking = Ext.create('Ext.form.Panel', {
                 dt.start = dt.end - 86400;
                 // console.log('waktu sekarang (epcohtime) => ',Math.floor(new Date().getTime() /1000) );
                 dt.density = 's';
+
+                if (dt.start && dt.end && dt.density) valid = true;
               }
               else if(dt.track_period === 'today')
               {
@@ -702,39 +724,54 @@ var panel_form_tracking = Ext.create('Ext.form.Panel', {
                 dt.start = parseInt(new Date(tg.getFullYear()+'-' +(tg.getMonth() +1)+'-'+tg.getDate() + ' 00:00:00' ).getTime()/1000);
                 dt.end = parseInt(tg.getTime() /1000);
                 dt.density = 's';
+
+                if (dt.start && dt.end && dt.density) valid = true;
               }
               else {
                 // console.log('periode');
-                dt.start = parseInt(new Date(dt.tr_start + ' 00:00:00' ).getTime()/1000);
-                dt.end = parseInt(new Date(dt.tr_end + ' 00:00:00' ).getTime()/1000);
-                dt.density = 'h';
+                // dt.start = parseInt(new Date(dt.tr_start + ' 00:00:00' ).getTime()/1000);
+                // dt.end = parseInt(new Date(dt.tr_end + ' 00:00:00' ).getTime()/1000);
+                dt.start = parseInt(new Date(dt.tr_date + ' 00:00:00' ).getTime()/1000);
+                dt.end = parseInt(new Date(dt.tr_date + ' 23:59:59' ).getTime()/1000);
+                dt.density = 's';
+                // console.log('dt.tr_date', dt.tr_date);
+                console.log('dt.start', dt.start);
+                console.log('dt.end', dt.end);
+                console.log('dt.density', dt.density);
 
+                if (dt.start && dt.end && dt.density) valid = true;
               }
 
               delete dt.track_period;
-              delete dt.tr_start;
-              delete dt.tr_end;
+              // delete dt.tr_start;
+              // delete dt.tr_end;
+              delete dt.tr_date;
 
+              console.log('valid', valid);
+              if (valid) {
+                Ext.Ajax.request({
+                    url   : getAPI()+'/map/track-marine',
+  									method:'get',
+  							    params: dt,
+  							    success: function(response){
+  							        var res = JSON.parse(response.responseText);
 
-							Ext.Ajax.request({
-                  url   : getAPI()+'/map/track-marine',
-									method:'get',
-							    params: dt,
-							    success: function(response){
-							        var res = JSON.parse(response.responseText);
+                        var d_rute = create_rute(res);
+                        create_tracking(d_rute,res);
+                        show_tracking(atlas);
+                        resetCenterTracking(atlas);
+                        myMask.hide();
 
-                      var d_rute = create_rute(res);
-                      create_tracking(d_rute,res);
-                      show_tracking(atlas);
-                      resetCenterTracking(atlas);
-                      myMask.hide();
+  							    },
+                    callback: function(a,b,c){
 
-							    },
-                  callback: function(a,b,c){
-
-                  }
-							});
-							form.reset();
+                    }
+  							});
+                form.reset();
+              } else {
+                alert("Please complete the form !");
+                myMask.hide();
+              }
 							// store_fuel_bunker.reload();
 
             }

@@ -16,7 +16,7 @@
 	//else echo 'Sukses';
 
 //<<<<<<< HEAD
-$db = new PDO('mysql:host=localhost;dbname=monita4', 'monita4', 'monita4');
+$db = new PDO('mysql:host=localhost;dbname=monita4', 'root', 'root');
 //=======
 // $db = new PDO('mysql:host=localhost;dbname=marine_1', 'marine', 'monita2014');
 //$db = new PDO('mysql:host=10.10.10.11;dbname=monita4', 'monita4', 'monita4');
