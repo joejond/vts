@@ -462,7 +462,7 @@ var grafik = new Ext.create('Chart.ux.Highcharts', {
     xField: 'time',
     chartConfig: {
         chart: {
-            marginRight: 400,
+            marginRight: 500,
             zoomType: 'x',
             animation: {
                 duration: 1500,

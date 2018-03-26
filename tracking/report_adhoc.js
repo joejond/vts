@@ -316,12 +316,12 @@ Ext.define('MyGrid', {
 
 
                     var fld = this.getModelField(cm[i].dataIndex);
-                    console.log('field id', fld);
+                    // console.log('field id', fld);
                     //console.log("fld.type: " + fld.name);
                     if(fld.name=="date"){
                     	//console.log("Tanggal dicetak: " + fld.name);
                     	// cellType.push("DateTime");
-                      cellType.push("DateTime");
+                      cellType.push("String");
                     	cellTypeClass.push("date");
                     }
                     else{
