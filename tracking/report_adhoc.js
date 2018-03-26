@@ -84,6 +84,7 @@ Ext.define('MyGrid', {
     	 if (!title) title = this.title;
 
         var vExportContent = this.getExcelXml(includeHidden, title);
+        console.log('xml nya xls = ',vExportContent);
         var location = 'data:application/vnd.ms-excel;base64,' + Base64.encode(vExportContent);
 
         //  dynamically create and anchor tag to force download with suggested filename
@@ -417,8 +418,8 @@ Ext.define('MyGrid', {
                     var v = r[cm[j].dataIndex];
                     if (cellType[k] !== "None") {
                         if (cellType[k] == 'DateTime') {
-                            temp += '<Cell><Data ss:Type="' + cellType[k] + '">';
-                            t += '<Cell><Data ss:Type="' + cellType[k] + '">';
+                            temp += '<Cell><Data>';
+                            t += '<Cell><Data>';
                             temp += Ext.Date.format(v, 'Y-m-d');
                             t += Ext.Date.format(v, 'Y-m-d');
                         } else {
@@ -436,8 +437,8 @@ Ext.define('MyGrid', {
             temp += '</Row>';
             t += '</Row>';
         }
-        console.log('temp', temp);
-        console.log('t', t);
+        // console.log('temp', temp);
+        // console.log('t', t);
 
         result.xml = t.concat(
             '</Table>',
