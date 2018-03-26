@@ -314,29 +314,46 @@ function create_rute_buntut(d){
             var d_rute = create_rute(res);
             var l_rute = d_rute.length;
 
-            var i =0;
+            // var i =0;
 
 
             buntut = taskBuntut.newTask({
               run: function(){
-                console.log(i);
-                d_rute.pop();
-                console.log(arr_dat);
+                show_tracking(null);
+                // console.log(i);
+                var akhir = d_rute[d_rute.length -1];
+
+                // d_rute.pop();
+                // console.log(arr_dat);
                 var data_ws = {};
-                console.log(d_rute.length);
+                // console.log(d_rute.length);
                 data_ws.lat = parseFloat(arr_dat[0].lat);
                 data_ws.lng = parseFloat(arr_dat[0].lng);
+                // data_ws.t = arr_dat[0].waktu;
 
-                console.log(data_ws);
-                d_rute.push(data_ws);
-                console.log(d_rute.length);
+                if(JSON.stringify(data_ws) === JSON.stringify(akhir)){
+                  console.log('sama');
+                }
+                else {
+                  console.log('beda');
+                  d_rute.push(data_ws);
+                  d_rute.shift();
+                  // console.log(d_rute.length);
+                  // console.log(d_rute);
+
+                }
+                create_tracking(d_rute,res);
+                show_tracking(atlas);
+                // console.log(data_ws);
 
 
 
 
 
 
-                i++;
+
+
+                // i++;
               },
               interval : 1000
 
