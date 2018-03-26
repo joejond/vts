@@ -462,7 +462,7 @@ var grafik = new Ext.create('Chart.ux.Highcharts', {
     xField: 'time',
     chartConfig: {
         chart: {
-            marginRight: 400,
+            marginRight: 500,
             zoomType: 'x',
             animation: {
                 duration: 1500,
@@ -785,9 +785,9 @@ function daily_akum() {
         success: function (data) {
     			   var hasil = Ext.JSON.decode(data.responseText);
           // console.log(hasil[0]);
-             console.log('get_data_summary_bima', data);
+             // console.log('get_data_summary_bima', data);
               var x = hasil[0];
-             console.log('x = ', x);
+             // console.log('x = ', x);
              if (x) {
                eng1_daily = parseFloat(x['ME2 Daily Consumtion']).toFixed(2) ;
                eng2_daily = parseFloat(x['ME1 Daily Consumtion']).toFixed(2) ;
