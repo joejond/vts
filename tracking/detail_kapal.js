@@ -661,7 +661,7 @@ var window_detail_jam = Ext.create('Ext.window.Window',{
     closable: false,
     listeners: {
     	boxready: function(){
-    		console.log("Window detail_jam: " + detail_jam_index);
+    		console.log("Window detail jam: " + detail_jam_index);
     	},
 			show: function(panel){
 				console.log("Window onShow : "+detail_jam_index);

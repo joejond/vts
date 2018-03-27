@@ -599,12 +599,42 @@ var store_adhoc_kapal = Ext.create('Ext.data.Store', {
     },
 });
 
+var detail_tanggal_index;
+
 //var tabel_r_adhoc = Ext.create('Ext.grid.Panel', {
 var tabel_r_adhoc = Ext.create('MyGrid', {
     id : 'table_ship_adhoc',
     title: 'Report Ad-Hoc',
     store : store_adhoc_kapal,
     flex: 4,
+    listeners: {
+      select: function(selModel, record, index, options) {
+           // var index_jam = record.getData().t;
+           // console.log('selModel', selModel);
+           // console.log('record.getData()', record.getData());
+           // console.log('index', index);
+           // console.log('options', options);
+			     // detail_tanggal_index = Ext.Date.format(index_jam,'Y-m-d H');
+           // window_detail_work_order.show();
+      },
+      cellclick : function(view, cell, cellIndex, record, row, rowIndex, e) {
+           // console.log('view', view);
+           // console.log('cell', cell);
+           // console.log('cellIndex', cellIndex);
+           // console.log('record', record);
+           // console.log('row', row);
+           // console.log('rowIndex', rowIndex);
+           // console.log('e', e);
+           if (cellIndex == 16 && record.getData()['Work Order'] != 0) {
+             var index_date = new Date(record.getData().date);
+             // console.log('index_date', index_date);
+             detail_tanggal_index = Ext.Date.format(index_date,'Y-m-d');
+             // console.log('detail_tanggal_index', detail_tanggal_index);
+
+             window_detail_work_order.show();
+           }
+      }
+		},
    	dockedItems: [{
                 xtype: 'toolbar',
                 docked: 'bottom',
@@ -724,7 +754,7 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
 			header: "Work Order",
 			width: 200,
 			dataIndex: 'Work Order',
-			renderer: function(v){return parseFloat(v).toFixed(2);}
+			renderer: function(v){return v;}
 		}]
 
 });
@@ -826,6 +856,7 @@ var panel_r_adhoc = {
 				text:'Add Work Order',
 				listeners:{
 					click: function() {
+              store_work_order.load();
 							window_work_order.show();
 							window_work_order.setTitle ('Work Order');//+data.name);
 	        		},
@@ -1273,6 +1304,21 @@ var tabel_work_order = Ext.create('Ext.grid.Panel', {
     // renderTo: Ext.getBody()
 });
 
+var tabel_detail_work_order = Ext.create('Ext.grid.Panel', {
+    title: 'Detail - Work Order',
+
+    store: store_work_order,
+
+    columns: [
+        { text: 'DateTime', dataIndex: 'date' },
+        { text: 'Order Number', dataIndex: 'work_order', flex: 1 }
+    ],
+    // height: 200,
+    flex:1
+    // width: 400,
+    // renderTo: Ext.getBody()
+});
+
 var window_fuel = Ext.create('Ext.window.Window',{
     title : 'fuel window',
     width : 400,
@@ -1315,7 +1361,7 @@ var window_fuel = Ext.create('Ext.window.Window',{
 });
 
 var window_work_order = Ext.create('Ext.window.Window',{
-    title : 'work order window',
+    title : 'Work Order',
     width : 400,
     modal : true,
     closable: false,
@@ -1338,5 +1384,40 @@ var window_work_order = Ext.create('Ext.window.Window',{
             this.up('.window').hide();
         }
     }]
+});
 
+var window_detail_work_order = Ext.create('Ext.window.Window',{
+    title : 'Work Order',
+    width : 400,
+    modal : true,
+    closable: false,
+    listeners: {
+    	boxready: function(){
+    		console.log("Window detail tangga: " + detail_tanggal_index);
+    	},
+			show: function(panel){
+				console.log("Window onShow : "+detail_tanggal_index);
+				param = {tanggal:detail_tanggal_index};
+				store_work_order.load({params:param});
+			}
+    },
+    layout : {
+        type : 'fit',
+        align : 'stretch'
+    },
+    items : [{
+          layout:{
+            type:'vbox',
+            align:'stretch'
+          },
+          items:[tabel_detail_work_order]
+
+      }],
+
+    buttons : [{
+        text : 'Close',
+        handler : function(){
+            this.up('.window').hide();
+        }
+    }]
 });

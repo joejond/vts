@@ -309,9 +309,10 @@ function create_rute_buntut(d){
         params: dtObj,
         success: function(response){
             var res = JSON.parse(response.responseText);
-            console.log(res);
-            console.log(res.length);
+            // console.log(res);
+            // console.log(res.length);
             var d_rute = create_rute(res);
+            console.log('d_rute', d_rute);
             var l_rute = d_rute.length;
 
             // var i =0;
@@ -332,10 +333,11 @@ function create_rute_buntut(d){
                 // data_ws.t = arr_dat[0].waktu;
 
                 if(JSON.stringify(data_ws) === JSON.stringify(akhir)){
-                  // console.log('sama');
+                //   // console.log('sama');
+                //   // console.log('d_rute', d_rute);
                 }
                 else {
-                  // console.log('beda');
+                  // console.log('beda');]
                   d_rute.push(data_ws);
                   d_rute.shift();
                   // console.log(d_rute.length);
@@ -418,6 +420,14 @@ function create_tracking(d_rute,d_vessel){
   var jml_rute = d_rute.length;
   var persen_50 = (Math.floor(jml_rute * 0.5));
   var persen_30 = (Math.floor(jml_rute * 0.3));
+  var persen_20 = (Math.floor(jml_rute * 0.2));
+
+  // if (persen_50+persen_30+persen_20 != jml_rute) return;
+
+  // console.log('d_rute', d_rute);
+  // console.log('persen_50', persen_50);
+  // console.log('persen_30', persen_30);al
+
   // var sisa = jml_rute - last_30;
 
   var rute1 =[],rute2=[],rute3=[];
