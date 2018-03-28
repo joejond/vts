@@ -1088,7 +1088,6 @@ var panel_form_work_order = Ext.create('Ext.form.Panel', {
 							});
 							form.reset();
 							store_work_order.reload();
-
             }
         }
     }],
@@ -1405,6 +1404,7 @@ var window_work_order = Ext.create('Ext.window.Window',{
         text : 'Close',
         handler : function(){
             this.up('.window').hide();
+            store_adhoc_kapal.load({params: { id: id_vessel_adhoc, m: month_adhoc}});
         }
     }]
 });
