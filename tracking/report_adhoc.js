@@ -642,7 +642,28 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
                     xtype: 'button',
                     text: 'Download to Excel',
                     handler: function(b, e) {
-                        b.up('grid').downloadExcelXml();
+                        // b.up('grid').downloadExcelXml();
+                        // console.log('id_vessel_adhoc', id_vessel_adhoc);
+                        // console.log('month_adhoc', month_adhoc);
+                        // var dt = {
+                        //   id: id_vessel_adhoc,
+                        //   m: month_adhoc,
+                        //   export: true
+                        // };
+                        // console.log(dt);
+                        window.open(getAPI()+'/get_data_adhoc?id=' + id_vessel_adhoc + '&m=' + Ext.Date.format(month_adhoc,'Y-m-d') + '&export=true');
+                        // http://project.daunbiru.com:1336/get_data_adhoc?_dc=1522145700890&id=Bima%20333-t&m=2018-03-27T00%3A00%3A00&export=true
+                        // Ext.Ajax.request({
+                        //     url: getAPI()+'/get_data_adhoc',
+                        //     method:'GET',
+                        //     // jsonData:json,
+                        //     params: dt,
+                        //     success: function(response){
+                        //         var text = response.responseText;
+                        //         window.open(text);
+                        //         // console.log(text);
+                        //     }
+                        // });
                     }
                 }]
             }
@@ -759,6 +780,8 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
 
 });
 
+var id_vessel_adhoc;
+var month_adhoc;
 
 var panel_r_adhoc = {
 	dockedItems: [{
@@ -780,16 +803,16 @@ var panel_r_adhoc = {
 				store: store_combo_kapal1,
 				listeners:{
 					select: function() {
-						var month='2018-02';
-						store_adhoc_kapal.load({params: { id: id_vessel_adhoc, m: month}});
-						console.log("Combo box adhoc selected [" + id_vessel_adhoc +"],[" + month +"]");
+						// var month='2018-02';
+						// store_adhoc_kapal.load({params: { id: id_vessel_adhoc, m: month}});
+						// console.log("Combo box adhoc selected [" + id_vessel_adhoc +"],[" + month +"]");
 					},
 					afterrender : function(){
 						var isi = this.getStore().data.items[0].data['name'];
 						this.setValue(isi);
 						id_vessel_adhoc = this.getValue();
 						comb_kapal2 = (comb_kapal1 != '') ? comb_kapal2 : isi;
-						var month_adhoc =Ext.Date.format(Ext.getCmp('combo_month_adhoc').getValue(),'Y-m');
+						month_adhoc = Ext.Date.format(Ext.getCmp('combo_month_adhoc').getValue(),'Y-m');
 						//var month_adhoc = Ext.getCmp('combo_month_adhoc').getValue();
 						var param = {user_id: dt.idu,id:id_kpl,tgl:tgl_sel1,tz: getTimeZone()};
 
@@ -819,8 +842,8 @@ var panel_r_adhoc = {
 				listeners: {
 					change: function () {
 
-						var id_vessel_adhoc=Ext.getCmp('cb_vessel_adhoc').getValue();
-						var month_adhoc=Ext.Date.format(this.getValue(),'Y-m');
+						id_vessel_adhoc=Ext.getCmp('cb_vessel_adhoc').getValue();
+						month_adhoc=Ext.Date.format(this.getValue(),'Y-m');
 						console.log("Combo box adhoc afterrender : [" + cb_vessel_adhoc +"],[" + month_adhoc +"]");
 						store_adhoc_kapal.load({params: { id: id_vessel_adhoc, m: month_adhoc}});
 
@@ -830,7 +853,7 @@ var panel_r_adhoc = {
 						// tgl_sel1 = Ext.Date.format(this.getValue(),'Y-m-d');
 						// tgl_sel2 = (tgl_sel1 != '') ? tgl_sel1 : Ext.Date.format(new Date(), 'd-M-Y' );
 						//console.log(tgl_sel1);
-						var month_adhoc= this.getValue();
+						month_adhoc= this.getValue();
 						//var id_vessel_adhoc=cb_vessel_adhoc.getValue();
 						console.log("Bulan dipilih: " + month_adhoc);
 						//store_adhoc_kapal.load({params: { id: id_vessel_adhoc, m: month}});
