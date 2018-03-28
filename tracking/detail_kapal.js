@@ -562,6 +562,7 @@ var panel_detail = {
 						comb_kapal1 = this.getValue();
 						comb_kapal2 = this.getRawValue();
 						var param = {user_id: dt.idu,id:comb_kapal1,tgl:tgl_sel1,tz: getTimeZone()};
+						console.log('param select', param);
 						store_detail_kapal.load({params: param});
 						Ext.getCmp('table_ship').setTitle('Vessel '+comb_kapal2 +' on '+ tgl_sel2);
 						//tabel_detail_kapal
@@ -571,12 +572,14 @@ var panel_detail = {
 					afterrender : function(){
 							var isi = this.getStore().data.items[0].data['name'];
 							this.setValue(isi);
-							id_kpl = this.getValue();
+							id_kpl = this.getStore().data.items[0].data['id'];
 							comb_kapal2 = (comb_kapal1 != '') ? comb_kapal2 : isi;
 
 							var tgl_ini = Ext.getCmp('date_total_harian').getValue();
 							var tgl_sesuai = Ext.Date.format(tgl_ini, 'd-M-Y' );
+							tgl_sel1 = Ext.Date.format(new Date(), 'Y-m-d' );
 							var param = {user_id: dt.idu,id:id_kpl,tgl:tgl_sel1,tz: getTimeZone()};
+							console.log('param afterrender', param);
 							// console.log(param);
 							// store_detail_kapal.load({params: { id: comb_kapal1, tgl: tgl_sel1}});
 							store_detail_kapal.load({params: param});
@@ -621,17 +624,18 @@ var panel_detail = {
 				xtype : 'button',
 				text : 'Export to Excel',
 				handler : function(){
-					var tgl = Ext.Date.format(Ext.getCmp('date_total1').getValue(),'Y-m-d');
-					var ves = Ext.getCmp('cb_vessel').getValue();
-					// console.log(comb_kapal1);
-					var kpl = (comb_kapal1=== '')?'1':comb_kapal1;
-					// console.log('export bro dari '+tgl+' ==> '+kpl);
-					// window.open('export_data_detail.php?id='+kpl+'&t='+tgl);
-					// Ext.Ajax.request({
-					// 	params : {t : tgl, id: ves },
-					// 	method : 'GET',
-					// 	url : 'export.php'
-					// })
+					// var tgl = Ext.Date.format(Ext.getCmp('date_total1').getValue(),'Y-m-d');
+					// var ves = Ext.getCmp('cb_vessel').getValue();
+					// // console.log(comb_kapal1);
+					// var kpl = (comb_kapal1=== '')?'1':comb_kapal1;
+					// // console.log('export bro dari '+tgl+' ==> '+kpl);
+					// // window.open('export_data_detail.php?id='+kpl+'&t='+tgl);
+					// // Ext.Ajax.request({
+					// // 	params : {t : tgl, id: ves },
+					// // 	method : 'GET',
+					// // 	url : 'export.php'
+					// // })
+					window.open(getAPI()+'/get_data_bima?user_id=' + dt.idu + '&id=' + id_kpl + '&tgl=' + tgl_sel1 + '&tz=' + getTimeZone() + '&export=true');
 
 				}
 			}
