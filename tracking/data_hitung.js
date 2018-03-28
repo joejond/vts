@@ -297,7 +297,7 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
 
     tbar : ['->',{
         xtype : 'button',
-        text : 'Export xls',
+        text : 'Export to Excel',
         handler : function(){
             // console.log('ini kiirm ke excel');
             // console.log(comb_kapal22,tgl_sel22);
@@ -305,6 +305,8 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
             // var id_kpl = (comb_kapal21 === '')? '1' : comb_kapal21;
             // console.log(id_kpl,tgl_sel21);
             // window.open('export_data_perjam.php?id='+id_kpl+'&t='+tgl_sel21);
+            window.open(getAPI()+'/get_data_summary_ship_hourly?tz='+getTimeZone()+'&tgl='+tgl_sel21+'&export=true');
+            // store_akumulasi_perjam.load({params : { /*id: comb_kapal21,*/ tz: getTimeZone(),tgl: tg }});
 
         }
         // tooltip: 'Export to xls files'
@@ -672,9 +674,11 @@ var panel_hitung = {
               			// store_grafik.load({params : { tz: getTimeZone(), tgl: tgl_sel21 }});
               			// console.log('comb_kapal22 : '+comb_kapal22);
               			// console.log('tgl_sel21  : '+tgl_sel21);
-                    var tg = Ext.Date.format(Ext.getCmp('date_tab2').getValue(),'Y-M-d');
+                    var tg = Ext.Date.format(Ext.getCmp('date_tab2').getValue(),'Y-m-d');
+                    tgl_sel21 = tg;
                     store_grafik.load({params : { tz: getTimeZone(), tgl: tg }});
                     store_akumulasi_perjam.load({params : { /*id: comb_kapal21,*/ tz: getTimeZone(),tgl: tg }});
+                    daily_akum();
 
                     // var tgl_ditab2 = (tgl_sel21=='')?Ext.getCmp('date_tab').getValue();
                     // console.log(Ext.getCmp('date_tab').getValue());
