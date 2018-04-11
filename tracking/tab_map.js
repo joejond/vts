@@ -777,7 +777,7 @@ var panel_form_tracking = Ext.create('Ext.form.Panel', {
 
                     }
   							});
-                form.reset();
+                // form.reset();
               } else {
                 alert("Please complete the form !");
                 myMask.hide();
