@@ -649,7 +649,7 @@ var panel_hitung = {
               	select: function() {
               		comb_kapal21 = this.getValue();
               		comb_kapal22 = this.getRawValue();
-              		console.log(comb_kapal21+' --> '+ comb_kapal22);
+              		// console.log(comb_kapal21+' --> '+ comb_kapal22);
               		//console.log(tgl_sel1);
               		store_grafik.load({params: { /*id: comb_kapal21, */tz: getTimeZone(), tgl: tgl_sel21}});
               		store_akumulasi_perjam.load({params : { /*id: comb_kapal21,*/ tz: getTimeZone(),tgl: tgl_sel21 }});
@@ -704,7 +704,7 @@ var panel_hitung = {
     					//console.log('Date selected: ', Ext.Date.format(this.getValue(),'Y-m-d'));
     					//console.log()
     					tgl_sel21 = Ext.Date.format(this.getValue(),'Y-m-d');
-              console.log('onchage ==> ',tgl_sel21);
+              // console.log('onchage ==> ',tgl_sel21);
     					// store_grafik.load({params: { id: comb_kapal21, tgl: tgl_sel21}});
     					store_grafik.load({params: { /*id: comb_kapal21,*/ tz:getTimeZone() , tgl: tgl_sel21}});
     					// store_akumulasi.load({params : { id: comb_kapal21, tgl: tgl_sel21 }});

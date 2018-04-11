@@ -574,7 +574,7 @@ var panel_detail = {
 							this.setValue(isi);
 							id_kpl = this.getStore().data.items[0].data['id'];
 							comb_kapal2 = (comb_kapal1 != '') ? comb_kapal2 : isi;
-
+							comb_kapal1 = id_kpl;
 							var tgl_ini = Ext.getCmp('date_total_harian').getValue();
 							var tgl_sesuai = Ext.Date.format(tgl_ini, 'd-M-Y' );
 							tgl_sel1 = Ext.Date.format(new Date(), 'Y-m-d' );
@@ -607,6 +607,8 @@ var panel_detail = {
 						store_detail_kapal.load({params: param});
 						tgl_sel2 = (tgl_sel1 != '') ? tgl_sel1 : Ext.Date.format(new Date(), 'd-M-Y' );
 						//console.log(tgl_sel2);
+						// console.log('comb_kapal1', comb_kapal1);
+						// console.log('comb_kapal2', comb_kapal2);
 						Ext.getCmp('table_ship').setTitle('Vessel '+comb_kapal2 +' on '+ tgl_sel2);
 						//update_text1();
 					},
