@@ -795,12 +795,16 @@ function daily_akum() {
              if (x) {
                eng1_daily = parseFloat(x['ME2 Daily Consumtion']).toFixed(2) ;
                eng2_daily = parseFloat(x['ME1 Daily Consumtion']).toFixed(2) ;
-               rh_engine1 = parseFloat(x['ME2 Working Hours']).toFixed(2) ;
-               rh_engine2 = parseFloat(x['ME1 Working Hours']).toFixed(2) ;
+               rh_engine1 = getHour(x['ME2 Working Hours']*60);
+               rh_engine2 = getHour(x['ME1 Working Hours']*60);
+               // rh_engine1 = parseFloat(x['ME2 Working Hours']).toFixed(2) ;
+               // rh_engine2 = parseFloat(x['ME1 Working Hours']).toFixed(2) ;
                ae1_daily = parseFloat(x['AE2 Daily Consumtion']).toFixed(2) ;
                ae2_daily = parseFloat(x['AE1 Daily Consumtion']).toFixed(2) ;
-               rh_ae1 = parseFloat(x['AE2 Working Hours']).toFixed(2) ;
-               rh_ae2 = parseFloat(x['AE1 Working Hours']).toFixed(2) ;
+               rh_ae1 = getHour(x['AE2 Working Hours']*60);
+               rh_ae2 = getHour(x['AE1 Working Hours']*60);
+               // rh_ae1 = parseFloat(x['AE2 Working Hours']).toFixed(2) ;
+               // rh_ae2 = parseFloat(x['AE1 Working Hours']).toFixed(2) ;
                total_daily = parseFloat(x['Total Daily']).toFixed(2) ;
              } else {
                eng1_daily = "NaN" ;
@@ -830,8 +834,8 @@ function daily_akum() {
             			'<td><span style="font-size:18px;"> ' + eng2_daily + ' Liters</span></td>'+
                   '</tr>' +
                   '<tr>'+
-                  '<td><span style="font-size:18px;"> ' + rh_engine1 + ' Hours</span></td>' +
-            			'<td><span style="font-size:18px;"> ' + rh_engine2 + ' Hours</span></td>'+
+                  '<td><span style="font-size:18px;"> ' + rh_engine1 + '</span></td>' +
+            			'<td><span style="font-size:18px;"> ' + rh_engine2 + '</span></td>'+
                   '</tr>' +
             			'<tr><td colspan="2"></td></tr>' +
             			'<tr><td colspan="2">Genset Daily</td></tr>' +
@@ -845,14 +849,24 @@ function daily_akum() {
             			'<td><span style="font-size:18px;">' + ae2_daily + ' Liter</span></td>' +
             			'</tr>' +
                   '<tr>' +
-            			'<td><span style="font-size:18px;">' + rh_ae1 + ' Hours</span></td>' +
-            			'<td><span style="font-size:18px;">' + rh_ae2 + ' Hours</span></td>' +
+            			'<td><span style="font-size:18px;">' + rh_ae1 + '</span></td>' +
+            			'<td><span style="font-size:18px;">' + rh_ae2 + '</span></td>' +
             			'</tr>' +
             			'</table>' ;
             			Ext.getCmp('panel_daily').update(content_akum);
 
 			         }
     });
+}
+
+function getHour(value) {
+    if (value == null) { return "0 hr"; }
+    if (value <= 0) { return "0 hr"; }
+    var hours = Math.floor(value / 60);
+    var minutes = value % 60;
+    var hour = (hours > 1) ? hours + " hrs " : hours + " hr ";
+    var min = (minutes > 0) ? parseFloat(minutes).toFixed(0) + " mins" : "";
+    return hour + min;
 }
 
 function ambil_status()

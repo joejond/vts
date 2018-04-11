@@ -252,7 +252,8 @@ session_start();
 				var dt = {u:$("input[name='userid']").val(),p:encodeMD5(pas)};
 				var j = JSON.stringify(dt);
 				var uid = btoa(j);
-
+        // console.log('j', j);
+        // console.log('uid', uid);
         $.ajax(
         {
             // Post the variable fetch to url.
