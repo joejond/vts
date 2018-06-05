@@ -1020,44 +1020,78 @@ var panel_form_work_order = Ext.create('Ext.form.Panel', {
     // The fields
     defaultType: 'textfield',
     items: [{
-
-				xtype: 'fieldcontainer',
-				fieldLabel: 'Date Time',
-				layout: 'hbox',
-				combineErrors: true,
-				// defaultType: 'textfield',
-				defaults: {
-				 	hideLabel: 'true'
-				},
-				items: [{
-					 	name: 'date',
-					 	xtype:'datefield',
-					 	flex: 2,
-            maxValue: new Date(),
-						value: new Date(),
-						submitFormat: 'Y-m-d',
-						format: 'd-M-Y',
-					 	allowBlank: false
-				}, {
-					 	name: 'time',
-					 	flex: 2,
-					 	margin: '0 0 0 6',
-					 	xtype:'timefield',
-						increment:30,
-						value: new Date(),
-						format: 'H:i',
-						allowBlank: false
-					}]
-				},{
-					fieldLabel: 'Work Order Number',
-					xtype:'textfield',
-          name: 'value',
-					hideTrigger: true,
-					keyNavEnabled: false,
-					mouseWheelEnabled: false,
-					allowBlank: false
+      xtype: 'fieldcontainer',
+			fieldLabel: 'Start Date Time',
+			layout: 'hbox',
+			combineErrors: true,
+			// defaultType: 'textfield',
+			defaults: {
+        hideLabel: 'true'
+			},
+			items: [{
+        name: 'startDate',
+				xtype:'datefield',
+				flex: 2,
+        maxValue: new Date(),
+				value: new Date(),
+				submitFormat: 'Y-m-d',
+				format: 'd-M-Y',
+				allowBlank: false
+			}, {
+			  name: 'startTime',
+				flex: 2,
+				margin: '0 0 0 6',
+				xtype:'timefield',
+				increment:30,
+				value: new Date(),
+				format: 'H:i',
+				allowBlank: false
+			}]
+		},{
+    	xtype: 'fieldcontainer',
+    	fieldLabel: 'End Date Time',
+    	layout: 'hbox',
+    	combineErrors: true,
+    	// defaultType: 'textfield',
+    	defaults: {
+        hideLabel: 'true'
+    	},
+    	items: [{
+        name: 'endDate',
+        xtype:'datefield',
+        flex: 2,
+        maxValue: new Date(),
+        value: new Date(),
+        submitFormat: 'Y-m-d',
+        format: 'd-M-Y',
+        allowBlank: false
+      }, {
+    		name: 'endTime',
+    		flex: 2,
+    		margin: '0 0 0 6',
+    		xtype:'timefield',
+    		increment:30,
+    		value: new Date(),
+    		format: 'H:i',
+    		allowBlank: false
+    	}]
+    },{
+      fieldLabel: 'Order Number',
+			xtype:'textfield',
+      name: 'value',
+			hideTrigger: true,
+			keyNavEnabled: false,
+			mouseWheelEnabled: false,
+			allowBlank: false
+    }, {
+      fieldLabel: 'Order Description',
+			xtype:'textarea',
+      name: 'desc',
+			hideTrigger: true,
+			keyNavEnabled: true,
+			mouseWheelEnabled: true,
+			allowBlank: true
     }],
-
     // Reset and Submit buttons
     buttons: [{
         text: 'Reset',
@@ -1075,7 +1109,6 @@ var panel_form_work_order = Ext.create('Ext.form.Panel', {
 							dt.titik_ukur_id = 11106;
 							console.log('Work Order dt = ',dt);
 							Ext.Ajax.request({
-
 							    url: getAPI()+'/pelindo/work_order',
 									method:'POST',
 
@@ -1316,11 +1349,13 @@ var tabel_work_order = Ext.create('Ext.grid.Panel', {
     store: store_work_order,
 
     columns: [
-        { text: 'DateTime', dataIndex: 'date' },
-        { text: 'Order Number', dataIndex: 'work_order', flex: 1 },
+        { text: 'Order Number', dataIndex: 'order_number', flex: 1 },
+        { text: 'Start Date', dataIndex: 'start_date' },
+        { text: 'End Date', dataIndex: 'end_date' },
+        { text: 'Description', dataIndex: 'order_desc' },
         { text: 'action', dataIndex: 'action' }
     ],
-    // height: 200,
+    height: 200,
     flex:1
     // width: 400,
     // renderTo: Ext.getBody()
@@ -1332,8 +1367,10 @@ var tabel_detail_work_order = Ext.create('Ext.grid.Panel', {
     store: store_work_order,
 
     columns: [
-        { text: 'DateTime', dataIndex: 'date' },
-        { text: 'Order Number', dataIndex: 'work_order', flex: 1 }
+      { text: 'Order Number', dataIndex: 'order_number', flex: 1 },
+      { text: 'Start Date', dataIndex: 'start_date' },
+      { text: 'End Date', dataIndex: 'end_date' },
+      { text: 'Description', dataIndex: 'order_desc' }
     ],
     // height: 200,
     flex:1
