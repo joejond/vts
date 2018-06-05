@@ -1116,7 +1116,7 @@ var panel_form_work_order = Ext.create('Ext.form.Panel', {
 							    success: function(response){
 							        var text = response.responseText;
 							        // console.log(text);
-											Ext.Msg.alert('Work Order', 'Sukses.</br>('+dt.date+' '+dt.time+':00) = '+dt.value);
+											Ext.Msg.alert('Work Order', 'Sukses.</br>('+dt.startDate+' '+dt.startTime+':00) = '+dt.value);
 							    }
 							});
 							form.reset();
@@ -1282,7 +1282,7 @@ var model_fuel_bunker = Ext.define('Fuel_Sonding', {
 });
 var model_work_order = Ext.define('Work_Order', {
     extend: 'Ext.data.Model',
-    fields: ['date','work_order']
+    fields: ['order_number','start_date','end_date','order_desc']
 });
 //
 var store_fuel_bunker = Ext.create('Ext.data.Store', {
@@ -1372,9 +1372,9 @@ var tabel_detail_work_order = Ext.create('Ext.grid.Panel', {
       { text: 'End Date', dataIndex: 'end_date' },
       { text: 'Description', dataIndex: 'order_desc' }
     ],
-    // height: 200,
+    height: 200,
+    width: 400,
     flex:1
-    // width: 400,
     // renderTo: Ext.getBody()
 });
 
