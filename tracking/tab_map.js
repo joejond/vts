@@ -636,12 +636,16 @@ var panel_form_tracking = Ext.create('Ext.form.Panel', {
             // Ext.getCmp('track_start').setDisabled(false);
             // Ext.getCmp('track_end').setDisabled(false);
             Ext.getCmp('track_date').setDisabled(false);
+            Ext.getCmp('track_start_time').setDisabled(false);
+            Ext.getCmp('track_end_time').setDisabled(false);
             // console.log('disable');
           }
           else{
             // Ext.getCmp('track_start').setDisabled(true);
             // Ext.getCmp('track_end').setDisabled(true);
             Ext.getCmp('track_date').setDisabled(true);
+            Ext.getCmp('track_start_time').setDisabled(true);
+            Ext.getCmp('track_end_time').setDisabled(true);
           }
         }
       }
@@ -660,6 +664,26 @@ var panel_form_tracking = Ext.create('Ext.form.Panel', {
           // submitFormat:'timestamp',
           submitFormat:'Y-m-d'
 					// allowBlank: false
+    },
+    {
+					fieldLabel: 'Start Time',
+					xtype:'timefield',
+          disabled:'true',
+          id: 'track_start_time',
+					name: 'tr_start_time',
+          increment:1,
+          value: '00:00:00',
+          format: 'H:i:s'
+    },
+    {
+					fieldLabel: 'End Time',
+					xtype:'timefield',
+          disabled:'true',
+          id: 'track_end_time',
+					name: 'tr_end_time',
+          increment:1,
+          value: new Date(),
+          format: 'H:i:s'
     }
     // {
 		// 			fieldLabel: 'Track Start',
@@ -741,13 +765,17 @@ var panel_form_tracking = Ext.create('Ext.form.Panel', {
                 // console.log('periode');
                 // dt.start = parseInt(new Date(dt.tr_start + ' 00:00:00' ).getTime()/1000);
                 // dt.end = parseInt(new Date(dt.tr_end + ' 00:00:00' ).getTime()/1000);
-                dt.start = parseInt(new Date(dt.tr_date + ' 00:00:00' ).getTime()/1000);
-                dt.end = parseInt(new Date(dt.tr_date + ' 23:59:59' ).getTime()/1000);
+                // console.log('dt.tr_start_time', dt.tr_start_time);
+                // console.log('dt.tr_end_time', dt.tr_end_time);
+                // dt.start = parseInt(new Date(dt.tr_date + ' 00:00:00' ).getTime()/1000);
+                // dt.end = parseInt(new Date(dt.tr_date + ' 23:59:59' ).getTime()/1000);
+                dt.start = parseInt(new Date(dt.tr_date + ' ' + dt.tr_start_time).getTime()/1000);
+                dt.end = parseInt(new Date(dt.tr_date + ' ' + dt.tr_end_time).getTime()/1000);
                 dt.density = 's';
                 // console.log('dt.tr_date', dt.tr_date);
-                console.log('dt.start', dt.start);
-                console.log('dt.end', dt.end);
-                console.log('dt.density', dt.density);
+                // console.log('dt.start', dt.start);
+                // console.log('dt.end', dt.end);
+                // console.log('dt.density', dt.density);
 
                 if (dt.start && dt.end && dt.density) valid = true;
               }
@@ -757,7 +785,7 @@ var panel_form_tracking = Ext.create('Ext.form.Panel', {
               // delete dt.tr_end;
               delete dt.tr_date;
 
-              console.log('valid', valid);
+              // console.log('valid', valid);
               if (valid) {
                 Ext.Ajax.request({
                     url   : getAPI()+'/map/track-marine',
