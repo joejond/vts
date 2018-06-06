@@ -648,14 +648,16 @@ var tabel_tracking_work_order = Ext.create('Ext.grid.Panel', {
       }
     },
     listeners: {
+      afterrender: function() {
+        var tanggal = new Date();
+        var str_tanggal = tanggal.getFullYear() + "-" + ("0"+(tanggal.getMonth()+1)).slice(-2) + "-" + ("0" + tanggal.getDate()).slice(-2);
+        // console.log("Window detail tanggal: " + str_tanggal);
+        // console.log("Window onShow : "+detail_tanggal_index);
+        param = {tanggal:str_tanggal};
+        store_tracking_work_order.load({params:param});
+      },
       celldblclick : function(view, cell, cellIndex, record, row, rowIndex, e) {
-        console.log('record.getData()', record.getData());
-        // console.log('Ext.getCmp(\'track_menu\')', Ext.getCmp('track_menu'));
-        // console.log('Ext.getCmp(\'track_menu\').items.items[2]', Ext.getCmp('track_menu').items.items[2]);
-        // Ext.getCmp('track_menu').items.items[2].setValue(true);
-        // Ext.getCmp('track_date').setValue('');
-        // Ext.getCmp('track_start_time').setValue('');
-        // Ext.getCmp('track_end_time').setValue('');
+        // console.log('record.getData()', record.getData());
 
         this.up('.window').hide();
 
@@ -705,7 +707,7 @@ var window_tracking_work_order = Ext.create('Ext.window.Window',{
     title : 'Work Order',
     width : 800,
     modal : true,
-    closable: true,
+    closable: false,
     layout : {
         type : 'fit',
         align : 'stretch'
@@ -717,14 +719,14 @@ var window_tracking_work_order = Ext.create('Ext.window.Window',{
       //   // tanggal.getFullYear() + " " + ("0" + tanggal.getHours()).slice(-2) + ":" + ("0" + tanggal.getMinutes()).slice(-2);
       //   // console.log("datestring", datestring);
       // },
-      show: function(panel){
-        var tanggal = new Date();
-        var str_tanggal = tanggal.getFullYear() + "-" + ("0"+(tanggal.getMonth()+1)).slice(-2) + "-" + ("0" + tanggal.getDate()).slice(-2);
-        // console.log("Window detail tanggal: " + str_tanggal);
-        // console.log("Window onShow : "+detail_tanggal_index);
-        param = {tanggal:str_tanggal};
-        store_tracking_work_order.load({params:param});
-      }
+      // show: function(panel){
+      //   var tanggal = new Date();
+      //   var str_tanggal = tanggal.getFullYear() + "-" + ("0"+(tanggal.getMonth()+1)).slice(-2) + "-" + ("0" + tanggal.getDate()).slice(-2);
+      //   // console.log("Window detail tanggal: " + str_tanggal);
+      //   // console.log("Window onShow : "+detail_tanggal_index);
+      //   param = {tanggal:str_tanggal};
+      //   store_tracking_work_order.load({params:param});
+      // }
     },
     items : [{
           layout:{
@@ -734,8 +736,8 @@ var window_tracking_work_order = Ext.create('Ext.window.Window',{
           items:[{
             fieldLabel: 'Order Date',
             xtype:'datefield',
-            // id: 'order_date',
-            // name: 'ord_date',
+            id: 'order_date',
+            name: 'ord_date',
             format: 'd-M-Y',
             // value: new Date(),
             maxValue: new Date(),
@@ -753,15 +755,13 @@ var window_tracking_work_order = Ext.create('Ext.window.Window',{
             tabel_tracking_work_order
           ]
 
+      }],
+      buttons : [{
+          text : 'Close',
+          handler : function(){
+              this.up('.window').hide();
+          }
       }]
-
-    // buttons : [{
-    //     text : 'Close',
-    //     handler : function(){
-    //         this.up('.window').hide();
-    //         store_adhoc_kapal.load({params: { id: id_vessel_adhoc, m: month_adhoc}});
-    //     }
-    // }]
 });
 
 var panel_form_tracking = Ext.create('Ext.form.Panel', {
