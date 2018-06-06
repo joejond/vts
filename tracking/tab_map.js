@@ -551,7 +551,7 @@ function resetCenterTracking(map){
     // }
 
     map.fitBounds(bounds);
-    map.setZoom(15);
+    map.setZoom(10);
 
   }
 
