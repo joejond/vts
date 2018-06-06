@@ -617,7 +617,8 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
 			     // detail_tanggal_index = Ext.Date.format(index_jam,'Y-m-d H');
            // window_detail_work_order.show();
       },
-      cellclick : function(view, cell, cellIndex, record, row, rowIndex, e) {
+      celldblclick : function(view, cell, cellIndex, record, row, rowIndex, e) {
+      // cellclick : function(view, cell, cellIndex, record, row, rowIndex, e) {
            // console.log('view', view);
            // console.log('cell', cell);
            // console.log('cellIndex', cellIndex);
@@ -1453,7 +1454,7 @@ var window_detail_work_order = Ext.create('Ext.window.Window',{
     closable: false,
     listeners: {
     	boxready: function(){
-    		console.log("Window detail tangga: " + detail_tanggal_index);
+    		console.log("Window detail tanggal: " + detail_tanggal_index);
     	},
 			show: function(panel){
 				console.log("Window onShow : "+detail_tanggal_index);
