@@ -153,7 +153,21 @@ session_start();
 	<style>
 	body {padding-top : 20px;}
 
+  .multiline-row .x-grid-cell-inner {
+    overflow: auto !important;
+    white-space: normal !important;
+    text-overflow: ellipsis;
+    display: block;
+  }
 	</style>
+  <!-- <style type=text/css>
+  .x-grid-row .x-grid-cell-inner {
+    white-space: normal;
+  }
+  .x-grid-row-over .x-grid-cell-inner {
+    white-space: normal;
+  }
+  </style> -->
 
 
 </head>

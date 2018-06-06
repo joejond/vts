@@ -613,6 +613,157 @@ var selmod = Ext.create('Ext.selection.CheckboxModel',{
     }
 });
 
+var model_tracking_work_order = Ext.define('Work_Order', {
+    extend: 'Ext.data.Model',
+    fields: ['order_number','start_date','end_date','order_desc']
+});
+
+var store_tracking_work_order = Ext.create('Ext.data.Store', {
+    model: model_tracking_work_order,
+    autoLoad: true,
+    proxy: {
+        type: 'ajax',
+        url:getAPI()+'/pelindo/work_order?titik_ukur_id=11106',
+        method: 'GET'
+    }
+});
+
+var tabel_tracking_work_order = Ext.create('Ext.grid.Panel', {
+    title: 'History - Work Order',
+    store: store_tracking_work_order,
+    columns: [
+        { text: 'Order Number', dataIndex: 'order_number', width: 150 },
+        { text: 'Start Date', dataIndex: 'start_date', width: 125 },
+        { text: 'End Date', dataIndex: 'end_date', width: 125 },
+        { text: 'Description', dataIndex: 'order_desc', flex: 1 }
+    ],
+    height: 200,
+    // width: 800,
+    viewConfig: {
+      loadingText: "Loading",
+      loadMask: true,
+      stripeRows: true,
+      getRowClass: function(record, rowIndex, rowParams, store) {
+        return 'multiline-row';
+      }
+    },
+    listeners: {
+      celldblclick : function(view, cell, cellIndex, record, row, rowIndex, e) {
+        console.log('record.getData()', record.getData());
+        // console.log('Ext.getCmp(\'track_menu\')', Ext.getCmp('track_menu'));
+        // console.log('Ext.getCmp(\'track_menu\').items.items[2]', Ext.getCmp('track_menu').items.items[2]);
+        // Ext.getCmp('track_menu').items.items[2].setValue(true);
+        // Ext.getCmp('track_date').setValue('');
+        // Ext.getCmp('track_start_time').setValue('');
+        // Ext.getCmp('track_end_time').setValue('');
+
+        this.up('.window').hide();
+
+        myMask.show();
+        show_tracking(null);
+
+        var tg = new Date();
+
+        // console.log(Ext.getCmp('ship_list_panel_id').isidata);
+        // var vessel = Ext.getCmp('ship_list_panel_id').isidata;
+        var dt = {
+          start: parseInt(new Date(record.getData().start_date).getTime()/1000),
+          end: parseInt(new Date(record.getData().end_date).getTime()/1000),
+          density: 's'
+        };
+        // dt.start = parseInt(new Date(record.getData().start_date).getTime()/1000);
+        // dt.end = parseInt(new Date(record.getData().end_date).getTime()/1000);
+        // dt.density = 's';
+
+        Ext.Ajax.request({
+            url   : getAPI()+'/map/track-marine',
+            method:'get',
+            params: dt,
+            success: function(response){
+                var res = JSON.parse(response.responseText);
+
+                var d_rute = create_rute(res);
+                create_tracking(d_rute,res);
+                show_tracking(atlas);
+                resetCenterTracking(atlas);
+                myMask.hide();
+
+            },
+            callback: function(a,b,c){
+
+            }
+        });
+
+        myMask.hide();
+      }
+    },
+    flex:1
+    // renderTo: Ext.getBody()
+});
+
+var window_tracking_work_order = Ext.create('Ext.window.Window',{
+    title : 'Work Order',
+    width : 800,
+    modal : true,
+    closable: true,
+    layout : {
+        type : 'fit',
+        align : 'stretch'
+    },
+    listeners: {
+      // boxready: function(){
+      //   // var tanggal = new Date();
+      //   // var datestring = ("0" + tanggal.getDate()).slice(-2) + "-" + ("0"+(tanggal.getMonth()+1)).slice(-2) + "-" +
+      //   // tanggal.getFullYear() + " " + ("0" + tanggal.getHours()).slice(-2) + ":" + ("0" + tanggal.getMinutes()).slice(-2);
+      //   // console.log("datestring", datestring);
+      // },
+      show: function(panel){
+        var tanggal = new Date();
+        var str_tanggal = tanggal.getFullYear() + "-" + ("0"+(tanggal.getMonth()+1)).slice(-2) + "-" + ("0" + tanggal.getDate()).slice(-2);
+        // console.log("Window detail tanggal: " + str_tanggal);
+        // console.log("Window onShow : "+detail_tanggal_index);
+        param = {tanggal:str_tanggal};
+        store_tracking_work_order.load({params:param});
+      }
+    },
+    items : [{
+          layout:{
+            type:'vbox',
+            align:'stretch'
+          },
+          items:[{
+            fieldLabel: 'Order Date',
+            xtype:'datefield',
+            // id: 'order_date',
+            // name: 'ord_date',
+            format: 'd-M-Y',
+            // value: new Date(),
+            maxValue: new Date(),
+            vtype: 'daterange',
+            submitFormat:'Y-m-d',
+            listeners: {
+              change: function () {
+                str_tanggal=Ext.Date.format(this.getValue(),'Y-m-d');
+                console.log("str_tanggal", str_tanggal);
+                param = {tanggal:str_tanggal};
+                store_tracking_work_order.load({params:param});
+              }
+            }
+          },
+            tabel_tracking_work_order
+          ]
+
+      }]
+
+    // buttons : [{
+    //     text : 'Close',
+    //     handler : function(){
+    //         this.up('.window').hide();
+    //         store_adhoc_kapal.load({params: { id: id_vessel_adhoc, m: month_adhoc}});
+    //     }
+    // }]
+});
+
 var panel_form_tracking = Ext.create('Ext.form.Panel', {
     // title: 'Tracking',
     bodyPadding: 5,
@@ -623,96 +774,93 @@ var panel_form_tracking = Ext.create('Ext.form.Panel', {
     items: [{
       xtype: 'radiogroup',
       fieldLabel: 'Tracking',
+      id: 'track_menu',
+			name: 'tr_menu',
       columns:1,
       items: [
           {boxLabel: 'Last 24H', name: 'track_period', inputValue: '24h', checked: true},
           {boxLabel: 'Today', name: 'track_period', inputValue: 'today'},
           {boxLabel: 'Periode', name: 'track_period', inputValue: 'period', reference : 'periode'}
+          // {boxLabel: 'Work Order', name: 'track_period', inputValue: 'work_order', reference : 'work_order'}
       ],
       listeners:{
         change: function( a,newValue, oldValue){
           // console.log(newValue,oldValue);
-          if (newValue.track_period == 'period'){
+          if (newValue.track_period == 'period') {
             // Ext.getCmp('track_start').setDisabled(false);
             // Ext.getCmp('track_end').setDisabled(false);
             Ext.getCmp('track_date').setDisabled(false);
             Ext.getCmp('track_start_time').setDisabled(false);
             Ext.getCmp('track_end_time').setDisabled(false);
+            // Ext.getCmp('track_date').setHidden(false);
+            // Ext.getCmp('track_start_time').setHidden(false);
+            // Ext.getCmp('track_end_time').setHidden(false);
             // console.log('disable');
           }
+          // else if (newValue.track_period == 'work_order') {
+          //   // Ext.getCmp('list_work_order').setDisabled(false);
+          // }
           else{
             // Ext.getCmp('track_start').setDisabled(true);
             // Ext.getCmp('track_end').setDisabled(true);
             Ext.getCmp('track_date').setDisabled(true);
             Ext.getCmp('track_start_time').setDisabled(true);
             Ext.getCmp('track_end_time').setDisabled(true);
+            // Ext.getCmp('track_date').setHidden(true);
+            // Ext.getCmp('track_start_time').setHidden(true);
+            // Ext.getCmp('track_end_time').setHidden(true);
+
+            // Ext.getCmp('list_work_order').setDisabled(true);
           }
         }
       }
     },
     {
-					fieldLabel: 'Track Date',
-					xtype:'datefield',
-          disabled:'true',
-          id: 'track_date',
-					name: 'tr_date',
-          format: 'd-M-Y',
-          // value: new Date(),
-          maxValue: new Date(),
-          vtype: 'daterange',
-          // endDateField: 'track_end',
-          // submitFormat:'timestamp',
-          submitFormat:'Y-m-d'
-					// allowBlank: false
+      fieldLabel: 'Track Date',
+			xtype:'datefield',
+      disabled:'true',
+      // hidden: 'true',
+      id: 'track_date',
+			name: 'tr_date',
+      format: 'd-M-Y',
+      // value: new Date(),
+      maxValue: new Date(),
+      vtype: 'daterange',
+      // endDateField: 'track_end',
+      // submitFormat:'timestamp',
+      submitFormat:'Y-m-d'
+			// allowBlank: false
     },
     {
-					fieldLabel: 'Start Time',
-					xtype:'timefield',
-          disabled:'true',
-          id: 'track_start_time',
-					name: 'tr_start_time',
-          increment:1,
-          value: '00:00:00',
-          format: 'H:i:s'
+			fieldLabel: 'Start Time',
+			xtype:'timefield',
+      disabled:'true',
+      // hidden: 'true',
+      id: 'track_start_time',
+			name: 'tr_start_time',
+      increment:1,
+      value: '00:00',
+      format: 'H:i'
     },
     {
-					fieldLabel: 'End Time',
-					xtype:'timefield',
-          disabled:'true',
-          id: 'track_end_time',
-					name: 'tr_end_time',
-          increment:1,
-          value: new Date(),
-          format: 'H:i:s'
+			fieldLabel: 'End Time',
+			xtype:'timefield',
+      disabled:'true',
+      // hidden: 'true',
+      id: 'track_end_time',
+			name: 'tr_end_time',
+      increment:1,
+      value: new Date(),
+      format: 'H:i'
+    },
+    {
+      xtype: 'button',
+      text: '<span style="color:black">by Work Order</span>',
+      anchor: '100%',
+      handler: function() {
+        window_tracking_work_order.show();
+      }
     }
-    // {
-		// 			fieldLabel: 'Track Start',
-		// 			xtype:'datefield',
-    //       disabled:'true',
-    //       id: 'track_start',
-		// 			name: 'tr_start',
-    //       format: 'd-M-Y',
-    //       // value: new Date(),
-    //       // maxValue: new Date(),
-    //       vtype: 'daterange',
-    //       endDateField: 'track_end',
-    //       // submitFormat:'timestamp',
-    //       submitFormat:'Y-m-d'
-		// 			// allowBlank: false
-    // },{
-    //       fieldLabel: 'Track End',
-    //       xtype:'datefield',
-    //       disabled:'true',
-    //       id: 'track_end',
-    //       name: 'tr_end',
-    //       format: 'd-M-Y',
-    //       // maxValue: new Date(),
-    //       // value: new Date(),
-    //       vtype: 'daterange',
-    //       startDateField: 'track_start',
-    //       submitFormat:'Y-m-d'
-    //       // allowBlank: false
-    // }
   ],
 
     // Reset and Submit buttons
@@ -954,4 +1102,4 @@ var ship_list = {
     /*ditutup dulu*/
     // tabel_daftar_kapal
     ]
-}
+  }

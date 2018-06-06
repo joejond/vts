@@ -16,10 +16,9 @@ include	'./../inc/conn_db.php';
 
 </head>
 <body >
-
 <?php
 	header("Location: LoginUser.php");
 
-?>	 
+?>
 </body>
 </html>
