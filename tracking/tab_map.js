@@ -300,7 +300,7 @@ function create_rute_buntut(d){
     var dtObj = {};
     dtObj.end = parseInt(skr/1000);
     dtObj.start = parseInt(skr/1000) - 3600;
-    dtObj.density = 's';
+    dtObj.density = 'm';
 
 
     Ext.Ajax.request({
@@ -671,11 +671,11 @@ var tabel_tracking_work_order = Ext.create('Ext.grid.Panel', {
         var dt = {
           start: parseInt(new Date(record.getData().start_date).getTime()/1000),
           end: parseInt(new Date(record.getData().end_date).getTime()/1000),
-          density: 's'
+          density: 'm'
         };
         // dt.start = parseInt(new Date(record.getData().start_date).getTime()/1000);
         // dt.end = parseInt(new Date(record.getData().end_date).getTime()/1000);
-        // dt.density = 's';
+        // dt.density = 'm';
 
         Ext.Ajax.request({
             url   : getAPI()+'/map/track-marine',
@@ -896,7 +896,7 @@ var panel_form_tracking = Ext.create('Ext.form.Panel', {
                 dt.end = parseInt(tg.getTime() /1000);
                 dt.start = dt.end - 86400;
                 // console.log('waktu sekarang (epcohtime) => ',Math.floor(new Date().getTime() /1000) );
-                dt.density = 's';
+                dt.density = 'm';
 
                 if (dt.start && dt.end && dt.density) valid = true;
               }
@@ -905,7 +905,7 @@ var panel_form_tracking = Ext.create('Ext.form.Panel', {
                 // console.log('to day');
                 dt.start = parseInt(new Date(tg.getFullYear()+'-' +(tg.getMonth() +1)+'-'+tg.getDate() + ' 00:00:00' ).getTime()/1000);
                 dt.end = parseInt(tg.getTime() /1000);
-                dt.density = 's';
+                dt.density = 'm';
 
                 if (dt.start && dt.end && dt.density) valid = true;
               }
@@ -919,7 +919,7 @@ var panel_form_tracking = Ext.create('Ext.form.Panel', {
                 // dt.end = parseInt(new Date(dt.tr_date + ' 23:59:59' ).getTime()/1000);
                 dt.start = parseInt(new Date(dt.tr_date + ' ' + dt.tr_start_time).getTime()/1000);
                 dt.end = parseInt(new Date(dt.tr_date + ' ' + dt.tr_end_time).getTime()/1000);
-                dt.density = 's';
+                dt.density = 'm';
                 // console.log('dt.tr_date', dt.tr_date);
                 // console.log('dt.start', dt.start);
                 // console.log('dt.end', dt.end);
