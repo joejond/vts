@@ -853,14 +853,14 @@ var panel_form_tracking = Ext.create('Ext.form.Panel', {
       value: new Date(),
       format: 'H:i'
     },
-    {
-      xtype: 'button',
-      text: '<span style="color:black">by Work Order</span>',
-      anchor: '100%',
-      handler: function() {
-        window_tracking_work_order.show();
-      }
-    }
+    // {
+    //   xtype: 'button',
+    //   text: '<span style="color:black">by Work Order</span>',
+    //   anchor: '100%',
+    //   handler: function() {
+    //     window_tracking_work_order.show();
+    //   }
+    // }
   ],
 
     // Reset and Submit buttons
@@ -1035,6 +1035,14 @@ var ship_list = {
     border: false,
     items:[
         panel_form_tracking,
+        {
+          xtype: 'button',
+          text: '<span style="color:black">by Work Order</span>',
+          anchor: '100%',
+          handler: function() {
+            window_tracking_work_order.show();
+          }
+        }
     // {
     //     height: 140,
     //     layout: 'form',
