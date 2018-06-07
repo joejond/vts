@@ -1037,7 +1037,15 @@ var panel_form_work_order = Ext.create('Ext.form.Panel', {
 				value: new Date(),
 				submitFormat: 'Y-m-d',
 				format: 'd-M-Y',
-				allowBlank: false
+				allowBlank: false,
+        listeners: {
+          change: function () {
+            str_tanggal=Ext.Date.format(this.getValue(),'Y-m-d');
+            console.log("str_tanggal", str_tanggal);
+            param = {tanggal:str_tanggal};
+            store_work_order.load({params:param});
+          }
+        }
 			}, {
 			  name: 'startTime',
 				flex: 2,
@@ -1350,11 +1358,11 @@ var tabel_work_order = Ext.create('Ext.grid.Panel', {
     store: store_work_order,
 
     columns: [
-        { text: 'Order Number', dataIndex: 'order_number', flex: 1 },
-        { text: 'Start Date', dataIndex: 'start_date' },
-        { text: 'End Date', dataIndex: 'end_date' },
-        { text: 'Description', dataIndex: 'order_desc' },
-        { text: 'action', dataIndex: 'action' }
+        { text: 'Order Number', dataIndex: 'order_number', width: 150 },
+        { text: 'Start Date', dataIndex: 'start_date', width: 125 },
+        { text: 'End Date', dataIndex: 'end_date', width: 125 },
+        { text: 'Description', dataIndex: 'order_desc', flex: 1 }
+        // { text: 'action', dataIndex: 'action', width: 125 }
     ],
     height: 200,
     flex:1
@@ -1368,13 +1376,13 @@ var tabel_detail_work_order = Ext.create('Ext.grid.Panel', {
     store: store_work_order,
 
     columns: [
-      { text: 'Order Number', dataIndex: 'order_number', flex: 1 },
-      { text: 'Start Date', dataIndex: 'start_date' },
-      { text: 'End Date', dataIndex: 'end_date' },
-      { text: 'Description', dataIndex: 'order_desc' }
+      { text: 'Order Number', dataIndex: 'order_number', width: 150 },
+      { text: 'Start Date', dataIndex: 'start_date', width: 125 },
+      { text: 'End Date', dataIndex: 'end_date', width: 125 },
+      { text: 'Description', dataIndex: 'order_desc', flex: 1 }
     ],
     height: 200,
-    width: 400,
+    // width: 400,
     flex:1
     // renderTo: Ext.getBody()
 });
@@ -1422,7 +1430,7 @@ var window_fuel = Ext.create('Ext.window.Window',{
 
 var window_work_order = Ext.create('Ext.window.Window',{
     title : 'Work Order',
-    width : 400,
+    width : 800,
     modal : true,
     closable: false,
     layout : {
@@ -1449,7 +1457,7 @@ var window_work_order = Ext.create('Ext.window.Window',{
 
 var window_detail_work_order = Ext.create('Ext.window.Window',{
     title : 'Work Order',
-    width : 400,
+    width : 800,
     modal : true,
     closable: false,
     listeners: {
