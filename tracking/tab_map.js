@@ -145,15 +145,18 @@ var peta = {
     }
 };
 
-function onClickPeta(map){
-  atlas.addListener('click',function(){
-    // console.log('terklik sodara');
-    resetCenterVessel(map);
-    show_tracking(null);
-
-    if (buntut) buntut.stop();
-  });
-}
+// function onClickPeta(map){
+//   atlas.addListener('click',function(){
+//     // console.log('terklik sodara');
+//     resetCenterVessel(map);
+//     show_tracking(null);
+//     if (taskAnimasiGaris) {
+//       taskAnimasiGaris.stop(taskAG);
+//     }
+//
+//     if (buntut) buntut.stop();
+//   });
+// }
 
 
 
@@ -200,7 +203,7 @@ var taskUpdV = {
         setTandaOnMap(atlas);
         // aa++;
       },
-      interval: 1000 * 3
+      interval: 1000*3
   };
 
 
@@ -274,21 +277,21 @@ function create_infowindow(t,d){
     // info_info.open(atlas,t);
   });
 
-  google.maps.event.addListener(t, 'click', function() {
-
-    taskBuntut = new Ext.util.TaskRunner();
-
-    info_info.close();
-    // info_info.setContent(detailVessel);
-    // info_info.open(atlas,t);
-    panel_ship=Ext.getCmp('ship_list_panel_id');
-    panel_ship.isidata = d;
-    panel_ship.expand();
-
-    create_rute_buntut(d);
-
-
-  });
+  // google.maps.event.addListener(t, 'click', function() {
+  //
+  //   taskBuntut = new Ext.util.TaskRunner();
+  //
+  //   info_info.close();
+  //   // info_info.setContent(detailVessel);
+  //   // info_info.open(atlas,t);
+  //   panel_ship=Ext.getCmp('ship_list_panel_id');
+  //   panel_ship.isidata = d;
+  //   panel_ship.expand();
+  //
+  //   create_rute_buntut(d);
+  //
+  //
+  // });
 
 }
 var buntut;
@@ -321,6 +324,9 @@ function create_rute_buntut(d){
             buntut = taskBuntut.newTask({
               run: function(){
                 show_tracking(null);
+                if (taskAnimasiGaris) {
+                  taskAnimasiGaris.stop(taskAG);
+                }
                 // console.log(i);
                 var akhir = d_rute[d_rute.length -1];
 
@@ -365,7 +371,7 @@ function create_rute_buntut(d){
             // create_tracking(d_rute,res);
             // show_tracking(atlas);
             // resetCenterTracking(atlas);
-            // myMask.hide();
+            // tracking_mask_periode.hide();
 
         },
         callback: function(a,b,c){
@@ -376,6 +382,7 @@ function create_rute_buntut(d){
 };
 
 function setTandaOnMap(map) {
+    // console.log('marker_marker', marker_marker);
     for (var i = 0; i < marker_marker.length; i++) {
         marker_marker[i].setMap(map);
     }
@@ -404,13 +411,37 @@ var rute;
 function create_rute(d)
 {
   rute = [];
-  d.forEach(function(v){
-    rute.push({lat: v['GPS-Lattitude']  ,lng:v['GPS-Longitude']});
-  });
+  console.log('d', d);
+  var temp_rute = [];
+  posisiAnimasiGaris = [];
+  for (var i = 0; i < d.length; i++) {
+    console.log('d['+i+']', d[i]);
+    temp_rute.push({lat: d[i]['GPS-Lattitude'], lng: d[i]['GPS-Longitude']});
+    posisiAnimasiGaris.push(
+      {
+        lat: d[i]['GPS-Lattitude'],
+        lng: d[i]['GPS-Longitude'],
+        head: d[i]['GPS-Heading'],
+        name: d[i]['nama'],
+        time: d[i]['t'],
+      }
+    );
+    // console.log('temp_rute', temp_rute);
+  }
+  // rute = temp_rute;
+  // console.log('rute', rute);
+  // d.forEach(function(v){
+  //   var temp = new Object();
+  //   temp['lat'] = v['GPS-Lattitude'];
+  //   temp['lng'] = v['GPS-Longitude'];
+  //   console.log('temp', temp);
+  //   rute.push(temp);
+  //   console.log('rute', rute);
+  // });
   // rute = rute.replace(/"/g, "");
-  // console.log(rute);
 
-  return rute;
+  // return rute;
+  return temp_rute;
 }
 
 function create_tracking(d_rute,d_vessel){
@@ -418,9 +449,9 @@ function create_tracking(d_rute,d_vessel){
     // console.log(d_vessel);
   var warna = ['#0000ff','#660099','#ff0000'];
   var jml_rute = d_rute.length;
-  var persen_50 = (Math.floor(jml_rute * 0.5));
-  var persen_30 = (Math.floor(jml_rute * 0.3));
-  var persen_20 = (Math.floor(jml_rute * 0.2));
+  var persen_50 = (Math.floor((jml_rute * 0.5)));
+  var persen_30 = (Math.floor((jml_rute * 0.3)));
+  var persen_20 = (Math.floor((jml_rute * 0.2)));
 
   // if (persen_50+persen_30+persen_20 != jml_rute) return;
 
@@ -430,19 +461,20 @@ function create_tracking(d_rute,d_vessel){
 
   // var sisa = jml_rute - last_30;
 
-  var rute1 =[],rute2=[],rute3=[];
-
+  var rute1 = [], rute2 = [], rute3 = [];
+  // console.log('d_rute', d_rute);
   for(var i=0; i< persen_50; i++){
     rute1.push(d_rute[i]);
   }
-  for(var i=persen_50; i<(persen_50+persen_30); i++){
+  for(var i=persen_50-1; i<(persen_50+persen_30); i++){
     rute2.push(d_rute[i]);
   }
-  for(var i=(persen_50+persen_30); i<jml_rute; i++){
+  for(var i=(persen_50+persen_30-1); i<jml_rute; i++){
     rute3.push(d_rute[i]);
   }
 
-
+  rute = d_rute;
+  // console.log('rute', rute);
 
 
   // var me = this;
@@ -514,12 +546,89 @@ function create_tracking(d_rute,d_vessel){
   // });
 }
 
+var animasiGaris;
+var markerAnimasiGaris;
+var posisiAnimasiGaris;
+var cntAnimasiGaris;
+var taskAnimasiGaris;
+
 function show_tracking(map){
   // garis.setMap(map);
   for(var i=0;i < garis.length;i++){
     garis[i].setMap(map);
   }
+  // posisiAnimasiGaris = rute;
+  cntAnimasiGaris = 0;
+  if (taskAnimasiGaris) {
+    taskAnimasiGaris.stop(taskAG);
+    taskAnimasiGaris = new Ext.util.TaskRunner();
+    taskAnimasiGaris.start(taskAG);
+    // console.log('restart animasi');
+  } else {
+    taskAnimasiGaris = new Ext.util.TaskRunner();
+    taskAnimasiGaris.start(taskAG);
+    // console.log('star animasi');
+  }
+
+  // var tanda = new google.maps.Marker({
+  //   position : new google.maps.LatLng(data.lat,data.lng),
+  //   // map : peta1.getMap(),
+  //   //*
+  //   icon : {
+  //       path: 'm -2.02025,5.2254321 0,1.9999997 -1,0 0,6.0000012 6.0312504,0.09375 0,-6.0000012 -1,0 0,-1.9999997 -4.0312504,-0.09375 z M 0.01100037,-12.693634 c -1.00000038,0 -1.17097237,0.331348 -2.00000037,2 -0.829028,1.6686508 -2.96875,8.0128161 -2.96875,8.0128161 l -0.03125,0 0,0.0625 0,19.9375009 10.0000004,0 0,-19.9375009 0,-0.0625 -0.03125,0 c 0,0 -2.139722,-6.3441653 -2.96875,-8.0128161 -0.829028,-1.668652 -1,-2 -2.00000003,-2 z',
+  //       // path: pth,
+  //       scale: 1,
+  //       rotation : parseFloat(data.head), //+parseFloat(cor),		// koreksi
+  //       strokeColor: 'black',
+  //       strokeWeight: 1,
+  //       fillColor: '#FF0000',
+  //       fillOpacity: 0.7
+  //     }
+  //   //*/
+  //   });
 }
+
+var taskAG = {
+      run: function(){
+        if (posisiAnimasiGaris) {
+          // console.log('posisiAnimasiGaris.length', posisiAnimasiGaris.length);
+          // console.log('cntAnimasiGaris', cntAnimasiGaris);
+          if (markerAnimasiGaris) {
+            markerAnimasiGaris.setMap(null);
+          }
+          var animasiGaris = new google.maps.Marker({
+            position: new google.maps.LatLng(posisiAnimasiGaris[cntAnimasiGaris].lat, posisiAnimasiGaris[cntAnimasiGaris].lng),
+            map: atlas,
+            label: posisiAnimasiGaris[cntAnimasiGaris].name + " :: " + posisiAnimasiGaris[cntAnimasiGaris].time,
+            // icons: [{
+            //   icon: {
+            //     path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+            //     scale : 2.5
+            //   },
+            //   offset: '10%',
+            //   repeat : '150px'
+            // }],
+            icon : {
+              path: 'm -2.02025,5.2254321 0,1.9999997 -1,0 0,6.0000012 6.0312504,0.09375 0,-6.0000012 -1,0 0,-1.9999997 -4.0312504,-0.09375 z M 0.01100037,-12.693634 c -1.00000038,0 -1.17097237,0.331348 -2.00000037,2 -0.829028,1.6686508 -2.96875,8.0128161 -2.96875,8.0128161 l -0.03125,0 0,0.0625 0,19.9375009 10.0000004,0 0,-19.9375009 0,-0.0625 -0.03125,0 c 0,0 -2.139722,-6.3441653 -2.96875,-8.0128161 -0.829028,-1.668652 -1,-2 -2.00000003,-2 z',
+              scale: 1,
+              rotation : parseFloat(posisiAnimasiGaris[cntAnimasiGaris].head),
+              strokeColor: 'black',
+              strokeWeight: 1,
+              fillColor: '#000000',
+              fillOpacity: 0.7,
+              labelOrigin: new google.maps.Point(50, 50)
+            },
+            id: 'animasi_'+posisiAnimasiGaris[cntAnimasiGaris].lat+'_'+posisiAnimasiGaris[cntAnimasiGaris].lng
+          });
+          markerAnimasiGaris = animasiGaris;
+          cntAnimasiGaris++;
+          if (cntAnimasiGaris >= posisiAnimasiGaris.length) {
+            cntAnimasiGaris = 0
+          };
+        }
+      },
+      interval: 500
+  };
 
 /* ===== end of Tracking ===== */
 
@@ -657,17 +766,28 @@ var tabel_tracking_work_order = Ext.create('Ext.grid.Panel', {
         store_tracking_work_order.load({params:param});
       },
       celldblclick : function(view, cell, cellIndex, record, row, rowIndex, e) {
-        // console.log('record.getData()', record.getData());
+        console.log('record.getData()', record.getData());
 
         this.up('.window').hide();
 
-        myMask.show();
+        tracking_mask_work_order.show();
         show_tracking(null);
-
+        if (taskAnimasiGaris) {
+          taskAnimasiGaris.stop(taskAG);
+        }
         var tg = new Date();
 
         // console.log(Ext.getCmp('ship_list_panel_id').isidata);
         // var vessel = Ext.getCmp('ship_list_panel_id').isidata;
+
+        Ext.getCmp('wo_number').setValue(record.getData().order_number);
+        // Ext.getCmp('wo_number').setVisible(true);
+        Ext.getCmp('wo_start_date').setValue(record.getData().start_date);
+        // Ext.getCmp('wo_start_date').setVisible(true);
+        Ext.getCmp('wo_end_date').setValue(record.getData().end_date);
+        // Ext.getCmp('wo_end_date').setVisible(true);
+        Ext.getCmp('wo_desc').setValue(record.getData().order_desc);
+        // Ext.getCmp('wo_desc').setVisible(true);
         var dt = {
           start: parseInt(new Date(record.getData().start_date).getTime()/1000),
           end: parseInt(new Date(record.getData().end_date).getTime()/1000),
@@ -684,11 +804,13 @@ var tabel_tracking_work_order = Ext.create('Ext.grid.Panel', {
             success: function(response){
                 var res = JSON.parse(response.responseText);
 
+                // console.log('res', res);
                 var d_rute = create_rute(res);
+                console.log('d_rute', d_rute);
                 create_tracking(d_rute,res);
                 show_tracking(atlas);
                 resetCenterTracking(atlas);
-                myMask.hide();
+                tracking_mask_work_order.hide();
 
             },
             callback: function(a,b,c){
@@ -696,7 +818,7 @@ var tabel_tracking_work_order = Ext.create('Ext.grid.Panel', {
             }
         });
 
-        myMask.hide();
+        tracking_mask_work_order.hide();
       }
     },
     flex:1
@@ -746,7 +868,7 @@ var window_tracking_work_order = Ext.create('Ext.window.Window',{
             listeners: {
               change: function () {
                 str_tanggal=Ext.Date.format(this.getValue(),'Y-m-d');
-                console.log("str_tanggal", str_tanggal);
+                // console.log("str_tanggal", str_tanggal);
                 param = {tanggal:str_tanggal};
                 store_tracking_work_order.load({params:param});
               }
@@ -765,7 +887,7 @@ var window_tracking_work_order = Ext.create('Ext.window.Window',{
 });
 
 var panel_form_tracking = Ext.create('Ext.form.Panel', {
-    // title: 'Tracking',
+    title: 'By Periode',
     bodyPadding: 5,
     layout: 'anchor',
     defaults: {
@@ -876,10 +998,12 @@ var panel_form_tracking = Ext.create('Ext.form.Panel', {
 
             var form = this.up('form').getForm();
             if (form.isValid()) {
-              myMask.show();
+              tracking_mask_periode.show();
 
               show_tracking(null);
-
+              if (taskAnimasiGaris) {
+                taskAnimasiGaris.stop(taskAG);
+              }
               var valid = false;
               var tg = new Date();
               console.log(tg.getTime());
@@ -946,7 +1070,7 @@ var panel_form_tracking = Ext.create('Ext.form.Panel', {
                         create_tracking(d_rute,res);
                         show_tracking(atlas);
                         resetCenterTracking(atlas);
-                        myMask.hide();
+                        tracking_mask_periode.hide();
 
   							    },
                     callback: function(a,b,c){
@@ -956,7 +1080,7 @@ var panel_form_tracking = Ext.create('Ext.form.Panel', {
                 // form.reset();
               } else {
                 alert("Please complete the form !");
-                myMask.hide();
+                tracking_mask_periode.hide();
               }
 							// store_fuel_bunker.reload();
 
@@ -966,9 +1090,71 @@ var panel_form_tracking = Ext.create('Ext.form.Panel', {
     // renderTo: Ext.getBody()
 });
 
-var myMask = new Ext.LoadMask({
+var val_order_number;
+var val_order_start_date;
+var val_order_end_date;
+var val_order_desc;
+
+var panel_form_work_order = Ext.create('Ext.form.Panel', {
+    title: 'By Work Order',
+    bodyPadding: 5,
+    layout: 'anchor',
+    defaults: {
+        anchor: '100%'
+    },
+    items: [
+      {
+        xtype: 'button',
+        text: '<span style="color:black">Select Work Order</span>',
+        anchor: '100%',
+        handler: function() {
+          window_tracking_work_order.show();
+        }
+      },
+      {
+        fieldLabel: 'Order Number',
+        fieldStyle: "font-weight:bold;",
+        xtype: 'displayfield',
+        id: 'wo_number',
+        // hidden: true,
+        value: ''
+      },
+      {
+        fieldLabel: 'Start Date',
+        fieldStyle: "font-weight:bold;",
+        xtype: 'displayfield',
+        id: 'wo_start_date',
+        // hidden: true,
+        value: ''
+      },
+      {
+        fieldLabel: 'End Date',
+        fieldStyle: "font-weight:bold;",
+        xtype: 'displayfield',
+        id: 'wo_end_date',
+        // hidden: true,
+        value: ''
+      },
+      {
+        fieldLabel: 'Description',
+        fieldStyle: "font-weight:bold;",
+        xtype: 'displayfield',
+        id: 'wo_desc',
+        // hidden: true,
+        value: ''
+      }
+    ]
+  }
+);
+
+var tracking_mask_periode = new Ext.LoadMask({
     msg    : 'Please wait...',
     target : panel_form_tracking
+});
+
+var tracking_mask_work_order = new Ext.LoadMask({
+    msg    : 'Please wait...',
+    target : panel_form_work_order
 });
 
 Ext.apply(Ext.form.field.VTypes, {
@@ -1020,7 +1206,8 @@ var tabel_daftar_kapal = Ext.create('Ext.grid.Panel', {
 });
 
 var ship_list = {
-    title: "Ship List",
+    // title: "Ship List",
+    title: "Tracking",
     id:'ship_list_panel_id',
     split: true,
     region: 'east',
@@ -1035,14 +1222,7 @@ var ship_list = {
     border: false,
     items:[
         panel_form_tracking,
-        {
-          xtype: 'button',
-          text: '<span style="color:black">by Work Order</span>',
-          anchor: '100%',
-          handler: function() {
-            window_tracking_work_order.show();
-          }
-        }
+        panel_form_work_order
     // {
     //     height: 140,
     //     layout: 'form',
