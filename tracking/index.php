@@ -53,25 +53,39 @@
 
 
         <style type="text/css">
-            .labels {
-              color: blue;
-              font-family: "Lucida Grande", "Arial", sans-serif;
-              font-size: 9px;
-              font-weight: bold;
-              text-align: center;
-              width: 80px;
-              white-space: nowrap;
-            }
+          .labels {
+            color: blue;
+            font-family: "Lucida Grande", "Arial", sans-serif;
+            font-size: 9px;
+            font-weight: bold;
+            text-align: center;
+            width: 80px;
+          	white-space: nowrap;
+          }
 
-            #app-header-title{
+          #app-header-title{
             padding:15px 9px 9px 80px;
             background:url(img/header.png) no-repeat 9px 4px;
             /*color:blue;*/
             font-size:25px;
             font-weight:bold;
             text-shadow:0 2px 0 white
+					}
 
-        }
+					.my-custom-class-for-label {
+  					width: 50px;
+  					height: 20px;
+
+  					border: 1px solid #eb3a44;
+  					border-radius: 5px;
+  					background: #fee1d7;
+
+  					text-align: center;
+  					line-height: 20px;
+  					font-weight: bold;
+  					font-size: 14px;
+  					color: #eb3a44;
+					}
 
         </style>
         <!-- <script type="text/javascript" src="markerwithlabel.js"></script> -->
