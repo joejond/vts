@@ -84,7 +84,7 @@ var peta = {
         });
         TaskVessel = new Ext.util.TaskRunner();
         TaskVessel.start(taskUpdV);
-        onClickPeta(atlas);
+        // onClickPeta(atlas);
         // ws.close();
         //
         // console.log('open');
@@ -145,18 +145,18 @@ var peta = {
     }
 };
 
-// function onClickPeta(map){
-//   atlas.addListener('click',function(){
-//     // console.log('terklik sodara');
-//     resetCenterVessel(map);
-//     show_tracking(null);
-//     if (taskAnimasiGaris) {
-//       taskAnimasiGaris.stop(taskAG);
-//     }
-//
-//     if (buntut) buntut.stop();
-//   });
-// }
+function onClickPeta(map){
+  atlas.addListener('click',function(){
+    // console.log('terklik sodara');
+    resetCenterVessel(map);
+    show_tracking(null);
+    if (taskAnimasiGaris) {
+      taskAnimasiGaris.stop(taskAG);
+    }
+
+    if (buntut) buntut.stop();
+  });
+}
 
 
 
@@ -324,6 +324,9 @@ function create_rute_buntut(d){
             buntut = taskBuntut.newTask({
               run: function(){
                 show_tracking(null);
+                if (markerAnimasiGaris) {
+                  markerAnimasiGaris.setMap(null);
+                }
                 if (taskAnimasiGaris) {
                   taskAnimasiGaris.stop(taskAG);
                 }
@@ -411,11 +414,11 @@ var rute;
 function create_rute(d)
 {
   rute = [];
-  console.log('d', d);
+  // console.log('d', d);
   var temp_rute = [];
   posisiAnimasiGaris = [];
   for (var i = 0; i < d.length; i++) {
-    console.log('d['+i+']', d[i]);
+    // console.log('d['+i+']', d[i]);
     temp_rute.push({lat: d[i]['GPS-Lattitude'], lng: d[i]['GPS-Longitude']});
     posisiAnimasiGaris.push(
       {
@@ -559,6 +562,9 @@ function show_tracking(map){
   }
   // posisiAnimasiGaris = rute;
   cntAnimasiGaris = 0;
+  if (markerAnimasiGaris) {
+    markerAnimasiGaris.setMap(null);
+  }
   if (taskAnimasiGaris) {
     taskAnimasiGaris.stop(taskAG);
     taskAnimasiGaris = new Ext.util.TaskRunner();
@@ -599,15 +605,6 @@ var taskAG = {
           var animasiGaris = new google.maps.Marker({
             position: new google.maps.LatLng(posisiAnimasiGaris[cntAnimasiGaris].lat, posisiAnimasiGaris[cntAnimasiGaris].lng),
             map: atlas,
-            label: posisiAnimasiGaris[cntAnimasiGaris].name + " :: " + posisiAnimasiGaris[cntAnimasiGaris].time,
-            // icons: [{
-            //   icon: {
-            //     path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
-            //     scale : 2.5
-            //   },
-            //   offset: '10%',
-            //   repeat : '150px'
-            // }],
             icon : {
               path: 'm -2.02025,5.2254321 0,1.9999997 -1,0 0,6.0000012 6.0312504,0.09375 0,-6.0000012 -1,0 0,-1.9999997 -4.0312504,-0.09375 z M 0.01100037,-12.693634 c -1.00000038,0 -1.17097237,0.331348 -2.00000037,2 -0.829028,1.6686508 -2.96875,8.0128161 -2.96875,8.0128161 l -0.03125,0 0,0.0625 0,19.9375009 10.0000004,0 0,-19.9375009 0,-0.0625 -0.03125,0 c 0,0 -2.139722,-6.3441653 -2.96875,-8.0128161 -0.829028,-1.668652 -1,-2 -2.00000003,-2 z',
               scale: 1,
@@ -616,7 +613,15 @@ var taskAG = {
               strokeWeight: 1,
               fillColor: '#000000',
               fillOpacity: 0.7,
+              labelClass: "my-custom-class-for-label", // your desired CSS class
+              labelInBackground: true,
               labelOrigin: new google.maps.Point(50, 50)
+            },
+            label: {
+              text: posisiAnimasiGaris[cntAnimasiGaris].name + " :: " + posisiAnimasiGaris[cntAnimasiGaris].time,
+              color: '#000000',
+              fontSize: '16px',
+              fontWeight: 'bold'
             },
             id: 'animasi_'+posisiAnimasiGaris[cntAnimasiGaris].lat+'_'+posisiAnimasiGaris[cntAnimasiGaris].lng
           });
@@ -772,6 +777,9 @@ var tabel_tracking_work_order = Ext.create('Ext.grid.Panel', {
 
         tracking_mask_work_order.show();
         show_tracking(null);
+        if (markerAnimasiGaris) {
+          markerAnimasiGaris.setMap(null);
+        }
         if (taskAnimasiGaris) {
           taskAnimasiGaris.stop(taskAG);
         }
@@ -1001,6 +1009,9 @@ var panel_form_tracking = Ext.create('Ext.form.Panel', {
               tracking_mask_periode.show();
 
               show_tracking(null);
+              if (markerAnimasiGaris) {
+                markerAnimasiGaris.setMap(null);
+              }
               if (taskAnimasiGaris) {
                 taskAnimasiGaris.stop(taskAG);
               }
