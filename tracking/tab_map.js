@@ -62,7 +62,7 @@ var peta = {
     },
     listeners:{
       mapready:function(win,gmap){
-        console.log('onmapready');
+        // console.log('onmapready');
         atlas = gmap;
         info_info = new google.maps.InfoWindow();
         // garis = new google.maps.Polyline();
@@ -648,28 +648,49 @@ function resetCenterVessel(map){
     }
     if(panel_ship != undefined) panel_ship.collapse();
     map.fitBounds(bounds);
-    map.setZoom(8);
+    map.setZoom(5);
 
 
 
 }
 
 function resetCenterTracking(map){
-
+  // console.log('rute = ', rute);
+  var maxLat = -360, minLat = 360;
+  var maxLng = -360, minLng = 360;
   for (var i=0;i<rute.length; i++){
-    // console.log(rute[i]);
     var latlng= new google.maps.LatLng(rute[i].lat,rute[i].lng);
-    // console.log(rute[i].getPosition());
-    // if(rute[i].getVisible()){
-      bounds.extend(latlng);
-    // }
-
-    map.fitBounds(bounds);
-    map.setZoom(10);
-
+    if (rute[i].lat > maxLat) {maxLat = rute[i].lat; indexMaxLat = i}
+    if (rute[i].lat < minLat) {minLat = rute[i].lat; indexMinLat = i}
+    if (rute[i].lng > maxLng) {maxLng = rute[i].lng; indexMaxLng = i}
+    if (rute[i].lng < minLng) {minLng = rute[i].lng; indexMinLng = i}
+    bounds.extend(latlng);
   }
+  var centerLatLng = new google.maps.LatLng(((maxLat + minLat) / 2), ((maxLng + minLng) / 2));
 
+  var MAX_ZOOM = map.mapTypes.get( map.getMapTypeId() ).maxZoom || 21 ;
+  var MIN_ZOOM = map.mapTypes.get( map.getMapTypeId() ).minZoom || 0 ;
 
+  var ne= map.getProjection().fromLatLngToPoint( new google.maps.LatLng(maxLat, maxLng) );
+  var sw= map.getProjection().fromLatLngToPoint( new google.maps.LatLng(minLat, minLng) );
+
+  var worldCoordWidth = Math.abs(ne.x-sw.x);
+  var worldCoordHeight = Math.abs(ne.y-sw.y);
+
+  //Fit padding in pixels
+  var FIT_PAD = 40;
+  var zoomDym = 0;
+  for( var zoom = MAX_ZOOM; zoom >= MIN_ZOOM; --zoom ){
+      if( worldCoordWidth*(1<<zoom)+2*FIT_PAD < $(map.getDiv()).width() &&
+          worldCoordHeight*(1<<zoom)+2*FIT_PAD < $(map.getDiv()).height() ) {
+            zoomDym = zoom;
+            // console.log('zoomDym = ', zoomDym);
+            break;
+      }
+  }
+  map.fitBounds(bounds);
+  map.setCenter(centerLatLng);
+  map.setZoom(zoomDym);
 }
 
 
@@ -771,7 +792,7 @@ var tabel_tracking_work_order = Ext.create('Ext.grid.Panel', {
         store_tracking_work_order.load({params:param});
       },
       celldblclick : function(view, cell, cellIndex, record, row, rowIndex, e) {
-        console.log('record.getData()', record.getData());
+        // console.log('record.getData()', record.getData());
 
         this.up('.window').hide();
 
@@ -814,7 +835,7 @@ var tabel_tracking_work_order = Ext.create('Ext.grid.Panel', {
 
                 // console.log('res', res);
                 var d_rute = create_rute(res);
-                console.log('d_rute', d_rute);
+                // console.log('d_rute', d_rute);
                 create_tracking(d_rute,res);
                 show_tracking(atlas);
                 resetCenterTracking(atlas);
@@ -1017,11 +1038,11 @@ var panel_form_tracking = Ext.create('Ext.form.Panel', {
               }
               var valid = false;
               var tg = new Date();
-              console.log(tg.getTime());
+              // console.log(tg.getTime());
 
               // console.log('dipencet');
               // console.log(this);
-              console.log(Ext.getCmp('ship_list_panel_id').isidata);
+              // console.log(Ext.getCmp('ship_list_panel_id').isidata);
               var vessel = Ext.getCmp('ship_list_panel_id').isidata;
 							var dt = form.getValues();
 
