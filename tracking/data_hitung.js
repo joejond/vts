@@ -903,11 +903,11 @@ function start() {
 function update_status(x)
 {
   if (x==1){
-    console.log('idup');
+    // console.log('idup');
     start();
   }
   else {
-    console.log('mati');
+    // console.log('mati');
     clearInterval(timer);
   }
 }
