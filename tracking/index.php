@@ -46,48 +46,28 @@
 		<script type="text/javascript" src="../Chart/highcharts-more.js"></script>
 		<script type="text/javascript" src="../Chart/exporting.js"></script>
 
-        <!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3&amp;sensor=false"></script> -->
-				<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?&key=AIzaSyC-UUPT4sbJjlVTR19z9tt-bBvkVVdeLmI&callback=" defer></script>
+		<style type="text/css">
+			.labels {
+				color: red;
+				background-color: white;
+				font-family: "Lucida Grande", "Arial", sans-serif;
+				font-size: 10px;
+				font-weight: bold;
+				text-align: center;
+				width: 40px;
+				border: 2px solid black;
+				white-space: nowrap;
+			}
+		</style>
+				<span id="id01" style="background-color: #FFFF00"></span>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3&&key=AIzaSyC-UUPT4sbJjlVTR19z9tt-bBvkVVdeLmI"></script>
+				<!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyC-UUPT4sbJjlVTR19z9tt-bBvkVVdeLmI&callback=" defer></script> -->
         <!-- <script type="text/javascript" src="https://cdn.rawgit.com/googlemaps/v3-utility-library/master/markerwithlabel/src/markerwithlabel.js" defer></script> -->
         <!-- <script type="text/javascript" src="markerwithlabel.js" defer></script> -->
 
+				<script type="text/javascript" src="../js/googlemaps-v3-utility-library/markerwithlabel/src/markerwithlabel.js"></script>
+				<script type="text/javascript" src="../js/googlemaps-v3-utility-library/maplabel/src/maplabel.js"></script>
 
-        <style type="text/css">
-          .labels {
-            color: blue;
-            font-family: "Lucida Grande", "Arial", sans-serif;
-            font-size: 9px;
-            font-weight: bold;
-            text-align: center;
-            width: 80px;
-          	white-space: nowrap;
-          }
-
-          #app-header-title{
-            padding:15px 9px 9px 80px;
-            background:url(img/header.png) no-repeat 9px 4px;
-            /*color:blue;*/
-            font-size:25px;
-            font-weight:bold;
-            text-shadow:0 2px 0 white
-					}
-
-					.my-custom-class-for-label {
-  					width: 50px;
-  					height: 20px;
-
-  					border: 1px solid #eb3a44;
-  					border-radius: 5px;
-  					background: #fee1d7;
-
-  					text-align: center;
-  					line-height: 20px;
-  					font-weight: bold;
-  					font-size: 14px;
-  					color: #eb3a44;
-					}
-
-        </style>
         <!-- <script type="text/javascript" src="markerwithlabel.js"></script> -->
         <!-- <script type="text/javascript" src="https://cdn.rawgit.com/googlemaps/v3-utility-library/master/markerwithlabel/src/markerwithlabel.js"></script> -->
         <!-- https://cdn.rawgit.com/googlemaps/v3-utility-library/master/markerwithlabel/src/markerwithlabel.js -->

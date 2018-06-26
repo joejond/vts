@@ -327,6 +327,9 @@ function create_rute_buntut(d){
                 if (markerAnimasiGaris) {
                   markerAnimasiGaris.setMap(null);
                 }
+                if (markerLabelGaris) {
+                  markerLabelGaris.setMap(null);
+                }
                 if (taskAnimasiGaris) {
                   taskAnimasiGaris.stop(taskAG);
                 }
@@ -551,6 +554,7 @@ function create_tracking(d_rute,d_vessel){
 
 var animasiGaris;
 var markerAnimasiGaris;
+var markerLabelGaris;
 var posisiAnimasiGaris;
 var cntAnimasiGaris;
 var taskAnimasiGaris;
@@ -564,6 +568,9 @@ function show_tracking(map){
   cntAnimasiGaris = 0;
   if (markerAnimasiGaris) {
     markerAnimasiGaris.setMap(null);
+  }
+  if (markerLabelGaris) {
+    markerLabelGaris.setMap(null);
   }
   if (taskAnimasiGaris) {
     taskAnimasiGaris.stop(taskAG);
@@ -602,6 +609,13 @@ var taskAG = {
           if (markerAnimasiGaris) {
             markerAnimasiGaris.setMap(null);
           }
+          if (markerLabelGaris) {
+            markerLabelGaris.setMap(null);
+          }
+          // var test_label = document.createElement("span");
+          // test_label.style.backgroundColor = "red";
+          // var node = document.createTextNode(posisiAnimasiGaris[cntAnimasiGaris].name + " :: " + posisiAnimasiGaris[cntAnimasiGaris].time);
+          // test_label.appendChild(node);
           var animasiGaris = new google.maps.Marker({
             position: new google.maps.LatLng(posisiAnimasiGaris[cntAnimasiGaris].lat, posisiAnimasiGaris[cntAnimasiGaris].lng),
             map: atlas,
@@ -613,19 +627,49 @@ var taskAG = {
               strokeWeight: 1,
               fillColor: '#000000',
               fillOpacity: 0.7,
-              labelClass: "my-custom-class-for-label", // your desired CSS class
-              labelInBackground: true,
-              labelOrigin: new google.maps.Point(50, 50)
+              // labelClass: "my-custom-class-for-label", // your desired CSS class
+              // labelInBackground: true,
+              // labelOrigin: new google.maps.Point(50, 50)
             },
-            label: {
-              text: posisiAnimasiGaris[cntAnimasiGaris].name + " :: " + posisiAnimasiGaris[cntAnimasiGaris].time,
-              color: '#000000',
-              fontSize: '16px',
-              fontWeight: 'bold'
-            },
+            // icon: {
+            //   url: createMarker(250, 25, 0),
+            //   labelOrigin: new google.maps.Point(50, 50)
+            // },
+            // label: {
+            //   text: posisiAnimasiGaris[cntAnimasiGaris].name + " :: " + posisiAnimasiGaris[cntAnimasiGaris].time,
+            //   // text: test_label,
+            //   color: '#000000',
+            //   fontSize: '16px',
+            //   fontWeight: 'bold'
+            // },
             id: 'animasi_'+posisiAnimasiGaris[cntAnimasiGaris].lat+'_'+posisiAnimasiGaris[cntAnimasiGaris].lng
           });
+          // var labelGaris = new MarkerWithLabel({
+          //   position: new google.maps.LatLng(posisiAnimasiGaris[cntAnimasiGaris].lat, posisiAnimasiGaris[cntAnimasiGaris].lng),
+          //   map: atlas,
+          //   labelContent: posisiAnimasiGaris[cntAnimasiGaris].name + " :: " + posisiAnimasiGaris[cntAnimasiGaris].time,
+          //   labelAnchor: new google.maps.Point(22, 0),
+          //   labelClass: "labels", // the CSS class for the label
+          //   labelStyle: {opacity: 0.75}
+          // });
+          var labelGaris = new MapLabel({
+            text: posisiAnimasiGaris[cntAnimasiGaris].name + " :: " + posisiAnimasiGaris[cntAnimasiGaris].time,
+            position: new google.maps.LatLng(posisiAnimasiGaris[cntAnimasiGaris].lat, posisiAnimasiGaris[cntAnimasiGaris].lng),
+            map: atlas,
+            fontSize: 12,
+            fontColor: '#ffffff',
+            strokeWeight: 5,
+            strokeColor: '#000000',
+            align: 'left',
+            zIndex: '-1'
+          });
+          // mapLabel.set('position', new google.maps.LatLng(34.03, -118.235));
+          // var labelGaris = new google.maps.Marker;
+          // labelGaris.bindTo('map', mapLabel);
+          // labelGaris.bindTo('position', mapLabel);
+
           markerAnimasiGaris = animasiGaris;
+          markerLabelGaris = labelGaris;
           cntAnimasiGaris++;
           if (cntAnimasiGaris >= posisiAnimasiGaris.length) {
             cntAnimasiGaris = 0
@@ -634,6 +678,31 @@ var taskAG = {
       },
       interval: 500
   };
+
+  function createMarker(width, height, radius) {
+    var canvas, context;
+    canvas = document.createElement("canvas");
+    canvas.width = width;
+    canvas.height = height;
+    context = canvas.getContext("2d");
+    context.clearRect(0, 0, width, height);
+    context.fillStyle = "rgba(255,255,0,1)";
+    context.strokeStyle = "rgba(0,0,0,1)";
+    context.beginPath();
+    context.moveTo(radius, 0);
+    context.lineTo(width - radius, 0);
+    context.quadraticCurveTo(width, 0, width, radius);
+    context.lineTo(width, height - radius);
+    context.quadraticCurveTo(width, height, width - radius, height);
+    context.lineTo(radius, height);
+    context.quadraticCurveTo(0, height, 0, height - radius);
+    context.lineTo(0, radius);
+    context.quadraticCurveTo(0, 0, radius, 0);
+    context.closePath();
+    context.fill();
+    context.stroke();
+    return canvas.toDataURL();
+  }
 
 /* ===== end of Tracking ===== */
 
@@ -800,6 +869,9 @@ var tabel_tracking_work_order = Ext.create('Ext.grid.Panel', {
         show_tracking(null);
         if (markerAnimasiGaris) {
           markerAnimasiGaris.setMap(null);
+        }
+        if (markerLabelGaris) {
+          markerLabelGaris.setMap(null);
         }
         if (taskAnimasiGaris) {
           taskAnimasiGaris.stop(taskAG);
@@ -1032,6 +1104,9 @@ var panel_form_tracking = Ext.create('Ext.form.Panel', {
               show_tracking(null);
               if (markerAnimasiGaris) {
                 markerAnimasiGaris.setMap(null);
+              }
+              if (markerLabelGaris) {
+                markerLabelGaris.setMap(null);
               }
               if (taskAnimasiGaris) {
                 taskAnimasiGaris.stop(taskAG);
