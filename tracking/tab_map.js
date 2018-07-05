@@ -52,13 +52,18 @@ var peta = {
     //margin: '5 5 5 5',
     region: 'center',
     id: 'mymap',
-    zoomLevel: 8,
+    // zoomLevel: 8,
+    zoomLevel: 5,
     gmapType: 'map',
     mapConfOpts: ['enableScrollWheelZoom','enableDoubleClickZoom','enableDragging'],
     mapControls: ['GSmallMapControl','GMapTypeControl'],
+    // setCenter: {
+    //     lat: -7,
+    //     lng: 115.0
+    // },
     setCenter: {
-        lat: -7,
-        lng: 115.0
+        lat: -2.141055,
+        lng: 118.017285
     },
     listeners:{
       mapready:function(win,gmap){
@@ -70,7 +75,7 @@ var peta = {
 
         ws = Ext.create ('Ext.ux.WebSocket', {
           url:   getWS(),
-	  listeners: {
+	        listeners: {
             open: function (ws) {
                 ws.send('usr:'+dt.idu);
             } ,
@@ -93,6 +98,35 @@ var peta = {
         // ws.send('usr:4');
         // console.log(ws);
         // console.log(ws.getStatus());
+
+        // var maxLat = 5.88969, minLat = -10.1718;
+        // var maxLng = 140.71813, minLng = 95.31644;
+        // var map = atlas;
+        // var centerLatLng = new google.maps.LatLng(((maxLat + minLat) / 2), ((maxLng + minLng) / 2));
+        //
+        // var MAX_ZOOM = map.mapTypes.get( map.getMapTypeId() ).maxZoom || 21 ;
+        // var MIN_ZOOM = map.mapTypes.get( map.getMapTypeId() ).minZoom || 0 ;
+        //
+        // var ne= map.getProjection().fromLatLngToPoint( new google.maps.LatLng(maxLat, maxLng) );
+        // var sw= map.getProjection().fromLatLngToPoint( new google.maps.LatLng(minLat, minLng) );
+        //
+        // var worldCoordWidth = Math.abs(ne.x-sw.x);
+        // var worldCoordHeight = Math.abs(ne.y-sw.y);
+        //
+        // //Fit padding in pixels
+        // var FIT_PAD = 40;
+        // var zoomDym = 0;
+        // for( var zoom = MAX_ZOOM; zoom >= MIN_ZOOM; --zoom ){
+        //     if( worldCoordWidth*(1<<zoom)+2*FIT_PAD < $(map.getDiv()).width() &&
+        //         worldCoordHeight*(1<<zoom)+2*FIT_PAD < $(map.getDiv()).height() ) {
+        //           zoomDym = zoom;
+        //           console.log('zoomDym = ', zoomDym);
+        //           break;
+        //     }
+        // }
+        // map.fitBounds(bounds);
+        // map.setCenter(centerLatLng);
+        // map.setZoom(zoomDym);
 
       },
 
