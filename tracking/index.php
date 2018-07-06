@@ -58,6 +58,10 @@
 				border: 2px solid black;
 				white-space: nowrap;
 			}
+
+			.x-monthpicker {
+    		padding-bottom: 35px;
+			}
 		</style>
 				<span id="id01" style="background-color: #FFFF00"></span>
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3&&key=AIzaSyC-UUPT4sbJjlVTR19z9tt-bBvkVVdeLmI"></script>

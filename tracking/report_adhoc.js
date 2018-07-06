@@ -592,7 +592,7 @@ var store_adhoc_kapal = Ext.create('Ext.data.Store', {
     proxy: {
         type: 'ajax',
         // url:'http://project.daunbiru.com:1336/get_data_adhoc',
-        url:'getAPI()+/get_data_adhoc',
+        url:getAPI()+'/get_data_adhoc',
         timeout: 40000,
         //url: 'http://project.daunbiru.com:1337/get_data_bima?id=8&user_id=4&tz=%2B07&tgl=2018-02-01',
         method: 'GET',
@@ -653,7 +653,9 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
                         //   export: true
                         // };
                         // console.log(dt);
-                        window.open(getAPI()+'/get_data_adhoc?id=' + id_vessel_adhoc + '&m=' + Ext.Date.format(month_adhoc,'Y-m-d') + '&export=true');
+                        console.log('month_adhoc', month_adhoc);
+                        // window.open(getAPI()+'/get_data_adhoc?id=' + id_vessel_adhoc + '&m=' + Ext.Date.format(month_adhoc,'Y-m-d') + '&export=true');
+                        window.open(getAPI()+'/get_data_adhoc?id=' + id_vessel_adhoc + '&m=' + month_adhoc + '-01&export=true');
                         // http://project.daunbiru.com:1336/get_data_adhoc?_dc=1522145700890&id=Bima%20333-t&m=2018-03-27T00%3A00%3A00&export=true
                         // Ext.Ajax.request({
                         //     url: getAPI()+'/get_data_adhoc',
@@ -848,6 +850,7 @@ var panel_r_adhoc = {
 						month_adhoc=Ext.Date.format(this.getValue(),'Y-m');
 						console.log("Combo box adhoc afterrender : [" + cb_vessel_adhoc +"],[" + month_adhoc +"]");
 						store_adhoc_kapal.load({params: { id: id_vessel_adhoc, m: month_adhoc}});
+            console.log('month_adhoc', month_adhoc);
 
 					},
 					afterrender : function(){
