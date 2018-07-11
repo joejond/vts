@@ -59,6 +59,15 @@
 				white-space: nowrap;
 			}
 
+			#app-header-title{
+				padding:15px 9px 9px 80px;
+				background:url(img/header.png) no-repeat 9px 4px;
+				/*color:blue;*/
+				font-size:25px;
+				font-weight:bold;
+				text-shadow:0 2px 0 white
+			}
+
 			.x-monthpicker {
     		padding-bottom: 35px;
 			}
