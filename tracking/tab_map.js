@@ -451,7 +451,7 @@ var rute;
 function create_rute(d)
 {
   rute = [];
-  // console.log('d', d);
+  console.log('d', d);
   var temp_rute = [];
   posisiAnimasiGaris = [];
   for (var i = 0; i < d.length; i++) {
@@ -825,7 +825,7 @@ var selmod = Ext.create('Ext.selection.CheckboxModel',{
                        ship.push(item.data.id);
             });
 
-            // console.log(ship);
+            console.log('ship', ship);
             //var text1 = "";
             //Ext.Array.each(selections, function (item) {
                 //text1 = text1 + "," + item.get('id');
@@ -833,20 +833,20 @@ var selmod = Ext.create('Ext.selection.CheckboxModel',{
             //var text2 = text1.substr(1, text1.length);
             //console.log(text2);
 
-            Ext.Ajax.request({
-                url: 'get_last_pos_array.php',
-                params : 'id='+ship,
-                method: 'GET',
-                success: function (data) {
-                    var isidat = Ext.JSON.decode(data.responseText);
-					              //  console.log (isidat);
-                    if(isidat.posisi.length == 0)
-                        deleteMarkers();
-                    else
-                        gambar_kapal(isidat);
-
-                }
-            });
+            // Ext.Ajax.request({
+            //     url: 'get_last_pos_array.php',
+            //     params : 'id='+ship,
+            //     method: 'GET',
+            //     success: function (data) {
+            //         var isidat = Ext.JSON.decode(data.responseText);
+					  //             //  console.log (isidat);
+            //         if(isidat.posisi.length == 0)
+            //             deleteMarkers();
+            //         else
+            //             gambar_kapal(isidat);
+            //
+            //     }
+            // });
         }
     }
 });
@@ -1362,6 +1362,7 @@ var ship_list = {
     },
     border: false,
     items:[
+        tabel_daftar_kapal,
         panel_form_tracking,
         panel_form_work_order
     // {
