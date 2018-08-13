@@ -11,7 +11,7 @@ var dt = JSON.parse(atob(Ext.util.Cookies.get("marine")));
 var model_detail_kapal = Ext.define('detail_kapal', {
     extend: 'Ext.data.Model',
   		fields:[
-			"PM - Door","PM-VBatt","PM-VCharg",
+			"PM-Door","PM-VBatt","PM-VCharg",
 			"ME1-FM In","ME1-FM Ov","ME1-FM Tem",
 			"ME2-FM In","ME2-FM Ov","ME2-FM Tem",
 			"AE1-FM In","AE1-FM Ov","AE1-FM Temp",
@@ -20,12 +20,7 @@ var model_detail_kapal = Ext.define('detail_kapal', {
 			"AE1-RPM","AE1-RH","AE2-RPM","AE2-RH",
 			"PE-Door","PE-VCharge","PE-VBatt",
 			"GPS-Lattitude","GPS-Longitude","GPS-Heading","GPS-Velocity",
-			"working distance","working hour","average speed","main engine daily comsumption","main engine consumtion rate",
-			"auxiliary engine daily consumtion","auxiliary engine consumtion rate","remaining onboard",
-			"ME1-Fuel Hourly","AE1-Fuel-Usage","FormulaContoh","Fuel-Bunkering",
-			"ME2-Fuel-Usage","Total Fuel Usage","Working Distances","Work Hours",
-			"ME Dialy consumption","ME1 Working Hours ",
-			"AE1-RH-Daily","AE2-RH-Daily","AE1-FuelUsage","AE2-FuelUsage","ME2-FuelUsage","ME1-FuelUsage","Total-FuelUsage",
+			"AE1-RH-Daily","AE2-RH-Daily",
 			"F_Sound_Check",{name:"t",type:"date"}
 		]
 	});
@@ -33,7 +28,7 @@ var model_detail_kapal = Ext.define('detail_kapal', {
 	var model_detail_kapal_detik = Ext.define('detail_kapal', {
 	    extend: 'Ext.data.Model',
 	  		fields:[
-				"PM - Door","PM-VBatt","PM-VCharg",
+				"PM-Door","PM-VBatt","PM-VCharg",
 				"ME1-FM In","ME1-FM Ov","ME1-FM Tem",
 				"ME2-FM In","ME2-FM Ov","ME2-FM Tem",
 				"AE1-FM In","AE1-FM Ov","AE1-FM Temp",
@@ -42,12 +37,7 @@ var model_detail_kapal = Ext.define('detail_kapal', {
 				"AE1-RPM","AE1-RH","AE2-RPM","AE2-RH",
 				"PE-Door","PE-VCharge","PE-VBatt",
 				"GPS-Lattitude","GPS-Longitude","GPS-Heading","GPS-Velocity",
-				"working distance","working hour","average speed","main engine daily comsumption","main engine consumtion rate",
-				"auxiliary engine daily consumtion","auxiliary engine consumtion rate","remaining onboard",
-				"ME1-Fuel Hourly","AE1-Fuel-Usage","FormulaContoh","Fuel-Bunkering",
-				"ME2-Fuel-Usage","Total Fuel Usage","Working Distances","Work Hours",
-				"ME Dialy consumption","ME1 Working Hours ",
-				"AE1-RH-Daily","AE2-RH-Daily","AE1-FuelUsage","AE2-FuelUsage","ME2-FuelUsage","ME1-FuelUsage","Total-FuelUsage",
+				"AE1-RH-Daily","AE2-RH-Daily",
 				"F_Sound_Check",{name:"t",type:"date"}
 			]
 		});
@@ -261,7 +251,7 @@ var tabel_detail_jam = Ext.create('Ext.grid.Panel', {
 			},{
 				header: "PM Door",
 				width: 70,
-				dataIndex: 'PM - Door'
+				dataIndex: 'PM-Door'
 			},{
 				header: "PE Battery",
 				width: 70,
@@ -471,7 +461,7 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
 			},{
 				header: "PM Door",
 				width: 70,
-				dataIndex: 'PM - Door'
+				dataIndex: 'PM-Door'
 			},{
 				header: "PE Battery",
 				width: 70,
@@ -561,7 +551,7 @@ var panel_detail = {
 					select: function() {
 						comb_kapal1 = this.getValue();
 						comb_kapal2 = this.getRawValue();
-						var param = {user_id: dt.idu,id:comb_kapal1,tgl:tgl_sel1,tz: getTimeZone()};
+						var param = {user_id: dt.idu,id:comb_kapal1,tgl:tgl_sel1,tz: getTimeZone(),type: 'vts'};
 						console.log('param select', param);
 						store_detail_kapal.load({params: param});
 						Ext.getCmp('table_ship').setTitle('Vessel '+comb_kapal2 +' on '+ tgl_sel2);
@@ -578,7 +568,7 @@ var panel_detail = {
 							var tgl_ini = Ext.getCmp('date_total_harian').getValue();
 							var tgl_sesuai = Ext.Date.format(tgl_ini, 'd-M-Y' );
 							tgl_sel1 = Ext.Date.format(new Date(), 'Y-m-d' );
-							var param = {user_id: dt.idu,id:id_kpl,tgl:tgl_sel1,tz: getTimeZone()};
+							var param = {user_id: dt.idu,id:id_kpl,tgl:tgl_sel1,tz: getTimeZone(), type: 'vts'};
 							console.log('param afterrender', param);
 							// console.log(param);
 							// store_detail_kapal.load({params: { id: comb_kapal1, tgl: tgl_sel1}});
@@ -602,7 +592,7 @@ var panel_detail = {
 				listeners: {
 					change: function () {
 						tgl_sel1 = Ext.Date.format(this.getValue(),'Y-m-d');
-						var param = {user_id: dt.idu,id:comb_kapal1,tgl:tgl_sel1,tz: getTimeZone()};
+						var param = {user_id: dt.idu,id:comb_kapal1,tgl:tgl_sel1,tz: getTimeZone(), type: 'vts'};
 						// store_detail_kapal.load({params: { id: comb_kapal1, tgl: tgl_sel1}});
 						store_detail_kapal.load({params: param});
 						tgl_sel2 = (tgl_sel1 != '') ? tgl_sel1 : Ext.Date.format(new Date(), 'd-M-Y' );
@@ -616,7 +606,7 @@ var panel_detail = {
 						//console.log('Date selected: ', this.getValue());
 						tgl_sel1 = Ext.Date.format(this.getValue(),'Y-m-d');
 						tgl_sel2 = (tgl_sel1 != '') ? tgl_sel1 : Ext.Date.format(new Date(), 'd-M-Y' );
-						var param = {user_id: dt.idu,id:comb_kapal1,tgl:tgl_sel1,tz: getTimeZone()};
+						var param = {user_id: dt.idu,id:comb_kapal1,tgl:tgl_sel1,tz: getTimeZone(), type: 'vts'};
 
 						store_detail_kapal.load({params: param});
 					}
@@ -637,7 +627,7 @@ var panel_detail = {
 					// // 	method : 'GET',
 					// // 	url : 'export.php'
 					// // })
-					window.open(getAPI()+'/get_data_bima?user_id=' + dt.idu + '&id=' + id_kpl + '&tgl=' + tgl_sel1 + '&tz=' + getTimeZone() + '&export=true');
+					window.open(getAPI()+'/get_data_bima?user_id=' + dt.idu + '&id=' + id_kpl + '&tgl=' + tgl_sel1 + '&tz=' + getTimeZone() + '&type=vts&export=true');
 
 				}
 			}
@@ -671,7 +661,7 @@ var window_detail_jam = Ext.create('Ext.window.Window',{
     	},
 			show: function(panel){
 				console.log("Window onShow : "+detail_jam_index);
-				param = {id:8,user_id:dt.idu,tgl:detail_jam_index,tz:dt.tz,density:'m'};
+				param = {id:comb_kapal1,user_id:dt.idu,tgl:detail_jam_index,tz:dt.tz,density:'m', type:'vts'};
 				store_detail_kapal_detik.load({params:param});
 			}
     },

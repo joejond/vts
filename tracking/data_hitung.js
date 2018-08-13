@@ -305,7 +305,7 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
             // var id_kpl = (comb_kapal21 === '')? '1' : comb_kapal21;
             // console.log(id_kpl,tgl_sel21);
             // window.open('export_data_perjam.php?id='+id_kpl+'&t='+tgl_sel21);
-            window.open(getAPI()+'/get_data_summary_ship_hourly?tz='+getTimeZone()+'&tgl='+tgl_sel21+'&export=true');
+            window.open(getAPI()+'/get_data_summary_ship_hourly?tz='+getTimeZone()+'&tgl='+tgl_sel21+'&id='+comb_kapal21+'&type=data_sum_hourly&export=true');
             // store_akumulasi_perjam.load({params : { /*id: comb_kapal21,*/ tz: getTimeZone(),tgl: tg }});
 
         }
@@ -651,8 +651,10 @@ var panel_hitung = {
               		comb_kapal22 = this.getRawValue();
               		// console.log(comb_kapal21+' --> '+ comb_kapal22);
               		//console.log(tgl_sel1);
-              		store_grafik.load({params: { /*id: comb_kapal21, */tz: getTimeZone(), tgl: tgl_sel21}});
-              		store_akumulasi_perjam.load({params : { /*id: comb_kapal21,*/ tz: getTimeZone(),tgl: tgl_sel21 }});
+                  console.log('comb_kapal21', comb_kapal21);
+                  console.log('comb_kapal22', comb_kapal22);
+              		store_grafik.load({params: { /*id: comb_kapal21, */tz: getTimeZone(), tgl: tgl_sel21, id: comb_kapal21, type: 'data_sum_graphic'}});
+              		store_akumulasi_perjam.load({params : { /*id: comb_kapal21,*/ tz: getTimeZone(),tgl: tgl_sel21, id:comb_kapal21, type: 'data_sum_hourly' }});
               		Ext.getCmp('table_chart').setTitle('Vessel '+comb_kapal22 +' on '+ tgl_sel22);
               		//tabel_detail_kapal
               		//update_text1();
@@ -676,8 +678,9 @@ var panel_hitung = {
               			// console.log('tgl_sel21  : '+tgl_sel21);
                     var tg = Ext.Date.format(Ext.getCmp('date_tab2').getValue(),'Y-m-d');
                     tgl_sel21 = tg;
-                    store_grafik.load({params : { tz: getTimeZone(), tgl: tg }});
-                    store_akumulasi_perjam.load({params : { /*id: comb_kapal21,*/ tz: getTimeZone(),tgl: tg }});
+                    store_grafik.load({params : { tz: getTimeZone(), tgl: tg, id: isiid, type: 'data_sum_graphic' }});
+                    store_akumulasi_perjam.load({params : { /*id: comb_kapal21,*/ tz: getTimeZone(),tgl: tg, id: isiid, type: 'data_sum_hourly' }});
+                    Ext.getCmp('table_chart').setTitle('Vessel '+comb_kapal22 +' on '+ tgl_sel22);
                     daily_akum();
 
                     // var tgl_ditab2 = (tgl_sel21=='')?Ext.getCmp('date_tab').getValue();
@@ -706,9 +709,9 @@ var panel_hitung = {
     					tgl_sel21 = Ext.Date.format(this.getValue(),'Y-m-d');
               // console.log('onchage ==> ',tgl_sel21);
     					// store_grafik.load({params: { id: comb_kapal21, tgl: tgl_sel21}});
-    					store_grafik.load({params: { /*id: comb_kapal21,*/ tz:getTimeZone() , tgl: tgl_sel21}});
+    					store_grafik.load({params: { /*id: comb_kapal21,*/ tz:getTimeZone() , tgl: tgl_sel21, id: comb_kapal21, type: 'data_sum_graphic'}});
     					// store_akumulasi.load({params : { id: comb_kapal21, tgl: tgl_sel21 }});
-    					store_akumulasi_perjam.load({params : { /*id: comb_kapal21,*/ tz:getTimeZone(), tgl: tgl_sel21 }});
+    					store_akumulasi_perjam.load({params : { /*id: comb_kapal21,*/ tz:getTimeZone(), tgl: tgl_sel21, id: comb_kapal21, type: 'data_sum_hourly' }});
     					tgl_sel22 = (tgl_sel21 != '') ? Ext.Date.format(this.getValue(),'d-M-Y') : Ext.Date.format(new Date(), 'd-M-Y' );
     					// console.log(tgl_sel2);
     					Ext.getCmp('table_chart').setTitle('Vessel '+comb_kapal22 +' on '+ tgl_sel22);
@@ -784,7 +787,7 @@ function daily_akum() {
         // url: 'http://project.daunbiru.com:1336/get_data_summary_bima',
         url: getAPI()+'/get_data_summary_bima',
         method: 'GET',
-        params: {tz:getTimeZone(),tgl: tgl_sel21},
+        params: {tz:getTimeZone(),tgl: tgl_sel21, id: comb_kapal21, type: 'data_sum_hourly'},
 
         success: function (data) {
     			   var hasil = Ext.JSON.decode(data.responseText);
