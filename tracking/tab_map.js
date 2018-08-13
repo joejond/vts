@@ -13,7 +13,7 @@ Ext.require(['*',
 
 var model_daftar_kapal = Ext.define('Kapal', {
     extend: 'Ext.data.Model',
-    fields: ['name']
+    fields: ['name','attribute']
 });
 
 var store_daftar_kapal = Ext.create('Ext.data.Store', {
@@ -77,11 +77,11 @@ var peta = {
           url:   getWS(),
 	        listeners: {
             open: function (ws) {
-                ws.send('usr:'+dt.idu);
-            } ,
+                // ws.send('usr:'+dt.idu);
+            },
             message: function (ws, data) {
               prosesDataSocket(JSON.parse(data));
-            } ,
+            },
             close: function (ws) {
               console.log('jadi close');
             }
@@ -136,45 +136,45 @@ var peta = {
 
 
         // console.log(dt);
-        Ext.Ajax.request({
-            url: getAPI()+'/asset/tree',
-            params: {
-                user_id: dt.idu
-            },
-            method:'get',
-            success: function(data){
-                var res = Ext.JSON.decode(data.responseText);
-                // console.log(res);
-                // console.log(res[0].children[1].name);
-                /*
-                * Sementara .........
-                *
-                */
-                var namanya = res[0].children[1].name;
-                data_obj.nama = namanya;
-                data_obj.id = 8;
-
-                // Crawler(8,res).then(function(data){
-                //     console.log(data);
-                //
-                //     // var mapmap= data.filter(function(dd){
-                //     //     // if(dd.id == 1027) return dd;
-                //     //     return (dd.id==1027);
-                //     //
-                //     // });
-                //     //
-                //     // console.log(mapmap);
-                //
-                //
-                // });
-
-                // console.log(hsl_soket);
-
-
-                // debugger;
-                // process server response here
-            }
-        });
+        // Ext.Ajax.request({
+        //     url: getAPI()+'/asset/tree',
+        //     params: {
+        //         user_id: dt.idu
+        //     },
+        //     method:'get',
+        //     success: function(data){
+        //         var res = Ext.JSON.decode(data.responseText);
+        //         // console.log(res);
+        //         // console.log(res[0].children[1].name);
+        //         /*
+        //         * Sementara .........
+        //         *
+        //         */
+        //         var namanya = res[0].children[1].name;
+        //         data_obj.nama = namanya;
+        //         data_obj.id = 8;
+        //
+        //         // Crawler(8,res).then(function(data){
+        //         //     console.log(data);
+        //         //
+        //         //     // var mapmap= data.filter(function(dd){
+        //         //     //     // if(dd.id == 1027) return dd;
+        //         //     //     return (dd.id==1027);
+        //         //     //
+        //         //     // });
+        //         //     //
+        //         //     // console.log(mapmap);
+        //         //
+        //         //
+        //         // });
+        //
+        //         // console.log(hsl_soket);
+        //
+        //
+        //         // debugger;
+        //         // process server response here
+        //     }
+        // });
       }
     }
 };
@@ -195,34 +195,80 @@ function onClickPeta(map){
 
 
 function prosesDataSocket(data){
-  // console.log(data);
+  // console.log('data', data);
   var hhh= data.monita.filter(function(d){
     // if(type_tu =="27") {return value;}
     return d.type_tu==27 || d.type_tu==28 || d.type_tu==29 || d.type_tu==30;
   });
 
   // var arr ={};
-  // console.log(hhh);
+  // console.log('hhh', hhh);
   hhh.forEach(function(d){
     arr_dat =[];
-    if(d.type_tu ==27){
-      data_obj.lat=d.value;
-      data_obj.waktu=d.epochtime;
+    if(d.type_tu == 27){
+      // data_obj.lat=d.value;
+      // data_obj.waktu=d.epochtime;
+      // console.log('d.titik_ukur', d.titik_ukur);
+      // console.log('aset_parameter.length', aset_parameter.length);
+      for (var i = 0; i < aset_parameter.length; i++) {
+        // console.log('aset_parameter['+i+'].tu_id.length', aset_parameter[i].tu_id.length);
+        for (var j = 0; j < aset_parameter[i].tu_id.length; j++) {
+          // console.log('aset_parameter['+i+'].tu_id['+j+'].titik_ukur', aset_parameter[i].tu_id[j].titik_ukur);
+          if (aset_parameter[i].tu_id[j].titik_ukur == d.titik_ukur) {
+            aset_parameter[i]['lat'] = d.value;
+            aset_parameter[i]['epoch'] = d.epochtime;
+            // console.log('d.titik_ukur', d.titik_ukur);
+            // console.log('d.value', d.value);
+            // console.log('aset_parameter['+i+'].tu_id['+j+'].titik_ukur', aset_parameter[i].tu_id[j].titik_ukur);
+            // console.log('aset_parameter['+i+'].tu_id['+j+'].titik_ukur', aset_parameter[i].tu_id[j].titik_ukur);
+            // console.log('aset_parameter['+i+'].lat', aset_parameter[i].lat);
+            break;
+          }
+        }
+      }
     }
-    if(d.type_tu ==28){
-      data_obj.lng=d.value;
+    if(d.type_tu == 28){
+      // data_obj.lng=d.value;
+      for (var i = 0; i < aset_parameter.length; i++) {
+        for (var j = 0; j < aset_parameter[i].tu_id.length; j++) {
+          if (aset_parameter[i].tu_id[j].titik_ukur == d.titik_ukur) {
+            aset_parameter[i]['lng'] = d.value;
+            aset_parameter[i]['epoch'] = d.epochtime;
+            break;
+          }
+        }
+      }
     }
     if(d.type_tu ==29){
-      data_obj.head=d.value;
+      // data_obj.head=d.value;
+      for (var i = 0; i < aset_parameter.length; i++) {
+        for (var j = 0; j < aset_parameter[i].tu_id.length; j++) {
+          if (aset_parameter[i].tu_id[j].titik_ukur == d.titik_ukur) {
+            aset_parameter[i]['head'] = d.value;
+            aset_parameter[i]['epoch'] = d.epochtime;
+            break;
+          }
+        }
+      }
     }
     if(d.type_tu ==30){
-      data_obj.speed=d.value;
+      // data_obj.speed=d.value;
+      for (var i = 0; i < aset_parameter.length; i++) {
+        for (var j = 0; j < aset_parameter[i].tu_id.length; j++) {
+          if (aset_parameter[i].tu_id[j].titik_ukur == d.titik_ukur) {
+            aset_parameter[i]['speed'] = d.value;
+            aset_parameter[i]['epoch'] = d.epochtime;
+            break;
+          }
+        }
+      }
     }
 
   });
-  arr_dat.push(data_obj);
+  // arr_dat.push(data_obj);
+  // console.log('arr_dat', arr_dat);
   // console.log(arr_dat);
-
+  // console.log('aset_parameter', aset_parameter);
 }
 // var aa =1;
 var marker_marker =[];
@@ -230,7 +276,8 @@ var taskUpdV = {
       run: function(){
         // console.log(aa);
         deleteTandaKapal();
-        proses_kapal(arr_dat);
+        // proses_kapal(arr_dat);
+        proses_kapal(aset_parameter);
         // deleteTandaKapal();
         /*tampilkan kapal*/
         // showTandaKapal(atlas);
@@ -248,7 +295,9 @@ function proses_kapal(d)
   // console.log('proses_kapal ',d);
   for (var i = 0; i <d.length; i++){
     // console.log('proses_kapal ke ['+i+'] => ',d);
-    marker_marker.push(addTandaKapal(d[i]));
+    if (d[i].lat && d[i].lng) {
+      marker_marker.push(addTandaKapal(d[i]));
+    }
   }
   // console.log(marker_marker);
 
@@ -258,7 +307,7 @@ function addTandaKapal(data)
 {
   // console.log(peta1.getMap());
   // console.log('addTandaKapal == > ',data);
-
+  // console.log('data', data);
   var tanda = new google.maps.Marker({
     position : new google.maps.LatLng(data.lat,data.lng),
     // map : peta1.getMap(),
@@ -270,7 +319,7 @@ function addTandaKapal(data)
         rotation : parseFloat(data.head), //+parseFloat(cor),		// koreksi
         strokeColor: 'black',
         strokeWeight: 1,
-        fillColor: '#FF0000',
+        fillColor: data.attribute.color,
         fillOpacity: 0.7
       }
     //*/
@@ -286,13 +335,16 @@ function addTandaKapal(data)
 var taskBuntut;
 function create_infowindow(t,d){
 
+  // console.log('d', d);
   var lati = ((parseFloat(d.lat) < 0) ? Math.abs(parseFloat(d.lat).toFixed(3))+'&deg; S' : parseFloat(d.lat).toFixed(3)+'&deg; N');
   var long = ((parseFloat(d.lng) < 0) ? Math.abs(parseFloat(d.lng).toFixed(3))+'&deg; W' : parseFloat(d.lng).toFixed(3)+'&deg; E');
 
   // info_ves = '<h3> BIMA-333 </h3>';
-  info_ves = '<h3>'+d.nama+'</h3>';
+  // info_ves = '<h3>'+d.nama+'</h3>';
+  info_ves = '<h3>'+d.name+'</h3>';
   info_ves += '<p>Position : '+lati+', ' + long+' </p>';
-  info_ves +='<p>Last Update : '+ Ext.Date.format(new Date(d.waktu*1000),'d-m-Y H:i:s')+'</p>'
+  // info_ves +='<p>Last Update : '+ Ext.Date.format(new Date(d.waktu*1000),'d-m-Y H:i:s')+'</p>'
+  info_ves +='<p>Last Update : '+ Ext.Date.format(new Date(d.epoch*1000),'d-m-Y H:i:s')+'</p>'
   // info_ves += '<p> '+ coords + '</p>';
   // info_ves += '<p> Last Updated : '+ me.pad(day,2) +'/'+me.pad(month,2)+'/'+year +' '+ hours+':'+me.pad(minutes,2)+':'+me.pad(seconds,2) + '</p>';
 
@@ -328,98 +380,98 @@ function create_infowindow(t,d){
   // });
 
 }
-var buntut;
-function create_rute_buntut(d){
-    console.log('buntute ==> ',d);
-    var skr = new Date().getTime();
-
-    console.log(skr,'ini sejam yng lalu ==> ', (parseInt(skr/1000)) - 3600 );
-    var dtObj = {};
-    dtObj.end = parseInt(skr/1000);
-    dtObj.start = parseInt(skr/1000) - 3600;
-    dtObj.density = 'm';
-
-
-    Ext.Ajax.request({
-        url   : getAPI()+'/map/track-marine',
-        method:'get',
-        params: dtObj,
-        success: function(response){
-            var res = JSON.parse(response.responseText);
-            // console.log(res);
-            // console.log(res.length);
-            var d_rute = create_rute(res);
-            console.log('d_rute', d_rute);
-            var l_rute = d_rute.length;
-
-            // var i =0;
-
-
-            buntut = taskBuntut.newTask({
-              run: function(){
-                show_tracking(null);
-                if (markerAnimasiGaris) {
-                  markerAnimasiGaris.setMap(null);
-                }
-                if (markerLabelGaris) {
-                  markerLabelGaris.setMap(null);
-                }
-                if (taskAnimasiGaris) {
-                  taskAnimasiGaris.stop(taskAG);
-                }
-                // console.log(i);
-                var akhir = d_rute[d_rute.length -1];
-
-                // d_rute.pop();
-                // console.log(arr_dat);
-                var data_ws = {};
-                // console.log(d_rute.length);
-                data_ws.lat = parseFloat(arr_dat[0].lat);
-                data_ws.lng = parseFloat(arr_dat[0].lng);
-                // data_ws.t = arr_dat[0].waktu;
-
-                if(JSON.stringify(data_ws) === JSON.stringify(akhir)){
-                //   // console.log('sama');
-                //   // console.log('d_rute', d_rute);
-                }
-                else {
-                  // console.log('beda');]
-                  d_rute.push(data_ws);
-                  d_rute.shift();
-                  // console.log(d_rute.length);
-                  // console.log(d_rute);
-
-                }
-                create_tracking(d_rute,res);
-                show_tracking(atlas);
-                // console.log(data_ws);
-
-
-
-
-
-
-
-
-                // i++;
-              },
-              interval : 1000
-
-            });
-
-            buntut.start();
-            // create_tracking(d_rute,res);
-            // show_tracking(atlas);
-            // resetCenterTracking(atlas);
-            // tracking_mask_periode.hide();
-
-        },
-        callback: function(a,b,c){
-
-        }
-    });
-
-};
+// var buntut;
+// function create_rute_buntut(d){
+//     console.log('buntute ==> ',d);
+//     var skr = new Date().getTime();
+//
+//     console.log(skr,'ini sejam yng lalu ==> ', (parseInt(skr/1000)) - 3600 );
+//     var dtObj = {};
+//     dtObj.end = parseInt(skr/1000);
+//     dtObj.start = parseInt(skr/1000) - 3600;
+//     dtObj.density = 'm';
+//
+//
+//     Ext.Ajax.request({
+//         url   : getAPI()+'/map/track-marine',
+//         method:'get',
+//         params: dtObj,
+//         success: function(response){
+//             var res = JSON.parse(response.responseText);
+//             // console.log(res);
+//             // console.log(res.length);
+//             var d_rute = create_rute(res);
+//             console.log('d_rute', d_rute);
+//             var l_rute = d_rute.length;
+//
+//             // var i =0;
+//
+//
+//             buntut = taskBuntut.newTask({
+//               run: function(){
+//                 show_tracking(null);
+//                 if (markerAnimasiGaris) {
+//                   markerAnimasiGaris.setMap(null);
+//                 }
+//                 if (markerLabelGaris) {
+//                   markerLabelGaris.setMap(null);
+//                 }
+//                 if (taskAnimasiGaris) {
+//                   taskAnimasiGaris.stop(taskAG);
+//                 }
+//                 // console.log(i);
+//                 var akhir = d_rute[d_rute.length -1];
+//
+//                 // d_rute.pop();
+//                 // console.log(arr_dat);
+//                 var data_ws = {};
+//                 // console.log(d_rute.length);
+//                 data_ws.lat = parseFloat(arr_dat[0].lat);
+//                 data_ws.lng = parseFloat(arr_dat[0].lng);
+//                 // data_ws.t = arr_dat[0].waktu;
+//
+//                 if(JSON.stringify(data_ws) === JSON.stringify(akhir)){
+//                 //   // console.log('sama');
+//                 //   // console.log('d_rute', d_rute);
+//                 }
+//                 else {
+//                   // console.log('beda');]
+//                   d_rute.push(data_ws);
+//                   d_rute.shift();
+//                   // console.log(d_rute.length);
+//                   // console.log(d_rute);
+//
+//                 }
+//                 create_tracking(d_rute,res);
+//                 show_tracking(atlas);
+//                 // console.log(data_ws);
+//
+//
+//
+//
+//
+//
+//
+//
+//                 // i++;
+//               },
+//               interval : 1000
+//
+//             });
+//
+//             buntut.start();
+//             // create_tracking(d_rute,res);
+//             // show_tracking(atlas);
+//             // resetCenterTracking(atlas);
+//             // tracking_mask_periode.hide();
+//
+//         },
+//         callback: function(a,b,c){
+//
+//         }
+//     });
+//
+// };
 
 function setTandaOnMap(map) {
     // console.log('marker_marker', marker_marker);
@@ -811,42 +863,75 @@ var paths_lon = [];
 var jml_point_paths = 0;
 var jmlpt = 0;
 var data_koor1 = [];
-//
+var ship = [];
+var aset_parameter;
 
 
 var selmod = Ext.create('Ext.selection.CheckboxModel',{
     listeners: {
+        // handler: function(checkbox, checked) {
+        //   if (checked) {
+        //     checkbox.el.setStyle("color","red");
+        //     //checkbox.setBoxLabel('<span style="color:red">MyCheckbox</span>');
+        //   } else {
+        //     checkbox.el.setStyle("color","green");
+        //     //checkbox.setBoxLabel('<span style="color:green">MyCheckbox</span>');
+        //   }
+        // },
         selectionchange: function(sm, selections) {
-            var ship=[],
-            hasil = tabel_daftar_kapal.getView().getSelectionModel().getSelection();
+            // console.log('sm', sm);
+            // console.log('selections', selections);
+            var hasil = tabel_daftar_kapal.getView().getSelectionModel().getSelection();
             // console.log('pencet ');;
 
+            // console.log('ship_list', ship_list);
+            ship = [];
             Ext.each(hasil, function (item) {
                        ship.push(item.data.id);
             });
-
-            console.log('ship', ship);
+            // console.log('hasil', hasil);
+            // console.log('ship', ship);
+            if (ship.length > 1 || ship.length == 0) {
+              Ext.getCmp('panel_form_tracking').setDisabled(true);
+              Ext.getCmp('panel_form_work_order').setDisabled(true);
+            } else {
+              Ext.getCmp('panel_form_tracking').setDisabled(false);
+              Ext.getCmp('panel_form_work_order').setDisabled(false);
+            }
             //var text1 = "";
             //Ext.Array.each(selections, function (item) {
                 //text1 = text1 + "," + item.get('id');
             //});
             //var text2 = text1.substr(1, text1.length);
             //console.log(text2);
-
-            // Ext.Ajax.request({
-            //     url: 'get_last_pos_array.php',
-            //     params : 'id='+ship,
-            //     method: 'GET',
-            //     success: function (data) {
-            //         var isidat = Ext.JSON.decode(data.responseText);
-					  //             //  console.log (isidat);
-            //         if(isidat.posisi.length == 0)
-            //             deleteMarkers();
-            //         else
-            //             gambar_kapal(isidat);
-            //
-            //     }
-            // });
+            // console.log('ship', ship);
+            // console.log('ship.toString()', ship.toString());
+            if (ship.length > 0) {
+              Ext.Ajax.request({
+                  url: 'get_visual_group.php',
+                  params : 'aset_id='+ship.toString(),
+                  method: 'GET',
+                  success: function (data) {
+                      var isidat = Ext.JSON.decode(data.responseText);
+                      // console.log ('isidat', isidat);
+                      var vg_id;
+                      aset_parameter = isidat.result.aset_parameter;
+                      for (var i = 0; i < aset_parameter.length; i++) {
+                        // console.log(aset_parameter[i]);
+                        if (!vg_id) {
+                          vg_id = aset_parameter[i].vg_id;
+                        } else {
+                          vg_id = vg_id + ',' + aset_parameter[i].vg_id;
+                        }
+                      }
+                      // console.log('vg_id', vg_id);
+                      ws.send('vg:'+vg_id);
+                  }
+              });
+            } else {
+              ws.send('vg:0');
+              aset_parameter = {};
+            }
         }
     }
 });
@@ -926,7 +1011,9 @@ var tabel_tracking_work_order = Ext.create('Ext.grid.Panel', {
         var dt = {
           start: parseInt(new Date(record.getData().start_date).getTime()/1000),
           end: parseInt(new Date(record.getData().end_date).getTime()/1000),
-          density: 'm'
+          density: 'm',
+          id: ship.toString(),
+          type: 'vts'
         };
         // dt.start = parseInt(new Date(record.getData().start_date).getTime()/1000);
         // dt.end = parseInt(new Date(record.getData().end_date).getTime()/1000);
@@ -1022,9 +1109,10 @@ var window_tracking_work_order = Ext.create('Ext.window.Window',{
 });
 
 var panel_form_tracking = Ext.create('Ext.form.Panel', {
-    title: 'By Periode',
+    title: 'Tracking by Periode',
     bodyPadding: 5,
     layout: 'anchor',
+    id: 'panel_form_tracking',
     defaults: {
         anchor: '100%'
     },
@@ -1129,7 +1217,7 @@ var panel_form_tracking = Ext.create('Ext.form.Panel', {
         handler: function() {
 
             // console.log(taskBuntut);
-            if (buntut) buntut.stop();
+            // if (buntut) buntut.stop();
 
             var form = this.up('form').getForm();
             if (form.isValid()) {
@@ -1192,7 +1280,8 @@ var panel_form_tracking = Ext.create('Ext.form.Panel', {
 
                 if (dt.start && dt.end && dt.density) valid = true;
               }
-
+              dt['id'] = ship.toString();
+              dt['type'] = 'vts';
               delete dt.track_period;
               // delete dt.tr_start;
               // delete dt.tr_end;
@@ -1237,8 +1326,9 @@ var val_order_end_date;
 var val_order_desc;
 
 var panel_form_work_order = Ext.create('Ext.form.Panel', {
-    title: 'By Work Order',
+    title: 'Tracking by Work Order',
     bodyPadding: 5,
+    id: 'panel_form_work_order',
     layout: 'anchor',
     defaults: {
         anchor: '100%'
@@ -1329,7 +1419,7 @@ Ext.apply(Ext.form.field.VTypes, {
 
 var tabel_daftar_kapal = Ext.create('Ext.grid.Panel', {
     store : store_daftar_kapal,
-    flex: 4,
+    flex: 1,
     selModel: selmod,
     columns: [
     {
@@ -1343,16 +1433,36 @@ var tabel_daftar_kapal = Ext.create('Ext.grid.Panel', {
         //width: 120,
         flex : 1,
         dataIndex: 'name'
+    },
+    {
+        text: "",
+        // flex: 1,
+        width: 30,
+        dataIndex: "attribute",
+        renderer: function(value) {
+          value = JSON.parse(value);
+          // console.log('value', value['color']);
+          return '<span style="background-color:' + value['color'] + ';height:15px;width:15px;border:1px solid black;display:block;">&nbsp</span>';
+        }
     }]
 });
 
+// var panel_tabel_daftar_kapal = Ext.create('Ext.form.Panel', {
+//     title: 'Daftar Kapal',
+//     bodyPadding: 5,
+//     id: 'panel_tabel_daftar_kapal',
+//     items: [tabel_daftar_kapal]
+//   }
+// );
+
 var ship_list = {
-    // title: "Ship List",
-    title: "Tracking",
+    title: "Ship List",
+    // title: "Tracking",
     id:'ship_list_panel_id',
     split: true,
     region: 'east',
     width: 250,
+    autoScroll: true,
     collapsible: true,
     collapsed: true,
     layout: {
@@ -1365,71 +1475,12 @@ var ship_list = {
         tabel_daftar_kapal,
         panel_form_tracking,
         panel_form_work_order
-    // {
-    //     height: 140,
-    //     layout: 'form',
-    //     id: 'simpleForm',
-    //     padding: 10,
-    //     frame: true,
-    //     items: [
-        // {
-
-
-        //
-        //     xtype: 'checkboxfield',
-        //     name: 'checkbox1',
-        //     boxLabel: 'show track path',
-        //     listeners:{
-        //         change: function(checkbox, newValue, oldValue, eOpts) {
-        //             if (newValue) {
-        //                 Ext.getCmp('start_path').enable();
-        //                 Ext.getCmp('stop_path').enable();
-        //                 Ext.getCmp('button_update').enable();
-        //                 status_path = 1;
-        //                 addpath();
-        //             } else {
-        //                 Ext.getCmp('start_path').disable();
-        //                 Ext.getCmp('stop_path').disable();
-        //                 Ext.getCmp('button_update').disable();
-        //                 status_path = 0;
-        //                 removepath();
-        //             }
-        //         }
-        //
-        //     }
-        // },{
-        //     fieldLabel: 'Start Date',
-        //     name: 'date',
-        //     id: 'start_path',
-        //     labelWidth: 70,
-        //     xtype: 'datefield',
-        //     value: new Date(),
-        //     maxValue: new Date(),
-        //     format: 'd-M-Y',
-        //     // disabled: true
-        // },{
-        // //     fieldLabel: 'Stop Date',
-        // //     name: 'date',
-        // //     id: 'stop_path',
-        // //     labelWidth: 70,
-        // //     xtype: 'datefield',
-        // //     value: new Date(),
-        // //     format: 'd-M-Y',
-        // //     disabled: true
-        // // },
-        // // {
-        //     xtype: 'button',
-        //     text : 'Show Track',
-        //     id: 'button_update',
-        //     disabled: true,
-        //     handler : function() {
-        //         removepath();
-        //         addpath();
-        //     }
-        // }
-    //   ]
-    // },
-    /*ditutup dulu*/
-    // tabel_daftar_kapal
-    ]
+    ],
+    listeners: {
+      boxready: function() {
+        // console.log('ship list ready');
+        Ext.getCmp('panel_form_tracking').setDisabled(true);
+        Ext.getCmp('panel_form_work_order').setDisabled(true);
+      }
+    }
   }

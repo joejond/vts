@@ -26,6 +26,7 @@ try {
 	// 					join aset_cat ac on ac.id = a.aset_cat_id
 	// 					where u.id = $id_user and ac.id = 3 and a.id=8";
   $query = "call get_aset($id_user);";
+  // $query = "select id from visual_group where aset_id in (8,76) and type = 'vts';";
   // echo $query;
   // echo '<pre>'.var_dump($query).'</pre>';
 	// $query = 'call ship_list()';
