@@ -150,7 +150,8 @@ var peta = {
                 * Sementara .........
                 *
                 */
-                var namanya = res[0].children[1].name;
+                // console.log('res', res);
+                var namanya = res[0].children[0].name;
                 data_obj.nama = namanya;
                 data_obj.id = 8;
 
@@ -195,14 +196,13 @@ function onClickPeta(map){
 
 
 function prosesDataSocket(data){
-  // console.log(data);
   var hhh= data.monita.filter(function(d){
     // if(type_tu =="27") {return value;}
     return d.type_tu==27 || d.type_tu==28 || d.type_tu==29 || d.type_tu==30;
   });
 
   // var arr ={};
-  // console.log(hhh);
+  // console.log('hhh', hhh);
   hhh.forEach(function(d){
     arr_dat =[];
     if(d.type_tu ==27){
@@ -220,8 +220,9 @@ function prosesDataSocket(data){
     }
 
   });
+  // console.log('data_obj', data);
   arr_dat.push(data_obj);
-  // console.log(arr_dat);
+  // console.log('arr_dat', arr_dat);
 
 }
 // var aa =1;
