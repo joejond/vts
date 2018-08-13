@@ -1452,7 +1452,7 @@ var tabel_daftar_kapal = Ext.create('Ext.grid.Panel', {
         sm.selectAll(true);
         console.log('test');
 
-        var hasil = sm.getSelection();
+        var hasil = tabel_daftar_kapal.getView().getSelectionModel().getSelection();
 
         ship = [];
         Ext.each(hasil, function (item) {
