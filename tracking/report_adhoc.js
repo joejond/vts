@@ -821,9 +821,11 @@ var panel_r_adhoc = {
 						var param = {user_id: dt.idu,id:id_kpl,tgl:tgl_sel1,tz: getTimeZone()};
 
 
-						console.log("Combo box adhoc afterrender : [" + id_vessel_adhoc +"],[" + month_adhoc +"]");
+						// console.log("Combo box adhoc afterrender : [" + id_vessel_adhoc +"],[" + month_adhoc +"]");
+            console.log('param', param);
+            console.log('month_adhoc', month_adhoc);
 						store_adhoc_kapal.load({params: { id: id_vessel_adhoc, m: month_adhoc}});
-						console.log(this.getStore());
+						// console.log(this.getStore());
 						}
 				}
 
