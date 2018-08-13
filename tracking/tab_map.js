@@ -44,6 +44,21 @@ var garis=[];
 var bounds;
 var ws;
 
+ws = Ext.create ('Ext.ux.WebSocket', {
+  url:   getWS(),
+  listeners: {
+    open: function (ws) {
+        // ws.send('usr:'+dt.idu);
+    },
+    message: function (ws, data) {
+      prosesDataSocket(JSON.parse(data));
+    },
+    close: function (ws) {
+      console.log('jadi close');
+    }
+  }
+});
+
 data_obj={};
 arr_dat=[];
 var panel_ship;
@@ -73,20 +88,6 @@ var peta = {
         // garis = new google.maps.Polyline();
         bounds = new google.maps.LatLngBounds();
 
-        ws = Ext.create ('Ext.ux.WebSocket', {
-          url:   getWS(),
-	        listeners: {
-            open: function (ws) {
-                // ws.send('usr:'+dt.idu);
-            },
-            message: function (ws, data) {
-              prosesDataSocket(JSON.parse(data));
-            },
-            close: function (ws) {
-              console.log('jadi close');
-            }
-          }
-        });
         TaskVessel = new Ext.util.TaskRunner();
         TaskVessel.start(taskUpdV);
         // onClickPeta(atlas);
@@ -503,7 +504,7 @@ var rute;
 function create_rute(d)
 {
   rute = [];
-  console.log('d', d);
+  // console.log('d', d);
   var temp_rute = [];
   posisiAnimasiGaris = [];
   for (var i = 0; i < d.length; i++) {
@@ -889,8 +890,8 @@ var selmod = Ext.create('Ext.selection.CheckboxModel',{
             Ext.each(hasil, function (item) {
                        ship.push(item.data.id);
             });
-            // console.log('hasil', hasil);
-            // console.log('ship', ship);
+            console.log('hasil', hasil);
+            console.log('ship', ship);
             if (ship.length > 1 || ship.length == 0) {
               Ext.getCmp('panel_form_tracking').setDisabled(true);
               Ext.getCmp('panel_form_work_order').setDisabled(true);
@@ -1444,7 +1445,57 @@ var tabel_daftar_kapal = Ext.create('Ext.grid.Panel', {
           // console.log('value', value['color']);
           return '<span style="background-color:' + value['color'] + ';height:15px;width:15px;border:1px solid black;display:block;">&nbsp</span>';
         }
-    }]
+    }],
+    listeners: {
+      afterrender: function( thisObj, eOpts ){
+        var sm=thisObj.getSelectionModel();
+        sm.selectAll(true);
+        console.log('test');
+
+        var hasil = sm.getSelection();
+
+        ship = [];
+        Ext.each(hasil, function (item) {
+                   ship.push(item.data.id);
+        });
+        console.log('hasil', hasil);
+        console.log('ship', ship);
+        if (ship.length > 1 || ship.length == 0) {
+          Ext.getCmp('panel_form_tracking').setDisabled(true);
+          Ext.getCmp('panel_form_work_order').setDisabled(true);
+        } else {
+          Ext.getCmp('panel_form_tracking').setDisabled(false);
+          Ext.getCmp('panel_form_work_order').setDisabled(false);
+        }
+
+        if (ship.length > 0) {
+          Ext.Ajax.request({
+              url: 'get_visual_group.php',
+              params : 'aset_id='+ship.toString(),
+              method: 'GET',
+              success: function (data) {
+                  var isidat = Ext.JSON.decode(data.responseText);
+                  // console.log ('isidat', isidat);
+                  var vg_id;
+                  aset_parameter = isidat.result.aset_parameter;
+                  for (var i = 0; i < aset_parameter.length; i++) {
+                    // console.log(aset_parameter[i]);
+                    if (!vg_id) {
+                      vg_id = aset_parameter[i].vg_id;
+                    } else {
+                      vg_id = vg_id + ',' + aset_parameter[i].vg_id;
+                    }
+                  }
+                  // console.log('vg_id', vg_id);
+                  ws.send('vg:'+vg_id);
+              }
+          });
+        } else {
+          ws.send('vg:0');
+          aset_parameter = {};
+        }
+      }
+    }
 });
 
 // var panel_tabel_daftar_kapal = Ext.create('Ext.form.Panel', {
