@@ -273,7 +273,7 @@ var tabel_detail_jam = Ext.create('Ext.grid.Panel', {
 
 var model_combo_kapal1 = Ext.define('Kapal', {
     extend: 'Ext.data.Model',
-    fields: ['name']
+    fields: ['name', 'id']
 });
 
 var store_combo_kapal1 = Ext.create('Ext.data.Store', {

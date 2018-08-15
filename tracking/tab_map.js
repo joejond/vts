@@ -54,7 +54,7 @@ ws = Ext.create ('Ext.ux.WebSocket', {
       prosesDataSocket(JSON.parse(data));
     },
     close: function (ws) {
-      console.log('jadi close');
+      // console.log('jadi close');
     }
   }
 });

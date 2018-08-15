@@ -669,6 +669,7 @@ var panel_hitung = {
               			var isiid = this.getStore().data.items[0].data['id'];
               			this.setValue(isi1);
               			comb_kapal22 = (comb_kapal21 != '') ? comb_kapal22 : isi1;
+                    comb_kapal21 = isiid;
                     // console.log('==> '+comb_kapal22);
               			// Ext.getCmp('table_chart').setTitle('Vessel '+isi1+' on '+ Ext.Date.format(new Date(), 'd-M-Y' ));
                     // console.log(this.getStore().data);
@@ -783,6 +784,7 @@ var panel_hitung = {
 
 var eng_rh1 = '';
 function daily_akum() {
+  console.log('comb_kapal21', comb_kapal21);
     Ext.Ajax.request({
         // url: 'http://project.daunbiru.com:1336/get_data_summary_bima',
         url: getAPI()+'/get_data_summary_bima',
