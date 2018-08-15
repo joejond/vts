@@ -786,6 +786,7 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
 
 var id_vessel_adhoc;
 var month_adhoc;
+var id_kpl;
 
 var panel_r_adhoc = {
 	dockedItems: [{
@@ -806,14 +807,25 @@ var panel_r_adhoc = {
 				valueField: 'id',
 				store: store_combo_kapal1,
 				listeners:{
-					select: function() {
-						// var month='2018-02';
-						// store_adhoc_kapal.load({params: { id: id_vessel_adhoc, m: month}});
-						// console.log("Combo box adhoc selected [" + id_vessel_adhoc +"],[" + month +"]");
+					// select: function() {
+					// 	// var month='2018-02';
+					// 	store_adhoc_kapal.load({params: { id: id_kpl, m: month_adhoc, type: 'data_adhoc'}});
+					// 	// console.log("Combo box adhoc selected [" + id_vessel_adhoc +"],[" + month +"]");
+					// },
+          change: function () {
+						id_vessel_adhoc=this.getValue();
+						month_adhoc=Ext.Date.format(Ext.getCmp('combo_month_adhoc').getValue(),'Y-m');
+						// console.log("Combo box adhoc afterrender : [" + cb_vessel_adhoc +"],[" + month_adhoc +"]");
+            // console.log('id_kpl', id_kpl);
+						store_adhoc_kapal.load({params: { id: id_vessel_adhoc, m: month_adhoc, type: 'data_adhoc'}});
+            // console.log('month_adhoc', month_adhoc);
+
 					},
 					afterrender : function(){
 						var isi = this.getStore().data.items[0].data['name'];
+            var isiid = this.getStore().data.items[0].data['id'];
 						this.setValue(isi);
+            id_kpl = isiid;
 						id_vessel_adhoc = this.getValue();
 						comb_kapal2 = (comb_kapal1 != '') ? comb_kapal2 : isi;
 						month_adhoc = Ext.Date.format(Ext.getCmp('combo_month_adhoc').getValue(),'Y-m');
@@ -822,9 +834,11 @@ var panel_r_adhoc = {
 
 
 						// console.log("Combo box adhoc afterrender : [" + id_vessel_adhoc +"],[" + month_adhoc +"]");
-            console.log('param', param);
-            console.log('month_adhoc', month_adhoc);
-						store_adhoc_kapal.load({params: { id: id_vessel_adhoc, m: month_adhoc}});
+            // console.log('param', param);
+            // console.log('month_adhoc', month_adhoc);
+            // console.log('id_kpl', id_kpl);
+						// store_adhoc_kapal.load({params: { id: id_vessel_adhoc, m: month_adhoc}});
+            store_adhoc_kapal.load({params: { id: id_kpl, m: month_adhoc, type: 'data_adhoc'}});
 						// console.log(this.getStore());
 						}
 				}
@@ -850,9 +864,10 @@ var panel_r_adhoc = {
 
 						id_vessel_adhoc=Ext.getCmp('cb_vessel_adhoc').getValue();
 						month_adhoc=Ext.Date.format(this.getValue(),'Y-m');
-						console.log("Combo box adhoc afterrender : [" + cb_vessel_adhoc +"],[" + month_adhoc +"]");
-						store_adhoc_kapal.load({params: { id: id_vessel_adhoc, m: month_adhoc}});
-            console.log('month_adhoc', month_adhoc);
+						// console.log("Combo box adhoc afterrender : [" + cb_vessel_adhoc +"],[" + month_adhoc +"]");
+            console.log('id_kpl', id_kpl);
+						store_adhoc_kapal.load({params: { id: id_kpl, m: month_adhoc, type: 'data_adhoc'}});
+            // console.log('month_adhoc', month_adhoc);
 
 					},
 					afterrender : function(){
@@ -1456,7 +1471,7 @@ var window_work_order = Ext.create('Ext.window.Window',{
         text : 'Close',
         handler : function(){
             this.up('.window').hide();
-            store_adhoc_kapal.load({params: { id: id_vessel_adhoc, m: month_adhoc}});
+            store_adhoc_kapal.load({params: { id: id_kpl, m: month_adhoc, type: 'data_adhoc'}});
         }
     }]
 });

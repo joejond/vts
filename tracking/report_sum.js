@@ -236,7 +236,7 @@ var panel_r_sum = {
 						//console.log('Date selected: ', Ext.Date.format(this.getValue(),'Y-m-d'));
 						// console.log('onselected');
 						tgl_sel_sum = Ext.Date.format(this.getValue(),'Y-m-d');
-						var param = {user_id: dtt.idu,tgl:tgl_sel_sum,tz: getTimeZone()};
+						var param = {user_id: dtt.idu,tgl:tgl_sel_sum,tz: getTimeZone(),type: 'data_sum_ship'};
 						store_detail_sum.load({params:param});
 						// // store_detail_kapal.load({params: { id: comb_kapal1, tgl: tgl_sel1}});
 						// tgl_sel2 = (tgl_sel1 != '') ? tgl_sel1 : Ext.Date.format(new Date(), 'd-M-Y' );
@@ -249,7 +249,7 @@ var panel_r_sum = {
 
 						tgl_sel_sum = Ext.Date.format(this.getValue(),'Y-m-d');
 						// var dtt= JSON.parse(atob(Ext.util.Cookies.get("marine")));
-						var param = {user_id: dtt.idu,tgl:tgl_sel_sum,tz: getTimeZone()};
+						var param = {user_id: dtt.idu,tgl:tgl_sel_sum,tz: getTimeZone(),type: 'data_sum_ship'};
 						store_detail_sum.load({params:param});
 						// tgl_sel2 = (tgl_sel1 != '') ? tgl_sel1 : Ext.Date.format(new Date(), 'd-M-Y' );
 						//console.log(tgl_sel1);
