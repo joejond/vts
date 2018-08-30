@@ -19,7 +19,7 @@ var model_detail_kapal = Ext.define('detail_kapal', {
 			"ME1-RPM","ME1-RH","ME2-RPM","ME2-RH",
 			"AE1-RPM","AE1-RH","AE2-RPM","AE2-RH",
 			"PE-Door","PE-VCharg","PE-VBatt",
-			"GPS-Lattitude","GPS-Longitude","GPS-Heading","GPS-Velocity",
+			"GPS-Latitude","GPS-Longitude","GPS-Heading","GPS-Velocity",
 			"AE1-RH-Daily","AE2-RH-Daily",
 			"F_Sound_Check",{name:"t",type:"date"}
 		]
@@ -36,7 +36,7 @@ var model_detail_kapal = Ext.define('detail_kapal', {
 				"ME1-RPM","ME1-RH","ME2-RPM","ME2-RH",
 				"AE1-RPM","AE1-RH","AE2-RPM","AE2-RH",
 				"PE-Door","PE-VCharg","PE-VBatt",
-				"GPS-Lattitude","GPS-Longitude","GPS-Heading","GPS-Velocity",
+				"GPS-Latitude","GPS-Longitude","GPS-Heading","GPS-Velocity",
 				"AE1-RH-Daily","AE2-RH-Daily",
 				"F_Sound_Check",{name:"t",type:"date"}
 			]
@@ -121,7 +121,7 @@ var tabel_detail_jam = Ext.create('Ext.grid.Panel', {
       columns: [{
 			header: "Latitude",
 			width: 50,
-			dataIndex: 'GPS-Lattitude'
+			dataIndex: 'GPS-Latitude'
 		},{
 			header: "Longitude",
 			width: 55,
@@ -331,7 +331,7 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
       columns: [{
 			header: "Latitude",
 			width: 50,
-			dataIndex: 'GPS-Lattitude'
+			dataIndex: 'GPS-Latitude'
 		},{
 			header: "Longitude",
 			width: 55,
