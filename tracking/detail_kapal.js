@@ -14,11 +14,11 @@ var model_detail_kapal = Ext.define('detail_kapal', {
 			"PM-Door","PM-VBatt","PM-VCharg",
 			"ME1-FM In","ME1-FM Ov","ME1-FM Tem",
 			"ME2-FM In","ME2-FM Ov","ME2-FM Tem",
-			"AE1-FM In","AE1-FM Ov","AE1-FM Temp",
+			"AE1-FM In","AE1-FM Ov","AE1-FM Tem",
 			"AE2-FM In","AE2-FM Ov","AE2-FM Tem",
 			"ME1-RPM","ME1-RH","ME2-RPM","ME2-RH",
 			"AE1-RPM","AE1-RH","AE2-RPM","AE2-RH",
-			"PE-Door","PE-VCharge","PE-VBatt",
+			"PE-Door","PE-VCharg","PE-VBatt",
 			"GPS-Lattitude","GPS-Longitude","GPS-Heading","GPS-Velocity",
 			"AE1-RH-Daily","AE2-RH-Daily",
 			"F_Sound_Check",{name:"t",type:"date"}
@@ -31,11 +31,11 @@ var model_detail_kapal = Ext.define('detail_kapal', {
 				"PM-Door","PM-VBatt","PM-VCharg",
 				"ME1-FM In","ME1-FM Ov","ME1-FM Tem",
 				"ME2-FM In","ME2-FM Ov","ME2-FM Tem",
-				"AE1-FM In","AE1-FM Ov","AE1-FM Temp",
+				"AE1-FM In","AE1-FM Ov","AE1-FM Tem",
 				"AE2-FM In","AE2-FM Ov","AE2-FM Tem",
 				"ME1-RPM","ME1-RH","ME2-RPM","ME2-RH",
 				"AE1-RPM","AE1-RH","AE2-RPM","AE2-RH",
-				"PE-Door","PE-VCharge","PE-VBatt",
+				"PE-Door","PE-VCharg","PE-VBatt",
 				"GPS-Lattitude","GPS-Longitude","GPS-Heading","GPS-Velocity",
 				"AE1-RH-Daily","AE2-RH-Daily",
 				"F_Sound_Check",{name:"t",type:"date"}
@@ -223,7 +223,7 @@ var tabel_detail_jam = Ext.create('Ext.grid.Panel', {
 		},{
 			header: "FM-Temp",
 			width: 70,
-			dataIndex: 'AE1-FM Temp'
+			dataIndex: 'AE1-FM Tem'
 		},{
 			header: "RPM",
 			width: 70,
@@ -259,7 +259,7 @@ var tabel_detail_jam = Ext.create('Ext.grid.Panel', {
 			},{
 				header: "PE Charger",
 				width: 70,
-				dataIndex: 'PE-VCharge'
+				dataIndex: 'PE-VCharg'
 			},{
 				header: "PE Door",
 				width: 70,
@@ -433,7 +433,7 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
 		},{
 			header: "FM-Temp",
 			width: 70,
-			dataIndex: 'AE1-FM Temp'
+			dataIndex: 'AE1-FM Tem'
 		},{
 			header: "RPM",
 			width: 70,
@@ -469,7 +469,7 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
 			},{
 				header: "PE Charger",
 				width: 70,
-				dataIndex: 'PE-VCharge'
+				dataIndex: 'PE-VCharg'
 			},{
 				header: "PE Door",
 				width: 70,
