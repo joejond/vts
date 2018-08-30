@@ -33,7 +33,8 @@ var store_daftar_kapal = Ext.create('Ext.data.Store', {
     }
 });
 // var flag_bound;
-var info_info;
+var info_info=[];
+var info_ves=[];
 var muncul;
 var atlas;
 var hsl_soket;
@@ -84,7 +85,7 @@ var peta = {
       mapready:function(win,gmap){
         // console.log('onmapready');
         atlas = gmap;
-        info_info = new google.maps.InfoWindow();
+        // info_info = new google.maps.InfoWindow();
         // garis = new google.maps.Polyline();
         bounds = new google.maps.LatLngBounds();
 
@@ -279,6 +280,7 @@ var taskUpdV = {
         deleteTandaKapal();
         // proses_kapal(arr_dat);
         proses_kapal(aset_parameter);
+
         // deleteTandaKapal();
         /*tampilkan kapal*/
         // showTandaKapal(atlas);
@@ -297,14 +299,14 @@ function proses_kapal(d)
   for (var i = 0; i <d.length; i++){
     // console.log('proses_kapal ke ['+i+'] => ',d);
     if (d[i].lat && d[i].lng) {
-      marker_marker.push(addTandaKapal(d[i]));
+      marker_marker.push(addTandaKapal(d[i],i));
     }
   }
   // console.log(marker_marker);
 
 }
 
-function addTandaKapal(data)
+function addTandaKapal(data,index)
 {
   // console.log(peta1.getMap());
   // console.log('addTandaKapal == > ',data);
@@ -328,38 +330,40 @@ function addTandaKapal(data)
 
 
   // marker_marker.push(tanda);
-  create_infowindow(tanda,data);
+  create_infowindow(tanda,data,index);
 
   return tanda;
   // console.log(marker_marker,' <== buat tanda',marker_marker[0].getPosition().lat());
 }
 var taskBuntut;
-function create_infowindow(t,d){
+function create_infowindow(t,d,index){
 
+  // console.log('t', t);
   // console.log('d', d);
   var lati = ((parseFloat(d.lat) < 0) ? Math.abs(parseFloat(d.lat).toFixed(3))+'&deg; S' : parseFloat(d.lat).toFixed(3)+'&deg; N');
   var long = ((parseFloat(d.lng) < 0) ? Math.abs(parseFloat(d.lng).toFixed(3))+'&deg; W' : parseFloat(d.lng).toFixed(3)+'&deg; E');
 
   // info_ves = '<h3> BIMA-333 </h3>';
   // info_ves = '<h3>'+d.nama+'</h3>';
-  info_ves = '<h3>'+d.name+'</h3>';
-  info_ves += '<p>Position : '+lati+', ' + long+' </p>';
+  info_ves[index] = '<h3>'+d.name+'</h3>';
+  info_ves[index] += '<p>Position : '+lati+', ' + long+' </p>';
   // info_ves +='<p>Last Update : '+ Ext.Date.format(new Date(d.waktu*1000),'d-m-Y H:i:s')+'</p>'
-  info_ves +='<p>Last Update : '+ Ext.Date.format(new Date(d.epoch*1000),'d-m-Y H:i:s')+'</p>'
+  info_ves[index] +='<p>Last Update : '+ Ext.Date.format(new Date(d.epoch*1000),'d-m-Y H:i:s')+'</p>'
   // info_ves += '<p> '+ coords + '</p>';
   // info_ves += '<p> Last Updated : '+ me.pad(day,2) +'/'+me.pad(month,2)+'/'+year +' '+ hours+':'+me.pad(minutes,2)+':'+me.pad(seconds,2) + '</p>';
 
+  info_info[index] = new google.maps.InfoWindow();
 
   google.maps.event.addListener(t, 'mouseover', function() {
     // console.log('lewat');
-    info_info.close();
-    info_info.setContent(info_ves);
-    info_info.open(atlas,t);
+    info_info[index].close();
+    info_info[index].setContent(info_ves[index]);
+    info_info[index].open(atlas,t);
   });
 
   google.maps.event.addListener(t, 'mouseout', function() {
     // console.log('ilang');
-    info_info.close();
+    info_info[index].close();
     // info_info.setContent(info_ves);
     // info_info.open(atlas,t);
   });
@@ -509,10 +513,10 @@ function create_rute(d)
   posisiAnimasiGaris = [];
   for (var i = 0; i < d.length; i++) {
     // console.log('d['+i+']', d[i]);
-    temp_rute.push({lat: d[i]['GPS-Lattitude'], lng: d[i]['GPS-Longitude']});
+    temp_rute.push({lat: d[i]['GPS-Latitude'], lng: d[i]['GPS-Longitude']});
     posisiAnimasiGaris.push(
       {
-        lat: d[i]['GPS-Lattitude'],
+        lat: d[i]['GPS-Latitude'],
         lng: d[i]['GPS-Longitude'],
         head: d[i]['GPS-Heading'],
         name: d[i]['nama'],
@@ -525,7 +529,7 @@ function create_rute(d)
   // console.log('rute', rute);
   // d.forEach(function(v){
   //   var temp = new Object();
-  //   temp['lat'] = v['GPS-Lattitude'];
+  //   temp['lat'] = v['GPS-Latitude'];
   //   temp['lng'] = v['GPS-Longitude'];
   //   console.log('temp', temp);
   //   rute.push(temp);
