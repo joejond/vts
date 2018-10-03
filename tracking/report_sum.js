@@ -260,6 +260,8 @@ var panel_r_sum = {
 				xtype : 'button',
 				text : 'Export to Excel',
 				handler : function(){
+					// console.log('dtt.idu', dtt.idu);
+					window.open(getAPI()+'/get_data_summary_ship?&user_id='+dtt.idu+'&tgl='+tgl_sel_sum+'&tz='+getTimeZone()+'&type=data_sum_ship&export=true');
 					// var tgl = Ext.Date.format(Ext.getCmp('date_total1').getValue(),'Y-m-d');
 					// var ves = Ext.getCmp('cb_vessel').getValue();
 					// // console.log(comb_kapal1);
