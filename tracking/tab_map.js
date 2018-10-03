@@ -930,7 +930,7 @@ var selmod = Ext.create('Ext.selection.CheckboxModel',{
                           vg_id = vg_id + ',' + aset_parameter[i].vg_id;
                         }
                       }
-                      // console.log('vg_id', vg_id);
+                      console.log('vg_id', vg_id);
                       ws.send('vg:'+vg_id);
                   }
               });
