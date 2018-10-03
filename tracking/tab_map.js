@@ -508,7 +508,7 @@ var rute;
 function create_rute(d)
 {
   rute = [];
-  // console.log('d', d);
+  console.log('d', d);
   var temp_rute = [];
   posisiAnimasiGaris = [];
   for (var i = 0; i < d.length; i++) {
@@ -743,6 +743,7 @@ var taskAG = {
           //   labelClass: "labels", // the CSS class for the label
           //   labelStyle: {opacity: 0.75}
           // });
+          // console.log('posisiAnimasiGaris['+cntAnimasiGaris+'].name', posisiAnimasiGaris[cntAnimasiGaris].name);
           var labelGaris = new MapLabel({
             text: posisiAnimasiGaris[cntAnimasiGaris].name + " :: " + posisiAnimasiGaris[cntAnimasiGaris].time,
             position: new google.maps.LatLng(posisiAnimasiGaris[cntAnimasiGaris].lat, posisiAnimasiGaris[cntAnimasiGaris].lng),
@@ -1301,6 +1302,7 @@ var panel_form_tracking = Ext.create('Ext.form.Panel', {
   							    success: function(response){
   							        var res = JSON.parse(response.responseText);
 
+                        // console.log('res', res);
                         var d_rute = create_rute(res);
                         create_tracking(d_rute,res);
                         show_tracking(atlas);

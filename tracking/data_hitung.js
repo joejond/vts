@@ -784,7 +784,7 @@ var panel_hitung = {
 
 var eng_rh1 = '';
 function daily_akum() {
-  console.log('comb_kapal21', comb_kapal21);
+  // console.log('comb_kapal21', comb_kapal21);
     Ext.Ajax.request({
         // url: 'http://project.daunbiru.com:1336/get_data_summary_bima',
         url: getAPI()+'/get_data_summary_bima',
