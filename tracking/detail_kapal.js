@@ -431,149 +431,149 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
 				// store_detail_jam.load({params: param});
 				window_detail_jam.show();
 
-				// if (comb_kapal1 == 79 || comb_kapal1 == 80 || comb_kapal1 == 81) {
-				// 	for (i = 1; i <= 46; i++) {
-				// 		// Sateli Data
-				// 		if (i >= 1 && i <= 4) {
-				// 			// Ext.getCmp('table_ship').columns[i].setVisible(true);
-				// 			Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
-				// 		}
-				// 		// PortSide Engine Mechanic
-				// 		if (i >= 5 && i <= 9) {
-				// 			// Ext.getCmp('table_ship').columns[i].setVisible(false);
-				// 			Ext.getCmp('table_ship_detail').columns[i].setVisible(false);
-				// 		}
-				// 		// PortSide Engine Electrical
-				// 		if (i >= 10 && i <= 17) {
-				// 			// Ext.getCmp('table_ship').columns[i].setVisible(true);
-				// 			Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
-				// 		}
-				// 		// StarBoard Engine Mechanic
-				// 		if (i >= 18 && i <= 22) {
-				// 			// Ext.getCmp('table_ship').columns[i].setVisible(false);
-				// 			Ext.getCmp('table_ship_detail').columns[i].setVisible(false);
-				// 		}
-				// 		// StarBoard Engine Electrical
-				// 		if (i >= 23 && i <= 30) {
-				// 			// Ext.getCmp('table_ship').columns[i].setVisible(true);
-				// 			Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
-				// 		}
-				// 		// PortSide Engine Genset
-				// 		if (i >= 31 && i <= 35) {
-				// 			// Ext.getCmp('table_ship').columns[i].setVisible(false);
-				// 			Ext.getCmp('table_ship_detail').columns[i].setVisible(false);
-				// 		}
-				// 		// StarBoard Engine Genset
-				// 		if (i >= 36 && i <= 40) {
-				// 			// Ext.getCmp('table_ship').columns[i].setVisible(false);
-				// 			Ext.getCmp('table_ship_detail').columns[i].setVisible(false);
-				// 		}
-				// 		// Panel
-				// 		if (i >= 41 && i <= 43) {
-				// 			// Ext.getCmp('table_ship').columns[i].setVisible(true);
-				// 			Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
-				// 		}
-				// 		if (i >= 44 && i <= 46) {
-				// 			// Ext.getCmp('table_ship').columns[i].setVisible(false);
-				// 			Ext.getCmp('table_ship_detail').columns[i].setVisible(false);
-				// 		}
-				// 	}
-				// } else {
-				// 	for (i = 1; i <= 44; i++) {
-				// 		// Sateli Data
-				// 		if (i >= 1 && i <= 4) {
-				// 			// Ext.getCmp('table_ship').columns[i].setVisible(true);
-				// 			Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
-				// 		}
-				// 		// PortSide Engine Mechanic
-				// 		if (i >= 5 && i <= 9) {
-				// 			// Ext.getCmp('table_ship').columns[i].setVisible(true);
-				// 			Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
-				// 		}
-				// 		// PortSide Engine Electrical
-				// 		if (i >= 10 && i <= 16) {
-				// 			// Ext.getCmp('table_ship').columns[i].setVisible(false);
-				// 			Ext.getCmp('table_ship_detail').columns[i].setVisible(false);
-				// 		}
-				// 		// StarBoard Engine Mechanic
-				// 		if (i >= 17 && i <= 21) {
-				// 			// Ext.getCmp('table_ship').columns[i].setVisible(true);
-				// 			Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
-				// 		}
-				// 		// StarBoard Engine Electrical
-				// 		if (i >= 22 && i <= 28) {
-				// 			// Ext.getCmp('table_ship').columns[i].setVisible(false);
-				// 			Ext.getCmp('table_ship_detail').columns[i].setVisible(false);
-				// 		}
-				// 		// PortSide Engine Genset
-				// 		if (i >= 29 && i <= 33) {
-				// 			// Ext.getCmp('table_ship').columns[i].setVisible(true);
-				// 			Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
-				// 		}
-				// 		// StarBoard Engine Genset
-				// 		if (i >= 34 && i <= 38) {
-				// 			// Ext.getCmp('table_ship').columns[i].setVisible(true);
-				// 			Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
-				// 		}
-				// 		// Panel
-				// 		if (i >= 39 && i <= 41) {
-				// 			// Ext.getCmp('table_ship').columns[i].setVisible(true);
-				// 			Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
-				// 		}
-				// 		if (i >= 42 && i <= 44) {
-				// 			// Ext.getCmp('table_ship').columns[i].setVisible(true);
-				// 			Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
-				// 		}
-				// 	}
-				// }
+				if (comb_kapal1 == 79 || comb_kapal1 == 80 || comb_kapal1 == 81) {
+					for (i = 1; i <= 46; i++) {
+						// Sateli Data
+						if (i >= 1 && i <= 4) {
+							// Ext.getCmp('table_ship').columns[i].setVisible(true);
+							Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
+						}
+						// PortSide Engine Mechanic
+						if (i >= 5 && i <= 9) {
+							// Ext.getCmp('table_ship').columns[i].setVisible(false);
+							Ext.getCmp('table_ship_detail').columns[i].setVisible(false);
+						}
+						// PortSide Engine Electrical
+						if (i >= 10 && i <= 17) {
+							// Ext.getCmp('table_ship').columns[i].setVisible(true);
+							Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
+						}
+						// StarBoard Engine Mechanic
+						if (i >= 18 && i <= 22) {
+							// Ext.getCmp('table_ship').columns[i].setVisible(false);
+							Ext.getCmp('table_ship_detail').columns[i].setVisible(false);
+						}
+						// StarBoard Engine Electrical
+						if (i >= 23 && i <= 30) {
+							// Ext.getCmp('table_ship').columns[i].setVisible(true);
+							Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
+						}
+						// PortSide Engine Genset
+						if (i >= 31 && i <= 35) {
+							// Ext.getCmp('table_ship').columns[i].setVisible(false);
+							Ext.getCmp('table_ship_detail').columns[i].setVisible(false);
+						}
+						// StarBoard Engine Genset
+						if (i >= 36 && i <= 40) {
+							// Ext.getCmp('table_ship').columns[i].setVisible(false);
+							Ext.getCmp('table_ship_detail').columns[i].setVisible(false);
+						}
+						// Panel
+						if (i >= 41 && i <= 43) {
+							// Ext.getCmp('table_ship').columns[i].setVisible(true);
+							Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
+						}
+						if (i >= 44 && i <= 46) {
+							// Ext.getCmp('table_ship').columns[i].setVisible(false);
+							Ext.getCmp('table_ship_detail').columns[i].setVisible(false);
+						}
+					}
+				} else {
+					for (i = 1; i <= 46; i++) {
+						// Sateli Data
+						if (i >= 1 && i <= 4) {
+							// Ext.getCmp('table_ship').columns[i].setVisible(true);
+							Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
+						}
+						// PortSide Engine Mechanic
+						if (i >= 5 && i <= 9) {
+							// Ext.getCmp('table_ship').columns[i].setVisible(true);
+							Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
+						}
+						// PortSide Engine Electrical
+						if (i >= 10 && i <= 17) {
+							// Ext.getCmp('table_ship').columns[i].setVisible(false);
+							Ext.getCmp('table_ship_detail').columns[i].setVisible(false);
+						}
+						// StarBoard Engine Mechanic
+						if (i >= 18 && i <= 22) {
+							// Ext.getCmp('table_ship').columns[i].setVisible(true);
+							Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
+						}
+						// StarBoard Engine Electrical
+						if (i >= 23 && i <= 30) {
+							// Ext.getCmp('table_ship').columns[i].setVisible(false);
+							Ext.getCmp('table_ship_detail').columns[i].setVisible(false);
+						}
+						// PortSide Engine Genset
+						if (i >= 31 && i <= 35) {
+							// Ext.getCmp('table_ship').columns[i].setVisible(true);
+							Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
+						}
+						// StarBoard Engine Genset
+						if (i >= 36 && i <= 40) {
+							// Ext.getCmp('table_ship').columns[i].setVisible(true);
+							Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
+						}
+						// Panel
+						if (i >= 41 && i <= 43) {
+							// Ext.getCmp('table_ship').columns[i].setVisible(true);
+							Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
+						}
+						if (i >= 44 && i <= 46) {
+							// Ext.getCmp('table_ship').columns[i].setVisible(true);
+							Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
+						}
+					}
+				}
 			},
 			afterrender: function() {
-				// for (i = 1; i <= 46; i++) {
-				// 	// Sateli Data
-				// 	if (i >= 1 && i <= 4) {
-				// 		Ext.getCmp('table_ship').columns[i].setVisible(true);
-				// 		Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
-				// 	}
-				// 	// PortSide Engine Mechanic
-				// 	if (i >= 5 && i <= 9) {
-				// 		Ext.getCmp('table_ship').columns[i].setVisible(true);
-				// 		Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
-				// 	}
-				// 	// PortSide Engine Electrical
-				// 	if (i >= 10 && i <= 16) {
-				// 		Ext.getCmp('table_ship').columns[i].setVisible(false);
-				// 		Ext.getCmp('table_ship_detail').columns[i].setVisible(false);
-				// 	}
-				// 	// StarBoard Engine Mechanic
-				// 	if (i >= 17 && i <= 21) {
-				// 		Ext.getCmp('table_ship').columns[i].setVisible(true);
-				// 		Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
-				// 	}
-				// 	// StarBoard Engine Electrical
-				// 	if (i >= 22 && i <= 28) {
-				// 		Ext.getCmp('table_ship').columns[i].setVisible(false);
-				// 		Ext.getCmp('table_ship_detail').columns[i].setVisible(false);
-				// 	}
-				// 	// PortSide Engine Genset
-				// 	if (i >= 29 && i <= 33) {
-				// 		Ext.getCmp('table_ship').columns[i].setVisible(true);
-				// 		Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
-				// 	}
-				// 	// StarBoard Engine Genset
-				// 	if (i >= 34 && i <= 38) {
-				// 		Ext.getCmp('table_ship').columns[i].setVisible(true);
-				// 		Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
-				// 	}
-				// 	// Panel
-				// 	if (i >= 39 && i <= 41) {
-				// 		Ext.getCmp('table_ship').columns[i].setVisible(true);
-				// 		Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
-				// 	}
-				// 	if (i >= 42 && i <= 44) {
-				// 		Ext.getCmp('table_ship').columns[i].setVisible(true);
-				// 		Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
-				// 	}
-				// }
+				for (i = 1; i <= 46; i++) {
+					// Sateli Data
+					if (i >= 1 && i <= 4) {
+						Ext.getCmp('table_ship').columns[i].setVisible(true);
+						Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
+					}
+					// PortSide Engine Mechanic
+					if (i >= 5 && i <= 9) {
+						Ext.getCmp('table_ship').columns[i].setVisible(true);
+						Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
+					}
+					// PortSide Engine Electrical
+					if (i >= 10 && i <= 17) {
+						Ext.getCmp('table_ship').columns[i].setVisible(false);
+						Ext.getCmp('table_ship_detail').columns[i].setVisible(false);
+					}
+					// StarBoard Engine Mechanic
+					if (i >= 18 && i <= 22) {
+						Ext.getCmp('table_ship').columns[i].setVisible(true);
+						Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
+					}
+					// StarBoard Engine Electrical
+					if (i >= 23 && i <= 30) {
+						Ext.getCmp('table_ship').columns[i].setVisible(false);
+						Ext.getCmp('table_ship_detail').columns[i].setVisible(false);
+					}
+					// PortSide Engine Genset
+					if (i >= 31 && i <= 35) {
+						Ext.getCmp('table_ship').columns[i].setVisible(true);
+						Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
+					}
+					// StarBoard Engine Genset
+					if (i >= 36 && i <= 40) {
+						Ext.getCmp('table_ship').columns[i].setVisible(true);
+						Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
+					}
+					// Panel
+					if (i >= 41 && i <= 43) {
+						Ext.getCmp('table_ship').columns[i].setVisible(true);
+						Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
+					}
+					if (i >= 44 && i <= 46) {
+						Ext.getCmp('table_ship').columns[i].setVisible(true);
+						Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
+					}
+				}
 			},
 			render: function() {
 				// console.log('test render');
@@ -581,35 +581,35 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
 		},
     columns: [
 			{
-        header: "Date Time",
+				header: "Date Time",
         width: 130,
         dataIndex: 't',
 				renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s'),
         locked : true
-			},{
-				header: "Satelite Data",
-				columns: [
+    	},{
+      	header: "Satelite Data",
+      	columns: [
 					{
 						header: "Latitude",
 						width: 50,
 						dataIndex: 'GPS-Latitude'
 					},{
 						header: "Longitude",
-						width: 55,
+						width: 60,
 						dataIndex: 'GPS-Longitude'
 					},{
 						header: "Speed",
-						width: 50,
+						width: 45,
 						dataIndex: 'GPS-Velocity'
 					},{
 						header: "Heading",
-						width: 50,
+						width: 55,
 						dataIndex: 'GPS-Heading'
 					}
 				]
 			},{
-				header: "PortSide Engine",
-				columns: [
+      	header: "PortSide Engine",
+      	columns: [
 					{
 						header: "FM-In",
 						width: 70,
@@ -633,9 +633,17 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
 					}
 				]
 			},{
-				header: "PortSide Engine",
-				columns: [
+      	header: "PortSide Engine",
+      	columns: [
 					{
+						header: "ECU Satus",
+						width: 70,
+						dataIndex: 'ME1 ECU Status'
+					},{
+						header: "Speed",
+						width: 70,
+						dataIndex: 'ME1 Speed'
+					},{
 						header: "Fuel Press",
 						width: 70,
 						dataIndex: 'ME1 Fuel Press'
@@ -656,17 +664,13 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
 						width: 70,
 						dataIndex: 'ME1 Load Engine'
 					},{
-						header: "ECU Satus",
-						width: 70,
-						dataIndex: 'ME1 ECU Status'
-					},{
 						header: "Engine Hours",
 						width: 80,
 						dataIndex: 'ME1 ECU Engine Hours'
 					}
 				]
 			},{
-				header: "StarBoard Engine",
+      	header: "StarBoard Engine",
 				columns: [
 					{
 						header: "FM-In",
@@ -691,9 +695,17 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
 					}
 				]
 			},{
-				header: "StarBoard Engine",
-				columns: [
+      	header: "StarBoard Engine",
+      	columns: [
 					{
+						header: "ECU Satus",
+						width: 70,
+						dataIndex: 'ME2 ECU Status'
+					},{
+						header: "Speed",
+						width: 70,
+						dataIndex: 'ME2 Speed'
+					},{
 						header: "Fuel Press",
 						width: 70,
 						dataIndex: 'ME2 Fuel Press'
@@ -714,17 +726,13 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
 						width: 70,
 						dataIndex: 'ME2 Load Engine'
 					},{
-						header: "ECU Satus",
-						width: 70,
-						dataIndex: 'ME2 ECU Status'
-					},{
 						header: "Engine Hours",
 						width: 80,
 						dataIndex: 'ME2 ECU Engine Hours'
 					}
 				]
 			},{
-				header: "PortSide GenSet",
+      	header: "PortSide GenSet",
 				columns: [
 					{
 						header: "FM-In",
@@ -784,8 +792,8 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
 					// }
 				]
 			},{
-				header: "Panel",
-				columns: [
+      	header: "Panel",
+      	columns: [
 					{
 						header: "PM Battery",
 						width: 70,
@@ -887,101 +895,101 @@ var panel_detail = {
 						//update_text1();
 						// console.log(comb_kapal1,comb_kapal2);
 
-						// if (comb_kapal1 == 79 || comb_kapal1 == 80 || comb_kapal1 == 81) {
-						// 	for (i = 1; i <= 44; i++) {
-						// 		// Sateli Data
-						// 		if (i >= 1 && i <= 4) {
-						// 			Ext.getCmp('table_ship').columns[i].setVisible(true);
-						// 			// Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
-						// 		}
-						// 		// PortSide Engine Mechanic
-						// 		if (i >= 5 && i <= 9) {
-						// 			Ext.getCmp('table_ship').columns[i].setVisible(false);
-						// 			// Ext.getCmp('table_ship_detail').columns[i].setVisible(false);
-						// 		}
-						// 		// PortSide Engine Electrical
-						// 		if (i >= 10 && i <= 16) {
-						// 			Ext.getCmp('table_ship').columns[i].setVisible(true);
-						// 			// Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
-						// 		}
-						// 		// StarBoard Engine Mechanic
-						// 		if (i >= 17 && i <= 21) {
-						// 			Ext.getCmp('table_ship').columns[i].setVisible(false);
-						// 			// Ext.getCmp('table_ship_detail').columns[i].setVisible(false);
-						// 		}
-						// 		// StarBoard Engine Electrical
-						// 		if (i >= 22 && i <= 28) {
-						// 			Ext.getCmp('table_ship').columns[i].setVisible(true);
-						// 			// Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
-						// 		}
-						// 		// PortSide Engine Genset
-						// 		if (i >= 29 && i <= 33) {
-						// 			Ext.getCmp('table_ship').columns[i].setVisible(false);
-						// 			// Ext.getCmp('table_ship_detail').columns[i].setVisible(false);
-						// 		}
-						// 		// StarBoard Engine Genset
-						// 		if (i >= 34 && i <= 38) {
-						// 			Ext.getCmp('table_ship').columns[i].setVisible(false);
-						// 			// Ext.getCmp('table_ship_detail').columns[i].setVisible(false);
-						// 		}
-						// 		// Panel
-						// 		if (i >= 39 && i <= 41) {
-						// 			Ext.getCmp('table_ship').columns[i].setVisible(true);
-						// 			// Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
-						// 		}
-						// 		if (i >= 42 && i <= 44) {
-						// 			Ext.getCmp('table_ship').columns[i].setVisible(false);
-						// 			// Ext.getCmp('table_ship_detail').columns[i].setVisible(false);
-						// 		}
-						// 	}
-						// } else {
-						// 	for (i = 1; i <= 44; i++) {
-						// 		// Sateli Data
-						// 		if (i >= 1 && i <= 4) {
-						// 			Ext.getCmp('table_ship').columns[i].setVisible(true);
-						// 			// Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
-						// 		}
-						// 		// PortSide Engine Mechanic
-						// 		if (i >= 5 && i <= 9) {
-						// 			Ext.getCmp('table_ship').columns[i].setVisible(true);
-						// 			// Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
-						// 		}
-						// 		// PortSide Engine Electrical
-						// 		if (i >= 10 && i <= 16) {
-						// 			Ext.getCmp('table_ship').columns[i].setVisible(false);
-						// 			// Ext.getCmp('table_ship_detail').columns[i].setVisible(false);
-						// 		}
-						// 		// StarBoard Engine Mechanic
-						// 		if (i >= 17 && i <= 21) {
-						// 			Ext.getCmp('table_ship').columns[i].setVisible(true);
-						// 			// Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
-						// 		}
-						// 		// StarBoard Engine Electrical
-						// 		if (i >= 22 && i <= 28) {
-						// 			Ext.getCmp('table_ship').columns[i].setVisible(false);
-						// 			// Ext.getCmp('table_ship_detail').columns[i].setVisible(false);
-						// 		}
-						// 		// PortSide Engine Genset
-						// 		if (i >= 29 && i <= 33) {
-						// 			Ext.getCmp('table_ship').columns[i].setVisible(true);
-						// 			// Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
-						// 		}
-						// 		// StarBoard Engine Genset
-						// 		if (i >= 34 && i <= 38) {
-						// 			Ext.getCmp('table_ship').columns[i].setVisible(true);
-						// 			// Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
-						// 		}
-						// 		// Panel
-						// 		if (i >= 39 && i <= 41) {
-						// 			Ext.getCmp('table_ship').columns[i].setVisible(true);
-						// 			// Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
-						// 		}
-						// 		if (i >= 42 && i <= 44) {
-						// 			Ext.getCmp('table_ship').columns[i].setVisible(true);
-						// 			// Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
-						// 		}
-						// 	}
-						// }
+						if (comb_kapal1 == 79 || comb_kapal1 == 80 || comb_kapal1 == 81) {
+							for (i = 1; i <= 46; i++) {
+								// Sateli Data
+								if (i >= 1 && i <= 4) {
+									Ext.getCmp('table_ship').columns[i].setVisible(true);
+									// Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
+								}
+								// PortSide Engine Mechanic
+								if (i >= 5 && i <= 9) {
+									Ext.getCmp('table_ship').columns[i].setVisible(false);
+									// Ext.getCmp('table_ship_detail').columns[i].setVisible(false);
+								}
+								// PortSide Engine Electrical
+								if (i >= 10 && i <= 17) {
+									Ext.getCmp('table_ship').columns[i].setVisible(true);
+									// Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
+								}
+								// StarBoard Engine Mechanic
+								if (i >= 18 && i <= 22) {
+									Ext.getCmp('table_ship').columns[i].setVisible(false);
+									// Ext.getCmp('table_ship_detail').columns[i].setVisible(false);
+								}
+								// StarBoard Engine Electrical
+								if (i >= 23 && i <= 30) {
+									Ext.getCmp('table_ship').columns[i].setVisible(true);
+									// Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
+								}
+								// PortSide Engine Genset
+								if (i >= 31 && i <= 35) {
+									Ext.getCmp('table_ship').columns[i].setVisible(false);
+									// Ext.getCmp('table_ship_detail').columns[i].setVisible(false);
+								}
+								// StarBoard Engine Genset
+								if (i >= 36 && i <= 40) {
+									Ext.getCmp('table_ship').columns[i].setVisible(false);
+									// Ext.getCmp('table_ship_detail').columns[i].setVisible(false);
+								}
+								// Panel
+								if (i >= 41 && i <= 43) {
+									Ext.getCmp('table_ship').columns[i].setVisible(true);
+									// Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
+								}
+								if (i >= 44 && i <= 46) {
+									Ext.getCmp('table_ship').columns[i].setVisible(false);
+									// Ext.getCmp('table_ship_detail').columns[i].setVisible(false);
+								}
+							}
+						} else {
+							for (i = 1; i <= 46; i++) {
+								// Sateli Data
+								if (i >= 1 && i <= 4) {
+									Ext.getCmp('table_ship').columns[i].setVisible(true);
+									// Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
+								}
+								// PortSide Engine Mechanic
+								if (i >= 5 && i <= 9) {
+									Ext.getCmp('table_ship').columns[i].setVisible(true);
+									// Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
+								}
+								// PortSide Engine Electrical
+								if (i >= 10 && i <= 17) {
+									Ext.getCmp('table_ship').columns[i].setVisible(false);
+									// Ext.getCmp('table_ship_detail').columns[i].setVisible(false);
+								}
+								// StarBoard Engine Mechanic
+								if (i >= 18 && i <= 22) {
+									Ext.getCmp('table_ship').columns[i].setVisible(true);
+									// Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
+								}
+								// StarBoard Engine Electrical
+								if (i >= 23 && i <= 30) {
+									Ext.getCmp('table_ship').columns[i].setVisible(false);
+									// Ext.getCmp('table_ship_detail').columns[i].setVisible(false);
+								}
+								// PortSide Engine Genset
+								if (i >= 31 && i <= 35) {
+									Ext.getCmp('table_ship').columns[i].setVisible(true);
+									// Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
+								}
+								// StarBoard Engine Genset
+								if (i >= 36 && i <= 40) {
+									Ext.getCmp('table_ship').columns[i].setVisible(true);
+									// Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
+								}
+								// Panel
+								if (i >= 41 && i <= 43) {
+									Ext.getCmp('table_ship').columns[i].setVisible(true);
+									// Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
+								}
+								if (i >= 44 && i <= 46) {
+									Ext.getCmp('table_ship').columns[i].setVisible(true);
+									// Ext.getCmp('table_ship_detail').columns[i].setVisible(true);
+								}
+							}
+						}
 					},
 					afterrender : function(){
 							var isi = this.getStore().data.items[0].data['name'];
