@@ -890,6 +890,17 @@ var selmod = Ext.create('Ext.selection.CheckboxModel',{
             var hasil = tabel_daftar_kapal.getView().getSelectionModel().getSelection();
             // console.log('pencet ');;
 
+            show_tracking(null);
+            if (markerAnimasiGaris) {
+              markerAnimasiGaris.setMap(null);
+            }
+            if (markerLabelGaris) {
+              markerLabelGaris.setMap(null);
+            }
+            if (taskAnimasiGaris) {
+              taskAnimasiGaris.stop(taskAG);
+            }
+
             // console.log('ship_list', ship_list);
             ship = [];
             Ext.each(hasil, function (item) {

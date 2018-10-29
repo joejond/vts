@@ -416,7 +416,8 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
     store : store_detail_kapal,
     flex: 4,
     listeners: {
-			select: function(selModel, record, index, options){
+			itemdblclick: function( selModel, record, item, index, e, eOpts ) {
+			// select: function(selModel, record, index, options) {
 				// detail_jam_index=index;
 				var index_jam = record.getData().t;
 				// console.log(Ext.Date.format(index_jam,'Y-m-d H'));
