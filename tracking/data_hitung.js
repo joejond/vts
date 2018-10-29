@@ -890,7 +890,7 @@ function ambil_status()
       // console.log(hasil.lastUpdate);
       var stat = (hasil.status =='Ok') ? '<b style="color:green;">'+hasil.status+'</b>' : '<b style="color:red;">'+hasil.status+'</b>';
 
-      Ext.getCmp('idstatus').update('<p style="font-size:14px;">Last Data : '+hasil.lastUpdate + ' >> ' +stat+'</p>');
+      // Ext.getCmp('idstatus').update('<p style="font-size:14px;">Last Data : '+hasil.lastUpdate + ' >> ' +stat+'</p>');
       //  var x = hasil[0];
     }
   });
