@@ -210,76 +210,76 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
         //renderer: Ext.util.Format.dateRenderer('d-M-Y')
 
     },{
-        header: "PortSide",
+        header: "StarBoard (ME1)",
         columns: [{
             header: "RunHours",
             width: 100,
-            dataIndex: 'working hours ME2',
+            dataIndex: 'working hours ME1',
             renderer: function(v){return parseFloat(v).toFixed(2);}
         },{
             header: "Fuel",
             width: 100,
-            dataIndex: 'ME2 consumtion',
+            dataIndex: 'ME1 consumtion',
             renderer: function(v){return parseFloat(v).toFixed(2);}
         },{
             header: "RPM",
             width: 100,
-            dataIndex: 'ME2 average rpm',
+            dataIndex: 'ME1 average rpm',
             renderer: function(v){return parseFloat(v).toFixed(2);}
         }]
     },{
-        header: "StarBoard",
+        header: "PortSide (ME2)",
         columns: [{
           header: "RunHours",
           width: 100,
-          dataIndex: 'working hours ME1',
+          dataIndex: 'working hours ME2',
           renderer: function(v){return parseFloat(v).toFixed(2);}
       },{
           header: "Fuel",
           width: 100,
-          dataIndex: 'ME1 consumtion',
+          dataIndex: 'ME2 consumtion',
           renderer: function(v){return parseFloat(v).toFixed(2);}
       },{
           header: "RPM",
           width: 100,
-          dataIndex: 'ME1 average rpm',
+          dataIndex: 'ME2 average rpm',
           renderer: function(v){return parseFloat(v).toFixed(2);}
         }]
     },{
-        header: "PortSide GenSet",
-        columns: [{
-          header: "RunHours",
-          width: 100,
-          dataIndex: 'working hours AE2',
-	  renderer: function(v){return parseFloat(v).toFixed(2);}
-      },{
-          header: "Fuel",
-          width: 100,
-          dataIndex: 'AE2 consumtion',
-          renderer: function(v){return parseFloat(v).toFixed(2);}
-      },{
-          header: "RPM",
-          width: 100,
-          dataIndex: 'AE2 average rpm',
-          renderer: function(v){return parseFloat(v).toFixed(2);}
-        }]
-    }, {
-		header: "StarBoard GenSet",
+        header: "GenSet#2 (AE2)",
         columns: [{
           header: "RunHours",
           width: 100,
           dataIndex: 'working hours AE1',
-          renderer: function(v){return parseFloat(v).toFixed(2);}
+	        renderer: function(v){return parseFloat(v).toFixed(2);}
       },{
           header: "Fuel",
           width: 100,
           dataIndex: 'AE1 consumtion',
           renderer: function(v){return parseFloat(v).toFixed(2);}
-          // renderer: function(v){return (v==null)? null :  parseFloat(v).toFixed(2);}
       },{
           header: "RPM",
           width: 100,
           dataIndex: 'AE1 average rpm',
+          renderer: function(v){return parseFloat(v).toFixed(2);}
+        }]
+    }, {
+		header: "GenSet#2 (AE2)",
+        columns: [{
+          header: "RunHours",
+          width: 100,
+          dataIndex: 'working hours AE2',
+          renderer: function(v){return parseFloat(v).toFixed(2);}
+      },{
+          header: "Fuel",
+          width: 100,
+          dataIndex: 'AE2 consumtion',
+          renderer: function(v){return parseFloat(v).toFixed(2);}
+          // renderer: function(v){return (v==null)? null :  parseFloat(v).toFixed(2);}
+      },{
+          header: "RPM",
+          width: 100,
+          dataIndex: 'AE2 average rpm',
           renderer: function(v){return parseFloat(v).toFixed(2);}
         }]
     }, {
@@ -358,89 +358,81 @@ var store_grafik = Ext.create('Ext.data.Store', {
 var grafik = new Ext.create('Chart.ux.Highcharts', {
     id: 'chart',
     series: [{
-        dataIndex: 'ME2 average rpm',
+        dataIndex: 'ME1 average rpm',
         yAxis: 0,
         type: 'spline',
         color: '#0033FF',
-        name: 'RPM ME1 (PortSide)',
+        name: 'RPM ME1 (StarBoard)',
         visible: true
     }, {
-        dataIndex: 'ME1 average rpm',
+        dataIndex: 'ME2 average rpm',
         yAxis: 0,
         color: '#336600',
         type: 'spline',
-        name: 'RPM ME2 (StartBoard)',
+        name: 'RPM ME2 (PortSide)',
         visible: true
      }, {
-        dataIndex: 'AE2 average rpm',
+        dataIndex: 'AE1 average rpm',
         yAxis: 0,
         color: '#8B6914',
         type: 'spline',
-        name: 'RPM AE1 (PortSide GenSet)',
+        name: 'RPM AE1 (GenSet#1)',
         visible: true
     }, {
-         dataIndex: 'AE1 average rpm',
+         dataIndex: 'AE2 average rpm',
          yAxis: 0,
          color: '#8B6900',
          type: 'spline',
-         name: 'RPM AE2 (StartBoard GenSet)',
+         name: 'RPM AE2 (GenSet#2)',
          visible: true
 
     }, {
-        dataIndex: 'ME2 consumtion',
+        dataIndex: 'ME1 consumtion',
         yAxis: 1,
         type: 'spline',
         color: '#0033FF',
         dashStyle: 'ShortDash',
-        name: 'ME1 Fuel Consumption (PortSide)',
+        name: 'ME1 Fuel Consumption (StarBoard)',
         visible: true
     }, {
-        dataIndex: 'ME1 consumtion',
+        dataIndex: 'ME2 consumtion',
         yAxis: 1,
         color: '#336600',
         dashStyle: 'ShortDash',
         type: 'spline',
-        name: 'ME2 Fuel Consumption (StartBoard)',
+        name: 'ME2 Fuel Consumption (PortSide)',
         visible: true
     }, {
-        dataIndex: 'AE2 consumtion',
+        dataIndex: 'AE1 consumtion',
         yAxis: 1,
         color: '#8B6914',
         dashStyle: 'ShortDash',
         type: 'spline',
-        name: 'AE1 Fuel Consumption (PortSide GenSet)',
+        name: 'AE1 Fuel Consumption (GenSet#1)',
         visible: true
     }, {
-		    dataIndex: 'AE1 consumtion',
+		    dataIndex: 'AE2 consumtion',
         yAxis: 1,
         color: '#FA5A6A',
         dashStyle: 'ShortDash',
         type: 'spline',
-        name: 'AE2 Fuel Consumption (StarBoard GenSet)',
-        visible: true
-    }, {
-        dataIndex: 'working hours ME2',
-        yAxis: 2,
-        type: 'spline',
-        color: '#0033FF',
-        dashStyle: 'ShortDot',
-        name: 'Working Hours ME1 (PortSide)',
+        name: 'AE2 Fuel Consumption (GenSet#2)',
         visible: true
     }, {
         dataIndex: 'working hours ME1',
         yAxis: 2,
         type: 'spline',
-        color: '#336600',
+        color: '#0033FF',
         dashStyle: 'ShortDot',
-        name: 'Working Hours ME2 (StartBoard)',
+        name: 'Working Hours ME1 (StarBoard)',
         visible: true
     }, {
-        dataIndex: 'working hours AE2',
+        dataIndex: 'working hours ME2',
         yAxis: 2,
         type: 'spline',
-        color: '#8B6914',
+        color: '#336600',
         dashStyle: 'ShortDot',
-        name: 'Working Hours AE1 (PortSide GenSet)',
+        name: 'Working Hours ME2 (PortSide)',
         visible: true
     }, {
         dataIndex: 'working hours AE1',
@@ -448,7 +440,15 @@ var grafik = new Ext.create('Chart.ux.Highcharts', {
         type: 'spline',
         color: '#8B6914',
         dashStyle: 'ShortDot',
-        name: 'Working Hours AE2 (StartBoard GenSet)',
+        name: 'Working Hours AE1 (GenSet#1)',
+        visible: true
+    }, {
+        dataIndex: 'working hours AE2',
+        yAxis: 2,
+        type: 'spline',
+        color: '#8B6914',
+        dashStyle: 'ShortDot',
+        name: 'Working Hours AE2 (GenSet#2)',
         visible: true
     }, {
         dataIndex: 'Total Perjam',
@@ -601,7 +601,7 @@ var content_akum = '<style type="text/css">' +
 			'<table width="100%" class="total_daily">' +
 			'<tr><td colspan="2">Total Daily</td></tr>' +
 			'<tr><td colspan="2" style="font-size:22px;">' + total_daily + ' Liters</td></tr>' +
-			'<tr><td>PortSide</td><td>StarBoard</td></tr>' +
+			'<tr><td>StarBoard (ME1)</td><td>PortSide (ME2)</td></tr>' +
 			'<tr>' +
 			'<td><span style="font-size:18px;"> ' + eng1_daily + ' Liters</span></td>' +
 			'<td><span style="font-size:18px;"> ' + eng2_daily + ' Liters</span></td>'+
@@ -614,8 +614,8 @@ var content_akum = '<style type="text/css">' +
 			'<tr><td colspan="2">Genset Daily</td></tr>' +
 			'</tr>' +
 			'<tr>' +
-			'<td>genset#1</td>' +
-			'<td>genset#2</td>' +
+			'<td>Genset#1 (AE1)</td>' +
+			'<td>Genset#2 (AE2)</td>' +
 			'</tr>' +
 			'<tr>' +
 			'<td><span style="font-size:18px;"> ' + ae1_daily + ' Liters</span></td>' +
@@ -801,16 +801,16 @@ function daily_akum() {
               var x = hasil[0];
              // console.log('x = ', x);
              if (x) {
-               eng1_daily = parseFloat(x['ME2 Daily Consumtion']).toFixed(2) ;
-               eng2_daily = parseFloat(x['ME1 Daily Consumtion']).toFixed(2) ;
-               rh_engine1 = getHour(x['ME2 Working Hours']*60);
-               rh_engine2 = getHour(x['ME1 Working Hours']*60);
+               eng1_daily = parseFloat(x['ME1 Daily Consumtion']).toFixed(2) ;
+               eng2_daily = parseFloat(x['ME2 Daily Consumtion']).toFixed(2) ;
+               rh_engine1 = getHour(x['ME1 Working Hours']*60);
+               rh_engine2 = getHour(x['ME2 Working Hours']*60);
                // rh_engine1 = parseFloat(x['ME2 Working Hours']).toFixed(2) ;
                // rh_engine2 = parseFloat(x['ME1 Working Hours']).toFixed(2) ;
-               ae1_daily = parseFloat(x['AE2 Daily Consumtion']).toFixed(2) ;
-               ae2_daily = parseFloat(x['AE1 Daily Consumtion']).toFixed(2) ;
-               rh_ae1 = getHour(x['AE2 Working Hours']*60);
-               rh_ae2 = getHour(x['AE1 Working Hours']*60);
+               ae1_daily = parseFloat(x['AE1 Daily Consumtion']).toFixed(2) ;
+               ae2_daily = parseFloat(x['AE2 Daily Consumtion']).toFixed(2) ;
+               rh_ae1 = getHour(x['AE1 Working Hours']*60);
+               rh_ae2 = getHour(x['AE2 Working Hours']*60);
                // rh_ae1 = parseFloat(x['AE2 Working Hours']).toFixed(2) ;
                // rh_ae2 = parseFloat(x['AE1 Working Hours']).toFixed(2) ;
                total_daily = parseFloat(x['Total Daily']).toFixed(2) ;
@@ -836,7 +836,7 @@ function daily_akum() {
             			'<table width="100%" class="total_daily">' +
             			'<tr><td colspan="2">Total Daily</td></tr>' +
             			'<tr><td colspan="2" style="font-size:22px;">' + total_daily + ' Liters</td></tr>' +
-            			'<tr><td>PortSide</td><td>StarBoard</td></tr>' +
+            			'<tr><td>StarBoard (ME1)</td><td>PortSide (ME2)</td></tr>' +
             			'<tr>' +
             			'<td><span style="font-size:18px;"> ' + eng1_daily + ' Liters</span></td>' +
             			'<td><span style="font-size:18px;"> ' + eng2_daily + ' Liters</span></td>'+
@@ -849,8 +849,8 @@ function daily_akum() {
             			'<tr><td colspan="2">Genset Daily</td></tr>' +
             			'</tr>' +
             			'<tr>' +
-            			'<td>genset#1</td>' +
-            			'<td>genset#2</td>' +
+            			'<td>Genset#1 (AE1)</td>' +
+            			'<td>Genset#2 (AE2)</td>' +
             			'</tr>' +
             			'<tr>' +
             			'<td><span style="font-size:18px;">' + ae1_daily + ' Liter</span></td>' +

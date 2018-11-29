@@ -18,7 +18,9 @@ var model_detail_sum = Ext.define('detail_kapal_sum', {
 			'ME1 daily consumption','ME2 daily consumtion',
 			'ME1 consumption rate','ME2 consumption rate',
 			'ME1 average rpm','ME2 average rpm','AE1 average rpm','AE2 average rpm',
-			'AE1 consumtion', 'AE2 consumtion','vessel','Remaining on board','Last fuel loading'
+			'AE1 consumtion', 'AE2 consumtion','vessel','Remaining on board','Last fuel loading',
+			'Total Consumption ME','Total Consumption AE','Total Consumption',
+			'Total Working Hours ME','Total Working Hours AE','Total Working Hours','Total Working Hours'
 			//
 			// 'waktu', 'lat', 'lng', 'speed', 'heading', 'rpm1', 'prop1', 'inflow1', 'outflow1', 'temp1', 'press1',
 			// 'rpm2', 'prop2', 'inflow2', 'outflow2', 'temp2', 'press2',
@@ -114,24 +116,24 @@ var tabel_r_sum = Ext.create('Ext.grid.Panel', {
       	header: "Working Distance",
 				width: 100,
 				dataIndex: 'working distance',
-				renderer: function(v){return parseFloat(v).toFixed(2);}
+				renderer: function(v){return parseFloat(v).toFixed(2)+" Km";}
 		},{
 				header: "Average Speed",
 				width: 100,
 				dataIndex: 'average speed',
-				renderer: function(v){return parseFloat(v).toFixed(2);}
+				renderer: function(v){return parseFloat(v).toFixed(2)+" Km/h";}
 		},{
 				header: "StarBoard Engine (ME1)",
 				columns:[{
 					header: "Fuel Consumption",
 					width: 100,
 					dataIndex: "ME1 daily consumption",
-					renderer: function(v){return parseFloat(v).toFixed(2);}
+					renderer: function(v){return parseFloat(v).toFixed(2)+" Liter";}
 				},{
 					header: "Working Hours",
 					width: 100,
 					dataIndex: "working hours ME1",
-					renderer: function(v){return parseFloat(v).toFixed(2);}
+					renderer: function(v){return getHour(parseFloat(v).toFixed(2)*60);}
 				}]
 		},{
 				header: "PortSide Engine (ME2)",
@@ -139,25 +141,38 @@ var tabel_r_sum = Ext.create('Ext.grid.Panel', {
 					header: "Fuel Consumption",
 					width: 100,
 					dataIndex: "ME2 daily consumtion",
-					renderer: function(v){return parseFloat(v).toFixed(2);}
+					renderer: function(v){return parseFloat(v).toFixed(2)+" Liter";}
 				},{
 					header: "Working Hours",
 					width: 100,
 					dataIndex: "working hours ME2",
-					renderer: function(v){return parseFloat(v).toFixed(2);}
+					renderer: function(v){return getHour(parseFloat(v).toFixed(2)*60);}
 				}]
+		},{
+			header: "Total Main Engine",
+			columns:[{
+				header: "Fuel Consumption",
+				width: 100,
+				dataIndex: "Total Consumption ME",
+				renderer: function(v){return parseFloat(v).toFixed(2)+" Liter";}
+			},{
+				header: "Working Hours",
+				width: 100,
+				dataIndex: "Total Working Hours ME",
+				renderer: function(v){return getHour(parseFloat(v).toFixed(2)*60);}
+			}]
 		},{
 			  header: "StarBoard GenSet (AE1)",
 				columns:[{
 					header: "Fuel Consumption",
 					width: 100,
 					dataIndex: "AE1 consumtion",
-					renderer: function(v){return parseFloat(v).toFixed(2);}
+					renderer: function(v){return parseFloat(v).toFixed(2)+" Liter";}
 				},{
 					header: "Working Hours",
 					width: 100,
 					dataIndex: "working hours AE1",
-					renderer: function(v){return parseFloat(v).toFixed(2);}
+					renderer: function(v){return getHour(parseFloat(v).toFixed(2)*60);}
 				}]
 		},{
 				header: "PortSide GenSet (AE2)",
@@ -165,66 +180,46 @@ var tabel_r_sum = Ext.create('Ext.grid.Panel', {
 					header: "Fuel Consumption",
 					width: 100,
 					dataIndex: "AE2 consumtion",
-					renderer: function(v){return parseFloat(v).toFixed(2);}
+					renderer: function(v){return parseFloat(v).toFixed(2)+" Liter";}
 				},{
 					header: "Working Hours",
 					width: 100,
 					dataIndex: "working hours AE2",
-					renderer: function(v){return parseFloat(v).toFixed(2);}
+					renderer: function(v){return getHour(parseFloat(v).toFixed(2)*60);}
 				}]
-			},
-	// 		{
-	// 			header: "Working Hours",
-	// 			columns:[{
-	// 				header: 'ME1 RH',
-	// 				width: 100,
-	// 				dataIndex: 'working hours ME1',
-	// 				renderer: function(v){return parseFloat(v).toFixed(2);}
-	// 			},{
-	// 				header: 'ME2 RH',
-	// 				width: 100,
-	// 				dataIndex: 'working hours ME2',
-	// 				renderer: function(v){return parseFloat(v).toFixed(2);}
-	// 			}]
-	// 	},{
-	// 		header: "Main Engine",
-  //     columns: [{
-	// 				header: "Daily Consumption",
-	// 				width: 100,
-	// 				dataIndex: 'ME1 daily consumption',
-	// 				renderer: function(v){return parseFloat(v).toFixed(2);}
-	// 		},{
-	// 				header: "Daily Rate",
-	// 				width: 100,
-	// 				dataIndex: 'ME1 consumption rate',
-	// 				renderer: function(v){return parseFloat(v).toFixed(2);}
-	//
-	// 		}]
-	// },{
-  //     header: "Auxiliary Engine",
-  //     columns: [{
-	// 				header: "AE1 Fuel",
-	// 				width: 100,
-	// 				dataIndex: 'AE1 consumtion',
-	// 				renderer: function(v){return parseFloat(v).toFixed(2);}
-	// 		},{
-	// 				header: "AE2 Fuel",
-	// 				width: 100,
-	// 				dataIndex: 'AE2 consumtion',
-	// 				renderer: function(v){return parseFloat(v).toFixed(2);}
-	//
-	// 		}]
-	// },
-	{
-      header: "Remaining onBoard",
-			width: 200,
-			dataIndex: 'Remaining on board',
-			renderer: function(v){return parseFloat(v).toFixed(2);}
-	},{
-			header: "Last Fuel Loding",
-			width: 200,
-			dataIndex: 'Last fuel loading',
-			renderer: function(v){return parseFloat(v).toFixed(2);}
+		},{
+				header: "Total Auxiliary Engine",
+				columns:[{
+					header: "Fuel Consumption",
+					width: 100,
+					dataIndex: "Total Consumption AE",
+					renderer: function(v){return parseFloat(v).toFixed(2)+" Liter";}
+				},{
+					header: "Working Hours",
+					width: 100,
+					dataIndex: "Total Working Hours AE",
+					renderer: function(v){return getHour(parseFloat(v).toFixed(2)*60);}
+				}]
+		},{
+      	header: "Remaining onBoard",
+				width: 200,
+				dataIndex: 'Remaining on board',
+				renderer: function(v){return parseFloat(v).toFixed(2)+" Liter";}
+		},{
+			 header: "Total Consumption",
+			 width: 200,
+			 dataIndex: 'Total Consumption',
+			 renderer: function(v){return parseFloat(v).toFixed(2)+" Liter";}
+		},{
+			 header: "Last Fuel Loding",
+			 width: 200,
+			 dataIndex: 'Last fuel loading',
+			 renderer: function(v){return parseFloat(v).toFixed(2)+" Liter";}
+		},{
+			 header: "Total Working Hours",
+			 width: 200,
+			 dataIndex: 'Total Working Hours',
+			 renderer: function(v){return getHour(parseFloat(v).toFixed(2)*60);}
 		}
 	]
 });
@@ -363,3 +358,15 @@ var panel_r_sum = {
 
     ]
 };
+
+function getHour(value) {
+	  // console.log("value", value);
+    if (value == null) { return "0 hr"; }
+    if (value <= 0) { return "0 hr"; }
+    var hours = Math.floor(value / 60);
+    var minutes = value % 60;
+    var hour = (hours > 1) ? hours + " hrs " : hours + " hr ";
+    var min = (minutes > 0) ? parseFloat(minutes).toFixed(0) + " mins" : "";
+		// console.log("result", hour + min);
+    return hour + min;
+}

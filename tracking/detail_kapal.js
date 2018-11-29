@@ -172,32 +172,32 @@ var tabel_detail_jam = Ext.create('Ext.grid.Panel', {
 					}
 				]
 			},{
-      	header: "PortSide Engine",
+      	header: "StarBoard Engine (ME1)",
       	columns: [
 					{
 						header: "FM-In",
 						width: 70,
-						dataIndex: 'ME2-FM In'
+						dataIndex: 'ME1-FM In'
 					},{
 						header: "FM-Ov",
 						width: 70,
-						dataIndex: 'ME2-FM Ov'
+						dataIndex: 'ME1-FM Ov'
 					},{
 						header: "FM-Temp",
 						width: 70,
-						dataIndex: 'ME2-FM Tem'
+						dataIndex: 'ME1-FM Tem'
 					},{
 						header: "RPM",
 						width: 70,
-						dataIndex: 'ME2-RPM'
+						dataIndex: 'ME1-RPM'
 					},{
 						header: "RunHours",
 						width: 70,
-						dataIndex: 'ME2-RH'
+						dataIndex: 'ME1-RH'
 					}
 				]
 			},{
-      	header: "PortSide Engine",
+      	header: "StarBoard Engine (ME1)",
       	columns: [
 					{
 						header: "ECU Satus",
@@ -246,32 +246,32 @@ var tabel_detail_jam = Ext.create('Ext.grid.Panel', {
 					}
 				]
 			},{
-      	header: "StarBoard Engine",
+      	header: "PortSide Engine (ME2)",
 				columns: [
 					{
 						header: "FM-In",
 						width: 70,
-						dataIndex: 'ME1-FM In'
+						dataIndex: 'ME2-FM In'
 					},{
 						header: "FM-Ov",
 						width: 70,
-						dataIndex: 'ME1-FM Ov'
+						dataIndex: 'ME2-FM Ov'
 					},{
 						header: "FM-Temp",
 						width: 70,
-						dataIndex: 'ME1-FM Tem'
+						dataIndex: 'ME2-FM Tem'
 					},{
 						header: "RPM",
 						width: 70,
-						dataIndex: 'ME1-RPM'
+						dataIndex: 'ME2-RPM'
 					},{
 						header: "RunHours",
 						width: 70,
-						dataIndex: 'ME1-RH'
+						dataIndex: 'ME2-RH'
 					}
 				]
 			},{
-      	header: "StarBoard Engine",
+      	header: "PortSide Engine (ME2)",
       	columns: [
 					{
 						header: "ECU Satus",
@@ -320,37 +320,7 @@ var tabel_detail_jam = Ext.create('Ext.grid.Panel', {
 					}
 				]
 			},{
-      	header: "PortSide GenSet",
-				columns: [
-					{
-						header: "FM-In",
-						width: 70,
-						dataIndex: 'AE2-FM In'
-					},{
-						header: "FM-Ov",
-						width: 70,
-						dataIndex: 'AE2-FM Ov'
-					},{
-						header: "FM-Temp",
-						width: 70,
-						dataIndex: 'AE2-FM Tem'
-					},{
-						header: "RPM",
-						width: 70,
-						dataIndex: 'AE2-RPM'
-					},{
-						header: "RunHours",
-						width: 70,
-						dataIndex: 'AE2-RH'
-					}
-					// ,{
-					// 	header: "Press",
-					// 	width: 70,
-					// 	dataIndex: 'press1'
-					// }
-				]
-			},{
-				header: "StarBoard GenSet",
+      	header: "StarBoard GenSet (AE1)",
 				columns: [
 					{
 						header: "FM-In",
@@ -372,6 +342,36 @@ var tabel_detail_jam = Ext.create('Ext.grid.Panel', {
 						header: "RunHours",
 						width: 70,
 						dataIndex: 'AE1-RH'
+					}
+					// ,{
+					// 	header: "Press",
+					// 	width: 70,
+					// 	dataIndex: 'press1'
+					// }
+				]
+			},{
+				header: "PortSide GenSet (AE2)",
+				columns: [
+					{
+						header: "FM-In",
+						width: 70,
+						dataIndex: 'AE2-FM In'
+					},{
+						header: "FM-Ov",
+						width: 70,
+						dataIndex: 'AE2-FM Ov'
+					},{
+						header: "FM-Temp",
+						width: 70,
+						dataIndex: 'AE2-FM Tem'
+					},{
+						header: "RPM",
+						width: 70,
+						dataIndex: 'AE2-RPM'
+					},{
+						header: "RunHours",
+						width: 70,
+						dataIndex: 'AE2-RH'
 					}
 					// ,{
 					// 	header: "Press",
@@ -639,32 +639,32 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
 					}
 				]
 			},{
-      	header: "PortSide Engine",
+      	header: "StarBoard Engine (ME1)",
       	columns: [
 					{
 						header: "FM-In",
 						width: 70,
-						dataIndex: 'ME2-FM In'
+						dataIndex: 'ME1-FM In'
 					},{
 						header: "FM-Ov",
 						width: 70,
-						dataIndex: 'ME2-FM Ov'
+						dataIndex: 'ME1-FM Ov'
 					},{
 						header: "FM-Temp",
 						width: 70,
-						dataIndex: 'ME2-FM Tem'
+						dataIndex: 'ME1-FM Tem'
 					},{
 						header: "RPM",
 						width: 70,
-						dataIndex: 'ME2-RPM'
+						dataIndex: 'ME1-RPM'
 					},{
 						header: "RunHours",
 						width: 70,
-						dataIndex: 'ME2-RH'
+						dataIndex: 'ME1-RH'
 					}
 				]
 			},{
-      	header: "PortSide Engine",
+      	header: "StarBoard Engine (ME1)",
       	columns: [
 					{
 						header: "ECU Satus",
@@ -713,32 +713,32 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
 					}
 				]
 			},{
-      	header: "StarBoard Engine",
+      	header: "PortSide Engine (ME2)",
 				columns: [
 					{
 						header: "FM-In",
 						width: 70,
-						dataIndex: 'ME1-FM In'
+						dataIndex: 'ME2-FM In'
 					},{
 						header: "FM-Ov",
 						width: 70,
-						dataIndex: 'ME1-FM Ov'
+						dataIndex: 'ME2-FM Ov'
 					},{
 						header: "FM-Temp",
 						width: 70,
-						dataIndex: 'ME1-FM Tem'
+						dataIndex: 'ME2-FM Tem'
 					},{
 						header: "RPM",
 						width: 70,
-						dataIndex: 'ME1-RPM'
+						dataIndex: 'ME2-RPM'
 					},{
 						header: "RunHours",
 						width: 70,
-						dataIndex: 'ME1-RH'
+						dataIndex: 'ME2-RH'
 					}
 				]
 			},{
-      	header: "StarBoard Engine",
+      	header: "PortSide Engine (ME2)",
       	columns: [
 					{
 						header: "ECU Satus",
@@ -787,37 +787,7 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
 					}
 				]
 			},{
-      	header: "PortSide GenSet",
-				columns: [
-					{
-						header: "FM-In",
-						width: 70,
-						dataIndex: 'AE2-FM In'
-					},{
-						header: "FM-Ov",
-						width: 70,
-						dataIndex: 'AE2-FM Ov'
-					},{
-						header: "FM-Temp",
-						width: 70,
-						dataIndex: 'AE2-FM Tem'
-					},{
-						header: "RPM",
-						width: 70,
-						dataIndex: 'AE2-RPM'
-					},{
-						header: "RunHours",
-						width: 70,
-						dataIndex: 'AE2-RH'
-					}
-					// ,{
-					// 	header: "Press",
-					// 	width: 70,
-					// 	dataIndex: 'press1'
-					// }
-				]
-			},{
-				header: "StarBoard GenSet",
+      	header: "PortSide GenSet (AE1)",
 				columns: [
 					{
 						header: "FM-In",
@@ -839,6 +809,36 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
 						header: "RunHours",
 						width: 70,
 						dataIndex: 'AE1-RH'
+					}
+					// ,{
+					// 	header: "Press",
+					// 	width: 70,
+					// 	dataIndex: 'press1'
+					// }
+				]
+			},{
+				header: "PortSide GenSet (AE2)",
+				columns: [
+					{
+						header: "FM-In",
+						width: 70,
+						dataIndex: 'AE2-FM In'
+					},{
+						header: "FM-Ov",
+						width: 70,
+						dataIndex: 'AE2-FM Ov'
+					},{
+						header: "FM-Temp",
+						width: 70,
+						dataIndex: 'AE2-FM Tem'
+					},{
+						header: "RPM",
+						width: 70,
+						dataIndex: 'AE2-RPM'
+					},{
+						header: "RunHours",
+						width: 70,
+						dataIndex: 'AE2-RH'
 					}
 					// ,{
 					// 	header: "Press",

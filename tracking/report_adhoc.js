@@ -674,114 +674,109 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
           ],
     columns: [
     {
-        header: "Date",
-        width: 100,
-        dataIndex: 'date',
-		renderer: Ext.util.Format.dateRenderer('d-M-Y'),
-        locked : true
+      header: "Date",
+      width: 100,
+      dataIndex: 'date',
+		  renderer: Ext.util.Format.dateRenderer('d-M-Y'),
+      locked : true
     },{
-      	header: "Working Dist.\n(km)",
-		width: 100,
-		dataIndex: 'working distance',
-		renderer: function(v){return parseFloat(v).toFixed(2);}
+      header: "Working Dist. (Km)",
+		  width: 150,
+		  dataIndex: 'working distance',
+		  renderer: function(v){return parseFloat(v).toFixed(2);}
 		},{
-		header: "Average Speed",
-		width: 100,
+		header: "Average Speed (Km/h)",
+		width: 150,
 		dataIndex: 'average speed',
 		renderer: function(v){return parseFloat(v).toFixed(2);}
 	},{
-		header: "Portside",
-      	columns: [{
-				header: "Working Hours",
-				width: 100,
-				dataIndex: 'working hours ME2',
-				renderer: function(v){return parseFloat(v).toFixed(2);}
-				},{
-				header: "Daily Consumption",
-				width: 100,
-				dataIndex: 'ME2 daily consumtion',
-				renderer: function(v){return parseFloat(v).toFixed(2);}
-				},{
-				header: "Hourly Rate",
-				width: 100,
-				dataIndex: 'ME2 consumtion rate',
-				renderer: function(v){return parseFloat(v).toFixed(2);}
-				}]
-			},{
-				header: "StarBoard",
-      			columns: [{
-				header: "Working Hours",
-				width: 100,
-				dataIndex: 'working hours ME1',
-				renderer: function(v){return parseFloat(v).toFixed(2);}
-				},{
-					header: "Daily Consumption",
-					width: 100,
-					dataIndex: 'ME1 daily consumption',
-					renderer: function(v){return parseFloat(v).toFixed(2);}
-				},{
-					header: "Hourly Rate",
-					width: 100,
-					dataIndex: 'ME1 consumption rate',
-					renderer: function(v){return parseFloat(v).toFixed(2);}
-			}]
-			},{
-      			header: "PortSide GenSet",
-      			columns: [{
-					header: "Daily Consumption",
-					width: 100,
-					dataIndex: 'AE2 consumtion',
-					renderer: function(v){return parseFloat(v).toFixed(2);}
-				},{
-					header: "RPM(rata2)",
-					width: 100,
-					dataIndex: 'AE2 average rpm',
-					renderer: function(v){return parseFloat(v).toFixed(2);}
-
-			}]
-			},{
-      			header: "StarBoard Genset",
-      			columns: [{
-					header: "Daily Consumption",
-					width: 100,
-					dataIndex: 'AE1 consumtion',
-					renderer: function(v){return parseFloat(v).toFixed(2);}
-			},{
-					header: "RPM (rata2)",
-					width: 100,
-					dataIndex: 'AE1 average rpm',
-					renderer: function(v){return parseFloat(v).toFixed(2);}
-
-			}]
-		},
-		{
-			header: "Total Daily Fuel",
+		header: "StarBoard (ME1)",
+    columns: [{
+      header: "Working Hours",
 			width: 100,
-			dataIndex: 'Total daily fuel',
+			dataIndex: 'working hours ME1',
 			renderer: function(v){return parseFloat(v).toFixed(2);}
 		},{
-     		header: "Remaining onBoard",
-			width: 200,
-			dataIndex: 'Remaining on board',
+			header: "Daily Consumption",
+			width: 100,
+			dataIndex: 'ME1 daily consumtion',
 			renderer: function(v){return parseFloat(v).toFixed(2);}
 		},{
-
-			header: "Last Fuel Loading",
-			width: 200,
-			dataIndex: 'Last fuel loading',
+			header: "Hourly Rate",
+			width: 100,
+			dataIndex: 'ME2 consumtion rate',
+			renderer: function(v){return parseFloat(v).toFixed(2);}
+    }]
+	},{
+	  header: "PortSide (ME2)",
+    columns: [{
+			header: "Working Hours",
+			width: 100,
+			dataIndex: 'working hours ME2',
 			renderer: function(v){return parseFloat(v).toFixed(2);}
 		},{
-			header: "F_Sound_Check",
-			width: 150,
-			dataIndex: 'F_Sound check',
+			header: "Daily Consumption",
+			width: 100,
+			dataIndex: 'ME2 daily consumption',
 			renderer: function(v){return parseFloat(v).toFixed(2);}
 		},{
-			header: "Work Order",
-			width: 200,
-			dataIndex: 'Work Order',
-			renderer: function(v){return v;}
+			header: "Hourly Rate",
+			width: 100,
+			dataIndex: 'ME2 consumption rate',
+			renderer: function(v){return parseFloat(v).toFixed(2);}
 		}]
-
+	},{
+    header: "GenSet#1 (AE1)",
+    columns: [{
+		  header: "Daily Consumption",
+			width: 100,
+			dataIndex: 'AE1 consumtion',
+			renderer: function(v){return parseFloat(v).toFixed(2);}
+		},{
+		  header: "RPM(rata2)",
+			width: 100,
+			dataIndex: 'AE1 average rpm',
+			renderer: function(v){return parseFloat(v).toFixed(2);}
+		}]
+	},{
+    header: "Genset#2 (AE2)",
+    columns: [{
+		  header: "Daily Consumption",
+      width: 100,
+      dataIndex: 'AE2 consumtion',
+			renderer: function(v){return parseFloat(v).toFixed(2);}
+		},{
+		  header: "RPM (rata2)",
+			width: 100,
+			dataIndex: 'AE2 average rpm',
+			renderer: function(v){return parseFloat(v).toFixed(2);}
+		}]
+	},{
+	  header: "Total Daily Fuel",
+		width: 100,
+		dataIndex: 'Total daily fuel',
+		renderer: function(v){return parseFloat(v).toFixed(2);}
+  },{
+    header: "Remaining onBoard",
+		width: 200,
+		dataIndex: 'Remaining on board',
+		renderer: function(v){return parseFloat(v).toFixed(2);}
+	},{
+    header: "Last Fuel Loading",
+		width: 200,
+		dataIndex: 'Last fuel loading',
+		renderer: function(v){return parseFloat(v).toFixed(2);}
+	},{
+    header: "Fuel Sounding",
+		width: 150,
+		dataIndex: 'F_Sound check',
+		renderer: function(v){return parseFloat(v).toFixed(2);}
+	},{
+		header: "Work Order",
+		width: 200,
+		dataIndex: 'Work Order',
+		renderer: function(v){return v;}
+	}]
 });
 
 var id_vessel_adhoc;
