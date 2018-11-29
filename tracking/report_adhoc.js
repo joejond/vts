@@ -1189,7 +1189,9 @@ var panel_form_work_order = Ext.create('Ext.form.Panel', {
             var form = this.up('form').getForm();
             if (form.isValid()) {
 							var dt = form.getValues();
-							dt.titik_ukur_id = 11106;
+							// dt.titik_ukur_id = 11106;
+              dt.aset_id = id_vessel_adhoc;
+              dt.titik_ukur_tipe_id = 106;
 							console.log('Work Order dt = ',dt);
 							Ext.Ajax.request({
 							    url: getAPI()+'/pelindo/work_order',
