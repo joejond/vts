@@ -906,8 +906,8 @@ var selmod = Ext.create('Ext.selection.CheckboxModel',{
             Ext.each(hasil, function (item) {
                        ship.push(item.data.id);
             });
-            console.log('hasil', hasil);
-            console.log('ship', ship);
+            // console.log('hasil', hasil);
+            // console.log('ship', ship);
             if (ship.length > 1 || ship.length == 0) {
               Ext.getCmp('panel_form_tracking').setDisabled(true);
               Ext.getCmp('panel_form_work_order').setDisabled(true);
@@ -963,7 +963,7 @@ var store_tracking_work_order = Ext.create('Ext.data.Store', {
     autoLoad: true,
     proxy: {
         type: 'ajax',
-        url:getAPI()+'/pelindo/work_order?titik_ukur_id=11106',
+        url:getAPI()+'/pelindo/work_order',
         method: 'GET'
     }
 });
@@ -993,8 +993,8 @@ var tabel_tracking_work_order = Ext.create('Ext.grid.Panel', {
         var str_tanggal = tanggal.getFullYear() + "-" + ("0"+(tanggal.getMonth()+1)).slice(-2) + "-" + ("0" + tanggal.getDate()).slice(-2);
         // console.log("Window detail tanggal: " + str_tanggal);
         // console.log("Window onShow : "+detail_tanggal_index);
-        param = {tanggal:str_tanggal};
-        store_tracking_work_order.load({params:param});
+        // param = {tanggal:str_tanggal};
+        // store_tracking_work_order.load({params:param});
       },
       celldblclick : function(view, cell, cellIndex, record, row, rowIndex, e) {
         // console.log('record.getData()', record.getData());
