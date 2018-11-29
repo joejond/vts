@@ -680,32 +680,38 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
 		  renderer: Ext.util.Format.dateRenderer('d-M-Y'),
       locked : true
     },{
-      header: "Working Dist. (Km)",
-		  width: 150,
+      header: "Working Distance",
+		  width: 100,
 		  dataIndex: 'working distance',
-		  renderer: function(v){return parseFloat(v).toFixed(2);}
+		  renderer: function(v){return parseFloat(v).toFixed(2)+" Km";}
 		},{
-		header: "Average Speed (Km/h)",
-		width: 150,
+		header: "Average Speed",
+		width: 100,
 		dataIndex: 'average speed',
-		renderer: function(v){return parseFloat(v).toFixed(2);}
+		renderer: function(v){return parseFloat(v).toFixed(2)+" Km/h";}
 	},{
 		header: "StarBoard (ME1)",
     columns: [{
       header: "Working Hours",
 			width: 100,
 			dataIndex: 'working hours ME1',
-			renderer: function(v){return parseFloat(v).toFixed(2);}
+			renderer: function(v){return getHour(parseFloat(v).toFixed(2)*60);}
 		},{
 			header: "Daily Consumption",
 			width: 100,
-			dataIndex: 'ME1 daily consumtion',
-			renderer: function(v){return parseFloat(v).toFixed(2);}
+			dataIndex: 'ME1 daily consumption',
+      renderer: function(v){
+        if (parseFloat(v) > 0) {
+          return parseFloat(v).toFixed(2)+" Liters";
+        } else {
+          return parseFloat(v).toFixed(2)+" Liter";
+        }
+      }
 		},{
 			header: "Hourly Rate",
 			width: 100,
-			dataIndex: 'ME2 consumtion rate',
-			renderer: function(v){return parseFloat(v).toFixed(2);}
+			dataIndex: 'ME1 consumption rate',
+			renderer: function(v){return parseFloat(v).toFixed(2)+" lt/h";}
     }]
 	},{
 	  header: "PortSide (ME2)",
@@ -713,17 +719,23 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
 			header: "Working Hours",
 			width: 100,
 			dataIndex: 'working hours ME2',
-			renderer: function(v){return parseFloat(v).toFixed(2);}
+			renderer: function(v){return getHour(parseFloat(v).toFixed(2)*60);}
 		},{
 			header: "Daily Consumption",
 			width: 100,
-			dataIndex: 'ME2 daily consumption',
-			renderer: function(v){return parseFloat(v).toFixed(2);}
+			dataIndex: 'ME2 daily consumtion',
+      renderer: function(v){
+        if (parseFloat(v) > 0) {
+          return parseFloat(v).toFixed(2)+" Liters";
+        } else {
+          return parseFloat(v).toFixed(2)+" Liter";
+        }
+      }
 		},{
 			header: "Hourly Rate",
 			width: 100,
-			dataIndex: 'ME2 consumption rate',
-			renderer: function(v){return parseFloat(v).toFixed(2);}
+			dataIndex: 'ME2 consumtion rate',
+			renderer: function(v){return parseFloat(v).toFixed(2)+" lt/h";}
 		}]
 	},{
     header: "GenSet#1 (AE1)",
@@ -731,12 +743,18 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
 		  header: "Daily Consumption",
 			width: 100,
 			dataIndex: 'AE1 consumtion',
-			renderer: function(v){return parseFloat(v).toFixed(2);}
+      renderer: function(v){
+        if (parseFloat(v) > 0) {
+          return parseFloat(v).toFixed(2)+" Liters";
+        } else {
+          return parseFloat(v).toFixed(2)+" Liter";
+        }
+      }
 		},{
-		  header: "RPM(rata2)",
+		  header: "RPM (Average)",
 			width: 100,
 			dataIndex: 'AE1 average rpm',
-			renderer: function(v){return parseFloat(v).toFixed(2);}
+			renderer: function(v){return parseFloat(v).toFixed(2)+" RPM";}
 		}]
 	},{
     header: "Genset#2 (AE2)",
@@ -744,38 +762,76 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
 		  header: "Daily Consumption",
       width: 100,
       dataIndex: 'AE2 consumtion',
-			renderer: function(v){return parseFloat(v).toFixed(2);}
+      renderer: function(v){
+        if (parseFloat(v) > 0) {
+          return parseFloat(v).toFixed(2)+" Liters";
+        } else {
+          return parseFloat(v).toFixed(2)+" Liter";
+        }
+      }
 		},{
 		  header: "RPM (rata2)",
 			width: 100,
 			dataIndex: 'AE2 average rpm',
-			renderer: function(v){return parseFloat(v).toFixed(2);}
+			renderer: function(v){return parseFloat(v).toFixed(2)+" RPM";}
 		}]
 	},{
 	  header: "Total Daily Fuel",
 		width: 100,
 		dataIndex: 'Total daily fuel',
-		renderer: function(v){return parseFloat(v).toFixed(2);}
+    renderer: function(v){
+      if (parseFloat(v) > 0) {
+        return parseFloat(v).toFixed(2)+" Liters";
+      } else {
+        return parseFloat(v).toFixed(2)+" Liter";
+      }
+    }
   },{
     header: "Remaining onBoard",
 		width: 200,
 		dataIndex: 'Remaining on board',
-		renderer: function(v){return parseFloat(v).toFixed(2);}
+    renderer: function(v){
+      if (parseFloat(v) > 0) {
+        return parseFloat(v).toFixed(2)+" Liters";
+      } else {
+        return parseFloat(v).toFixed(2)+" Liter";
+      }
+    }
 	},{
     header: "Last Fuel Loading",
 		width: 200,
 		dataIndex: 'Last fuel loading',
-		renderer: function(v){return parseFloat(v).toFixed(2);}
+    renderer: function(v){
+      if (parseFloat(v) > 0) {
+        return parseFloat(v).toFixed(2)+" Liters";
+      } else {
+        return parseFloat(v).toFixed(2)+" Liter";
+      }
+    }
 	},{
     header: "Fuel Sounding",
 		width: 150,
 		dataIndex: 'F_Sound check',
-		renderer: function(v){return parseFloat(v).toFixed(2);}
+    renderer: function(v){
+      if (parseFloat(v) > 0) {
+        return parseFloat(v).toFixed(2)+" Liters";
+      } else {
+        return parseFloat(v).toFixed(2)+" Liter";
+      }
+    }
 	},{
 		header: "Work Order",
 		width: 200,
-		dataIndex: 'Work Order',
-		renderer: function(v){return v;}
+		dataIndex: 'Work Order (Summary)',
+    renderer: function(v){
+      if (v) {
+        if (parseFloat(v) > 0) {
+          return v+" Orders";
+        } else {
+          return v+" Order";
+        }
+      }
+    }
 	}]
 });
 
@@ -1003,7 +1059,8 @@ var panel_form_bunker = Ext.create('Ext.form.Panel', {
             var form = this.up('form').getForm();
             if (form.isValid()) {
 							var dt = form.getValues();
-							dt.titik_ukur_id = 11033;
+							// dt.titik_ukur_id = 11033;
+              dt.aset_id = Ext.getCmp('cb_vessel_adhoc').getValue();
 							console.log(dt);
 							Ext.Ajax.request({
 
@@ -1163,7 +1220,8 @@ var store_fuel_sonding = Ext.create('Ext.data.Store', {
     autoLoad: true,
 		proxy: {
 				type: 'ajax',
-				url:getAPI()+'/pelindo/custom_input?titik_ukur_id=12005',
+				// url:getAPI()+'/pelindo/custom_input?titik_ukur_id=12005',
+        url:getAPI()+'/pelindo/custom_input?aset_id='+Ext.getCmp('cb_vessel_adhoc').getValue(),
 				method: 'GET',
 				// params: {titik_ukur_id:12005},
 				// reader: {
@@ -1269,8 +1327,9 @@ var panel_form_sonding = Ext.create('Ext.form.Panel', {
 							// var dt_tgl = dt.tgl_son+' '+dt.time_son+':00';
 							// var dt_vol = dt.vol_son;
 							// var dt_tu = 12005;
-							dt.titik_ukur_id = 12005;
-							console.log(dt);
+							// dt.titik_ukur_id = 12005;
+              dt.aset_id = Ext.getCmp('cb_vessel_adhoc').getValue();
+							// console.log(dt);
 							Ext.Ajax.request({
 							    url: getAPI()+'/pelindo/custom_input',
 									method:'POST',
@@ -1336,11 +1395,10 @@ var store_work_order = Ext.create('Ext.data.Store', {
     autoLoad: true,
 		proxy: {
 				type: 'ajax',
-
 				// url:'http://10.10.10.11:1336/pelindo/custom_input?titik_ukur_id=11033',
 				// url:'http://192.168.1.17:1337/pelindo/custom_input?titik_ukur_id=11033',
-				url:getAPI()+'/pelindo/work_order?titik_ukur_id=11106',
-
+				// url:getAPI()+'/pelindo/work_order?titik_ukur_id=11106',
+        url:getAPI()+'/pelindo/work_order?aset_id='+Ext.getCmp('cb_vessel_adhoc').getValue(),
 				method: 'GET',
 				// params: {titik_ukur_id:12005},
 				// reader: {
@@ -1506,3 +1564,15 @@ var window_detail_work_order = Ext.create('Ext.window.Window',{
         }
     }]
 });
+
+function getHour(value) {
+	  // console.log("value", value);
+    if (value == null) { return "0 hr"; }
+    if (value <= 0) { return "0 hr"; }
+    var hours = Math.floor(value / 60);
+    var minutes = value % 60;
+    var hour = (hours > 1) ? hours + " hrs " : hours + " hr ";
+    var min = (minutes > 0) ? parseFloat(minutes).toFixed(0) + " mins" : "";
+		// console.log("result", hour + min);
+    return hour + min;
+}

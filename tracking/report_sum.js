@@ -128,7 +128,13 @@ var tabel_r_sum = Ext.create('Ext.grid.Panel', {
 					header: "Fuel Consumption",
 					width: 100,
 					dataIndex: "ME1 daily consumption",
-					renderer: function(v){return parseFloat(v).toFixed(2)+" Liter";}
+					renderer: function(v){
+						if (parseFloat(v) > 0) {
+							return parseFloat(v).toFixed(2)+" Liters";
+						} else {
+							return parseFloat(v).toFixed(2)+" Liter";
+						}
+					}
 				},{
 					header: "Working Hours",
 					width: 100,
@@ -141,7 +147,13 @@ var tabel_r_sum = Ext.create('Ext.grid.Panel', {
 					header: "Fuel Consumption",
 					width: 100,
 					dataIndex: "ME2 daily consumtion",
-					renderer: function(v){return parseFloat(v).toFixed(2)+" Liter";}
+					renderer: function(v){
+						if (parseFloat(v) > 0) {
+							return parseFloat(v).toFixed(2)+" Liters";
+						} else {
+							return parseFloat(v).toFixed(2)+" Liter";
+						}
+					}
 				},{
 					header: "Working Hours",
 					width: 100,
@@ -154,7 +166,13 @@ var tabel_r_sum = Ext.create('Ext.grid.Panel', {
 				header: "Fuel Consumption",
 				width: 100,
 				dataIndex: "Total Consumption ME",
-				renderer: function(v){return parseFloat(v).toFixed(2)+" Liter";}
+				renderer: function(v){
+					if (parseFloat(v) > 0) {
+						return parseFloat(v).toFixed(2)+" Liters";
+					} else {
+						return parseFloat(v).toFixed(2)+" Liter";
+					}
+				}
 			},{
 				header: "Working Hours",
 				width: 100,
@@ -167,7 +185,13 @@ var tabel_r_sum = Ext.create('Ext.grid.Panel', {
 					header: "Fuel Consumption",
 					width: 100,
 					dataIndex: "AE1 consumtion",
-					renderer: function(v){return parseFloat(v).toFixed(2)+" Liter";}
+					renderer: function(v){
+						if (parseFloat(v) > 0) {
+							return parseFloat(v).toFixed(2)+" Liters";
+						} else {
+							return parseFloat(v).toFixed(2)+" Liter";
+						}
+					}
 				},{
 					header: "Working Hours",
 					width: 100,
@@ -180,7 +204,13 @@ var tabel_r_sum = Ext.create('Ext.grid.Panel', {
 					header: "Fuel Consumption",
 					width: 100,
 					dataIndex: "AE2 consumtion",
-					renderer: function(v){return parseFloat(v).toFixed(2)+" Liter";}
+					renderer: function(v){
+						if (parseFloat(v) > 0) {
+							return parseFloat(v).toFixed(2)+" Liters";
+						} else {
+							return parseFloat(v).toFixed(2)+" Liter";
+						}
+					}
 				},{
 					header: "Working Hours",
 					width: 100,
@@ -193,7 +223,13 @@ var tabel_r_sum = Ext.create('Ext.grid.Panel', {
 					header: "Fuel Consumption",
 					width: 100,
 					dataIndex: "Total Consumption AE",
-					renderer: function(v){return parseFloat(v).toFixed(2)+" Liter";}
+					renderer: function(v){
+						if (parseFloat(v) > 0) {
+							return parseFloat(v).toFixed(2)+" Liters";
+						} else {
+							return parseFloat(v).toFixed(2)+" Liter";
+						}
+					}
 				},{
 					header: "Working Hours",
 					width: 100,
@@ -204,17 +240,35 @@ var tabel_r_sum = Ext.create('Ext.grid.Panel', {
       	header: "Remaining onBoard",
 				width: 200,
 				dataIndex: 'Remaining on board',
-				renderer: function(v){return parseFloat(v).toFixed(2)+" Liter";}
+				renderer: function(v){
+					if (parseFloat(v) > 0) {
+						return parseFloat(v).toFixed(2)+" Liters";
+					} else {
+						return parseFloat(v).toFixed(2)+" Liter";
+					}
+				}
 		},{
 			 header: "Total Consumption",
 			 width: 200,
 			 dataIndex: 'Total Consumption',
-			 renderer: function(v){return parseFloat(v).toFixed(2)+" Liter";}
+			 renderer: function(v){
+				 if (parseFloat(v) > 0) {
+					 return parseFloat(v).toFixed(2)+" Liters";
+				 } else {
+					 return parseFloat(v).toFixed(2)+" Liter";
+				 }
+			 }
 		},{
 			 header: "Last Fuel Loding",
 			 width: 200,
 			 dataIndex: 'Last fuel loading',
-			 renderer: function(v){return parseFloat(v).toFixed(2)+" Liter";}
+			 renderer: function(v){
+				 if (parseFloat(v) > 0) {
+					 return parseFloat(v).toFixed(2)+" Liters";
+				 } else {
+					 return parseFloat(v).toFixed(2)+" Liter";
+				 }
+			 }
 		},{
 			 header: "Total Working Hours",
 			 width: 200,
