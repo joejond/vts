@@ -787,7 +787,7 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
 					}
 				]
 			},{
-      	header: "PortSide GenSet (AE1)",
+      	header: "StarBoard GenSet (AE1)",
 				columns: [
 					{
 						header: "FM-In",
