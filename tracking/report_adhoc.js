@@ -1061,6 +1061,7 @@ var panel_form_bunker = Ext.create('Ext.form.Panel', {
 							var dt = form.getValues();
 							// dt.titik_ukur_id = 11033;
               dt.aset_id = Ext.getCmp('cb_vessel_adhoc').getValue();
+              dt.titik_ukur_tipe_id = 33;
 							console.log(dt);
 							Ext.Ajax.request({
 
@@ -1221,7 +1222,7 @@ var store_fuel_sonding = Ext.create('Ext.data.Store', {
 		proxy: {
 				type: 'ajax',
 				// url:getAPI()+'/pelindo/custom_input?titik_ukur_id=12005',
-        url:getAPI()+'/pelindo/custom_input?aset_id='+Ext.getCmp('cb_vessel_adhoc').getValue(),
+        url:getAPI()+'/pelindo/custom_input?titik_ukur_tipe_id=41&aset_id='+Ext.getCmp('cb_vessel_adhoc').getValue(),
 				method: 'GET',
 				// params: {titik_ukur_id:12005},
 				// reader: {
@@ -1329,6 +1330,7 @@ var panel_form_sonding = Ext.create('Ext.form.Panel', {
 							// var dt_tu = 12005;
 							// dt.titik_ukur_id = 12005;
               dt.aset_id = Ext.getCmp('cb_vessel_adhoc').getValue();
+              dt.titik_ukur_tipe_id = 41;
 							// console.log(dt);
 							Ext.Ajax.request({
 							    url: getAPI()+'/pelindo/custom_input',
@@ -1377,7 +1379,7 @@ var store_fuel_bunker = Ext.create('Ext.data.Store', {
 
 				// url:'http://10.10.10.11:1336/pelindo/custom_input?titik_ukur_id=11033',
 				// url:'http://192.168.1.17:1337/pelindo/custom_input?titik_ukur_id=11033',
-				url:getAPI()+'/pelindo/custom_input?titik_ukur_id=11033',
+				url:getAPI()+'/pelindo/custom_input?titik_ukur_tipe_id=33&titik_ukur_id=11033',
 
 				method: 'GET',
 				// params: {titik_ukur_id:12005},
@@ -1398,7 +1400,7 @@ var store_work_order = Ext.create('Ext.data.Store', {
 				// url:'http://10.10.10.11:1336/pelindo/custom_input?titik_ukur_id=11033',
 				// url:'http://192.168.1.17:1337/pelindo/custom_input?titik_ukur_id=11033',
 				// url:getAPI()+'/pelindo/work_order?titik_ukur_id=11106',
-        url:getAPI()+'/pelindo/work_order?aset_id='+Ext.getCmp('cb_vessel_adhoc').getValue(),
+        url:getAPI()+'/pelindo/work_order?titik_ukur_tipe_id=106&aset_id='+Ext.getCmp('cb_vessel_adhoc').getValue(),
 				method: 'GET',
 				// params: {titik_ukur_id:12005},
 				// reader: {
