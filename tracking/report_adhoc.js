@@ -820,17 +820,18 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
       }
     }
 	},{
-		header: "Work Order",
+		header: "Work Order (Summary)",
 		width: 200,
-		dataIndex: 'Work Order (Summary)',
+		dataIndex: 'Work Order',
     renderer: function(v){
-      if (v) {
-        if (parseFloat(v) > 0) {
-          return v+" Orders";
-        } else {
-          return v+" Order";
-        }
-      }
+      return v;
+      // if (v) {
+      //   if (parseFloat(v) > 0) {
+      //     return v+" Orders";
+      //   } else {
+      //     return v+" Order";
+      //   }
+      // }
     }
 	}]
 });
@@ -952,7 +953,9 @@ var panel_r_adhoc = {
 				text:'Add Work Order',
 				listeners:{
 					click: function() {
-              store_work_order.load();
+              console.log("aset_id", id_kpl);
+              store_work_order.load({params: { titik_ukur_tipe_id: 106, aset_id: id_kpl}});
+              // store_work_order.load();
 							window_work_order.show();
 							window_work_order.setTitle ('Work Order');//+data.name);
 	        		},
@@ -1060,7 +1063,7 @@ var panel_form_bunker = Ext.create('Ext.form.Panel', {
             if (form.isValid()) {
 							var dt = form.getValues();
 							// dt.titik_ukur_id = 11033;
-              dt.aset_id = Ext.getCmp('cb_vessel_adhoc').getValue();
+              dt.aset_id = id_kpl;
               dt.titik_ukur_tipe_id = 33;
 							console.log(dt);
 							Ext.Ajax.request({
@@ -1116,8 +1119,9 @@ var panel_form_work_order = Ext.create('Ext.form.Panel', {
           change: function () {
             str_tanggal=Ext.Date.format(this.getValue(),'Y-m-d');
             console.log("str_tanggal", str_tanggal);
-            param = {tanggal:str_tanggal};
-            store_work_order.load({params:param});
+            console.log("aset_id", id_kpl);
+            param = {tanggal:str_tanggal,titik_ukur_tipe_id:106,aset_id:id_kpl};
+            store_work_order.load({params:{tanggal:str_tanggal,titik_ukur_tipe_id:106,aset_id:id_kpl}});
           }
         }
 			}, {
@@ -1190,7 +1194,7 @@ var panel_form_work_order = Ext.create('Ext.form.Panel', {
             if (form.isValid()) {
 							var dt = form.getValues();
 							// dt.titik_ukur_id = 11106;
-              dt.aset_id = id_vessel_adhoc;
+              dt.aset_id = id_kpl;
               dt.titik_ukur_tipe_id = 106;
 							console.log('Work Order dt = ',dt);
 							Ext.Ajax.request({
@@ -1224,7 +1228,7 @@ var store_fuel_sonding = Ext.create('Ext.data.Store', {
 		proxy: {
 				type: 'ajax',
 				// url:getAPI()+'/pelindo/custom_input?titik_ukur_id=12005',
-        url:getAPI()+'/pelindo/custom_input?titik_ukur_tipe_id=41&aset_id='+id_vessel_adhoc,
+        url:getAPI()+'/pelindo/custom_input?titik_ukur_tipe_id=41&aset_id='+id_kpl,
 				method: 'GET',
 				// params: {titik_ukur_id:12005},
 				// reader: {
@@ -1331,7 +1335,7 @@ var panel_form_sonding = Ext.create('Ext.form.Panel', {
 							// var dt_vol = dt.vol_son;
 							// var dt_tu = 12005;
 							// dt.titik_ukur_id = 12005;
-              dt.aset_id = Ext.getCmp('cb_vessel_adhoc').getValue();
+              dt.aset_id = id_kpl;
               dt.titik_ukur_tipe_id = 41;
 							// console.log(dt);
 							Ext.Ajax.request({
@@ -1381,7 +1385,7 @@ var store_fuel_bunker = Ext.create('Ext.data.Store', {
 
 				// url:'http://10.10.10.11:1336/pelindo/custom_input?titik_ukur_id=11033',
 				// url:'http://192.168.1.17:1337/pelindo/custom_input?titik_ukur_id=11033',
-				url:getAPI()+'/pelindo/custom_input?titik_ukur_tipe_id=33&titik_ukur_id=11033',
+				url:getAPI()+'/pelindo/custom_input?titik_ukur_tipe_id=33&aset_id='+id_kpl,
 
 				method: 'GET',
 				// params: {titik_ukur_id:12005},
@@ -1402,7 +1406,7 @@ var store_work_order = Ext.create('Ext.data.Store', {
 				// url:'http://10.10.10.11:1336/pelindo/custom_input?titik_ukur_id=11033',
 				// url:'http://192.168.1.17:1337/pelindo/custom_input?titik_ukur_id=11033',
 				// url:getAPI()+'/pelindo/work_order?titik_ukur_id=11106',
-        url:getAPI()+'/pelindo/work_order?titik_ukur_tipe_id=106&aset_id='+id_vessel_adhoc,
+        url:getAPI()+'/pelindo/work_order',
 				method: 'GET',
 				// params: {titik_ukur_id:12005},
 				// reader: {
