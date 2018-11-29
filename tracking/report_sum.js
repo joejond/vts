@@ -271,63 +271,78 @@ var panel_r_sum = {
         dock: 'top',
 				height: 40,
         items: [{
-
-
-				padding : '0 0 0 5',
-				fieldLabel: 'Date ',
-				id: 'date_total_sum',
-				labelWidth: 40,
-				editable : false,
-				xtype: 'datefield',
-				value: new Date(),
-				maxValue: new Date(),
-				format: 'd-M-Y',
-				listeners: {
-					change: function () {
-
-						//console.log('Date selected: ', Ext.Date.format(this.getValue(),'Y-m-d'));
-						// console.log('onselected');
-						tgl_sel_sum = Ext.Date.format(this.getValue(),'Y-m-d');
-						var param = {user_id: dtt.idu,tgl:tgl_sel_sum,tz: getTimeZone(),type: 'data_sum_ship'};
-						store_detail_sum.load({params:param});
-						// // store_detail_kapal.load({params: { id: comb_kapal1, tgl: tgl_sel1}});
-						// tgl_sel2 = (tgl_sel1 != '') ? tgl_sel1 : Ext.Date.format(new Date(), 'd-M-Y' );
-						// //console.log(tgl_sel2);
-						// Ext.getCmp('table_ship').setTitle('Vessel '+comb_kapal2 +' on '+ tgl_sel2);
-						//update_text1();
-					},
-					afterrender : function(){
-						console.log('Date selected: ', this.getValue());
-
-						tgl_sel_sum = Ext.Date.format(this.getValue(),'Y-m-d');
-						// var dtt= JSON.parse(atob(Ext.util.Cookies.get("marine")));
-						var param = {user_id: dtt.idu,tgl:tgl_sel_sum,tz: getTimeZone(),type: 'data_sum_ship'};
-						store_detail_sum.load({params:param});
-						// tgl_sel2 = (tgl_sel1 != '') ? tgl_sel1 : Ext.Date.format(new Date(), 'd-M-Y' );
-						//console.log(tgl_sel1);
+					padding : '0 0 0 5',
+					fieldLabel: 'Date ',
+					id: 'date_total_sum',
+					labelWidth: 40,
+					editable : false,
+					xtype: 'datefield',
+					value: new Date(),
+					maxValue: new Date(),
+					format: 'd-M-Y',
+					listeners: {
+						change: function () {
+							//console.log('Date selected: ', Ext.Date.format(this.getValue(),'Y-m-d'));
+							// console.log('onselected');
+							// tgl_sel_sum = Ext.Date.format(this.getValue(),'Y-m-d');
+							// var param = {user_id: dtt.idu,tgl:tgl_sel_sum,tz: getTimeZone(),type: 'data_sum_ship'};
+							// store_detail_sum.load({params:param});
+							// // store_detail_kapal.load({params: { id: comb_kapal1, tgl: tgl_sel1}});
+							// tgl_sel2 = (tgl_sel1 != '') ? tgl_sel1 : Ext.Date.format(new Date(), 'd-M-Y' );
+							// //console.log(tgl_sel2);
+							// Ext.getCmp('table_ship').setTitle('Vessel '+comb_kapal2 +' on '+ tgl_sel2);
+							//update_text1();
+						},
+						afterrender : function() {
+							// console.log('Date selected: ', this.getValue());
+							tgl_sel_sum = Ext.Date.format(this.getValue(),'Y-m-d');
+							// var dtt= JSON.parse(atob(Ext.util.Cookies.get("marine")));
+							var param = {user_id: dtt.idu,tgl:tgl_sel_sum,tz: getTimeZone(),type: 'data_sum_ship'};
+							store_detail_sum.load({params:param});
+							// tgl_sel2 = (tgl_sel1 != '') ? tgl_sel1 : Ext.Date.format(new Date(), 'd-M-Y' );
+							//console.log(tgl_sel1);
 						}
+					}
+				},{
+					padding : '0 0 0 5',
+					fieldLabel: 'To ',
+					id: 'date_total_sum2',
+					labelWidth: 40,
+					editable : false,
+					xtype: 'datefield',
+					value: new Date(),
+					maxValue: new Date(),
+					format: 'd-M-Y'
+				},{
+					xtype : 'button',
+					text : 'Submit',
+					handler : function(){
+						tgl_sel_sum=Ext.Date.format(Ext.getCmp('date_total_sum').getValue(),'Y-m-d');
+						tgl_sel_sum2=Ext.Date.format(Ext.getCmp('date_total_sum2').getValue(),'Y-m-d');
+						// if (Ext.getCmp('date_total_sum').getValue() > Ext.getCmp('date_total_sum2').getValue()) {
+							var param = {user_id: dtt.idu,tgl:tgl_sel_sum,tgl2:tgl_sel_sum2,tz: getTimeZone(),type: 'data_sum_ship'};
+							store_detail_sum.load({params:param});
+						// }
+					}
+				},'->',{
+					xtype : 'button',
+					text : 'Export to Excel',
+					handler : function(){
+						// console.log('dtt.idu', dtt.idu);
+						window.open(getAPI()+'/get_data_summary_ship?&user_id='+dtt.idu+'&tgl='+tgl_sel_sum+'&tz='+getTimeZone()+'&type=data_sum_ship&export=true');
+						// var tgl = Ext.Date.format(Ext.getCmp('date_total1').getValue(),'Y-m-d');
+						// var ves = Ext.getCmp('cb_vessel').getValue();
+						// // console.log(comb_kapal1);
+						// var kpl = (comb_kapal1=== '')?'1':comb_kapal1;
+						// // console.log('export bro dari '+tgl+' ==> '+kpl);
+						// window.open('export_data_detail.php?id='+kpl+'&t='+tgl);
+						// Ext.Ajax.request({
+						// 	params : {t : tgl, id: ves },
+						// 	method : 'GET',
+						// 	url : 'export.php'
+						// })
+					}
 				}
-			},'->',
-			{
-				xtype : 'button',
-				text : 'Export to Excel',
-				handler : function(){
-					// console.log('dtt.idu', dtt.idu);
-					window.open(getAPI()+'/get_data_summary_ship?&user_id='+dtt.idu+'&tgl='+tgl_sel_sum+'&tz='+getTimeZone()+'&type=data_sum_ship&export=true');
-					// var tgl = Ext.Date.format(Ext.getCmp('date_total1').getValue(),'Y-m-d');
-					// var ves = Ext.getCmp('cb_vessel').getValue();
-					// // console.log(comb_kapal1);
-					// var kpl = (comb_kapal1=== '')?'1':comb_kapal1;
-					// // console.log('export bro dari '+tgl+' ==> '+kpl);
-					// window.open('export_data_detail.php?id='+kpl+'&t='+tgl);
-					// Ext.Ajax.request({
-					// 	params : {t : tgl, id: ves },
-					// 	method : 'GET',
-					// 	url : 'export.php'
-					// })
-
-				}
-			}
 			//'-',
 			//{
 				//id: 'toolbar_text',
@@ -335,7 +350,7 @@ var panel_r_sum = {
 				////html:'<html><body><div style="font-size: 20px; color:blue">(current view -> '+comb_kapal1+' - date: '+tgl_sel1+')</div></body></html>'
 
 			//}
-        ]
+			]
     }],
     layout: {
         type: 'hbox',

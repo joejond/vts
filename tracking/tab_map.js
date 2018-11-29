@@ -1467,7 +1467,7 @@ var tabel_daftar_kapal = Ext.create('Ext.grid.Panel', {
       afterrender: function( thisObj, eOpts ){
         var sm=thisObj.getSelectionModel();
         sm.selectAll(true);
-        console.log('test');
+        // console.log('test');
 
         var hasil = tabel_daftar_kapal.getView().getSelectionModel().getSelection();
 
@@ -1475,8 +1475,8 @@ var tabel_daftar_kapal = Ext.create('Ext.grid.Panel', {
         Ext.each(hasil, function (item) {
                    ship.push(item.data.id);
         });
-        console.log('hasil', hasil);
-        console.log('ship', ship);
+        // console.log('hasil', hasil);
+        // console.log('ship', ship);
         if (ship.length > 1 || ship.length == 0) {
           Ext.getCmp('panel_form_tracking').setDisabled(true);
           Ext.getCmp('panel_form_work_order').setDisabled(true);
