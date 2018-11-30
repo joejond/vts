@@ -1027,6 +1027,7 @@ var panel_form_bunker = Ext.create('Ext.form.Panel', {
 				items: [{
 					 	name: 'date',
 					 	xtype:'datefield',
+            id: 'date_fuel_bunker',
 					 	flex: 2,
             maxValue: new Date(),
 						value: new Date(),
@@ -1036,7 +1037,7 @@ var panel_form_bunker = Ext.create('Ext.form.Panel', {
             listeners: {
               change: function() {
                 var date_fuel_bunker = Ext.Date.format(this.getValue(),'Y-m-d');
-                store_fuel_bunker.load({params: { tanggal: date_fuel_bunker}});
+                store_fuel_bunker.load({params: {aset_id: id_kpl, titik_ukur_id: 33, tanggal: date_fuel_bunker}});
               }
             }
 				}, {
@@ -1090,8 +1091,10 @@ var panel_form_bunker = Ext.create('Ext.form.Panel', {
 											Ext.Msg.alert('Fuel-Bunkering', 'Sukses.</br>('+dt.date+' '+dt.time+':00) = '+dt.value+' Liters');
 							    }
 							});
-							form.reset();
-							store_fuel_bunker.reload();
+							// form.reset();
+              var date_fuel_bunker = Ext.Date.format(Ext.getCmp('date_fuel_bunker').getValue(),'Y-m-d');
+              store_fuel_bunker.load({params: {aset_id: id_kpl, titik_ukur_id: 33, tanggal: date_fuel_bunker}});
+							// store_fuel_bunker.reload();
 
             }
         }
@@ -1240,7 +1243,7 @@ var store_fuel_sonding = Ext.create('Ext.data.Store', {
 		proxy: {
 				type: 'ajax',
 				// url:getAPI()+'/pelindo/custom_input?titik_ukur_id=12005',
-        url:getAPI()+'/pelindo/custom_input?titik_ukur_tipe_id=41&aset_id='+id_kpl,
+        url:getAPI()+'/pelindo/custom_input',
 				method: 'GET',
 				// params: {titik_ukur_id:12005},
 				// reader: {
@@ -1292,6 +1295,7 @@ var panel_form_sonding = Ext.create('Ext.form.Panel', {
 				items: [{
 					 	name: 'date',
 					 	xtype:'datefield',
+            id: 'date_fuel_sounding',
 					 	flex: 2,
             maxValue: new Date(),
 						value: new Date(),
@@ -1301,7 +1305,7 @@ var panel_form_sonding = Ext.create('Ext.form.Panel', {
             listeners: {
               change: function() {
                 var date_fuel_sounding = Ext.Date.format(this.getValue(),'Y-m-d');
-                store_fuel_sonding.load({params: { tanggal: date_fuel_sounding}});
+                store_fuel_sonding.load({params: {aset_id: id_kpl, titik_ukur_id: 41, tanggal: date_fuel_bunker}});
               }
             }
 				}, {
@@ -1365,10 +1369,12 @@ var panel_form_sonding = Ext.create('Ext.form.Panel', {
 							        var text = response.responseText;
 							        // console.log(text);
               				Ext.Msg.alert('Fuel-Sounding', 'Sukses.</br>('+dt.date+' '+dt.time+':00) = '+dt.value+' Liters');
-                      store_fuel_sonding.reload();
+                      // store_fuel_sonding.reload();
+                      var date_fuel_sounding = Ext.Date.format(Ext.getCmp('date_fuel_sounding').getValue(),'Y-m-d');
+                      store_fuel_sonding.load({params: {aset_id: id_kpl, titik_ukur_id: 41, tanggal: date_fuel_bunker}});
                   }
 							});
-							form.reset();
+							// form.reset();
 
 							// store_fuel_sonding.load({params:{titik_ukur_id: dt.titik_ukur_id}});
 							// tabel_fuel_sonding.reload();
@@ -1403,7 +1409,7 @@ var store_fuel_bunker = Ext.create('Ext.data.Store', {
 
 				// url:'http://10.10.10.11:1336/pelindo/custom_input?titik_ukur_id=11033',
 				// url:'http://192.168.1.17:1337/pelindo/custom_input?titik_ukur_id=11033',
-				url:getAPI()+'/pelindo/custom_input?titik_ukur_tipe_id=33&aset_id='+id_kpl,
+				url:getAPI()+'/pelindo/custom_input',
 
 				method: 'GET',
 				// params: {titik_ukur_id:12005},
