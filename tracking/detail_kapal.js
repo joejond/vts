@@ -71,6 +71,7 @@ var model_detail_kapal = Ext.define('detail_kapal', {
 var comb_kapal1 = '';
 var tgl_sel1 = '';
 var id_kpl = '';
+var nama_kpl = '';
 
 var store_detail_kapal = Ext.create('Ext.data.Store', {
     model: model_detail_kapal,
@@ -1112,7 +1113,7 @@ var panel_detail = {
 					// // 	method : 'GET',
 					// // 	url : 'export.php'
 					// // })
-					window.open(getAPI()+'/get_data_bima?user_id=' + dt.idu + '&id=' + id_kpl + '&tgl=' + tgl_sel1 + '&tz=' + getTimeZone() + '&type=vts&export=true');
+					window.open(getAPI()+'/get_data_bima?user_id=' + dt.idu + '&id=' + id_kpl + '&tgl=' + tgl_sel1 + '&tz=' + getTimeZone() + '&type=vts&export=true&filename=' + comb_kapal2 + '_' + tgl_sel2 + ".xlsx");
 
 				}
 			}

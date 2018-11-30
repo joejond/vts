@@ -341,6 +341,7 @@ var panel_r_sum = {
 							// //console.log(tgl_sel2);
 							// Ext.getCmp('table_ship').setTitle('Vessel '+comb_kapal2 +' on '+ tgl_sel2);
 							//update_text1();
+							tgl_sel_sum = Ext.Date.format(this.getValue(),'Y-m-d');
 						},
 						afterrender : function() {
 							// console.log('Date selected: ', this.getValue());
@@ -361,7 +362,15 @@ var panel_r_sum = {
 					xtype: 'datefield',
 					value: new Date(),
 					maxValue: new Date(),
-					format: 'd-M-Y'
+					format: 'd-M-Y',
+					listeners: {
+						change: function() {
+							tgl_sel_sum2 = Ext.Date.format(this.getValue(),'Y-m-d');
+						},
+						afterrender: function() {
+							tgl_sel_sum2 = Ext.Date.format(this.getValue(),'Y-m-d');
+						}
+					}
 				},{
 					xtype : 'button',
 					text : 'Submit',
@@ -378,7 +387,7 @@ var panel_r_sum = {
 					text : 'Export to Excel',
 					handler : function(){
 						// console.log('dtt.idu', dtt.idu);
-						window.open(getAPI()+'/get_data_summary_ship?&user_id='+dtt.idu+'&tgl='+tgl_sel_sum+'&tz='+getTimeZone()+'&type=data_sum_ship&export=true');
+						window.open(getAPI()+'/get_data_summary_ship?&user_id='+dtt.idu+'&tgl='+tgl_sel_sum+'&tgl2='+tgl_sel_sum2+'&tz='+getTimeZone()+'&type=data_sum_ship&export=true&filename=Pelindo3_Summary_'+tgl_sel_sum+"_until_"+tgl_sel_sum2+".xlsx");
 						// var tgl = Ext.Date.format(Ext.getCmp('date_total1').getValue(),'Y-m-d');
 						// var ves = Ext.getCmp('cb_vessel').getValue();
 						// // console.log(comb_kapal1);

@@ -653,9 +653,10 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
                         //   export: true
                         // };
                         // console.log(dt);
+                        console.log('nama_kpl', nama_kpl);
                         console.log('month_adhoc', month_adhoc);
                         // window.open(getAPI()+'/get_data_adhoc?id=' + id_vessel_adhoc + '&m=' + Ext.Date.format(month_adhoc,'Y-m-d') + '&export=true');
-                        window.open(getAPI()+'/get_data_adhoc?id=' + id_kpl + '&m=' + month_adhoc + '-01&type=data_adhoc&export=true');
+                        window.open(getAPI()+'/get_data_adhoc?id=' + id_kpl + '&m=' + month_adhoc + '-01&type=data_adhoc&export=true&filename=' + nama_kpl + '_' + month_adhoc + ".xlsx");
                         // http://project.daunbiru.com:1336/get_data_adhoc?_dc=1522145700890&id=Bima%20333-t&m=2018-03-27T00%3A00%3A00&export=true
                         // Ext.Ajax.request({
                         //     url: getAPI()+'/get_data_adhoc',
@@ -839,6 +840,7 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
 var id_vessel_adhoc;
 var month_adhoc;
 var id_kpl;
+var nama_kpl
 
 var panel_r_adhoc = {
 	dockedItems: [{
@@ -865,7 +867,10 @@ var panel_r_adhoc = {
 					// 	// console.log("Combo box adhoc selected [" + id_vessel_adhoc +"],[" + month +"]");
 					// },
           change: function () {
+            nama_kpl = this.getRawValue();
+            // console.log('nama_kpl', nama_kpl);
 						id_vessel_adhoc=this.getValue();
+            id_kpl = id_vessel_adhoc
 						month_adhoc=Ext.Date.format(Ext.getCmp('combo_month_adhoc').getValue(),'Y-m');
 						// console.log("Combo box adhoc afterrender : [" + cb_vessel_adhoc +"],[" + month_adhoc +"]");
             // console.log('id_kpl', id_kpl);
@@ -877,6 +882,7 @@ var panel_r_adhoc = {
 						var isi = this.getStore().data.items[0].data['name'];
             var isiid = this.getStore().data.items[0].data['id'];
 						this.setValue(isi);
+            nama_kpl = isi;
             id_kpl = isiid;
 						id_vessel_adhoc = this.getValue();
 						comb_kapal2 = (comb_kapal1 != '') ? comb_kapal2 : isi;
@@ -917,19 +923,19 @@ var panel_r_adhoc = {
 						id_vessel_adhoc=Ext.getCmp('cb_vessel_adhoc').getValue();
 						month_adhoc=Ext.Date.format(this.getValue(),'Y-m');
 						// console.log("Combo box adhoc afterrender : [" + cb_vessel_adhoc +"],[" + month_adhoc +"]");
-            console.log('id_kpl', id_kpl);
+            // console.log('id_kpl', id_kpl);
 						store_adhoc_kapal.load({params: { id: id_kpl, m: month_adhoc, type: 'data_adhoc'}});
             // console.log('month_adhoc', month_adhoc);
 
 					},
 					afterrender : function(){
-						console.log('Date selected: ', this.getValue());
+						// console.log('Date selected: ', this.getValue());
 						// tgl_sel1 = Ext.Date.format(this.getValue(),'Y-m-d');
 						// tgl_sel2 = (tgl_sel1 != '') ? tgl_sel1 : Ext.Date.format(new Date(), 'd-M-Y' );
 						//console.log(tgl_sel1);
-						month_adhoc= this.getValue();
+						month_adhoc=Ext.Date.format(this.getValue(),'Y-m');
 						//var id_vessel_adhoc=cb_vessel_adhoc.getValue();
-						console.log("Bulan dipilih: " + month_adhoc);
+						// console.log("Bulan dipilih: " + month_adhoc);
 						//store_adhoc_kapal.load({params: { id: id_vessel_adhoc, m: month}});
 						}
 				}

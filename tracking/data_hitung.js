@@ -305,7 +305,7 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
             // var id_kpl = (comb_kapal21 === '')? '1' : comb_kapal21;
             // console.log(id_kpl,tgl_sel21);
             // window.open('export_data_perjam.php?id='+id_kpl+'&t='+tgl_sel21);
-            window.open(getAPI()+'/get_data_summary_ship_hourly?tz='+getTimeZone()+'&tgl='+tgl_sel21+'&id='+comb_kapal21+'&type=data_sum_ship&export=true');
+            window.open(getAPI()+'/get_data_summary_ship_hourly?tz='+getTimeZone()+'&tgl='+tgl_sel21+'&id='+comb_kapal21+'&type=data_sum_ship&export=true&filename=' + comb_kapal22 + '_' + tgl_sel22 + ".xlsx");
             // store_akumulasi_perjam.load({params : { /*id: comb_kapal21,*/ tz: getTimeZone(),tgl: tg }});
 
         }
