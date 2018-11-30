@@ -1032,7 +1032,13 @@ var panel_form_bunker = Ext.create('Ext.form.Panel', {
 						value: new Date(),
 						submitFormat: 'Y-m-d',
 						format: 'd-M-Y',
-					 	allowBlank: false
+					 	allowBlank: false,
+            listeners: {
+              change: function() {
+                var date_fuel_bunker = Ext.Date.format(this.getValue(),'Y-m-d');
+                store_fuel_bunker.load({params: { tanggal: date_fuel_bunker}});
+              }
+            }
 				}, {
 					 	name: 'time',
 					 	flex: 2,
@@ -1291,7 +1297,13 @@ var panel_form_sonding = Ext.create('Ext.form.Panel', {
 						value: new Date(),
 						format: 'd-M-Y',
 						submitFormat: 'Y-m-d',
-					 	allowBlank: false
+					 	allowBlank: false,
+            listeners: {
+              change: function() {
+                var date_fuel_sounding = Ext.Date.format(this.getValue(),'Y-m-d');
+                store_fuel_sonding.load({params: { tanggal: date_fuel_sounding}});
+              }
+            }
 				}, {
 					 	name: 'time',
 					 	flex: 2,
