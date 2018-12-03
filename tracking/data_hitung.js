@@ -761,7 +761,7 @@ var panel_hitung = {
     }, {
         xtype: 'splitter'
     }, {
-        flex: 3,
+        flex: 7,
         border: false,
         height: 100,
         layout: {

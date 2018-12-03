@@ -947,7 +947,7 @@ var panel_r_adhoc = {
 					click: function() {
 	            // this == the button, as we are in the local scope
 	            // this.setText('I was clicked!');
-							console.log('diklik');
+							// console.log('diklik');
 							window_fuel.show();
 							window_fuel.setTitle ('Daily Fuel ');//+data.name);
 							// window_fuel.vessel = data.id;
@@ -1037,7 +1037,11 @@ var panel_form_bunker = Ext.create('Ext.form.Panel', {
             listeners: {
               change: function() {
                 var date_fuel_bunker = Ext.Date.format(this.getValue(),'Y-m-d');
-                store_fuel_bunker.load({params: {aset_id: id_kpl, titik_ukur_id: 33, tanggal: date_fuel_bunker}});
+                store_fuel_bunker.load({params: {aset_id: id_kpl, titik_ukur_tipe_id: 33, tanggal: date_fuel_bunker}});
+              },
+              afterrender: function() {
+                var date_fuel_bunker = Ext.Date.format(this.getValue(),'Y-m-d');
+                store_fuel_bunker.load({params: {aset_id: id_kpl, titik_ukur_tipe_id: 33, tanggal: date_fuel_bunker}});
               }
             }
 				}, {
@@ -1234,7 +1238,7 @@ var panel_form_work_order = Ext.create('Ext.form.Panel', {
 
 var model_fuel_sonding = Ext.define('Fuel_Sonding', {
     extend: 'Ext.data.Model',
-    fields: ['date','volume']
+    fields: ['date','value']
 });
 //
 var store_fuel_sonding = Ext.create('Ext.data.Store', {
@@ -1259,10 +1263,43 @@ var tabel_fuel_sonding = Ext.create('Ext.grid.Panel', {
     title: 'History - Sounding',
     store: store_fuel_sonding,
     columns: [
-        { text: 'DateTime', dataIndex: 'date' },
+        { text: 'DateTime', dataIndex: 'date', flex: 1 },
         // { text: 'Level', dataIndex: 'email', flex: 1 },
-        { text: 'Volume', dataIndex: 'volume', flex: 1 },
-        { text: 'action', dataIndex: 'phone' }
+        { text: 'Volume', dataIndex: 'value', flex: 1 },
+        // { text: 'action', dataIndex: 'phone' }
+        {
+          renderer: function(val,meta,rec) {
+             // generate unique id for an element
+             var id = Ext.id();
+             Ext.defer(function() {
+                Ext.widget('button', {
+                   renderTo: id,
+                   text: 'DELETE',
+                   scale: 'small',
+                   handler: function() {
+                     dt.titik_ukur_tipe_id = 41;
+                     dt.aset_id = id_kpl;
+                     // console.log('rec', rec);
+                     // console.log('aset_id', dt.aset_id);
+                     dt.date = rec.data.date;
+                     // console.log('date', dt.date);
+                     dt.value = rec.data.value;
+                     Ext.Ajax.request({
+                         url: getAPI()+'/pelindo/custom_input',
+                         method:'DELETE',
+                         params: dt,
+                         success: function(response){
+                             var text = response.responseText;
+                             // console.log(text);
+                             Ext.Msg.alert('Fuel Sounding', 'Deleted.</br>('+dt.date+') = '+dt.value);
+                         }
+                     });
+                   }
+                });
+             }, 50);
+             return Ext.String.format('<div id="{0}"></div>', id);
+          }
+       }
     ],
 		// layout :'fit',
     flex:1
@@ -1305,7 +1342,11 @@ var panel_form_sonding = Ext.create('Ext.form.Panel', {
             listeners: {
               change: function() {
                 var date_fuel_sounding = Ext.Date.format(this.getValue(),'Y-m-d');
-                store_fuel_sonding.load({params: {aset_id: id_kpl, titik_ukur_id: 41, tanggal: date_fuel_bunker}});
+                store_fuel_sonding.load({params: {aset_id: id_kpl, titik_ukur_tipe_id: 41, tanggal: date_fuel_sounding}});
+              },
+              afterrender: function() {
+                var date_fuel_sounding = Ext.Date.format(this.getValue(),'Y-m-d');
+                store_fuel_sonding.load({params: {aset_id: id_kpl, titik_ukur_tipe_id: 41, tanggal: date_fuel_sounding}});
               }
             }
 				}, {
@@ -1371,7 +1412,7 @@ var panel_form_sonding = Ext.create('Ext.form.Panel', {
               				Ext.Msg.alert('Fuel-Sounding', 'Sukses.</br>('+dt.date+' '+dt.time+':00) = '+dt.value+' Liters');
                       // store_fuel_sonding.reload();
                       var date_fuel_sounding = Ext.Date.format(Ext.getCmp('date_fuel_sounding').getValue(),'Y-m-d');
-                      store_fuel_sonding.load({params: {aset_id: id_kpl, titik_ukur_id: 41, tanggal: date_fuel_bunker}});
+                      store_fuel_sonding.load({params: {aset_id: id_kpl, titik_ukur_id: 41, tanggal: date_fuel_sounding}});
                   }
 							});
 							// form.reset();
@@ -1394,7 +1435,7 @@ var panel_form_sonding = Ext.create('Ext.form.Panel', {
 });
 var model_fuel_bunker = Ext.define('Fuel_Sonding', {
     extend: 'Ext.data.Model',
-    fields: ['date','total']
+    fields: ['date','value']
 });
 var model_work_order = Ext.define('Work_Order', {
     extend: 'Ext.data.Model',
@@ -1448,9 +1489,42 @@ var tabel_fuel_bunker = Ext.create('Ext.grid.Panel', {
     store: store_fuel_bunker,
 
     columns: [
-        { text: 'DateTime', dataIndex: 'date' },
-        { text: 'Total', dataIndex: 'total', flex: 1 },
-        { text: 'action', dataIndex: 'phone' }
+        { text: 'DateTime', dataIndex: 'date', flex: 1 },
+        { text: 'Total', dataIndex: 'value', flex: 1 },
+        // { text: 'action', dataIndex: 'phone' }
+        {
+          renderer: function(val,meta,rec) {
+             // generate unique id for an element
+             var id = Ext.id();
+             Ext.defer(function() {
+                Ext.widget('button', {
+                   renderTo: id,
+                   text: 'DELETE',
+                   scale: 'small',
+                   handler: function() {
+                     dt.titik_ukur_tipe_id = 33;
+                     dt.aset_id = id_kpl;
+                     // console.log('rec', rec);
+                     // console.log('aset_id', dt.aset_id);
+                     dt.date = rec.data.date;
+                     // console.log('date', dt.date);
+                     dt.value = rec.data.value;
+                     Ext.Ajax.request({
+                         url: getAPI()+'/pelindo/custom_input',
+                         method:'DELETE',
+                         params: dt,
+                         success: function(response){
+                             var text = response.responseText;
+                             // console.log(text);
+                             Ext.Msg.alert('Fuel Bunkering', 'Deleted.</br>('+dt.date+') = '+dt.value);
+                         }
+                     });
+                   }
+                });
+             }, 50);
+             return Ext.String.format('<div id="{0}"></div>', id);
+          }
+       }
     ],
     // height: 200,
     flex:1
@@ -1464,6 +1538,37 @@ var tabel_work_order = Ext.create('Ext.grid.Panel', {
     store: store_work_order,
 
     columns: [
+      {
+        renderer: function(val,meta,rec) {
+           // generate unique id for an element
+           var id = Ext.id();
+           Ext.defer(function() {
+              Ext.widget('button', {
+                 renderTo: id,
+                 text: 'DELETE',
+                 scale: 'small',
+                 handler: function() {
+                   dt.titik_ukur_tipe_id = 106;
+                   dt.aset_id = id_kpl;
+                   dt.start_date = rec.data.start_date;
+                   dt.end_date = rec.data.end_date;
+                   dt.order_number = rec.data.order_number;
+                   Ext.Ajax.request({
+                       url: getAPI()+'/pelindo/work_order',
+                       method:'DELETE',
+                       params: dt,
+                       success: function(response){
+                           var text = response.responseText;
+                           // console.log(text);
+                           Ext.Msg.alert('Work Order', 'Deleted.</br>('+dt.start_date+' - '+dt.end_date+') = '+dt.value);
+                       }
+                   });
+                 }
+              });
+           }, 50);
+           return Ext.String.format('<div id="{0}"></div>', id);
+        }
+     },
         { text: 'Order Number', dataIndex: 'order_number', width: 150 },
         { text: 'Start Date', dataIndex: 'start_date', width: 125 },
         { text: 'End Date', dataIndex: 'end_date', width: 125 },
@@ -1529,6 +1634,7 @@ var window_fuel = Ext.create('Ext.window.Window',{
         text : 'Close',
         handler : function(){
             this.up('.window').hide();
+            store_adhoc_kapal.load({params: { id: id_kpl, m: month_adhoc, type: 'data_adhoc'}});
         }
     }]
 
