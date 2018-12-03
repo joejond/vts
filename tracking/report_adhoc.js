@@ -959,7 +959,7 @@ var panel_r_adhoc = {
 				text:'Add Work Order',
 				listeners:{
 					click: function() {
-              console.log("aset_id", id_kpl);
+              // console.log("aset_id", id_kpl);
               store_work_order.load({params: { titik_ukur_tipe_id: 106, aset_id: id_kpl}});
               // store_work_order.load();
 							window_work_order.show();
@@ -1128,6 +1128,7 @@ var panel_form_work_order = Ext.create('Ext.form.Panel', {
 			items: [{
         name: 'startDate',
 				xtype:'datefield',
+        id: 'wo_start_date',
 				flex: 2,
         maxValue: new Date(),
 				value: new Date(),
@@ -1137,8 +1138,8 @@ var panel_form_work_order = Ext.create('Ext.form.Panel', {
         listeners: {
           change: function () {
             str_tanggal=Ext.Date.format(this.getValue(),'Y-m-d');
-            console.log("str_tanggal", str_tanggal);
-            console.log("aset_id", id_kpl);
+            // console.log("str_tanggal", str_tanggal);
+            // console.log("aset_id", id_kpl);
             param = {tanggal:str_tanggal,titik_ukur_tipe_id:106,aset_id:id_kpl};
             store_work_order.load({params:{tanggal:str_tanggal,titik_ukur_tipe_id:106,aset_id:id_kpl}});
           }
@@ -1645,6 +1646,13 @@ var window_work_order = Ext.create('Ext.window.Window',{
     width : 800,
     modal : true,
     closable: false,
+    listeners: {
+      show: function() {
+        var wo_start_date = Ext.Date.format(Ext.getCmp('wo_start_date').getValue(),'Y-m-d');
+        param = {tanggal:wo_start_date,titik_ukur_tipe_id:106,aset_id:id_kpl};
+        store_work_order.load({params:{tanggal:str_tanggal,titik_ukur_tipe_id:106,aset_id:id_kpl}});
+      }
+    },
     layout : {
         type : 'fit',
         align : 'stretch'
@@ -1674,10 +1682,10 @@ var window_detail_work_order = Ext.create('Ext.window.Window',{
     closable: false,
     listeners: {
     	boxready: function(){
-    		console.log("Window detail tanggal: " + detail_tanggal_index);
+    		// console.log("Window detail tanggal: " + detail_tanggal_index);
     	},
 			show: function(panel){
-				console.log("Window onShow : "+detail_tanggal_index);
+				// console.log("Window onShow : "+detail_tanggal_index);
 				param = {tanggal:detail_tanggal_index};
 				store_work_order.load({params:param});
 			}
