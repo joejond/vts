@@ -423,13 +423,13 @@ var panel_r_sum = {
 };
 
 function getHour(value) {
-	  // console.log("value", value);
+	// console.log("value", value);
     if (value == null) { return "0 hr"; }
     if (value <= 0) { return "0 hr"; }
     var hours = Math.floor(value / 60);
     var minutes = value % 60;
     var hour = (hours > 1) ? hours + " hrs " : hours + " hr ";
     var min = (minutes > 0) ? parseFloat(minutes).toFixed(0) + " mins" : "";
-		// console.log("result", hour + min);
+	// console.log("result", hour + min);
     return hour + min;
 }

@@ -246,7 +246,7 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
           renderer: function(v){return parseFloat(v).toFixed(2);}
         }]
     },{
-        header: "GenSet#2 (AE2)",
+        header: "GenSet#1 (AE1)",
         columns: [{
           header: "RunHours",
           width: 100,
@@ -651,8 +651,8 @@ var panel_hitung = {
               		comb_kapal22 = this.getRawValue();
               		// console.log(comb_kapal21+' --> '+ comb_kapal22);
               		//console.log(tgl_sel1);
-                  console.log('comb_kapal21', comb_kapal21);
-                  console.log('comb_kapal22', comb_kapal22);
+                //   console.log('comb_kapal21', comb_kapal21);
+                //   console.log('comb_kapal22', comb_kapal22);
               		store_grafik.load({params: { /*id: comb_kapal21, */tz: getTimeZone(), tgl: tgl_sel21, id: comb_kapal21, type: 'data_sum_graphic'}});
               		// store_akumulasi_perjam.load({params : { /*id: comb_kapal21,*/ tz: getTimeZone(),tgl: tgl_sel21, id:comb_kapal21, type: 'data_sum_hourly' }});
                   store_akumulasi_perjam.load({params : { /*id: comb_kapal21,*/ tz: getTimeZone(),tgl: tgl_sel21, id:comb_kapal21, type: 'data_sum_ship' }});
