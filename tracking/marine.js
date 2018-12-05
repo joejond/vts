@@ -59,7 +59,7 @@ Ext.onReady(function() {
 										// console.log(uu);
 										Ext.fly('user').update('Welcome '+uu.u);
 										// console.log('tab muali muncul');
-										update_status(0);
+										// update_status(0);
                 }
             }
         },{
