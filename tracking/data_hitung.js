@@ -218,16 +218,16 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
     }, {
         header: "StarBoard (ME1)",
         columns: [{
-            header: "RunHours",
+            header: "Fuel",
             width: 100,
-            dataIndex: 'working hours ME1',
+            dataIndex: 'ME1 consumtion',
             renderer: function (v) {
                 return parseFloat(v).toFixed(2);
             }
         }, {
-            header: "Fuel",
+            header: "RunHours",
             width: 100,
-            dataIndex: 'ME1 consumtion',
+            dataIndex: 'working hours ME1',
             renderer: function (v) {
                 return parseFloat(v).toFixed(2);
             }
@@ -249,16 +249,16 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
     }, {
         header: "PortSide (ME2)",
         columns: [{
-            header: "RunHours",
+            header: "Fuel",
             width: 100,
-            dataIndex: 'working hours ME2',
+            dataIndex: 'ME2 consumtion',
             renderer: function (v) {
                 return parseFloat(v).toFixed(2);
             }
         }, {
-            header: "Fuel",
+            header: "RunHours",
             width: 100,
-            dataIndex: 'ME2 consumtion',
+            dataIndex: 'working hours ME2',
             renderer: function (v) {
                 return parseFloat(v).toFixed(2);
             }
@@ -280,16 +280,16 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
     }, {
         header: "GenSet#1 (AE1)",
         columns: [{
-            header: "RunHours",
+            header: "Fuel",
             width: 100,
-            dataIndex: 'working hours AE1',
+            dataIndex: 'AE1 consumtion',
             renderer: function (v) {
                 return parseFloat(v).toFixed(2);
             }
         }, {
-            header: "Fuel",
+            header: "RunHours",
             width: 100,
-            dataIndex: 'AE1 consumtion',
+            dataIndex: 'working hours AE1',
             renderer: function (v) {
                 return parseFloat(v).toFixed(2);
             }
@@ -311,13 +311,6 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
     }, {
         header: "GenSet#2 (AE2)",
         columns: [{
-            header: "RunHours",
-            width: 100,
-            dataIndex: 'working hours AE2',
-            renderer: function (v) {
-                return parseFloat(v).toFixed(2);
-            }
-        }, {
             header: "Fuel",
             width: 100,
             dataIndex: 'AE2 consumtion',
@@ -325,6 +318,13 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
                 return parseFloat(v).toFixed(2);
             }
             // renderer: function(v){return (v==null)? null :  parseFloat(v).toFixed(2);}
+        }, {
+            header: "RunHours",
+            width: 100,
+            dataIndex: 'working hours AE2',
+            renderer: function (v) {
+                return parseFloat(v).toFixed(2);
+            }
         }, {
             header: "Rate",
             width: 100,
@@ -977,16 +977,20 @@ function daily_akum() {
                 eng2_daily = parseFloat(x['ME2 Daily Consumtion']).toFixed(2);
                 rh_engine1 = getHour(x['ME1 Working Hours'] * 60);
                 rh_engine2 = getHour(x['ME2 Working Hours'] * 60);
-                fr_engine1 = parseFloat(parseFloat(x['ME1 Daily Consumtion']) / parseFloat(x['ME1 Working Hours'])).toFixed(2);
-                fr_engine1 = parseFloat(parseFloat(x['ME2 Daily Consumtion']) / parseFloat(x['ME2 Working Hours'])).toFixed(2);
+                // fr_engine1 = parseFloat(parseFloat(x['ME1 Daily Consumtion']) / parseFloat(x['ME1 Working Hours'])).toFixed(2);
+                // fr_engine1 = parseFloat(parseFloat(x['ME2 Daily Consumtion']) / parseFloat(x['ME2 Working Hours'])).toFixed(2);
+                fr_engine1 = parseFloat(x['ME1 fuel rate']).toFixed(2);
+                fr_engine2 = parseFloat(x['ME2 fuel rate']).toFixed(2);
                 // rh_engine1 = parseFloat(x['ME2 Working Hours']).toFixed(2) ;
                 // rh_engine2 = parseFloat(x['ME1 Working Hours']).toFixed(2) ;
                 ae1_daily = parseFloat(x['AE1 Daily Consumtion']).toFixed(2);
                 ae2_daily = parseFloat(x['AE2 Daily Consumtion']).toFixed(2);
                 rh_ae1 = getHour(x['AE1 Working Hours'] * 60);
                 rh_ae2 = getHour(x['AE2 Working Hours'] * 60);
-                fr_ae1 = parseFloat(parseFloat(x['AE1 Daily Consumtion']) / parseFloat(x['AE1 Working Hours'])).toFixed(2);
-                fr_ae2 = parseFloat(parseFloat(x['AE2 Daily Consumtion']) / parseFloat(x['AE2 Working Hours'])).toFixed(2);
+                // fr_ae1 = parseFloat(parseFloat(x['AE1 Daily Consumtion']) / parseFloat(x['AE1 Working Hours'])).toFixed(2);
+                // fr_ae2 = parseFloat(parseFloat(x['AE2 Daily Consumtion']) / parseFloat(x['AE2 Working Hours'])).toFixed(2);
+                fr_ae1 = parseFloat(x['AE1 fuel rate']).toFixed(2);
+                fr_ae2 = parseFloat(x['AE2 fuel rate']).toFixed(2);
                 // rh_ae1 = parseFloat(x['AE2 Working Hours']).toFixed(2) ;
                 // rh_ae2 = parseFloat(x['AE1 Working Hours']).toFixed(2) ;
                 total_daily = parseFloat(x['Total Daily']).toFixed(2);

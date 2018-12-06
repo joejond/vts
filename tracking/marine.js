@@ -107,8 +107,8 @@ Ext.onReady(function() {
 							tabchange: function(tabPanel, newCard, oldCard, eOpts){
 								// console.log(tabPanel, newCard, oldCard, eOpts);
 								// console.log(newCard.id);
-								var tab = newCard.id;
-								(tab == 'analisis_tab')?update_status(1):update_status(0);
+								// var tab = newCard.id;
+								// (tab == 'analisis_tab')?update_status(1):update_status(0);
 								// console.log(ws);
 								// ws.close;
 
