@@ -636,19 +636,19 @@ var grafik = new Ext.create('Chart.ux.Highcharts', {
                     color: '#AA4643'
                 }
             },
-            plotLines: [{
-                value: 1000,
-                color: 'red',
-                width: 1,
-                dashStyle: 'longdashdot',
-                label: {
-                    text: 'Daily Limit',
-                    align: 'left',
-                    style: {
-                        color: 'blue'
-                    }
-                }
-            }],
+            // plotLines: [{
+            //     value: 1000,
+            //     color: 'red',
+            //     width: 1,
+            //     dashStyle: 'longdashdot',
+            //     label: {
+            //         text: 'Daily Limit',
+            //         align: 'left',
+            //         style: {
+            //             color: 'blue'
+            //         }
+            //     }
+            // }],
             min: 0,
             opposite: true
         }, {
