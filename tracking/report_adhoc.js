@@ -1211,7 +1211,7 @@ var panel_form_bunker = Ext.create('Ext.form.Panel', {
                 store_fuel_bunker.load({
                     params: {
                         aset_id: id_kpl,
-                        titik_ukur_id: 33,
+                        titik_ukur_tipe_id: 33,
                         tanggal: date_fuel_bunker
                     }
                 });
@@ -1562,7 +1562,7 @@ var panel_form_sonding = Ext.create('Ext.form.Panel', {
                         store_fuel_sonding.load({
                             params: {
                                 aset_id: id_kpl,
-                                titik_ukur_id: 41,
+                                titik_ukur_tipe_id: 41,
                                 tanggal: date_fuel_sounding
                             }
                         });
