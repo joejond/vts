@@ -951,9 +951,9 @@ var panel_r_adhoc = {
 
                         month_adhoc = Ext.Date.format(Ext.getCmp('combo_month_adhoc').getValue(), 'Y-m');
                         // console.log("Combo box adhoc afterrender : [" + cb_vessel_adhoc +"],[" + month_adhoc +"]");
-                        console.log('nama_kpl', nama_kpl);
-                        console.log('id_kpl', id_kpl);
-                        console.log('id_vessel_adhoc', id_vessel_adhoc);
+                        // console.log('nama_kpl', nama_kpl);
+                        // console.log('id_kpl', id_kpl);
+                        // console.log('id_vessel_adhoc', id_vessel_adhoc);
                         store_adhoc_kapal.load({
                             params: {
                                 id: id_kpl,
