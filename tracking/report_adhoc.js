@@ -1193,7 +1193,7 @@ var panel_form_bunker = Ext.create('Ext.form.Panel', {
                 // dt.titik_ukur_id = 11033;
                 dt.aset_id = id_kpl;
                 dt.titik_ukur_tipe_id = 33;
-                console.log(dt);
+                // console.log(dt);
                 Ext.Ajax.request({
 
                     url: getAPI() + '/pelindo/custom_input',
