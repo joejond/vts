@@ -650,7 +650,7 @@ var store_adhoc_kapal = Ext.create('Ext.data.Store', {
         type: 'ajax',
         // url:'http://project.daunbiru.com:1336/get_data_adhoc',
         url: getAPI() + '/get_data_adhoc',
-        timeout: 40000,
+        // timeout: 40000,
         //url: 'http://project.daunbiru.com:1337/get_data_bima?id=8&user_id=4&tz=%2B07&tgl=2018-02-01',
         method: 'GET',
 
@@ -941,13 +941,22 @@ var panel_r_adhoc = {
                         nama_kpl = this.getRawValue();
                         // console.log('nama_kpl', nama_kpl);
                         id_vessel_adhoc = this.getValue();
-                        id_kpl = id_vessel_adhoc
+                        id_kpl = id_vessel_adhoc;
+
+                        // var isi = this.getStore().data.items[0].data['name'];
+                        // var isiid = this.getStore().data.items[0].data['id'];
+                        // this.setValue(isi);
+                        // nama_kpl = isi;
+                        // id_kpl = isiid;
+
                         month_adhoc = Ext.Date.format(Ext.getCmp('combo_month_adhoc').getValue(), 'Y-m');
                         // console.log("Combo box adhoc afterrender : [" + cb_vessel_adhoc +"],[" + month_adhoc +"]");
-                        // console.log('id_kpl', id_kpl);
+                        console.log('nama_kpl', nama_kpl);
+                        console.log('id_kpl', id_kpl);
+                        console.log('id_vessel_adhoc', id_vessel_adhoc);
                         store_adhoc_kapal.load({
                             params: {
-                                id: id_vessel_adhoc,
+                                id: id_kpl,
                                 m: month_adhoc,
                                 type: 'data_adhoc'
                             }
@@ -958,7 +967,7 @@ var panel_r_adhoc = {
                     afterrender: function () {
                         var isi = this.getStore().data.items[0].data['name'];
                         var isiid = this.getStore().data.items[0].data['id'];
-                        this.setValue(isi);
+                        this.setValue(isiid);
                         nama_kpl = isi;
                         id_kpl = isiid;
                         id_vessel_adhoc = this.getValue();
@@ -978,13 +987,13 @@ var panel_r_adhoc = {
                         // console.log('month_adhoc', month_adhoc);
                         // console.log('id_kpl', id_kpl);
                         // store_adhoc_kapal.load({params: { id: id_vessel_adhoc, m: month_adhoc}});
-                        store_adhoc_kapal.load({
-                            params: {
-                                id: id_kpl,
-                                m: month_adhoc,
-                                type: 'data_adhoc'
-                            }
-                        });
+                        // store_adhoc_kapal.load({
+                        //     params: {
+                        //         id: id_kpl,
+                        //         m: month_adhoc,
+                        //         type: 'data_adhoc'
+                        //     }
+                        // });
                         // console.log(this.getStore());
                     }
                 }
@@ -1427,6 +1436,15 @@ var tabel_fuel_sonding = Ext.create('Ext.grid.Panel', {
                                     var text = response.responseText;
                                     // console.log(text);
                                     Ext.Msg.alert('Fuel Sounding', 'Deleted.</br>(' + dt.date + ') = ' + dt.value);
+
+                                    var date_fuel_sounding = Ext.Date.format(Ext.getCmp('date_fuel_sounding').getValue(), 'Y-m-d');
+                                    store_fuel_sonding.load({
+                                        params: {
+                                            aset_id: id_kpl,
+                                            titik_ukur_tipe_id: 41,
+                                            tanggal: date_fuel_sounding
+                                        }
+                                    });
                                 }
                             });
                         }
@@ -1677,6 +1695,15 @@ var tabel_fuel_bunker = Ext.create('Ext.grid.Panel', {
                                     var text = response.responseText;
                                     // console.log(text);
                                     Ext.Msg.alert('Fuel Bunkering', 'Deleted.</br>(' + dt.date + ') = ' + dt.value);
+                                }
+                            });
+
+                            var date_fuel_bunker = Ext.Date.format(Ext.getCmp('date_fuel_bunker').getValue(), 'Y-m-d');
+                            store_fuel_bunker.load({
+                                params: {
+                                    aset_id: id_kpl,
+                                    titik_ukur_tipe_id: 33,
+                                    tanggal: date_fuel_bunker
                                 }
                             });
                         }
