@@ -1060,7 +1060,7 @@ var panel_detail = {
 							console.log('param afterrender', param);
 							// console.log(param);
 							// store_detail_kapal.load({params: { id: comb_kapal1, tgl: tgl_sel1}});
-							store_detail_kapal.load({params: param});
+							// store_detail_kapal.load({params: param});
 							// console.log('====>>>> ',this.getStore().data.items[0].data['id']+' === >> ',tgl_ini);
 							Ext.getCmp('table_ship').setTitle('Vessel '+isi+' on '+ tgl_sesuai);
 						}
