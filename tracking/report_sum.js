@@ -143,7 +143,7 @@ var tabel_r_sum = Ext.create('Ext.grid.Panel', {
 				}
 			}
 		}, {
-			header: "Working Hours",
+			header: "Engine Hours",
 			width: 100,
 			dataIndex: "working hours ME1",
 			renderer: function (v) {
@@ -171,7 +171,7 @@ var tabel_r_sum = Ext.create('Ext.grid.Panel', {
 				}
 			}
 		}, {
-			header: "Working Hours",
+			header: "Engine Hours",
 			width: 100,
 			dataIndex: "working hours ME2",
 			renderer: function (v) {
@@ -199,7 +199,7 @@ var tabel_r_sum = Ext.create('Ext.grid.Panel', {
 				}
 			}
 		}, {
-			header: "Working Hours",
+			header: "Engine Hours",
 			width: 100,
 			dataIndex: "Total Working Hours ME",
 			renderer: function (v) {
@@ -220,7 +220,7 @@ var tabel_r_sum = Ext.create('Ext.grid.Panel', {
 				}
 			}
 		}, {
-			header: "Working Hours",
+			header: "Engine Hours",
 			width: 100,
 			dataIndex: "working hours AE1",
 			renderer: function (v) {
@@ -248,7 +248,7 @@ var tabel_r_sum = Ext.create('Ext.grid.Panel', {
 				}
 			}
 		}, {
-			header: "Working Hours",
+			header: "Engine Hours",
 			width: 100,
 			dataIndex: "working hours AE2",
 			renderer: function (v) {
@@ -276,7 +276,7 @@ var tabel_r_sum = Ext.create('Ext.grid.Panel', {
 				}
 			}
 		}, {
-			header: "Working Hours",
+			header: "Engine Hours",
 			width: 100,
 			dataIndex: "Total Working Hours AE",
 			renderer: function (v) {
@@ -317,7 +317,7 @@ var tabel_r_sum = Ext.create('Ext.grid.Panel', {
 			}
 		}
 	}, {
-		header: "Total Working Hours",
+		header: "Total Engine Hours",
 		width: 200,
 		dataIndex: 'Total Working Hours',
 		renderer: function (v) {

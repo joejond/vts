@@ -760,7 +760,7 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
     }, {
         header: "StarBoard (ME1)",
         columns: [{
-            header: "Daily Consumption",
+            header: "Fuel Consumption",
             width: 100,
             dataIndex: 'ME1 daily consumption',
             renderer: function (v) {
@@ -771,7 +771,7 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
                 }
             }
         }, {
-            header: "Working Hours",
+            header: "Engine Hours",
             width: 100,
             dataIndex: 'working hours ME1',
             renderer: function (v) {
@@ -788,7 +788,7 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
     }, {
         header: "PortSide (ME2)",
         columns: [{
-            header: "Daily Consumption",
+            header: "Fuel Consumption",
             width: 100,
             dataIndex: 'ME2 daily consumtion',
             renderer: function (v) {
@@ -799,7 +799,7 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
                 }
             }
         }, {
-            header: "Working Hours",
+            header: "Engine Hours",
             width: 100,
             dataIndex: 'working hours ME2',
             renderer: function (v) {
@@ -816,7 +816,7 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
     }, {
         header: "GenSet#1 (AE1)",
         columns: [{
-            header: "Daily Consumption",
+            header: "Fuel Consumption",
             width: 100,
             dataIndex: 'AE1 consumtion',
             renderer: function (v) {
@@ -837,7 +837,7 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
     }, {
         header: "Genset#2 (AE2)",
         columns: [{
-            header: "Daily Consumption",
+            header: "Fuel Consumption",
             width: 100,
             dataIndex: 'AE2 consumtion',
             renderer: function (v) {
