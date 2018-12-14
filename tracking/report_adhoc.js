@@ -629,6 +629,14 @@ var model_adhoc_kapal = Ext.define('adhoc_kapal', {
             type: "Number"
         },
         {
+            name: "Last F_Sound check",
+            type: "String"
+        },
+        {
+            name: "Consumption after F_Sound check",
+            type: "Number"
+        },
+        {
             name: "Last fuel loading",
             type: "Number"
         },
@@ -884,6 +892,24 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
         header: "Fuel Sounding",
         width: 150,
         dataIndex: 'F_Sound check',
+        renderer: function (v) {
+            if (parseFloat(v) > 0) {
+                return parseFloat(v).toFixed(2) + " Liters";
+            } else {
+                return parseFloat(v).toFixed(2) + " Liter";
+            }
+        }
+    }, {
+        header: "Last Date F.Sounding",
+        width: 150,
+        dataIndex: 'Last F_Sound check',
+        renderer: function (v) {
+            return v;
+        }
+    }, {
+        header: "Total Fuel After F.Sounding",
+        width: 150,
+        dataIndex: 'Consumption after F_Sound check',
         renderer: function (v) {
             if (parseFloat(v) > 0) {
                 return parseFloat(v).toFixed(2) + " Liters";
