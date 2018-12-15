@@ -350,7 +350,19 @@ function create_infowindow(t, d, index, mode) {
   info_ves[index] += '<p>Heading : ' + d.head + ' &#176;</p>';
   info_ves[index] += '<p>Speed : ' + d.speed + ' Knot</p>';
   // info_ves +='<p>Last Update : '+ Ext.Date.format(new Date(d.waktu*1000),'d-m-Y H:i:s')+'</p>'
-  info_ves[index] += '<p>Last Update : ' + Ext.Date.format(new Date(d.epoch * 1000), 'd-m-Y H:i:s') + '</p>'
+  var date_val = new Date(d.epoch * 1000);
+  var date_cur = new Date();
+  info_ves[index] += '<p>Last Update : ' + Ext.Date.format(date_val, 'd-m-Y H:i:s') + '</p>';
+  console.log('date_val', date_val);
+  console.log('date_val.getTime()', date_val.getTime());
+  console.log('date_cur', date_cur);
+  console.log('date_cur.getTime()', date_cur.getTime());
+  // info_ves[index] += '<p> Health Status : </p>';
+  if ((date_val.getTime()*60*1000*10) >= date_cur.getTime()) {
+    info_ves[index] += '<p>Health Status : <b><font color="green" size="3">OK</font></b></p>';
+  } else {
+    info_ves[index] += '<p>Health Status : <b><font color="red" size="3">Bad</font></b></p>';
+  }
   // info_ves += '<p> '+ coords + '</p>';
   // info_ves += '<p> Last Updated : '+ me.pad(day,2) +'/'+me.pad(month,2)+'/'+year +' '+ hours+':'+me.pad(minutes,2)+':'+me.pad(seconds,2) + '</p>';
 
