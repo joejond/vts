@@ -148,7 +148,7 @@ var tabel_r_sum = Ext.create('Ext.grid.Panel', {
 			dataIndex: "working hours ME1",
 			renderer: function (v) {
 				// return getHour(parseFloat(v).toFixed(2) * 60);
-				return parseFloat(v).toFixed(2);
+				return parseFloat(v).toFixed(2) + " Hrs";
 			}
 		}, {
 			header: "Fuel Rate",
@@ -177,7 +177,7 @@ var tabel_r_sum = Ext.create('Ext.grid.Panel', {
 			dataIndex: "working hours ME2",
 			renderer: function (v) {
 				// return getHour(parseFloat(v).toFixed(2) * 60);
-				return parseFloat(v).toFixed(2);
+				return parseFloat(v).toFixed(2) + " Hrs";
 			}
 		}, {
 			header: "Fuel Rate",
@@ -206,7 +206,7 @@ var tabel_r_sum = Ext.create('Ext.grid.Panel', {
 			dataIndex: "Total Working Hours ME",
 			renderer: function (v) {
 				// return getHour(parseFloat(v).toFixed(2) * 60);
-				return parseFloat(v).toFixed(2);
+				return parseFloat(v).toFixed(2) + " Hrs";
 			}
 		}]
 	}, {
@@ -228,7 +228,7 @@ var tabel_r_sum = Ext.create('Ext.grid.Panel', {
 			dataIndex: "working hours AE1",
 			renderer: function (v) {
 				// return getHour(parseFloat(v).toFixed(2) * 60);
-				return parseFloat(v).toFixed(2);
+				return parseFloat(v).toFixed(2) + " Hrs";
 			}
 		}, {
 			header: "Fuel Rate",
@@ -257,7 +257,7 @@ var tabel_r_sum = Ext.create('Ext.grid.Panel', {
 			dataIndex: "working hours AE2",
 			renderer: function (v) {
 				// return getHour(parseFloat(v).toFixed(2) * 60);
-				return parseFloat(v).toFixed(2);
+				return parseFloat(v).toFixed(2) + " Hrs";
 			}
 		}, {
 			header: "Fuel Rate",
@@ -286,7 +286,7 @@ var tabel_r_sum = Ext.create('Ext.grid.Panel', {
 			dataIndex: "Total Working Hours AE",
 			renderer: function (v) {
 				// return getHour(parseFloat(v).toFixed(2) * 60);
-				return parseFloat(v).toFixed(2);
+				return parseFloat(v).toFixed(2) + " Hrs";
 			}
 		}]
 	}, {
@@ -328,7 +328,7 @@ var tabel_r_sum = Ext.create('Ext.grid.Panel', {
 		dataIndex: 'Total Working Hours',
 		renderer: function (v) {
 			// return getHour(parseFloat(v).toFixed(2) * 60);
-			return parseFloat(v).toFixed(2);
+			return parseFloat(v).toFixed(2) + " Hrs";
 		}
 	}]
 });
