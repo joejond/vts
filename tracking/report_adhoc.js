@@ -775,7 +775,8 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
             width: 100,
             dataIndex: 'working hours ME1',
             renderer: function (v) {
-                return getHour(parseFloat(v).toFixed(2) * 60);
+                // return getHour(parseFloat(v).toFixed(2) * 60);
+                return parseFloat(v).toFixed(2);
             }
         }, {
             header: "Fuel Rate",
@@ -803,7 +804,8 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
             width: 100,
             dataIndex: 'working hours ME2',
             renderer: function (v) {
-                return getHour(parseFloat(v).toFixed(2) * 60);
+                // return getHour(parseFloat(v).toFixed(2) * 60);
+                return parseFloat(v).toFixed(2);
             }
         }, {
             header: "Fuel Rate",

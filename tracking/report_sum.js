@@ -147,7 +147,8 @@ var tabel_r_sum = Ext.create('Ext.grid.Panel', {
 			width: 100,
 			dataIndex: "working hours ME1",
 			renderer: function (v) {
-				return getHour(parseFloat(v).toFixed(2) * 60);
+				// return getHour(parseFloat(v).toFixed(2) * 60);
+				return parseFloat(v).toFixed(2);
 			}
 		}, {
 			header: "Fuel Rate",
@@ -175,7 +176,8 @@ var tabel_r_sum = Ext.create('Ext.grid.Panel', {
 			width: 100,
 			dataIndex: "working hours ME2",
 			renderer: function (v) {
-				return getHour(parseFloat(v).toFixed(2) * 60);
+				// return getHour(parseFloat(v).toFixed(2) * 60);
+				return parseFloat(v).toFixed(2);
 			}
 		}, {
 			header: "Fuel Rate",
@@ -203,7 +205,8 @@ var tabel_r_sum = Ext.create('Ext.grid.Panel', {
 			width: 100,
 			dataIndex: "Total Working Hours ME",
 			renderer: function (v) {
-				return getHour(parseFloat(v).toFixed(2) * 60);
+				// return getHour(parseFloat(v).toFixed(2) * 60);
+				return parseFloat(v).toFixed(2);
 			}
 		}]
 	}, {
@@ -224,7 +227,8 @@ var tabel_r_sum = Ext.create('Ext.grid.Panel', {
 			width: 100,
 			dataIndex: "working hours AE1",
 			renderer: function (v) {
-				return getHour(parseFloat(v).toFixed(2) * 60);
+				// return getHour(parseFloat(v).toFixed(2) * 60);
+				return parseFloat(v).toFixed(2);
 			}
 		}, {
 			header: "Fuel Rate",
@@ -252,7 +256,8 @@ var tabel_r_sum = Ext.create('Ext.grid.Panel', {
 			width: 100,
 			dataIndex: "working hours AE2",
 			renderer: function (v) {
-				return getHour(parseFloat(v).toFixed(2) * 60);
+				// return getHour(parseFloat(v).toFixed(2) * 60);
+				return parseFloat(v).toFixed(2);
 			}
 		}, {
 			header: "Fuel Rate",
@@ -280,7 +285,8 @@ var tabel_r_sum = Ext.create('Ext.grid.Panel', {
 			width: 100,
 			dataIndex: "Total Working Hours AE",
 			renderer: function (v) {
-				return getHour(parseFloat(v).toFixed(2) * 60);
+				// return getHour(parseFloat(v).toFixed(2) * 60);
+				return parseFloat(v).toFixed(2);
 			}
 		}]
 	}, {
@@ -321,7 +327,8 @@ var tabel_r_sum = Ext.create('Ext.grid.Panel', {
 		width: 200,
 		dataIndex: 'Total Working Hours',
 		renderer: function (v) {
-			return getHour(parseFloat(v).toFixed(2) * 60);
+			// return getHour(parseFloat(v).toFixed(2) * 60);
+			return parseFloat(v).toFixed(2);
 		}
 	}]
 });
