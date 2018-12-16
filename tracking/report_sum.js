@@ -112,224 +112,316 @@ var tabel_r_sum = Ext.create('Ext.grid.Panel', {
 	flex: 4,
 	columns: [{
 		header: "Vessel",
+		align: 'center',
 		width: 100,
 		dataIndex: 'vessel',
 		locked: true
 	}, {
-		header: "Working Distance",
-		width: 100,
-		dataIndex: 'working distance',
-		renderer: function (v) {
-			return parseFloat(v).toFixed(2) + " Km";
-		}
+		header: "",
+		columns: [{
+			header: "Working Distance",
+			align: 'center',
+			columns: [{
+				header: "Km",
+				align: 'center',
+				width: 100,
+				dataIndex: 'working distance',
+				renderer: function (v) {
+					return parseFloat(v).toFixed(2);
+				}
+			}]
+		}]
 	}, {
-		header: "Average Speed",
-		width: 100,
-		dataIndex: 'average speed',
-		renderer: function (v) {
-			return parseFloat(v).toFixed(2) + " Km/h";
-		}
+		header: "",
+		columns: [{
+			header: "Average Speed",
+			align: 'center',
+			columns: [{
+				header: "Km/h",
+				align: 'center',
+				width: 100,
+				dataIndex: 'average speed',
+				renderer: function (v) {
+					return parseFloat(v).toFixed(2);
+				}
+			}]
+		}]
 	}, {
 		header: "StarBoard Engine (ME1)",
+		align: 'center',
 		columns: [{
 			header: "Fuel Consumption",
-			width: 100,
-			dataIndex: "ME1 daily consumption",
-			renderer: function (v) {
-				if (parseFloat(v) > 0) {
-					return parseFloat(v).toFixed(2) + " Liters";
-				} else {
-					return parseFloat(v).toFixed(2) + " Liter";
+			align: 'center',
+			columns: [{
+				header: "Liter",
+				align: 'center',
+				width: 100,
+				dataIndex: "ME1 daily consumption",
+				renderer: function (v) {
+					return parseFloat(v).toFixed(2);
 				}
-			}
+			}]
 		}, {
 			header: "Engine Hours",
-			width: 100,
-			dataIndex: "working hours ME1",
-			renderer: function (v) {
-				// return getHour(parseFloat(v).toFixed(2) * 60);
-				return parseFloat(v).toFixed(2) + " Hrs";
-			}
+			align: 'center',
+			columns: [{
+				header: "Hr",
+				align: 'center',
+				width: 100,
+				dataIndex: "working hours ME1",
+				renderer: function (v) {
+					return parseFloat(v).toFixed(2);
+				}
+			}]
 		}, {
 			header: "Fuel Rate",
-			width: 100,
-			dataIndex: "ME1 fuel rate",
-			renderer: function (v) {
-				return parseFloat(v).toFixed(2) + " lt/hr";
-			}
+			align: 'center',
+			columns: [{
+				header: "lt/hr",
+				align: 'center',
+				width: 100,
+				dataIndex: "ME1 fuel rate",
+				renderer: function (v) {
+					return parseFloat(v).toFixed(2);
+				}
+			}]
 		}]
 	}, {
 		header: "PortSide Engine (ME2)",
+		align: 'center',
 		columns: [{
 			header: "Fuel Consumption",
-			width: 100,
-			dataIndex: "ME2 daily consumtion",
-			renderer: function (v) {
-				if (parseFloat(v) > 0) {
-					return parseFloat(v).toFixed(2) + " Liters";
-				} else {
-					return parseFloat(v).toFixed(2) + " Liter";
-				}
-			}
+			align: 'center',
+			columns: [{
+				header: "Liter",
+				align: 'center',
+				width: 100,
+				dataIndex: "ME2 daily consumtion",
+				renderer: function (v) {
+					return parseFloat(v).toFixed(2);
+				}	
+			}]
 		}, {
 			header: "Engine Hours",
-			width: 100,
-			dataIndex: "working hours ME2",
-			renderer: function (v) {
-				// return getHour(parseFloat(v).toFixed(2) * 60);
-				return parseFloat(v).toFixed(2) + " Hrs";
-			}
+			align: 'center',
+			columns: [{
+				header: "Hr",
+				align: 'center',
+				width: 100,
+				dataIndex: "working hours ME2",
+				renderer: function (v) {
+					return parseFloat(v).toFixed(2);
+				}
+			}]
 		}, {
 			header: "Fuel Rate",
-			width: 100,
-			dataIndex: "ME2 fuel rate",
-			renderer: function (v) {
-				return parseFloat(v).toFixed(2) + " lt/hr";
-			}
+			align: 'center',
+			columns: [{
+				header: "lt/hr",
+				align: 'center',
+				width: 100,
+				dataIndex: "ME2 fuel rate",
+				renderer: function (v) {
+					return parseFloat(v).toFixed(2);
+				}
+			}]
 		}]
 	}, {
 		header: "Total Main Engine",
+		align: 'center',
 		columns: [{
 			header: "Fuel Consumption",
-			width: 100,
-			dataIndex: "Total Consumption ME",
-			renderer: function (v) {
-				if (parseFloat(v) > 0) {
-					return parseFloat(v).toFixed(2) + " Liters";
-				} else {
-					return parseFloat(v).toFixed(2) + " Liter";
+			align: 'center',
+			columns: [{
+				header: "Liter",
+				align: 'center',
+				width: 100,
+				dataIndex: "Total Consumption ME",
+				renderer: function (v) {
+					return parseFloat(v).toFixed(2);
 				}
-			}
+			}]
 		}, {
 			header: "Engine Hours",
-			width: 100,
-			dataIndex: "Total Working Hours ME",
-			renderer: function (v) {
-				// return getHour(parseFloat(v).toFixed(2) * 60);
-				return parseFloat(v).toFixed(2) + " Hrs";
-			}
+			align: 'center',
+			columns: [{
+				header: "Hr",
+				align: 'center',
+				width: 100,
+				dataIndex: "Total Working Hours ME",
+				renderer: function (v) {
+					return parseFloat(v).toFixed(2);
+				}
+			}]
 		}]
 	}, {
 		header: "StarBoard GenSet (AE1)",
+		align: 'center',
 		columns: [{
 			header: "Fuel Consumption",
-			width: 100,
-			dataIndex: "AE1 consumtion",
-			renderer: function (v) {
-				if (parseFloat(v) > 0) {
-					return parseFloat(v).toFixed(2) + " Liters";
-				} else {
-					return parseFloat(v).toFixed(2) + " Liter";
-				}
-			}
+			align: 'center',
+			columns: [{
+				header: "Liter",
+				align: 'center',
+				width: 100,
+				dataIndex: "AE1 consumtion",
+				renderer: function (v) {
+					return parseFloat(v).toFixed(2);
+				}	
+			}]
 		}, {
 			header: "Engine Hours",
-			width: 100,
-			dataIndex: "working hours AE1",
-			renderer: function (v) {
-				// return getHour(parseFloat(v).toFixed(2) * 60);
-				return parseFloat(v).toFixed(2) + " Hrs";
-			}
+			align: 'center',
+			columns: [{
+				header: "Hr",
+				align: 'center',
+				width: 100,
+				dataIndex: "working hours AE1",
+				renderer: function (v) {
+					return parseFloat(v).toFixed(2);
+				}
+			}]
 		}, {
 			header: "Fuel Rate",
-			width: 100,
-			dataIndex: "AE1 fuel rate",
-			renderer: function (v) {
-				return parseFloat(v).toFixed(2) + " lt/hr";
-			}
+			align: 'center',
+			columns: [{
+				header: "lt/hr",
+				align: 'center',
+				width: 100,
+				dataIndex: "AE1 fuel rate",
+				renderer: function (v) {
+					return parseFloat(v).toFixed(2);
+				}
+			}]
 		}]
 	}, {
 		header: "PortSide GenSet (AE2)",
+		align: 'center',
 		columns: [{
 			header: "Fuel Consumption",
-			width: 100,
-			dataIndex: "AE2 consumtion",
-			renderer: function (v) {
-				if (parseFloat(v) > 0) {
-					return parseFloat(v).toFixed(2) + " Liters";
-				} else {
-					return parseFloat(v).toFixed(2) + " Liter";
+			align: 'center',
+			columns: [{
+				header: "Liter",
+				align: 'center',
+				width: 100,
+				dataIndex: "AE2 consumtion",
+				renderer: function (v) {
+					return parseFloat(v).toFixed(2);
 				}
-			}
+			}]
 		}, {
 			header: "Engine Hours",
-			width: 100,
-			dataIndex: "working hours AE2",
-			renderer: function (v) {
-				// return getHour(parseFloat(v).toFixed(2) * 60);
-				return parseFloat(v).toFixed(2) + " Hrs";
-			}
+			align: 'center',
+			columns: [{
+				header: "Hr",
+				align: 'center',
+				width: 100,
+				dataIndex: "working hours AE2",
+				renderer: function (v) {
+					return parseFloat(v).toFixed(2);
+				}
+			}]
 		}, {
 			header: "Fuel Rate",
-			width: 100,
-			dataIndex: "AE2 fuel rate",
-			renderer: function (v) {
-				return parseFloat(v).toFixed(2) + " lt/hr";
-			}
+			align: 'center',
+			columns: [{
+				header: "lt/hr",
+				align: 'center',
+				width: 100,
+				dataIndex: "AE2 fuel rate",
+				renderer: function (v) {
+					return parseFloat(v).toFixed(2);
+				}
+			}]
 		}]
 	}, {
 		header: "Total Auxiliary Engine",
+		align: 'center',
 		columns: [{
 			header: "Fuel Consumption",
-			width: 100,
-			dataIndex: "Total Consumption AE",
-			renderer: function (v) {
-				if (parseFloat(v) > 0) {
-					return parseFloat(v).toFixed(2) + " Liters";
-				} else {
-					return parseFloat(v).toFixed(2) + " Liter";
+			align: 'center',
+			columns: [{
+				header: "Liter",
+				align: 'center',
+				width: 100,
+				dataIndex: "Total Consumption AE",
+				renderer: function (v) {
+					return parseFloat(v).toFixed(2);
 				}
-			}
+			}]
 		}, {
 			header: "Engine Hours",
-			width: 100,
-			dataIndex: "Total Working Hours AE",
-			renderer: function (v) {
-				// return getHour(parseFloat(v).toFixed(2) * 60);
-				return parseFloat(v).toFixed(2) + " Hrs";
-			}
+			align: 'center',
+			columns: [{
+				header: "Hr",
+				align: 'center',
+				width: 100,
+				dataIndex: "Total Working Hours AE",
+				renderer: function (v) {
+					return parseFloat(v).toFixed(2);
+				}
+			}]
 		}]
 	}, {
-		header: "Remaining onBoard",
-		width: 200,
-		dataIndex: 'Remaining on board',
-		renderer: function (v) {
-			if (parseFloat(v) > 0) {
-				return parseFloat(v).toFixed(2) + " Liters";
-			} else {
-				return parseFloat(v).toFixed(2) + " Liter";
-			}
-		}
+		header: "",
+		columns: [{
+			header: "Remaining on Board",
+			align: 'center',
+			columns: [{
+				header: "Liter",
+				align: 'center',
+				width: 150,
+				dataIndex: 'Remaining on board',
+				renderer: function (v) {
+					return parseFloat(v).toFixed(2);
+				}		
+			}]
+		}]
 	}, {
-		header: "Total Consumption",
-		width: 200,
-		dataIndex: 'Total Consumption',
-		renderer: function (v) {
-			if (parseFloat(v) > 0) {
-				return parseFloat(v).toFixed(2) + " Liters";
-			} else {
-				return parseFloat(v).toFixed(2) + " Liter";
-			}
-		}
+		header: "",
+		columns: [{
+			header: "Total Consumption",
+			align: 'center',
+			columns: [{
+				header: "Liter",
+				align: 'center',
+				width: 150,
+				dataIndex: 'Total Consumption',
+				renderer: function (v) {
+					return parseFloat(v).toFixed(2);
+				}
+			}]
+		}]
 	}, {
-		header: "Last Fuel Loding",
-		width: 200,
-		dataIndex: 'Last fuel loading',
-		renderer: function (v) {
-			if (parseFloat(v) > 0) {
-				return parseFloat(v).toFixed(2) + " Liters";
-			} else {
-				return parseFloat(v).toFixed(2) + " Liter";
-			}
-		}
+		header: "",
+		columns: [{
+			header: "Last Fuel Loding",
+			align: 'center',
+			columns: [{
+				header: "Liter",
+				align: 'center',
+				width: 150,
+				dataIndex: 'Last fuel loading',
+				renderer: function (v) {
+					return parseFloat(v).toFixed(2);
+				}
+			}]
+		}]
 	}, {
-		header: "Total Engine Hours",
-		width: 200,
-		dataIndex: 'Total Working Hours',
-		renderer: function (v) {
-			// return getHour(parseFloat(v).toFixed(2) * 60);
-			return parseFloat(v).toFixed(2) + " Hrs";
-		}
+		header: "",
+		columns: [{
+			header: "Total Engine Hours",
+			align: 'center',
+			columns: [{
+				header: "Hr",
+				align: 'center',
+				width: 150,
+				dataIndex: 'Total Working Hours',
+				renderer: function (v) {
+					return parseFloat(v).toFixed(2);
+				}
+			}]
+		}]
 	}]
 });
 //
