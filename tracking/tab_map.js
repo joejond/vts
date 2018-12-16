@@ -353,10 +353,10 @@ function create_infowindow(t, d, index, mode) {
   var date_val = new Date(d.epoch * 1000);
   var date_cur = new Date();
   info_ves[index] += '<p>Last Update : ' + Ext.Date.format(date_val, 'd-m-Y H:i:s') + '</p>';
-  console.log('date_val', date_val);
-  console.log('date_val.getTime()', date_val.getTime());
-  console.log('date_cur', date_cur);
-  console.log('date_cur.getTime()', date_cur.getTime());
+  // console.log('date_val', date_val);
+  // console.log('date_val.getTime()', date_val.getTime());
+  // console.log('date_cur', date_cur);
+  // console.log('date_cur.getTime()', date_cur.getTime());
   // info_ves[index] += '<p> Health Status : </p>';
   if ((date_val.getTime()*60*1000*10) >= date_cur.getTime()) {
     info_ves[index] += '<p>Health Status : <b><font color="green" size="3">OK</font></b></p>';
