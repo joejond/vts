@@ -79,6 +79,7 @@ var model_akumulasi_perjam = Ext.define('akumulasi', {
         "working distance", "average speed",
         "working hours ME1", "working hours ME2", "working hours AE1", "working hours AE2",
         "ME1 consumtion", "ME2 consumtion", "AE1 consumtion", "AE2 consumtion",
+        "Total Daily Consumption",
         "ME1 fuel rate", "ME2 fuel rate", "AE1 fuel rate", "AE2 fuel rate",
         "ME1 average rpm", "ME2 average rpm", "AE1 average rpm", "AE2 average rpm"
     ]
@@ -219,6 +220,7 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
         header: "StarBoard (ME1)",
         columns: [{
             header: "Fuel Consumption",
+            align: 'center',
             width: 100,
             dataIndex: 'ME1 consumtion',
             renderer: function (v) {
@@ -226,6 +228,7 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
             }
         }, {
             header: "Engine Hours",
+            align: 'center',
             width: 100,
             dataIndex: 'working hours ME1',
             renderer: function (v) {
@@ -233,6 +236,7 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
             }
         }, {
             header: "Fuel Rate",
+            align: 'center',
             width: 100,
             dataIndex: 'ME1 fuel rate',
             renderer: function (v) {
@@ -240,6 +244,7 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
             }
         }, {
             header: "RPM (Average)",
+            align: 'center',
             width: 100,
             dataIndex: 'ME1 average rpm',
             renderer: function (v) {
@@ -250,6 +255,7 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
         header: "PortSide (ME2)",
         columns: [{
             header: "Fuel Consumption",
+            align: 'center',
             width: 100,
             dataIndex: 'ME2 consumtion',
             renderer: function (v) {
@@ -257,6 +263,7 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
             }
         }, {
             header: "Engine Hours",
+            align: 'center',
             width: 100,
             dataIndex: 'working hours ME2',
             renderer: function (v) {
@@ -264,6 +271,7 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
             }
         }, {
             header: "Fuel Rate",
+            align: 'center',
             width: 100,
             dataIndex: 'ME2 fuel rate',
             renderer: function (v) {
@@ -271,6 +279,7 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
             }
         }, {
             header: "RPM (Average)",
+            align: 'center',
             width: 100,
             dataIndex: 'ME2 average rpm',
             renderer: function (v) {
@@ -281,6 +290,7 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
         header: "GenSet#1 (AE1)",
         columns: [{
             header: "Fuel Consumption",
+            align: 'center',
             width: 100,
             dataIndex: 'AE1 consumtion',
             renderer: function (v) {
@@ -288,6 +298,7 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
             }
         }, {
             header: "Engine Hours",
+            align: 'center',
             width: 100,
             dataIndex: 'working hours AE1',
             renderer: function (v) {
@@ -295,6 +306,7 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
             }
         }, {
             header: "Fuel Rate",
+            align: 'center',
             width: 100,
             dataIndex: 'AE1 fuel rate',
             renderer: function (v) {
@@ -302,6 +314,7 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
             }
         }, {
             header: "RPM (Average)",
+            align: 'center',
             width: 100,
             dataIndex: 'AE1 average rpm',
             renderer: function (v) {
@@ -312,6 +325,7 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
         header: "GenSet#2 (AE2)",
         columns: [{
             header: "Fuel Consumption",
+            align: 'center',
             width: 100,
             dataIndex: 'AE2 consumtion',
             renderer: function (v) {
@@ -320,6 +334,7 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
             // renderer: function(v){return (v==null)? null :  parseFloat(v).toFixed(2);}
         }, {
             header: "Engine Hours",
+            align: 'center',
             width: 100,
             dataIndex: 'working hours AE2',
             renderer: function (v) {
@@ -327,6 +342,7 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
             }
         }, {
             header: "Fuel Rate",
+            align: 'center',
             width: 100,
             dataIndex: 'AE2 fuel rate',
             renderer: function (v) {
@@ -334,6 +350,7 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
             }
         }, {
             header: "RPM (Average)",
+            align: 'center',
             width: 100,
             dataIndex: 'AE2 average rpm',
             renderer: function (v) {
@@ -341,7 +358,16 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
             }
         }]
     }, {
+        header: "Total Consumption",
+        align: 'center',
+        width: 100,
+        dataIndex: 'Total Daily Consumption',
+        renderer: function (v) {
+            return parseFloat(v).toFixed(2);
+        }
+    }, {
         header: "Working Distance",
+        align: 'center',
         width: 100,
         dataIndex: 'working distance',
         renderer: function (v) {
@@ -349,6 +375,7 @@ var tabel_akumulasi = Ext.create('Ext.grid.Panel', {
         }
     }, {
         header: "Average Speed",
+        align: 'center',
         width: 100,
         dataIndex: 'average speed',
         renderer: function (v) {
@@ -968,7 +995,8 @@ function daily_akum() {
             tz: getTimeZone(),
             tgl: tgl_sel21,
             id: comb_kapal21,
-            type: 'data_sum_hourly'
+            // type: 'data_sum_hourly'
+            type: 'data_adhoc'
         },
 
         success: function (data) {
