@@ -132,7 +132,7 @@ var tabel_detail_jam = Ext.create('Ext.grid.Panel', {
     store: store_detail_kapal_detik,
     listeners: {
 			afterrender : function(){
-				console.log("[tabel_detail_jam] afterrender: " + detail_jam_index);
+				// console.log("[tabel_detail_jam] afterrender: " + detail_jam_index);
 				//tgl_sel1 = Ext.Date.format(this.getValue(),'Y-m-d');
 				//tgl_sel2 = (tgl_sel1 != '') ? tgl_sel1 : Ext.Date.format(new Date(), 'd-M-Y' );
 				//var param = {user_id: dt.idu,id:comb_kapal1,tgl:tgl_sel1,tz: getTimeZone()};
@@ -944,7 +944,7 @@ var panel_detail = {
 						comb_kapal2 = this.getRawValue();
 
 						var param = {user_id: dt.idu,id:comb_kapal1,tgl:tgl_sel1,tz: getTimeZone(),type: 'vts'};
-						console.log('param select', param);
+						// console.log('param select', param);
 						store_detail_kapal.load({params: param});
 						Ext.getCmp('table_ship').setTitle('Vessel '+comb_kapal2 +' on '+ tgl_sel2);
 						//tabel_detail_kapal
@@ -1057,7 +1057,7 @@ var panel_detail = {
 							var tgl_sesuai = Ext.Date.format(tgl_ini, 'd-M-Y' );
 							tgl_sel1 = Ext.Date.format(new Date(), 'Y-m-d' );
 							var param = {user_id: dt.idu,id:id_kpl,tgl:tgl_sel1,tz: getTimeZone(), type: 'vts'};
-							console.log('param afterrender', param);
+							// console.log('param afterrender', param);
 							// console.log(param);
 							// store_detail_kapal.load({params: { id: comb_kapal1, tgl: tgl_sel1}});
 							// store_detail_kapal.load({params: param});
@@ -1143,10 +1143,10 @@ var window_detail_jam = Ext.create('Ext.window.Window',{
     closable: false,
     listeners: {
     	boxready: function(){
-    		console.log("Window detail jam: " + detail_jam_index);
+    		// console.log("Window detail jam: " + detail_jam_index);
     	},
 			show: function(panel){
-				console.log("Window onShow : "+detail_jam_index);
+				// console.log("Window onShow : "+detail_jam_index);
 				param = {id:comb_kapal1,user_id:dt.idu,tgl:detail_jam_index,tz:dt.tz,density:'m', type:'vts'};
 				store_detail_kapal_detik.load({params:param});
 			}
