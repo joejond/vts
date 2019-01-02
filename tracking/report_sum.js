@@ -538,7 +538,8 @@ var panel_r_sum = {
 						tgl: tgl_sel_sum,
 						tgl2: tgl_sel_sum2,
 						tz: getTimeZone(),
-						type: 'data_sum_ship'
+						// type: 'data_sum_ship'
+						type: 'data_adhoc'
 					};
 					store_detail_sum.load({
 						params: param
