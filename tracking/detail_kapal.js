@@ -33,8 +33,8 @@ var model_detail_kapal = Ext.define('detail_kapal', {
     'ME1 ECU Engine Hours 1', 'ME1 ECU Engine Hours 2',
     'ME2 ECU Engine Hours 1', 'ME2 ECU Engine Hours 2',
     'ME1 ECU Fuel Burned 1', 'ME1 ECU Fuel Burned 2',
-	'ME2 ECU Fuel Burned 1', 'ME2 ECU Fuel Burned 2',
-	'AE1 Speed', 'AE2 Speed',
+    'ME2 ECU Fuel Burned 1', 'ME2 ECU Fuel Burned 2',
+    'AE1 Speed', 'AE2 Speed',
     'AE1 Fuel Press', 'AE2 Fuel Press',
     'AE1 Fuel Rate', 'AE2 Fuel Rate',
     'AE1 Fuel Temp', 'AE2 Fuel Temp',
@@ -45,7 +45,10 @@ var model_detail_kapal = Ext.define('detail_kapal', {
     'AE2 ECU Engine Hours 1', 'AE2 ECU Engine Hours 2',
     'AE1 ECU Fuel Burned 1', 'AE1 ECU Fuel Burned 2',
     'AE2 ECU Fuel Burned 1', 'AE2 ECU Fuel Burned 2',
-    {name: 't',type: 'date'}
+    {
+      name: 't',
+      type: 'date'
+    }
   ]
 })
 
@@ -74,8 +77,8 @@ var model_detail_kapal_detik = Ext.define('detail_kapal', {
     'ME1 ECU Engine Hours 1', 'ME1 ECU Engine Hours 2',
     'ME2 ECU Engine Hours 1', 'ME2 ECU Engine Hours 2',
     'ME1 ECU Fuel Burned 1', 'ME1 ECU Fuel Burned 2',
-	'ME2 ECU Fuel Burned 1', 'ME2 ECU Fuel Burned 2',
-	'AE1 Speed', 'AE2 Speed',
+    'ME2 ECU Fuel Burned 1', 'ME2 ECU Fuel Burned 2',
+    'AE1 Speed', 'AE2 Speed',
     'AE1 Fuel Press', 'AE2 Fuel Press',
     'AE1 Fuel Rate', 'AE2 Fuel Rate',
     'AE1 Fuel Temp', 'AE2 Fuel Temp',
@@ -86,7 +89,10 @@ var model_detail_kapal_detik = Ext.define('detail_kapal', {
     'AE2 ECU Engine Hours 1', 'AE2 ECU Engine Hours 2',
     'AE1 ECU Fuel Burned 1', 'AE1 ECU Fuel Burned 2',
     'AE2 ECU Fuel Burned 1', 'AE2 ECU Fuel Burned 2',
-    {name: 't',type: 'date'}
+    {
+      name: 't',
+      type: 'date'
+    }
   ]
 })
 
@@ -105,12 +111,12 @@ var store_detail_kapal = Ext.create('Ext.data.Store', {
     url: getAPI() + '/get_data_bima',
     // url: 'http://192.168.1.17:1337/get_data_bima?id=8&user_id=4&tz=%2B07:00&tgl=2018-02-26',
     method: 'GET',
-  // reader: {
-  //     type: 'json',
-  //     //successProperty: 'success',
-  //     root: '',
-  //     // messageProperty: 'message'
-  // }
+    // reader: {
+    //     type: 'json',
+    //     //successProperty: 'success',
+    //     root: '',
+    //     // messageProperty: 'message'
+    // }
   },
   listeners: {
     beforeload: function (store, options) {
@@ -163,305 +169,432 @@ var tabel_detail_jam = Ext.create('Ext.grid.Panel', {
       console.log('[tabel_detail_jam] show:' + detail_jam_index + 'user_id=' + dt.idu)
     }
   },
-  columns: [
-    {
-      header: 'Date Time',
-      width: 130,
-      dataIndex: 't',
-      renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s'),
-      locked: true
+  columns: [{
+    header: 'Date Time',
+    align: 'center',
+    width: 130,
+    dataIndex: 't',
+    renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s'),
+    locked: true
+  }, {
+    header: 'Satelite Data',
+    columns: [{
+      header: 'Latitude',
+      align: 'center',
+      width: 50,
+      dataIndex: 'GPS-Latitude'
     }, {
-      header: 'Satelite Data',
-      columns: [
-        {
-          header: 'Latitude',
-          width: 50,
-          dataIndex: 'GPS-Latitude'
-        }, {
-          header: 'Longitude',
-          width: 55,
-          dataIndex: 'GPS-Longitude'
-        }, {
-          header: 'Speed',
-          width: 50,
-          dataIndex: 'GPS-Velocity'
-        }, {
-          header: 'Heading',
-          width: 50,
-          dataIndex: 'GPS-Heading'
-        }
-      ]
+      header: 'Longitude',
+      align: 'center',
+      width: 55,
+      dataIndex: 'GPS-Longitude'
     }, {
-      header: 'StarBoard Engine (ME1)',
-      columns: [
-        {
-          header: 'FM-In',
-          width: 70,
-          dataIndex: 'ME1-FM In'
-        }, {
-          header: 'FM-Ov',
-          width: 70,
-          dataIndex: 'ME1-FM Ov'
-        }, {
-          header: 'FM-Temp',
-          width: 70,
-          dataIndex: 'ME1-FM Tem'
-        }, {
-          header: 'RPM',
-          width: 70,
-          dataIndex: 'ME1-RPM'
-        }, {
-          header: 'RunHours',
-          width: 70,
-          dataIndex: 'ME1-RH'
-        }
-      ]
+      header: 'Speed',
+      align: 'center',
+      width: 50,
+      dataIndex: 'GPS-Velocity'
     }, {
-      header: 'StarBoard Engine (ME1)',
-      columns: [
-        {
-          header: 'ECU Satus',
-          width: 70,
-          dataIndex: 'ME1 ECU Status'
-        }, {
-          header: 'Speed',
-          width: 70,
-          dataIndex: 'ME1 Speed'
-        }, {
-          header: 'Fuel Temp',
-          width: 70,
-          dataIndex: 'ME1 Fuel Temp'
-        }, {
-          header: 'Load Engine',
-          width: 70,
-          dataIndex: 'ME1 Load Engine'
-        }, {
-          header: 'Engine Hours 1',
-          width: 90,
-          dataIndex: 'ME1 ECU Engine Hours 1'
-        }, {
-          header: 'Engine Hours 2',
-          width: 90,
-          dataIndex: 'ME1 ECU Engine Hours 2'
-        }, {
-          header: 'Fuel Burned 1',
-          width: 80,
-          dataIndex: 'ME1 ECU Fuel Burned 1'
-        }, {
-          header: 'Fuel Burned 2',
-          width: 80,
-          dataIndex: 'ME1 ECU Fuel Burned 2'
-        }
-      ]
+      header: 'Heading',
+      align: 'center',
+      width: 50,
+      dataIndex: 'GPS-Heading'
+    }]
+  }, {
+    header: 'StarBoard Engine (ME1)',
+    columns: [{
+      header: 'FM-In',
+      align: 'center',
+      width: 70,
+      dataIndex: 'ME1-FM In'
     }, {
-      header: 'PortSide Engine (ME2)',
-      columns: [
-        {
-          header: 'FM-In',
-          width: 70,
-          dataIndex: 'ME2-FM In'
-        }, {
-          header: 'FM-Ov',
-          width: 70,
-          dataIndex: 'ME2-FM Ov'
-        }, {
-          header: 'FM-Temp',
-          width: 70,
-          dataIndex: 'ME2-FM Tem'
-        }, {
-          header: 'RPM',
-          width: 70,
-          dataIndex: 'ME2-RPM'
-        }, {
-          header: 'RunHours',
-          width: 70,
-          dataIndex: 'ME2-RH'
-        }
-      ]
+      header: 'FM-Ov',
+      align: 'center',
+      width: 70,
+      dataIndex: 'ME1-FM Ov'
     }, {
-      header: 'PortSide Engine (ME2)',
-      columns: [
-        {
-          header: 'ECU Satus',
-          width: 70,
-          dataIndex: 'ME2 ECU Status'
-        }, {
-          header: 'Speed',
-          width: 70,
-          dataIndex: 'ME2 Speed'
-        }, {
-          header: 'Fuel Temp',
-          width: 70,
-          dataIndex: 'ME2 Fuel Temp'
-        }, {
-          header: 'Load Engine',
-          width: 70,
-          dataIndex: 'ME2 Load Engine'
-        }, {
-          header: 'Engine Hours 1',
-          width: 90,
-          dataIndex: 'ME2 ECU Engine Hours 1'
-        }, {
-          header: 'Engine Hours 2',
-          width: 90,
-          dataIndex: 'ME2 ECU Engine Hours 2'
-        }, {
-          header: 'Fuel Burned 1',
-          width: 80,
-          dataIndex: 'ME2 ECU Fuel Burned 1'
-        }, {
-          header: 'Fuel Burned 2',
-          width: 80,
-          dataIndex: 'ME2 ECU Fuel Burned 2'
-        }
-      ]
+      header: 'FM-Temp',
+      align: 'center',
+      width: 70,
+      dataIndex: 'ME1-FM Tem'
     }, {
-      header: 'StarBoard GenSet (AE1)',
-      columns: [
-        {
-          header: 'FM-In',
-          width: 70,
-          dataIndex: 'AE1-FM In'
-        }, {
-          header: 'FM-Ov',
-          width: 70,
-          dataIndex: 'AE1-FM Ov'
-        }, {
-          header: 'FM-Temp',
-          width: 70,
-          dataIndex: 'AE1-FM Tem'
-        }, {
-          header: 'RPM',
-          width: 70,
-          dataIndex: 'AE1-RPM'
-        }, {
-          header: 'RunHours',
-          width: 70,
-          dataIndex: 'AE1-RH'
-        }
-      ]
+      header: 'RPM',
+      align: 'center',
+      width: 70,
+      dataIndex: 'ME1-RPM'
     }, {
-      header: 'StarBoard GenSet (AE1)',
-      columns: [
-        {
-          header: 'ECU Satus',
-          width: 70,
-          dataIndex: 'AE1 ECU Status'
-        }, {
-          header: 'Speed',
-          width: 70,
-          dataIndex: 'AE1 Speed'
-        }, {
-          header: 'Load Engine',
-          width: 70,
-          dataIndex: 'AE1 Load Engine'
-        }, {
-          header: 'Engine Hours 1',
-          width: 90,
-          dataIndex: 'AE1 ECU Engine Hours 1'
-        }, {
-          header: 'Engine Hours 2',
-          width: 90,
-          dataIndex: 'AE1 ECU Engine Hours 2'
-        }, {
-          header: 'Fuel Burned 1',
-          width: 80,
-          dataIndex: 'AE1 ECU Fuel Burned 1'
-        }, {
-          header: 'Fuel Burned 2',
-          width: 80,
-          dataIndex: 'AE1 ECU Fuel Burned 2'
-        }
-      ]
+      header: 'RunHours',
+      align: 'center',
+      width: 70,
+      dataIndex: 'ME1-RH'
+    }]
+  }, {
+    header: 'StarBoard Engine (ME1)',
+    columns: [{
+      header: 'ECU Satus',
+      align: 'center',
+      width: 70,
+      dataIndex: 'ME1 ECU Status'
     }, {
-      header: 'PortSide GenSet (AE2)',
-      columns: [
-        {
-          header: 'FM-In',
-          width: 70,
-          dataIndex: 'AE2-FM In'
-        }, {
-          header: 'FM-Ov',
-          width: 70,
-          dataIndex: 'AE2-FM Ov'
-        }, {
-          header: 'FM-Temp',
-          width: 70,
-          dataIndex: 'AE2-FM Tem'
-        }, {
-          header: 'RPM',
-          width: 70,
-          dataIndex: 'AE2-RPM'
-        }, {
-          header: 'RunHours',
-          width: 70,
-          dataIndex: 'AE2-RH'
-        }
-      ]
+      header: 'Speed',
+      align: 'center',
+      width: 70,
+      dataIndex: 'ME1 Speed'
     }, {
-      header: 'PortSide GenSet (AE2)',
-      columns: [
-        {
-          header: 'ECU Satus',
-          width: 70,
-          dataIndex: 'AE2 ECU Status'
-        }, {
-          header: 'Speed',
-          width: 70,
-          dataIndex: 'AE2 Speed'
-        }, {
-          header: 'Load Engine',
-          width: 70,
-          dataIndex: 'AE2 Load Engine'
-        }, {
-          header: 'Engine Hours 1',
-          width: 90,
-          dataIndex: 'AE2 ECU Engine Hours 1'
-        }, {
-          header: 'Engine Hours 2',
-          width: 90,
-          dataIndex: 'AE2 ECU Engine Hours 2'
-        }, {
-          header: 'Fuel Burned 1',
-          width: 80,
-          dataIndex: 'AE2 ECU Fuel Burned 1'
-        }, {
-          header: 'Fuel Burned 2',
-          width: 80,
-          dataIndex: 'AE2 ECU Fuel Burned 2'
-        }
-      ]
+      header: 'Fuel Temp',
+      align: 'center',
+      width: 70,
+      dataIndex: 'ME1 Fuel Temp'
     }, {
-      header: 'Panel',
-      columns: [
-        {
-          header: 'PM Battery',
-          width: 70,
-          dataIndex: 'PM-VBatt'
-        }, {
-          header: 'PM Charger',
-          width: 70,
-          dataIndex: 'PM-VCharg'
-        }, {
-          header: 'PM Door',
-          width: 70,
-          dataIndex: 'PM-Door'
-        }, {
-          header: 'PE Battery',
-          width: 70,
-          dataIndex: 'PE-VBatt'
-        }, {
-          header: 'PE Charger',
-          width: 70,
-          dataIndex: 'PE-VCharg'
-        }, {
-          header: 'PE Door',
-          width: 70,
-          dataIndex: 'PE-Door'
-        }
-      ]
-    }
-  ],
+      header: 'Load Engine',
+      align: 'center',
+      width: 70,
+      dataIndex: 'ME1 Load Engine'
+    }, {
+      header: 'Engine Hours 1',
+      align: 'center',
+      width: 90,
+      dataIndex: 'ME1 ECU Engine Hours 1'
+    }, {
+      header: 'Engine Hours 2',
+      align: 'center',
+      width: 90,
+      dataIndex: 'ME1 ECU Engine Hours 2'
+    }, {
+      header: 'Engine Hours',
+      align: 'center',
+      width: 90,
+      renderer: function (value, metaData, record, row, col, store, gridView) {
+        // console.log('record', record);
+        var hex1 = record.data["ME1 ECU Engine Hours 1"].toString(16).padStart(4,'0');
+        var hex2 = record.data["ME1 ECU Engine Hours 2"].toString(16).padStart(4,'0');
+        var val = hex2+hex1;
+        return parseFloat(parseInt(val,16)*0.05).toFixed(2);
+      }
+    }, {
+      header: 'Fuel Burned 1',
+      align: 'center',
+      width: 80,
+      dataIndex: 'ME1 ECU Fuel Burned 1'
+    }, {
+      header: 'Fuel Burned 2',
+      align: 'center',
+      width: 80,
+      dataIndex: 'ME1 ECU Fuel Burned 2'
+    }, {
+      header: 'Fuel Burned',
+      align: 'center',
+      width: 80,
+      renderer: function (value, metaData, record, row, col, store, gridView) {
+        // console.log('record', record);
+        var hex1 = record.data["ME1 ECU Fuel Burned 1"].toString(16).padStart(4,'0');
+        var hex2 = record.data["ME1 ECU Fuel Burned 2"].toString(16).padStart(4,'0');
+        var val = hex2+hex1;
+        return parseFloat(parseInt(val,16)*0.5).toFixed(2);
+      }
+    }]
+  }, {
+    header: 'PortSide Engine (ME2)',
+    columns: [{
+      header: 'FM-In',
+      align: 'center',
+      width: 70,
+      dataIndex: 'ME2-FM In'
+    }, {
+      header: 'FM-Ov',
+      align: 'center',
+      width: 70,
+      dataIndex: 'ME2-FM Ov'
+    }, {
+      header: 'FM-Temp',
+      align: 'center',
+      width: 70,
+      dataIndex: 'ME2-FM Tem'
+    }, {
+      header: 'RPM',
+      align: 'center',
+      width: 70,
+      dataIndex: 'ME2-RPM'
+    }, {
+      header: 'RunHours',
+      align: 'center',
+      width: 70,
+      dataIndex: 'ME2-RH'
+    }]
+  }, {
+    header: 'PortSide Engine (ME2)',
+    columns: [{
+      header: 'ECU Satus',
+      align: 'center',
+      width: 70,
+      dataIndex: 'ME2 ECU Status'
+    }, {
+      header: 'Speed',
+      align: 'center',
+      width: 70,
+      dataIndex: 'ME2 Speed'
+    }, {
+      header: 'Fuel Temp',
+      align: 'center',
+      width: 70,
+      dataIndex: 'ME2 Fuel Temp'
+    }, {
+      header: 'Load Engine',
+      align: 'center',
+      width: 70,
+      dataIndex: 'ME2 Load Engine'
+    }, {
+      header: 'Engine Hours 1',
+      align: 'center',
+      width: 90,
+      dataIndex: 'ME2 ECU Engine Hours 1'
+    }, {
+      header: 'Engine Hours 2',
+      align: 'center',
+      width: 90,
+      dataIndex: 'ME2 ECU Engine Hours 2'
+    }, {
+      header: 'Engine Hours',
+      align: 'center',
+      width: 90,
+      renderer: function (value, metaData, record, row, col, store, gridView) {
+        // console.log('record', record);
+        var hex1 = record.data["ME2 ECU Engine Hours 1"].toString(16).padStart(4,'0');
+        var hex2 = record.data["ME2 ECU Engine Hours 2"].toString(16).padStart(4,'0');
+        var val = hex2+hex1;
+        return parseFloat(parseInt(val,16)*0.05).toFixed(2);
+      }
+    }, {
+      header: 'Fuel Burned 1',
+      align: 'center',
+      width: 80,
+      dataIndex: 'ME2 ECU Fuel Burned 1'
+    }, {
+      header: 'Fuel Burned 2',
+      align: 'center',
+      width: 80,
+      dataIndex: 'ME2 ECU Fuel Burned 2'
+    }, {
+      header: 'Fuel Burned',
+      align: 'center',
+      width: 80,
+      renderer: function (value, metaData, record, row, col, store, gridView) {
+        // console.log('record', record);
+        var hex1 = record.data["ME2 ECU Fuel Burned 1"].toString(16).padStart(4,'0');
+        var hex2 = record.data["ME2 ECU Fuel Burned 2"].toString(16).padStart(4,'0');
+        var val = hex2+hex1;
+        return parseFloat(parseInt(val,16)*0.5).toFixed(2);
+      }
+    }]
+  }, {
+    header: 'StarBoard GenSet (AE1)',
+    columns: [{
+      header: 'FM-In',
+      align: 'center',
+      width: 70,
+      dataIndex: 'AE1-FM In'
+    }, {
+      header: 'FM-Ov',
+      align: 'center',
+      width: 70,
+      dataIndex: 'AE1-FM Ov'
+    }, {
+      header: 'FM-Temp',
+      align: 'center',
+      width: 70,
+      dataIndex: 'AE1-FM Tem'
+    }, {
+      header: 'RPM',
+      align: 'center',
+      width: 70,
+      dataIndex: 'AE1-RPM'
+    }, {
+      header: 'RunHours',
+      align: 'center',
+      width: 70,
+      dataIndex: 'AE1-RH'
+    }]
+  }, {
+    header: 'StarBoard GenSet (AE1)',
+    columns: [{
+      header: 'ECU Satus',
+      align: 'center',
+      width: 70,
+      dataIndex: 'AE1 ECU Status'
+    }, {
+      header: 'Speed',
+      align: 'center',
+      width: 70,
+      dataIndex: 'AE1 Speed'
+    }, {
+      header: 'Load Engine',
+      align: 'center',
+      width: 70,
+      dataIndex: 'AE1 Load Engine'
+    }, {
+      header: 'Engine Hours 1',
+      align: 'center',
+      width: 90,
+      dataIndex: 'AE1 ECU Engine Hours 1'
+    }, {
+      header: 'Engine Hours 2',
+      align: 'center',
+      width: 90,
+      dataIndex: 'AE1 ECU Engine Hours 2'
+    }, {
+      header: 'Engine Hours',
+      align: 'center',
+      width: 90,
+      renderer: function (value, metaData, record, row, col, store, gridView) {
+        // console.log('record', record);
+        var hex1 = record.data["AE1 ECU Engine Hours 1"].toString(16).padStart(4,'0');
+        var hex2 = record.data["AE1 ECU Engine Hours 2"].toString(16).padStart(4,'0');
+        var val = hex2+hex1;
+        return parseFloat(parseInt(val,16)*0.05).toFixed(2);
+      }
+    }, {
+      header: 'Fuel Burned 1',
+      align: 'center',
+      width: 80,
+      dataIndex: 'AE1 ECU Fuel Burned 1'
+    }, {
+      header: 'Fuel Burned 2',
+      align: 'center',
+      width: 80,
+      dataIndex: 'AE1 ECU Fuel Burned 2'
+    }, {
+      header: 'Fuel Burned',
+      align: 'center',
+      width: 80,
+      renderer: function (value, metaData, record, row, col, store, gridView) {
+        // console.log('record', record);
+        var hex1 = record.data["AE1 ECU Fuel Burned 1"].toString(16).padStart(4,'0');
+        var hex2 = record.data["AE1 ECU Fuel Burned 2"].toString(16).padStart(4,'0');
+        var val = hex2+hex1;
+        return parseFloat(parseInt(val,16)*0.5).toFixed(2);
+      }
+    }]
+  }, {
+    header: 'PortSide GenSet (AE2)',
+    columns: [{
+      header: 'FM-In',
+      align: 'center',
+      width: 70,
+      dataIndex: 'AE2-FM In'
+    }, {
+      header: 'FM-Ov',
+      align: 'center',
+      width: 70,
+      dataIndex: 'AE2-FM Ov'
+    }, {
+      header: 'FM-Temp',
+      align: 'center',
+      width: 70,
+      dataIndex: 'AE2-FM Tem'
+    }, {
+      header: 'RPM',
+      align: 'center',
+      width: 70,
+      dataIndex: 'AE2-RPM'
+    }, {
+      header: 'RunHours',
+      align: 'center',
+      width: 70,
+      dataIndex: 'AE2-RH'
+    }]
+  }, {
+    header: 'PortSide GenSet (AE2)',
+    columns: [{
+      header: 'ECU Satus',
+      align: 'center',
+      width: 70,
+      dataIndex: 'AE2 ECU Status'
+    }, {
+      header: 'Speed',
+      align: 'center',
+      width: 70,
+      dataIndex: 'AE2 Speed'
+    }, {
+      header: 'Load Engine',
+      align: 'center',
+      width: 70,
+      dataIndex: 'AE2 Load Engine'
+    }, {
+      header: 'Engine Hours 1',
+      align: 'center',
+      width: 90,
+      dataIndex: 'AE2 ECU Engine Hours 1'
+    }, {
+      header: 'Engine Hours 2',
+      align: 'center',
+      width: 90,
+      dataIndex: 'AE2 ECU Engine Hours 2'
+    }, {
+      header: 'Engine Hours',
+      align: 'center',
+      width: 90,
+      renderer: function (value, metaData, record, row, col, store, gridView) {
+        // console.log('record', record);
+        var hex1 = record.data["AE2 ECU Engine Hours 1"].toString(16).padStart(4,'0');
+        var hex2 = record.data["AE2 ECU Engine Hours 2"].toString(16).padStart(4,'0');
+        var val = hex2+hex1;
+        return parseFloat(parseInt(val,16)*0.05).toFixed(2);
+      }
+    }, {
+      header: 'Fuel Burned 1',
+      align: 'center',
+      width: 80,
+      dataIndex: 'AE2 ECU Fuel Burned 1'
+    }, {
+      header: 'Fuel Burned 2',
+      align: 'center',
+      width: 80,
+      dataIndex: 'AE2 ECU Fuel Burned 2'
+    }, {
+      header: 'Fuel Burned',
+      align: 'center',
+      width: 80,
+      renderer: function (value, metaData, record, row, col, store, gridView) {
+        // console.log('record', record);
+        var hex1 = record.data["AE2 ECU Fuel Burned 1"].toString(16).padStart(4,'0');
+        var hex2 = record.data["AE2 ECU Fuel Burned 2"].toString(16).padStart(4,'0');
+        var val = hex2+hex1;
+        return parseFloat(parseInt(val,16)*0.5).toFixed(2);
+      }
+    }]
+  }, {
+    header: 'Panel',
+    columns: [{
+      header: 'PM Battery',
+      align: 'center',
+      width: 70,
+      dataIndex: 'PM-VBatt'
+    }, {
+      header: 'PM Charger',
+      align: 'center',
+      width: 70,
+      dataIndex: 'PM-VCharg'
+    }, {
+      header: 'PM Door',
+      align: 'center',
+      width: 70,
+      dataIndex: 'PM-Door'
+    }, {
+      header: 'PE Battery',
+      align: 'center',
+      width: 70,
+      dataIndex: 'PE-VBatt'
+    }, {
+      header: 'PE Charger',
+      align: 'center',
+      width: 70,
+      dataIndex: 'PE-VCharg'
+    }, {
+      header: 'PE Door',
+      align: 'center',
+      width: 70,
+      dataIndex: 'PE-Door'
+    }]
+  }],
   flex: 1
 })
 
@@ -514,7 +647,7 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
       window_detail_jam.show()
 
       if (comb_kapal1 == 79 || comb_kapal1 == 81) {
-        for (i = 1; i <= 60; i++) {
+        for (i = 1; i <= 68; i++) {
           // Sateli Data
           if (i >= 1 && i <= 4) {
             // Ext.getCmp('table_ship').columns[i].setVisible(true)
@@ -526,127 +659,127 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
             Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
           }
           // StarBoard Engine Electrical
-          if (i >= 10 && i <= 17) {
+          if (i >= 10 && i <= 19) {
             // Ext.getCmp('table_ship').columns[i].setVisible(true)
             Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
           }
           // PortSide Engine Mechanical
-          if (i >= 18 && i <= 22) {
+          if (i >= 20 && i <= 24) {
             // Ext.getCmp('table_ship').columns[i].setVisible(false)
             Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
           }
           // PortSide Engine Electrical
-          if (i >= 23 && i <= 30) {
+          if (i >= 25 && i <= 34) {
             // Ext.getCmp('table_ship').columns[i].setVisible(true)
             Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
           }
           // StarBoard Engine Genset Mechanical
-          if (i >= 31 && i <= 35) {
+          if (i >= 35 && i <= 39) {
             // Ext.getCmp('table_ship').columns[i].setVisible(false)
             Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
           }
           // StarBoard Engine Genset Electrical
-          if (i >= 36 && i <= 42) {
+          if (i >= 40 && i <= 48) {
             // Ext.getCmp('table_ship').columns[i].setVisible(true)
             Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
           }
           // PortSide Engine Genset Mechanical
-          if (i >= 43 && i <= 47) {
+          if (i >= 49 && i <= 53) {
             // Ext.getCmp('table_ship').columns[i].setVisible(false)
             Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
           }
           // PortSide Engine Genset Electrical
-          if (i >= 48 && i <= 54) {
+          if (i >= 54 && i <= 62) {
             // Ext.getCmp('table_ship').columns[i].setVisible(true)
             Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
           }
           // Panel
-          if (i >= 55 && i <= 57) {
+          if (i >= 63 && i <= 65) {
             // Ext.getCmp('table_ship').columns[i].setVisible(true)
             Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
           }
-          if (i >= 58 && i <= 60) {
+          if (i >= 66 && i <= 68) {
             // Ext.getCmp('table_ship').columns[i].setVisible(false)
             Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
           }
-		}
-	  } else if (comb_kapal1 == 80) {
-		for (i = 1; i <= 60; i++) {
-			// Sateli Data
-			if (i >= 1 && i <= 4) {
-			  // Ext.getCmp('table_ship').columns[i].setVisible(true)
-			  Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
-			}
-			// StarBoard Engine Mechanical
-			if (i >= 5 && i <= 9) {
-			  // Ext.getCmp('table_ship').columns[i].setVisible(false)
-			  Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
-			}
-			// StarBoard Engine Electrical
-			if (i >= 10 && i <= 17) {
-			  // Ext.getCmp('table_ship').columns[i].setVisible(true)
-			  Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
-			}
-			// PortSide Engine Mechanical
-			if (i >= 18 && i <= 22) {
-			  // Ext.getCmp('table_ship').columns[i].setVisible(false)
-			  Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
-			}
-			// PortSide Engine Electrical
-			if (i >= 23 && i <= 30) {
-			  // Ext.getCmp('table_ship').columns[i].setVisible(true)
-			  Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
-			}
-			
-			// StarBoard Engine Genset Mechanical
-			
-			// Ext.getCmp('table_ship').columns[31].setVisible(true)
-			Ext.getCmp('table_ship_detail').columns[31].setVisible(true)
-			// Ext.getCmp('table_ship').columns[32].setVisible(true)
-			Ext.getCmp('table_ship_detail').columns[32].setVisible(true)
-			// Ext.getCmp('table_ship').columns[33].setVisible(false)
-			Ext.getCmp('table_ship_detail').columns[33].setVisible(false)
-			// Ext.getCmp('table_ship').columns[34].setVisible(true)
-			Ext.getCmp('table_ship_detail').columns[34].setVisible(true)
-			// Ext.getCmp('table_ship').columns[35].setVisible(true)
-			Ext.getCmp('table_ship_detail').columns[35].setVisible(true)
+        }
+      } else if (comb_kapal1 == 80) {
+        for (i = 1; i <= 68; i++) {
+          // Sateli Data
+          if (i >= 1 && i <= 4) {
+            // Ext.getCmp('table_ship').columns[i].setVisible(true)
+            Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
+          }
+          // StarBoard Engine Mechanical
+          if (i >= 5 && i <= 9) {
+            // Ext.getCmp('table_ship').columns[i].setVisible(false)
+            Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
+          }
+          // StarBoard Engine Electrical
+          if (i >= 10 && i <= 19) {
+            // Ext.getCmp('table_ship').columns[i].setVisible(true)
+            Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
+          }
+          // PortSide Engine Mechanical
+          if (i >= 20 && i <= 24) {
+            // Ext.getCmp('table_ship').columns[i].setVisible(false)
+            Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
+          }
+          // PortSide Engine Electrical
+          if (i >= 25 && i <= 34) {
+            // Ext.getCmp('table_ship').columns[i].setVisible(true)
+            Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
+          }
 
-			// StarBoard Engine Genset Electrical
-			if (i >= 36 && i <= 42) {
-			  // Ext.getCmp('table_ship').columns[i].setVisible(false)
-			  Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
-			}
-			
-			// PortSide Engine Genset Mechanical
-			
-			// Ext.getCmp('table_ship').columns[43].setVisible(false)
-			Ext.getCmp('table_ship_detail').columns[43].setVisible(false)
-			// Ext.getCmp('table_ship').columns[44].setVisible(false)
-			Ext.getCmp('table_ship_detail').columns[44].setVisible(false)
-			// Ext.getCmp('table_ship').columns[45].setVisible(false)
-			Ext.getCmp('table_ship_detail').columns[45].setVisible(false)
-			// Ext.getCmp('table_ship').columns[46].setVisible(true)
-			Ext.getCmp('table_ship_detail').columns[46].setVisible(true)
-			// Ext.getCmp('table_ship').columns[47].setVisible(true)
-			Ext.getCmp('table_ship_detail').columns[47].setVisible(true)
+          // StarBoard Engine Genset Mechanical
 
-			// PortSide Engine Genset Electrical
-			if (i >= 48 && i <= 54) {
-			  // Ext.getCmp('table_ship').columns[i].setVisible(false)
-			  Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
-			}
-			// Panel
-			if (i >= 55 && i <= 57) {
-			  // Ext.getCmp('table_ship').columns[i].setVisible(true)
-			  Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
-			}
-			if (i >= 58 && i <= 60) {
-			  // Ext.getCmp('table_ship').columns[i].setVisible(true)
-			  Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
-			}
-		  }
+          // Ext.getCmp('table_ship').columns[35].setVisible(true)
+          Ext.getCmp('table_ship_detail').columns[35].setVisible(true)
+          // Ext.getCmp('table_ship').columns[36].setVisible(true)
+          Ext.getCmp('table_ship_detail').columns[36].setVisible(true)
+          // Ext.getCmp('table_ship').columns[37].setVisible(false)
+          Ext.getCmp('table_ship_detail').columns[37].setVisible(false)
+          // Ext.getCmp('table_ship').columns[38].setVisible(true)
+          Ext.getCmp('table_ship_detail').columns[38].setVisible(true)
+          // Ext.getCmp('table_ship').columns[39].setVisible(true)
+          Ext.getCmp('table_ship_detail').columns[39].setVisible(true)
+
+          // StarBoard Engine Genset Electrical
+          if (i >= 40 && i <= 48) {
+            // Ext.getCmp('table_ship').columns[i].setVisible(false)
+            Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
+          }
+
+          // PortSide Engine Genset Mechanical
+
+          // Ext.getCmp('table_ship').columns[49].setVisible(false)
+          Ext.getCmp('table_ship_detail').columns[49].setVisible(false)
+          // Ext.getCmp('table_ship').columns[50].setVisible(false)
+          Ext.getCmp('table_ship_detail').columns[50].setVisible(false)
+          // Ext.getCmp('table_ship').columns[51].setVisible(false)
+          Ext.getCmp('table_ship_detail').columns[51].setVisible(false)
+          // Ext.getCmp('table_ship').columns[52].setVisible(true)
+          Ext.getCmp('table_ship_detail').columns[52].setVisible(true)
+          // Ext.getCmp('table_ship').columns[53].setVisible(true)
+          Ext.getCmp('table_ship_detail').columns[53].setVisible(true)
+
+          // PortSide Engine Genset Electrical
+          if (i >= 54 && i <= 62) {
+            // Ext.getCmp('table_ship').columns[i].setVisible(false)
+            Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
+          }
+          // Panel
+          if (i >= 63 && i <= 65) {
+            // Ext.getCmp('table_ship').columns[i].setVisible(true)
+            Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
+          }
+          if (i >= 66 && i <= 68) {
+            // Ext.getCmp('table_ship').columns[i].setVisible(true)
+            Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
+          }
+        }
       } else {
-        for (i = 1; i <= 60; i++) {
+        for (i = 1; i <= 68; i++) {
           // Sateli Data
           if (i >= 1 && i <= 4) {
             // Ext.getCmp('table_ship').columns[i].setVisible(true)
@@ -658,46 +791,46 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
             Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
           }
           // StarBoard Engine Electrical
-          if (i >= 10 && i <= 17) {
+          if (i >= 10 && i <= 19) {
             // Ext.getCmp('table_ship').columns[i].setVisible(false)
             Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
           }
           // PortSide Engine Mechanical
-          if (i >= 18 && i <= 22) {
+          if (i >= 20 && i <= 24) {
             // Ext.getCmp('table_ship').columns[i].setVisible(true)
             Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
           }
           // PortSide Engine Electrical
-          if (i >= 23 && i <= 30) {
+          if (i >= 25 && i <= 34) {
             // Ext.getCmp('table_ship').columns[i].setVisible(false)
             Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
           }
           // StarBoard Engine Genset Mechanical
-          if (i >= 31 && i <= 35) {
+          if (i >= 35 && i <= 39) {
             // Ext.getCmp('table_ship').columns[i].setVisible(true)
             Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
           }
           // StarBoard Engine Genset Electrical
-          if (i >= 36 && i <= 42) {
+          if (i >= 40 && i <= 48) {
             // Ext.getCmp('table_ship').columns[i].setVisible(false)
             Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
           }
           // PortSide Engine Genset Mechanical
-          if (i >= 43 && i <= 47) {
+          if (i >= 49 && i <= 53) {
             // Ext.getCmp('table_ship').columns[i].setVisible(true)
             Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
           }
           // PortSide Engine Genset Electrical
-          if (i >= 48 && i <= 54) {
+          if (i >= 54 && i <= 62) {
             // Ext.getCmp('table_ship').columns[i].setVisible(false)
             Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
           }
           // Panel
-          if (i >= 55 && i <= 57) {
+          if (i >= 63 && i <= 65) {
             // Ext.getCmp('table_ship').columns[i].setVisible(true)
             Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
           }
-          if (i >= 58 && i <= 60) {
+          if (i >= 66 && i <= 68) {
             // Ext.getCmp('table_ship').columns[i].setVisible(true)
             Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
           }
@@ -705,7 +838,7 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
       }
     },
     afterrender: function () {
-      for (i = 1; i <= 60; i++) {
+      for (i = 1; i <= 68; i++) {
         // Sateli Data
         if (i >= 1 && i <= 4) {
           Ext.getCmp('table_ship').columns[i].setVisible(true)
@@ -717,46 +850,46 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
           // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
         }
         // StarBoard Engine Electrical
-        if (i >= 10 && i <= 17) {
+        if (i >= 10 && i <= 19) {
           Ext.getCmp('table_ship').columns[i].setVisible(false)
           // Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
         }
         // PortSide Engine Mechanical
-        if (i >= 18 && i <= 22) {
+        if (i >= 20 && i <= 24) {
           Ext.getCmp('table_ship').columns[i].setVisible(true)
           // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
         }
         // PortSide Engine Electrical
-        if (i >= 23 && i <= 30) {
+        if (i >= 25 && i <= 34) {
           Ext.getCmp('table_ship').columns[i].setVisible(false)
           // Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
         }
         // StarBoard Engine Genset Mechanical
-        if (i >= 31 && i <= 35) {
+        if (i >= 35 && i <= 39) {
           Ext.getCmp('table_ship').columns[i].setVisible(true)
           // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
         }
         // StarBoard Engine Genset Electrical
-        if (i >= 36 && i <= 42) {
+        if (i >= 40 && i <= 48) {
           Ext.getCmp('table_ship').columns[i].setVisible(false)
           // Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
         }
         // PortSide Engine Genset Mechanical
-        if (i >= 43 && i <= 47) {
+        if (i >= 49 && i <= 53) {
           Ext.getCmp('table_ship').columns[i].setVisible(true)
           // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
         }
         // PortSide Engine Genset Electrical
-        if (i >= 48 && i <= 54) {
+        if (i >= 54 && i <= 62) {
           Ext.getCmp('table_ship').columns[i].setVisible(false)
           // Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
         }
         // Panel
-        if (i >= 55 && i <= 57) {
+        if (i >= 63 && i <= 65) {
           Ext.getCmp('table_ship').columns[i].setVisible(true)
           // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
         }
-        if (i >= 58 && i <= 60) {
+        if (i >= 66 && i <= 68) {
           Ext.getCmp('table_ship').columns[i].setVisible(true)
           // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
         }
@@ -766,311 +899,436 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
       // console.log('test render')
     }
   },
-  columns: [
-    {
-      header: 'Date Time',
-      width: 130,
-      dataIndex: 't',
-      renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s'),
-      locked: true
+  columns: [{
+    header: 'Date Time',
+    width: 130,
+    dataIndex: 't',
+    renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s'),
+    locked: true
+  }, {
+    header: 'Satelite Data',
+    columns: [{
+      header: 'Latitude',
+      align: 'center',
+      width: 50,
+      dataIndex: 'GPS-Latitude'
     }, {
-      header: 'Satelite Data',
-      columns: [
-        {
-          header: 'Latitude',
-          width: 50,
-          dataIndex: 'GPS-Latitude'
-        }, {
-          header: 'Longitude',
-          width: 60,
-          dataIndex: 'GPS-Longitude'
-        }, {
-          header: 'Speed',
-          width: 45,
-          dataIndex: 'GPS-Velocity'
-        }, {
-          header: 'Heading',
-          width: 55,
-          dataIndex: 'GPS-Heading'
-        }
-      ]
+      header: 'Longitude',
+      align: 'center',
+      width: 60,
+      dataIndex: 'GPS-Longitude'
     }, {
-      header: 'StarBoard Engine (ME1)',
-      columns: [
-        {
-          header: 'FM-In',
-          width: 70,
-          dataIndex: 'ME1-FM In'
-        }, {
-          header: 'FM-Ov',
-          width: 70,
-          dataIndex: 'ME1-FM Ov'
-        }, {
-          header: 'FM-Temp',
-          width: 70,
-          dataIndex: 'ME1-FM Tem'
-        }, {
-          header: 'RPM',
-          width: 70,
-          dataIndex: 'ME1-RPM'
-        }, {
-          header: 'RunHours',
-          width: 70,
-          dataIndex: 'ME1-RH'
-        }
-      ]
+      header: 'Speed',
+      align: 'center',
+      width: 45,
+      dataIndex: 'GPS-Velocity'
     }, {
-      header: 'StarBoard Engine (ME1)',
-      columns: [
-        {
-          header: 'ECU Satus',
-          width: 70,
-          dataIndex: 'ME1 ECU Status'
-        }, {
-          header: 'Speed',
-          width: 70,
-          dataIndex: 'ME1 Speed'
-        }, {
-          header: 'Fuel Temp',
-          width: 70,
-          dataIndex: 'ME1 Fuel Temp'
-        }, {
-          header: 'Load Engine',
-          width: 70,
-          dataIndex: 'ME1 Load Engine'
-        }, {
-          header: 'Engine Hours 1',
-          width: 90,
-          dataIndex: 'ME1 ECU Engine Hours 1'
-        }, {
-          header: 'Engine Hours 2',
-          width: 90,
-          dataIndex: 'ME1 ECU Engine Hours 2'
-        }, {
-          header: 'Fuel Burned 1',
-          width: 80,
-          dataIndex: 'ME1 ECU Fuel Burned 1'
-        }, {
-          header: 'Fuel Burned 2',
-          width: 80,
-          dataIndex: 'ME1 ECU Fuel Burned 2'
-        }
-      ]
+      header: 'Heading',
+      align: 'center',
+      width: 55,
+      dataIndex: 'GPS-Heading'
+    }]
+  }, {
+    header: 'StarBoard Engine (ME1)',
+    columns: [{
+      header: 'FM-In',
+      align: 'center',
+      width: 70,
+      dataIndex: 'ME1-FM In'
     }, {
-      header: 'PortSide Engine (ME2)',
-      columns: [
-        {
-          header: 'FM-In',
-          width: 70,
-          dataIndex: 'ME2-FM In'
-        }, {
-          header: 'FM-Ov',
-          width: 70,
-          dataIndex: 'ME2-FM Ov'
-        }, {
-          header: 'FM-Temp',
-          width: 70,
-          dataIndex: 'ME2-FM Tem'
-        }, {
-          header: 'RPM',
-          width: 70,
-          dataIndex: 'ME2-RPM'
-        }, {
-          header: 'RunHours',
-          width: 70,
-          dataIndex: 'ME2-RH'
-        }
-      ]
+      header: 'FM-Ov',
+      align: 'center',
+      width: 70,
+      dataIndex: 'ME1-FM Ov'
     }, {
-      header: 'PortSide Engine (ME2)',
-      columns: [
-        {
-          header: 'ECU Satus',
-          width: 70,
-          dataIndex: 'ME2 ECU Status'
-        }, {
-          header: 'Speed',
-          width: 70,
-          dataIndex: 'ME2 Speed'
-        }, {
-          header: 'Fuel Temp',
-          width: 70,
-          dataIndex: 'ME2 Fuel Temp'
-        }, {
-          header: 'Load Engine',
-          width: 70,
-          dataIndex: 'ME2 Load Engine'
-        }, {
-          header: 'Engine Hours 1',
-          width: 90,
-          dataIndex: 'ME2 ECU Engine Hours 1'
-        }, {
-          header: 'Engine Hours 2',
-          width: 90,
-          dataIndex: 'ME2 ECU Engine Hours 2'
-        }, {
-          header: 'Fuel Burned 1',
-          width: 80,
-          dataIndex: 'ME2 ECU Fuel Burned 1'
-        }, {
-          header: 'Fuel Burned 2',
-          width: 80,
-          dataIndex: 'ME2 ECU Fuel Burned 2'
-        }
-      ]
+      header: 'FM-Temp',
+      align: 'center',
+      width: 70,
+      dataIndex: 'ME1-FM Tem'
     }, {
-      header: 'StarBoard GenSet (AE1)',
-      columns: [
-        {
-          header: 'FM-In',
-          width: 70,
-          dataIndex: 'AE1-FM In'
-        }, {
-          header: 'FM-Ov',
-          width: 70,
-          dataIndex: 'AE1-FM Ov'
-        }, {
-          header: 'FM-Temp',
-          width: 70,
-          dataIndex: 'AE1-FM Tem'
-        }, {
-          header: 'RPM',
-          width: 70,
-          dataIndex: 'AE1-RPM'
-        }, {
-          header: 'RunHours',
-          width: 70,
-          dataIndex: 'AE1-RH'
-        }
-      ]
+      header: 'RPM',
+      align: 'center',
+      width: 70,
+      dataIndex: 'ME1-RPM'
     }, {
-      header: 'StarBoard GenSet (AE1)',
-      columns: [
-        {
-          header: 'ECU Satus',
-          width: 70,
-          dataIndex: 'AE1 ECU Status'
-        }, {
-          header: 'Speed',
-          width: 70,
-          dataIndex: 'AE1 Speed'
-        }, {
-          header: 'Load Engine',
-          width: 70,
-          dataIndex: 'AE1 Load Engine'
-        }, {
-          header: 'Engine Hours 1',
-          width: 90,
-          dataIndex: 'AE1 ECU Engine Hours 1'
-        }, {
-          header: 'Engine Hours 2',
-          width: 90,
-          dataIndex: 'AE1 ECU Engine Hours 2'
-        }, {
-          header: 'Fuel Burned 1',
-          width: 80,
-          dataIndex: 'AE1 ECU Fuel Burned 1'
-        }, {
-          header: 'Fuel Burned 2',
-          width: 80,
-          dataIndex: 'AE1 ECU Fuel Burned 2'
-        }
-      ]
+      header: 'RunHours',
+      align: 'center',
+      width: 70,
+      dataIndex: 'ME1-RH'
+    }]
+  }, {
+    header: 'StarBoard Engine (ME1)',
+    columns: [{
+      header: 'ECU Satus',
+      align: 'center',
+      width: 70,
+      dataIndex: 'ME1 ECU Status'
     }, {
-      header: 'PortSide GenSet (AE2)',
-      columns: [
-        {
-          header: 'FM-In',
-          width: 70,
-          dataIndex: 'AE2-FM In'
-        }, {
-          header: 'FM-Ov',
-          width: 70,
-          dataIndex: 'AE2-FM Ov'
-        }, {
-          header: 'FM-Temp',
-          width: 70,
-          dataIndex: 'AE2-FM Tem'
-        }, {
-          header: 'RPM',
-          width: 70,
-          dataIndex: 'AE2-RPM'
-        }, {
-          header: 'RunHours',
-          width: 70,
-          dataIndex: 'AE2-RH'
-        }
-      ]
+      header: 'Speed',
+      align: 'center',
+      width: 70,
+      dataIndex: 'ME1 Speed'
     }, {
-      header: 'PortSide GenSet (AE2)',
-      columns: [
-        {
-          header: 'ECU Satus',
-          width: 70,
-          dataIndex: 'AE2 ECU Status'
-        }, {
-          header: 'Speed',
-          width: 70,
-          dataIndex: 'AE2 Speed'
-        }, {
-          header: 'Load Engine',
-          width: 70,
-          dataIndex: 'AE2 Load Engine'
-        }, {
-          header: 'Engine Hours 1',
-          width: 90,
-          dataIndex: 'AE2 ECU Engine Hours 1'
-        }, {
-          header: 'Engine Hours 2',
-          width: 90,
-          dataIndex: 'AE2 ECU Engine Hours 2'
-        }, {
-          header: 'Fuel Burned 1',
-          width: 80,
-          dataIndex: 'AE2 ECU Fuel Burned 1'
-        }, {
-          header: 'Fuel Burned 2',
-          width: 80,
-          dataIndex: 'AE2 ECU Fuel Burned 2'
-        }
-      ]
+      header: 'Fuel Temp',
+      align: 'center',
+      width: 70,
+      dataIndex: 'ME1 Fuel Temp'
     }, {
-      header: 'Panel',
-      columns: [
-        {
-          header: 'PM Battery',
-          width: 70,
-          dataIndex: 'PM-VBatt'
-        }, {
-          header: 'PM Charger',
-          width: 70,
-          dataIndex: 'PM-VCharg'
-        }, {
-          header: 'PM Door',
-          width: 70,
-          dataIndex: 'PM-Door'
-        }, {
-          header: 'PE Battery',
-          width: 70,
-          dataIndex: 'PE-VBatt'
-        }, {
-          header: 'PE Charger',
-          width: 70,
-          dataIndex: 'PE-VCharg'
-        }, {
-          header: 'PE Door',
-          width: 70,
-          dataIndex: 'PE-Door'
-        }
-      ]
-    }
-  ]
+      header: 'Load Engine',
+      align: 'center',
+      width: 70,
+      dataIndex: 'ME1 Load Engine'
+    }, {
+      header: 'Engine Hours 1',
+      align: 'center',
+      width: 90,
+      dataIndex: 'ME1 ECU Engine Hours 1'
+    }, {
+      header: 'Engine Hours 2',
+      align: 'center',
+      width: 90,
+      dataIndex: 'ME1 ECU Engine Hours 2'
+    }, {
+      header: 'Engine Hours',
+      align: 'center',
+      width: 90,
+      renderer: function(value, metaData, record, row, col, store, gridView) {
+        // console.log('record', record);
+        var hex1 = record.data["ME1 ECU Engine Hours 1"].toString(16).padStart(4,'0');
+        var hex2 = record.data["ME1 ECU Engine Hours 2"].toString(16).padStart(4,'0');
+        var val = hex2+hex1;
+        return parseFloat(parseInt(val,16)*0.05).toFixed(2);
+      }
+    }, {
+      header: 'Fuel Burned 1',
+      align: 'center',
+      width: 80,
+      dataIndex: 'ME1 ECU Fuel Burned 1'
+    }, {
+      header: 'Fuel Burned 2',
+      align: 'center',
+      width: 80,
+      dataIndex: 'ME1 ECU Fuel Burned 2'
+    }, {
+      header: 'Fuel Burned',
+      align: 'center',
+      width: 80,
+      renderer: function(value, metaData, record, row, col, store, gridView) {
+        // console.log('record', record);
+        var hex1 = record.data["ME1 ECU Fuel Burned 1"].toString(16).padStart(4,'0');
+        var hex2 = record.data["ME1 ECU Fuel Burned 2"].toString(16).padStart(4,'0');
+        var val = hex2+hex1;
+        return parseFloat(parseInt(val,16)*0.5).toFixed(2);
+      }
+    }]
+  }, {
+    header: 'PortSide Engine (ME2)',
+    columns: [{
+      header: 'FM-In',
+      align: 'center',
+      width: 70,
+      dataIndex: 'ME2-FM In'
+    }, {
+      header: 'FM-Ov',
+      align: 'center',
+      width: 70,
+      dataIndex: 'ME2-FM Ov'
+    }, {
+      header: 'FM-Temp',
+      align: 'center',
+      width: 70,
+      dataIndex: 'ME2-FM Tem'
+    }, {
+      header: 'RPM',
+      align: 'center',
+      width: 70,
+      dataIndex: 'ME2-RPM'
+    }, {
+      header: 'RunHours',
+      align: 'center',
+      width: 70,
+      dataIndex: 'ME2-RH'
+    }]
+  }, {
+    header: 'PortSide Engine (ME2)',
+    columns: [{
+      header: 'ECU Satus',
+      align: 'center',
+      width: 70,
+      dataIndex: 'ME2 ECU Status'
+    }, {
+      header: 'Speed',
+      align: 'center',
+      width: 70,
+      dataIndex: 'ME2 Speed'
+    }, {
+      header: 'Fuel Temp',
+      align: 'center',
+      width: 70,
+      dataIndex: 'ME2 Fuel Temp'
+    }, {
+      header: 'Load Engine',
+      align: 'center',
+      width: 70,
+      dataIndex: 'ME2 Load Engine'
+    }, {
+      header: 'Engine Hours 1',
+      align: 'center',
+      width: 90,
+      dataIndex: 'ME2 ECU Engine Hours 1'
+    }, {
+      header: 'Engine Hours 2',
+      align: 'center',
+      width: 90,
+      dataIndex: 'ME2 ECU Engine Hours 2'
+    }, {
+      header: 'Engine Hours',
+      align: 'center',
+      width: 90,
+      renderer: function(value, metaData, record, row, col, store, gridView) {
+        // console.log('record', record);
+        var hex1 = record.data["ME2 ECU Engine Hours 1"].toString(16).padStart(4,'0');
+        var hex2 = record.data["ME2 ECU Engine Hours 2"].toString(16).padStart(4,'0');
+        var val = hex2+hex1;
+        return parseFloat(parseInt(val,16)*0.05).toFixed(2);
+      }
+    }, {
+      header: 'Fuel Burned 1',
+      align: 'center',
+      width: 80,
+      dataIndex: 'ME2 ECU Fuel Burned 1'
+    }, {
+      header: 'Fuel Burned 2',
+      align: 'center',
+      width: 80,
+      dataIndex: 'ME2 ECU Fuel Burned 2'
+    }, {
+      header: 'Fuel Burned',
+      align: 'center',
+      width: 80,
+      renderer: function(value, metaData, record, row, col, store, gridView) {
+        // console.log('record', record);
+        var hex1 = record.data["ME2 ECU Fuel Burned 1"].toString(16).padStart(4,'0');
+        var hex2 = record.data["ME2 ECU Fuel Burned 2"].toString(16).padStart(4,'0');
+        var val = hex2+hex1;
+        return parseFloat(parseInt(val,16)*0.5).toFixed(2);
+      }
+    }]
+  }, {
+    header: 'StarBoard GenSet (AE1)',
+    columns: [{
+      header: 'FM-In',
+      align: 'center',
+      width: 70,
+      dataIndex: 'AE1-FM In'
+    }, {
+      header: 'FM-Ov',
+      align: 'center',
+      width: 70,
+      dataIndex: 'AE1-FM Ov'
+    }, {
+      header: 'FM-Temp',
+      align: 'center',
+      width: 70,
+      dataIndex: 'AE1-FM Tem'
+    }, {
+      header: 'RPM',
+      align: 'center',
+      width: 70,
+      dataIndex: 'AE1-RPM'
+    }, {
+      header: 'RunHours',
+      align: 'center',
+      width: 70,
+      dataIndex: 'AE1-RH'
+    }]
+  }, {
+    header: 'StarBoard GenSet (AE1)',
+    columns: [{
+      header: 'ECU Satus',
+      align: 'center',
+      width: 70,
+      dataIndex: 'AE1 ECU Status'
+    }, {
+      header: 'Speed',
+      align: 'center',
+      width: 70,
+      dataIndex: 'AE1 Speed'
+    }, {
+      header: 'Load Engine',
+      align: 'center',
+      width: 70,
+      dataIndex: 'AE1 Load Engine'
+    }, {
+      header: 'Engine Hours 1',
+      align: 'center',
+      width: 90,
+      dataIndex: 'AE1 ECU Engine Hours 1'
+    }, {
+      header: 'Engine Hours 2',
+      align: 'center',
+      width: 90,
+      dataIndex: 'AE1 ECU Engine Hours 2'
+    }, {
+      header: 'Engine Hours',
+      align: 'center',
+      width: 90,
+      renderer: function(value, metaData, record, row, col, store, gridView) {
+        // console.log('record', record);
+        var hex1 = record.data["AE1 ECU Engine Hours 1"].toString(16).padStart(4,'0');
+        var hex2 = record.data["AE1 ECU Engine Hours 2"].toString(16).padStart(4,'0');
+        var val = hex2+hex1;
+        return parseFloat(parseInt(val,16)*0.05).toFixed(2);
+      }
+    }, {
+      header: 'Fuel Burned 1',
+      align: 'center',
+      width: 80,
+      dataIndex: 'AE1 ECU Fuel Burned 1'
+    }, {
+      header: 'Fuel Burned 2',
+      align: 'center',
+      width: 80,
+      dataIndex: 'AE1 ECU Fuel Burned 2'
+    }, {
+      header: 'Fuel Burned',
+      align: 'center',
+      width: 80,
+      renderer: function(value, metaData, record, row, col, store, gridView) {
+        // console.log('record', record);
+        var hex1 = record.data["AE1 ECU Fuel Burned 1"].toString(16).padStart(4,'0');
+        var hex2 = record.data["AE1 ECU Fuel Burned 2"].toString(16).padStart(4,'0');
+        var val = hex2+hex1;
+        return parseFloat(parseInt(val,16)*0.5).toFixed(2);
+      }
+    }]
+  }, {
+    header: 'PortSide GenSet (AE2)',
+    columns: [{
+      header: 'FM-In',
+      align: 'center',
+      width: 70,
+      dataIndex: 'AE2-FM In'
+    }, {
+      header: 'FM-Ov',
+      align: 'center',
+      width: 70,
+      dataIndex: 'AE2-FM Ov'
+    }, {
+      header: 'FM-Temp',
+      align: 'center',
+      width: 70,
+      dataIndex: 'AE2-FM Tem'
+    }, {
+      header: 'RPM',
+      align: 'center',
+      width: 70,
+      dataIndex: 'AE2-RPM'
+    }, {
+      header: 'RunHours',
+      align: 'center',
+      width: 70,
+      dataIndex: 'AE2-RH'
+    }]
+  }, {
+    header: 'PortSide GenSet (AE2)',
+    columns: [{
+      header: 'ECU Satus',
+      align: 'center',
+      width: 70,
+      dataIndex: 'AE2 ECU Status'
+    }, {
+      header: 'Speed',
+      align: 'center',
+      width: 70,
+      dataIndex: 'AE2 Speed'
+    }, {
+      header: 'Load Engine',
+      align: 'center',
+      width: 70,
+      dataIndex: 'AE2 Load Engine'
+    }, {
+      header: 'Engine Hours 1',
+      align: 'center',
+      width: 90,
+      dataIndex: 'AE2 ECU Engine Hours 1'
+    }, {
+      header: 'Engine Hours 2',
+      align: 'center',
+      width: 90,
+      dataIndex: 'AE2 ECU Engine Hours 2'
+    }, {
+      header: 'Engine Hours',
+      align: 'center',
+      width: 90,
+      renderer: function(value, metaData, record, row, col, store, gridView) {
+        // console.log('record', record);
+        var hex1 = record.data["AE2 ECU Engine Hours 1"].toString(16).padStart(4,'0');
+        var hex2 = record.data["AE2 ECU Engine Hours 2"].toString(16).padStart(4,'0');
+        var val = hex2+hex1;
+        return parseFloat(parseInt(val,16)*0.05).toFixed(2);
+      }
+    }, {
+      header: 'Fuel Burned 1',
+      align: 'center',
+      width: 80,
+      dataIndex: 'AE2 ECU Fuel Burned 1'
+    }, {
+      header: 'Fuel Burned 2',
+      align: 'center',
+      width: 80,
+      dataIndex: 'AE2 ECU Fuel Burned 2'
+    }, {
+      header: 'Fuel Burned',
+      align: 'center',
+      width: 80,
+      renderer: function(value, metaData, record, row, col, store, gridView) {
+        // console.log('record', record);
+        var hex1 = record.data["AE2 ECU Fuel Burned 1"].toString(16).padStart(4,'0');
+        var hex2 = record.data["AE2 ECU Fuel Burned 2"].toString(16).padStart(4,'0');
+        var val = hex2+hex1;
+        return parseFloat(parseInt(val,16)*0.5).toFixed(2);
+      }
+    }]
+  }, {
+    header: 'Panel',
+    columns: [{
+      header: 'PM Battery',
+      align: 'center',
+      width: 70,
+      dataIndex: 'PM-VBatt'
+    }, {
+      header: 'PM Charger',
+      align: 'center',
+      width: 70,
+      dataIndex: 'PM-VCharg'
+    }, {
+      header: 'PM Door',
+      align: 'center',
+      width: 70,
+      dataIndex: 'PM-Door'
+    }, {
+      header: 'PE Battery',
+      align: 'center',
+      width: 70,
+      dataIndex: 'PE-VBatt'
+    }, {
+      header: 'PE Charger',
+      align: 'center',
+      width: 70,
+      dataIndex: 'PE-VCharg'
+    }, {
+      header: 'PE Door',
+      align: 'center',
+      width: 70,
+      dataIndex: 'PE-Door'
+    }]
+  }]
 })
 
 var range = Ext.create('Ext.data.Store', {
   fields: ['tipe_range'],
-  data: [
-    {
+  data: [{
       'tipe_range': 'daily'
     },
 
@@ -1108,274 +1366,304 @@ var panel_detail = {
     height: 40,
     items: [{
 
-      // 'selected ship :',
-      // ship_combo1,
-      // '-',
-      // {
-      xtype: 'combobox',
-      id: 'cb_vessel',
-      fieldLabel: ' Selected Ship',
-      labelWidth: 80,
-      width: 300,
-      queryMode: 'remote',
-      emptyText: '- select ship -',
-      editable: false,
-      displayField: 'name',
-      valueField: 'id',
-      store: store_combo_kapal1,
-      listeners: {
-        select: function () {
-          comb_kapal1 = this.getValue()
-          comb_kapal2 = this.getRawValue()
+        // 'selected ship :',
+        // ship_combo1,
+        // '-',
+        // {
+        xtype: 'combobox',
+        id: 'cb_vessel',
+        fieldLabel: ' Selected Ship',
+        labelWidth: 80,
+        width: 300,
+        queryMode: 'remote',
+        emptyText: '- select ship -',
+        editable: false,
+        displayField: 'name',
+        valueField: 'id',
+        store: store_combo_kapal1,
+        listeners: {
+          select: function () {
+            comb_kapal1 = this.getValue()
+            comb_kapal2 = this.getRawValue()
 
-          var param = {user_id: dt.idu,id: comb_kapal1,tgl: tgl_sel1,tz: getTimeZone(),type: 'vts'}
-          // console.log('param select', param)
-          store_detail_kapal.load({params: param})
-          Ext.getCmp('table_ship').setTitle('Vessel ' + comb_kapal2 + ' on ' + tgl_sel2)
-          // tabel_detail_kapal
-          // update_text1()
-          // console.log(comb_kapal1,comb_kapal2)
+            var param = {
+              user_id: dt.idu,
+              id: comb_kapal1,
+              tgl: tgl_sel1,
+              tz: getTimeZone(),
+              type: 'vts'
+            }
+            // console.log('param select', param)
+            store_detail_kapal.load({
+              params: param
+            })
+            Ext.getCmp('table_ship').setTitle('Vessel ' + comb_kapal2 + ' on ' + tgl_sel2)
+            // tabel_detail_kapal
+            // update_text1()
+            // console.log(comb_kapal1,comb_kapal2)
 
-          if (comb_kapal1 == 79 || comb_kapal1 == 81) {
-            for (i = 1; i <= 60; i++) {
-              // Sateli Data
-              if (i >= 1 && i <= 4) {
-                Ext.getCmp('table_ship').columns[i].setVisible(true)
-                // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
+            if (comb_kapal1 == 79 || comb_kapal1 == 81) {
+              for (i = 1; i <= 68; i++) {
+                // Sateli Data
+                if (i >= 1 && i <= 4) {
+                  Ext.getCmp('table_ship').columns[i].setVisible(true)
+                  // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
+                }
+                // StarBoard Engine Mechanical
+                if (i >= 5 && i <= 9) {
+                  Ext.getCmp('table_ship').columns[i].setVisible(false)
+                  // Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
+                }
+                // StarBoard Engine Electrical
+                if (i >= 10 && i <= 19) {
+                  Ext.getCmp('table_ship').columns[i].setVisible(true)
+                  // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
+                }
+                // PortSide Engine Mechanical
+                if (i >= 20 && i <= 24) {
+                  Ext.getCmp('table_ship').columns[i].setVisible(false)
+                  // Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
+                }
+                // PortSide Engine Electrical
+                if (i >= 25 && i <= 34) {
+                  Ext.getCmp('table_ship').columns[i].setVisible(true)
+                  // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
+                }
+                // StarBoard Engine Genset Mechanical
+                if (i >= 35 && i <= 39) {
+                  Ext.getCmp('table_ship').columns[i].setVisible(false)
+                  // Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
+                }
+                // StarBoard Engine Genset Electrical
+                if (i >= 40 && i <= 48) {
+                  Ext.getCmp('table_ship').columns[i].setVisible(true)
+                  // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
+                }
+                // PortSide Engine Genset Mechanical
+                if (i >= 49 && i <= 53) {
+                  Ext.getCmp('table_ship').columns[i].setVisible(false)
+                  // Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
+                }
+                // PortSide Engine Genset Electrical
+                if (i >= 54 && i <= 62) {
+                  Ext.getCmp('table_ship').columns[i].setVisible(true)
+                  // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
+                }
+                // Panel
+                if (i >= 63 && i <= 65) {
+                  Ext.getCmp('table_ship').columns[i].setVisible(true)
+                  // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
+                }
+                if (i >= 66 && i <= 68) {
+                  Ext.getCmp('table_ship').columns[i].setVisible(false)
+                  // Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
+                }
               }
-              // StarBoard Engine Mechanical
-              if (i >= 5 && i <= 9) {
-                Ext.getCmp('table_ship').columns[i].setVisible(false)
-                // Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
-              }
-              // StarBoard Engine Electrical
-              if (i >= 10 && i <= 17) {
-                Ext.getCmp('table_ship').columns[i].setVisible(true)
-                // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
-              }
-              // PortSide Engine Mechanical
-              if (i >= 18 && i <= 22) {
-                Ext.getCmp('table_ship').columns[i].setVisible(false)
-                // Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
-              }
-              // PortSide Engine Electrical
-              if (i >= 23 && i <= 30) {
-                Ext.getCmp('table_ship').columns[i].setVisible(true)
-                // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
-              }
-              // StarBoard Engine Genset Mechanical
-              if (i >= 31 && i <= 35) {
-                Ext.getCmp('table_ship').columns[i].setVisible(false)
-                // Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
-              }
-              // StarBoard Engine Genset Electrical
-              if (i >= 36 && i <= 42) {
-                Ext.getCmp('table_ship').columns[i].setVisible(true)
-                // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
-              }
-              // PortSide Engine Genset Mechanical
-              if (i >= 43 && i <= 47) {
-                Ext.getCmp('table_ship').columns[i].setVisible(false)
-                // Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
-              }
-              // PortSide Engine Genset Electrical
-              if (i >= 48 && i <= 54) {
-                Ext.getCmp('table_ship').columns[i].setVisible(true)
-                // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
-              }
-              // Panel
-              if (i >= 55 && i <= 57) {
-                Ext.getCmp('table_ship').columns[i].setVisible(true)
-                // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
-              }
-              if (i >= 58 && i <= 60) {
-                Ext.getCmp('table_ship').columns[i].setVisible(false)
-                // Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
-              }
-			}
-          } else if (comb_kapal1 == 80) {
-			for (i = 1; i <= 60; i++) {
-				// Sateli Data
-				if (i >= 1 && i <= 4) {
-				  Ext.getCmp('table_ship').columns[i].setVisible(true)
-				  // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
-				}
-				// StarBoard Engine Mechanical
-				if (i >= 5 && i <= 9) {
-				  Ext.getCmp('table_ship').columns[i].setVisible(false)
-				  // Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
-				}
-				// StarBoard Engine Electrical
-				if (i >= 10 && i <= 17) {
-				  Ext.getCmp('table_ship').columns[i].setVisible(true)
-				  // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
-				}
-				// PortSide Engine Mechanical
-				if (i >= 18 && i <= 22) {
-				  Ext.getCmp('table_ship').columns[i].setVisible(false)
-				  // Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
-				}
-				// PortSide Engine Electrical
-				if (i >= 23 && i <= 30) {
-				  Ext.getCmp('table_ship').columns[i].setVisible(true)
-				  // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
-				}
+            } else if (comb_kapal1 == 80) {
+              for (i = 1; i <= 68; i++) {
+                // Sateli Data
+                if (i >= 1 && i <= 4) {
+                  Ext.getCmp('table_ship').columns[i].setVisible(true)
+                  // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
+                }
+                // StarBoard Engine Mechanical
+                if (i >= 5 && i <= 9) {
+                  Ext.getCmp('table_ship').columns[i].setVisible(false)
+                  // Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
+                }
+                // StarBoard Engine Electrical
+                if (i >= 10 && i <= 19) {
+                  Ext.getCmp('table_ship').columns[i].setVisible(true)
+                  // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
+                }
+                // PortSide Engine Mechanical
+                if (i >= 20 && i <= 24) {
+                  Ext.getCmp('table_ship').columns[i].setVisible(false)
+                  // Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
+                }
+                // PortSide Engine Electrical
+                if (i >= 25 && i <= 34) {
+                  Ext.getCmp('table_ship').columns[i].setVisible(true)
+                  // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
+                }
 
-				// StarBoard Engine Genset Mechanical
-				Ext.getCmp('table_ship').columns[31].setVisible(true)
-				// Ext.getCmp('table_ship_detail').columns[31].setVisible(true)
-				Ext.getCmp('table_ship').columns[32].setVisible(true)
-				// Ext.getCmp('table_ship_detail').columns[32].setVisible(true)
-				Ext.getCmp('table_ship').columns[33].setVisible(false)
-				// Ext.getCmp('table_ship_detail').columns[33].setVisible(false)
-				Ext.getCmp('table_ship').columns[34].setVisible(true)
-				// Ext.getCmp('table_ship_detail').columns[34].setVisible(true)
-				Ext.getCmp('table_ship').columns[35].setVisible(true)
-				// Ext.getCmp('table_ship_detail').columns[35].setVisible(true)
+                // StarBoard Engine Genset Mechanical
+                Ext.getCmp('table_ship').columns[35].setVisible(true)
+                // Ext.getCmp('table_ship_detail').columns[35].setVisible(true)
+                Ext.getCmp('table_ship').columns[36].setVisible(true)
+                // Ext.getCmp('table_ship_detail').columns[36].setVisible(true)
+                Ext.getCmp('table_ship').columns[37].setVisible(false)
+                // Ext.getCmp('table_ship_detail').columns[37].setVisible(false)
+                Ext.getCmp('table_ship').columns[38].setVisible(true)
+                // Ext.getCmp('table_ship_detail').columns[38].setVisible(true)
+                Ext.getCmp('table_ship').columns[39].setVisible(true)
+                // Ext.getCmp('table_ship_detail').columns[39].setVisible(true)
 
-				// StarBoard Engine Genset Electrical
-				if (i >= 36 && i <= 42) {
-				  Ext.getCmp('table_ship').columns[i].setVisible(false)
-				  // Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
-				}
+                // StarBoard Engine Genset Electrical
+                if (i >= 40 && i <= 48) {
+                  Ext.getCmp('table_ship').columns[i].setVisible(false)
+                  // Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
+                }
 
-				// PortSide Engine Genset Mechanical
-				Ext.getCmp('table_ship').columns[43].setVisible(false)
-				// Ext.getCmp('table_ship_detail').columns[43].setVisible(false)
-				Ext.getCmp('table_ship').columns[44].setVisible(false)
-				// Ext.getCmp('table_ship_detail').columns[44].setVisible(false)
-				Ext.getCmp('table_ship').columns[45].setVisible(false)
-				// Ext.getCmp('table_ship_detail').columns[45].setVisible(false)
-				Ext.getCmp('table_ship').columns[46].setVisible(true)
-				// Ext.getCmp('table_ship_detail').columns[46].setVisible(true)
-				Ext.getCmp('table_ship').columns[47].setVisible(true)
-				// Ext.getCmp('table_ship_detail').columns[47].setVisible(true)
+                // PortSide Engine Genset Mechanical
+                Ext.getCmp('table_ship').columns[49].setVisible(false)
+                // Ext.getCmp('table_ship_detail').columns[49].setVisible(false)
+                Ext.getCmp('table_ship').columns[50].setVisible(false)
+                // Ext.getCmp('table_ship_detail').columns[50].setVisible(false)
+                Ext.getCmp('table_ship').columns[51].setVisible(false)
+                // Ext.getCmp('table_ship_detail').columns[51].setVisible(false)
+                Ext.getCmp('table_ship').columns[52].setVisible(true)
+                // Ext.getCmp('table_ship_detail').columns[52].setVisible(true)
+                Ext.getCmp('table_ship').columns[53].setVisible(true)
+                // Ext.getCmp('table_ship_detail').columns[53].setVisible(true)
 
-				// PortSide Engine Genset Electrical
-				if (i >= 48 && i <= 54) {
-				  Ext.getCmp('table_ship').columns[i].setVisible(false)
-				  // Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
-				}
-				// Panel
-				if (i >= 55 && i <= 57) {
-				  Ext.getCmp('table_ship').columns[i].setVisible(true)
-				  // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
-				}
-				if (i >= 58 && i <= 60) {
-				  Ext.getCmp('table_ship').columns[i].setVisible(true)
-				  // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
-				}
-			  }
-		  } else {
-            for (i = 1; i <= 60; i++) {
-              // Sateli Data
-              if (i >= 1 && i <= 4) {
-                Ext.getCmp('table_ship').columns[i].setVisible(true)
-                // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
+                // PortSide Engine Genset Electrical
+                if (i >= 54 && i <= 62) {
+                  Ext.getCmp('table_ship').columns[i].setVisible(false)
+                  // Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
+                }
+                // Panel
+                if (i >= 63 && i <= 65) {
+                  Ext.getCmp('table_ship').columns[i].setVisible(true)
+                  // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
+                }
+                if (i >= 66 && i <= 68) {
+                  Ext.getCmp('table_ship').columns[i].setVisible(true)
+                  // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
+                }
               }
-              // StarBoard Engine Mechanical
-              if (i >= 5 && i <= 9) {
-                Ext.getCmp('table_ship').columns[i].setVisible(true)
-                // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
-              }
-              // StarBoard Engine Electrical
-              if (i >= 10 && i <= 17) {
-                Ext.getCmp('table_ship').columns[i].setVisible(false)
-                // Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
-              }
-              // PortSide Engine Mechanical
-              if (i >= 18 && i <= 22) {
-                Ext.getCmp('table_ship').columns[i].setVisible(true)
-                // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
-              }
-              // PortSide Engine Electrical
-              if (i >= 23 && i <= 30) {
-                Ext.getCmp('table_ship').columns[i].setVisible(false)
-                // Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
-              }
-              // StarBoard Engine Genset Mechanical
-              if (i >= 31 && i <= 35) {
-                Ext.getCmp('table_ship').columns[i].setVisible(true)
-                // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
-              }
-              // StarBoard Engine Genset Electrical
-              if (i >= 36 && i <= 42) {
-                Ext.getCmp('table_ship').columns[i].setVisible(false)
-                // Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
-              }
-              // PortSide Engine Genset Mechanical
-              if (i >= 43 && i <= 47) {
-                Ext.getCmp('table_ship').columns[i].setVisible(true)
-                // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
-              }
-              // PortSide Engine Genset Electrical
-              if (i >= 48 && i <= 54) {
-                Ext.getCmp('table_ship').columns[i].setVisible(false)
-                // Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
-              }
-              // Panel
-              if (i >= 55 && i <= 57) {
-                Ext.getCmp('table_ship').columns[i].setVisible(true)
-                // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
-              }
-              if (i >= 58 && i <= 60) {
-                Ext.getCmp('table_ship').columns[i].setVisible(true)
-                // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
+            } else {
+              for (i = 1; i <= 68; i++) {
+                // Sateli Data
+                if (i >= 1 && i <= 4) {
+                  Ext.getCmp('table_ship').columns[i].setVisible(true)
+                  // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
+                }
+                // StarBoard Engine Mechanical
+                if (i >= 5 && i <= 9) {
+                  Ext.getCmp('table_ship').columns[i].setVisible(true)
+                  // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
+                }
+                // StarBoard Engine Electrical
+                if (i >= 10 && i <= 19) {
+                  Ext.getCmp('table_ship').columns[i].setVisible(false)
+                  // Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
+                }
+                // PortSide Engine Mechanical
+                if (i >= 20 && i <= 24) {
+                  Ext.getCmp('table_ship').columns[i].setVisible(true)
+                  // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
+                }
+                // PortSide Engine Electrical
+                if (i >= 25 && i <= 34) {
+                  Ext.getCmp('table_ship').columns[i].setVisible(false)
+                  // Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
+                }
+                // StarBoard Engine Genset Mechanical
+                if (i >= 35 && i <= 39) {
+                  Ext.getCmp('table_ship').columns[i].setVisible(true)
+                  // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
+                }
+                // StarBoard Engine Genset Electrical
+                if (i >= 40 && i <= 48) {
+                  Ext.getCmp('table_ship').columns[i].setVisible(false)
+                  // Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
+                }
+                // PortSide Engine Genset Mechanical
+                if (i >= 49 && i <= 53) {
+                  Ext.getCmp('table_ship').columns[i].setVisible(true)
+                  // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
+                }
+                // PortSide Engine Genset Electrical
+                if (i >= 54 && i <= 62) {
+                  Ext.getCmp('table_ship').columns[i].setVisible(false)
+                  // Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
+                }
+                // Panel
+                if (i >= 63 && i <= 65) {
+                  Ext.getCmp('table_ship').columns[i].setVisible(true)
+                  // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
+                }
+                if (i >= 66 && i <= 68) {
+                  Ext.getCmp('table_ship').columns[i].setVisible(true)
+                  // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
+                }
               }
             }
+          },
+          afterrender: function () {
+            var isi = this.getStore().data.items[0].data['name']
+            this.setValue(isi)
+            id_kpl = this.getStore().data.items[0].data['id']
+            comb_kapal2 = (comb_kapal1 != '') ? comb_kapal2 : isi
+            comb_kapal1 = id_kpl
+            var tgl_ini = Ext.getCmp('date_total_harian').getValue()
+            var tgl_sesuai = Ext.Date.format(tgl_ini, 'd-M-Y')
+            tgl_sel1 = Ext.Date.format(new Date(), 'Y-m-d')
+            var param = {
+              user_id: dt.idu,
+              id: id_kpl,
+              tgl: tgl_sel1,
+              tz: getTimeZone(),
+              type: 'vts'
+            }
+            // console.log('param afterrender', param)
+            // console.log(param)
+            // store_detail_kapal.load({params: { id: comb_kapal1, tgl: tgl_sel1}})
+            // store_detail_kapal.load({params: param})
+            // console.log('====>>>> ',this.getStore().data.items[0].data['id']+' === >> ',tgl_ini)
+            Ext.getCmp('table_ship').setTitle('Vessel ' + isi + ' on ' + tgl_sesuai)
           }
-        },
-        afterrender: function () {
-          var isi = this.getStore().data.items[0].data['name']
-          this.setValue(isi)
-          id_kpl = this.getStore().data.items[0].data['id']
-          comb_kapal2 = (comb_kapal1 != '') ? comb_kapal2 : isi
-          comb_kapal1 = id_kpl
-          var tgl_ini = Ext.getCmp('date_total_harian').getValue()
-          var tgl_sesuai = Ext.Date.format(tgl_ini, 'd-M-Y')
-          tgl_sel1 = Ext.Date.format(new Date(), 'Y-m-d')
-          var param = {user_id: dt.idu,id: id_kpl,tgl: tgl_sel1,tz: getTimeZone(), type: 'vts'}
-          // console.log('param afterrender', param)
-          // console.log(param)
-          // store_detail_kapal.load({params: { id: comb_kapal1, tgl: tgl_sel1}})
-          // store_detail_kapal.load({params: param})
-          // console.log('====>>>> ',this.getStore().data.items[0].data['id']+' === >> ',tgl_ini)
-          Ext.getCmp('table_ship').setTitle('Vessel ' + isi + ' on ' + tgl_sesuai)
         }
-      }
-    }, {
-      padding: '0 0 0 5',
-      fieldLabel: 'Date',
-      id: 'date_total_harian',
-      labelWidth: 40,
-      editable: false,
-      xtype: 'datefield',
-      value: new Date(),
-      maxValue: new Date(),
-      format: 'd-M-Y',
-      listeners: {
-        change: function () {
-          tgl_sel1 = Ext.Date.format(this.getValue(), 'Y-m-d')
-          var param = {user_id: dt.idu,id: comb_kapal1,tgl: tgl_sel1,tz: getTimeZone(), type: 'vts'}
-          // store_detail_kapal.load({params: { id: comb_kapal1, tgl: tgl_sel1}})
-          store_detail_kapal.load({params: param})
-          tgl_sel2 = (tgl_sel1 != '') ? tgl_sel1 : Ext.Date.format(new Date(), 'd-M-Y')
-          // console.log(tgl_sel2)
-          // console.log('comb_kapal1', comb_kapal1)
-          // console.log('comb_kapal2', comb_kapal2)
-          Ext.getCmp('table_ship').setTitle('Vessel ' + comb_kapal2 + ' on ' + tgl_sel2)
-        // update_text1()
-        },
-        afterrender: function () {
-          // console.log('Date selected: ', this.getValue())
-          tgl_sel1 = Ext.Date.format(this.getValue(), 'Y-m-d')
-          tgl_sel2 = (tgl_sel1 != '') ? tgl_sel1 : Ext.Date.format(new Date(), 'd-M-Y')
-          var param = {user_id: dt.idu,id: comb_kapal1,tgl: tgl_sel1,tz: getTimeZone(), type: 'vts'}
+      }, {
+        padding: '0 0 0 5',
+        fieldLabel: 'Date',
+        id: 'date_total_harian',
+        labelWidth: 40,
+        editable: false,
+        xtype: 'datefield',
+        value: new Date(),
+        maxValue: new Date(),
+        format: 'd-M-Y',
+        listeners: {
+          change: function () {
+            tgl_sel1 = Ext.Date.format(this.getValue(), 'Y-m-d')
+            var param = {
+              user_id: dt.idu,
+              id: comb_kapal1,
+              tgl: tgl_sel1,
+              tz: getTimeZone(),
+              type: 'vts'
+            }
+            // store_detail_kapal.load({params: { id: comb_kapal1, tgl: tgl_sel1}})
+            store_detail_kapal.load({
+              params: param
+            })
+            tgl_sel2 = (tgl_sel1 != '') ? tgl_sel1 : Ext.Date.format(new Date(), 'd-M-Y')
+            // console.log(tgl_sel2)
+            // console.log('comb_kapal1', comb_kapal1)
+            // console.log('comb_kapal2', comb_kapal2)
+            Ext.getCmp('table_ship').setTitle('Vessel ' + comb_kapal2 + ' on ' + tgl_sel2)
+            // update_text1()
+          },
+          afterrender: function () {
+            // console.log('Date selected: ', this.getValue())
+            tgl_sel1 = Ext.Date.format(this.getValue(), 'Y-m-d')
+            tgl_sel2 = (tgl_sel1 != '') ? tgl_sel1 : Ext.Date.format(new Date(), 'd-M-Y')
+            var param = {
+              user_id: dt.idu,
+              id: comb_kapal1,
+              tgl: tgl_sel1,
+              tz: getTimeZone(),
+              type: 'vts'
+            }
 
-          store_detail_kapal.load({params: param})
+            store_detail_kapal.load({
+              params: param
+            })
+          }
         }
-      }
-    }, '->',
+      }, '->',
       {
         xtype: 'button',
         text: 'Export to Excel',
@@ -1400,7 +1688,7 @@ var panel_detail = {
       // xtype : 'label'
       // //html:'<html><body><div style="font-size: 20px; color:blue">(current view -> '+comb_kapal1+' - date: '+tgl_sel1+')</div></body></html>'
 
-    // }
+      // }
     ]
   }],
   layout: {
@@ -1424,8 +1712,17 @@ var window_detail_jam = Ext.create('Ext.window.Window', {
     },
     show: function (panel) {
       // console.log("Window onShow : "+detail_jam_index)
-      param = {id: comb_kapal1,user_id: dt.idu,tgl: detail_jam_index,tz: dt.tz,density: 'm', type: 'vts'}
-      store_detail_kapal_detik.load({params: param})
+      param = {
+        id: comb_kapal1,
+        user_id: dt.idu,
+        tgl: detail_jam_index,
+        tz: dt.tz,
+        density: 'm',
+        type: 'vts'
+      }
+      store_detail_kapal_detik.load({
+        params: param
+      })
     }
   },
   layout: {
@@ -1446,7 +1743,7 @@ var window_detail_jam = Ext.create('Ext.window.Window', {
         type: 'vbox',
         align: 'stretch'
       },
-      items: [ tabel_detail_jam]
+      items: [tabel_detail_jam]
     }]
   }],
 
@@ -1454,7 +1751,7 @@ var window_detail_jam = Ext.create('Ext.window.Window', {
     text: 'Close',
     handler: function () {
       this.up('.window').hide()
-    // this.up('.window').destroy()
+      // this.up('.window').destroy()
     }
   }]
 
