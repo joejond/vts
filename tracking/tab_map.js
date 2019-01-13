@@ -383,7 +383,8 @@ function create_infowindow(t, d, index, mode) {
     if ((date_val.getTime() + (60 * 1000 * 10)) >= date_cur.getTime()) {
         info_ves[index] += '<p>Health Status : <b><font color="green" size="3">OK</font></b></p>';
     } else {
-        info_ves[index] += '<p>Health Status : <b><font color="red" size="3">Bad</font></b></p>';
+        info_ves[index] += '<p>Health Status : <b><font color="red" size="3">Bad</font></b>';
+        info_ves[index] += '</br><i><font color="red" size="1">*Data tidak terkirim lebih dari 10 menit</font></i></p>';
     }
     // info_ves += '<p> '+ coords + '</p>';
     // info_ves += '<p> Last Updated : '+ me.pad(day,2) +'/'+me.pad(month,2)+'/'+year +' '+ hours+':'+me.pad(minutes,2)+':'+me.pad(seconds,2) + '</p>';
