@@ -700,7 +700,7 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
           }
           if (i >= 66 && i <= 68) {
             // Ext.getCmp('table_ship').columns[i].setVisible(false)
-            Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
+            Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
           }
         }
       } else if (comb_kapal1 == 80) {
@@ -1455,7 +1455,7 @@ var panel_detail = {
                   // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
                 }
                 if (i >= 66 && i <= 68) {
-                  Ext.getCmp('table_ship').columns[i].setVisible(false)
+                  Ext.getCmp('table_ship').columns[i].setVisible(true)
                   // Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
                 }
               }
