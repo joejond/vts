@@ -230,11 +230,6 @@ var tabel_detail_jam = Ext.create('Ext.grid.Panel', {
   }, {
     header: 'StarBoard Engine (ME1)',
     columns: [{
-      header: 'ECU Satus',
-      align: 'center',
-      width: 70,
-      dataIndex: 'ME1 ECU Status'
-    }, {
       header: 'Speed',
       align: 'center',
       width: 70,
@@ -323,11 +318,6 @@ var tabel_detail_jam = Ext.create('Ext.grid.Panel', {
   }, {
     header: 'PortSide Engine (ME2)',
     columns: [{
-      header: 'ECU Satus',
-      align: 'center',
-      width: 70,
-      dataIndex: 'ME2 ECU Status'
-    }, {
       header: 'Speed',
       align: 'center',
       width: 70,
@@ -416,11 +406,6 @@ var tabel_detail_jam = Ext.create('Ext.grid.Panel', {
   }, {
     header: 'StarBoard GenSet (AE1)',
     columns: [{
-      header: 'ECU Satus',
-      align: 'center',
-      width: 70,
-      dataIndex: 'AE1 ECU Status'
-    }, {
       header: 'Speed',
       align: 'center',
       width: 70,
@@ -504,11 +489,6 @@ var tabel_detail_jam = Ext.create('Ext.grid.Panel', {
   }, {
     header: 'PortSide GenSet (AE2)',
     columns: [{
-      header: 'ECU Satus',
-      align: 'center',
-      width: 70,
-      dataIndex: 'AE2 ECU Status'
-    }, {
       header: 'Speed',
       align: 'center',
       width: 70,
@@ -647,7 +627,7 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
       window_detail_jam.show()
 
       if (comb_kapal1 == 79 || comb_kapal1 == 81) {
-        for (i = 1; i <= 68; i++) {
+        for (i = 1; i <= 64; i++) {
           // Sateli Data
           if (i >= 1 && i <= 4) {
             // Ext.getCmp('table_ship').columns[i].setVisible(true)
@@ -659,52 +639,52 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
             Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
           }
           // StarBoard Engine Electrical
-          if (i >= 10 && i <= 19) {
+          if (i >= 10 && i <= 18) {
             // Ext.getCmp('table_ship').columns[i].setVisible(true)
             Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
           }
           // PortSide Engine Mechanical
-          if (i >= 20 && i <= 24) {
+          if (i >= 19 && i <= 23) {
             // Ext.getCmp('table_ship').columns[i].setVisible(false)
             Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
           }
           // PortSide Engine Electrical
-          if (i >= 25 && i <= 34) {
+          if (i >= 24 && i <= 32) {
             // Ext.getCmp('table_ship').columns[i].setVisible(true)
             Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
           }
           // StarBoard Engine Genset Mechanical
-          if (i >= 35 && i <= 39) {
+          if (i >= 33 && i <= 37) {
             // Ext.getCmp('table_ship').columns[i].setVisible(false)
             Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
           }
           // StarBoard Engine Genset Electrical
-          if (i >= 40 && i <= 48) {
+          if (i >= 38 && i <= 45) {
             // Ext.getCmp('table_ship').columns[i].setVisible(true)
             Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
           }
           // PortSide Engine Genset Mechanical
-          if (i >= 49 && i <= 53) {
+          if (i >= 46 && i <= 50) {
             // Ext.getCmp('table_ship').columns[i].setVisible(false)
             Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
           }
           // PortSide Engine Genset Electrical
-          if (i >= 54 && i <= 62) {
+          if (i >= 51 && i <= 58) {
             // Ext.getCmp('table_ship').columns[i].setVisible(true)
             Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
           }
           // Panel
-          if (i >= 63 && i <= 65) {
+          if (i >= 59 && i <= 61) {
             // Ext.getCmp('table_ship').columns[i].setVisible(true)
             Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
           }
-          if (i >= 66 && i <= 68) {
+          if (i >= 62 && i <= 64) {
             // Ext.getCmp('table_ship').columns[i].setVisible(false)
             Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
           }
         }
       } else if (comb_kapal1 == 80) {
-        for (i = 1; i <= 68; i++) {
+        for (i = 1; i <= 64; i++) {
           // Sateli Data
           if (i >= 1 && i <= 4) {
             // Ext.getCmp('table_ship').columns[i].setVisible(true)
@@ -716,70 +696,70 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
             Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
           }
           // StarBoard Engine Electrical
-          if (i >= 10 && i <= 19) {
+          if (i >= 10 && i <= 18) {
             // Ext.getCmp('table_ship').columns[i].setVisible(true)
             Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
           }
           // PortSide Engine Mechanical
-          if (i >= 20 && i <= 24) {
+          if (i >= 19 && i <= 23) {
             // Ext.getCmp('table_ship').columns[i].setVisible(false)
             Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
           }
           // PortSide Engine Electrical
-          if (i >= 25 && i <= 34) {
+          if (i >= 24 && i <= 32) {
             // Ext.getCmp('table_ship').columns[i].setVisible(true)
             Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
           }
 
           // StarBoard Engine Genset Mechanical
 
-          // Ext.getCmp('table_ship').columns[35].setVisible(true)
-          Ext.getCmp('table_ship_detail').columns[35].setVisible(true)
+          // Ext.getCmp('table_ship').columns[33].setVisible(true)
+          Ext.getCmp('table_ship_detail').columns[33].setVisible(true)
+          // Ext.getCmp('table_ship').columns[34].setVisible(true)
+          Ext.getCmp('table_ship_detail').columns[34].setVisible(true)
+          // Ext.getCmp('table_ship').columns[35].setVisible(false)
+          Ext.getCmp('table_ship_detail').columns[35].setVisible(false)
           // Ext.getCmp('table_ship').columns[36].setVisible(true)
           Ext.getCmp('table_ship_detail').columns[36].setVisible(true)
-          // Ext.getCmp('table_ship').columns[37].setVisible(false)
-          Ext.getCmp('table_ship_detail').columns[37].setVisible(false)
-          // Ext.getCmp('table_ship').columns[38].setVisible(true)
-          Ext.getCmp('table_ship_detail').columns[38].setVisible(true)
-          // Ext.getCmp('table_ship').columns[39].setVisible(true)
-          Ext.getCmp('table_ship_detail').columns[39].setVisible(true)
+          // Ext.getCmp('table_ship').columns[37].setVisible(true)
+          Ext.getCmp('table_ship_detail').columns[37].setVisible(true)
 
           // StarBoard Engine Genset Electrical
-          if (i >= 40 && i <= 48) {
+          if (i >= 38 && i <= 45) {
             // Ext.getCmp('table_ship').columns[i].setVisible(false)
             Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
           }
 
           // PortSide Engine Genset Mechanical
 
-          // Ext.getCmp('table_ship').columns[49].setVisible(false)
-          Ext.getCmp('table_ship_detail').columns[49].setVisible(false)
-          // Ext.getCmp('table_ship').columns[50].setVisible(false)
-          Ext.getCmp('table_ship_detail').columns[50].setVisible(false)
-          // Ext.getCmp('table_ship').columns[51].setVisible(false)
-          Ext.getCmp('table_ship_detail').columns[51].setVisible(false)
-          // Ext.getCmp('table_ship').columns[52].setVisible(true)
-          Ext.getCmp('table_ship_detail').columns[52].setVisible(true)
-          // Ext.getCmp('table_ship').columns[53].setVisible(true)
-          Ext.getCmp('table_ship_detail').columns[53].setVisible(true)
+          // Ext.getCmp('table_ship').columns[46].setVisible(false)
+          Ext.getCmp('table_ship_detail').columns[46].setVisible(false)
+          // Ext.getCmp('table_ship').columns[47].setVisible(false)
+          Ext.getCmp('table_ship_detail').columns[47].setVisible(false)
+          // Ext.getCmp('table_ship').columns[48].setVisible(false)
+          Ext.getCmp('table_ship_detail').columns[48].setVisible(false)
+          // Ext.getCmp('table_ship').columns[49].setVisible(true)
+          Ext.getCmp('table_ship_detail').columns[49].setVisible(true)
+          // Ext.getCmp('table_ship').columns[50].setVisible(true)
+          Ext.getCmp('table_ship_detail').columns[50].setVisible(true)
 
           // PortSide Engine Genset Electrical
-          if (i >= 54 && i <= 62) {
+          if (i >= 51 && i <= 58) {
             // Ext.getCmp('table_ship').columns[i].setVisible(false)
             Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
           }
           // Panel
-          if (i >= 63 && i <= 65) {
+          if (i >= 59 && i <= 61) {
             // Ext.getCmp('table_ship').columns[i].setVisible(true)
             Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
           }
-          if (i >= 66 && i <= 68) {
+          if (i >= 62 && i <= 64) {
             // Ext.getCmp('table_ship').columns[i].setVisible(true)
             Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
           }
         }
       } else {
-        for (i = 1; i <= 68; i++) {
+        for (i = 1; i <= 64; i++) {
           // Sateli Data
           if (i >= 1 && i <= 4) {
             // Ext.getCmp('table_ship').columns[i].setVisible(true)
@@ -791,46 +771,46 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
             Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
           }
           // StarBoard Engine Electrical
-          if (i >= 10 && i <= 19) {
+          if (i >= 10 && i <= 18) {
             // Ext.getCmp('table_ship').columns[i].setVisible(false)
             Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
           }
           // PortSide Engine Mechanical
-          if (i >= 20 && i <= 24) {
+          if (i >= 19 && i <= 23) {
             // Ext.getCmp('table_ship').columns[i].setVisible(true)
             Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
           }
           // PortSide Engine Electrical
-          if (i >= 25 && i <= 34) {
+          if (i >= 24 && i <= 32) {
             // Ext.getCmp('table_ship').columns[i].setVisible(false)
             Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
           }
           // StarBoard Engine Genset Mechanical
-          if (i >= 35 && i <= 39) {
+          if (i >= 33 && i <= 37) {
             // Ext.getCmp('table_ship').columns[i].setVisible(true)
             Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
           }
           // StarBoard Engine Genset Electrical
-          if (i >= 40 && i <= 48) {
+          if (i >= 38 && i <= 45) {
             // Ext.getCmp('table_ship').columns[i].setVisible(false)
             Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
           }
           // PortSide Engine Genset Mechanical
-          if (i >= 49 && i <= 53) {
+          if (i >= 46 && i <= 50) {
             // Ext.getCmp('table_ship').columns[i].setVisible(true)
             Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
           }
           // PortSide Engine Genset Electrical
-          if (i >= 54 && i <= 62) {
+          if (i >= 51 && i <= 58) {
             // Ext.getCmp('table_ship').columns[i].setVisible(false)
             Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
           }
           // Panel
-          if (i >= 63 && i <= 65) {
+          if (i >= 59 && i <= 61) {
             // Ext.getCmp('table_ship').columns[i].setVisible(true)
             Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
           }
-          if (i >= 66 && i <= 68) {
+          if (i >= 62 && i <= 64) {
             // Ext.getCmp('table_ship').columns[i].setVisible(true)
             Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
           }
@@ -838,7 +818,7 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
       }
     },
     afterrender: function () {
-      for (i = 1; i <= 68; i++) {
+      for (i = 1; i <= 64; i++) {
         // Sateli Data
         if (i >= 1 && i <= 4) {
           Ext.getCmp('table_ship').columns[i].setVisible(true)
@@ -850,46 +830,46 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
           // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
         }
         // StarBoard Engine Electrical
-        if (i >= 10 && i <= 19) {
+        if (i >= 10 && i <= 18) {
           Ext.getCmp('table_ship').columns[i].setVisible(false)
           // Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
         }
         // PortSide Engine Mechanical
-        if (i >= 20 && i <= 24) {
+        if (i >= 19 && i <= 23) {
           Ext.getCmp('table_ship').columns[i].setVisible(true)
           // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
         }
         // PortSide Engine Electrical
-        if (i >= 25 && i <= 34) {
+        if (i >= 24 && i <= 32) {
           Ext.getCmp('table_ship').columns[i].setVisible(false)
           // Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
         }
         // StarBoard Engine Genset Mechanical
-        if (i >= 35 && i <= 39) {
+        if (i >= 33 && i <= 37) {
           Ext.getCmp('table_ship').columns[i].setVisible(true)
           // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
         }
         // StarBoard Engine Genset Electrical
-        if (i >= 40 && i <= 48) {
+        if (i >= 38 && i <= 45) {
           Ext.getCmp('table_ship').columns[i].setVisible(false)
           // Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
         }
         // PortSide Engine Genset Mechanical
-        if (i >= 49 && i <= 53) {
+        if (i >= 46 && i <= 50) {
           Ext.getCmp('table_ship').columns[i].setVisible(true)
           // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
         }
         // PortSide Engine Genset Electrical
-        if (i >= 54 && i <= 62) {
+        if (i >= 51 && i <= 58) {
           Ext.getCmp('table_ship').columns[i].setVisible(false)
           // Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
         }
         // Panel
-        if (i >= 63 && i <= 65) {
+        if (i >= 59 && i <= 61) {
           Ext.getCmp('table_ship').columns[i].setVisible(true)
           // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
         }
-        if (i >= 66 && i <= 68) {
+        if (i >= 62 && i <= 64) {
           Ext.getCmp('table_ship').columns[i].setVisible(true)
           // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
         }
@@ -959,11 +939,6 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
   }, {
     header: 'StarBoard Engine (ME1)',
     columns: [{
-      header: 'ECU Satus',
-      align: 'center',
-      width: 70,
-      dataIndex: 'ME1 ECU Status'
-    }, {
       header: 'Speed',
       align: 'center',
       width: 70,
@@ -1052,11 +1027,6 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
   }, {
     header: 'PortSide Engine (ME2)',
     columns: [{
-      header: 'ECU Satus',
-      align: 'center',
-      width: 70,
-      dataIndex: 'ME2 ECU Status'
-    }, {
       header: 'Speed',
       align: 'center',
       width: 70,
@@ -1145,11 +1115,6 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
   }, {
     header: 'StarBoard GenSet (AE1)',
     columns: [{
-      header: 'ECU Satus',
-      align: 'center',
-      width: 70,
-      dataIndex: 'AE1 ECU Status'
-    }, {
       header: 'Speed',
       align: 'center',
       width: 70,
@@ -1233,11 +1198,6 @@ var tabel_detail_kapal = Ext.create('Ext.grid.Panel', {
   }, {
     header: 'PortSide GenSet (AE2)',
     columns: [{
-      header: 'ECU Satus',
-      align: 'center',
-      width: 70,
-      dataIndex: 'AE2 ECU Status'
-    }, {
       header: 'Speed',
       align: 'center',
       width: 70,
@@ -1403,7 +1363,7 @@ var panel_detail = {
             // console.log(comb_kapal1,comb_kapal2)
 
             if (comb_kapal1 == 79 || comb_kapal1 == 81) {
-              for (i = 1; i <= 68; i++) {
+              for (i = 1; i <= 64; i++) {
                 // Sateli Data
                 if (i >= 1 && i <= 4) {
                   Ext.getCmp('table_ship').columns[i].setVisible(true)
@@ -1415,52 +1375,52 @@ var panel_detail = {
                   // Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
                 }
                 // StarBoard Engine Electrical
-                if (i >= 10 && i <= 19) {
+                if (i >= 10 && i <= 18) {
                   Ext.getCmp('table_ship').columns[i].setVisible(true)
                   // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
                 }
                 // PortSide Engine Mechanical
-                if (i >= 20 && i <= 24) {
+                if (i >= 19 && i <= 23) {
                   Ext.getCmp('table_ship').columns[i].setVisible(false)
                   // Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
                 }
                 // PortSide Engine Electrical
-                if (i >= 25 && i <= 34) {
+                if (i >= 24 && i <= 32) {
                   Ext.getCmp('table_ship').columns[i].setVisible(true)
                   // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
                 }
                 // StarBoard Engine Genset Mechanical
-                if (i >= 35 && i <= 39) {
+                if (i >= 33 && i <= 37) {
                   Ext.getCmp('table_ship').columns[i].setVisible(false)
                   // Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
                 }
                 // StarBoard Engine Genset Electrical
-                if (i >= 40 && i <= 48) {
+                if (i >= 38 && i <= 45) {
                   Ext.getCmp('table_ship').columns[i].setVisible(true)
                   // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
                 }
                 // PortSide Engine Genset Mechanical
-                if (i >= 49 && i <= 53) {
+                if (i >= 46 && i <= 50) {
                   Ext.getCmp('table_ship').columns[i].setVisible(false)
                   // Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
                 }
                 // PortSide Engine Genset Electrical
-                if (i >= 54 && i <= 62) {
+                if (i >= 51 && i <= 58) {
                   Ext.getCmp('table_ship').columns[i].setVisible(true)
                   // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
                 }
                 // Panel
-                if (i >= 63 && i <= 65) {
+                if (i >= 59 && i <= 61) {
                   Ext.getCmp('table_ship').columns[i].setVisible(true)
                   // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
                 }
-                if (i >= 66 && i <= 68) {
+                if (i >= 62 && i <= 64) {
                   Ext.getCmp('table_ship').columns[i].setVisible(true)
                   // Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
                 }
               }
             } else if (comb_kapal1 == 80) {
-              for (i = 1; i <= 68; i++) {
+              for (i = 1; i <= 64; i++) {
                 // Sateli Data
                 if (i >= 1 && i <= 4) {
                   Ext.getCmp('table_ship').columns[i].setVisible(true)
@@ -1472,68 +1432,68 @@ var panel_detail = {
                   // Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
                 }
                 // StarBoard Engine Electrical
-                if (i >= 10 && i <= 19) {
+                if (i >= 10 && i <= 18) {
                   Ext.getCmp('table_ship').columns[i].setVisible(true)
                   // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
                 }
                 // PortSide Engine Mechanical
-                if (i >= 20 && i <= 24) {
+                if (i >= 19 && i <= 23) {
                   Ext.getCmp('table_ship').columns[i].setVisible(false)
                   // Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
                 }
                 // PortSide Engine Electrical
-                if (i >= 25 && i <= 34) {
+                if (i >= 24 && i <= 32) {
                   Ext.getCmp('table_ship').columns[i].setVisible(true)
                   // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
                 }
 
                 // StarBoard Engine Genset Mechanical
-                Ext.getCmp('table_ship').columns[35].setVisible(true)
-                // Ext.getCmp('table_ship_detail').columns[35].setVisible(true)
+                Ext.getCmp('table_ship').columns[33].setVisible(true)
+                // Ext.getCmp('table_ship_detail').columns[33].setVisible(true)
+                Ext.getCmp('table_ship').columns[34].setVisible(true)
+                // Ext.getCmp('table_ship_detail').columns[34].setVisible(true)
+                Ext.getCmp('table_ship').columns[35].setVisible(false)
+                // Ext.getCmp('table_ship_detail').columns[35].setVisible(false)
                 Ext.getCmp('table_ship').columns[36].setVisible(true)
                 // Ext.getCmp('table_ship_detail').columns[36].setVisible(true)
-                Ext.getCmp('table_ship').columns[37].setVisible(false)
-                // Ext.getCmp('table_ship_detail').columns[37].setVisible(false)
-                Ext.getCmp('table_ship').columns[38].setVisible(true)
-                // Ext.getCmp('table_ship_detail').columns[38].setVisible(true)
-                Ext.getCmp('table_ship').columns[39].setVisible(true)
-                // Ext.getCmp('table_ship_detail').columns[39].setVisible(true)
+                Ext.getCmp('table_ship').columns[37].setVisible(true)
+                // Ext.getCmp('table_ship_detail').columns[37].setVisible(true)
 
                 // StarBoard Engine Genset Electrical
-                if (i >= 40 && i <= 48) {
+                if (i >= 38 && i <= 45) {
                   Ext.getCmp('table_ship').columns[i].setVisible(false)
                   // Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
                 }
 
                 // PortSide Engine Genset Mechanical
-                Ext.getCmp('table_ship').columns[49].setVisible(false)
-                // Ext.getCmp('table_ship_detail').columns[49].setVisible(false)
-                Ext.getCmp('table_ship').columns[50].setVisible(false)
-                // Ext.getCmp('table_ship_detail').columns[50].setVisible(false)
-                Ext.getCmp('table_ship').columns[51].setVisible(false)
-                // Ext.getCmp('table_ship_detail').columns[51].setVisible(false)
-                Ext.getCmp('table_ship').columns[52].setVisible(true)
-                // Ext.getCmp('table_ship_detail').columns[52].setVisible(true)
-                Ext.getCmp('table_ship').columns[53].setVisible(true)
-                // Ext.getCmp('table_ship_detail').columns[53].setVisible(true)
+                Ext.getCmp('table_ship').columns[46].setVisible(false)
+                // Ext.getCmp('table_ship_detail').columns[46].setVisible(false)
+                Ext.getCmp('table_ship').columns[47].setVisible(false)
+                // Ext.getCmp('table_ship_detail').columns[47].setVisible(false)
+                Ext.getCmp('table_ship').columns[48].setVisible(false)
+                // Ext.getCmp('table_ship_detail').columns[48].setVisible(false)
+                Ext.getCmp('table_ship').columns[49].setVisible(true)
+                // Ext.getCmp('table_ship_detail').columns[49].setVisible(true)
+                Ext.getCmp('table_ship').columns[50].setVisible(true)
+                // Ext.getCmp('table_ship_detail').columns[50].setVisible(true)
 
                 // PortSide Engine Genset Electrical
-                if (i >= 54 && i <= 62) {
+                if (i >= 51 && i <= 58) {
                   Ext.getCmp('table_ship').columns[i].setVisible(false)
                   // Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
                 }
                 // Panel
-                if (i >= 63 && i <= 65) {
+                if (i >= 59 && i <= 61) {
                   Ext.getCmp('table_ship').columns[i].setVisible(true)
                   // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
                 }
-                if (i >= 66 && i <= 68) {
+                if (i >= 62 && i <= 64) {
                   Ext.getCmp('table_ship').columns[i].setVisible(true)
                   // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
                 }
               }
             } else {
-              for (i = 1; i <= 68; i++) {
+              for (i = 1; i <= 64; i++) {
                 // Sateli Data
                 if (i >= 1 && i <= 4) {
                   Ext.getCmp('table_ship').columns[i].setVisible(true)
@@ -1545,46 +1505,46 @@ var panel_detail = {
                   // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
                 }
                 // StarBoard Engine Electrical
-                if (i >= 10 && i <= 19) {
+                if (i >= 10 && i <= 18) {
                   Ext.getCmp('table_ship').columns[i].setVisible(false)
                   // Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
                 }
                 // PortSide Engine Mechanical
-                if (i >= 20 && i <= 24) {
+                if (i >= 19 && i <= 23) {
                   Ext.getCmp('table_ship').columns[i].setVisible(true)
                   // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
                 }
                 // PortSide Engine Electrical
-                if (i >= 25 && i <= 34) {
+                if (i >= 24 && i <= 32) {
                   Ext.getCmp('table_ship').columns[i].setVisible(false)
                   // Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
                 }
                 // StarBoard Engine Genset Mechanical
-                if (i >= 35 && i <= 39) {
+                if (i >= 33 && i <= 37) {
                   Ext.getCmp('table_ship').columns[i].setVisible(true)
                   // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
                 }
                 // StarBoard Engine Genset Electrical
-                if (i >= 40 && i <= 48) {
+                if (i >= 38 && i <= 45) {
                   Ext.getCmp('table_ship').columns[i].setVisible(false)
                   // Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
                 }
                 // PortSide Engine Genset Mechanical
-                if (i >= 49 && i <= 53) {
+                if (i >= 46 && i <= 50) {
                   Ext.getCmp('table_ship').columns[i].setVisible(true)
                   // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
                 }
                 // PortSide Engine Genset Electrical
-                if (i >= 54 && i <= 62) {
+                if (i >= 51 && i <= 58) {
                   Ext.getCmp('table_ship').columns[i].setVisible(false)
                   // Ext.getCmp('table_ship_detail').columns[i].setVisible(false)
                 }
                 // Panel
-                if (i >= 63 && i <= 65) {
+                if (i >= 59 && i <= 61) {
                   Ext.getCmp('table_ship').columns[i].setVisible(true)
                   // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
                 }
-                if (i >= 66 && i <= 68) {
+                if (i >= 62 && i <= 64) {
                   Ext.getCmp('table_ship').columns[i].setVisible(true)
                   // Ext.getCmp('table_ship_detail').columns[i].setVisible(true)
                 }
