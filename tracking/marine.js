@@ -25,16 +25,18 @@ Ext.onReady(function() {
 							id		: 'app-header-title',
 							html	: document.title,
 							//flex 	: 1,
-							width	: '65%'
+							width	: '55%'
 						},{
 							id		: 'user',
 							xtype	: 'label',
-							width	: '15%'
+							width	: '20%',
+							style	: { 'font-size': "20px" }
 						},{
 							id	: 'jam',
 							xtype	: 'label',
 							//html	: '<div id="jam"></div><span>'+ user_login +' </span>',
-							width	: '15%'
+							width	: '20%',
+							style	: { 'font-size': "20px" }
 						},{
 							// id: 'user',
 							xtype	: 'button',
@@ -71,7 +73,7 @@ Ext.onReady(function() {
             items: [{
                 title: 'MAP VIEW',
                 layout: 'border',
-								id: 'map_tab',
+				id: 'map_tab',
                 iconCls: 'tab-icon',
                 items: [ peta , ship_list ]
             },{
@@ -84,7 +86,26 @@ Ext.onReady(function() {
                 title: 'DAILY REPORT',
                 layout: 'fit',
                 id: 'analisis_tab',
-                items: [ panel_hitung ],
+                items: [{
+					region: 'center',
+					xtype: 'tabpanel',
+					tabPosition: 'top',
+					frame: true,
+					padding: 5,
+					items: [{
+						title: 'Single Ship',
+						layout: 'fit',
+						id: 'single_ship_tab',
+						iconCls: 'tab-icon',
+						items: [ panel_hitung ]
+					},{
+						title: 'Multiple Ship',
+						layout: 'fit',
+						id: 'multiple_ship_tab',
+						iconCls: 'tab-icon',
+						items: [ ]
+					}]
+				}],
                 iconCls: 'tab-icon'
 
 						},{

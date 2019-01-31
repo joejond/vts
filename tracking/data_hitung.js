@@ -983,6 +983,45 @@ var panel_hitung = {
     }]
 };
 
+// var multiple_panel_hitung = {
+//     layout: {
+//         type: 'vbox',
+//         pack: 'start',
+//         align: 'stretch'
+//     },
+//     items: [{
+//         id: 'table_chart',
+//         title: 'Data Chart',
+//         flex: 9,
+//         layout: 'fit',
+//         items: [grafik]
+//     }, {
+//         xtype: 'splitter'
+//     }, {
+//         flex: 7,
+//         border: false,
+//         height: 100,
+//         layout: {
+//             type: 'hbox',
+//             pack: 'start',
+//             align: 'stretch'
+//         },
+//         items: [{
+//                 title: 'Daily Summary',
+//                 flex: 2,
+//                 items: [{
+//                     border: false,
+//                     id: "panel_daily",
+//                     html: content_akum
+//                 }]
+//             }, {
+//                 xtype: 'splitter'
+//             },
+//             tabel_akumulasi
+//         ]
+//     }]
+// };
+
 var eng_rh1 = '';
 
 function daily_akum() {
