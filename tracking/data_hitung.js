@@ -31,6 +31,7 @@ var eng1_daily = 0.0;
 var eng2_daily = 0.0;
 var ae1_daily = 0.0;
 var ae2_daily = 0.0;
+var remaining_on_board = 0.0;
 var rh_engine1 = 0.0;
 var rh_engine2 = 0.0;
 var rh_ae1 = 0.0;
@@ -741,45 +742,33 @@ var time_range_combo = Ext.create('Ext.form.ComboBox', {
     valueField: 'tipe_range'
 });
 
-
 var content_akum = '<style type="text/css">' +
     'table.total_daily {font-family: verdana,arial,sans-serif;font-size:12px;text-align: center;color:#333333;border-width: 1px;border-color: #a9c6c9;border-collapse: collapse;}' +
     'table.total_daily td {border-width: 1px;padding: 4px;border-style: solid;border-color: #a9c6c9;}' +
     '</style>' +
     '<table width="100%" class="total_daily">' +
-    '<tr><td colspan="2">Total Daily</td></tr>' +
-    '<tr><td colspan="2" style="font-size:22px;">' + total_daily + ' Liters</td></tr>' +
-    '<tr><td>StarBoard (ME1)</td><td>PortSide (ME2)</td></tr>' +
+    '<tr><td>Total Consumption</td><td colspan="4" style="font-size:22px;">' + total_daily + ' Liters</td></tr>' +
+    '<tr><td>Remaining on Board</td><td colspan="4" style="font-size:22px;">' + remaining_on_board + ' Liters</td></tr>' +
     '<tr>' +
+    '<td>&nbsp;</td><td>StarBoard (ME1)</td><td>PortSide (ME2)</td><td>Genset#1 (AE1)</td><td>Genset#2 (AE2)</td>' +
+    '</tr>' +
+    '<tr><td>Fuel Consumption</td>' +
     '<td><span style="font-size:18px;"> ' + eng1_daily + ' Liters</span></td>' +
     '<td><span style="font-size:18px;"> ' + eng2_daily + ' Liters</span></td>' +
+    '<td><span style="font-size:18px;"> ' + ae1_daily + ' Liters</span></td>' +
+    '<td><span style="font-size:18px;"> ' + ae2_daily + ' Liters</span></td>' +
     '</tr>' +
-    '<tr>' +
-    '<td><span style="font-size:18px;"> ' + rh_engine1 + ' Hours</span></td>' +
-    '<td><span style="font-size:18px;"> ' + rh_engine2 + ' Hours</span></td>' +
+    '<tr><td>Engine Hours</td>' +
+    '<td><span style="font-size:18px;"> ' + rh_engine1 + ' Hrs</span></td>' +
+    '<td><span style="font-size:18px;"> ' + rh_engine2 + ' Hrs</span></td>' +
+    '<td><span style="font-size:18px;"> ' + rh_ae1 + ' Hrs</span></td>' +
+    '<td><span style="font-size:18px;"> ' + rh_ae2 + ' Hrs</span></td>' +
     '</tr>' +
-    '<tr>' +
+    '<tr><td>Fuel Rate</td>' +
     '<td><span style="font-size:18px;"> ' + fr_engine1 + ' lt/hr</span></td>' +
     '<td><span style="font-size:18px;"> ' + fr_engine2 + ' lt/hr</span></td>' +
-    '</tr>' +
-    '<tr><td colspan="2"></td></tr>' +
-    '<tr><td colspan="2">Genset Daily</td></tr>' +
-    '</tr>' +
-    '<tr>' +
-    '<td>Genset#1 (AE1)</td>' +
-    '<td>Genset#2 (AE2)</td>' +
-    '</tr>' +
-    '<tr>' +
-    '<td><span style="font-size:18px;"> ' + ae1_daily + ' Liters</span></td>' +
-    '<td><span style="font-size:18px;">' + ae2_daily + ' Liters</span></td>' +
-    '</tr>' +
-    '<tr>' +
-    '<td><span style="font-size:18px;">' + rh_ae1 + ' Hours</span></td>' +
-    '<td><span style="font-size:18px;">' + rh_ae2 + ' Hours</span></td>' +
-    '</tr>' +
-    '<tr>' +
-    '<td><span style="font-size:18px;">' + fr_ae1 + ' lt/hr</span></td>' +
-    '<td><span style="font-size:18px;">' + fr_ae2 + ' lt/hr</span></td>' +
+    '<td><span style="font-size:18px;"> ' + fr_ae1 + ' lt/hr</span></td>' +
+    '<td><span style="font-size:18px;"> ' + fr_ae2 + ' lt/hr</span></td>' +
     '</tr>' +
     '</table>';
 
@@ -875,7 +864,9 @@ var panel_hitung = {
 
                     // var hostnya = getAPI();
                     // console.log(hostnya);
-
+                    
+                    var task_multipleShip = new Ext.util.TaskRunner();
+                    task_multipleShip.start(taskMS);
                 }
             }
         }, {
@@ -1096,7 +1087,6 @@ function daily_akum() {
                 'table.total_daily td {border-width: 1px;padding: 4px;border-style: solid;border-color: #a9c6c9;}' +
                 '</style>' +
                 '<table width="100%" class="total_daily">' +
-                // '<tr><td>1</td><td colspan="2">Total Daily</td><td>1</td></tr>' +
                 '<tr><td>Total Consumption</td><td colspan="4" style="font-size:22px;">' + total_daily + ' Liters</td></tr>' +
                 '<tr><td>Remaining on Board</td><td colspan="4" style="font-size:22px;">' + remaining_on_board + ' Liters</td></tr>' +
                 '<tr>' +
@@ -1120,25 +1110,6 @@ function daily_akum() {
                 '<td><span style="font-size:18px;"> ' + fr_ae1 + ' lt/hr</span></td>' +
                 '<td><span style="font-size:18px;"> ' + fr_ae2 + ' lt/hr</span></td>' +
                 '</tr>' +
-                // '<tr><td>7</td><td colspan="4"></td></tr>' +
-                // '<tr><td>8</td><td colspan="4">Genset Daily</td></tr>' +
-                // // '</tr>' +
-                // '<tr><td>9</td>' +
-                // '<td>Genset#1 (AE1)</td>' +
-                // '<td>Genset#2 (AE2)</td>' +
-                // '<td>9</td></tr>' +
-                // '<tr><td>10</td>' +
-                // '<td><span style="font-size:18px;">' + ae1_daily + ' Liter</span></td>' +
-                // '<td><span style="font-size:18px;">' + ae2_daily + ' Liter</span></td>' +
-                // '<td>10</td></tr>' +
-                // '<tr><td>11</td>' +
-                // '<td><span style="font-size:18px;">' + rh_ae1 + '</span></td>' +
-                // '<td><span style="font-size:18px;">' + rh_ae2 + '</span></td>' +
-                // '<td>11</td></tr>' +
-                // '<tr><td>12</td>' +
-                // '<td><span style="font-size:18px;">' + fr_ae1 + ' lt/hr</span></td>' +
-                // '<td><span style="font-size:18px;">' +s fr_ae2 + ' lt/hr</span></td>' +
-                // '<td>12</td></tr>' +
                 '</table>';
             Ext.getCmp('panel_daily').update(content_akum);
 

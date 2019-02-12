@@ -103,7 +103,7 @@ Ext.onReady(function() {
 						layout: 'fit',
 						id: 'multiple_ship_tab',
 						iconCls: 'tab-icon',
-						items: [ ]
+						items: [ panel_hitung_banyak ]
 					}]
 				}],
                 iconCls: 'tab-icon'
