@@ -147,6 +147,94 @@ var tabel_r_sum = Ext.create('Ext.grid.Panel', {
 			}]
 		}]
 	}, {
+		header: "",
+		columns: [{
+			header: "Remaining on Board",
+			align: 'center',
+			columns: [{
+				header: "Liter",
+				align: 'center',
+				width: 150,
+				dataIndex: 'Remaining on board',
+				renderer: function (v) {
+					return parseFloat(v).toFixed(2);
+				}		
+			}]
+		}]
+	}, {
+		header: "",
+		columns: [{
+			header: "Total Consumption",
+			align: 'center',
+			columns: [{
+				header: "Liter",
+				align: 'center',
+				width: 150,
+				dataIndex: 'Total Consumption',
+				renderer: function (v) {
+					return parseFloat(v).toFixed(2);
+				}
+			}]
+		}]
+	}, {
+		header: "",
+		columns: [{
+			header: "Last Fuel Loding",
+			align: 'center',
+			columns: [{
+				header: "Liter",
+				align: 'center',
+				width: 150,
+				dataIndex: 'Last fuel loading',
+				renderer: function (v) {
+					return parseFloat(v).toFixed(2);
+				}
+			}]
+		}]
+	}, {
+		header: "",
+		columns: [{
+			header: "Total Engine Hours",
+			align: 'center',
+			columns: [{
+				header: "Hr",
+				align: 'center',
+				width: 150,
+				dataIndex: 'Total Working Hours',
+				renderer: function (v) {
+					return parseFloat(v).toFixed(2);
+				}
+			}]
+		}]
+	}, {
+		header: "Total Main Engine",
+		align: 'center',
+		columns: [{
+			header: "Fuel Consumption",
+			align: 'center',
+			columns: [{
+				header: "Liter",
+				align: 'center',
+				width: 100,
+				dataIndex: "Total Consumption ME",
+				renderer: function (v) {
+					return parseFloat(v).toFixed(2);
+				}
+			}]
+		}, {
+			header: "Engine Hours",
+			align: 'center',
+			columns: [{
+				header: "Hr",
+				align: 'center',
+				width: 100,
+				dataIndex: "Total Working Hours ME",
+				renderer: function (v) {
+					return parseFloat(v).toFixed(2);
+				}
+			}]
+		}]
+	}, {
 		header: "StarBoard Engine (ME1)",
 		align: 'center',
 		columns: [{
@@ -227,7 +315,7 @@ var tabel_r_sum = Ext.create('Ext.grid.Panel', {
 			}]
 		}]
 	}, {
-		header: "Total Main Engine",
+		header: "Total Auxiliary Engine",
 		align: 'center',
 		columns: [{
 			header: "Fuel Consumption",
@@ -236,7 +324,7 @@ var tabel_r_sum = Ext.create('Ext.grid.Panel', {
 				header: "Liter",
 				align: 'center',
 				width: 100,
-				dataIndex: "Total Consumption ME",
+				dataIndex: "Total Consumption AE",
 				renderer: function (v) {
 					return parseFloat(v).toFixed(2);
 				}
@@ -248,7 +336,7 @@ var tabel_r_sum = Ext.create('Ext.grid.Panel', {
 				header: "Hr",
 				align: 'center',
 				width: 100,
-				dataIndex: "Total Working Hours ME",
+				dataIndex: "Total Working Hours AE",
 				renderer: function (v) {
 					return parseFloat(v).toFixed(2);
 				}
@@ -334,95 +422,7 @@ var tabel_r_sum = Ext.create('Ext.grid.Panel', {
 				}
 			}]
 		}]
-	}, {
-		header: "Total Auxiliary Engine",
-		align: 'center',
-		columns: [{
-			header: "Fuel Consumption",
-			align: 'center',
-			columns: [{
-				header: "Liter",
-				align: 'center',
-				width: 100,
-				dataIndex: "Total Consumption AE",
-				renderer: function (v) {
-					return parseFloat(v).toFixed(2);
-				}
-			}]
-		}, {
-			header: "Engine Hours",
-			align: 'center',
-			columns: [{
-				header: "Hr",
-				align: 'center',
-				width: 100,
-				dataIndex: "Total Working Hours AE",
-				renderer: function (v) {
-					return parseFloat(v).toFixed(2);
-				}
-			}]
-		}]
-	}, {
-		header: "",
-		columns: [{
-			header: "Remaining on Board",
-			align: 'center',
-			columns: [{
-				header: "Liter",
-				align: 'center',
-				width: 150,
-				dataIndex: 'Remaining on board',
-				renderer: function (v) {
-					return parseFloat(v).toFixed(2);
-				}		
-			}]
-		}]
-	}, {
-		header: "",
-		columns: [{
-			header: "Total Consumption",
-			align: 'center',
-			columns: [{
-				header: "Liter",
-				align: 'center',
-				width: 150,
-				dataIndex: 'Total Consumption',
-				renderer: function (v) {
-					return parseFloat(v).toFixed(2);
-				}
-			}]
-		}]
-	}, {
-		header: "",
-		columns: [{
-			header: "Last Fuel Loding",
-			align: 'center',
-			columns: [{
-				header: "Liter",
-				align: 'center',
-				width: 150,
-				dataIndex: 'Last fuel loading',
-				renderer: function (v) {
-					return parseFloat(v).toFixed(2);
-				}
-			}]
-		}]
-	}, {
-		header: "",
-		columns: [{
-			header: "Total Engine Hours",
-			align: 'center',
-			columns: [{
-				header: "Hr",
-				align: 'center',
-				width: 150,
-				dataIndex: 'Total Working Hours',
-				renderer: function (v) {
-					return parseFloat(v).toFixed(2);
-				}
-			}]
-		}]
-	}]
+    }]
 });
 //
 //
