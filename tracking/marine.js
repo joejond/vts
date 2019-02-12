@@ -86,26 +86,27 @@ Ext.onReady(function() {
                 title: 'DAILY REPORT',
                 layout: 'fit',
                 id: 'analisis_tab',
-                items: [{
-					region: 'center',
-					xtype: 'tabpanel',
-					tabPosition: 'top',
-					frame: true,
-					padding: 5,
-					items: [{
-						title: 'Single Ship',
-						layout: 'fit',
-						id: 'single_ship_tab',
-						iconCls: 'tab-icon',
-						items: [ panel_hitung ]
-					},{
-						title: 'Multiple Ship',
-						layout: 'fit',
-						id: 'multiple_ship_tab',
-						iconCls: 'tab-icon',
-						items: [ panel_hitung_banyak ]
-					}]
-				}],
+                items: [ panel_hitung ],
+                // items: [{
+				// 	region: 'center',
+				// 	xtype: 'tabpanel',
+				// 	tabPosition: 'top',
+				// 	frame: true,
+				// 	padding: 5,
+				// 	items: [{
+				// 		title: 'Single Ship',
+				// 		layout: 'fit',
+				// 		id: 'single_ship_tab',
+				// 		iconCls: 'tab-icon',
+				// 		items: [ panel_hitung ]
+				// 	},{
+				// 		title: 'Multiple Ship',
+				// 		layout: 'fit',
+				// 		id: 'multiple_ship_tab',
+				// 		iconCls: 'tab-icon',
+				// 		items: [ panel_hitung_banyak ]
+				// 	}]
+				// }],
                 iconCls: 'tab-icon'
 
 						},{
