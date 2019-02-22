@@ -865,8 +865,8 @@ var panel_hitung = {
                     // var hostnya = getAPI();
                     // console.log(hostnya);
                     
-                    var task_multipleShip = new Ext.util.TaskRunner();
-                    task_multipleShip.start(taskMS);
+                    // var task_multipleShip = new Ext.util.TaskRunner();
+                    // task_multipleShip.start(taskMS);
                 }
             }
         }, {
