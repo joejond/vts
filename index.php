@@ -1,7 +1,7 @@
 <?php
 session_start();
-include	'./../inc/cekSession.php';
-include	'./../inc/conn_db.php';
+include	'../inc/cekSession.php';
+include	'../inc/conn_db.php';
 ?>
 
 

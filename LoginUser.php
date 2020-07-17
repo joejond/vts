@@ -5,136 +5,6 @@ session_start();
 //>>>>>>> acbcd4121c59d1900b3ea98bec84944ec035c339
 //include	'inc/conn_db.php';
 
-//if (!empty($_SERVER["HTTP_CLIENT_IP"]))
-//{
- ////check for ip from share internet
- //$ip = $_SERVER["HTTP_CLIENT_IP"];
-//}
-//elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"]))
-//{
- //// Check for the Proxy User
- //$ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
-//}
-//else
-//{
- //$ip = $_SERVER["REMOTE_ADDR"];
-//}
-
-//if(isset($_POST['userid']) && isset($_POST['capcai'])) {
-		//$user = strip_tags(trim($_POST['userid'])); //echo $user;
-		//$pass = strip_tags(trim($_POST['passwd'])); //echo $pass;
-		//$capca = strip_tags(trim($_POST['capcai'])); //echo $capca;
-		//$kode = $_SESSION['kode']; //echo $kode;
-		//$banding = strcmp($kode,$capca); //echo $banding;
-//<<<<<<< HEAD
-
-		//$sql 	= "SELECT u.id, u.username ,u.timezone, ur.route, u.id_company
-//=======
-
-		//$sql 	= "SELECT u.id, u.username ,u.timezone, ur.route, u.id_company
-//>>>>>>> acbcd4121c59d1900b3ea98bec84944ec035c339
-					//FROM user u
-						//join user_route ur on ur.id_company = u.id_company
-					//WHERE u.username = '".$user."' and u.password='".MD5($pass)."'";
-		////echo $sql.'<br>';
-		//$sth = $db->prepare($sql);
-		//$sth->execute();
-		////$result = $sth->fetchAll();
-		////print_r($result);
-		////$statement->rowCount()
-		////$hasil 	= $db->query($sql);
-		////$jml 	= $hasil->num_rows;
-//<<<<<<< HEAD
-
-		//$jml = $sth->rowCount();
-		//$result = $sth->fetch(PDO::FETCH_OBJ);
-
-		////print_r($result);
-
-//=======
-
-		//$jml = $sth->rowCount();
-		//$result = $sth->fetch(PDO::FETCH_OBJ);
-
-		////print_r($result);
-
-//>>>>>>> acbcd4121c59d1900b3ea98bec84944ec035c339
-		//if ($user == '' || $pass == ''){
-			//$msg = '<p class="text-center text-danger" ><b><span class="glyphicon glyphicon-warning-sign"></span>   Please type your username or password!!</b></p>';
-		//}
-
-		//else if (($jml == 1) && ($banding == 0)) {
-			////while($row = $sth->fetch()){
-			////foreach($result as $row){
-				////echo $row['username'] . '<br />';
-//<<<<<<< HEAD
-
-				////$_SESSION['uid']		= $row['id'];
-				////$_SESSION['username']	= $row['username'];
-				////$_SESSION['timezone']	= $row['timezone'];
-				//$_SESSION['uid']		= $result->id;
-				//$_SESSION['username']	= $result->username;
-				//$_SESSION['company']	= $result->id_company;
-				//$_SESSION['timezone']	= $result->timezone;
-
-
-				//$sql_log = "update user set last_login = UNIX_TIMESTAMP(NOW()), ipaddress = '".$ip."' where id = ".$result->id."";
-				//$loged = $db->prepare($sql_log);
-				//$loged->execute();
-
-			////}
-				////print_r ($result);
-
-			////echo 'ini dia - >'. $result->route;
-			////echo  'hahada'.$row['user_route_id'];
-			////*
-			//echo '<script type="text/javascript">
-					//window.parent.location ="'.$result->route.'/#";
-
-
-//=======
-
-				////$_SESSION['uid']		= $row['id'];
-				////$_SESSION['username']	= $row['username'];
-				////$_SESSION['timezone']	= $row['timezone'];
-				//$_SESSION['uid']		= $result->id;
-				//$_SESSION['username']	= $result->username;
-				//$_SESSION['company']	= $result->id_company;
-				//$_SESSION['timezone']	= $result->timezone;
-
-
-				//$sql_log = "update user set last_login = UNIX_TIMESTAMP(NOW()), ipaddress = '".$ip."' where id = ".$result->id."";
-				//$loged = $db->prepare($sql_log);
-				//$loged->execute();
-
-			////}
-				////print_r ($result);
-
-			////echo 'ini dia - >'. $result->route;
-			////echo  'hahada'.$row['user_route_id'];
-			////*
-			//echo '<script type="text/javascript">
-					//window.parent.location ="'.$result->route.'/#";
-
-
-//>>>>>>> acbcd4121c59d1900b3ea98bec84944ec035c339
-			//</script>' ;
-			////*/
-			//$msg = '<p class="text-center text-success"><b><span class="glyphicon glyphicon-thumbs-up"></span>  Succesfull Authenticate</b></p>';
-			//$sks = 1;
-		//}
-//<<<<<<< HEAD
-
-//=======
-
-//>>>>>>> acbcd4121c59d1900b3ea98bec84944ec035c339
-		//else {
-			//$msg = '<p class="text-center text-danger"><b><span class="glyphicon glyphicon-warning-sign"></span>  You not Authorize to login, please check your username or password.</b></p>';
-		//}
-	//}
-//else {
-	//$msg = '<p class="text-center text-danger"><b><span class="glyphicon glyphicon-warning-sign"></span>  Please Login First</b></p>';
-	//}
 
 ?>
 
@@ -237,78 +107,84 @@ session_start();
     <script src="js/lmanager.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <!-- <script src="js/lmanager_62.js"></script> -->
-    <script src="js/lmanager.js"></script>
+    <script src="js/isMobile.js"></script>
     <!-- <script src="js/jsencode.js"></script> -->
     <!-- <script src="js/base64.min.js"></script> -->
     <script>
-		//var sukses = <?php //echo $sks; ?>;
-		//alert ('ini sukses : '+sukses);
-		//alert ("<?php //echo $alert;?>");
-
-
-	$(document).ready(function(){
-//<<<<<<< HEAD
-//		$("#pesan").delay(3000).fadeOut('slow');
-
-//		$("#flogin").submit(function(){
-//				console.log("di submit");
-//				var uname = $("input[name='userid']").val(),
-//				pas = $("input[name='passwd']").val();
-
-//=======
-		//$("#pesan").delay(3000).fadeOut('slow');
-
-   $("#flogin").submit(function(){
+		$(document).ready(function(){
+			$("#flogin").submit(function(){
 				console.log("di submit");
-      var uname = $("input[name='userid']").val(),
-      pas = $("input[name='passwd']").val();
+				var uname = $("input[name='userid']").val(),
+				pas = $("input[name='passwd']").val();
 
 				var dt = {u:$("input[name='userid']").val(),p:encodeMD5(pas)};
 				var j = JSON.stringify(dt);
 				var uid = btoa(j);
-        // console.log('j', j);
-        // console.log('uid', uid);
-        $.ajax(
-        {
-            // Post the variable fetch to url.
-            type : 'post',
-            // url : 'http://project.daunbiru.com:1336/auth/login',
-            url : getAPI()+'/auth/login',
-            dataType : 'json', // expected returned data format.
-            // crossDomain : true,
-            data :{idu : uid},
-            // data :{idu : 'eyJ1IjoicGVsaW5kbzMiLCJwIjoiNDI2MjY2ZGRiNTY5ZTJmZjQxZDU2MGIwYzIxZmY1MjkifQ=='},
-            success : function(data)
-            {
-                if (data.success){
+				// console.log('j', j);
+				// console.log('uid', uid);
+				$.ajax(
+				{
+					// Post the variable fetch to url.
+					type : 'post',
+					// url : 'http://project.daunbiru.com:1336/auth/login',
+					url : getAPI()+'/auth/login',
+					dataType : 'json', // expected returned data format.
+					// crossDomain : true,
+					data :{idu : uid},
+					// data :{idu : 'eyJ1IjoicGVsaW5kbzMiLCJwIjoiNDI2MjY2ZGRiNTY5ZTJmZjQxZDU2MGIwYzIxZmY1MjkifQ=='},
+					success : function(data)
+					{
+							console.log('satu', data);
+						if (data.success){
 
-                  var res = JSON.parse(atob(data.auth));
-                  var obj = JSON.stringify({idu:res.uid,u:res.nama,tz:getTimeZone()});
+							var res = JSON.parse(atob(data.auth));
+							var obj = JSON.stringify({idu:res.uid,u:res.nama,role:res.role_id,tz:getTimeZone()});
 
-                  var objd = btoa(obj);
-                  setcookie('marine',objd,30);
-                  var host = document.location.origin;
+							var objd = btoa(obj);
+							setcookie('marine',objd,30);
+							var host = document.location.origin;
+							console.log("android ===>>> " +isMobile());
+							
+							if(isMobile()){
+								window.parent.location =host+"/tracking/mobile.php";
+							}
+							else{
+								window.parent.location = (host == 'http://localhost') ? (host+"/vts/tracking"): (host == 'http://127.0.0.1')?(host+"/tracking") :  (host+"/tracking/index.php");
 
-                  window.parent.location = (host == 'http://localhost') ? (host+"/vts/tracking"): (host == 'http://127.0.0.1')?(host+"/tracking") :  (host+"/tracking/index.php");
+							}
 
-                }
-            },
-            error: function(d){
-                // debugger;
-                alert("User or Password not Match.. \n Please re-login ");
-                console.log('error brroooooo');
-                // console.log(d);
-            },
-            complete : function(data)
-            {
-              // debugger;
-                // do something, not critical.
-                // console.log("complte");
-            }
-        });
+							// if(window.mobilecheck){
+								// window.parent.location = "google.com";
+								// window.location = "www.google.com";
+
+							// }
+							// else{
+								
+								// window.location = "www.google.com";
+
+								// window.parent.location = (host == 'http://localhost') ? (host+"/vts/tracking"): (host == 'http://127.0.0.1')?(host+"/tracking") :  (host+"/tracking/index.php");
+							// }
+						}else{
+							alert("Username / Password not match");
+						}
+					},
+					error: function(d){
+						// debugger;
+						alert("Koneksi error");
+						console.log('error brroooooo');
+						// console.log(d);
+					},
+					complete : function(data)
+					{	
+						console.log('dua', data);
+					// debugger;
+						// do something, not critical.
+						// console.log("complte");
+					}
+				});
 
 			});
-	});
+		});
 
 
 
