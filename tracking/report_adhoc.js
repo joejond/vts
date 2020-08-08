@@ -752,16 +752,17 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
                 dataIndex: 'working distance',
                 renderer: function (v, metaData) {
                     if(v < 0){
-                        metaData.style = 'display:block; background-color:#fff0f0';
-                        return 'Err';
+                        // metaData.style = 'display:block; background-color:#fff0f0';
+                        // return 'Err';
+                        return 0;
                     }else{
-                    		if(v.toString().includes('e')){
-                    			metaData.style = 'display:block; background-color:#fff0f0';
-                        	return 'Err';
-                    		}else{
-													return parseFloat(v).toFixed(2);
-                    		}
-                    }
+                        if(v.toString().includes('e')){
+                            // metaData.style = 'display:block; background-color:#fff0f0';
+                            return 0 ;
+                        }else{
+                            return parseFloat(v).toFixed(2);
+                        }
+                }
                 }
             }]
         }]
@@ -776,15 +777,15 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
                 dataIndex: 'average speed',
                 renderer: function (v, metaData) {
                     if(v < 0){
-                        metaData.style = 'display:block; background-color:#fff0f0';
-                        return 'Err';
+                        // metaData.style = 'display:block; background-color:#fff0f0';
+                        return 0;
                     }else{
                         if(v.toString().includes('e')){
-                    			metaData.style = 'display:block; background-color:#fff0f0';
-                        	return 'Err';
-                    		}else{
-													return parseFloat(v).toFixed(2);
-                    		}
+                    			// metaData.style = 'display:block; background-color:#fff0f0';
+                        	return 0;
+                        }else{
+                            return parseFloat(v).toFixed(2);
+                        }
                     }
                 }
             }]
@@ -802,15 +803,18 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
                 dataIndex: 'ME1 daily consumption',
                 renderer: function (v, metaData) {
                     if(v < 0){
-                        metaData.style = 'display:block; background-color:#fff0f0';
-                        return 'Err';
+                        // metaData.style = 'display:block; background-color:#fff0f0';
+                        // return 'Err';
+                        return 0;
                     }else{
-                        if(v.toString().includes('e')){
-                    			metaData.style = 'display:block; background-color:#fff0f0';
-                        	return 'Err';
-                    		}else{
-													return parseFloat(v).toFixed(2);
-                    		}
+                        return parseFloat(v).toFixed(2);
+
+                        // if(v.toString().includes('e')){
+                    	// 		metaData.style = 'display:block; background-color:#fff0f0';
+                        // 	return 'Err';
+                    	// 	}else{
+						// 							return parseFloat(v).toFixed(2);
+                    	// 	}
                     }
                 }
             }]
@@ -824,15 +828,18 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
                 dataIndex: 'working hours ME1',
                 renderer: function (v, metaData) {
                     if(v < 0){
-                        metaData.style = 'display:block; background-color:#fff0f0';
-                        return 'Err';
+                        // metaData.style = 'display:block; background-color:#fff0f0';
+                        // return 'Err';
+                        return 0;
                     }else{
-                        if(v.toString().includes('e')){
-                    			metaData.style = 'display:block; background-color:#fff0f0';
-                        	return 'Err';
-                    		}else{
-													return parseFloat(v).toFixed(2);
-                    		}
+                        return parseFloat(v).toFixed(2);
+
+                        // if(v.toString().includes('e')){
+                    	// 		metaData.style = 'display:block; background-color:#fff0f0';
+                        // 	return 'Err';
+                    	// 	}else{
+						// 							return parseFloat(v).toFixed(2);
+                    	// 	}
                     }
                 }
             }]
@@ -846,15 +853,17 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
                 dataIndex: 'ME1 fuel rate',
                 renderer: function (v, metaData) {
                     if(v < 0){
-                        metaData.style = 'display:block; background-color:#fff0f0';
-                        return 'Err';
+                        // metaData.style = 'display:block; background-color:#fff0f0';
+                        // return 'Err';
+                        return 0;
                     }else{
-                        if(v.toString().includes('e')){
-                    			metaData.style = 'display:block; background-color:#fff0f0';
-                        	return 'Err';
-                    		}else{
-													return parseFloat(v).toFixed(2);
-                    		}
+                        return parseFloat(v).toFixed(2);
+                        // if(v.toString().includes('e')){
+                    	// 		metaData.style = 'display:block; background-color:#fff0f0';
+                        // 	return 'Err';
+                    	// 	}else{
+						// 							return parseFloat(v).toFixed(2);
+                    	// 	}
                     }
                 }
             }]
@@ -872,15 +881,17 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
                 dataIndex: 'ME2 daily consumtion',
                 renderer: function (v, metaData) {
                     if(v < 0){
-                        metaData.style = 'display:block; background-color:#fff0f0';
-                        return 'Err';
+                        // metaData.style = 'display:block; background-color:#fff0f0';
+                        // return 'Err';
+                        return 0;
                     }else{
-                        if(v.toString().includes('e')){
-                    			metaData.style = 'display:block; background-color:#fff0f0';
-                        	return 'Err';
-                    		}else{
-													return parseFloat(v).toFixed(2);
-                    		}
+                        return parseFloat(v).toFixed(2);
+                        // if(v.toString().includes('e')){
+                    	// 		metaData.style = 'display:block; background-color:#fff0f0';
+                        // 	return 'Err';
+                    	// 	}else{
+						// 							return parseFloat(v).toFixed(2);
+                    	// 	}
                     }
                 }
             }]
@@ -894,15 +905,17 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
                 dataIndex: 'working hours ME2',
                 renderer: function (v, metaData) {
                     if(v < 0){
-                        metaData.style = 'display:block; background-color:#fff0f0';
-                        return 'Err';
+                        // metaData.style = 'display:block; background-color:#fff0f0';
+                        // return 'Err';
+                        return 0;
                     }else{
-                        if(v.toString().includes('e')){
-                    			metaData.style = 'display:block; background-color:#fff0f0';
-                        	return 'Err';
-                    		}else{
-													return parseFloat(v).toFixed(2);
-                    		}
+                        return parseFloat(v).toFixed(2);
+                        // if(v.toString().includes('e')){
+                    	// 		metaData.style = 'display:block; background-color:#fff0f0';
+                        // 	return 'Err';
+                    	// 	}else{
+						// 							return parseFloat(v).toFixed(2);
+                    	// 	}
                     }
                 }
             }]
@@ -916,15 +929,17 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
                 dataIndex: 'ME2 fuel rate',
                 renderer: function (v, metaData) {
                     if(v < 0){
-                        metaData.style = 'display:block; background-color:#fff0f0';
-                        return 'Err';
+                        // metaData.style = 'display:block; background-color:#fff0f0';
+                        // return 'Err';
+                        return 0;
                     }else{
-                        if(v.toString().includes('e')){
-                    			metaData.style = 'display:block; background-color:#fff0f0';
-                        	return 'Err';
-                    		}else{
-													return parseFloat(v).toFixed(2);
-                    		}
+                        return parseFloat(v).toFixed(2);
+                        // if(v.toString().includes('e')){
+                    	// 		metaData.style = 'display:block; background-color:#fff0f0';
+                        // 	return 'Err';
+                    	// 	}else{
+						// 							return parseFloat(v).toFixed(2);
+                    	// 	}
                     }
                 }
             }]
@@ -942,15 +957,17 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
                 dataIndex: 'AE1 consumtion',
                 renderer: function (v, metaData) {
                     if(v < 0){
-                        metaData.style = 'display:block; background-color:#fff0f0';
-                        return 'Err';
+                        // metaData.style = 'display:block; background-color:#fff0f0';
+                        // return 'Err';
+                        return 0;
                     }else{
-                        if(v.toString().includes('e')){
-                    			metaData.style = 'display:block; background-color:#fff0f0';
-                        	return 'Err';
-                    		}else{
-													return parseFloat(v).toFixed(2);
-                    		}
+                        return parseFloat(v).toFixed(2);
+                        // if(v.toString().includes('e')){
+                    	// 		metaData.style = 'display:block; background-color:#fff0f0';
+                        // 	return 'Err';
+                    	// 	}else{
+						// 							return parseFloat(v).toFixed(2);
+                    	// 	}
                     }
                 }
             }]
@@ -964,15 +981,17 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
                 dataIndex: 'AE1 average rpm',
                 renderer: function (v, metaData) {
                     if(v < 0){
-                        metaData.style = 'display:block; background-color:#fff0f0';
-                        return 'Err';
+                        // metaData.style = 'display:block; background-color:#fff0f0';
+                        // return 'Err';
+                        return 0;
                     }else{
-                        if(v.toString().includes('e')){
-                    			metaData.style = 'display:block; background-color:#fff0f0';
-                        	return 'Err';
-                    		}else{
-													return parseFloat(v).toFixed(2);
-                    		}
+                        return parseFloat(v).toFixed(2);
+                        // if(v.toString().includes('e')){
+                    	// 		metaData.style = 'display:block; background-color:#fff0f0';
+                        // 	return 'Err';
+                    	// 	}else{
+						// 							return parseFloat(v).toFixed(2);
+                    	// 	}
                     }
                 }
             }]
@@ -990,15 +1009,17 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
                 dataIndex: 'AE2 consumtion',
                 renderer: function (v, metaData) {
                     if(v < 0){
-                        metaData.style = 'display:block; background-color:#fff0f0';
-                        return 'Err';
+                        // metaData.style = 'display:block; background-color:#fff0f0';
+                        // return 'Err';
+                        return 0;
                     }else{
-                        if(v.toString().includes('e')){
-                    			metaData.style = 'display:block; background-color:#fff0f0';
-                        	return 'Err';
-                    		}else{
-													return parseFloat(v).toFixed(2);
-                    		}
+                        return parseFloat(v).toFixed(2);
+                        // if(v.toString().includes('e')){
+                    	// 		metaData.style = 'display:block; background-color:#fff0f0';
+                        // 	return 'Err';
+                    	// 	}else{
+						// 							return parseFloat(v).toFixed(2);
+                    	// 	}
                     }
                 }
             }]
@@ -1012,15 +1033,18 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
                 dataIndex: 'AE2 average rpm',
                 renderer: function (v, metaData) {
                     if(v < 0){
-                        metaData.style = 'display:block; background-color:#fff0f0';
-                        return 'Err';
+                        // metaData.style = 'display:block; background-color:#fff0f0';
+                        // return 'Err';
+                        return 0;
                     }else{
-                        if(v.toString().includes('e')){
-                    			metaData.style = 'display:block; background-color:#fff0f0';
-                        	return 'Err';
-                    		}else{
-													return parseFloat(v).toFixed(2);
-                    		}
+                        return parseFloat(v).toFixed(2);
+                   
+                        // if(v.toString().includes('e')){
+                    	// 		metaData.style = 'display:block; background-color:#fff0f0';
+                        // 	return 'Err';
+                    	// 	}else{
+						// 							return parseFloat(v).toFixed(2);
+                    	// 	}
                     }
                 }
             }]
@@ -1037,15 +1061,17 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
                 dataIndex: 'Total daily fuel',
                 renderer: function (v, metaData) {
                     if(v < 0){
-                        metaData.style = 'display:block; background-color:#fff0f0';
-                        return 'Err';
+                        // metaData.style = 'display:block; background-color:#fff0f0';
+                        // return 'Err';
+                        return 0;
                     }else{
-                        if(v.toString().includes('e')){
-                    			metaData.style = 'display:block; background-color:#fff0f0';
-                        	return 'Err';
-                    		}else{
-													return parseFloat(v).toFixed(2);
-                    		}
+                        return parseFloat(v).toFixed(2);
+                        // if(v.toString().includes('e')){
+                    	// 		metaData.style = 'display:block; background-color:#fff0f0';
+                        // 	return 'Err';
+                    	// 	}else{
+						// 							return parseFloat(v).toFixed(2);
+                    	// 	}
                     }
                 }
             }]

@@ -91,10 +91,13 @@
         <script type="text/javascript" src="data_hitung.js?ver=1.3"></script>
         <!-- <script type="text/javascript" src="data_hitung_banyak.js"></script> -->
         <script type="text/javascript" src="marine.js?ver=1.0"></script>
-				<script type="text/javascript" src="report_adhoc.js?ver=1.0"></script>
+				<script type="text/javascript" src="report_adhoc.js?ver=1.1"></script>
 				<script type="text/javascript" src="report_sum.js?ver=1.0"></script>
 
 
     </head>
-    <body></body>
+<!--</body></html>-->
+    <body>
+<!--</body></html>-->
+</Body>
 </html>

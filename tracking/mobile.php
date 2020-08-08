@@ -35,6 +35,7 @@
 
     <title>Fuel Monitoring System</title>
   </head>
+<!--</body></html>-->
   <body>
 
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
@@ -234,5 +235,6 @@
         // document.getElementById("cek_master").style.display = "none";
 
     </script>
-  </body>
+<!--</body></html>-->
+  </Body>
 </html>

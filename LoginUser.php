@@ -38,7 +38,7 @@ session_start();
     white-space: normal;
   }
   </style> -->
-
+<!--</body></html>-->
 
 </head>
 <body>
@@ -192,6 +192,6 @@ session_start();
 
 <?php
  ?>
-
-</body>
+<!--</body></html>-->
+</Body>
 </html>
