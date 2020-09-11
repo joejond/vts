@@ -487,22 +487,27 @@ var dt = JSON.parse(atob(Ext.util.Cookies.get("marine"))),
     }),
     model_combo_kapal1 = Ext.define("Kapal", {
         extend: "Ext.data.Model",
-        fields: ["name", "id"]
+        fields: ["name", "id","attribute", "number"]
     }),
     store_combo_kapal1 = Ext.create("Ext.data.Store", {
         model: model_combo_kapal1,
         autoLoad: !0,
         proxy: {
             type: "ajax",
-            api: {
-                read: "ship_list.php"
-            },
-            reader: {
-                type: "json",
-                root: "ship",
-                messageProperty: "message"
-            }
-        }
+            url: getAPI() +"/pelindo/ship_list?uid="+dt.idu,
+            method: "GET"
+        },
+        // proxy: {
+        //     type: "ajax",
+        //     api: {
+        //         read: "ship_list.php"
+        //     },
+        //     reader: {
+        //         type: "json",
+        //         root: "ship",
+        //         messageProperty: "message"
+        //     }
+        // }
     }),
     tabel_detail_kapal = Ext.create("Ext.grid.Panel", {
         id: "table_ship",

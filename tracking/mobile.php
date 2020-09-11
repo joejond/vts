@@ -77,10 +77,10 @@
             </div>
             <div class="card mb-6 box-shadow">
                 <div class="card-header">
-                    <h6 class="my-0 font-weight-normal">SUMMARY</h6>
+                    <h6 class="my-0 font-weight-normal">ADHOC REPORT</h6>
                 </div>
                 <div class="card-body">
-                    <button type="button" class="btn btn-lg btn-block btn-outline-primary" id="btn-sum">SUMMARY</button>
+                    <button type="button" class="btn btn-lg btn-block btn-outline-primary" id="btn-adhoc">ADHOC REPORT</button>
                 </div>
             </div>
         </div>
@@ -120,13 +120,13 @@
     <script type="text/javascript" src="../js/googlemaps-v3-utility-library/markerwithlabel/src/markerwithlabel.js"></script>
     <script type="text/javascript" src="../js/googlemaps-v3-utility-library/maplabel/src/maplabel.js"></script>
 
-    <script type="text/javascript" src="../js/lmanager.js" sync></script>
-    <script type="text/javascript" src="tab_map.js?ver=1.0"></script>
+    <!-- <script type="text/javascript" src="../js/lmanager.js" sync></script> -->
+    <!-- <script type="text/javascript" src="tab_map.js?ver=1.0"></script>
     <script type="text/javascript" src="detail_kapal.js?ver=1.0"></script>
     <script type="text/javascript" src="data_hitung.js?ver=1.3"></script>
     <script type="text/javascript" src="marine.js?ver=1.0"></script>
     <script type="text/javascript" src="report_adhoc.js?ver=1.0"></script>
-    <script type="text/javascript" src="report_sum.js?ver=1.0"></script>
+    <script type="text/javascript" src="report_sum.js?ver=1.0"></script> -->
 
 
     <!-- Optional JavaScript -->
@@ -134,7 +134,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="../js/lmanager.js" sync></script>
+    <!-- <script type="text/javascript" src="../js/lmanager.js" sync></script> -->
 
     <script>
         $(document).ready(function() {
@@ -145,23 +145,23 @@
             $('#btn-map').click(function(){
                 // console.log('button maps di click');
                 // alert("MAPS dipilih ==>" + uu.idu);//,JSON.stringify(uu));
-                window.location= "http://monita.pelindo.co.id/tracking/#map_tab";
+                window.location= "https://monita.pelindo.co.id/tracking/#map_tab";
 
             });
             $('#btn-detail').click(function(){
                 // console.log('button maps di click');
                 // alert("DETAIL DATA dipilih");
-                window.location= "http://monita.pelindo.co.id/tracking/#detail_tab";
+                window.location= "https://monita.pelindo.co.id/tracking/#detail_tab";
             });
             $('#btn-report').click(function(){
                 // console.log('button maps di click');
                 // alert("REPORT dipilih");
-                window.location= "http://monita.pelindo.co.id/tracking/#analisis_tab";
+                window.location= "https://monita.pelindo.co.id/tracking/#analisis_tab";
             });
-            $('#btn-sum').click(function(){
+            $('#btn-adhoc').click(function(){
                 // console.log('button maps di click');
                 // alert("SUMMARY dipilih");
-                window.location= "http://monita.pelindo.co.id/tracking/#summ_tab";
+                window.location= "https://monita.pelindo.co.id/tracking/#adhoc_rep";
             });
             $('#btn-user').click(function(){
                 // console.log('button maps di click');

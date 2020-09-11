@@ -31,6 +31,7 @@
   // echo $hsl->{'tz'}."<br>";
 
 	include	'../inc/cekSession.php';
+//header('Content-Type: application/javascript');
 ?>
 <html>
     <head>
@@ -88,16 +89,13 @@
 				<script type="text/javascript" src="../js/lmanager.js" sync></script>
 				<script type="text/javascript" src="tab_map.js?ver=1.0"></script>
         <script type="text/javascript" src="detail_kapal.js?ver=1.0"></script>
-        <script type="text/javascript" src="data_hitung.js?ver=1.3"></script>
+        <script type="text/javascript" src="data_hitung.js?ver=1.4"></script>
         <!-- <script type="text/javascript" src="data_hitung_banyak.js"></script> -->
         <script type="text/javascript" src="marine.js?ver=1.0"></script>
-				<script type="text/javascript" src="report_adhoc.js?ver=1.1"></script>
+				<script type="text/javascript" src="report_adhoc.js?ver=2.0"></script>
 				<script type="text/javascript" src="report_sum.js?ver=1.0"></script>
 
 
     </head>
 <!--</body></html>-->
-    <body>
-<!--</body></html>-->
-</Body>
 </html>

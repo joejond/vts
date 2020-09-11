@@ -149,8 +149,8 @@ session_start();
 								window.parent.location =host+"/tracking/mobile.php";
 							}
 							else{
-								window.parent.location = (host == 'http://localhost') ? (host+"/vts/tracking"): (host == 'http://127.0.0.1')?(host+"/tracking") :  (host+"/tracking/index.php");
-
+								// window.parent.location = (host == 'http://localhost') ? (host+"/vts/tracking"): (host == 'http://127.0.0.1')?(host+"/tracking") :  (host+"/tracking/index.php");
+								window.parent.location = host+"/tracking";
 							}
 
 							// if(window.mobilecheck){

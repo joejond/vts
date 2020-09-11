@@ -540,23 +540,23 @@ var model_combo_kapal_ad = Ext.define('Kapal', {
     fields: ['name']
 });
 //
-var store_combo_kapal_ad = Ext.create('Ext.data.Store', {
-    model: model_combo_kapal_ad,
-    autoLoad: true,
-    proxy: {
-        type: 'ajax',
-        api: {
-            read: 'ship_list.php'
-        },
-        reader: {
-            //totalProperty:'total',
-            type: 'json',
-            //successProperty: 'success',
-            root: 'ship',
-            messageProperty: 'message'
-        }
-    }
-});
+// var store_combo_kapal_ad = Ext.create('Ext.data.Store', {
+//     model: model_combo_kapal_ad,
+//     autoLoad: true,
+//     proxy: {
+//         type: 'ajax',
+//         api: {
+//             read: 'ship_list.php'
+//         },
+//         reader: {
+//             //totalProperty:'total',
+//             type: 'json',
+//             //successProperty: 'success',
+//             root: 'ship',
+//             messageProperty: 'message'
+//         }
+//     }
+// });
 
 var model_adhoc_kapal = Ext.define('adhoc_kapal', {
     extend: 'Ext.data.Model',
@@ -605,6 +605,14 @@ var model_adhoc_kapal = Ext.define('adhoc_kapal', {
             type: "Number"
         },
         {
+            name: "AE1 fuel rate",
+            type: "Number"
+        },
+        {
+            name: "AE2 fuel rate",
+            type: "Number"
+        },
+        {
             name: "ME1 average rpm",
             type: "Number"
         },
@@ -613,11 +621,11 @@ var model_adhoc_kapal = Ext.define('adhoc_kapal', {
             type: "Number"
         },
         {
-            name: "AE1 average rpm",
+            name: "AE1 Working Hours",
             type: "Number"
         },
         {
-            name: "AE2 average rpm",
+            name: "AE2 Working Hours",
             type: "Number"
         },
         {
@@ -656,8 +664,8 @@ var store_adhoc_kapal = Ext.create('Ext.data.Store', {
     //autoLoad: true,
     proxy: {
         type: 'ajax',
-        url: getAPI() + '/get_data_adhoc',
-        timeout: 40000,
+        url: getAPI() + '/v3/get_data_adhoc',
+        // timeout: 40000,
         method: 'GET',
     },
 });
@@ -715,22 +723,11 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
                 //   export: true
                 // };
                 // console.log(dt);
-                console.log('nama_kpl', nama_kpl);
-                console.log('month_adhoc', month_adhoc);
+                // console.log('nama_kpl', nama_kpl);
+                // console.log('month_adhoc', month_adhoc);
                 // window.open(getAPI()+'/get_data_adhoc?id=' + id_vessel_adhoc + '&m=' + Ext.Date.format(month_adhoc,'Y-m-d') + '&export=true');
-                window.open(getAPI() + '/get_data_adhoc?id=' + id_kpl + '&m=' + month_adhoc + '-01&type=data_adhoc&export=true&filename=' + nama_kpl + '_' + month_adhoc + ".xlsx");
-                // http://project.daunbiru.com:1336/get_data_adhoc?_dc=1522145700890&id=Bima%20333-t&m=2018-03-27T00%3A00%3A00&export=true
-                // Ext.Ajax.request({
-                //     url: getAPI()+'/get_data_adhoc',
-                //     method:'GET',
-                //     // jsonData:json,
-                //     params: dt,
-                //     success: function(response){
-                //         var text = response.responseText;
-                //         window.open(text);
-                //         // console.log(text);
-                //     }
-                // });
+                
+                window.open(getAPI() + '/v3/get_data_adhoc?id=' + id_kpl + '&tz='+getTimeZone()+'&m=' + month_adhoc + '&type=data_adhoc&export=true&filename=' + nama_kpl + '_' + month_adhoc + ".xlsx");
             }
         }]
     }],
@@ -743,13 +740,16 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
         locked: true
     }, {
         header: "",
+        hidden:true,
         columns: [{
             header: "Working Distance",
+            hidden:true,
             columns: [{
                 header: "Km",
                 align: 'center',
                 width: 100,
                 dataIndex: 'working distance',
+                hidden:true,
                 renderer: function (v, metaData) {
                     if(v < 0){
                         // metaData.style = 'display:block; background-color:#fff0f0';
@@ -768,13 +768,16 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
         }]
     }, {
         header: "",
+        hidden:true,
         columns: [{
             header: "Average Speed",
+            hidden:true,
             columns: [{
                 header: "Km/h",
                 align: 'center',
                 width: 100,
                 dataIndex: 'average speed',
+                hidden:true,
                 renderer: function (v, metaData) {
                     if(v < 0){
                         // metaData.style = 'display:block; background-color:#fff0f0';
@@ -972,13 +975,13 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
                 }
             }]
         }, {
-            header: "RPM (avg)",
+            header: "Engine Hours",
             align: 'center',
             columns: [{
-                header: "",
+                header: "Hr",
                 align: 'center',
                 width: 100,
-                dataIndex: 'AE1 average rpm',
+                dataIndex: 'AE1 Working Hours',
                 renderer: function (v, metaData) {
                     if(v < 0){
                         // metaData.style = 'display:block; background-color:#fff0f0';
@@ -995,6 +998,31 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
                     }
                 }
             }]
+        },{
+            header: "Fuel Rate",
+            align: 'center',
+            columns: [{
+                header: "lt/hr",
+                align: 'center',
+                width: 100,
+                dataIndex: 'AE1 fuel rate',
+                renderer: function (v, metaData) {
+                    if(v < 0){
+                        // metaData.style = 'display:block; background-color:#fff0f0';
+                        // return 'Err';
+                        return 0;
+                    }else{
+                        return parseFloat(v).toFixed(2);
+                        // if(v.toString().includes('e')){
+                    	// 		metaData.style = 'display:block; background-color:#fff0f0';
+                        // 	return 'Err';
+                    	// 	}else{
+						// 							return parseFloat(v).toFixed(2);
+                    	// 	}
+                    }
+                }
+            }]
+
         }]
     }, {
         header: "Genset#2",
@@ -1024,13 +1052,14 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
                 }
             }]
         }, {
-            header: "RPM (avg)",
+            // header: "RPM (avg)",
+            header: "Engine Hours",
             aling: 'center',
             columns: [{
-                header: "",
+                header: "Hr",
                 align: 'center',
                 width: 100,
-                dataIndex: 'AE2 average rpm',
+                dataIndex: 'AE2 Working Hours',
                 renderer: function (v, metaData) {
                     if(v < 0){
                         // metaData.style = 'display:block; background-color:#fff0f0';
@@ -1039,6 +1068,30 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
                     }else{
                         return parseFloat(v).toFixed(2);
                    
+                        // if(v.toString().includes('e')){
+                    	// 		metaData.style = 'display:block; background-color:#fff0f0';
+                        // 	return 'Err';
+                    	// 	}else{
+						// 							return parseFloat(v).toFixed(2);
+                    	// 	}
+                    }
+                }
+            }]
+        },{
+            header: "Fuel Rate",
+            align: 'center',
+            columns: [{
+                header: "lt/hr",
+                align: 'center',
+                width: 100,
+                dataIndex: 'AE2 fuel rate',
+                renderer: function (v, metaData) {
+                    if(v < 0){
+                        // metaData.style = 'display:block; background-color:#fff0f0';
+                        // return 'Err';
+                        return 0;
+                    }else{
+                        return parseFloat(v).toFixed(2);
                         // if(v.toString().includes('e')){
                     	// 		metaData.style = 'display:block; background-color:#fff0f0';
                         // 	return 'Err';
@@ -1078,10 +1131,13 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
         }]
     }, {
         header: "",
+        hidden:true,
         columns: [{
+            hidden:true,
             header: "Remaining on Board",
             align: 'center',
             columns: [{
+                hidden:true,
                 header: "Liter",
                 align: 'center',
                 width: 150,
@@ -1103,10 +1159,13 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
         }]
     }, {
         header: "",
+        hidden:true,
         columns: [{
+            hidden:true,
             header: "Last Fuel Loading",
             align: 'center',
             columns: [{
+                hidden:true,
                 header: "Liter",
                 align: 'center',
                 width: 150,
@@ -1128,10 +1187,13 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
         }]
     }, {
         header: "",
+        hidden:true,
         columns: [{
+            hidden:true,
             header: "Fuel Sounding",
             align: 'center',
             columns: [{
+                hidden:true,
                 header: "Liter",
                 align: 'center',
                 width: 150,
@@ -1153,10 +1215,13 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
         }]
     }, {
         header: "",
+        hidden:true,
         columns: [{
+            hidden:true,
             header: "Last Date F.Sounding",
             align: 'center',
             columns: [{
+                hidden:true,
                 align: 'center',
                 width: 150,
                 dataIndex: 'Last F_Sound check',
@@ -1177,10 +1242,13 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
         }]
     }, {
         header: "",
+        hidden:true,
         columns: [{
+            hidden:true,
             header: "Total Fuel After F.Sounding",
             align: 'center',
             columns: [{
+                hidden:true,
                 align: 'center',
                 width: 150,
                 dataIndex: 'Consumption after F_Sound check',
@@ -1201,10 +1269,16 @@ var tabel_r_adhoc = Ext.create('MyGrid', {
         }]
     }, {
         header: "",
+        hidden:true,
+        hideable:false,
         columns: [{
+            hidden:true,
+            hideable:false,
             header: "Work Order (Total Daily)",
             align: 'center',
             columns: [{
+                hidden:true,
+                hideable: false,
                 align: 'center',
                 width: 150,
                 dataIndex: 'Work Order',
@@ -1264,9 +1338,16 @@ var panel_r_adhoc = {
                             params: {
                                 id: id_kpl,
                                 m: month_adhoc,
-                                type: 'data_adhoc'
+                                type: 'data_adhoc',
+                                tz:getTimeZone()
                             }
                         });
+                        // console.log({
+                        //     id: id_kpl,
+                        //     m: month_adhoc,
+                        //     type: 'data_adhoc',
+                        //     tz:'+07:00'
+                        // });
                         // console.log('month_adhoc', month_adhoc);
 
                     },
@@ -1313,9 +1394,16 @@ var panel_r_adhoc = {
                             params: {
                                 id: id_kpl,
                                 m: month_adhoc,
-                                type: 'data_adhoc'
+                                type: 'data_adhoc',
+                                tz :getTimeZone()
                             }
                         });
+                        // console.log('change tgl',{
+                        //     id: id_kpl,
+                        //     m: month_adhoc,
+                        //     type: 'data_adhoc',
+                        //     tz:'+07:00'
+                        // });
                         // console.log('month_adhoc', month_adhoc);
 
                     },
@@ -1478,7 +1566,7 @@ var panel_form_bunker = Ext.create('Ext.form.Panel', {
                 // dt.titik_ukur_id = 11033;
                 dt.aset_id = id_kpl;
                 dt.titik_ukur_tipe_id = 33;
-                // console.log(dt);
+                console.log(dt);
                 Ext.Ajax.request({
 
                     url: getAPI() + '/pelindo/custom_input',
@@ -2131,7 +2219,8 @@ var window_fuel = Ext.create('Ext.window.Window', {
                 params: {
                     id: id_kpl,
                     m: month_adhoc,
-                    type: 'data_adhoc'
+                    type: 'data_adhoc',
+                    tz  : getTimeZone()
                 }
             });
         }
@@ -2182,7 +2271,8 @@ var window_work_order = Ext.create('Ext.window.Window', {
                 params: {
                     id: id_kpl,
                     m: month_adhoc,
-                    type: 'data_adhoc'
+                    type: 'data_adhoc',
+                    tz:getTimeZone()
                 }
             });
         }

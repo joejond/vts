@@ -6,11 +6,11 @@ function setcookie(n, v, e) {
 }
 
 function getAPI() {
-    return "http://monita.pelindo.co.id:1336"
+    return "https://monita.pelindo.co.id:1336"
 }
 
 function getWS() {
-    return "ws://monita.pelindo.co.id:1234"
+    return "wss://monita.pelindo.co.id:1234"
 }
 
 function cookiename() {

@@ -121,7 +121,10 @@ Ext.onReady(function () {
                         // console.log(window.location.hash);
                         var id = window.location.hash.substring(1);
                         // console.log(id);
-                        tab.setActiveTab(Ext.getCmp(id));
+			Ext.Function.defer(function(){
+                      		tab.setActiveTab(Ext.getCmp(id));	
+                        },1000);
+                        //tab.setActiveTab(Ext.getCmp(id));
                     }
                 }
             }]

@@ -3,11 +3,16 @@ Ext.Loader.setPath("Ext.ux", "ux/"), Ext.Loader.setConfig({
 }), Ext.require(["*", "Ext.ux.GMapPanel", "Ext.grid.plugin.CellEditing", "Ext.ux.statusbar.StatusBar", "Ext.ux.WebSocket", "Ext.ux.WebSocketManager"]);
 var model_daftar_kapal = Ext.define("Kapal", {
         extend: "Ext.data.Model",
-        fields: ["name", "attribute", "number"]
-    }),
-    store_daftar_kapal = Ext.create("Ext.data.Store", {
+        fields: ["name", "attribute", "number","id"]
+    });
+var store_daftar_kapal = Ext.create("Ext.data.Store", {
         model: model_daftar_kapal,
         autoLoad: !0,
+        // proxy: {
+        //     type: "ajax",
+        //     url: getAPI() +"/pelindo/ship_list?uid="+dt.idu
+        //     // method: "GET"
+        // }
         proxy: {
             type: "ajax",
             api: {
@@ -615,12 +620,15 @@ var tabel_daftar_kapal = Ext.create("Ext.grid.Panel", {
         }],
         listeners: {
             afterrender: function (thisObj, eOpts) {
+                // console.log(thisObj.getStore());
                 var sm;
                 thisObj.getSelectionModel().selectAll(!0);
                 var hasil = tabel_daftar_kapal.getView().getSelectionModel().getSelection();
-                ship = [], Ext.each(hasil, function (item) {
+                ship = [], 
+                Ext.each(hasil, function (item) {
                     ship.push(item.data.id)
-                }), ship.length > 1 || 0 == ship.length ? (Ext.getCmp("panel_form_tracking").setDisabled(!0), Ext.getCmp("panel_form_work_order").setDisabled(!0)) : (Ext.getCmp("panel_form_tracking").setDisabled(!1), Ext.getCmp("panel_form_work_order").setDisabled(!1)), ship.length > 0 ? Ext.Ajax.request({
+                }), 
+                ship.length > 1 || 0 == ship.length ? (Ext.getCmp("panel_form_tracking").setDisabled(!0), Ext.getCmp("panel_form_work_order").setDisabled(!0)) : (Ext.getCmp("panel_form_tracking").setDisabled(!1), Ext.getCmp("panel_form_work_order").setDisabled(!1)), ship.length > 0 ? Ext.Ajax.request({
                     url: "get_visual_group.php",
                     params: "aset_id=" + ship.toString(),
                     method: "GET",
@@ -653,7 +661,8 @@ var tabel_daftar_kapal = Ext.create("Ext.grid.Panel", {
         items: [tabel_daftar_kapal, panel_form_tracking/*, panel_form_work_order*/],
         listeners: {
             boxready: function () {
-                Ext.getCmp("panel_form_tracking").setDisabled(!0), Ext.getCmp("panel_form_work_order").setDisabled(!0)
+                Ext.getCmp("panel_form_tracking").setDisabled(!0), 
+                Ext.getCmp("panel_form_work_order").setDisabled(!0)
             }
         }
     };
